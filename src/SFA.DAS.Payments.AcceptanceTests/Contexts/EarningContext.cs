@@ -1,4 +1,5 @@
 ﻿using System;
+using SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities;
 
 namespace SFA.DAS.Payments.AcceptanceTests.Contexts
 {
@@ -16,5 +17,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
         public DateTime IlrPlannedEndDate { get; set; }
         public DateTime? IlrActualEndDate { get; set; }
         public CompletionStatus IlrCompletionStatus { get; set; }
+
+        public PeriodisedValuesEntity[] EarnedByPeriod { get; set; }
     }
 }
