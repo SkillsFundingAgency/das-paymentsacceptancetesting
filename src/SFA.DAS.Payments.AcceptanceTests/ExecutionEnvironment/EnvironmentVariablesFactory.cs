@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ProviderPayments.TestStack.Core;
 
 namespace SFA.DAS.Payments.AcceptanceTests.ExecutionEnvironment
@@ -14,25 +10,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionEnvironment
         {
             return new EnvironmentVariables
             {
-                TransientConnectionString = GetTransientConnectionString(),
-                DedsDatabaseConnectionString = GetDedsConnectionString(),
-                WorkingDirectory = GetWorkingDirectory(),
+                TransientConnectionString = ConfigurationManager.AppSettings["TransientConnectionString"],
+                DedsDatabaseConnectionString = ConfigurationManager.AppSettings["DedsConnectionString"],
+                WorkingDirectory = ConfigurationManager.AppSettings["WorkingDir"],
                 CurrentYear = DateTime.Today.GetAcademicYear(),
                 LogLevel = "DEBUG"
             };
-        }
-
-        private static string GetTransientConnectionString()
-        {
-            return ConfigurationManager.AppSettings["TransientConnectionString"];
-        }
-        private static string GetDedsConnectionString()
-        {
-            return ConfigurationManager.AppSettings["DedsConnectionString"];
-        }
-        private static string GetWorkingDirectory()
-        {
-            return "C:\\temp\\PaymentsAT\\";
         }
     }
 }
