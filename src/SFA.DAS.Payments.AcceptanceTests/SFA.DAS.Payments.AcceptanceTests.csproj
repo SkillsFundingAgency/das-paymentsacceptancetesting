@@ -110,8 +110,10 @@
       <Link>Features\earnings.feature</Link>
       <LastGenOutput>earnings1.feature.cs</LastGenOutput>
     </None>
+    <None Include="..\..\features\payments.feature">
+      <Link>Features\payments.feature</Link>
+    </None>
     <None Include="App.config" />
-    <None Include="Features\payments.feature" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
