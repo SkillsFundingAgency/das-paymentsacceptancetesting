@@ -246,6 +246,9 @@ paket-files/
 
 # FAKE - F# Make
 .fake/
+**/tools/**/*.*
+!**/tools/nuget/**/*.*
+**/*.orig
 
 # JetBrains Rider
 .idea/

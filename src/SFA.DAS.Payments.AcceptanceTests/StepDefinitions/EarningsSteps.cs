@@ -28,6 +28,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
         [When(@"an ILR file is submitted with the following data:")]
         public void WhenAnILRFileIsSubmittedWithTheFollowingData(Table table)
         {
+            throw new Exception("FAILURE!!!!");
+
             // Store spec values in context
             EarningContext.IlrStartDate = DateTime.Parse(table.Rows[0][0]);
             EarningContext.IlrPlannedEndDate = DateTime.Parse(table.Rows[0][1]);
