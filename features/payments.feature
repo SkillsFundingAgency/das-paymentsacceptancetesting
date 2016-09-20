@@ -1,5 +1,11 @@
 Feature: Provider payments
 
+    For DAS learners, where there is no lag in ILR submission, payments follow these rules:
+    - Provider payment follows the month after earnings
+    - The levy account is debited in the same month as payment is made
+    - Spend against budget is represented against the month in which funding is earned
+    - Where a levy account is used for funding, payments are made against the SFA Levy budget
+
 Background:
     Given The learner is normal DAS
     And the agreed price is 15000
