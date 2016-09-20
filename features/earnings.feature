@@ -1,5 +1,9 @@
 Feature: Provider earnings
 
+  The total cost of training for an apprentice is split between:
+  - 80% of the total cost split into equal monthly instalments
+  - 20% of the total cost held back until completion
+
 Background:
 	Given The learner is normal DAS
 	And the agreed price is 15000
