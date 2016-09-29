@@ -6,6 +6,7 @@ Feature: Provider earnings and payments where learner completes on time and is f
 
     For payments, where there is no lag in ILR submission, payments follow these rules:
     - Provider payment follows the month after earnings
+    - This is due to the fact that activity relating to earnings is captured for funding purposes on the fourth working day of the next calendar month
     - The levy account is debited in the same month as payment is made (although at different times in the month)
     - Spend against budget is represented against the month in which funding is earned
     - Where a levy account is used for funding, payments are made against the SFA Levy budget
