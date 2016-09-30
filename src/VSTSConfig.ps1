@@ -1,14 +1,18 @@
 function RecursivelyFixVariableValue([string] $value) {
+	Write-Host ('Fixing ' + $value)
 	$result = $value
 	
 	$varRegex = '\$\(.*\)'
 	$varMatches = select-string -InputObject $value -Pattern $varRegex -AllMatches | % { $_.Matches } | % { $_.Value }
 	ForEach($varMatch in $varMatches)
 	{
-		$x = (($varMatch -replace '^\$\(','') -replace '\)$','') -replace '\.','_'
-		$y = (get-item env:$x).Value
+		$varKey = ($varMatch -replace '^\$\(','') -replace '\)$',''
+		$varEnv = $varKey -replace '\.','_'
+		$varVal = (get-item env:$varEnv).Value
+		
+		Write-Host ('Transform ' + $varKey + '(' + $varEnv + ') to ' + $varVal)
 
-		$result = $result -replace ('\$\(' + $x + '\)'),$y
+		$result = RecursivelyFixVariableValue($result -replace ('\$\(' + $varKey + '\)'),$varVal)
 	}
 	
 	return $result
