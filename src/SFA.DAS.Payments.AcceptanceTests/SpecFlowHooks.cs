@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Globalization;
-using System.Threading;
 using ProviderPayments.TestStack.Core;
 using SFA.DAS.Payments.AcceptanceTests.DataHelpers;
 using SFA.DAS.Payments.AcceptanceTests.ExecutionEnvironment;
@@ -33,6 +31,13 @@ namespace SFA.DAS.Payments.AcceptanceTests
             processService.RebuildDedsDatabase(ComponentType.LevyCalculator, environmentVariables);
             processService.RebuildDedsDatabase(ComponentType.CoInvestedPayments, environmentVariables);
         }
-        
+
+        [BeforeScenario]
+        public static void ClearCollectionPeriodMapping()
+        {
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+
+            AcceptanceTestDataHelper.ClearCollectionPeriodMapping(environmentVariables);
+        }
     }
 }

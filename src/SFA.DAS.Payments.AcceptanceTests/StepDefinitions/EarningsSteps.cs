@@ -51,62 +51,53 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 
             // Submit ILR and capture output
             var processService = new ProcessService(new TestLogger());
-            var earnedByPeriod = new List<PeriodisedValuesEntity>();
+            var earnedByPeriod = new Dictionary<string, decimal>();
 
-            var endDate = EarningContext.IlrActualEndDate ?? EarningContext.IlrPlannedEndDate;
-            var academicYearsToSubmitTo = EarningContext.IlrStartDate.AcademicYearsUntil(endDate);
-            foreach (var academicYear in academicYearsToSubmitTo)
+            var date = EarningContext.IlrStartDate.NextCensusDate();
+            var endDate = (EarningContext.IlrActualEndDate ?? EarningContext.IlrPlannedEndDate).NextCensusDate();
+            while (date < endDate)
             {
+                var academicYear = date.GetAcademicYear();
                 environmentVariables.CurrentYear = academicYear;
 
-                var actualEndDateForYear = academicYear == academicYearsToSubmitTo[academicYearsToSubmitTo.Length - 1]
-                    ? EarningContext.IlrActualEndDate : null;
-
+                var nextCensusDate = date.AddDays(15).NextCensusDate();
+                var actualEndDate = nextCensusDate >= endDate ? EarningContext.IlrActualEndDate : null;
                 IlrSubmission submission = IlrBuilder.CreateAIlrSubmission()
                     .WithUkprn(ukprn)
                     .WithALearner()
                         .WithLearningDelivery()
                             .WithActualStartDate(EarningContext.IlrStartDate)
                             .WithPlannedEndDate(EarningContext.IlrPlannedEndDate)
-                            .WithActualEndDate(actualEndDateForYear)
+                            .WithActualEndDate(actualEndDate)
                             .WithAgreedPrice(EarningContext.ReferenceDataContext.AgreedPrice);
+
+                AcceptanceTestDataHelper.AddCurrentActivePeriod(date.Year, date.Month, environmentVariables);
 
                 var statusWatcher = new TestStatusWatcher(environmentVariables, $"Submit ILR to year {academicYear}");
                 processService.RunIlrSubmission(submission, environmentVariables, statusWatcher);
 
-                earnedByPeriod.AddRange(EarningsDataHelper.GetPeriodisedValuesForUkprn(ukprn, environmentVariables));
-            }
+                var periodEarnings = EarningsDataHelper.GetPeriodisedValuesForUkprn(ukprn, environmentVariables).Last();
+                earnedByPeriod.AddOrUpdate("08/" + academicYear.Substring(0, 2), periodEarnings.Period_1);
+                earnedByPeriod.AddOrUpdate("09/" + academicYear.Substring(0, 2), periodEarnings.Period_2);
+                earnedByPeriod.AddOrUpdate("10/" + academicYear.Substring(0, 2), periodEarnings.Period_3);
+                earnedByPeriod.AddOrUpdate("11/" + academicYear.Substring(0, 2), periodEarnings.Period_4);
+                earnedByPeriod.AddOrUpdate("12/" + academicYear.Substring(0, 2), periodEarnings.Period_5);
+                earnedByPeriod.AddOrUpdate("01/" + academicYear.Substring(2), periodEarnings.Period_6);
+                earnedByPeriod.AddOrUpdate("02/" + academicYear.Substring(2), periodEarnings.Period_7);
+                earnedByPeriod.AddOrUpdate("03/" + academicYear.Substring(2), periodEarnings.Period_8);
+                earnedByPeriod.AddOrUpdate("04/" + academicYear.Substring(2), periodEarnings.Period_9);
+                earnedByPeriod.AddOrUpdate("05/" + academicYear.Substring(2), periodEarnings.Period_10);
+                earnedByPeriod.AddOrUpdate("06/" + academicYear.Substring(2), periodEarnings.Period_11);
+                earnedByPeriod.AddOrUpdate("07/" + academicYear.Substring(2), periodEarnings.Period_12);
 
-            EarningContext.EarnedByPeriod = earnedByPeriod.ToArray();
+                date = nextCensusDate;
+            }
+            EarningContext.EarnedByPeriod = earnedByPeriod;
         }
 
         [Then(@"the provider earnings and payments break down as follows:")]
         public void ThenTheProviderEarningsBreakDownAsFollows(Table table)
         {
-            var values = new Dictionary<string, decimal>();
-
-            // Convert periodised values
-            for (var i = 0; i < EarningContext.EarnedByPeriod.Length; i++)
-            {
-                var periodisedValues = EarningContext.EarnedByPeriod[i];
-                var academicYear = EarningContext.IlrStartDate.AddYears(i).GetAcademicYear();
-
-                values.Add("08/" + academicYear.Substring(0, 2), periodisedValues.Period_1);
-                values.Add("09/" + academicYear.Substring(0, 2), periodisedValues.Period_2);
-                values.Add("10/" + academicYear.Substring(0, 2), periodisedValues.Period_3);
-                values.Add("11/" + academicYear.Substring(0, 2), periodisedValues.Period_4);
-                values.Add("12/" + academicYear.Substring(0, 2), periodisedValues.Period_5);
-                values.Add("01/" + academicYear.Substring(2), periodisedValues.Period_6);
-                values.Add("02/" + academicYear.Substring(2), periodisedValues.Period_7);
-                values.Add("03/" + academicYear.Substring(2), periodisedValues.Period_8);
-                values.Add("04/" + academicYear.Substring(2), periodisedValues.Period_9);
-                values.Add("05/" + academicYear.Substring(2), periodisedValues.Period_10);
-                values.Add("06/" + academicYear.Substring(2), periodisedValues.Period_11);
-                values.Add("07/" + academicYear.Substring(2), periodisedValues.Period_12);
-            }
-
-
-            // Assert correctness
             var row = table.Rows.First();
             for (var colIndex = 1; colIndex < table.Header.Count; colIndex++)
             {
@@ -116,14 +107,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                     continue;
                 }
 
-                if (!values.ContainsKey(periodName))
+                if (!EarningContext.EarnedByPeriod.ContainsKey(periodName))
                 {
                     Assert.Fail($"Expected value for period {periodName} but none found");
                 }
 
                 var expectedValue = decimal.Parse(row[colIndex]);
-                Assert.IsTrue(values.ContainsKey(periodName), $"Expected value for period {periodName} but none found");
-                Assert.AreEqual(expectedValue, values[periodName]);
+                Assert.IsTrue(EarningContext.EarnedByPeriod.ContainsKey(periodName), $"Expected value for period {periodName} but none found");
+                Assert.AreEqual(expectedValue, EarningContext.EarnedByPeriod[periodName]);
             }
         }
 
