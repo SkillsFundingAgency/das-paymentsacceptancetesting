@@ -14,7 +14,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
         public ReferenceDataContext ReferenceDataContext { get; set; }
 
         [Given(@"The learner is normal DAS")]
-        public void GivenTheLearnerIsNormalDAS()
+        public void GivenTheLearnerIsNormalDas()
         {
             ReferenceDataContext.LearnerType = LearnerType.NormalDas;
         }

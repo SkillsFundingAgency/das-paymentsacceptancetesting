@@ -29,7 +29,9 @@ namespace SFA.DAS.Payments.AcceptanceTests
 
             processService.RebuildDedsDatabase(ComponentType.DataLock, environmentVariables);
             processService.RebuildDedsDatabase(ComponentType.EarningsCalculator, environmentVariables);
+            processService.RebuildDedsDatabase(ComponentType.PaymentsDue, environmentVariables);
             processService.RebuildDedsDatabase(ComponentType.LevyCalculator, environmentVariables);
+            processService.RebuildDedsDatabase(ComponentType.CoInvestedPayments, environmentVariables);
         }
         
     }

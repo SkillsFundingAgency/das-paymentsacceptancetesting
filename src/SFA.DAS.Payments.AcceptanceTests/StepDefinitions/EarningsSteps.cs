@@ -26,7 +26,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 
 
         [When(@"an ILR file is submitted with the following data:")]
-        public void WhenAnILRFileIsSubmittedWithTheFollowingData(Table table)
+        public void WhenAnIlrFileIsSubmittedWithTheFollowingData(Table table)
         {
             // Store spec values in context
             EarningContext.IlrStartDate = DateTime.Parse(table.Rows[0][0]);
@@ -80,7 +80,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             EarningContext.EarnedByPeriod = earnedByPeriod.ToArray();
         }
 
-        [Then(@"the provider earnings break down as follows:")]
+        [Then(@"the provider earnings and payments break down as follows:")]
         public void ThenTheProviderEarningsBreakDownAsFollows(Table table)
         {
             var values = new Dictionary<string, decimal>();
