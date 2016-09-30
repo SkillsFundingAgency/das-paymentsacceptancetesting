@@ -8,7 +8,7 @@ function RecursivelyFixVariableValue([string] $value) {
 		$x = (($varMatch -replace '^\$\(','') -replace '\)$','') -replace '\.','_'
 		$y = (get-item env:$x).Value
 
-		$result = RecursivelyFixVariableValue($result -replace ('\$\(' + $x + '\)'),$y)
+		$result = $result -replace ('\$\(' + $x + '\)'),$y
 	}
 	
 	return $result
