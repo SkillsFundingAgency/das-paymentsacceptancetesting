@@ -1,3 +1,20 @@
+function RecursivelyFixVariableValue([string] $value) {
+	$result = $value
+	
+	$varRegex = '\$\(.*\)'
+	$varMatches = select-string -InputObject $value -Pattern $varRegex -AllMatches | % { $_.Matches } | % { $_.Value }
+	ForEach($varMatch in $varMatches)
+	{
+		$x = (($varMatch -replace '^\$\(','') -replace '\)$','') -replace '\.','_'
+		$y = (get-item env:$x).Value
+
+		$result = RecursivelyFixVariableValue($result -replace ('\$\(' + $x + '\)'),$y)
+	}
+	
+	return $result
+}
+
+
 $SourcePath = (Get-Item -Path ".\" -Verbose).FullName
 
 $testPath = Test-Path $SourcePath
@@ -29,12 +46,18 @@ if($testPath)
 		
 		ForEach($match in $matches)
 		{
+		  Write-Output ("Attempting to match variable " + $match)
 		  $matchedItem = $match
 		  $matchedItem = $matchedItem.Trim('_')
 		  $matchedItem = $matchedItem -replace '\.','_'
+		  
+		  $newValue = RecursivelyFixVariableValue((get-item env:$matchedItem).Value)
+		  
+		  Write-Output ("Replacing " + $match + " with " + $newValue)
+		  
 		  (Get-Content $tempFile) | 
 		  Foreach-Object {
-			$_ -replace $match,(get-item env:$matchedItem).Value
+			$_ -replace $match,$newValue
 		  } | 
 		Set-Content $tempFile -Force
 		}
