@@ -13,10 +13,16 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 
         public ReferenceDataContext ReferenceDataContext { get; set; }
 
-        [Given(@"The learner is normal DAS")]
-        public void GivenTheLearnerIsNormalDas()
+        [Given(@"The learner is programme only DAS")]
+        public void GivenTheLearnerIsProgrammeOnlyDas()
         {
-            ReferenceDataContext.LearnerType = LearnerType.NormalDas;
+            ReferenceDataContext.LearnerType = LearnerType.ProgrammeOnlyDas;
+        }
+
+        [Given(@"The learner is programme only non-DAS")]
+        public void GivenTheLearnerIsProgrammeOnlyNonDas()
+        {
+            ReferenceDataContext.LearnerType = LearnerType.ProgrammeOnlyNonDas;
         }
 
         [Given(@"the agreed price is (.*)")]
@@ -29,6 +35,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
         public void GivenTheApprenticeshipFundingBandMaximumIs(int fundingMaximum)
         {
             ReferenceDataContext.FundingMaximum = fundingMaximum;
+        }
+
+        [Given(@"levy balance = (.*)")]
+        public void GivenLevyBalanceAgreedPrice(int levyBalance)
+        {
+            ReferenceDataContext.AccountBalance = levyBalance;
         }
 
         [Given(@"levy balance > agreed price")]

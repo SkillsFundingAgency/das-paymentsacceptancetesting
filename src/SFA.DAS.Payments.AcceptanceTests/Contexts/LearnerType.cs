@@ -2,6 +2,7 @@
 {
     public enum LearnerType
     {
-        NormalDas
+        ProgrammeOnlyDas,
+        ProgrammeOnlyNonDas
     }
 }

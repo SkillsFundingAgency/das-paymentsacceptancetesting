@@ -12,31 +12,28 @@ Feature: Provider earnings and payments where learner completes on time and is f
     - Where a levy account is used for funding, payments are made against the SFA Levy budget
 
     Background:
-        Given The learner is programme only DAS
-        And the agreed price is 15000
+        Given the agreed price is 15000
         And the apprenticeship funding band maximum is 17000
-        And levy balance > agreed price
 
     Scenario: Earnings and payments for a DAS learner, levy available, learner finishes on time
+        Given The learner is programme only DAS
+		And levy balance > agreed price
         When an ILR file is submitted with the following data:
             | start date | planned end date | actual end date | completion status |
             | 01/09/2017 | 08/09/2018       | 08/09/2018      | completed         |
         Then the provider earnings and payments break down as follows:
-            | Type                  | 09/17 | 10/17 | 11/17 | ... | 08/18 | 09/18 | 10/18 |
-            | Provider Earned       | 1000  | 1000  | 1000  | ... | 1000  | 3000  | 0     |
-            | Provider Paid         | 0     | 1000  | 1000  | ... | 1000  | 1000  | 3000  |
-            | Levy account debited  | 0     | 1000  | 1000  | ... | 1000  | 1000  | 3000  |
-            | SFA Levy budget       | 1000  | 1000  | 1000  | ... | 1000  | 3000  | 0     |
-            | SFA co-funding budget | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+            | Type                     | 09/17 | 10/17 | 11/17 | ... | 08/18 | 09/18 | 10/18 |
+            | Provider Earned Total    | 1000  | 1000  | 1000  | ... | 1000  | 3000  | 0     |
+            | Provider Earned from SFA | 1000  | 1000  | 1000  | ... | 1000  | 3000  | 0     |
+            | Provider Paid by SFA     | 0     | 1000  | 1000  | ... | 1000  | 1000  | 3000  |
+            | Levy account debited     | 0     | 1000  | 1000  | ... | 1000  | 1000  | 3000  |
+            | SFA Levy budget          | 1000  | 1000  | 1000  | ... | 1000  | 3000  | 0     |
+            | SFA co-funding budget    | 0     | 0     | 0     | ... | 0     | 0     | 0     |
 
             
-    Background:
-        Given The learner is programme only DAS
-        And the agreed price is 15000
-        And the apprenticeship funding band maximum is 17000
-        And levy balance = 0
-
     Scenario: Earnings for a DAS learner, no levy available, learner finishes on time
+        Given The learner is programme only DAS
+		And levy balance = 0
         When an ILR file is submitted with the following data:
             | start date | planned end date | actual end date | completion status |
             | 01/09/2017 | 08/09/2018       | 08/09/2018      | completed         |
@@ -52,13 +49,10 @@ Feature: Provider earnings and payments where learner completes on time and is f
             | SFA Levy co-funded budget     | 900   | 900   | 900   | ... | 900   | 2700  | 0     |
             | SFA non-Levy co-funding budget| 0     | 0     | 0     | ... | 0     | 0     |       | 
             
-            
-    Background:
-        Given The learner is programme only non-DAS
-        And the agreed price is 15000
-        And the apprenticeship funding band maximum is 17000
 
+	@ignore
     Scenario: Earnings for a non-DAS learner, learner finishes on time
+        Given The learner is programme only non-DAS
         When an ILR file is submitted with the following data:
             | start date | planned end date | actual end date | completion status |
             | 01/09/2017 | 08/09/2018       | 08/09/2018      | completed         |

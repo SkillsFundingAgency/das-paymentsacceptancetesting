@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities;
+using TechTalk.SpecFlow;
 
 namespace SFA.DAS.Payments.AcceptanceTests
 {
@@ -88,6 +89,12 @@ namespace SFA.DAS.Payments.AcceptanceTests
             {
                 dictionary.Add(key, value);
             }
+        }
+
+
+        internal static TableRow RowWithKey(this TableRows rows, string key)
+        {
+            return rows.FirstOrDefault(r => r[0].Equals(key, StringComparison.OrdinalIgnoreCase));
         }
     }
 }

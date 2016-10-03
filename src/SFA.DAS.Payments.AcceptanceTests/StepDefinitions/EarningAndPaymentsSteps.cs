@@ -77,8 +77,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
         [Then(@"the provider earnings and payments break down as follows:")]
         public void ThenTheProviderEarningsBreakDownAsFollows(Table table)
         {
-            var earnedRow = table.Rows.ElementAt(0);
-            var levyPaidRow = table.Rows.ElementAt(1);
+            var earnedRow = table.Rows.RowWithKey("Provider Earned Total");
+            var levyPaidRow = table.Rows.RowWithKey("Provider Paid by SFA");
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
             for (var colIndex = 1; colIndex < table.Header.Count; colIndex++)
