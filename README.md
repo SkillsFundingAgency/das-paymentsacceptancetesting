@@ -15,3 +15,7 @@ In order to run the tests locally you will need:
 * A database to act as the DCFS transient database
 * A database to act as the DCFS DEDS database
 * The latest versions of the DAS payment components
+
+You will then need to run:
+* The AT scripts in [src/Deploy](src/Deploy/)
+* Run the test stack scripts
