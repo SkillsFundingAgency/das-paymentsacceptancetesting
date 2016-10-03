@@ -12,7 +12,7 @@ Feature: Provider earnings and payments where learner completes on time and is f
     - Where a levy account is used for funding, payments are made against the SFA Levy budget
 
     Background:
-        Given The learner is normal DAS
+        Given The learner is simple DAS
         And the agreed price is 15000
         And the apprenticeship funding band maximum is 17000
         And levy balance > agreed price
