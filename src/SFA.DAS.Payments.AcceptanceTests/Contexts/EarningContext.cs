@@ -20,5 +20,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
         public CompletionStatus IlrCompletionStatus { get; set; }
 
         public Dictionary<string, decimal> EarnedByPeriod { get; set; }
+        public int Ukprn { get; set; }
     }
 }

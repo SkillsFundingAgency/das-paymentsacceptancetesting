@@ -39,5 +39,25 @@ namespace SFA.DAS.Payments.AcceptanceTests
 
             AcceptanceTestDataHelper.ClearCollectionPeriodMapping(environmentVariables);
         }
+
+        [BeforeScenario]
+        public static void ClearOldStuff()
+        {
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+
+            AcceptanceTestDataHelper.ClearOldDedsIlrSubmissions(environmentVariables);
+        }
+
+        [BeforeScenario]
+        public static void Start()
+        {
+            Console.WriteLine("Start: " + DateTime.Now.ToString());
+        }
+
+        [AfterScenario]
+        public static void Finish()
+        {
+            Console.WriteLine("Finish: " + DateTime.Now.ToString());
+        }
     }
 }

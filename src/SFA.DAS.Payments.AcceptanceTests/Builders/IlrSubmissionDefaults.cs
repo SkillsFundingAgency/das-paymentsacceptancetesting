@@ -18,7 +18,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
             PlannedEndDate = new DateTime(2018, 6, 2);
             ActualEndDate = null;
             AgreedPrice = 15000;
-            ActFamCodeValue = 2;
+            ActFamCodeValue = 1;
         }
 
         public long Ukprn { get; set; }

@@ -42,6 +42,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             var uln = int.Parse(IdentifierGenerator.GenerateIdentifier(6, false));
             var commitmentId = IdentifierGenerator.GenerateIdentifier();
 
+            EarningContext.Ukprn = ukprn;
+
             AccountDataHelper.CreateAccount(accountId, accountId, EarningContext.ReferenceDataContext.AccountBalance, environmentVariables);
 
             CommitmentDataHelper.CreateCommitment(commitmentId, ukprn, uln, accountId, EarningContext.IlrStartDate,
@@ -53,18 +55,32 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             var processService = new ProcessService(new TestLogger());
             var earnedByPeriod = new Dictionary<string, decimal>();
 
+            var periodId = 1;
             var date = EarningContext.IlrStartDate.NextCensusDate();
-            var endDate = (EarningContext.IlrActualEndDate ?? EarningContext.IlrPlannedEndDate).NextCensusDate();
-            while (date < endDate)
+            var endDate = (EarningContext.IlrActualEndDate ?? EarningContext.IlrPlannedEndDate);
+            var lastCensusDate = endDate.NextCensusDate();
+            while (date <= lastCensusDate)
             {
                 var academicYear = date.GetAcademicYear();
                 environmentVariables.CurrentYear = academicYear;
+                environmentVariables.SummarisationPeriod = new SummarisationCollectionPeriod
+                {
+                    PeriodId = periodId++,
+                    CollectionPeriod = "R" + (new DateTime(date.Year, date.Month, 1)).GetPeriodNumber().ToString("00"),
+                    CalendarMonth = date.Month,
+                    CalendarYear = date.Year,
+                    ActualsSchemaPeriod = date.Year + date.Month.ToString("00"),
+                    CollectionOpen = 1
+                };
 
                 var nextCensusDate = date.AddDays(15).NextCensusDate();
-                var actualEndDate = nextCensusDate >= endDate ? EarningContext.IlrActualEndDate : null;
+
+                // Submit ILR
+                var actualEndDate = date >= endDate ? EarningContext.IlrActualEndDate : null;
                 IlrSubmission submission = IlrBuilder.CreateAIlrSubmission()
                     .WithUkprn(ukprn)
                     .WithALearner()
+                        .WithUln(uln)
                         .WithLearningDelivery()
                             .WithActualStartDate(EarningContext.IlrStartDate)
                             .WithPlannedEndDate(EarningContext.IlrPlannedEndDate)
@@ -73,8 +89,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 
                 AcceptanceTestDataHelper.AddCurrentActivePeriod(date.Year, date.Month, environmentVariables);
 
-                var statusWatcher = new TestStatusWatcher(environmentVariables, $"Submit ILR to year {academicYear}");
-                processService.RunIlrSubmission(submission, environmentVariables, statusWatcher);
+                var ilrStatusWatcher = new TestStatusWatcher(environmentVariables, $"Submit ILR to {date:dd/MM/yy}");
+                processService.RunIlrSubmission(submission, environmentVariables, ilrStatusWatcher);
 
                 var periodEarnings = EarningsDataHelper.GetPeriodisedValuesForUkprn(ukprn, environmentVariables).Last();
                 earnedByPeriod.AddOrUpdate("08/" + academicYear.Substring(0, 2), periodEarnings.Period_1);
@@ -90,6 +106,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                 earnedByPeriod.AddOrUpdate("06/" + academicYear.Substring(2), periodEarnings.Period_11);
                 earnedByPeriod.AddOrUpdate("07/" + academicYear.Substring(2), periodEarnings.Period_12);
 
+                // Run month end
+                var summarisationStatusWatcher = new TestStatusWatcher(environmentVariables, $"Summarise {date:dd/MM/yy}");
+                processService.RunSummarisation(environmentVariables, summarisationStatusWatcher);
+
+                // Move on
                 date = nextCensusDate;
             }
             EarningContext.EarnedByPeriod = earnedByPeriod;
@@ -98,7 +119,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
         [Then(@"the provider earnings and payments break down as follows:")]
         public void ThenTheProviderEarningsBreakDownAsFollows(Table table)
         {
-            var row = table.Rows.First();
+            var earnedRow = table.Rows.ElementAt(0);
+            var levyPaidRow = table.Rows.ElementAt(1);
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+
             for (var colIndex = 1; colIndex < table.Header.Count; colIndex++)
             {
                 var periodName = table.Header.ElementAt(colIndex);
@@ -107,16 +131,34 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                     continue;
                 }
 
+                var periodMonth = int.Parse(periodName.Substring(0, 2));
+                var periodYear = int.Parse(periodName.Substring(3)) + 2000;
+
+
+                // Verify earnings
                 if (!EarningContext.EarnedByPeriod.ContainsKey(periodName))
                 {
                     Assert.Fail($"Expected value for period {periodName} but none found");
                 }
 
-                var expectedValue = decimal.Parse(row[colIndex]);
-                Assert.IsTrue(EarningContext.EarnedByPeriod.ContainsKey(periodName), $"Expected value for period {periodName} but none found");
-                Assert.AreEqual(expectedValue, EarningContext.EarnedByPeriod[periodName]);
+                var expectedEarning = decimal.Parse(earnedRow[colIndex]);
+                Assert.IsTrue(EarningContext.EarnedByPeriod.ContainsKey(periodName), $"Expected earning for period {periodName} but none found");
+                Assert.AreEqual(expectedEarning, EarningContext.EarnedByPeriod[periodName]);
+
+                // Verify levy payments
+                var levyPayments = LevyPaymentDataHelper.GetLevyPaymentsForPeriod(EarningContext.Ukprn, periodYear, periodMonth - 1, environmentVariables)
+                    ?? new LevyPaymentEntity[0];
+                if (levyPayments.Length < 0 || levyPayments.Length > 1)
+                {
+                    Assert.Fail($"Should have no more than 1 payment for {periodName} but have {levyPayments.Length}");
+                }
+
+                var actualLevyPayment = levyPayments.Length == 0 ? 0m : levyPayments[0].Amount;
+                var expectedLevyPayment = decimal.Parse(levyPaidRow[colIndex]);
+                Assert.AreEqual(expectedLevyPayment, actualLevyPayment, $"Expected a levy payment of {expectedLevyPayment} but made a payment of {actualLevyPayment} for {periodName}");
             }
         }
+        
 
     }
 }

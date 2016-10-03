@@ -33,6 +33,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
             }
         }
 
+        internal static void ClearOldDedsIlrSubmissions(EnvironmentVariables environmentVariables)
+        {
+            using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
+            {
+                connection.Execute("DELETE FROM Valid.LearningProvider");
+            }
+        }
+
         internal static void AddCurrentActivePeriod(int year, int month, EnvironmentVariables environmentVariables)
         {
             var periodName = "R" + (new DateTime(year, month, 1)).GetPeriodNumber().ToString("00");
