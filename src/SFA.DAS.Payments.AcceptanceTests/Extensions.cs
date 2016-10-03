@@ -30,6 +30,11 @@ namespace SFA.DAS.Payments.AcceptanceTests
             return int.Parse(startYear.ToString() + endYear.ToString()).ToString();
         }
 
+        internal static DateTime NextCensusDate(this DateTime date)
+        {
+            return new DateTime(date.Year, date.Month, DateTime.DaysInMonth(date.Year, date.Month));
+        }
+
         internal static int GetPeriodNumber(this DateTime date)
         {
             if (date.Month < 8)
@@ -70,6 +75,19 @@ namespace SFA.DAS.Payments.AcceptanceTests
             }
 
             throw new IndexOutOfRangeException("Invalid periodNumber. Must be between 1 and 12 inclusive");
+        }
+
+
+        internal static void AddOrUpdate(this Dictionary<string, decimal> dictionary, string key, decimal value)
+        {
+            if (dictionary.ContainsKey(key))
+            {
+                dictionary[key] = value;
+            }
+            else
+            {
+                dictionary.Add(key, value);
+            }
         }
     }
 }

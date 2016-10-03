@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Globalization;
-using System.Threading;
 using ProviderPayments.TestStack.Core;
 using SFA.DAS.Payments.AcceptanceTests.DataHelpers;
 using SFA.DAS.Payments.AcceptanceTests.ExecutionEnvironment;
@@ -29,8 +27,37 @@ namespace SFA.DAS.Payments.AcceptanceTests
 
             processService.RebuildDedsDatabase(ComponentType.DataLock, environmentVariables);
             processService.RebuildDedsDatabase(ComponentType.EarningsCalculator, environmentVariables);
+            processService.RebuildDedsDatabase(ComponentType.PaymentsDue, environmentVariables);
             processService.RebuildDedsDatabase(ComponentType.LevyCalculator, environmentVariables);
+            processService.RebuildDedsDatabase(ComponentType.CoInvestedPayments, environmentVariables);
         }
-        
+
+        [BeforeScenario]
+        public static void ClearCollectionPeriodMapping()
+        {
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+
+            AcceptanceTestDataHelper.ClearCollectionPeriodMapping(environmentVariables);
+        }
+
+        [BeforeScenario]
+        public static void ClearOldStuff()
+        {
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+
+            AcceptanceTestDataHelper.ClearOldDedsIlrSubmissions(environmentVariables);
+        }
+
+        [BeforeScenario]
+        public static void Start()
+        {
+            Console.WriteLine("Start: " + DateTime.Now.ToString());
+        }
+
+        [AfterScenario]
+        public static void Finish()
+        {
+            Console.WriteLine("Finish: " + DateTime.Now.ToString());
+        }
     }
 }

@@ -24,5 +24,39 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                     new { runId, level, date, message, exception = exception?.ToString() });
             }
         }
+
+        internal static void ClearCollectionPeriodMapping(EnvironmentVariables environmentVariables)
+        {
+            using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
+            {
+                connection.Execute("DELETE FROM Collection_Period_Mapping");
+            }
+        }
+
+        internal static void ClearOldDedsIlrSubmissions(EnvironmentVariables environmentVariables)
+        {
+            using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
+            {
+                connection.Execute("DELETE FROM Valid.LearningProvider");
+            }
+        }
+
+        internal static void AddCurrentActivePeriod(int year, int month, EnvironmentVariables environmentVariables)
+        {
+            var periodName = "R" + (new DateTime(year, month, 1)).GetPeriodNumber().ToString("00");
+            var periodKey = year + month.ToString("00");
+
+            using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
+            {
+                connection.Execute("UPDATE [Collection_Period_Mapping]  SET Collection_Open=0");
+
+                connection.Execute("DELETE FROM [Collection_Period_Mapping]  WHERE Period=@month AND Calendar_Year=@year", new { month, year });
+
+                connection.Execute("INSERT INTO [Collection_Period_Mapping]" +
+                                   "(Period_ID, Collection_Period, Period, Calendar_Year, Collection_Open, ActualsSchemaPeriod)" +
+                                   "SELECT ISNULL(MAX(Period_Id), 0) + 1, @periodName, @month, @year, 1, @periodKey FROM [Collection_Period_Mapping]",
+                                   new { periodName, month, year, periodKey });
+            }
+        }
     }
 }

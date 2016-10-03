@@ -84,34 +84,31 @@
     <Compile Include="Builders\IlrLearningDeliveryBuilder.cs" />
     <Compile Include="Builders\IlrSubmissionDefaults.cs" />
     <Compile Include="Contexts\CompletionStatus.cs" />
-    <Compile Include="Contexts\EarningContext.cs" />
+    <Compile Include="Contexts\EarningAndPaymentsContext.cs" />
     <Compile Include="Contexts\LearnerType.cs" />
     <Compile Include="Contexts\ReferenceDataContext.cs" />
     <Compile Include="DataHelpers\AcceptanceTestDataHelper.cs" />
     <Compile Include="DataHelpers\AccountDataHelper.cs" />
     <Compile Include="DataHelpers\CommitmentDataHelper.cs" />
     <Compile Include="DataHelpers\EarningsDataHelper.cs" />
+    <Compile Include="DataHelpers\Entities\LevyPaymentEntity.cs" />
     <Compile Include="DataHelpers\Entities\PeriodisedValuesEntity.cs" />
     <Compile Include="DataHelpers\IdentifierGenerator.cs" />
+    <Compile Include="DataHelpers\LevyPaymentDataHelper.cs" />
     <Compile Include="ExecutionEnvironment\EnvironmentVariablesFactory.cs" />
     <Compile Include="ExecutionEnvironment\TestStatusWatcher.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="Features\earnings.feature.cs" />
-    <Compile Include="Features\payments.feature.cs" />
+    <Compile Include="Features\ontime_ILR_submission.feature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpecFlowHooks.cs" />
-    <Compile Include="StepDefinitions\EarningsSteps.cs" />
+    <Compile Include="StepDefinitions\EarningAndPaymentsSteps.cs" />
     <Compile Include="StepDefinitions\ReferenceDataSteps.cs" />
     <Compile Include="ExecutionEnvironment\TestLogger.cs" />
     <Compile Include="Translators\IlrTranslator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\features\earnings.feature">
-      <Link>Features\earnings.feature</Link>
-      <LastGenOutput>earnings1.feature.cs</LastGenOutput>
-    </None>
-    <None Include="..\..\features\payments.feature">
-      <Link>Features\payments.feature</Link>
+    <None Include="..\..\features\ontime_ILR_submission.feature">
+      <Link>Features\ontime_ILR_submission.feature</Link>
     </None>
     <None Include="App.config" />
     <None Include="App.Release.config">
@@ -129,7 +126,7 @@
   </Target>
   -->
   <!-- config transform -->
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!--<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />-->
   <UsingTask TaskName="TransformXml" AssemblyFile="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v14.0\Web\Microsoft.Web.Publishing.Tasks.dll" />
   <Target Name="AfterCompile" Condition="exists('app.$(Configuration).config')">
     <!-- Generate transformed app config in the intermediate directory -->
