@@ -2,6 +2,8 @@
 
 This repository represents the specifications for the SFA - DAS payment system; including automation to test the specifications against all the components (from other repositories) that comprise the system.
 
+Documentation can be viewed at [here](https://skillsfundingagency.github.io/das-paymentsacceptancetesting/)
+
 ## Structure
 
 * The [features](features/) folder contains the [Gherkin](https://github.com/cucumber/cucumber/wiki/Gherkin) specifications
