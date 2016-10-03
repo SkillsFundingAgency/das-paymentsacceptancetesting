@@ -51,3 +51,25 @@ Feature: Provider earnings and payments where learner completes on time and is f
             | SFA Levy employer budget      | 0     | 0     | 0     | ... | 0     | 0     | 0     |
             | SFA Levy co-funded budget     | 900   | 900   | 900   | ... | 900   | 2700  | 0     |
             | SFA non-Levy co-funding budget| 0     | 0     | 0     | ... | 0     | 0     |       | 
+            
+            
+    Background:
+        Given The learner is programme only non-DAS
+        And the agreed price is 15000
+        And the apprenticeship funding band maximum is 17000
+
+    Scenario: Earnings for a non-DAS learner, learner finishes on time
+        When an ILR file is submitted with the following data:
+            | start date | planned end date | actual end date | completion status |
+            | 01/09/2017 | 08/09/2018       | 08/09/2018      | completed         |
+        Then the provider earnings and payments break down as follows:
+            | Type                          | 09/17 | 10/17 | 11/17 | ... | 08/18 | 09/18 | 10/18 |
+            | Provider Earned Total         | 1000  | 1000  | 1000  | ... | 1000  | 3000  | 0     |
+            | Provider Earned from SFA      | 900   | 900   | 900   | ... | 900   | 2700  | 0     |
+            | Provider Earned from Employer | 100   | 100   | 100   | ... | 100   | 300   | 0     |
+            | Provider Paid by SFA          | 0     | 900   | 900   | ... | 900   | 900   | 2700  |
+            | Payment due from Employer     | 0     | 100   | 100   | ... | 100   | 100   | 300   |
+            | Levy account debited          | 0     | 0     | 0     | ... | 0     | 0     | 0     | 
+            | SFA Levy employer budget      | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+            | SFA Levy co-funded budget     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+            | SFA non-Levy co-funding budget| 900   | 900   | 900   | ... | 900   | 2700  | 0     | 
