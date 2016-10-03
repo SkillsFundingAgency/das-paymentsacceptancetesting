@@ -11,9 +11,9 @@ Scenario Outline: Learner type
     Then the learner is <learner type>
 
     Examples:
-    | Age | DAS contract status | English component | Maths component | Has learning support | Incentive payments | learner type   |
-    | 30  | DAS                 | no                | no              | does not exist       | none               | simple DAS     |
-    | 30  | non-DAS             | no                | no              | does not exist       | none               | simple non-DAS |
+    | Age | DAS contract status | English component | Maths component | Has learning support | Incentive payments | learner type       |
+    | 30  | DAS                 | no                | no              | does not exist       | none               | programme only DAS |
+    | 30  | non-DAS             | no                | no              | does not exist       | none               | programme non-DAS  |
 
 Scenario Outline: Calculating census months
     Given the census date is the last date of the month
