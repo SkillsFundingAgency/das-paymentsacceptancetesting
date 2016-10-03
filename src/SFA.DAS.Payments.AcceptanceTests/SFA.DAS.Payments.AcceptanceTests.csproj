@@ -84,7 +84,7 @@
     <Compile Include="Builders\IlrLearningDeliveryBuilder.cs" />
     <Compile Include="Builders\IlrSubmissionDefaults.cs" />
     <Compile Include="Contexts\CompletionStatus.cs" />
-    <Compile Include="Contexts\EarningContext.cs" />
+    <Compile Include="Contexts\EarningAndPaymentsContext.cs" />
     <Compile Include="Contexts\LearnerType.cs" />
     <Compile Include="Contexts\ReferenceDataContext.cs" />
     <Compile Include="DataHelpers\AcceptanceTestDataHelper.cs" />
@@ -101,7 +101,7 @@
     <Compile Include="Features\ontime_ILR_submission.feature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpecFlowHooks.cs" />
-    <Compile Include="StepDefinitions\EarningsSteps.cs" />
+    <Compile Include="StepDefinitions\EarningAndPaymentsSteps.cs" />
     <Compile Include="StepDefinitions\ReferenceDataSteps.cs" />
     <Compile Include="ExecutionEnvironment\TestLogger.cs" />
     <Compile Include="Translators\IlrTranslator.cs" />

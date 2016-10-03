@@ -4,10 +4,10 @@ using SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities;
 
 namespace SFA.DAS.Payments.AcceptanceTests.Contexts
 {
-    public class EarningContext
+    public class EarningAndPaymentsContext
     {
 
-        public EarningContext(ReferenceDataContext referenceDataContext)
+        public EarningAndPaymentsContext(ReferenceDataContext referenceDataContext)
         {
             ReferenceDataContext = referenceDataContext;
         }
