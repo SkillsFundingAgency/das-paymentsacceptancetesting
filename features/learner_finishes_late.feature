@@ -1,6 +1,6 @@
 Feature: Provider earnings and payments where learner completes later than planned and is funded by levy
 
-    The earnings and payment rules for late completions are the same as for learners finishing on time.
+    The earnings and payment rules for late completions are the same as for learners finishing on time, except that the completion payment is held back until completion.
 
     Background:
         Given The learner is programme only DAS
