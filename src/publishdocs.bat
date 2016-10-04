@@ -1,7 +1,7 @@
 mkdir pubdocs
 cd pubdocs
 
-git clone https://%1%:%2%github.com/SkillsFundingAgency/das-paymentsacceptancetesting.git --branch gh-pages
+git clone https://%1%:%2%@github.com/SkillsFundingAgency/das-paymentsacceptancetesting.git --branch gh-pages
 
 xcopy ..\das-payments-AcceptanceTests\AcceptanceTests\docs das-paymentsacceptancetesting /E /R /Y
 
