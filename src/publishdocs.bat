@@ -5,8 +5,8 @@ git clone https://%1:%2@github.com/SkillsFundingAgency/das-paymentsacceptancetes
 
 xcopy ..\das-payments-AcceptanceTests\AcceptanceTests\docs das-paymentsacceptancetesting /E /R /Y
 
-git config  --global user.email "kalim.akbar@fasst.org.uk" 
-git config  --global user.name "build agent"
+git config  user.email "kalim.akbar@fasst.org.uk" 
+git config  user.name "build agent"
 
 cd das-paymentsacceptancetesting
 git add --all
