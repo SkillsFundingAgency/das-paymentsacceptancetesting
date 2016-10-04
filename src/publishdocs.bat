@@ -5,6 +5,9 @@ git clone https://%1:%2@github.com/SkillsFundingAgency/das-paymentsacceptancetes
 
 xcopy ..\das-payments-AcceptanceTests\AcceptanceTests\docs das-paymentsacceptancetesting /E /R /Y
 
+git config  user.email "kalim.akbar@fasst.org.uk" 
+git config  user.name "das build agent"
+
 cd das-paymentsacceptancetesting
 git add --all
 git commit -m "Update docs for release %RELEASE_RELEASENAME%"
