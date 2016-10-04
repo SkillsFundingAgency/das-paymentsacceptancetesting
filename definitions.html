@@ -1,0 +1,282 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"[]>
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Business definitions</title>
+    <link rel="stylesheet" href="css/master.css" type="text/css" />
+    <link rel="stylesheet" href="css/print.css" type="text/css" media="print" />
+    <script src="js/jquery.js" type="text/javascript"></script>
+    <script src="js/scripts.js" type="text/javascript"></script>
+    <script type="text/javascript">
+$(document).ready(function() {
+  initializeToc();
+});
+</script>
+    <!-- We are using Font Awesome - http://fortawesome.github.com/Font-Awesome - licensed under CC BY 3.0 -->
+  </head>
+  <body>
+    <div id="container">
+      <div id="top" />
+      <div id="toc">
+        <p class="tocCollapser" title="Collapse Table of Content">«</p>
+        <ul class="features">
+          <li class="file" id="root">
+            <a href="index.html">Home</a>
+          </li>
+          <li class="file">
+            <span class="current">Business definitions</span>
+            <span class="float-right">
+              <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
+            </span>
+          </li>
+          <li class="file">
+            <a href="learner_finishes_early.html">Provider earnings and payments where learner completes earlier than planned and is funded by levy</a>
+            <span class="float-right">
+              <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
+            </span>
+          </li>
+          <li class="file">
+            <a href="learner_finishes_late.html">Provider earnings and payments where learner completes later than planned and is funded by levy</a>
+            <span class="float-right">
+              <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
+            </span>
+          </li>
+          <li class="file">
+            <a href="learner_finishes_on_time.html">Provider earnings and payments where learner completes on time and is funded by levy</a>
+            <span class="float-right">
+              <i class="icon-minus-sign failed" title="Failed"> </i>
+            </span>
+          </li>
+        </ul>
+      </div>
+      <div id="feature">
+        <div class="float-right">
+          <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
+        </div>
+        <h1>Business definitions</h1>
+        <ul id="scenarios">
+          <li class="scenario">
+            <div class="float-right">
+              <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
+            </div>
+            <div class="scenario-heading" id="learner-type">
+              <h2>Learner type</h2>
+            </div>
+            <div class="steps">
+              <ul>
+                <li class="step">
+                  <span class="keyword">When </span>the learner is age &lt;Age&gt;</li>
+                <li class="step">
+                  <span class="keyword">And </span>the contract type is &lt;DAS contract status&gt;</li>
+                <li class="step">
+                  <span class="keyword">And </span>English is &lt;English component&gt;</li>
+                <li class="step">
+                  <span class="keyword">And </span>maths is &lt;Maths component&gt;</li>
+                <li class="step">
+                  <span class="keyword">And </span>learning support is &lt;Has learning support&gt;</li>
+                <li class="step">
+                  <span class="keyword">And </span>incentive payments due are &lt;Incentive payments&gt;</li>
+                <li class="step">
+                  <span class="keyword">And </span>no ILR validation errors</li>
+                <li class="step">
+                  <span class="keyword">Then </span>the learner is &lt;learner type&gt;</li>
+              </ul>
+            </div>
+            <a class="scenario-link" href="javascript:showImageLink('learner-type')" title="Copy scenario link to clipboard.">
+              <i class="icon-link"> </i>
+            </a>
+            <div>
+              <div class="examples">
+                <h3>Examples: </h3>
+                <div class="table_container">
+                  <table class="datatable">
+                    <thead>
+                      <tr>
+                        <th>Age</th>
+                        <th>DAS contract status</th>
+                        <th>English component</th>
+                        <th>Maths component</th>
+                        <th>Has learning support</th>
+                        <th>Incentive payments</th>
+                        <th>learner type</th>
+                        <th> </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>30</td>
+                        <td>DAS</td>
+                        <td>no</td>
+                        <td>no</td>
+                        <td>does not exist</td>
+                        <td>none</td>
+                        <td>programme only DAS</td>
+                        <td>
+                          <div class="float-right">
+                            <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>30</td>
+                        <td>non-DAS</td>
+                        <td>no</td>
+                        <td>no</td>
+                        <td>does not exist</td>
+                        <td>none</td>
+                        <td>programme non-DAS</td>
+                        <td>
+                          <div class="float-right">
+                            <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="scenario">
+            <div class="float-right">
+              <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
+            </div>
+            <div class="scenario-heading" id="calculating-census-months">
+              <h2>Calculating census months</h2>
+            </div>
+            <div class="steps">
+              <ul>
+                <li class="step">
+                  <span class="keyword">Given </span>the census date is the last date of the month</li>
+                <li class="step">
+                  <span class="keyword">When </span>the start date is &lt;start date&gt;</li>
+                <li class="step">
+                  <span class="keyword">And </span>the planned end date is &lt;planned end date&gt;</li>
+                <li class="step">
+                  <span class="keyword">Then </span>the number of census months is &lt;census months&gt;</li>
+              </ul>
+            </div>
+            <a class="scenario-link" href="javascript:showImageLink('calculating-census-months')" title="Copy scenario link to clipboard.">
+              <i class="icon-link"> </i>
+            </a>
+            <div>
+              <div class="examples">
+                <h3>Examples: </h3>
+                <div class="table_container">
+                  <table class="datatable">
+                    <thead>
+                      <tr>
+                        <th>start date</th>
+                        <th>planned end date</th>
+                        <th>census months</th>
+                        <th> </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>01/09/2017</td>
+                        <td>08/09/2018</td>
+                        <td>12</td>
+                        <td>
+                          <div class="float-right">
+                            <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>01/09/2017</td>
+                        <td>29/09/2018</td>
+                        <td>12</td>
+                        <td>
+                          <div class="float-right">
+                            <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>01/09/2017</td>
+                        <td>30/09/2018</td>
+                        <td>13</td>
+                        <td>
+                          <div class="float-right">
+                            <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="scenario">
+            <div class="float-right">
+              <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
+            </div>
+            <div class="scenario-heading" id="earnings-distribution">
+              <h2>Earnings distribution</h2>
+            </div>
+            <div class="steps">
+              <ul>
+                <li class="step">
+                  <span class="keyword">When </span>the planned course duration covers &lt;census months&gt; months</li>
+                <li class="step">
+                  <span class="keyword">And </span>an agreed price of 15000</li>
+                <li class="step">
+                  <span class="keyword">Then </span>the monthly earnings is &lt;monthly earnings&gt;</li>
+                <li class="step">
+                  <span class="keyword">And </span>the completion payment is &lt;completion payment&gt;</li>
+              </ul>
+            </div>
+            <a class="scenario-link" href="javascript:showImageLink('earnings-distribution')" title="Copy scenario link to clipboard.">
+              <i class="icon-link"> </i>
+            </a>
+            <div>
+              <div class="examples">
+                <h3>Examples: </h3>
+                <div class="table_container">
+                  <table class="datatable">
+                    <thead>
+                      <tr>
+                        <th>census months</th>
+                        <th>monthly earnings</th>
+                        <th>completion payment</th>
+                        <th> </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>12</td>
+                        <td>1000</td>
+                        <td>3000</td>
+                        <td>
+                          <div class="float-right">
+                            <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>6</td>
+                        <td>2000</td>
+                        <td>3000</td>
+                        <td>
+                          <div class="float-right">
+                            <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div id="footer">
+        <p>Generated on: 4 October 2016 12:49:06</p>
+        <p>Produced by Pickles, version 2.8.2.0</p>
+      </div>
+    </div>
+  </body>
+</html>
