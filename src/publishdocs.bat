@@ -9,6 +9,6 @@ xcopy ..\das-payments-AcceptanceTests\AcceptanceTests\docs das-paymentsacceptanc
 cd das-paymentsacceptancetesting
 git add --all
 git commit -m "Update docs for release %RELEASE_RELEASENAME%"
-git config  user.email "kalim.akbar@fasst.org.uk" 
-git config  user.name "das build agent"
+git config  --global user.email "kalim.akbar@fasst.org.uk" 
+git config  --global user.name "build agent"
 git push origin gh-pages
