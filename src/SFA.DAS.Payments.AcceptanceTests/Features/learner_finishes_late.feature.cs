@@ -18,23 +18,24 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.1.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Provider earnings and payments where learner completes earlier than planned and i" +
-        "s funded by levy")]
-    public partial class ProviderEarningsAndPaymentsWhereLearnerCompletesEarlierThanPlannedAndIsFundedByLevyFeature
+    [NUnit.Framework.DescriptionAttribute("Provider earnings and payments where learner completes later than planned and is " +
+        "funded by levy")]
+    public partial class ProviderEarningsAndPaymentsWhereLearnerCompletesLaterThanPlannedAndIsFundedByLevyFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "learner_finishes_early.feature"
+#line 1 "learner_finishes_late.feature"
 #line hidden
         
         [NUnit.Framework.TestFixtureSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-GB"), "Provider earnings and payments where learner completes earlier than planned and i" +
-                    "s funded by levy", "    The earnings and payment rules for early completions are the same as for lear" +
-                    "ners finishing on time, except that the completion payment is earned earlier.", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-GB"), "Provider earnings and payments where learner completes later than planned and is " +
+                    "funded by levy", "    The earnings and payment rules for late completions are the same as for learn" +
+                    "ers finishing on time, except that the completion payment is held back until com" +
+                    "pletion.", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -81,86 +82,100 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Earnings for a DAS learner, levy available, learner finishes early")]
-        public virtual void EarningsForADASLearnerLevyAvailableLearnerFinishesEarly()
+        [NUnit.Framework.DescriptionAttribute("Earnings for a DAS learner, levy available, learner finishes late")]
+        public virtual void EarningsForADASLearnerLevyAvailableLearnerFinishesLate()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Earnings for a DAS learner, levy available, learner finishes early", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Earnings for a DAS learner, levy available, learner finishes late", ((string[])(null)));
 #line 11
     this.ScenarioSetup(scenarioInfo);
 #line 5
     this.FeatureBackground();
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                         "start date",
                         "planned end date",
                         "actual end date",
                         "completion status"});
-            table1.AddRow(new string[] {
+            table3.AddRow(new string[] {
                         "01/09/2017",
                         "08/09/2018",
-                        "08/08/2018",
+                        "08/10/2018",
                         "completed"});
 #line 12
-        testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table1, "When ");
+        testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table3, "When ");
 #line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
                         "09/17",
                         "10/17",
                         "11/17",
                         "...",
                         "08/18",
-                        "09/18"});
-            table2.AddRow(new string[] {
+                        "09/18",
+                        "10/18",
+                        "11/18"});
+            table4.AddRow(new string[] {
                         "Provider Earned Total",
                         "1000",
                         "1000",
                         "1000",
                         "...",
-                        "4000",
+                        "1000",
+                        "0",
+                        "3000",
                         "0"});
-            table2.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Provider Earned from SFA",
                         "1000",
                         "1000",
                         "1000",
                         "...",
-                        "4000",
+                        "1000",
+                        "0",
+                        "3000",
                         "0"});
-            table2.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Provider Paid by SFA",
                         "0",
                         "1000",
                         "1000",
                         "...",
                         "1000",
-                        "4000"});
-            table2.AddRow(new string[] {
+                        "1000",
+                        "0",
+                        "3000"});
+            table4.AddRow(new string[] {
                         "Levy account debited",
                         "0",
                         "1000",
                         "1000",
                         "...",
                         "1000",
-                        "4000"});
-            table2.AddRow(new string[] {
+                        "1000",
+                        "0",
+                        "3000"});
+            table4.AddRow(new string[] {
                         "SFA Levy employer budget",
                         "1000",
                         "1000",
                         "1000",
                         "...",
-                        "4000",
+                        "1000",
+                        "0",
+                        "3000",
                         "0"});
-            table2.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "SFA Levy co-funding budget",
                         "0",
                         "0",
                         "0",
                         "...",
                         "0",
+                        "0",
+                        "0",
                         "0"});
 #line 15
-        testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table2, "Then ");
+        testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table4, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
