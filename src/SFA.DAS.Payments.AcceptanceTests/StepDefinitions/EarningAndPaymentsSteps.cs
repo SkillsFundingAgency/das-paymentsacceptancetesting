@@ -77,9 +77,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
         [Then(@"the provider earnings and payments break down as follows:")]
         public void ThenTheProviderEarningsBreakDownAsFollows(Table table)
         {
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+
             var earnedRow = table.Rows.RowWithKey(RowKeys.Earnings);
             var levyPaidRow = table.Rows.RowWithKey(RowKeys.LevyPayment);
-            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+            var govtCofundRow = table.Rows.RowWithKey(RowKeys.CoFinanceGovernmentPayment);
+            var employerCofundRow = table.Rows.RowWithKey(RowKeys.CoFinanceEmployerPayment);
 
             for (var colIndex = 1; colIndex < table.Header.Count; colIndex++)
             {
@@ -95,6 +98,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 
                 VerifyEarningsForPeriod(periodName, colIndex, earnedRow);
                 VerifyLevyPayments(periodName, periodYear, periodMonth, colIndex, levyPaidRow, environmentVariables);
+                VerifyCofinancePayments(periodName, periodYear, periodMonth, colIndex, govtCofundRow, employerCofundRow, environmentVariables);
             }
         }
 
@@ -113,7 +117,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                 CollectionOpen = 1
             };
         }
-        private void SubmitIlr(long ukprn, int uln, string academicYear, DateTime date, DateTime endDate, 
+        private void SubmitIlr(long ukprn, int uln, string academicYear, DateTime date, DateTime endDate,
             EnvironmentVariables environmentVariables, ProcessService processService, Dictionary<string, decimal> earnedByPeriod)
         {
             var actualEndDate = date >= endDate ? EarningAndPaymentsContext.IlrActualEndDate : null;
@@ -168,7 +172,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             Assert.IsTrue(EarningAndPaymentsContext.EarnedByPeriod.ContainsKey(periodName), $"Expected earning for period {periodName} but none found");
             Assert.AreEqual(expectedEarning, EarningAndPaymentsContext.EarnedByPeriod[periodName]);
         }
-        private void VerifyLevyPayments(string periodName, int periodYear, int periodMonth, int colIndex, TableRow levyPaidRow, EnvironmentVariables environmentVariables)
+        private void VerifyLevyPayments(string periodName, int periodYear, int periodMonth, int colIndex,
+            TableRow levyPaidRow, EnvironmentVariables environmentVariables)
         {
             if (levyPaidRow == null)
             {
@@ -185,6 +190,28 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             var actualLevyPayment = levyPayments.Length == 0 ? 0m : levyPayments[0].Amount;
             var expectedLevyPayment = decimal.Parse(levyPaidRow[colIndex]);
             Assert.AreEqual(expectedLevyPayment, actualLevyPayment, $"Expected a levy payment of {expectedLevyPayment} but made a payment of {actualLevyPayment} for {periodName}");
+        }
+        private void VerifyCofinancePayments(string periodName, int periodYear, int periodMonth, int colIndex,
+            TableRow govtCofundRow, TableRow employerCofundRow, EnvironmentVariables environmentVariables)
+        {
+            if (govtCofundRow == null && employerCofundRow == null)
+            {
+                return;
+            }
+
+            var cofinancePayments = CoFinancePaymentsDataHelper.GetLevyPaymentsForPeriod(EarningAndPaymentsContext.Ukprn, periodYear, periodMonth, environmentVariables);
+            if (cofinancePayments.Length != 0 && cofinancePayments.Length != 2)
+            {
+                Assert.Fail($"Should have 2 or 0 co-invested payments for {periodName} but have {cofinancePayments.Length}");
+            }
+
+            var actualGovtPayment = cofinancePayments.SingleOrDefault(p => p.FundingSource == 2)?.Amount ?? 0m;
+            var expectedGovtPayment = govtCofundRow == null ? 0 : decimal.Parse(govtCofundRow[colIndex]);
+            Assert.AreEqual(expectedGovtPayment, actualGovtPayment, $"Expected a government co-finance payment of {expectedGovtPayment} but made a payment of {actualGovtPayment} for {periodName}");
+
+            var actualEmployerPayment = cofinancePayments.SingleOrDefault(p => p.FundingSource == 3)?.Amount ?? 0m;
+            var expectedEmployerPayment = employerCofundRow == null ? 0 : decimal.Parse(employerCofundRow[colIndex]);
+            Assert.AreEqual(expectedGovtPayment, actualGovtPayment, $"Expected a employer co-finance payment of {expectedEmployerPayment} but made a payment of {actualEmployerPayment} for {periodName}");
         }
 
     }

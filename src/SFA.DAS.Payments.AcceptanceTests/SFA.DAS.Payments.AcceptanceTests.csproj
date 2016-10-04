@@ -89,8 +89,10 @@
     <Compile Include="Contexts\ReferenceDataContext.cs" />
     <Compile Include="DataHelpers\AcceptanceTestDataHelper.cs" />
     <Compile Include="DataHelpers\AccountDataHelper.cs" />
+    <Compile Include="DataHelpers\CoFinancePaymentsDataHelper.cs" />
     <Compile Include="DataHelpers\CommitmentDataHelper.cs" />
     <Compile Include="DataHelpers\EarningsDataHelper.cs" />
+    <Compile Include="DataHelpers\Entities\CoFinancePaymentEntity.cs" />
     <Compile Include="DataHelpers\Entities\LevyPaymentEntity.cs" />
     <Compile Include="DataHelpers\Entities\PeriodisedValuesEntity.cs" />
     <Compile Include="DataHelpers\IdentifierGenerator.cs" />

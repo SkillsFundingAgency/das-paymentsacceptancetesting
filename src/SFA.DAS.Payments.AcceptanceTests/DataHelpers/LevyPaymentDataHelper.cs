@@ -6,7 +6,7 @@ using SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities;
 
 namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 {
-    internal class LevyPaymentDataHelper
+    internal static class LevyPaymentDataHelper
     {
         internal static LevyPaymentEntity[] GetLevyPaymentsForPeriod(long ukprn, int year, int month, EnvironmentVariables environmentVariables)
         {

@@ -159,7 +159,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "1000",
                         "3000"});
             table2.AddRow(new string[] {
-                        "SFA Levy budget",
+                        "SFA Levy employer budget",
                         "1000",
                         "1000",
                         "1000",
@@ -168,7 +168,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "3000",
                         "0"});
             table2.AddRow(new string[] {
-                        "SFA co-funding budget",
+                        "SFA Levy co-funding budget",
                         "0",
                         "0",
                         "0",
