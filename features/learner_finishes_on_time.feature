@@ -22,13 +22,13 @@ Feature: Provider earnings and payments where learner completes on time and is f
             | start date | planned end date | actual end date | completion status |
             | 01/09/2017 | 08/09/2018       | 08/09/2018      | completed         |
         Then the provider earnings and payments break down as follows:
-            | Type                     | 09/17 | 10/17 | 11/17 | ... | 08/18 | 09/18 | 10/18 |
-            | Provider Earned Total    | 1000  | 1000  | 1000  | ... | 1000  | 3000  | 0     |
-            | Provider Earned from SFA | 1000  | 1000  | 1000  | ... | 1000  | 3000  | 0     |
-            | Provider Paid by SFA     | 0     | 1000  | 1000  | ... | 1000  | 1000  | 3000  |
-            | Levy account debited     | 0     | 1000  | 1000  | ... | 1000  | 1000  | 3000  |
-            | SFA Levy budget          | 1000  | 1000  | 1000  | ... | 1000  | 3000  | 0     |
-            | SFA co-funding budget    | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+            | Type                       | 09/17 | 10/17 | 11/17 | ... | 08/18 | 09/18 | 10/18 |
+            | Provider Earned Total      | 1000  | 1000  | 1000  | ... | 1000  | 3000  | 0     |
+            | Provider Earned from SFA   | 1000  | 1000  | 1000  | ... | 1000  | 3000  | 0     |
+            | Provider Paid by SFA       | 0     | 1000  | 1000  | ... | 1000  | 1000  | 3000  |
+            | Levy account debited       | 0     | 1000  | 1000  | ... | 1000  | 1000  | 3000  |
+            | SFA Levy employer budget   | 1000  | 1000  | 1000  | ... | 1000  | 3000  | 0     |
+            | SFA Levy co-funding budget | 0     | 0     | 0     | ... | 0     | 0     | 0     |
 
             
     Scenario: Earnings for a DAS learner, no levy available, learner finishes on time

@@ -100,6 +100,7 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Features\learner_finishes_on_time.feature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RowKeys.cs" />
     <Compile Include="SpecFlowHooks.cs" />
     <Compile Include="StepDefinitions\EarningAndPaymentsSteps.cs" />
     <Compile Include="StepDefinitions\ReferenceDataSteps.cs" />

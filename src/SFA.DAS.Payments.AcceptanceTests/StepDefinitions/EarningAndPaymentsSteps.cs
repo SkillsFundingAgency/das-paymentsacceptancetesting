@@ -77,8 +77,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
         [Then(@"the provider earnings and payments break down as follows:")]
         public void ThenTheProviderEarningsBreakDownAsFollows(Table table)
         {
-            var earnedRow = table.Rows.RowWithKey("Provider Earned Total");
-            var levyPaidRow = table.Rows.RowWithKey("Levy account debited");
+            var earnedRow = table.Rows.RowWithKey(RowKeys.Earnings);
+            var levyPaidRow = table.Rows.RowWithKey(RowKeys.LevyPayment);
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
             for (var colIndex = 1; colIndex < table.Header.Count; colIndex++)
@@ -154,6 +154,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 
         private void VerifyEarningsForPeriod(string periodName, int colIndex, TableRow earnedRow)
         {
+            if (earnedRow == null)
+            {
+                return;
+            }
+
             if (!EarningAndPaymentsContext.EarnedByPeriod.ContainsKey(periodName))
             {
                 Assert.Fail($"Expected value for period {periodName} but none found");
@@ -165,6 +170,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
         }
         private void VerifyLevyPayments(string periodName, int periodYear, int periodMonth, int colIndex, TableRow levyPaidRow, EnvironmentVariables environmentVariables)
         {
+            if (levyPaidRow == null)
+            {
+                return;
+            }
+
             var levyPayments = LevyPaymentDataHelper.GetLevyPaymentsForPeriod(EarningAndPaymentsContext.Ukprn, periodYear, periodMonth - 1, environmentVariables)
                     ?? new LevyPaymentEntity[0];
             if (levyPayments.Length < 0 || levyPayments.Length > 1)
