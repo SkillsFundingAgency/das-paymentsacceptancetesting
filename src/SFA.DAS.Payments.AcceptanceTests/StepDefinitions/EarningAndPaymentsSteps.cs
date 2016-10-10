@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using IlrGenerator;
 using NUnit.Framework;
 using ProviderPayments.TestStack.Core;
 using ProviderPayments.TestStack.Core.Domain;
-using SFA.DAS.Payments.AcceptanceTests.Builders;
 using SFA.DAS.Payments.AcceptanceTests.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.DataHelpers;
 using SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities;
 using SFA.DAS.Payments.AcceptanceTests.ExecutionEnvironment;
 using SFA.DAS.Payments.AcceptanceTests.Translators;
 using TechTalk.SpecFlow;
+using IlrBuilder = SFA.DAS.Payments.AcceptanceTests.Builders.IlrBuilder;
 
 namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 {

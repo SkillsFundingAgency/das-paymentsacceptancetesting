@@ -1,4 +1,5 @@
-﻿using ProviderPayments.TestStack.Core.Domain;
+﻿using IlrGenerator;
+using ProviderPayments.TestStack.Core.Domain;
 
 namespace SFA.DAS.Payments.AcceptanceTests.Builders
 {

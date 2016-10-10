@@ -25,7 +25,8 @@ namespace SFA.DAS.Payments.AcceptanceTests
             var processService = new ProcessService(new TestLogger());
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
-            processService.RebuildDedsDatabase(ComponentType.DataLock, environmentVariables);
+            processService.RebuildDedsDatabase(ComponentType.DataLockSubmission, environmentVariables);
+            processService.RebuildDedsDatabase(ComponentType.DataLockPeriodEnd, environmentVariables);
             processService.RebuildDedsDatabase(ComponentType.EarningsCalculator, environmentVariables);
             processService.RebuildDedsDatabase(ComponentType.PaymentsDue, environmentVariables);
             processService.RebuildDedsDatabase(ComponentType.LevyCalculator, environmentVariables);
