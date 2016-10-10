@@ -183,12 +183,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 
             var levyPayments = LevyPaymentDataHelper.GetLevyPaymentsForPeriod(EarningAndPaymentsContext.Ukprn, periodYear, periodMonth - 1, environmentVariables)
                     ?? new LevyPaymentEntity[0];
-            if (levyPayments.Length < 0 || levyPayments.Length > 1)
-            {
-                Assert.Fail($"Should have no more than 1 payment for {periodName} but have {levyPayments.Length}");
-            }
 
-            var actualLevyPayment = levyPayments.Length == 0 ? 0m : levyPayments[0].Amount;
+            var actualLevyPayment = levyPayments.Length == 0 ? 0m : levyPayments.Sum(p => p.Amount);
             var expectedLevyPayment = decimal.Parse(levyPaidRow[colIndex]);
             Assert.AreEqual(expectedLevyPayment, actualLevyPayment, $"Expected a levy payment of {expectedLevyPayment} but made a payment of {actualLevyPayment} for {periodName}");
         }
@@ -201,16 +197,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             }
 
             var cofinancePayments = CoFinancePaymentsDataHelper.GetLevyPaymentsForPeriod(EarningAndPaymentsContext.Ukprn, periodYear, periodMonth, environmentVariables);
-            if (cofinancePayments.Length != 0 && cofinancePayments.Length != 2)
-            {
-                Assert.Fail($"Should have 2 or 0 co-invested payments for {periodName} but have {cofinancePayments.Length}");
-            }
 
-            var actualGovtPayment = cofinancePayments.SingleOrDefault(p => p.FundingSource == 2)?.Amount ?? 0m;
+            var actualGovtPayment = cofinancePayments.Where(p => p.FundingSource == 2).Sum(p => p.Amount);
             var expectedGovtPayment = govtCofundRow == null ? 0 : decimal.Parse(govtCofundRow[colIndex]);
             Assert.AreEqual(expectedGovtPayment, actualGovtPayment, $"Expected a government co-finance payment of {expectedGovtPayment} but made a payment of {actualGovtPayment} for {periodName}");
 
-            var actualEmployerPayment = cofinancePayments.SingleOrDefault(p => p.FundingSource == 3)?.Amount ?? 0m;
+            var actualEmployerPayment = cofinancePayments.Where(p => p.FundingSource == 3).Sum(p => p.Amount);
             var expectedEmployerPayment = employerCofundRow == null ? 0 : decimal.Parse(employerCofundRow[colIndex]);
             Assert.AreEqual(expectedGovtPayment, actualGovtPayment, $"Expected a employer co-finance payment of {expectedEmployerPayment} but made a payment of {actualEmployerPayment} for {periodName}");
         }
