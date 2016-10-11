@@ -14,7 +14,7 @@ Feature: Provider earnings and payments where learner completes on time and is f
     Background:
         Given the apprenticeship funding band maximum is 17000
 
-    Scenario: Earnings and payments for a DAS learner, levy available, learner finishes on time
+    Scenario: A DAS learner, levy available, learner finishes on time
         Given levy balance > agreed price
         When an ILR file is submitted with the following data:
             | learner type       | agreed price | start date | planned end date | actual end date | completion status |
@@ -29,7 +29,7 @@ Feature: Provider earnings and payments where learner completes on time and is f
             | SFA Levy co-funding budget | 0     | 0     | 0     | ... | 0     | 0     | 0     |
 
 
-    Scenario: Earnings for a DAS learner, no levy available, learner finishes on time
+    Scenario: A DAS learner, no levy available, learner finishes on time
         Given levy balance = 0
         When an ILR file is submitted with the following data:
             | learner type       | agreed price | start date | planned end date | actual end date | completion status |
@@ -48,7 +48,7 @@ Feature: Provider earnings and payments where learner completes on time and is f
 
 
     @ignore
-    Scenario: Earnings for a non-DAS learner, learner finishes on time
+    Scenario: A non-DAS learner, learner finishes on time
         When an ILR file is submitted with the following data:
             | agreed price | learner type           | start date | planned end date | actual end date | completion status |
             | 15000        | programme only non-DAS | 01/09/2017 | 08/09/2018       | 08/09/2018      | completed         |
