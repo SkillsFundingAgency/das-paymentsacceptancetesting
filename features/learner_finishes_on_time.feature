@@ -17,7 +17,7 @@ Feature: Provider earnings and payments where learner completes on time and is f
         Given the apprenticeship funding band maximum for each learner is 17000
 
     Scenario: A DAS learner, levy available, learner finishes on time
-        Given levy balance > agreed price
+        Given levy balance > agreed price for all months
         When an ILR file is submitted with the following data:
             | learner type       | agreed price | start date | planned end date | actual end date | completion status |
             | programme only DAS | 15000        | 01/09/2017 | 08/09/2018       | 08/09/2018      | completed         |
@@ -32,7 +32,7 @@ Feature: Provider earnings and payments where learner completes on time and is f
 
 
     Scenario: A DAS learner, no levy available, learner finishes on time
-        Given levy balance = 0
+        Given levy balance = 0 for all months
         When an ILR file is submitted with the following data:
             | learner type       | agreed price | start date | planned end date | actual end date | completion status |
             | programme only DAS | 15000        | 01/09/2017 | 08/09/2018       | 08/09/2018      | completed         |
@@ -50,8 +50,10 @@ Feature: Provider earnings and payments where learner completes on time and is f
 
 
     Scenario: 2 DAS learners, only enough levy to cover 1
-        Given levy balance = 7500
-        And the following commitments:
+        Given the employer's levy balance is:
+            | 09/17 | 10/17 | 11/17 | ... | 08/18 | 09/18 | 10/18 |
+            | 0     | 500   | 500   | 500 | 500   | 500   | 1500  |
+        And the following commitments exist:
             | ULN       | priority |
             | learner a | 1        |
             | learner b | 2        |
