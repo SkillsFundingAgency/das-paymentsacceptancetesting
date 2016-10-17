@@ -171,7 +171,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 
             var expectedEarning = decimal.Parse(earnedRow[colIndex]);
             Assert.IsTrue(EarningAndPaymentsContext.EarnedByPeriod.ContainsKey(periodName), $"Expected earning for period {periodName} but none found");
-            Assert.AreEqual(expectedEarning, EarningAndPaymentsContext.EarnedByPeriod[periodName]);
+            Assert.AreEqual(expectedEarning, EarningAndPaymentsContext.EarnedByPeriod[periodName], $"Expected earning of {expectedEarning} for period {periodName} but found {EarningAndPaymentsContext.EarnedByPeriod[periodName]}");
         }
         private void VerifyLevyPayments(string periodName, int periodYear, int periodMonth, int colIndex,
             TableRow levyPaidRow, EnvironmentVariables environmentVariables)
