@@ -41,7 +41,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             var accountId = IdentifierGenerator.GenerateIdentifier();
             var ukprn = int.Parse(IdentifierGenerator.GenerateIdentifier(6, false));
             var uln = int.Parse(IdentifierGenerator.GenerateIdentifier(6, false));
-            var commitmentId = IdentifierGenerator.GenerateIdentifier();
+            var commitmentId = int.Parse(IdentifierGenerator.GenerateIdentifier(6, false));
 
             EarningAndPaymentsContext.Ukprn = ukprn;
 

@@ -7,7 +7,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 {
     internal static class CommitmentDataHelper
     {
-        internal static void CreateCommitment(string commitmentId, long ukprn, long uln, string accountId,
+        internal static void CreateCommitment(long commitmentId, long ukprn, long uln, string accountId,
             DateTime startDate, DateTime endDate, decimal agreedCost, long standardCode,
             int frameworkCode, int programmeType, int pathwayCode, int priority, string versionId, EnvironmentVariables environmentVariables)
         {
