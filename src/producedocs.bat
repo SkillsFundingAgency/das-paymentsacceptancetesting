@@ -5,4 +5,4 @@ packages\NUnit.ConsoleRunner.3.4.1\tools\nunit3-console.exe SFA.DAS.Payments.Acc
 
 rmdir ..\docs /Q /S
 mkdir ..\docs
-packages\Pickles.CommandLine.2.8.2\tools\pickles.exe --feature-directory ..\features --link-results-file SFA.DAS.Payments.AcceptanceTests\bin\%cfg%\TestResult.xml --test-results-format nunit2 --output-directory ..\docs
+packages\Pickles.CommandLine.2.8.2\tools\pickles.exe --feature-directory ..\features --link-results-file SFA.DAS.Payments.AcceptanceTests\bin\%cfg%\TestResult.xml --test-results-format nunit --output-directory ..\docs
