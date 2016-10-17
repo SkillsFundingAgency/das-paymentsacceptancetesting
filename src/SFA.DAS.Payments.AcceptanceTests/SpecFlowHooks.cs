@@ -31,6 +31,8 @@ namespace SFA.DAS.Payments.AcceptanceTests
             processService.RebuildDedsDatabase(ComponentType.PaymentsDue, environmentVariables);
             processService.RebuildDedsDatabase(ComponentType.LevyCalculator, environmentVariables);
             processService.RebuildDedsDatabase(ComponentType.CoInvestedPayments, environmentVariables);
+            processService.RebuildDedsDatabase(ComponentType.ReferenceCommitments, environmentVariables);
+            processService.RebuildDedsDatabase(ComponentType.ReferenceAccounts, environmentVariables);
         }
 
         [BeforeScenario]
