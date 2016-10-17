@@ -9,16 +9,16 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
     {
         internal static void CreateCommitment(string commitmentId, long ukprn, long uln, string accountId,
             DateTime startDate, DateTime endDate, decimal agreedCost, long standardCode,
-            int frameworkCode, int programmeType, int pathwayCode, EnvironmentVariables environmentVariables)
+            int frameworkCode, int programmeType, int pathwayCode, int priority, string versionId, EnvironmentVariables environmentVariables)
         {
 
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
             {
                 connection.Execute("INSERT INTO DasCommitments " +
-                                   "(CommitmentId, Ukprn, Uln, AccountId, StartDate, EndDate, AgreedCost, StandardCode, FrameworkCode, ProgrammeType, PathwayCode) " +
+                                   "(CommitmentId, Ukprn, Uln, AccountId, StartDate, EndDate, AgreedCost, StandardCode, FrameworkCode, ProgrammeType, PathwayCode, Priority, VersionId) " +
                                    "VALUES " +
-                                   "(@commitmentId, @ukprn, @uln, @accountId, @startDate, @endDate, @agreedCost, @standardCode, @frameworkCode, @programmeType, @pathwayCode)",
-                    new { commitmentId, ukprn, uln, accountId, startDate, endDate, agreedCost, standardCode, frameworkCode, programmeType, pathwayCode });
+                                   "(@commitmentId, @ukprn, @uln, @accountId, @startDate, @endDate, @agreedCost, @standardCode, @frameworkCode, @programmeType, @pathwayCode, @priority, @versionId)",
+                    new { commitmentId, ukprn, uln, accountId, startDate, endDate, agreedCost, standardCode, frameworkCode, programmeType, pathwayCode, priority, versionId });
             }
         }
     }

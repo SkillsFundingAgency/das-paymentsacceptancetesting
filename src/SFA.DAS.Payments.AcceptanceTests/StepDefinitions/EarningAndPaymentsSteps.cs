@@ -49,7 +49,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 
             CommitmentDataHelper.CreateCommitment(commitmentId, ukprn, uln, accountId, EarningAndPaymentsContext.IlrStartDate,
                 EarningAndPaymentsContext.IlrPlannedEndDate, EarningAndPaymentsContext.ReferenceDataContext.AgreedPrice, IlrBuilder.Defaults.StandardCode,
-                IlrBuilder.Defaults.FrameworkCode, IlrBuilder.Defaults.ProgrammeType, IlrBuilder.Defaults.PathwayCode, environmentVariables);
+                IlrBuilder.Defaults.FrameworkCode, IlrBuilder.Defaults.ProgrammeType, IlrBuilder.Defaults.PathwayCode, 1, "1", environmentVariables);
 
 
             // Process months
