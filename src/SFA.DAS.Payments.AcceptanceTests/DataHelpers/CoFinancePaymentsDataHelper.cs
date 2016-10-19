@@ -12,7 +12,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
         {
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
             {
-                var query = "SELECT * FROM CoInvestedPayments.Payments WHERE UKPRN = @ukprn AND CollectionPeriodMonth = @month AND CollectionPeriodYear = @year";
+                var query = "SELECT * FROM Payments.Payments WHERE UKPRN = @ukprn AND CollectionPeriodMonth = @month AND CollectionPeriodYear = @year AND FundingSource IN (2, 3)";
                 return connection.Query<CoFinancePaymentEntity>(query, new { ukprn, month, year }).ToArray();
             }
         }
