@@ -107,6 +107,7 @@
     <Compile Include="ExecutionEnvironment\EnvironmentVariablesFactory.cs" />
     <Compile Include="ExecutionEnvironment\TestStatusWatcher.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Features\ILR_is_submitted_late.feature.cs" />
     <Compile Include="Features\learner_finishes_early.feature.cs" />
     <Compile Include="Features\learner_finishes_late.feature.cs" />
     <Compile Include="Features\learner_finishes_on_time.feature.cs" />
@@ -119,6 +120,9 @@
     <Compile Include="Translators\IlrTranslator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\features\ILR_is_submitted_late.feature">
+      <Link>Features\ILR_is_submitted_late.feature</Link>
+    </None>
     <None Include="..\..\features\learner_finishes_early.feature">
       <Link>Features\learner_finishes_early.feature</Link>
     </None>
