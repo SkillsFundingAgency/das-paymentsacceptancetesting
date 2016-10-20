@@ -14,5 +14,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                     new { accountId, accountName, levyBalance });
             }
         }
+
+        internal static void UpdateAccountBalance(string accountId, decimal levyBalance, EnvironmentVariables environmentVariables)
+        {
+            using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
+            {
+                connection.Execute("UPDATE DasAccounts SET LevyBalance = @levyBalance WHERE AccountId = @accountId",
+                    new { accountId, levyBalance });
+            }
+        }
     }
 }
