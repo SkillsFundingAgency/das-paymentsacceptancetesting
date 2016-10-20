@@ -51,8 +51,8 @@ Feature: Provider earnings and payments where learner completes on time and is f
 
     Scenario: 2 DAS learners, only enough levy to cover 1
         Given the employer's levy balance is:
-            | 09/17 | 10/17 | 11/17 | ... | 08/18 | 09/18 | 10/18 |
-            | 0     | 500   | 500   | 500 | 500   | 1500  | 1500  |
+            | 09/17 | 10/17 | 11/17 | ... | 08/18 | 09/18 |
+            | 0     | 500   | 500   | 500 | 500   | 1500  |
         And the following commitments exist:
             | ULN       | priority |
             | learner a | 1        |
