@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities;
+using System.Linq;
 
 namespace SFA.DAS.Payments.AcceptanceTests.Contexts
 {
@@ -14,10 +14,24 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
 
         public ReferenceDataContext ReferenceDataContext { get; set; }
 
-        public DateTime IlrStartDate { get; set; }
-        public DateTime IlrPlannedEndDate { get; set; }
-        public DateTime? IlrActualEndDate { get; set; }
-        public CompletionStatus IlrCompletionStatus { get; set; }
+        public DateTime IlrStartDate
+        {
+            get { return Learners.Min(l => l.LearningDelivery.StartDate); }
+        }
+        public DateTime IlrEndDate
+        {
+            get
+            {
+                var maxActualEndDate = Learners.Max(l => l.LearningDelivery.ActualEndDate) ?? DateTime.MinValue;
+                var maxEndDate = Learners.Max(l => l.LearningDelivery.PlannedEndDate);
+
+                return maxActualEndDate > maxEndDate
+                    ? maxActualEndDate
+                    : maxEndDate;
+            }
+        }
+
+        public Learner[] Learners { get; set; }
 
         public Dictionary<string, decimal> EarnedByPeriod { get; set; }
         public int Ukprn { get; set; }

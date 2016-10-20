@@ -70,37 +70,37 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         {
 #line 5
     #line 6
-        testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+        testRunner.Given("the apprenticeship funding band maximum for each learner is 17000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 7
-        testRunner.And("the agreed price is 15000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 8
-        testRunner.And("the apprenticeship funding band maximum is 17000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 9
-        testRunner.And("levy balance > agreed price", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Earnings for a DAS learner, levy available, learner finishes early")]
-        public virtual void EarningsForADASLearnerLevyAvailableLearnerFinishesEarly()
+        [NUnit.Framework.DescriptionAttribute("A DAS learner, levy available, learner finishes early")]
+        public virtual void ADASLearnerLevyAvailableLearnerFinishesEarly()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Earnings for a DAS learner, levy available, learner finishes early", ((string[])(null)));
-#line 11
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("A DAS learner, levy available, learner finishes early", ((string[])(null)));
+#line 9
     this.ScenarioSetup(scenarioInfo);
 #line 5
     this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "learner type",
+                        "agreed price",
                         "start date",
                         "planned end date",
                         "actual end date",
                         "completion status"});
             table1.AddRow(new string[] {
+                        "programme only DAS",
+                        "15000",
                         "01/09/2017",
                         "08/09/2018",
                         "08/08/2018",
                         "completed"});
-#line 12
+#line 10
         testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table1, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -159,7 +159,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "...",
                         "0",
                         "0"});
-#line 15
+#line 13
         testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table2, "Then ");
 #line hidden
             this.ScenarioCleanup();

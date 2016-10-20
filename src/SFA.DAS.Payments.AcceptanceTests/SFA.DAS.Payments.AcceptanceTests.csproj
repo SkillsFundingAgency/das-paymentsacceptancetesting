@@ -84,10 +84,14 @@
   <ItemGroup>
     <Compile Include="Builders\IlrBuilder.cs" />
     <Compile Include="Builders\IlrLearnerBuilder.cs" />
+    <Compile Include="Builders\IlrLearnersBuilder.cs" />
     <Compile Include="Builders\IlrLearningDeliveryBuilder.cs" />
     <Compile Include="Builders\IlrSubmissionDefaults.cs" />
+    <Compile Include="Contexts\Commitment.cs" />
     <Compile Include="Contexts\CompletionStatus.cs" />
     <Compile Include="Contexts\EarningAndPaymentsContext.cs" />
+    <Compile Include="Contexts\Learner.cs" />
+    <Compile Include="Contexts\LearningDelivery.cs" />
     <Compile Include="Contexts\LearnerType.cs" />
     <Compile Include="Contexts\ReferenceDataContext.cs" />
     <Compile Include="DataHelpers\AcceptanceTestDataHelper.cs" />

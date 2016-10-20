@@ -42,6 +42,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
             return new IlrLearnerBuilder(this);
         }
 
+        public IlrLearnersBuilder WithMultipleLearners()
+        {
+            return new IlrLearnersBuilder(this);
+        }
+
         public static implicit operator IlrSubmission(IlrBuilder builder)
         {
             return builder.Submission;

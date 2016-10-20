@@ -12,7 +12,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
         {
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
             {
-                var query = "SELECT * FROM LevyPayments.Payments WHERE UKPRN = @ukprn AND CollectionPeriodMonth = @month AND CollectionPeriodYear = @year";
+                var query = "SELECT * FROM Payments.Payments WHERE UKPRN = @ukprn AND CollectionPeriodMonth = @month AND CollectionPeriodYear = @year AND FundingSource = 1";
                 return connection.Query<LevyPaymentEntity>(query, new { ukprn, month, year }).ToArray();
             }
         }
