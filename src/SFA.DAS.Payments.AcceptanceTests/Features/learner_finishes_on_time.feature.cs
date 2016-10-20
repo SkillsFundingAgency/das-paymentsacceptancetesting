@@ -323,15 +323,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "11/17",
                         "...",
                         "08/18",
-                        "09/18",
-                        "10/18"});
+                        "09/18"});
             table9.AddRow(new string[] {
                         "0",
                         "500",
                         "500",
                         "500",
                         "500",
-                        "1500",
                         "1500"});
 #line 53
         testRunner.Given("the employer\'s levy balance is:", ((string)(null)), table9, "Given ");
