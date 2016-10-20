@@ -96,5 +96,11 @@ namespace SFA.DAS.Payments.AcceptanceTests
         {
             return rows.FirstOrDefault(r => r[0].Equals(key, StringComparison.OrdinalIgnoreCase));
         }
+
+        internal static string GetPeriod(this DateTime date)
+        {
+            var month = date.Month < 10 ? "0" + date.Month : date.Month.ToString();
+            return $"{month}/{date.Year - 2000}";
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 {
     internal static class CoFinancePaymentsDataHelper
     {
-        internal static CoFinancePaymentEntity[] GetLevyPaymentsForPeriod(long ukprn, int year, int month, EnvironmentVariables environmentVariables)
+        internal static CoFinancePaymentEntity[] GetCoInvestedPaymentsForPeriod(long ukprn, int year, int month, EnvironmentVariables environmentVariables)
         {
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
             {

@@ -3,8 +3,6 @@
     public class PeriodisedValuesEntity
     {
         public long Ukprn { get; set; }
-        public string LearnRefNumber { get; set; }
-        public int AimSeqNumber { get; set; }
         public decimal Period_1 { get; set; }
         public decimal Period_2 { get; set; }
         public decimal Period_3 { get; set; }
