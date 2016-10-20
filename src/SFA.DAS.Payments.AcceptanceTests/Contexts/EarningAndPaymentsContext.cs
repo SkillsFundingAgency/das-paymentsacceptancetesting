@@ -13,7 +13,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
         }
 
         public ReferenceDataContext ReferenceDataContext { get; set; }
-
         public DateTime IlrStartDate
         {
             get { return Learners.Min(l => l.LearningDelivery.StartDate); }
@@ -30,10 +29,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
                     : maxEndDate;
             }
         }
-
         public Learner[] Learners { get; set; }
-
         public Dictionary<string, decimal> EarnedByPeriod { get; set; }
-        public int Ukprn { get; set; }
+        public long Ukprn { get; set; }
+        public string AccountId { get; set; }
     }
 }

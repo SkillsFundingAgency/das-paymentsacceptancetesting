@@ -31,81 +31,36 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
         public void WhenAnIlrFileIsSubmittedWithTheFollowingData(Table table)
         {
             // Store spec values in context
-            EarningAndPaymentsContext.Learners = new Contexts.Learner[table.RowCount];
-
-            for (var rowIndex = 0; rowIndex < table.RowCount; rowIndex++)
-            {
-                EarningAndPaymentsContext.Learners[rowIndex] = new Contexts.Learner
-                {
-                    Name = table.Rows[rowIndex].ContainsKey("ULN") ? table.Rows[rowIndex]["ULN"] : string.Empty,
-                    Uln = long.Parse(IdentifierGenerator.GenerateIdentifier(10, false)),
-                    LearningDelivery = new LearningDelivery
-                    {
-                        AgreedPrice = decimal.Parse(table.Rows[rowIndex]["agreed price"]),
-                        LearnerType = LearnerType.ProgrammeOnlyDas,
-                        StartDate = DateTime.Parse(table.Rows[rowIndex]["start date"]),
-                        PlannedEndDate = DateTime.Parse(table.Rows[rowIndex]["planned end date"]),
-                        ActualEndDate = string.IsNullOrWhiteSpace(table.Rows[rowIndex]["actual end date"]) ? null : (DateTime?)DateTime.Parse(table.Rows[rowIndex]["actual end date"]),
-                        CompletionStatus = IlrTranslator.TranslateCompletionStatus(table.Rows[rowIndex]["completion status"])
-                    }
-                };
-            }
+            SetupContextLearners(table);
 
             // Setup reference data
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
-            var accountId = IdentifierGenerator.GenerateIdentifier();
-            var ukprn = int.Parse(IdentifierGenerator.GenerateIdentifier(8, false));
+            EarningAndPaymentsContext.Ukprn = int.Parse(IdentifierGenerator.GenerateIdentifier(8, false));
+            EarningAndPaymentsContext.AccountId = IdentifierGenerator.GenerateIdentifier();
 
-            EarningAndPaymentsContext.Ukprn = ukprn;
-
-            AccountDataHelper.CreateAccount(accountId, accountId, 0.00m, environmentVariables);
-
-            foreach (var learner in EarningAndPaymentsContext.Learners)
-            {
-                var commitment = EarningAndPaymentsContext.ReferenceDataContext.Commitments?.SingleOrDefault(c => c.Learner == learner.Name);
-
-                if (commitment != null)
-                {
-                    CommitmentDataHelper.CreateCommitment(commitment.Id, ukprn, learner.Uln, accountId, learner.LearningDelivery.StartDate,
-                        learner.LearningDelivery.PlannedEndDate, learner.LearningDelivery.AgreedPrice, IlrBuilder.Defaults.StandardCode,
-                        IlrBuilder.Defaults.FrameworkCode, IlrBuilder.Defaults.ProgrammeType, IlrBuilder.Defaults.PathwayCode, commitment.Priority, "1", environmentVariables);
-                }
-                else
-                {
-                    var commitmentId = int.Parse(IdentifierGenerator.GenerateIdentifier(6, false));
-
-                    CommitmentDataHelper.CreateCommitment(commitmentId, ukprn, learner.Uln, accountId, learner.LearningDelivery.StartDate,
-                        learner.LearningDelivery.PlannedEndDate, learner.LearningDelivery.AgreedPrice, IlrBuilder.Defaults.StandardCode,
-                        IlrBuilder.Defaults.FrameworkCode, IlrBuilder.Defaults.ProgrammeType, IlrBuilder.Defaults.PathwayCode, 1, "1", environmentVariables);
-                }
-            }
+            SetupReferenceData(environmentVariables);
 
             // Process months
-            var processService = new ProcessService(new TestLogger());
-            var earnedByPeriod = new Dictionary<string, decimal>();
+            ProcessMonths(EarningAndPaymentsContext.IlrStartDate.NextCensusDate(), environmentVariables);
+        }
 
-            var periodId = 1;
-            var date = EarningAndPaymentsContext.IlrStartDate.NextCensusDate();
-            var endDate = EarningAndPaymentsContext.IlrEndDate;
-            var lastCensusDate = endDate.NextCensusDate();
+        [When(@"an ILR file is submitted in (.*) with the following data:")]
+        public void WhenAnIlrFileIsSubmittedInAMonthWithTheFollowingData(string month, Table table)
+        {
+            // Store spec values in context
+            SetupContextLearners(table);
 
-            while (date <= lastCensusDate)
-            {
-                var period = date.GetPeriod();
-                var levyBalance = GetAccountBalanceForPeriod(period, EarningAndPaymentsContext.ReferenceDataContext);
-                AccountDataHelper.UpdateAccountBalance(accountId, levyBalance, environmentVariables);
+            // Setup reference data
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+            EarningAndPaymentsContext.Ukprn = int.Parse(IdentifierGenerator.GenerateIdentifier(8, false));
+            EarningAndPaymentsContext.AccountId = IdentifierGenerator.GenerateIdentifier();
 
-                var academicYear = date.GetAcademicYear();
+            SetupReferenceData(environmentVariables);
 
-                SetupEnvironmentVariablesForMonth(date, academicYear, environmentVariables, ref periodId);
+            // Process months
+            var submissionDate = new DateTime(int.Parse(month.Substring(3)) + 2000, int.Parse(month.Substring(0, 2)), 1).NextCensusDate();
 
-                SubmitIlr(ukprn, EarningAndPaymentsContext.Learners, academicYear, date, environmentVariables, processService, earnedByPeriod);
-
-                SubmitMonthEnd(date, environmentVariables, processService);
-
-                date = date.AddDays(15).NextCensusDate();
-            }
-            EarningAndPaymentsContext.EarnedByPeriod = earnedByPeriod;
+            ProcessMonths(submissionDate, environmentVariables);
         }
 
         [Then(@"the provider earnings and payments break down as follows:")]
@@ -128,15 +83,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 
                 var periodMonth = int.Parse(periodName.Substring(0, 2));
                 var periodYear = int.Parse(periodName.Substring(3)) + 2000;
+                var periodDate = new DateTime(periodYear, periodMonth, 1).NextCensusDate();
 
 
                 VerifyEarningsForPeriod(periodName, colIndex, earnedRow);
-                VerifyLevyPayments(periodName, periodYear, periodMonth, colIndex, levyPaidRow, environmentVariables);
+                VerifyLevyPayments(periodName, periodYear, periodMonth, periodDate, colIndex, levyPaidRow, environmentVariables);
                 VerifyCofinancePayments(periodName, periodYear, periodMonth, colIndex, govtCofundRow, employerCofundRow, environmentVariables);
             }
         }
-
-
 
         private void SetupEnvironmentVariablesForMonth(DateTime date, string academicYear, EnvironmentVariables environmentVariables, ref int periodId)
         {
@@ -150,6 +104,87 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                 ActualsSchemaPeriod = date.Year + date.Month.ToString("00"),
                 CollectionOpen = 1
             };
+        }
+        private void SetupContextLearners(Table table)
+        {
+            EarningAndPaymentsContext.Learners = new Contexts.Learner[table.RowCount];
+
+            for (var rowIndex = 0; rowIndex < table.RowCount; rowIndex++)
+            {
+                EarningAndPaymentsContext.Learners[rowIndex] = new Contexts.Learner
+                {
+                    Name = table.Rows[rowIndex].ContainsKey("ULN") ? table.Rows[rowIndex]["ULN"] : string.Empty,
+                    Uln = long.Parse(IdentifierGenerator.GenerateIdentifier(10, false)),
+                    LearningDelivery = new LearningDelivery
+                    {
+                        AgreedPrice = decimal.Parse(table.Rows[rowIndex]["agreed price"]),
+                        LearnerType = LearnerType.ProgrammeOnlyDas,
+                        StartDate = DateTime.Parse(table.Rows[rowIndex]["start date"]),
+                        PlannedEndDate = DateTime.Parse(table.Rows[rowIndex]["planned end date"]),
+                        ActualEndDate = !table.Header.Contains("actual end date") || string.IsNullOrWhiteSpace(table.Rows[rowIndex]["actual end date"]) ? null : (DateTime?)DateTime.Parse(table.Rows[rowIndex]["actual end date"]),
+                        CompletionStatus = IlrTranslator.TranslateCompletionStatus(table.Rows[rowIndex]["completion status"])
+                    }
+                };
+            }
+        }
+        private void SetupReferenceData(EnvironmentVariables environmentVariables)
+        {
+            AccountDataHelper.CreateAccount(EarningAndPaymentsContext.AccountId, EarningAndPaymentsContext.AccountId, 0.00m, environmentVariables);
+
+            foreach (var learner in EarningAndPaymentsContext.Learners)
+            {
+                var commitment = EarningAndPaymentsContext.ReferenceDataContext.Commitments?.SingleOrDefault(c => c.Learner == learner.Name);
+
+                if (commitment != null)
+                {
+                    CommitmentDataHelper.CreateCommitment(commitment.Id, EarningAndPaymentsContext.Ukprn, learner.Uln,
+                        EarningAndPaymentsContext.AccountId, learner.LearningDelivery.StartDate,
+                        learner.LearningDelivery.PlannedEndDate, learner.LearningDelivery.AgreedPrice,
+                        IlrBuilder.Defaults.StandardCode,
+                        IlrBuilder.Defaults.FrameworkCode, IlrBuilder.Defaults.ProgrammeType,
+                        IlrBuilder.Defaults.PathwayCode, commitment.Priority, "1", environmentVariables);
+                }
+                else
+                {
+                    var commitmentId = int.Parse(IdentifierGenerator.GenerateIdentifier(6, false));
+
+                    CommitmentDataHelper.CreateCommitment(commitmentId, EarningAndPaymentsContext.Ukprn, learner.Uln,
+                        EarningAndPaymentsContext.AccountId, learner.LearningDelivery.StartDate,
+                        learner.LearningDelivery.PlannedEndDate, learner.LearningDelivery.AgreedPrice,
+                        IlrBuilder.Defaults.StandardCode,
+                        IlrBuilder.Defaults.FrameworkCode, IlrBuilder.Defaults.ProgrammeType,
+                        IlrBuilder.Defaults.PathwayCode, 1, "1", environmentVariables);
+                }
+            }
+        }
+        private void ProcessMonths(DateTime start, EnvironmentVariables environmentVariables)
+        {
+            var processService = new ProcessService(new TestLogger());
+            var earnedByPeriod = new Dictionary<string, decimal>();
+
+            var periodId = 1;
+            var date = start.NextCensusDate();
+            var endDate = EarningAndPaymentsContext.IlrEndDate;
+            var lastCensusDate = endDate.NextCensusDate();
+
+            while (date <= lastCensusDate)
+            {
+                var period = date.GetPeriod();
+                var levyBalance = GetAccountBalanceForPeriod(period);
+                AccountDataHelper.UpdateAccountBalance(EarningAndPaymentsContext.AccountId, levyBalance, environmentVariables);
+
+                var academicYear = date.GetAcademicYear();
+
+                SetupEnvironmentVariablesForMonth(date, academicYear, environmentVariables, ref periodId);
+
+                SubmitIlr(EarningAndPaymentsContext.Ukprn, EarningAndPaymentsContext.Learners, academicYear, date, environmentVariables, processService, earnedByPeriod);
+
+                SubmitMonthEnd(date, environmentVariables, processService);
+
+                date = date.AddDays(15).NextCensusDate();
+            }
+
+            EarningAndPaymentsContext.EarnedByPeriod = earnedByPeriod;
         }
         private void SubmitIlr(long ukprn, Contexts.Learner[] learners, string academicYear, DateTime date,
             EnvironmentVariables environmentVariables, ProcessService processService, Dictionary<string, decimal> earnedByPeriod)
@@ -215,23 +250,25 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             Assert.IsTrue(EarningAndPaymentsContext.EarnedByPeriod.ContainsKey(periodName), $"Expected earning for period {periodName} but none found");
             Assert.AreEqual(expectedEarning, EarningAndPaymentsContext.EarnedByPeriod[periodName], $"Expected earning of {expectedEarning} for period {periodName} but found {EarningAndPaymentsContext.EarnedByPeriod[periodName]}");
         }
-        private void VerifyLevyPayments(string periodName, int periodYear, int periodMonth, int colIndex,
-            TableRow levyPaidRow, EnvironmentVariables environmentVariables)
+        private void VerifyLevyPayments(string periodName, int periodYear, int periodMonth, DateTime periodDate,
+            int colIndex, TableRow levyPaidRow, EnvironmentVariables environmentVariables)
         {
             if (levyPaidRow == null)
             {
                 return;
             }
 
-            var levyPayments = LevyPaymentDataHelper.GetLevyPaymentsForPeriod(EarningAndPaymentsContext.Ukprn, periodYear, periodMonth - 1, environmentVariables)
+            var levyPaymentDate = periodDate.AddMonths(-1);
+
+            var levyPayments = LevyPaymentDataHelper.GetLevyPaymentsForPeriod(EarningAndPaymentsContext.Ukprn, levyPaymentDate.Year, levyPaymentDate.Month, environmentVariables)
                     ?? new LevyPaymentEntity[0];
 
             var actualLevyPayment = levyPayments.Length == 0 ? 0m : levyPayments.Sum(p => p.Amount);
             var expectedLevyPayment = decimal.Parse(levyPaidRow[colIndex]);
             Assert.AreEqual(expectedLevyPayment, actualLevyPayment, $"Expected a levy payment of {expectedLevyPayment} but made a payment of {actualLevyPayment} for {periodName}");
         }
-        private void VerifyCofinancePayments(string periodName, int periodYear, int periodMonth, int colIndex,
-            TableRow govtCofundRow, TableRow employerCofundRow, EnvironmentVariables environmentVariables)
+        private void VerifyCofinancePayments(string periodName, int periodYear, int periodMonth,
+            int colIndex, TableRow govtCofundRow, TableRow employerCofundRow, EnvironmentVariables environmentVariables)
         {
             if (govtCofundRow == null && employerCofundRow == null)
             {
@@ -249,19 +286,19 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             Assert.AreEqual(expectedGovtPayment, actualGovtPayment, $"Expected a employer co-finance payment of {expectedEmployerPayment} but made a payment of {actualEmployerPayment} for {periodName}");
         }
 
-        private decimal GetAccountBalanceForPeriod(string period, ReferenceDataContext context)
+        private decimal GetAccountBalanceForPeriod(string period)
         {
-            if (context.MonthlyAccountBalance.ContainsKey("All"))
+            if (EarningAndPaymentsContext.ReferenceDataContext.MonthlyAccountBalance.ContainsKey("All"))
             {
-                return context.MonthlyAccountBalance["All"];
+                return EarningAndPaymentsContext.ReferenceDataContext.MonthlyAccountBalance["All"];
             }
 
-            if (context.MonthlyAccountBalance.ContainsKey(period))
+            if (EarningAndPaymentsContext.ReferenceDataContext.MonthlyAccountBalance.ContainsKey(period))
             {
-                return context.MonthlyAccountBalance[period];
+                return EarningAndPaymentsContext.ReferenceDataContext.MonthlyAccountBalance[period];
             }
 
-            return context.MonthlyAccountBalance["..."];
+            return EarningAndPaymentsContext.ReferenceDataContext.MonthlyAccountBalance["..."];
         }
     }
 }
