@@ -66,6 +66,8 @@ For payments, where there is no lag in ILR submission, payments follow these rul
 - The levy account is debited in the same month as payment is made (although at different times in the month)
 - Spend against budget is represented against the month in which funding is earned
 - Where a levy account is used for funding, payments are made against the SFA Levy budget
+- Levy funds are used until they run out, and then co-funding is used
+- The order in which learners are funded is derived from the priorities of the commitments
 </code>
           </pre>
         </div>
@@ -80,9 +82,7 @@ For payments, where there is no lag in ILR submission, payments follow these rul
             <div class="steps">
               <ul>
                 <li class="step">
-                  <span class="keyword">Given </span>the agreed price is 15000</li>
-                <li class="step">
-                  <span class="keyword">And </span>the apprenticeship funding band maximum is 17000</li>
+                  <span class="keyword">Given </span>the apprenticeship funding band maximum for each learner is 17000</li>
               </ul>
             </div>
           </li>
@@ -90,22 +90,20 @@ For payments, where there is no lag in ILR submission, payments follow these rul
             <div class="float-right">
               <i class="icon-ok passed" title="Successful"> </i>
             </div>
-            <div class="scenario-heading" id="earnings-and-payments-for-a-das-learner-levy-available-learner-finishes-on-time">
-              <h2>Earnings and payments for a DAS learner, levy available, learner finishes on time</h2>
+            <div class="scenario-heading" id="a-das-learner-levy-available-learner-finishes-on-time">
+              <h2>A DAS learner, levy available, learner finishes on time</h2>
             </div>
             <div class="steps">
               <ul>
                 <li class="step">
-                  <span class="keyword">Given </span>The learner is programme only DAS</li>
+                  <span class="keyword">Given </span>levy balance &gt; agreed price for all months</li>
                 <li class="step">
-                  <span class="keyword">And </span>levy balance &gt; agreed price</li>
-                <li class="step">
-                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th> </th></tr></thead><tbody><tr><td>01/09/2017</td><td>08/09/2018</td><td>08/09/2018</td><td>completed</td></tr></tbody></table></div></li>
+                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>learner type</th><th>agreed price</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th> </th></tr></thead><tbody><tr><td>programme only DAS</td><td>15000</td><td>01/09/2017</td><td>08/09/2018</td><td>08/09/2018</td><td>completed</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>09/17</th><th>10/17</th><th>11/17</th><th>...</th><th>08/18</th><th>09/18</th><th>10/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>3000</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>3000</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>1000</td><td>3000</td></tr><tr><td>Levy account debited</td><td>0</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>1000</td><td>3000</td></tr><tr><td>SFA Levy employer budget</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>3000</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr></tbody></table></div></li>
               </ul>
             </div>
-            <a class="scenario-link" href="javascript:showImageLink('earnings-and-payments-for-a-das-learner-levy-available-learner-finishes-on-time')" title="Copy scenario link to clipboard.">
+            <a class="scenario-link" href="javascript:showImageLink('a-das-learner-levy-available-learner-finishes-on-time')" title="Copy scenario link to clipboard.">
               <i class="icon-link"> </i>
             </a>
           </li>
@@ -113,22 +111,43 @@ For payments, where there is no lag in ILR submission, payments follow these rul
             <div class="float-right">
               <i class="icon-ok passed" title="Successful"> </i>
             </div>
-            <div class="scenario-heading" id="earnings-for-a-das-learner-no-levy-available-learner-finishes-on-time">
-              <h2>Earnings for a DAS learner, no levy available, learner finishes on time</h2>
+            <div class="scenario-heading" id="a-das-learner-no-levy-available-learner-finishes-on-time">
+              <h2>A DAS learner, no levy available, learner finishes on time</h2>
             </div>
             <div class="steps">
               <ul>
                 <li class="step">
-                  <span class="keyword">Given </span>The learner is programme only DAS</li>
+                  <span class="keyword">Given </span>levy balance = 0 for all months</li>
                 <li class="step">
-                  <span class="keyword">And </span>levy balance = 0</li>
-                <li class="step">
-                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th> </th></tr></thead><tbody><tr><td>01/09/2017</td><td>08/09/2018</td><td>08/09/2018</td><td>completed</td></tr></tbody></table></div></li>
+                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>learner type</th><th>agreed price</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th> </th></tr></thead><tbody><tr><td>programme only DAS</td><td>15000</td><td>01/09/2017</td><td>08/09/2018</td><td>08/09/2018</td><td>completed</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>09/17</th><th>10/17</th><th>11/17</th><th>...</th><th>08/18</th><th>09/18</th><th>10/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>3000</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>900</td><td>900</td><td>900</td><td>...</td><td>900</td><td>2700</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>100</td><td>100</td><td>100</td><td>...</td><td>100</td><td>300</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>900</td><td>900</td><td>...</td><td>900</td><td>900</td><td>2700</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>100</td><td>100</td><td>...</td><td>100</td><td>100</td><td>300</td></tr><tr><td>Levy account debited</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA Levy employer budget</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA Levy co-funded budget</td><td>900</td><td>900</td><td>900</td><td>...</td><td>900</td><td>2700</td><td>0</td></tr><tr><td>SFA non-Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td></td></tr></tbody></table></div></li>
               </ul>
             </div>
-            <a class="scenario-link" href="javascript:showImageLink('earnings-for-a-das-learner-no-levy-available-learner-finishes-on-time')" title="Copy scenario link to clipboard.">
+            <a class="scenario-link" href="javascript:showImageLink('a-das-learner-no-levy-available-learner-finishes-on-time')" title="Copy scenario link to clipboard.">
+              <i class="icon-link"> </i>
+            </a>
+          </li>
+          <li class="scenario">
+            <div class="float-right">
+              <i class="icon-ok passed" title="Successful"> </i>
+            </div>
+            <div class="scenario-heading" id="2-das-learners-only-enough-levy-to-cover-1">
+              <h2>2 DAS learners, only enough levy to cover 1</h2>
+            </div>
+            <div class="steps">
+              <ul>
+                <li class="step">
+                  <span class="keyword">Given </span>the employer's levy balance is:<div class="table_container"><table class="datatable"><thead><tr><th>09/17</th><th>10/17</th><th>11/17</th><th>...</th><th>08/18</th><th>09/18</th><th> </th></tr></thead><tbody><tr><td>0</td><td>500</td><td>500</td><td>500</td><td>500</td><td>1500</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>priority</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>1</td></tr><tr><td>learner b</td><td>2</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>agreed price</th><th>learner type</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>7500</td><td>programme only DAS</td><td>01/09/2017</td><td>08/09/2018</td><td>08/09/2018</td><td>completed</td></tr><tr><td>learner b</td><td>15000</td><td>programme only DAS</td><td>01/09/2017</td><td>08/09/2018</td><td>08/09/2018</td><td>completed</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>09/17</th><th>10/17</th><th>11/17</th><th>...</th><th>08/18</th><th>09/18</th><th>10/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>1500</td><td>1500</td><td>1500</td><td>...</td><td>1500</td><td>4500</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>1350</td><td>1400</td><td>1400</td><td>...</td><td>1400</td><td>4200</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>150</td><td>100</td><td>100</td><td>...</td><td>100</td><td>300</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>1400</td><td>1400</td><td>...</td><td>1400</td><td>1400</td><td>4200</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>100</td><td>100</td><td>...</td><td>100</td><td>100</td><td>300</td></tr><tr><td>Levy account debited</td><td>0</td><td>0</td><td>500</td><td>...</td><td>500</td><td>500</td><td>1500</td></tr><tr><td>SFA Levy employer budget</td><td>0</td><td>500</td><td>500</td><td>...</td><td>500</td><td>1500</td><td>0</td></tr><tr><td>SFA Levy co-funded budget</td><td>1350</td><td>900</td><td>900</td><td>...</td><td>900</td><td>2700</td><td>0</td></tr><tr><td>SFA non-Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td></td></tr></tbody></table></div></li>
+              </ul>
+            </div>
+            <a class="scenario-link" href="javascript:showImageLink('2-das-learners-only-enough-levy-to-cover-1')" title="Copy scenario link to clipboard.">
               <i class="icon-link"> </i>
             </a>
           </li>
@@ -136,28 +155,26 @@ For payments, where there is no lag in ILR submission, payments follow these rul
             <div class="float-right">
               <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
             </div>
-            <div class="scenario-heading" id="earnings-for-a-non-das-learner-learner-finishes-on-time">
-              <h2>Earnings for a non-DAS learner, learner finishes on time</h2>
+            <div class="scenario-heading" id="a-non-das-learner-learner-finishes-on-time">
+              <h2>A non-DAS learner, learner finishes on time</h2>
               <p class="tags">Tags: <span>@ignore</span></p>
             </div>
             <div class="steps">
               <ul>
                 <li class="step">
-                  <span class="keyword">Given </span>The learner is programme only non-DAS</li>
-                <li class="step">
-                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th> </th></tr></thead><tbody><tr><td>01/09/2017</td><td>08/09/2018</td><td>08/09/2018</td><td>completed</td></tr></tbody></table></div></li>
+                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>agreed price</th><th>learner type</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th> </th></tr></thead><tbody><tr><td>15000</td><td>programme only non-DAS</td><td>01/09/2017</td><td>08/09/2018</td><td>08/09/2018</td><td>completed</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>09/17</th><th>10/17</th><th>11/17</th><th>...</th><th>08/18</th><th>09/18</th><th>10/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>3000</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>900</td><td>900</td><td>900</td><td>...</td><td>900</td><td>2700</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>100</td><td>100</td><td>100</td><td>...</td><td>100</td><td>300</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>900</td><td>900</td><td>...</td><td>900</td><td>900</td><td>2700</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>100</td><td>100</td><td>...</td><td>100</td><td>100</td><td>300</td></tr><tr><td>Levy account debited</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA Levy employer budget</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA Levy co-funded budget</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA non-Levy co-funding budget</td><td>900</td><td>900</td><td>900</td><td>...</td><td>900</td><td>2700</td><td>0</td></tr></tbody></table></div></li>
               </ul>
             </div>
-            <a class="scenario-link" href="javascript:showImageLink('earnings-for-a-non-das-learner-learner-finishes-on-time')" title="Copy scenario link to clipboard.">
+            <a class="scenario-link" href="javascript:showImageLink('a-non-das-learner-learner-finishes-on-time')" title="Copy scenario link to clipboard.">
               <i class="icon-link"> </i>
             </a>
           </li>
         </ul>
       </div>
       <div id="footer">
-        <p>Generated on: 19 October 2016 13:34:15</p>
+        <p>Generated on: 20 October 2016 13:46:09</p>
         <p>Produced by Pickles, version 2.8.2.0</p>
       </div>
     </div>
