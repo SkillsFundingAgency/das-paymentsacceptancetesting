@@ -7,9 +7,9 @@ Feature: The ILR is submitted late
         And levy balance > agreed price for all months
 
     Scenario: A DAS learner, levy available, learner finishes on time
-        When an ILR file is submitted in 12/2017 with the following data:
-            | learner type       | start date | planned end date | completion status |
-            | programme only DAS | 01/09/2017 | 08/09/2018       | continuing        |
+        When an ILR file is submitted in 12/17 with the following data:
+            | learner type       | agreed price | start date | planned end date | completion status |
+            | programme only DAS | 15000        | 01/09/2017 | 08/09/2018       | continuing        |
         Then the provider earnings and payments break down as follows:
             | Type                       | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 | 02/18 | ... |
             | Provider Earned Total      | 1000  | 1000  | 1000  | 1000  | 1000  | 1000  | ... |
