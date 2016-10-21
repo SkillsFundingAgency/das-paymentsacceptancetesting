@@ -90,3 +90,23 @@ Feature: Provider earnings and payments where learner completes on time and is f
             | SFA Levy employer budget      | 0     | 0     | 0     | ... | 0     | 0     | 0     |
             | SFA Levy co-funded budget     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
             | SFA non-Levy co-funding budget| 900   | 900   | 900   | ... | 900   | 2700  | 0     |
+
+
+	Scenario: 1 DAS Learner, not enough levy to cover full payment
+        Given the employer's levy balance is:
+            | 09/17 | 10/17 | 11/17 | ... | 08/18 | 09/18 |
+            | 0     | 500   | 500   | 500 | 500   | 1500  |
+        When an ILR file is submitted with the following data:
+            | learner type       | agreed price | start date | planned end date | actual end date | completion status |
+            | programme only DAS | 15000        | 01/09/2017 | 08/09/2018       | 08/09/2018      | completed         |
+        Then the provider earnings and payments break down as follows:
+            | Type                          | 09/17 | 10/17 | 11/17 | ... | 08/18 | 09/18 | 10/18 |
+            | Provider Earned Total         | 1000  | 1000  | 1000  | ... | 1000  | 3000  | 0     |
+            | Provider Earned from SFA      | 950   | 950   | 950   | ... | 950   | 2850  | 0     |
+            | Provider Earned from Employer | 50    | 50    | 50    | ... | 50    | 150   | 0     |
+            | Provider Paid by SFA          | 0     | 950   | 950   | ... | 950   | 950   | 2850  |
+            | Payment due from Employer     | 0     | 50    | 50    | ... | 50    | 50    | 150   |
+            | Levy account debited          | 0     | 500   | 500   | ... | 500   | 500   | 1500  |
+            | SFA Levy employer budget      | 500   | 500   | 500   | ... | 500   | 1500  | 0     |
+            | SFA Levy co-funded budget     | 450   | 450   | 450   | ... | 450   | 1350  | 0     |
+            | SFA non-Levy co-funding budget| 0     | 0     | 0     | ... | 0     | 0     |       |
