@@ -16,12 +16,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
             }
         }
 
-        internal static void Log(string runId, int level, DateTime date, string message, Exception exception, EnvironmentVariables environmentVariables)
+        internal static void Log(string runId, string scenarioTitle, int level, DateTime date, string message, Exception exception, EnvironmentVariables environmentVariables)
         {
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
             {
-                connection.Execute("INSERT INTO AT.Logs (RunId,LogLevel,LogDtTm,LogMessage,ExceptionDetails) VALUES (@runId,@level,@date,@message,@exception)",
-                    new { runId, level, date, message, exception = exception?.ToString() });
+                connection.Execute("INSERT INTO AT.Logs " +
+                                   "(RunId,LogLevel,LogDtTm,LogMessage,ExceptionDetails,ScenarioTitle) " +
+                                   "VALUES " +
+                                   "(@runId,@level,@date,@message,@exception,@scenarioTitle)",
+                    new { runId, level, date, message, exception = exception?.ToString(), scenarioTitle });
             }
         }
 

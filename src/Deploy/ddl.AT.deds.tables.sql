@@ -3,7 +3,9 @@ IF NOT EXISTS (SELECT [schema_id] FROM sys.schemas WHERE [name] = 'AT')
 		EXEC('CREATE SCHEMA AT')
 	END
 GO
-
+----------------------------------------------------------------------------------------------------------------------------
+-- TestRuns
+----------------------------------------------------------------------------------------------------------------------------
 IF NOT EXISTS (SELECT [object_id] FROM sys.tables WHERE [name] = 'TestRuns' AND [schema_id] = SCHEMA_ID('AT'))
 	BEGIN
 		CREATE TABLE [AT].[TestRuns](
@@ -17,7 +19,9 @@ IF NOT EXISTS (SELECT [object_id] FROM sys.tables WHERE [name] = 'TestRuns' AND 
 		)
 	END
 GO
-
+----------------------------------------------------------------------------------------------------------------------------
+-- Logs
+----------------------------------------------------------------------------------------------------------------------------
 IF NOT EXISTS (SELECT [object_id] FROM sys.tables WHERE [name] = 'Logs' AND [schema_id] = SCHEMA_ID('AT'))
 	BEGIN
 		CREATE TABLE [AT].[Logs](
@@ -33,4 +37,22 @@ IF NOT EXISTS (SELECT [object_id] FROM sys.tables WHERE [name] = 'Logs' AND [sch
 			)
 		)
 	END
+GO
+
+----------------------------------------------------------------------------------------------------------------------------
+-- GetLastRunLogs
+----------------------------------------------------------------------------------------------------------------------------
+IF EXISTS (SELECT [object_id] FROM sys.procedures WHERE [name] = 'GetLastRunLogs')
+	BEGIN
+		DROP PROCEDURE GetLastRunLogs
+	END
+GO
+
+CREATE PROCEDURE GetLastRunLogs
+AS
+SET NOCOUNT ON
+
+	DECLARE @LastRunId varchar(50) = (SELECT TOP 1 RunId FROM AT.TestRuns ORDER BY StartDtTm DESC)
+
+	SELECT * FROM AT.Logs WHERE RunId = @LastRunId ORDER BY LogDtTm DESC
 GO
