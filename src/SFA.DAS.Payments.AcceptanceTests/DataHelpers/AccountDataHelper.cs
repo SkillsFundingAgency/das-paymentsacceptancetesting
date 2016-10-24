@@ -6,20 +6,20 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 {
     internal static class AccountDataHelper
     {
-        internal static void CreateAccount(string accountId, string accountName, decimal levyBalance, EnvironmentVariables environmentVariables)
+        internal static void CreateAccount(long accountId, string accountName, decimal levyBalance, EnvironmentVariables environmentVariables)
         {
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
             {
-                connection.Execute("INSERT INTO DasAccounts (AccountId,AccountName,LevyBalance) VALUES (@accountId,@accountName,@levyBalance)",
+                connection.Execute("INSERT INTO DasAccounts (AccountId,AccountHashId,AccountName,Balance) VALUES (@accountId,@accountId,@accountName,@levyBalance)",
                     new { accountId, accountName, levyBalance });
             }
         }
 
-        internal static void UpdateAccountBalance(string accountId, decimal levyBalance, EnvironmentVariables environmentVariables)
+        internal static void UpdateAccountBalance(long accountId, decimal levyBalance, EnvironmentVariables environmentVariables)
         {
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
             {
-                connection.Execute("UPDATE DasAccounts SET LevyBalance = @levyBalance WHERE AccountId = @accountId",
+                connection.Execute("UPDATE DasAccounts SET Balance = @levyBalance WHERE AccountId = @accountId",
                     new { accountId, levyBalance });
             }
         }

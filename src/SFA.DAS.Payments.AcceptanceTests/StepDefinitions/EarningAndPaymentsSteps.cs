@@ -36,7 +36,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             // Setup reference data
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
             EarningAndPaymentsContext.Ukprn = int.Parse(IdentifierGenerator.GenerateIdentifier(8, false));
-            EarningAndPaymentsContext.AccountId = IdentifierGenerator.GenerateIdentifier();
+            EarningAndPaymentsContext.AccountId = long.Parse(IdentifierGenerator.GenerateIdentifier(8, false));
 
             SetupReferenceData(environmentVariables);
 
@@ -53,7 +53,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             // Setup reference data
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
             EarningAndPaymentsContext.Ukprn = int.Parse(IdentifierGenerator.GenerateIdentifier(8, false));
-            EarningAndPaymentsContext.AccountId = IdentifierGenerator.GenerateIdentifier();
+            EarningAndPaymentsContext.AccountId = long.Parse(IdentifierGenerator.GenerateIdentifier(8, false));
 
             SetupReferenceData(environmentVariables);
 
@@ -129,7 +129,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
         }
         private void SetupReferenceData(EnvironmentVariables environmentVariables)
         {
-            AccountDataHelper.CreateAccount(EarningAndPaymentsContext.AccountId, EarningAndPaymentsContext.AccountId, 0.00m, environmentVariables);
+            AccountDataHelper.CreateAccount(EarningAndPaymentsContext.AccountId, EarningAndPaymentsContext.AccountId.ToString(), 0.00m, environmentVariables);
 
             foreach (var learner in EarningAndPaymentsContext.Learners)
             {
@@ -138,7 +138,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                 if (commitment != null)
                 {
                     CommitmentDataHelper.CreateCommitment(commitment.Id, EarningAndPaymentsContext.Ukprn, learner.Uln,
-                        EarningAndPaymentsContext.AccountId, learner.LearningDelivery.StartDate,
+                        EarningAndPaymentsContext.AccountId.ToString(), learner.LearningDelivery.StartDate,
                         learner.LearningDelivery.PlannedEndDate, learner.LearningDelivery.AgreedPrice,
                         IlrBuilder.Defaults.StandardCode,
                         IlrBuilder.Defaults.FrameworkCode, IlrBuilder.Defaults.ProgrammeType,
@@ -149,7 +149,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                     var commitmentId = int.Parse(IdentifierGenerator.GenerateIdentifier(6, false));
 
                     CommitmentDataHelper.CreateCommitment(commitmentId, EarningAndPaymentsContext.Ukprn, learner.Uln,
-                        EarningAndPaymentsContext.AccountId, learner.LearningDelivery.StartDate,
+                        EarningAndPaymentsContext.AccountId.ToString(), learner.LearningDelivery.StartDate,
                         learner.LearningDelivery.PlannedEndDate, learner.LearningDelivery.AgreedPrice,
                         IlrBuilder.Defaults.StandardCode,
                         IlrBuilder.Defaults.FrameworkCode, IlrBuilder.Defaults.ProgrammeType,

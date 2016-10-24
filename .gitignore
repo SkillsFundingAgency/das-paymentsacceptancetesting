@@ -256,3 +256,4 @@ paket-files/
 
 # Misc
 !**/assemblies/*.dll
+docs/

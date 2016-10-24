@@ -24,8 +24,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
 
         public IlrLearnersBuilder WithLearners(Contexts.Learner[] learners)
         {
+
             Learners = learners.Select(l =>
-                new Learner
+            {
+                var tnp1 = l.LearningDelivery.AgreedPrice * 0.8m;
+                var tnp2 = l.LearningDelivery.AgreedPrice - tnp1;
+                return new Learner
                 {
                     Uln = l.Uln,
                     LearningDeliveries = new[]
@@ -40,10 +44,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
                             ProgrammeType = Defaults.ProgrammeType,
                             FrameworkCode = Defaults.FrameworkCode,
                             PathwayCode = Defaults.PathwayCode,
-                            AgreedPrice = l.LearningDelivery.AgreedPrice
+                            TrainingCost = tnp1,
+                            EndpointAssesmentCost = tnp2
                         }
                     }
-                }).ToArray();
+                };
+            }).ToArray();
 
             Submission.Learners = Learners;
 

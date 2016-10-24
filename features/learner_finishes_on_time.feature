@@ -95,7 +95,7 @@ Feature: Provider earnings and payments where learner completes on time and is f
 	Scenario: 1 DAS Learner, not enough levy to cover full payment
         Given the employer's levy balance is:
             | 09/17 | 10/17 | 11/17 | ... | 08/18 | 09/18 |
-            | 0     | 500   | 500   | 500 | 500   | 1500  |
+            | 500   | 500   | 500   | 500 | 500   | 1500  |
         When an ILR file is submitted with the following data:
             | learner type       | agreed price | start date | planned end date | actual end date | completion status |
             | programme only DAS | 15000        | 01/09/2017 | 08/09/2018       | 08/09/2018      | completed         |
