@@ -32,6 +32,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
         public Learner[] Learners { get; set; }
         public Dictionary<string, decimal> EarnedByPeriod { get; set; }
         public long Ukprn { get; set; }
-        public string AccountId { get; set; }
+        public long AccountId { get; set; }
     }
 }

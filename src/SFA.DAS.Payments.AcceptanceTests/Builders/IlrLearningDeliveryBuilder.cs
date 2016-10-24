@@ -12,6 +12,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
         internal IlrLearningDeliveryBuilder(IlrLearnerBuilder parentBuilder)
             : base(parentBuilder.Submission, parentBuilder.Learner)
         {
+            var tnp1 = Defaults.AgreedPrice * 0.8m;
+            var tnp2 = Defaults.AgreedPrice - tnp1;
+
             Delivery = new LearningDelivery
             {
                 StandardCode = Defaults.StandardCode,
@@ -21,7 +24,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
                 ActualStartDate = Defaults.ActualStartDate,
                 PlannedEndDate = Defaults.PlannedEndDate,
                 ActualEndDate = Defaults.ActualEndDate,
-                AgreedPrice = Defaults.AgreedPrice,
+                TrainingCost = tnp1,
+                EndpointAssesmentCost = tnp2,
                 ActFamCodeValue = Defaults.ActFamCodeValue
             };
             var deliveries = new List<LearningDelivery>(parentBuilder.Learner.LearningDeliveries) { Delivery };
@@ -67,7 +71,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
 
         public IlrLearningDeliveryBuilder WithAgreedPrice(decimal agreedPrice)
         {
-            Delivery.AgreedPrice = agreedPrice;
+            var tnp1 = agreedPrice * 0.8m;
+            var tnp2 = agreedPrice - tnp1;
+
+            Delivery.TrainingCost = tnp1;
+            Delivery.EndpointAssesmentCost = tnp2;
+
             return this;
         }
 

@@ -78,10 +78,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("A DAS learner, levy available, learner finishes early")]
+        [NUnit.Framework.CategoryAttribute("not_implemented")]
         public virtual void ADASLearnerLevyAvailableLearnerFinishesEarly()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("A DAS learner, levy available, learner finishes early", ((string[])(null)));
-#line 9
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("A DAS learner, levy available, learner finishes early", new string[] {
+                        "not_implemented"});
+#line 10
     this.ScenarioSetup(scenarioInfo);
 #line 5
     this.FeatureBackground();
@@ -100,7 +102,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "08/09/2018",
                         "08/08/2018",
                         "completed"});
-#line 10
+#line 11
         testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table3, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
@@ -159,7 +161,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "...",
                         "0",
                         "0"});
-#line 13
+#line 14
         testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table4, "Then ");
 #line hidden
             this.ScenarioCleanup();
