@@ -32,7 +32,7 @@ $(document).ready(function() {
           <li class="file">
             <a href="learner_finishes_early.html">Provider earnings and payments where learner completes earlier than planned and is funded by levy</a>
             <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
+              <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
             </span>
           </li>
           <li class="file">
@@ -177,10 +177,31 @@ For payments, where there is no lag in ILR submission, payments follow these rul
               <i class="icon-link"> </i>
             </a>
           </li>
+          <li class="scenario">
+            <div class="float-right">
+              <i class="icon-minus-sign failed" title="Failed"> </i>
+            </div>
+            <div class="scenario-heading" id="1-das-learner-not-enough-levy-to-cover-full-payment">
+              <h2>1 DAS Learner, not enough levy to cover full payment</h2>
+            </div>
+            <div class="steps">
+              <ul>
+                <li class="step">
+                  <span class="keyword">Given </span>the employer's levy balance is:<div class="table_container"><table class="datatable"><thead><tr><th>09/17</th><th>10/17</th><th>11/17</th><th>...</th><th>08/18</th><th>09/18</th><th> </th></tr></thead><tbody><tr><td>500</td><td>500</td><td>500</td><td>500</td><td>500</td><td>1500</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>learner type</th><th>agreed price</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th> </th></tr></thead><tbody><tr><td>programme only DAS</td><td>15000</td><td>01/09/2017</td><td>08/09/2018</td><td>08/09/2018</td><td>completed</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>09/17</th><th>10/17</th><th>11/17</th><th>...</th><th>08/18</th><th>09/18</th><th>10/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>3000</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>950</td><td>950</td><td>950</td><td>...</td><td>950</td><td>2850</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>50</td><td>50</td><td>50</td><td>...</td><td>50</td><td>150</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>950</td><td>950</td><td>...</td><td>950</td><td>950</td><td>2850</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>50</td><td>50</td><td>...</td><td>50</td><td>50</td><td>150</td></tr><tr><td>Levy account debited</td><td>0</td><td>500</td><td>500</td><td>...</td><td>500</td><td>500</td><td>1500</td></tr><tr><td>SFA Levy employer budget</td><td>500</td><td>500</td><td>500</td><td>...</td><td>500</td><td>1500</td><td>0</td></tr><tr><td>SFA Levy co-funded budget</td><td>450</td><td>450</td><td>450</td><td>...</td><td>450</td><td>1350</td><td>0</td></tr><tr><td>SFA non-Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td></td></tr></tbody></table></div></li>
+              </ul>
+            </div>
+            <a class="scenario-link" href="javascript:showImageLink('1-das-learner-not-enough-levy-to-cover-full-payment')" title="Copy scenario link to clipboard.">
+              <i class="icon-link"> </i>
+            </a>
+          </li>
         </ul>
       </div>
       <div id="footer">
-        <p>Generated on: 24 October 2016 13:36:33</p>
+        <p>Generated on: 25 October 2016 13:01:05</p>
         <p>Produced by Pickles, version 2.8.2.0</p>
       </div>
     </div>
