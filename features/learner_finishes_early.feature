@@ -6,7 +6,6 @@ Feature: Provider earnings and payments where learner completes earlier than pla
         Given the apprenticeship funding band maximum for each learner is 17000
         And levy balance > agreed price for all months
 
-	@not_implemented
     Scenario: A DAS learner, levy available, learner finishes early
         When an ILR file is submitted with the following data:
             | learner type       | agreed price | start date | planned end date | actual end date | completion status |
@@ -19,3 +18,8 @@ Feature: Provider earnings and payments where learner completes earlier than pla
             | Levy account debited       | 0     | 1000  | 1000  | ... | 1000  | 4000  |
             | SFA Levy employer budget   | 1000  | 1000  | 1000  | ... | 4000  | 0     |
             | SFA Levy co-funding budget | 0     | 0     | 0     | ... | 0     | 0     |
+        And the transaction types for the payments are:
+            | Transaction type | 10/17 | 11/17 | ... | 08/18 | 09/18 |
+            | On-program       | 1000  | 1000  | ... | 1000  | 0     |
+            | Completion       | 0     | 0     | ... | 0     | 3000  |
+            | Balancing        | 0     | 0     | ... | 0     | 1000  |
