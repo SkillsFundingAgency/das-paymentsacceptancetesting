@@ -10,7 +10,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
         {
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
             {
-                connection.Execute("INSERT INTO DasAccounts (AccountId,AccountHashId,AccountName,Balance) VALUES (@accountId,@accountId,@accountName,@levyBalance)",
+                connection.Execute("INSERT INTO DasAccounts (AccountId,AccountHashId,AccountName,Balance,VersionId) VALUES (@accountId,@accountId,@accountName,@levyBalance,CONVERT(varchar, GETDATE(), 126))",
                     new { accountId, accountName, levyBalance });
             }
         }

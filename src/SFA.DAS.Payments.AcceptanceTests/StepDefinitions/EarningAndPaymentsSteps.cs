@@ -87,8 +87,35 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 
 
                 VerifyEarningsForPeriod(periodName, colIndex, earnedRow);
-                VerifyLevyPayments(periodName, periodYear, periodMonth, periodDate, colIndex, levyPaidRow, environmentVariables);
-                VerifyCofinancePayments(periodName, periodYear, periodMonth, colIndex, govtCofundRow, employerCofundRow, environmentVariables);
+                VerifyLevyPayments(periodName, periodDate, colIndex, levyPaidRow, environmentVariables);
+                VerifyCofinancePayments(periodName, periodDate, colIndex, govtCofundRow, employerCofundRow, environmentVariables);
+            }
+        }
+
+        [Then(@"the transaction types for the payments are:")]
+        public void ThenTheTransactionsForThePaymentsAre(Table table)
+        {
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+
+            var onProgramRow = table.Rows.RowWithKey(RowKeys.OnProgramPayment);
+            var completionRow = table.Rows.RowWithKey(RowKeys.CompletionPayment);
+            var balancingRow = table.Rows.RowWithKey(RowKeys.BalancingPayment);
+
+            for (var colIndex = 1; colIndex < table.Header.Count; colIndex++)
+            {
+                var periodName = table.Header.ElementAt(colIndex);
+                if (periodName == "...")
+                {
+                    continue;
+                }
+
+                var periodMonth = int.Parse(periodName.Substring(0, 2));
+                var periodYear = int.Parse(periodName.Substring(3)) + 2000;
+                var periodDate = new DateTime(periodYear, periodMonth, 1).NextCensusDate();
+
+                VerifyPaymentsDueByTransactionType(periodName, periodDate, colIndex, TransactionType.OnProgram, onProgramRow, environmentVariables);
+                VerifyPaymentsDueByTransactionType(periodName, periodDate, colIndex, TransactionType.Completion, completionRow, environmentVariables);
+                VerifyPaymentsDueByTransactionType(periodName, periodDate, colIndex, TransactionType.Balancing, balancingRow, environmentVariables);
             }
         }
 
@@ -250,7 +277,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             Assert.IsTrue(EarningAndPaymentsContext.EarnedByPeriod.ContainsKey(periodName), $"Expected earning for period {periodName} but none found");
             Assert.AreEqual(expectedEarning, EarningAndPaymentsContext.EarnedByPeriod[periodName], $"Expected earning of {expectedEarning} for period {periodName} but found {EarningAndPaymentsContext.EarnedByPeriod[periodName]}");
         }
-        private void VerifyLevyPayments(string periodName, int periodYear, int periodMonth, DateTime periodDate,
+        private void VerifyLevyPayments(string periodName, DateTime periodDate,
             int colIndex, TableRow levyPaidRow, EnvironmentVariables environmentVariables)
         {
             if (levyPaidRow == null)
@@ -260,14 +287,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 
             var levyPaymentDate = periodDate.AddMonths(-1);
 
-            var levyPayments = LevyPaymentDataHelper.GetLevyPaymentsForPeriod(EarningAndPaymentsContext.Ukprn, levyPaymentDate.Year, levyPaymentDate.Month, environmentVariables)
-                    ?? new LevyPaymentEntity[0];
+            var levyPayments = LevyPaymentDataHelper.GetLevyPaymentsForPeriod(EarningAndPaymentsContext.Ukprn,
+                levyPaymentDate.Year, levyPaymentDate.Month, environmentVariables)
+                               ?? new LevyPaymentEntity[0];
 
             var actualLevyPayment = levyPayments.Length == 0 ? 0m : levyPayments.Sum(p => p.Amount);
             var expectedLevyPayment = decimal.Parse(levyPaidRow[colIndex]);
             Assert.AreEqual(expectedLevyPayment, actualLevyPayment, $"Expected a levy payment of {expectedLevyPayment} but made a payment of {actualLevyPayment} for {periodName}");
         }
-        private void VerifyCofinancePayments(string periodName, int periodYear, int periodMonth,
+        private void VerifyCofinancePayments(string periodName, DateTime periodDate,
             int colIndex, TableRow govtCofundRow, TableRow employerCofundRow, EnvironmentVariables environmentVariables)
         {
             if (govtCofundRow == null && employerCofundRow == null)
@@ -275,7 +303,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                 return;
             }
 
-            var cofinancePayments = CoFinancePaymentsDataHelper.GetCoInvestedPaymentsForPeriod(EarningAndPaymentsContext.Ukprn, periodYear, periodMonth, environmentVariables);
+            var cofinancePayments = CoFinancePaymentsDataHelper.GetCoInvestedPaymentsForPeriod(EarningAndPaymentsContext.Ukprn,
+                periodDate.Year, periodDate.Month, environmentVariables)
+                                    ?? new CoFinancePaymentEntity[0];
 
             var actualGovtPayment = cofinancePayments.Where(p => p.FundingSource == 2).Sum(p => p.Amount);
             var expectedGovtPayment = govtCofundRow == null ? 0 : decimal.Parse(govtCofundRow[colIndex]);
@@ -284,6 +314,24 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             var actualEmployerPayment = cofinancePayments.Where(p => p.FundingSource == 3).Sum(p => p.Amount);
             var expectedEmployerPayment = employerCofundRow == null ? 0 : decimal.Parse(employerCofundRow[colIndex]);
             Assert.AreEqual(expectedGovtPayment, actualGovtPayment, $"Expected a employer co-finance payment of {expectedEmployerPayment} but made a payment of {actualEmployerPayment} for {periodName}");
+        }
+        private void VerifyPaymentsDueByTransactionType(string periodName, DateTime periodDate, int colIndex, TransactionType paymentType,
+            TableRow paymentsRow, EnvironmentVariables environmentVariables)
+        {
+            if (paymentsRow == null)
+            {
+                return;
+            }
+
+            var paymentsDueDate = periodDate.AddMonths(-1);
+
+            var paymentsDue = PaymentsDueDataHelper.GetPaymentsDueForPeriod(EarningAndPaymentsContext.Ukprn,
+                paymentsDueDate.Year, paymentsDueDate.Month, environmentVariables)
+                              ?? new RequiredPaymentEntity[0];
+
+            var actualPaymentDue = paymentsDue.Length == 0 ? 0m : paymentsDue.Where(p => p.TransactionType == (int)paymentType).Sum(p => p.AmountDue);
+            var expectedPaymentDue = decimal.Parse(paymentsRow[colIndex]);
+            Assert.AreEqual(expectedPaymentDue, actualPaymentDue, $"Expected a {paymentType} payment due of {expectedPaymentDue} but made a payment of {actualPaymentDue} for {periodName}");
         }
 
         private decimal GetAccountBalanceForPeriod(string period)
