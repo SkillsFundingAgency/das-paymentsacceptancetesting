@@ -94,6 +94,7 @@
     <Compile Include="Contexts\LearningDelivery.cs" />
     <Compile Include="Contexts\LearnerType.cs" />
     <Compile Include="Contexts\ReferenceDataContext.cs" />
+    <Compile Include="Contexts\TransactionType.cs" />
     <Compile Include="DataHelpers\AcceptanceTestDataHelper.cs" />
     <Compile Include="DataHelpers\AccountDataHelper.cs" />
     <Compile Include="DataHelpers\CoFinancePaymentsDataHelper.cs" />
@@ -102,8 +103,10 @@
     <Compile Include="DataHelpers\Entities\CoFinancePaymentEntity.cs" />
     <Compile Include="DataHelpers\Entities\LevyPaymentEntity.cs" />
     <Compile Include="DataHelpers\Entities\PeriodisedValuesEntity.cs" />
+    <Compile Include="DataHelpers\Entities\RequiredPaymentEntity.cs" />
     <Compile Include="DataHelpers\IdentifierGenerator.cs" />
     <Compile Include="DataHelpers\LevyPaymentDataHelper.cs" />
+    <Compile Include="DataHelpers\PaymentsDueDataHelper.cs" />
     <Compile Include="ExecutionEnvironment\EnvironmentVariablesFactory.cs" />
     <Compile Include="ExecutionEnvironment\TestStatusWatcher.cs" />
     <Compile Include="Extensions.cs" />
