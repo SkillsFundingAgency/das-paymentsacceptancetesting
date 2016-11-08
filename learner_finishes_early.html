@@ -32,13 +32,13 @@ $(document).ready(function() {
           <li class="file">
             <span class="current">Provider earnings and payments where learner completes earlier than planned and is funded by levy</span>
             <span class="float-right">
-              <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
+              <i class="icon-minus-sign failed" title="Failed"> </i>
             </span>
           </li>
           <li class="file">
             <a href="learner_finishes_late.html">Provider earnings and payments where learner completes later than planned and is funded by levy</a>
             <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
+              <i class="icon-ok passed" title="Successful"> </i>
             </span>
           </li>
           <li class="file">
@@ -50,14 +50,14 @@ $(document).ready(function() {
           <li class="file">
             <a href="ILR_is_submitted_late.html">The ILR is submitted late</a>
             <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
+              <i class="icon-ok passed" title="Successful"> </i>
             </span>
           </li>
         </ul>
       </div>
       <div id="feature">
         <div class="float-right">
-          <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
+          <i class="icon-minus-sign failed" title="Failed"> </i>
         </div>
         <h1>Provider earnings and payments where learner completes earlier than planned and is funded by levy</h1>
         <div class="description">
@@ -85,11 +85,10 @@ $(document).ready(function() {
           </li>
           <li class="scenario">
             <div class="float-right">
-              <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
+              <i class="icon-minus-sign failed" title="Failed"> </i>
             </div>
-            <div class="scenario-heading" id="a-das-learner-levy-available-learner-finishes-early">
-              <h2>A DAS learner, levy available, learner finishes early</h2>
-              <p class="tags">Tags: <span>@not_implemented</span></p>
+            <div class="scenario-heading" id="a-das-learner-levy-available-learner-finishes-one-month-early">
+              <h2>A DAS learner, levy available, learner finishes one month early</h2>
             </div>
             <div class="steps">
               <ul>
@@ -97,16 +96,39 @@ $(document).ready(function() {
                   <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>learner type</th><th>agreed price</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th> </th></tr></thead><tbody><tr><td>programme only DAS</td><td>15000</td><td>01/09/2017</td><td>08/09/2018</td><td>08/08/2018</td><td>completed</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>09/17</th><th>10/17</th><th>11/17</th><th>...</th><th>08/18</th><th>09/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>4000</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>4000</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>4000</td></tr><tr><td>Levy account debited</td><td>0</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>4000</td></tr><tr><td>SFA Levy employer budget</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>4000</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the transaction types for the payments are:<div class="table_container"><table class="datatable"><thead><tr><th>Transaction type</th><th>10/17</th><th>11/17</th><th>...</th><th>08/18</th><th>09/18</th><th> </th></tr></thead><tbody><tr><td>On-program</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>1000</td></tr><tr><td>Completion</td><td>0</td><td>0</td><td>...</td><td>0</td><td>3000</td></tr><tr><td>Balancing</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr></tbody></table></div></li>
               </ul>
             </div>
-            <a class="scenario-link" href="javascript:showImageLink('a-das-learner-levy-available-learner-finishes-early')" title="Copy scenario link to clipboard.">
+            <a class="scenario-link" href="javascript:showImageLink('a-das-learner-levy-available-learner-finishes-one-month-early')" title="Copy scenario link to clipboard.">
+              <i class="icon-link"> </i>
+            </a>
+          </li>
+          <li class="scenario">
+            <div class="float-right">
+              <i class="icon-minus-sign failed" title="Failed"> </i>
+            </div>
+            <div class="scenario-heading" id="a-das-learner-levy-available-learner-finishes-two-months-early">
+              <h2>A DAS learner, levy available, learner finishes two months early</h2>
+            </div>
+            <div class="steps">
+              <ul>
+                <li class="step">
+                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>learner type</th><th>agreed price</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th> </th></tr></thead><tbody><tr><td>programme only DAS</td><td>15000</td><td>01/09/2017</td><td>08/09/2018</td><td>08/07/2018</td><td>completed</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>09/17</th><th>10/17</th><th>11/17</th><th>...</th><th>07/18</th><th>08/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>5000</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>5000</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>5000</td></tr><tr><td>Levy account debited</td><td>0</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>5000</td></tr><tr><td>SFA Levy employer budget</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>5000</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the transaction types for the payments are:<div class="table_container"><table class="datatable"><thead><tr><th>Transaction type</th><th>10/17</th><th>11/17</th><th>...</th><th>07/18</th><th>08/18</th><th> </th></tr></thead><tbody><tr><td>On-program</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>1000</td></tr><tr><td>Completion</td><td>0</td><td>0</td><td>...</td><td>0</td><td>3000</td></tr><tr><td>Balancing</td><td>0</td><td>0</td><td>...</td><td>0</td><td>1000</td></tr></tbody></table></div></li>
+              </ul>
+            </div>
+            <a class="scenario-link" href="javascript:showImageLink('a-das-learner-levy-available-learner-finishes-two-months-early')" title="Copy scenario link to clipboard.">
               <i class="icon-link"> </i>
             </a>
           </li>
         </ul>
       </div>
       <div id="footer">
-        <p>Generated on: 8 November 2016 13:01:12</p>
+        <p>Generated on: 8 November 2016 17:34:11</p>
         <p>Produced by Pickles, version 2.8.2.0</p>
       </div>
     </div>
