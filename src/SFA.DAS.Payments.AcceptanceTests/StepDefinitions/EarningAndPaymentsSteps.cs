@@ -36,7 +36,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             // Setup reference data
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
             EarningAndPaymentsContext.Ukprn = int.Parse(IdentifierGenerator.GenerateIdentifier(8, false));
-            EarningAndPaymentsContext.AccountId = long.Parse(IdentifierGenerator.GenerateIdentifier(8, false));
+            //EarningAndPaymentsContext.AccountId = long.Parse(IdentifierGenerator.GenerateIdentifier(8, false));
 
             SetupReferenceData(environmentVariables);
 
@@ -53,7 +53,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             // Setup reference data
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
             EarningAndPaymentsContext.Ukprn = int.Parse(IdentifierGenerator.GenerateIdentifier(8, false));
-            EarningAndPaymentsContext.AccountId = long.Parse(IdentifierGenerator.GenerateIdentifier(8, false));
+            //EarningAndPaymentsContext.AccountId = long.Parse(IdentifierGenerator.GenerateIdentifier(8, false));
 
             SetupReferenceData(environmentVariables);
 
@@ -156,32 +156,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
         }
         private void SetupReferenceData(EnvironmentVariables environmentVariables)
         {
-            AccountDataHelper.CreateAccount(EarningAndPaymentsContext.AccountId, EarningAndPaymentsContext.AccountId.ToString(), 0.00m, environmentVariables);
+            foreach (var employer in EarningAndPaymentsContext.ReferenceDataContext.Employers)
+            {
+                AccountDataHelper.CreateAccount(employer.AccountId, employer.AccountId.ToString(), 0.00m, environmentVariables);
+            }
 
             foreach (var learner in EarningAndPaymentsContext.Learners)
             {
-                var commitment = EarningAndPaymentsContext.ReferenceDataContext.Commitments?.SingleOrDefault(c => c.Learner == learner.Name);
-
-                if (commitment != null)
-                {
-                    CommitmentDataHelper.CreateCommitment(commitment.Id, EarningAndPaymentsContext.Ukprn, learner.Uln,
-                        EarningAndPaymentsContext.AccountId.ToString(), learner.LearningDelivery.StartDate,
-                        learner.LearningDelivery.PlannedEndDate, learner.LearningDelivery.AgreedPrice,
-                        IlrBuilder.Defaults.StandardCode,
-                        IlrBuilder.Defaults.FrameworkCode, IlrBuilder.Defaults.ProgrammeType,
-                        IlrBuilder.Defaults.PathwayCode, commitment.Priority, "1", environmentVariables);
-                }
-                else
-                {
-                    var commitmentId = int.Parse(IdentifierGenerator.GenerateIdentifier(6, false));
-
-                    CommitmentDataHelper.CreateCommitment(commitmentId, EarningAndPaymentsContext.Ukprn, learner.Uln,
-                        EarningAndPaymentsContext.AccountId.ToString(), learner.LearningDelivery.StartDate,
-                        learner.LearningDelivery.PlannedEndDate, learner.LearningDelivery.AgreedPrice,
-                        IlrBuilder.Defaults.StandardCode,
-                        IlrBuilder.Defaults.FrameworkCode, IlrBuilder.Defaults.ProgrammeType,
-                        IlrBuilder.Defaults.PathwayCode, 1, "1", environmentVariables);
-                }
+                AddLearnerCommitment(learner, environmentVariables);
             }
         }
         private void ProcessMonths(DateTime start, EnvironmentVariables environmentVariables)
@@ -197,8 +179,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             while (date <= lastCensusDate)
             {
                 var period = date.GetPeriod();
-                var levyBalance = GetAccountBalanceForPeriod(period);
-                AccountDataHelper.UpdateAccountBalance(EarningAndPaymentsContext.AccountId, levyBalance, environmentVariables);
+                UpdateAccountsBalances(period, environmentVariables);
 
                 var academicYear = date.GetAcademicYear();
 
@@ -334,19 +315,50 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             Assert.AreEqual(expectedPaymentDue, actualPaymentDue, $"Expected a {paymentType} payment due of {expectedPaymentDue} but made a payment of {actualPaymentDue} for {periodName}");
         }
 
-        private decimal GetAccountBalanceForPeriod(string period)
+        private void UpdateAccountsBalances(string month, EnvironmentVariables environmentVariables)
         {
-            if (EarningAndPaymentsContext.ReferenceDataContext.MonthlyAccountBalance.ContainsKey("All"))
+            foreach (var employer in EarningAndPaymentsContext.ReferenceDataContext.Employers)
             {
-                return EarningAndPaymentsContext.ReferenceDataContext.MonthlyAccountBalance["All"];
+                AccountDataHelper.UpdateAccountBalance(employer.AccountId, employer.GetBalanceForMonth(month), environmentVariables);
+            }
+        }
+
+        private void AddLearnerCommitment(Contexts.Learner learner, EnvironmentVariables environmentVariables)
+        {
+            var commitmentId = long.Parse(IdentifierGenerator.GenerateIdentifier(6, false));
+            var commitmentPriority = 1;
+            var accountId = long.Parse(IdentifierGenerator.GenerateIdentifier(8, false));
+
+            var commitment = EarningAndPaymentsContext.ReferenceDataContext.Commitments?.SingleOrDefault(c => c.Learner == learner.Name);
+
+            if (commitment != null)
+            {
+                commitmentId = commitment.Id;
+                commitmentPriority = commitment.Priority;
+
+                var employer = EarningAndPaymentsContext.ReferenceDataContext.Employers?.SingleOrDefault(e => e.Name == commitment.Employer);
+
+                if (employer != null)
+                {
+                    accountId = employer.AccountId;
+                }
             }
 
-            if (EarningAndPaymentsContext.ReferenceDataContext.MonthlyAccountBalance.ContainsKey(period))
-            {
-                return EarningAndPaymentsContext.ReferenceDataContext.MonthlyAccountBalance[period];
-            }
-
-            return EarningAndPaymentsContext.ReferenceDataContext.MonthlyAccountBalance["..."];
+            CommitmentDataHelper.CreateCommitment(
+                commitmentId,
+                EarningAndPaymentsContext.Ukprn,
+                learner.Uln,
+                accountId.ToString(),
+                learner.LearningDelivery.StartDate,
+                learner.LearningDelivery.PlannedEndDate,
+                learner.LearningDelivery.AgreedPrice,
+                IlrBuilder.Defaults.StandardCode,
+                IlrBuilder.Defaults.FrameworkCode,
+                IlrBuilder.Defaults.ProgrammeType,
+                IlrBuilder.Defaults.PathwayCode,
+                commitmentPriority,
+                "1",
+                environmentVariables);
         }
     }
 }

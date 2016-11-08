@@ -110,3 +110,60 @@ Feature: Provider earnings and payments where learner completes on time and is f
             | SFA Levy employer budget      | 500   | 500   | 500   | ... | 500   | 1500  | 0     |
             | SFA Levy co-funded budget     | 450   | 450   | 450   | ... | 450   | 1350  | 0     |
             | SFA non-Levy co-funding budget| 0     | 0     | 0     | ... | 0     | 0     |       |
+
+            
+    Scenario: 2 learners, 2 employers, 1 provider - enough levy
+        Given the employer 1 has a levy balance > agreed price for all months
+        And the employer 2 has a levy balance > agreed price for all months
+        And the following commitments exist:
+            | Employer   | Provider   | ULN       | priority | agreed price |
+            | employer 1 | provider A | learner a | 1        | 7500         |
+            | employer 2 | provider A | learner b | 1        | 15000        |
+        When an ILR file is submitted with the following data:
+            | ULN       | agreed price | learner type       | start date | planned end date | actual end date | completion status |
+            | learner a | 7500         | programme only DAS | 01/09/2017 | 08/09/2018       | 08/09/2018      | completed         |
+            | learner b | 15000        | programme only DAS | 01/09/2017 | 08/09/2018       | 08/09/2018      | completed         |
+        Then the provider earnings and payments break down as follows:
+            | Type                            | 09/17 | 10/17 | 11/17 | ... | 08/18 | 09/18 | 10/18 |
+            | Provider Earned Total           | 1500  | 1500  | 1500  | ... | 1500  | 4500  | 0     |
+            | Provider Earned from SFA        | 1500  | 1500  | 1500  | ... | 1500  | 4500  | 0     |
+            | Provider Earned from Employer 1 | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+            | Provider Earned from Employer 2 | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+            | Provider Paid by SFA            | 0     | 1500  | 1500  | ... | 1500  | 1500  | 4500  |
+            | Payment due from Employer       | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+            | employer 1 Levy account debited | 0     | 500   | 500   | ... | 500   | 500   | 1500  |
+            | employer 2 Levy account debited | 0     | 1000  | 1000  | ... | 1000  | 1000  | 3000  |
+            | SFA Levy employer budget        | 1500  | 1500  | 1500  | ... | 1500  | 3000  | 0     |
+            | SFA Levy co-funded budget       | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+            | SFA non-Levy co-funding budget  | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+
+
+    Scenario: 2 learners, 2 employers, 1 provider - not enough levy
+        Given the employer 1 has a levy balance of:
+            | 09/17 | 10/17 | 11/17 | ... | 08/18 | 09/18 |
+            | 0     | 100   | 100   | 100 | 250   | 500   |
+        And the employer 2 has a levy balance of:
+            | 09/17 | 10/17 | 11/17 | ... | 08/18 | 09/18 |
+            | 500   | 500   | 500   | 500 | 500   | 1500  |
+        And the following commitments exist:
+            | Employer   | Provider   | ULN       | priority | agreed price |
+            | employer 1 | provider A | learner a | 1        | 7500         |
+            | employer 2 | provider A | learner b | 1        | 15000        |
+        When an ILR file is submitted with the following data:
+            | ULN       | agreed price | learner type       | start date | planned end date | actual end date | completion status |
+            | learner a | 7500         | programme only DAS | 01/09/2017 | 08/09/2018       | 08/09/2018      | completed         |
+            | learner b | 15000        | programme only DAS | 01/09/2017 | 08/09/2018       | 08/09/2018      | completed         |
+        Then the provider earnings and payments break down as follows:
+            | Type                            | 09/17 | 10/17 | 11/17 | ... | 08/18 | 09/18 | 10/18 |
+            | Provider Earned Total           | 1500  | 1500  | 1500  | ... | 1500  | 4500  | 0     |
+            | Provider Earned from SFA        | 1400  | 1410  | 1410  | ... | 1425  | 4250  | 0     |
+            | Provider Earned from Employer 1 | 50    | 40    | 40    | ... | 25    | 100   | 0     |
+            | Provider Earned from Employer 2 | 50    | 50    | 50    | ... | 50    | 150   | 0     |
+            | Provider Paid by SFA            | 0     | 1400  | 1410  | ... | 1410  | 1410  | 4250  |
+            | Payment due from Employer 1     | 0     | 50    | 40    | ... | 40    | 40    | 100   |
+            | Payment due from Employer 2     | 0     | 50    | 50    | ... | 50    | 50    | 150   |
+            | employer 1 Levy account debited | 0     | 0     | 100   | ... | 100   | 250   | 500   |
+            | employer 2 Levy account debited | 0     | 500   | 500   | ... | 500   | 500   | 1500  |
+            | SFA Levy employer budget        | 500   | 600   | 600   | ... | 750   | 2000  | 0     |
+            | SFA Levy co-funded budget       | 900   | 810   | 810   | ... | 675   | 2250  | 0     |
+            | SFA non-Levy co-funding budget  | 0     | 0     | 0     | ... | 0     | 0     | 0     |
