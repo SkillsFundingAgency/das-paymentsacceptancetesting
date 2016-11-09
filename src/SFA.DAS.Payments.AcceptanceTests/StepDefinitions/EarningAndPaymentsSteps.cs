@@ -161,10 +161,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                 AccountDataHelper.CreateAccount(employer.AccountId, employer.AccountId.ToString(), 0.00m, environmentVariables);
             }
 
+            AccountDataHelper.UpdateAudit(environmentVariables);
+
             foreach (var learner in EarningAndPaymentsContext.Learners)
             {
                 AddLearnerCommitment(learner, environmentVariables);
             }
+
+            CommitmentDataHelper.UpdateEventStreamPointer(environmentVariables);
         }
         private void ProcessMonths(DateTime start, EnvironmentVariables environmentVariables)
         {
