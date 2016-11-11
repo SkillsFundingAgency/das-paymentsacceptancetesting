@@ -90,6 +90,7 @@
     <Compile Include="Contexts\Commitment.cs" />
     <Compile Include="Contexts\CompletionStatus.cs" />
     <Compile Include="Contexts\EarningAndPaymentsContext.cs" />
+    <Compile Include="Contexts\Employer.cs" />
     <Compile Include="Contexts\Learner.cs" />
     <Compile Include="Contexts\LearningDelivery.cs" />
     <Compile Include="Contexts\LearnerType.cs" />

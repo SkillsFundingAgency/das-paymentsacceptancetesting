@@ -23,5 +23,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                     new { accountId, levyBalance });
             }
         }
+
+        internal static void UpdateAudit(EnvironmentVariables environmentVariables)
+        {
+            using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
+            {
+                connection.Execute("INSERT INTO DasAccountsAudit (ReadDateTime,AccountsRead,CompletedSuccessfully) SELECT GETDATE(), COUNT(AccountId),1 FROM dbo.DasAccounts");
+            }
+        }
     }
 }

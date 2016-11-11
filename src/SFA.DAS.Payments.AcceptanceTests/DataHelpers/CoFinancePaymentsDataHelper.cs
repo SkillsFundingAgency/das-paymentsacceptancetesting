@@ -16,5 +16,20 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                 return connection.Query<CoFinancePaymentEntity>(query, new { ukprn, month, year }).ToArray();
             }
         }
+
+        internal static CoFinancePaymentEntity[] GetAccountCoInvestedPaymentsForPeriod(long ukprn, long accountId, int year, int month, EnvironmentVariables environmentVariables)
+        {
+            using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
+            {
+                var query = @"SELECT * 
+                                FROM Payments.Payments 
+                                WHERE UKPRN = @ukprn 
+                                    AND CollectionPeriodMonth = @month 
+                                    AND CollectionPeriodYear = @year 
+                                    AND FundingSource IN (2, 3)
+                                    AND CommitmentId IN (SELECT CommitmentId FROM dbo.DasCommitments WHERE AccountId = @accountId)";
+                return connection.Query<CoFinancePaymentEntity>(query, new { ukprn, month, year, accountId }).ToArray();
+            }
+        }
     }
 }

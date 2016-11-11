@@ -21,5 +21,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                     new { commitmentId, ukprn, uln, accountId, startDate, endDate, agreedCost, standardCode, frameworkCode, programmeType, pathwayCode, priority, versionId });
             }
         }
+
+        internal static void UpdateEventStreamPointer(EnvironmentVariables environmentVariables)
+        {
+            using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
+            {
+                connection.Execute("INSERT INTO EventStreamPointer SELECT ISNULL(MAX(EventId),0) + 1, GETDATE() FROM EventStreamPointer");
+            }
+        }
     }
 }
