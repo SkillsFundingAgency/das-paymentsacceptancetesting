@@ -16,5 +16,20 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                 return connection.Query<LevyPaymentEntity>(query, new { ukprn, month, year }).ToArray();
             }
         }
+
+        internal static LevyPaymentEntity[] GetAccountLevyPaymentsForPeriod(long ukprn, long accountId, int year, int month, EnvironmentVariables environmentVariables)
+        {
+            using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
+            {
+                var query = @"SELECT * 
+                                FROM Payments.Payments 
+                                WHERE UKPRN = @ukprn 
+                                    AND CollectionPeriodMonth = @month 
+                                    AND CollectionPeriodYear = @year 
+                                    AND FundingSource = 1 
+                                    AND CommitmentId IN (SELECT CommitmentId FROM dbo.DasCommitments WHERE AccountId = @accountId)";
+                return connection.Query<LevyPaymentEntity>(query, new { ukprn, month, year, accountId }).ToArray();
+            }
+        }
     }
 }

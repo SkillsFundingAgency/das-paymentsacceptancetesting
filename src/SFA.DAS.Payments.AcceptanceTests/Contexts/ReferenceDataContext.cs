@@ -38,5 +38,17 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
 
             Commitments = new[] { commitment };
         }
+
+        public void SetDefaultEmployer(Dictionary<string, decimal> monthlyBalance)
+        {
+            var employer = new Employer
+            {
+                Name = "employer",
+                AccountId = long.Parse(IdentifierGenerator.GenerateIdentifier(8, false)),
+                MonthlyAccountBalance = monthlyBalance
+            };
+
+            Employers = new[] { employer };
+        }
     }
 }

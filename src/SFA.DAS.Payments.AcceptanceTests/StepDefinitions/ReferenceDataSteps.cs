@@ -43,27 +43,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
         [Given(@"levy balance = (.*) for all months")]
         public void GivenLevyBalanceAgreedPrice(int levyBalance)
         {
-            var employer = new Employer
-            {
-                Name = "employer",
-                AccountId = long.Parse(IdentifierGenerator.GenerateIdentifier(8, false)),
-                MonthlyAccountBalance = new Dictionary<string, decimal> { { "All", levyBalance } }
-            };
-
-            ReferenceDataContext.AddEmployer(employer);
+            ReferenceDataContext.SetDefaultEmployer(new Dictionary<string, decimal> { { "All", levyBalance } });
         }
 
         [Given(@"levy balance > agreed price for all months")]
         public void GivenLevyBalanceAgreedPrice()
         {
-            var employer = new Employer
-            {
-                Name = "employer",
-                AccountId = long.Parse(IdentifierGenerator.GenerateIdentifier(8, false)),
-                MonthlyAccountBalance = new Dictionary<string, decimal> { { "All", int.MaxValue } }
-            };
-
-            ReferenceDataContext.AddEmployer(employer);
+            ReferenceDataContext.SetDefaultEmployer(new Dictionary<string, decimal> { { "All", int.MaxValue } });
         }
 
         [Given(@"the employer's levy balance is:")]
@@ -79,14 +65,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                 monthlyAccountBalance.Add(period, balance);
             }
 
-            var employer = new Employer
-            {
-                Name = "employer",
-                AccountId = long.Parse(IdentifierGenerator.GenerateIdentifier(8, false)),
-                MonthlyAccountBalance = monthlyAccountBalance
-            };
-
-            ReferenceDataContext.AddEmployer(employer);
+            ReferenceDataContext.SetDefaultEmployer(monthlyAccountBalance);
         }
 
         [Given(@"the following commitments exist:")]
