@@ -30,79 +30,97 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
         [When(@"an ILR file is submitted with the following data:")]
         public void WhenAnIlrFileIsSubmittedWithTheFollowingData(Table table)
         {
+            EarningAndPaymentsContext.SetDefaultProvider();
+            var ukprn = EarningAndPaymentsContext.Providers[0].Ukprn;
+
             // Store spec values in context
-            SetupContextLearners(table);
+            SetupContextLearners(ukprn, table);
 
             // Setup reference data
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
-            EarningAndPaymentsContext.Ukprn = int.Parse(IdentifierGenerator.GenerateIdentifier(8, false));
 
-            SetupReferenceData(environmentVariables);
+            SetupReferenceData(ukprn, environmentVariables);
 
             // Process months
-            ProcessMonths(EarningAndPaymentsContext.IlrStartDate.NextCensusDate(), environmentVariables);
+            //var startDate = EarningAndPaymentsContext.IlrStartDate.NextCensusDate();
+            var startDate = EarningAndPaymentsContext.GetProviderIlrStartDate(ukprn).NextCensusDate();
+
+            ProcessMonths(ukprn, startDate, environmentVariables);
         }
 
         [When(@"an ILR file is submitted in (.*) with the following data:")]
         public void WhenAnIlrFileIsSubmittedInAMonthWithTheFollowingData(string month, Table table)
         {
+            EarningAndPaymentsContext.SetDefaultProvider();
+            var ukprn = EarningAndPaymentsContext.Providers[0].Ukprn;
+
             // Store spec values in context
-            SetupContextLearners(table);
+            SetupContextLearners(ukprn, table);
 
             // Setup reference data
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
-            EarningAndPaymentsContext.Ukprn = int.Parse(IdentifierGenerator.GenerateIdentifier(8, false));
 
-            SetupReferenceData(environmentVariables);
+            SetupReferenceData(ukprn, environmentVariables);
 
             // Process months
             var submissionDate = new DateTime(int.Parse(month.Substring(3)) + 2000, int.Parse(month.Substring(0, 2)), 1).NextCensusDate();
 
-            ProcessMonths(submissionDate, environmentVariables);
+            ProcessMonths(ukprn, submissionDate, environmentVariables);
+        }
+
+        [When(@"an ILR file is submitted by (.*) with the following data:")]
+        public void WhenAnIlrFileIsSubmittedByTheProviderWithTheFollowingData(string providerName, Table table)
+        {
+            var provider = new Provider
+            {
+                Name = providerName,
+                Ukprn = long.Parse(IdentifierGenerator.GenerateIdentifier(8, false))
+            };
+
+            EarningAndPaymentsContext.AddProvider(provider);
+
+            // Store spec values in context
+            SetupContextLearners(provider.Ukprn, table);
+
+            // Setup reference data
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+
+            SetupReferenceData(provider.Ukprn, environmentVariables);
+
+            // Process months
+            //var startDate = EarningAndPaymentsContext.IlrStartDate.NextCensusDate();
+            var startDate = EarningAndPaymentsContext.GetProviderIlrStartDate(provider.Ukprn).NextCensusDate();
+
+            ProcessMonths(provider.Ukprn, startDate, environmentVariables);
         }
 
         [Then(@"the provider earnings and payments break down as follows:")]
         public void ThenTheProviderEarningsBreakDownAsFollows(Table table)
         {
-            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+            var ukprn = EarningAndPaymentsContext.Providers[0].Ukprn;
 
-            var earnedRow = table.Rows.RowWithKey(RowKeys.Earnings);
-            var govtCofundRow = table.Rows.RowWithKey(RowKeys.CoFinanceGovernmentPayment);
+            VerifyProviderEarningsAndPayments(ukprn, table);
+        }
 
-            for (var colIndex = 1; colIndex < table.Header.Count; colIndex++)
+        [Then(@"the earnings and payments break down for (.*) is as follows:")]
+        public void ThenAProviderEarningsBreakDownAsFollows(string providerName, Table table)
+        {
+            var provider = EarningAndPaymentsContext.Providers.Single(p => p.Name == providerName);
+
+            if (provider == null)
             {
-                var periodName = table.Header.ElementAt(colIndex);
-                if (periodName == "...")
-                {
-                    continue;
-                }
-
-                var periodMonth = int.Parse(periodName.Substring(0, 2));
-                var periodYear = int.Parse(periodName.Substring(3)) + 2000;
-                var periodDate = new DateTime(periodYear, periodMonth, 1).NextCensusDate();
-
-
-                VerifyEarningsForPeriod(periodName, colIndex, earnedRow);
-                VerifyGovtCofinancePayments(periodName, periodDate, colIndex, govtCofundRow, environmentVariables);
-
-                foreach (var employer in EarningAndPaymentsContext.ReferenceDataContext.Employers)
-                {
-                    var levyPaidRow = table.Rows.RowWithKey(RowKeys.DefaultLevyPayment)
-                        ?? table.Rows.RowWithKey($"{employer.Name}{RowKeys.LevyPayment}");
-
-                    var employerCofundRow = table.Rows.RowWithKey(RowKeys.DefaultCoFinanceEmployerPayment)
-                                            ?? table.Rows.RowWithKey($"{RowKeys.CoFinanceEmployerPayment}{employer.Name}");
-
-                    VerifyLevyPayments(periodName, periodDate, employer.AccountId, colIndex, levyPaidRow, environmentVariables);
-                    VerifyEmployerCofinancePayments(periodName, periodDate, employer.AccountId, colIndex, employerCofundRow, environmentVariables);
-                }
+                throw new Exception($"Unknown provider {providerName}");
             }
+
+            VerifyProviderEarningsAndPayments(provider.Ukprn, table);
         }
 
         [Then(@"the transaction types for the payments are:")]
         public void ThenTheTransactionsForThePaymentsAre(Table table)
         {
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+
+            var ukprn = EarningAndPaymentsContext.Providers[0].Ukprn;
 
             var onProgramRow = table.Rows.RowWithKey(RowKeys.OnProgramPayment);
             var completionRow = table.Rows.RowWithKey(RowKeys.CompletionPayment);
@@ -120,9 +138,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                 var periodYear = int.Parse(periodName.Substring(3)) + 2000;
                 var periodDate = new DateTime(periodYear, periodMonth, 1).NextCensusDate();
 
-                VerifyPaymentsDueByTransactionType(periodName, periodDate, colIndex, TransactionType.OnProgram, onProgramRow, environmentVariables);
-                VerifyPaymentsDueByTransactionType(periodName, periodDate, colIndex, TransactionType.Completion, completionRow, environmentVariables);
-                VerifyPaymentsDueByTransactionType(periodName, periodDate, colIndex, TransactionType.Balancing, balancingRow, environmentVariables);
+                VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, TransactionType.OnProgram, onProgramRow, environmentVariables);
+                VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, TransactionType.Completion, completionRow, environmentVariables);
+                VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, TransactionType.Balancing, balancingRow, environmentVariables);
             }
         }
 
@@ -139,13 +157,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                 CollectionOpen = 1
             };
         }
-        private void SetupContextLearners(Table table)
+        private void SetupContextLearners(long ukprn, Table table)
         {
-            EarningAndPaymentsContext.Learners = new Contexts.Learner[table.RowCount];
+            var learners = new List<Contexts.Learner>();
 
             for (var rowIndex = 0; rowIndex < table.RowCount; rowIndex++)
             {
-                EarningAndPaymentsContext.Learners[rowIndex] = new Contexts.Learner
+                learners.Add(new Contexts.Learner
                 {
                     Name = table.Rows[rowIndex].ContainsKey("ULN") ? table.Rows[rowIndex]["ULN"] : string.Empty,
                     Uln = long.Parse(IdentifierGenerator.GenerateIdentifier(10, false)),
@@ -155,13 +173,19 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                         LearnerType = LearnerType.ProgrammeOnlyDas,
                         StartDate = DateTime.Parse(table.Rows[rowIndex]["start date"]),
                         PlannedEndDate = DateTime.Parse(table.Rows[rowIndex]["planned end date"]),
-                        ActualEndDate = !table.Header.Contains("actual end date") || string.IsNullOrWhiteSpace(table.Rows[rowIndex]["actual end date"]) ? null : (DateTime?)DateTime.Parse(table.Rows[rowIndex]["actual end date"]),
+                        ActualEndDate =
+                            !table.Header.Contains("actual end date") ||
+                            string.IsNullOrWhiteSpace(table.Rows[rowIndex]["actual end date"])
+                                ? null
+                                : (DateTime?) DateTime.Parse(table.Rows[rowIndex]["actual end date"]),
                         CompletionStatus = IlrTranslator.TranslateCompletionStatus(table.Rows[rowIndex]["completion status"])
                     }
-                };
+                });
             }
+
+            EarningAndPaymentsContext.SetProviderIlrLearners(ukprn, learners.ToArray());
         }
-        private void SetupReferenceData(EnvironmentVariables environmentVariables)
+        private void SetupReferenceData(long ukprn, EnvironmentVariables environmentVariables)
         {
             foreach (var employer in EarningAndPaymentsContext.ReferenceDataContext.Employers)
             {
@@ -170,21 +194,21 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 
             AccountDataHelper.UpdateAudit(environmentVariables);
 
-            foreach (var learner in EarningAndPaymentsContext.Learners)
+            foreach (var learner in EarningAndPaymentsContext.GetProviderIlrLearners(ukprn))
             {
-                AddLearnerCommitment(learner, environmentVariables);
+                AddLearnerCommitment(ukprn, learner, environmentVariables);
             }
 
             CommitmentDataHelper.UpdateEventStreamPointer(environmentVariables);
         }
-        private void ProcessMonths(DateTime start, EnvironmentVariables environmentVariables)
+        private void ProcessMonths(long ukprn, DateTime start, EnvironmentVariables environmentVariables)
         {
             var processService = new ProcessService(new TestLogger());
             var earnedByPeriod = new Dictionary<string, decimal>();
 
             var periodId = 1;
             var date = start.NextCensusDate();
-            var endDate = EarningAndPaymentsContext.IlrEndDate;
+            var endDate = EarningAndPaymentsContext.GetProviderIlrEndDate(ukprn);
             var lastCensusDate = endDate.NextCensusDate();
 
             while (date <= lastCensusDate)
@@ -196,14 +220,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 
                 SetupEnvironmentVariablesForMonth(date, academicYear, environmentVariables, ref periodId);
 
-                SubmitIlr(EarningAndPaymentsContext.Ukprn, EarningAndPaymentsContext.Learners, academicYear, date, environmentVariables, processService, earnedByPeriod);
+                SubmitIlr(ukprn, EarningAndPaymentsContext.GetProviderIlrLearners(ukprn), academicYear, date, environmentVariables, processService, earnedByPeriod);
 
                 SubmitMonthEnd(date, environmentVariables, processService);
 
                 date = date.AddDays(15).NextCensusDate();
             }
 
-            EarningAndPaymentsContext.EarnedByPeriod = earnedByPeriod;
+            EarningAndPaymentsContext.SetProviderEarnedByPeriod(ukprn, earnedByPeriod);
         }
         private void SubmitIlr(long ukprn, Contexts.Learner[] learners, string academicYear, DateTime date,
             EnvironmentVariables environmentVariables, ProcessService processService, Dictionary<string, decimal> earnedByPeriod)
@@ -253,23 +277,60 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             processService.RunSummarisation(environmentVariables, summarisationStatusWatcher);
         }
 
-        private void VerifyEarningsForPeriod(string periodName, int colIndex, TableRow earnedRow)
+        private void VerifyProviderEarningsAndPayments(long ukprn, Table table)
+        {
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+
+            var earnedRow = table.Rows.RowWithKey(RowKeys.Earnings);
+            var govtCofundRow = table.Rows.RowWithKey(RowKeys.CoFinanceGovernmentPayment);
+
+            for (var colIndex = 1; colIndex < table.Header.Count; colIndex++)
+            {
+                var periodName = table.Header.ElementAt(colIndex);
+                if (periodName == "...")
+                {
+                    continue;
+                }
+
+                var periodMonth = int.Parse(periodName.Substring(0, 2));
+                var periodYear = int.Parse(periodName.Substring(3)) + 2000;
+                var periodDate = new DateTime(periodYear, periodMonth, 1).NextCensusDate();
+
+
+                VerifyEarningsForPeriod(ukprn, periodName, colIndex, earnedRow);
+                VerifyGovtCofinancePayments(ukprn, periodName, periodDate, colIndex, govtCofundRow, environmentVariables);
+
+                foreach (var employer in EarningAndPaymentsContext.ReferenceDataContext.Employers)
+                {
+                    var levyPaidRow = table.Rows.RowWithKey(RowKeys.DefaultLevyPayment)
+                        ?? table.Rows.RowWithKey($"{employer.Name}{RowKeys.LevyPayment}");
+
+                    var employerCofundRow = table.Rows.RowWithKey(RowKeys.DefaultCoFinanceEmployerPayment)
+                                            ?? table.Rows.RowWithKey($"{RowKeys.CoFinanceEmployerPayment}{employer.Name}");
+
+                    VerifyLevyPayments(ukprn, periodName, periodDate, employer.AccountId, colIndex, levyPaidRow, environmentVariables);
+                    VerifyEmployerCofinancePayments(ukprn, periodName, periodDate, employer.AccountId, colIndex, employerCofundRow, environmentVariables);
+                }
+            }
+        }
+
+        private void VerifyEarningsForPeriod(long ukprn, string periodName, int colIndex, TableRow earnedRow)
         {
             if (earnedRow == null)
             {
                 return;
             }
 
-            if (!EarningAndPaymentsContext.EarnedByPeriod.ContainsKey(periodName))
+            if (!EarningAndPaymentsContext.GetProviderEarnedByPeriod(ukprn).ContainsKey(periodName))
             {
                 Assert.Fail($"Expected value for period {periodName} but none found");
             }
 
             var expectedEarning = decimal.Parse(earnedRow[colIndex]);
-            Assert.IsTrue(EarningAndPaymentsContext.EarnedByPeriod.ContainsKey(periodName), $"Expected earning for period {periodName} but none found");
-            Assert.AreEqual(expectedEarning, EarningAndPaymentsContext.EarnedByPeriod[periodName], $"Expected earning of {expectedEarning} for period {periodName} but found {EarningAndPaymentsContext.EarnedByPeriod[periodName]}");
+            Assert.IsTrue(EarningAndPaymentsContext.GetProviderEarnedByPeriod(ukprn).ContainsKey(periodName), $"Expected earning for period {periodName} but none found");
+            Assert.AreEqual(expectedEarning, EarningAndPaymentsContext.GetProviderEarnedByPeriod(ukprn)[periodName], $"Expected earning of {expectedEarning} for period {periodName} but found {EarningAndPaymentsContext.GetProviderEarnedByPeriod(ukprn)[periodName]}");
         }
-        private void VerifyLevyPayments(string periodName, DateTime periodDate, long accountId,
+        private void VerifyLevyPayments(long ukprn, string periodName, DateTime periodDate, long accountId,
             int colIndex, TableRow levyPaidRow, EnvironmentVariables environmentVariables)
         {
             if (levyPaidRow == null)
@@ -279,7 +340,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 
             var levyPaymentDate = periodDate.AddMonths(-1);
 
-            var levyPayments = LevyPaymentDataHelper.GetAccountLevyPaymentsForPeriod(EarningAndPaymentsContext.Ukprn, accountId, 
+            var levyPayments = LevyPaymentDataHelper.GetAccountLevyPaymentsForPeriod(ukprn, accountId, 
                 levyPaymentDate.Year, levyPaymentDate.Month, environmentVariables)
                                ?? new LevyPaymentEntity[0];
 
@@ -287,7 +348,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             var expectedLevyPayment = decimal.Parse(levyPaidRow[colIndex]);
             Assert.AreEqual(expectedLevyPayment, actualLevyPayment, $"Expected a levy payment of {expectedLevyPayment} but made a payment of {actualLevyPayment} for {periodName}");
         }
-        private void VerifyGovtCofinancePayments(string periodName, DateTime periodDate,
+        private void VerifyGovtCofinancePayments(long ukprn, string periodName, DateTime periodDate,
             int colIndex, TableRow govtCofundRow, EnvironmentVariables environmentVariables)
         {
             if (govtCofundRow == null)
@@ -295,7 +356,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                 return;
             }
 
-            var cofinancePayments = CoFinancePaymentsDataHelper.GetCoInvestedPaymentsForPeriod(EarningAndPaymentsContext.Ukprn,
+            var cofinancePayments = CoFinancePaymentsDataHelper.GetCoInvestedPaymentsForPeriod(ukprn,
                 periodDate.Year, periodDate.Month, environmentVariables)
                                     ?? new CoFinancePaymentEntity[0];
 
@@ -303,7 +364,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             var expectedGovtPayment = decimal.Parse(govtCofundRow[colIndex]);
             Assert.AreEqual(expectedGovtPayment, actualGovtPayment, $"Expected a government co-finance payment of {expectedGovtPayment} but made a payment of {actualGovtPayment} for {periodName}");
         }
-        private void VerifyEmployerCofinancePayments(string periodName, DateTime periodDate, long accountId,
+        private void VerifyEmployerCofinancePayments(long ukprn, string periodName, DateTime periodDate, long accountId,
             int colIndex, TableRow employerCofundRow, EnvironmentVariables environmentVariables)
         {
             if (employerCofundRow == null)
@@ -313,7 +374,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 
             var employerPaymentDate = periodDate.AddMonths(-1);
 
-            var cofinancePayments = CoFinancePaymentsDataHelper.GetAccountCoInvestedPaymentsForPeriod(EarningAndPaymentsContext.Ukprn, accountId,
+            var cofinancePayments = CoFinancePaymentsDataHelper.GetAccountCoInvestedPaymentsForPeriod(ukprn, accountId,
                 employerPaymentDate.Year, employerPaymentDate.Month, environmentVariables)
                                     ?? new CoFinancePaymentEntity[0];
 
@@ -321,7 +382,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             var expectedEmployerPayment = decimal.Parse(employerCofundRow[colIndex]);
             Assert.AreEqual(expectedEmployerPayment, actualEmployerPayment, $"Expected a employer co-finance payment of {expectedEmployerPayment} but made a payment of {actualEmployerPayment} for {periodName}");
         }
-        private void VerifyPaymentsDueByTransactionType(string periodName, DateTime periodDate, int colIndex, TransactionType paymentType,
+        private void VerifyPaymentsDueByTransactionType(long ukprn, string periodName, DateTime periodDate, int colIndex, TransactionType paymentType,
             TableRow paymentsRow, EnvironmentVariables environmentVariables)
         {
             if (paymentsRow == null)
@@ -331,7 +392,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 
             var paymentsDueDate = periodDate.AddMonths(-1);
 
-            var paymentsDue = PaymentsDueDataHelper.GetPaymentsDueForPeriod(EarningAndPaymentsContext.Ukprn,
+            var paymentsDue = PaymentsDueDataHelper.GetPaymentsDueForPeriod(ukprn,
                 paymentsDueDate.Year, paymentsDueDate.Month, environmentVariables)
                               ?? new RequiredPaymentEntity[0];
 
@@ -348,13 +409,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             }
         }
 
-        private void AddLearnerCommitment(Contexts.Learner learner, EnvironmentVariables environmentVariables)
+        private void AddLearnerCommitment(long ukprn, Contexts.Learner learner, EnvironmentVariables environmentVariables)
         {
             var commitmentId = long.Parse(IdentifierGenerator.GenerateIdentifier(6, false));
             var commitmentPriority = 1;
             var accountId = long.Parse(IdentifierGenerator.GenerateIdentifier(8, false));
 
             var commitment = EarningAndPaymentsContext.ReferenceDataContext.Commitments?.SingleOrDefault(c => c.Learner == learner.Name);
+            var provider = EarningAndPaymentsContext.Providers.Single(p => p.Ukprn == ukprn);
 
             if (commitment != null)
             {
@@ -371,7 +433,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 
             CommitmentDataHelper.CreateCommitment(
                 commitmentId,
-                EarningAndPaymentsContext.Ukprn,
+                ukprn,
                 learner.Uln,
                 accountId.ToString(),
                 learner.LearningDelivery.StartDate,
