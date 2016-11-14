@@ -15,10 +15,20 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
             ReferenceDataContext = referenceDataContext;
         }
 
-        public void AddProvider(Provider provider)
+        public void AddProvider(string name)
         {
             var providers = Providers?.ToList() ?? new List<Provider>();
-            providers.Add(provider);
+
+            if (providers.Any(p => p.Name == name))
+            {
+                return;
+            }
+
+            providers.Add(new Provider
+            {
+                Name = name,
+                Ukprn = long.Parse(IdentifierGenerator.GenerateIdentifier(8, false))
+            });
 
             Providers = providers.ToArray();
         }
@@ -34,32 +44,24 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
             Providers = new[] { provider };
         }
 
-        public DateTime GetProviderIlrStartDate(long ukprn)
+        public DateTime GetIlrStartDate()
         {
-            var provider = Providers.Single(p => p.Ukprn == ukprn);
-
-            return provider.IlrStartDate;
+            return Providers.Min(p => p.IlrStartDate);
         }
 
-        public DateTime GetProviderIlrEndDate(long ukprn)
+        public DateTime GetIlrEndDate()
         {
-            var provider = Providers.Single(p => p.Ukprn == ukprn);
-
-            return provider.IlrEndDate;
+            return Providers.Max(p => p.IlrEndDate);
         }
 
-        public Learner[] GetProviderIlrLearners(long ukprn)
+        public void AddProviderLearner(string name, Learner learner)
         {
-            var provider = Providers.Single(p => p.Ukprn == ukprn);
+            var provider = Providers.Single(p => p.Name == name);
 
-            return provider.Learners;
-        }
+            var learners = provider.Learners?.ToList() ?? new List<Learner>();
+            learners.Add(learner);
 
-        public void SetProviderIlrLearners(long ukprn, Learner[] learners)
-        {
-            var provider = Providers.Single(p => p.Ukprn == ukprn);
-
-            provider.Learners = learners;
+            provider.Learners = learners.ToArray();
         }
 
         public Dictionary<string, decimal> GetProviderEarnedByPeriod(long ukprn)
@@ -67,13 +69,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
             var provider = Providers.Single(p => p.Ukprn == ukprn);
 
             return provider.EarnedByPeriod;
-        }
-
-        public void SetProviderEarnedByPeriod(long ukprn, Dictionary<string, decimal> earned)
-        {
-            var provider = Providers.Single(p => p.Ukprn == ukprn);
-
-            provider.EarnedByPeriod = earned;
         }
     }
 }

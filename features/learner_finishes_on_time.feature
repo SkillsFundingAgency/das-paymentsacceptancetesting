@@ -176,12 +176,10 @@ Feature: Provider earnings and payments where learner completes on time and is f
             | Employer   | Provider   | ULN       | priority | agreed price |
             | employer 1 | provider A | learner a | 1        | 7500         |
             | employer 1 | provider B | learner b | 2        | 15000        |
-        When an ILR file is submitted by provider A with the following data:
-            | ULN       | agreed price | learner type       | start date | planned end date | actual end date | completion status |
-            | learner a | 7500         | programme only DAS | 01/09/2017 | 08/09/2018       | 08/09/2018      | completed         |
-        And an ILR file is submitted by provider B with the following data:    
-            | ULN       | agreed price | learner type       | start date | planned end date | actual end date | completion status |
-            | learner b | 15000        | programme only DAS | 01/09/2017 | 08/09/2018       | 08/09/2018      | completed         |
+        When the providers submit the following ILR files:
+            | Provider   | ULN       | agreed price | learner type       | start date | planned end date | actual end date | completion status |
+            | provider A | learner a | 7500         | programme only DAS | 01/09/2017 | 08/09/2018       | 08/09/2018      | completed         |
+            | provider B | learner b | 15000        | programme only DAS | 01/09/2017 | 08/09/2018       | 08/09/2018      | completed         |
         Then the earnings and payments break down for provider A is as follows:
             | Type                            | 09/17 | 10/17 | 11/17 | ... | 08/18 | 09/18 | 10/18 |
             | Provider Earned Total           | 500   | 500   | 500   | ... | 500   | 1500  | 0     |
@@ -210,19 +208,21 @@ Feature: Provider earnings and payments where learner completes on time and is f
         Given the employer 1 has a levy balance of:
             | 09/17 | 10/17 | 11/17 | ... | 08/18 | 09/18 |
             | 750   | 750   | 750   | 750 | 1000  | 1000  |
-        When an ILR file is submitted by provider A with the following data:
-            | ULN       | agreed price | learner type       | start date | planned end date | actual end date | completion status |
-            | learner a | 7500         | programme only DAS | 01/09/2017 | 08/09/2018       | 08/09/2018      | completed         |
-        And an ILR file is submitted by provider B with the following data:    
-            | ULN       | agreed price | learner type       | start date | planned end date | actual end date | completion status |
-            | learner b | 15000        | programme only DAS | 01/09/2017 | 08/09/2018       | 08/09/2018      | completed         |
+        And the following commitments exist:
+            | Employer   | Provider   | ULN       | priority | agreed price |
+            | employer 1 | provider A | learner a | 1        | 7500         |
+            | employer 1 | provider B | learner b | 2        | 15000        |
+        When the providers submit the following ILR files:
+            | Provider   | ULN       | agreed price | learner type       | start date | planned end date | actual end date | completion status |
+            | provider A | learner a | 7500         | programme only DAS | 01/09/2017 | 08/09/2018       | 08/09/2018      | completed         |
+            | provider B | learner b | 15000        | programme only DAS | 01/09/2017 | 08/09/2018       | 08/09/2018      | completed         |
         Then the earnings and payments break down for provider A is as follows:
             | Type                            | 09/17 | 10/17 | 11/17 | ... | 08/18 | 09/18 | 10/18 |
             | Provider Earned Total           | 500   | 500   | 500   | ... | 500   | 1500  | 0     |
             | Provider Earned from SFA        | 500   | 500   | 500   | ... | 500   | 1450  | 0     |
             | Provider Earned from Employer 1 | 0     | 0     | 0     | ... | 0     | 50    | 0     |
             | Provider Paid by SFA            | 0     | 500   | 500   | ... | 500   | 500   | 1450  |
-            | Payment due from Employer       | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+            | Payment due from Employer 1     | 0     | 0     | 0     | ... | 0     | 0     | 50    |
             | employer 1 Levy account debited | 0     | 500   | 500   | ... | 500   | 500   | 1000  |
             | SFA Levy employer budget        | 0     | 500   | 500   | ... | 500   | 1000  | 0     |
             | SFA Levy co-funded budget       | 0     | 0     | 0     | ... | 0     | 450   | 0     |
@@ -233,7 +233,7 @@ Feature: Provider earnings and payments where learner completes on time and is f
             | Provider Earned from SFA        | 925   | 925   | 925   | ... | 950   | 2700  | 0     |
             | Provider Earned from Employer 1 | 75    | 75    | 75    | ... | 50    | 300   | 0     |
             | Provider Paid by SFA            | 0     | 925   | 925   | ... | 925   | 950   | 2700  |
-            | Payment due from Employer       | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+            | Payment due from Employer 1     | 0     | 75    | 75    | ... | 75    | 50    | 300   |
             | employer 1 Levy account debited | 0     | 250   | 250   | ... | 250   | 500   | 0     |
             | SFA Levy employer budget        | 250   | 250   | 250   | ... | 500   | 0     | 0     |
             | SFA Levy co-funded budget       | 675   | 675   | 675   | ... | 450   | 2700  | 0     |
