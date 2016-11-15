@@ -3,6 +3,8 @@ using System.Linq;
 using Dapper;
 using ProviderPayments.TestStack.Core;
 using SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities;
+using System.Collections.Generic;
+using System;
 
 namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 {
@@ -32,5 +34,115 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                 return connection.Query<PeriodisedValuesEntity>(query, new { ukprn }).ToArray();
             }
         }
+
+        internal static void SavePeriodisedValuesForUkprn(long ukprn,
+                                                            string learnRefNumber,
+                                                            Dictionary<string,decimal> periods, EnvironmentVariables environmentVariables)
+        {
+
+            using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
+            {
+                foreach (var period in periods.Keys)
+                {
+                    var periodValue = periods[period];
+                    connection.Execute("INSERT INTO [Rulebase].[AE_LearningDelivery_PeriodisedValues] " +
+                                       $"(Ukprn,LearnRefNumber,AimSeqNumber,AttributeName,{period}) " +
+                                       "VALUES " +
+                                       "(@ukprn, @learnRefNumber,1, 'ProgrammeAimBalPayment', @periodValue)",
+                        new { ukprn,learnRefNumber, periodValue });
+                }
+                }
+        
+        }
+
+
+        internal static void SaveLearningDeliveryValuesForUkprn(long ukprn, 
+                                                                long uln,
+                                                                string learnRefNumber,
+                                                                string niNumber,
+                                                                long stdCode,
+                                                                int progType,
+                                                                decimal negotiatedPrice,
+                                                                DateTime learnStartDate, 
+                                                                DateTime learnPlanEndDate,
+                                                                decimal monthlyInstallment, 
+                                                                decimal completionPayment,
+                                                                EnvironmentVariables environmentVariables)
+        {
+
+            using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
+            {
+               
+                    connection.Execute("INSERT INTO [Rulebase].[AE_LearningDelivery] " +
+                                       "(LearnRefNumber,AimSeqNumber,Ukprn,uln,NiNumber,StdCode,ProgType,NegotiatedPrice,learnStartDate,learnPlanEndDate,monthlyInstallment,monthlyInstallmentUncapped,completionPayment,completionPaymentUncapped) " +
+                                       "VALUES " +
+                                       "(@learnRefNumber, 1, @ukprn, @uln,@NiNumber,@StdCode,@ProgType,@negotiatedPrice,@LearnStartDate,@LearnPlanEndDate,@MonthlyInstallment,@MonthlyInstallment,@CompletionPayment,@CompletionPayment)",
+                        new {learnRefNumber, ukprn,@uln, niNumber,stdCode,progType, negotiatedPrice, learnStartDate,learnPlanEndDate,monthlyInstallment,completionPayment });
+                
+            }
+
+        }
+
+        internal static void SaveEarnedAmount(long ukprn,
+                                            long commitmentId,
+                                            string accountId,
+                                            string learnRefNumber,
+                                            long uln,
+                                            int aimSeqNumber,
+                                            int deliveryMonth,
+                                            int deliveryYear,
+                                            string collectionPeriodName,
+                                            int collectionPeriodMonth,
+                                            int collectionPeriodYear,
+                                            int transactionType,
+                                            decimal amountDue,
+                                            EnvironmentVariables environmentVariables)
+        {
+
+          
+
+            using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
+            {
+
+                var accountVersionId = IdentifierGenerator.GenerateIdentifier(8, false).ToString();
+                var commitmentVersionId = IdentifierGenerator.GenerateIdentifier(8, false).ToString();
+
+                connection.Execute("INSERT INTO PaymentsDue.RequiredPayments" +
+                                       "(CommitmentId,CommitmentVersionId" +
+                                       ",AccountId,AccountVersionId,uln,LearnRefNumber" +
+                                       ",AimSeqNumber,Ukprn,DeliveryMonth" +
+                                       ",DeliveryYear,CollectionPeriodName" +
+                                       ",CollectionPeriodMonth,CollectionPeriodYear" +
+                                       ",TransactionType,AmountDue) " +
+                                       "VALUES " +
+                                        "(@commitmentId,@commitmentVersionId" +
+                                       ",@accountId,@accountVersionId,@uln,@learnRefNumber" +
+                                       ",@aimSeqNumber,@ukprn,@deliveryMonth" +
+                                       ",@deliveryYear,@collectionPeriodName" +
+                                       ",@collectionPeriodMonth,@collectionPeriodYear" +
+                                       ",@transactionType,@amountDue) ", 
+                        new {
+                            commitmentId,
+                            commitmentVersionId,
+                            accountId,
+                            accountVersionId,
+                            uln,
+                            learnRefNumber,
+                            aimSeqNumber,
+                            ukprn,
+                            deliveryMonth,
+                            deliveryYear,
+                            collectionPeriodName,
+                            collectionPeriodMonth,
+                            collectionPeriodYear,
+                            transactionType,
+                            amountDue
+                        });
+
+            
+            }
+
+        }
+
     }
 }

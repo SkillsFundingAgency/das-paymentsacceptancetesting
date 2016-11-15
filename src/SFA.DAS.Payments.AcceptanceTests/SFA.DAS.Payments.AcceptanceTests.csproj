@@ -106,6 +106,7 @@
     <Compile Include="DataHelpers\Entities\PeriodisedValuesEntity.cs" />
     <Compile Include="DataHelpers\Entities\RequiredPaymentEntity.cs" />
     <Compile Include="DataHelpers\IdentifierGenerator.cs" />
+    <Compile Include="DataHelpers\LearnerDataHelper.cs" />
     <Compile Include="DataHelpers\LevyPaymentDataHelper.cs" />
     <Compile Include="DataHelpers\PaymentsDueDataHelper.cs" />
     <Compile Include="ExecutionEnvironment\EnvironmentVariablesFactory.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="Features\learner_finishes_early.feature.cs" />
     <Compile Include="Features\learner_finishes_late.feature.cs" />
     <Compile Include="Features\learner_finishes_on_time.feature.cs" />
+    <Compile Include="Features\provider_due_amount.feature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RowKeys.cs" />
     <Compile Include="SpecFlowHooks.cs" />
@@ -136,13 +138,18 @@
     <None Include="..\..\features\learner_finishes_on_time.feature">
       <Link>Features\learner_finishes_on_time.feature</Link>
     </None>
+    <None Include="..\..\features\provider_due_amount.feature">
+      <Link>Features\provider_due_amount.feature</Link>
+    </None>
     <None Include="App.config" />
     <None Include="App.Release.config">
       <DependentUpon>App.config</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
