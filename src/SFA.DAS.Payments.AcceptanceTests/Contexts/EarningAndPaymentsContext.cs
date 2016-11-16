@@ -58,6 +58,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
         {
             var provider = Providers.Single(p => p.Name == name);
 
+            AddProviderLearner(provider, learner);
+        }
+
+        public void AddProviderLearner(Provider provider, Learner learner)
+        {
             var learners = provider.Learners?.ToList() ?? new List<Learner>();
             learners.Add(learner);
 
@@ -69,6 +74,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
             var provider = Providers.Single(p => p.Ukprn == ukprn);
 
             return provider.EarnedByPeriod;
+        }
+
+        public Provider GetDefaultProvider()
+        {
+            if (Providers == null || Providers.Count() == 0)
+                throw new NullReferenceException("There are no providers set");
+
+            return Providers[0];
         }
     }
 }

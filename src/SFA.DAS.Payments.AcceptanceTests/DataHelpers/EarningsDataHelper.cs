@@ -3,6 +3,8 @@ using System.Linq;
 using Dapper;
 using ProviderPayments.TestStack.Core;
 using SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities;
+using System.Collections.Generic;
+using System;
 
 namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 {
@@ -32,5 +34,103 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                 return connection.Query<PeriodisedValuesEntity>(query, new { ukprn }).ToArray();
             }
         }
+
+        internal static void SavePeriodisedValuesForUkprn(long ukprn,
+                                                            Dictionary<string,decimal> periods,
+                                                            EnvironmentVariables environmentVariables)
+        {
+
+            using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
+            {
+                foreach (var period in periods.Keys)
+                {
+                    var periodValue = periods[period];
+                    connection.Execute("INSERT INTO [Rulebase].[AE_LearningDelivery_PeriodisedValues] " +
+                                       $"(Ukprn,LearnRefNumber,AimSeqNumber,AttributeName,{period}) " +
+                                       "VALUES " +
+                                       "(@ukprn, '1',1, 'ProgrammeAimOnProgPayment', @periodValue)",
+                        new { ukprn, periodValue });
+                }
+                }
+        
+        }
+
+
+        internal static void SaveLearningDeliveryValuesForUkprn(long ukprn, 
+                                                                long uln,
+                                                                decimal negotiatedPrice,
+                                                                DateTime learnStartDate, 
+                                                                DateTime learnPlanEndDate,
+                                                                decimal monthlyInstallment, 
+                                                                decimal completionPayment,
+                                                                EnvironmentVariables environmentVariables)
+        {
+
+            using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
+            {
+               
+                    connection.Execute("INSERT INTO [Rulebase].[AE_LearningDelivery] " +
+                                       "(LearnRefNumber,AimSeqNumber,Ukprn,uln,NiNumber,StdCode,ProgType,NegotiatedPrice,learnStartDate,learnPlanEndDate,monthlyInstallment,monthlyInstallmentUncapped,completionPayment,completionPaymentUncapped) " +
+                                       "VALUES " +
+                                       "('1', 1, @ukprn, @uln,'AB123456C',98765,25,@negotiatedPrice,@LearnStartDate,@LearnPlanEndDate,@MonthlyInstallment,@MonthlyInstallment,@CompletionPayment,@CompletionPayment)",
+                        new { ukprn,@uln, negotiatedPrice, learnStartDate,learnPlanEndDate,monthlyInstallment,completionPayment });
+                
+            }
+
+        }
+
+        internal static void SaveEarnedAmount(long ukprn,
+                                            long commitmentId,
+                                            long accountId,
+                                            long uln,
+                                            string collectionPeriodName,
+                                            int collectionPeriodMonth,
+                                            int collectionPeriodYear,
+                                            int transactionType,
+                                            decimal amountDue,
+                                            EnvironmentVariables environmentVariables)
+        {
+
+          
+
+            using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
+            {
+
+                var accountVersionId = IdentifierGenerator.GenerateIdentifier(8, false).ToString();
+                var commitmentVersionId = IdentifierGenerator.GenerateIdentifier(8, false).ToString();
+
+                connection.Execute("INSERT INTO PaymentsDue.RequiredPayments" +
+                                       "(CommitmentId,CommitmentVersionId" +
+                                       ",AccountId,AccountVersionId,uln,LearnRefNumber" +
+                                       ",AimSeqNumber,Ukprn,DeliveryMonth" +
+                                       ",DeliveryYear,CollectionPeriodName" +
+                                       ",CollectionPeriodMonth,CollectionPeriodYear" +
+                                       ",TransactionType,AmountDue) " +
+                                       "VALUES " +
+                                        "(@commitmentId,@commitmentVersionId" +
+                                       ",@accountId,@accountVersionId,@uln,'1'" +
+                                       ",1,@ukprn,@collectionPeriodMonth" +
+                                       ",@collectionPeriodYear,@collectionPeriodName" +
+                                       ",@collectionPeriodMonth,@collectionPeriodYear" +
+                                       ",@transactionType,@amountDue) ", 
+                        new {
+                            commitmentId,
+                            commitmentVersionId,
+                            accountId,
+                            accountVersionId,
+                            uln,
+                            ukprn,
+                            collectionPeriodName,
+                            collectionPeriodMonth,
+                            collectionPeriodYear,
+                            transactionType,
+                            amountDue
+                        });
+
+            
+            }
+
+        }
+
     }
 }

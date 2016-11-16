@@ -447,5 +447,147 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                 "1",
                 environmentVariables);
         }
+
+        [Given(@"a provider has previously earned (.*) in period R01")]
+        public void GivenProviderHasPreviouslyEarnedInPeriod(decimal previousAmount)
+        {
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+
+            EarningAndPaymentsContext.SetDefaultProvider();
+
+            var provider = EarningAndPaymentsContext.GetDefaultProvider();
+            
+            //setup a learner
+            var learner = new Contexts.Learner
+            {
+                Name = string.Empty,
+                Uln = long.Parse(IdentifierGenerator.GenerateIdentifier(10, false)),
+                LearningDelivery = new LearningDelivery
+                {
+                    AgreedPrice = 15000,
+                    LearnerType = LearnerType.ProgrammeOnlyDas,
+                    StartDate = new DateTime(2017, 09, 01),
+                    PlannedEndDate = new DateTime(2018, 09, 08),
+                    ActualEndDate = null,
+                    CompletionStatus = CompletionStatus.InProgress
+                }
+            };
+
+            EarningAndPaymentsContext.AddProviderLearner(provider, learner);
+           
+
+            //set a default employer
+            EarningAndPaymentsContext.ReferenceDataContext.SetDefaultEmployer(
+                                                new Dictionary<string, decimal> {
+                                                    { "All", int.MaxValue }
+                                                });
+
+            //setup committment and employer ref data
+            SetupReferenceData(environmentVariables);
+
+            //Save File Details
+            LearnerDataHelper.SaveFileDetails(provider.Ukprn,
+                                                environmentVariables);
+
+            //Save Learning Provider
+            LearnerDataHelper.SaveLearningProvider(provider.Ukprn,
+                                                    environmentVariables);
+
+            //Save the Learner
+            LearnerDataHelper.SaveLearner(provider.Ukprn,
+                                        learner.Uln,
+                                        environmentVariables);
+
+            //save Learner delivery
+            LearnerDataHelper.SaveLearningDelivery(provider.Ukprn,
+                                                    learner.LearningDelivery.StartDate,
+                                                    learner.LearningDelivery.PlannedEndDate,
+                                                    environmentVariables);
+
+            //save learning delivery FAM
+            LearnerDataHelper.SaveLearningDeliveryFAM(provider.Ukprn, environmentVariables);
+
+            //save Trailblazer
+            LearnerDataHelper.SaveTrailblazerApprenticeshipFinancialRecord(provider.Ukprn,
+                                                                            1,
+                                                                            12000,
+                                                                            environmentVariables);
+            LearnerDataHelper.SaveTrailblazerApprenticeshipFinancialRecord(provider.Ukprn,
+                                                                            2,
+                                                                            3000,
+                                                                            environmentVariables);
+
+            var committment = EarningAndPaymentsContext.ReferenceDataContext.Commitments.First();
+            var account = EarningAndPaymentsContext.ReferenceDataContext.Employers.FirstOrDefault(x => x.Name == committment.Employer);
+
+            //save the learning deliver values
+            EarningsDataHelper.SaveLearningDeliveryValuesForUkprn(provider.Ukprn,
+                                                                    learner.Uln,
+                                                                    15000,
+                                                                    new DateTime(2017, 09, 01),
+                                                                    new DateTime(2018, 09, 08),
+                                                                    1000,
+                                                                    3000,
+                                                                    environmentVariables);
+
+            //Save the previous earning
+            EarningsDataHelper.SaveEarnedAmount(provider.Ukprn,
+                                                committment.Id,
+                                                account.AccountId,
+                                                learner.Uln,
+                                                "R01",
+                                                08,
+                                                2016,
+                                                1,
+                                                previousAmount, environmentVariables);
+
+
+
+
+        }
+
+        [When(@"an earning of (.*) is calculated for period R01")]
+        public void AnEarningIsCalculatedForThePeriod(decimal earnedAmount)
+        {
+
+            // Setup reference data
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+
+            //save the periodiosed values
+            EarningsDataHelper.SavePeriodisedValuesForUkprn(EarningAndPaymentsContext.GetDefaultProvider().Ukprn,
+                                                            new Dictionary<string, decimal> { { "Period_1", earnedAmount } },
+                                                            environmentVariables);
+
+
+            // Process month end now
+            SubmitMonthEnd(new DateTime(2016, 09, 01).NextCensusDate(),
+                            environmentVariables,
+                            new ProcessService(new TestLogger()));
+        }
+
+
+        [Then(@"a payment of (.*) is due")]
+        public void ThenAPaymentIsDue(decimal dueAmount)
+        {
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+
+            //Get the due amount 
+            var earning = PaymentsDueDataHelper.GetPaymentsDueForPeriod(EarningAndPaymentsContext.GetDefaultProvider().Ukprn,
+                                                                        2016,
+                                                                        08,
+                                                                        environmentVariables)
+                                                                        .FirstOrDefault();
+
+            if (dueAmount != 0)
+            {
+                Assert.IsNotNull(earning, $"Expected earning for the period but nothing found");
+                Assert.AreEqual(dueAmount, earning.AmountDue, $"Expected earning of {dueAmount} for period R02 but found {earning.AmountDue}");
+            }
+            else
+            {
+                Assert.IsNull(earning, $"There was no expected earning for the period but earnigs data found");
+
+            }
+        }
     }
 }
