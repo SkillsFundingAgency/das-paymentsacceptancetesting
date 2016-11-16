@@ -1,36 +1,74 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using SFA.DAS.Payments.AcceptanceTests.DataHelpers;
 
 namespace SFA.DAS.Payments.AcceptanceTests.Contexts
 {
     public class EarningAndPaymentsContext
     {
+        public ReferenceDataContext ReferenceDataContext { get; set; }
+        public Provider[] Providers { get; private set; }
 
         public EarningAndPaymentsContext(ReferenceDataContext referenceDataContext)
         {
             ReferenceDataContext = referenceDataContext;
         }
 
-        public ReferenceDataContext ReferenceDataContext { get; set; }
-        public DateTime IlrStartDate
+        public void AddProvider(string name)
         {
-            get { return Learners.Min(l => l.LearningDelivery.StartDate); }
-        }
-        public DateTime IlrEndDate
-        {
-            get
-            {
-                var maxActualEndDate = Learners.Max(l => l.LearningDelivery.ActualEndDate) ?? DateTime.MinValue;
-                var maxEndDate = Learners.Max(l => l.LearningDelivery.PlannedEndDate);
+            var providers = Providers?.ToList() ?? new List<Provider>();
 
-                return maxActualEndDate > maxEndDate
-                    ? maxActualEndDate
-                    : maxEndDate;
+            if (providers.Any(p => p.Name == name))
+            {
+                return;
             }
+
+            providers.Add(new Provider
+            {
+                Name = name,
+                Ukprn = long.Parse(IdentifierGenerator.GenerateIdentifier(8, false))
+            });
+
+            Providers = providers.ToArray();
         }
-        public Learner[] Learners { get; set; }
-        public Dictionary<string, decimal> EarnedByPeriod { get; set; }
-        public long Ukprn { get; set; }
+
+        public void SetDefaultProvider()
+        {
+            var provider = new Provider
+            {
+                Name = "provider",
+                Ukprn = long.Parse(IdentifierGenerator.GenerateIdentifier(8, false))
+            };
+
+            Providers = new[] { provider };
+        }
+
+        public DateTime GetIlrStartDate()
+        {
+            return Providers.Min(p => p.IlrStartDate);
+        }
+
+        public DateTime GetIlrEndDate()
+        {
+            return Providers.Max(p => p.IlrEndDate);
+        }
+
+        public void AddProviderLearner(string name, Learner learner)
+        {
+            var provider = Providers.Single(p => p.Name == name);
+
+            var learners = provider.Learners?.ToList() ?? new List<Learner>();
+            learners.Add(learner);
+
+            provider.Learners = learners.ToArray();
+        }
+
+        public Dictionary<string, decimal> GetProviderEarnedByPeriod(long ukprn)
+        {
+            var provider = Providers.Single(p => p.Ukprn == ukprn);
+
+            return provider.EarnedByPeriod;
+        }
     }
 }
