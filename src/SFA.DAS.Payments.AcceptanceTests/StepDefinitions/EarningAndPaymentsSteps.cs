@@ -168,13 +168,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                             !table.Header.Contains("actual end date") ||
                             string.IsNullOrWhiteSpace(table.Rows[rowIndex]["actual end date"])
                                 ? null
-                                : (DateTime?) DateTime.Parse(table.Rows[rowIndex]["actual end date"]),
+                                : (DateTime?)DateTime.Parse(table.Rows[rowIndex]["actual end date"]),
                         CompletionStatus =
                             IlrTranslator.TranslateCompletionStatus(table.Rows[rowIndex]["completion status"])
                     }
                 };
 
-                var provider = table.ContainsColumn("Provider") 
+                var provider = table.ContainsColumn("Provider")
                     ? table.Rows[rowIndex]["Provider"]
                     : "provider";
 
@@ -341,7 +341,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 
             var levyPaymentDate = periodDate.AddMonths(-1);
 
-            var levyPayments = LevyPaymentDataHelper.GetAccountLevyPaymentsForPeriod(ukprn, accountId, 
+            var levyPayments = LevyPaymentDataHelper.GetAccountLevyPaymentsForPeriod(ukprn, accountId,
                 levyPaymentDate.Year, levyPaymentDate.Month, environmentVariables)
                                ?? new LevyPaymentEntity[0];
 
@@ -456,7 +456,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             EarningAndPaymentsContext.SetDefaultProvider();
 
             var provider = EarningAndPaymentsContext.GetDefaultProvider();
-            
+
             //setup a learner
             var learner = new Contexts.Learner
             {
@@ -474,7 +474,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             };
 
             EarningAndPaymentsContext.AddProviderLearner(provider, learner);
-           
+
 
             //set a default employer
             EarningAndPaymentsContext.ReferenceDataContext.SetDefaultEmployer(
@@ -589,5 +589,17 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 
             }
         }
+
+        #region Payment Type Breakdown 
+
+        [Given(@"the account has a balance of (*.)")]
+        public void GivenTheAccountHasABalance(decimal balance)
+        {
+
+        }
+
+
+
+        #endregion
     }
 }

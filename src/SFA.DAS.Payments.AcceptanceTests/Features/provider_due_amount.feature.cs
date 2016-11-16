@@ -83,6 +83,30 @@ testRunner.Then(string.Format("a payment of {0} is due", dueAmount), ((string)(n
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Payment type breakdown")]
+        [NUnit.Framework.TestCaseAttribute("99999", "1000", "1000", "0", "0", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("500", "1000", "500", "450", "50", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("0", "1000", "0", "900", "100", new string[0])]
+        public virtual void PaymentTypeBreakdown(string balance, string dueAmount, string levyAmount, string governmentAmount, string employerAmount, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Payment type breakdown", exampleTags);
+#line 17
+this.ScenarioSetup(scenarioInfo);
+#line 18
+testRunner.Given(string.Format("the account has a balance of {0}", balance), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 19
+testRunner.When(string.Format("payment of {0} is due", dueAmount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 20
+testRunner.Then(string.Format("a levy payment of {0} is made", levyAmount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 21
+testRunner.And(string.Format("a government payment of {0} is made", governmentAmount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 22
+testRunner.And(string.Format("a employer payment of{0} is expected", employerAmount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
