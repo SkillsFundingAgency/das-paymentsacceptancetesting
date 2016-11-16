@@ -448,8 +448,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                 environmentVariables);
         }
 
-        [Given(@"Provider has previously earned (.*) in the period")]
-        public void GivenProviderHasPreviouslyEarnedInPeriod(decimal previousEarning)
+        [Given(@"a provider has previously earned (.*) in period R01")]
+        public void GivenProviderHasPreviouslyEarnedInPeriod(decimal previousAmount)
         {
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
@@ -539,14 +539,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                                                 08,
                                                 2016,
                                                 1,
-                                                previousEarning, environmentVariables);
+                                                previousAmount, environmentVariables);
 
 
 
 
         }
 
-        [When(@"an earning of (.*) is calculated for the period")]
+        [When(@"an earning of (.*) is calculated for period R01")]
         public void AnEarningIsCalculatedForThePeriod(decimal earnedAmount)
         {
 

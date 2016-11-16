@@ -64,69 +64,22 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Provider has no previous earnings")]
-        public virtual void ProviderHasNoPreviousEarnings()
+        [NUnit.Framework.DescriptionAttribute("Calculating payments due")]
+        [NUnit.Framework.TestCaseAttribute("0", "1000", "1000", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("500", "1000", "500", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("1000", "1000", "0", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("0", "0", "0", new string[0])]
+        public virtual void CalculatingPaymentsDue(string previousAmount, string earnedAmount, string dueAmount, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Provider has no previous earnings", ((string[])(null)));
-#line 3
-    this.ScenarioSetup(scenarioInfo);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calculating payments due", exampleTags);
 #line 4
-        testRunner.Given("Provider has previously earned 0 in the period", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 5
-        testRunner.When("an earning of 1000 is calculated for the period", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.Given(string.Format("a provider has previously earned {0} in period R01", previousAmount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 6
-        testRunner.Then("a payment of 1000 is due", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Provider has previously earned more than  0")]
-        public virtual void ProviderHasPreviouslyEarnedMoreThan0()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Provider has previously earned more than  0", ((string[])(null)));
-#line 8
- this.ScenarioSetup(scenarioInfo);
-#line 9
-        testRunner.Given("Provider has previously earned 500 in the period", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 10
-        testRunner.When("an earning of 1000 is calculated for the period", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 11
-        testRunner.Then("a payment of 500 is due", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Provider has earned same amount as amount due")]
-        public virtual void ProviderHasEarnedSameAmountAsAmountDue()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Provider has earned same amount as amount due", ((string[])(null)));
-#line 13
- this.ScenarioSetup(scenarioInfo);
-#line 14
-        testRunner.Given("Provider has previously earned 1000 in the period", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 15
-        testRunner.When("an earning of 1000 is calculated for the period", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 16
-        testRunner.Then("a payment of 0 is due", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Provider has not earned any amount and none is due")]
-        public virtual void ProviderHasNotEarnedAnyAmountAndNoneIsDue()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Provider has not earned any amount and none is due", ((string[])(null)));
-#line 18
- this.ScenarioSetup(scenarioInfo);
-#line 19
-        testRunner.Given("Provider has previously earned 0 in the period", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 20
-        testRunner.When("an earning of 0 is calculated for the period", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 21
-        testRunner.Then("a payment of 0 is due", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.When(string.Format("an earning of {0} is calculated for period R01", earnedAmount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 7
+testRunner.Then(string.Format("a payment of {0} is due", dueAmount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
