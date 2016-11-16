@@ -81,10 +81,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Provider has previously earned > 0")]
-        public virtual void ProviderHasPreviouslyEarned0()
+        [NUnit.Framework.DescriptionAttribute("Provider has previously earned more than  0")]
+        public virtual void ProviderHasPreviouslyEarnedMoreThan0()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Provider has previously earned > 0", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Provider has previously earned more than  0", ((string[])(null)));
 #line 8
  this.ScenarioSetup(scenarioInfo);
 #line 9

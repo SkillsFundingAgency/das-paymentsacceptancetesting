@@ -14,7 +14,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
     {
         internal static void SaveLearner(long ukprn, 
                                         long uln, 
-                                        string learnRefNumber, 
                                         EnvironmentVariables environmentVariables)
         {
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
@@ -22,16 +21,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 
                 connection.Execute("INSERT INTO [Valid].[Learner]" +
                 "([UKPRN],[LearnRefNumber],[ULN],[Ethnicity],[Sex],[LLDDHealthProb])" +
-                "VALUES (@ukprn,@learnRefNumber,@uln,98,'M',2)",
-                    new { ukprn, learnRefNumber, uln});
+                "VALUES (@ukprn,'1',@uln,98,'M',2)",
+                    new { ukprn, uln});
 
             }
 
         }
 
         internal static void SaveLearningDelivery(long ukprn, 
-                                                string learnRefNumber,
-                                                int progType, 
                                                 DateTime learnStartDate,
                                                 DateTime learnPlanEndDate, 
                                                 EnvironmentVariables environmentVariables)
@@ -42,8 +39,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                 connection.Execute("INSERT INTO [Valid].[LearningDelivery]" + 
                 "  ([UKPRN],[LearnRefNumber],[LearnAimRef],[AimType],[AimSeqNumber],[LearnStartDate],[LearnPlanEndDate]," +
                 "[FundModel],[ProgType],[StdCode])" +
-                " VALUES (@ukprn,@learnRefNumber,'ZPROG001',1,1,@learnStartDate,@learnPlanEndDate,36,@progType,@stdCode)",
-                    new { ukprn, learnRefNumber, learnStartDate,learnPlanEndDate,progType, stdCode = IlrBuilder.Defaults.StandardCode });
+                " VALUES (@ukprn,'1','ZPROG001',1,1,@learnStartDate,@learnPlanEndDate,36,25,98765)",
+                    new { ukprn,  learnStartDate,learnPlanEndDate });
 
             }
 
@@ -51,9 +48,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
         }
 
         internal static void SaveLearningDeliveryFAM(long ukprn,
-                                               string learnRefNumber,
-                                               string famType,
-                                               int famCode,
                                                EnvironmentVariables environmentVariables)
         {
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
@@ -61,16 +55,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 
                 connection.Execute("INSERT INTO [Valid].[LearningDeliveryFAM]" +
                             " ([UKPRN],[LearnRefNumber],[AimSeqNumber],[LearnDelFAMType],[LearnDelFAMCode])" +
-                " VALUES (@ukprn,@learnRefNumber,1,@famType,@famCode)",
-                    new { ukprn, learnRefNumber, famType,famCode});
+                " VALUES (@ukprn,'1',1,'ACT',1)",
+                    new { ukprn});
 
             }
         }
 
 
         internal static void SaveTrailblazerApprenticeshipFinancialRecord(long ukprn,
-                                                                   string learnRefNumber,
-                                                                   string tbFinType,
                                                                    int tbFinCode,
                                                                    decimal tbFinAmount,
                                                                    EnvironmentVariables environmentVariables)
@@ -80,8 +72,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 
                 connection.Execute("INSERT INTO [Valid].[TrailblazerApprenticeshipFinancialRecord]" +
                             " ([UKPRN],[LearnRefNumber],[AimSeqNumber],[TBFinType],[TBFinCode],[TBFinAmount])" +
-                " VALUES (@ukprn,@learnRefNumber,1,@tbFinType,@tbFinCode,@tbFinAmount)",
-                    new { ukprn, learnRefNumber, tbFinType,tbFinCode,tbFinAmount});
+                " VALUES (@ukprn,'1',1,'TNP',@tbFinCode,@tbFinAmount)",
+                    new { ukprn,tbFinCode,tbFinAmount});
 
             }
         }

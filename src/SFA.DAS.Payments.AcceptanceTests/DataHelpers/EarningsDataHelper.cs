@@ -36,8 +36,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
         }
 
         internal static void SavePeriodisedValuesForUkprn(long ukprn,
-                                                            string learnRefNumber,
-                                                            Dictionary<string,decimal> periods, EnvironmentVariables environmentVariables)
+                                                            Dictionary<string,decimal> periods,
+                                                            EnvironmentVariables environmentVariables)
         {
 
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
@@ -48,8 +48,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                     connection.Execute("INSERT INTO [Rulebase].[AE_LearningDelivery_PeriodisedValues] " +
                                        $"(Ukprn,LearnRefNumber,AimSeqNumber,AttributeName,{period}) " +
                                        "VALUES " +
-                                       "(@ukprn, @learnRefNumber,1, 'ProgrammeAimBalPayment', @periodValue)",
-                        new { ukprn,learnRefNumber, periodValue });
+                                       "(@ukprn, '1',1, 'ProgrammeAimOnProgPayment', @periodValue)",
+                        new { ukprn, periodValue });
                 }
                 }
         
@@ -58,10 +58,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 
         internal static void SaveLearningDeliveryValuesForUkprn(long ukprn, 
                                                                 long uln,
-                                                                string learnRefNumber,
-                                                                string niNumber,
-                                                                long stdCode,
-                                                                int progType,
                                                                 decimal negotiatedPrice,
                                                                 DateTime learnStartDate, 
                                                                 DateTime learnPlanEndDate,
@@ -76,8 +72,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                     connection.Execute("INSERT INTO [Rulebase].[AE_LearningDelivery] " +
                                        "(LearnRefNumber,AimSeqNumber,Ukprn,uln,NiNumber,StdCode,ProgType,NegotiatedPrice,learnStartDate,learnPlanEndDate,monthlyInstallment,monthlyInstallmentUncapped,completionPayment,completionPaymentUncapped) " +
                                        "VALUES " +
-                                       "(@learnRefNumber, 1, @ukprn, @uln,@NiNumber,@StdCode,@ProgType,@negotiatedPrice,@LearnStartDate,@LearnPlanEndDate,@MonthlyInstallment,@MonthlyInstallment,@CompletionPayment,@CompletionPayment)",
-                        new {learnRefNumber, ukprn,@uln, niNumber,stdCode,progType, negotiatedPrice, learnStartDate,learnPlanEndDate,monthlyInstallment,completionPayment });
+                                       "('1', 1, @ukprn, @uln,'AB123456C',98765,25,@negotiatedPrice,@LearnStartDate,@LearnPlanEndDate,@MonthlyInstallment,@MonthlyInstallment,@CompletionPayment,@CompletionPayment)",
+                        new { ukprn,@uln, negotiatedPrice, learnStartDate,learnPlanEndDate,monthlyInstallment,completionPayment });
                 
             }
 
@@ -85,12 +81,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 
         internal static void SaveEarnedAmount(long ukprn,
                                             long commitmentId,
-                                            string accountId,
-                                            string learnRefNumber,
+                                            long accountId,
                                             long uln,
-                                            int aimSeqNumber,
-                                            int deliveryMonth,
-                                            int deliveryYear,
                                             string collectionPeriodName,
                                             int collectionPeriodMonth,
                                             int collectionPeriodYear,
@@ -116,9 +108,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                                        ",TransactionType,AmountDue) " +
                                        "VALUES " +
                                         "(@commitmentId,@commitmentVersionId" +
-                                       ",@accountId,@accountVersionId,@uln,@learnRefNumber" +
-                                       ",@aimSeqNumber,@ukprn,@deliveryMonth" +
-                                       ",@deliveryYear,@collectionPeriodName" +
+                                       ",@accountId,@accountVersionId,@uln,'1'" +
+                                       ",1,@ukprn,@collectionPeriodMonth" +
+                                       ",@collectionPeriodYear,@collectionPeriodName" +
                                        ",@collectionPeriodMonth,@collectionPeriodYear" +
                                        ",@transactionType,@amountDue) ", 
                         new {
@@ -127,11 +119,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                             accountId,
                             accountVersionId,
                             uln,
-                            learnRefNumber,
-                            aimSeqNumber,
                             ukprn,
-                            deliveryMonth,
-                            deliveryYear,
                             collectionPeriodName,
                             collectionPeriodMonth,
                             collectionPeriodYear,

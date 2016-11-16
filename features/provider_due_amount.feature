@@ -5,7 +5,7 @@ Feature: Amount due is calculated based on previously earned amount
         When an earning of 1000 is calculated for the period 
         Then a payment of 1000 is due
           
-	Scenario: Provider has previously earned > 0 
+	Scenario: Provider has previously earned more than  0 
         Given Provider has previously earned 500 in the period 
         When an earning of 1000 is calculated for the period
         Then a payment of 500 is due
