@@ -357,11 +357,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                 return;
             }
 
-            var cofinancePayments = CoFinancePaymentsDataHelper.GetCoInvestedPaymentsForPeriod(ukprn,
+            var cofinancePayments = CoFinancePaymentsDataHelper.GetCoInvestedGovernmentPaymentsForPeriod(ukprn,
                 periodDate.Year, periodDate.Month, environmentVariables)
                                     ?? new CoFinancePaymentEntity[0];
 
-            var actualGovtPayment = cofinancePayments.Where(p => p.FundingSource == 2).Sum(p => p.Amount);
+            var actualGovtPayment = cofinancePayments.Sum(p => p.Amount);
             var expectedGovtPayment = decimal.Parse(govtCofundRow[colIndex]);
             Assert.AreEqual(expectedGovtPayment, actualGovtPayment, $"Expected a government co-finance payment of {expectedGovtPayment} but made a payment of {actualGovtPayment} for {periodName}");
         }
@@ -599,11 +599,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
             //Get the due amount 
-            var governmentDueEntity = CoFinancePaymentsDataHelper.GetCoInvestedPaymentsForPeriod(EarningAndPaymentsContext.GetDefaultProvider().Ukprn,
+            var governmentDueEntity = CoFinancePaymentsDataHelper.GetCoInvestedGovernmentPaymentsForPeriod(EarningAndPaymentsContext.GetDefaultProvider().Ukprn,
                                                                         2016,
                                                                         08,
                                                                         environmentVariables)
-                                                                        .Where(x => x.FundingSource == 2)
                                                                         .FirstOrDefault();
 
             if (governmentAmount != 0)
@@ -624,21 +623,20 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
             //Get the due amount 
-            var employerPaymentEntity = CoFinancePaymentsDataHelper.GetCoInvestedPaymentsForPeriod(EarningAndPaymentsContext.GetDefaultProvider().Ukprn,
+            var employerPaymentEntity = CoFinancePaymentsDataHelper.GetCoInvestedEmployerPaymentsForPeriod(EarningAndPaymentsContext.GetDefaultProvider().Ukprn,
                                                                         2016,
                                                                         08,
                                                                         environmentVariables)
-                                                                        .Where(x => x.FundingSource == 3)
-                                                                        .FirstOrDefault();
+                                                                       .FirstOrDefault();
 
             if (employerAmount != 0)
             {
-                Assert.IsNotNull(employerPaymentEntity, $"Expected Levy earning for the period but nothing found");
-                Assert.AreEqual(employerAmount, employerPaymentEntity.Amount, $"Expected earning of {employerAmount} for period R01 but found {employerPaymentEntity.Amount}");
+                Assert.IsNotNull(employerPaymentEntity, $"Expected employer amount for the period but nothing found");
+                Assert.AreEqual(employerAmount, employerPaymentEntity.Amount, $"Expected employer amount of {employerAmount} for period R01 but found {employerPaymentEntity.Amount}");
             }
             else
             {
-                Assert.IsNull(employerPaymentEntity, $"There was no expected levy amount for the period but levy amount data found");
+                Assert.IsNull(employerPaymentEntity, $"There was no expected employer amount for the period but employer amount data found");
 
             }
         }

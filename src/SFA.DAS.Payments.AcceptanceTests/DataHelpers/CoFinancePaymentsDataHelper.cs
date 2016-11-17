@@ -3,18 +3,21 @@ using System.Linq;
 using Dapper;
 using ProviderPayments.TestStack.Core;
 using SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities;
+using SFA.DAS.Payments.AcceptanceTests.Contexts;
 
 namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 {
     internal static class CoFinancePaymentsDataHelper
     {
-        internal static CoFinancePaymentEntity[] GetCoInvestedPaymentsForPeriod(long ukprn, int year, int month, EnvironmentVariables environmentVariables)
+
+        internal static CoFinancePaymentEntity[] GetCoInvestedGovernmentPaymentsForPeriod(long ukprn, int year, int month, EnvironmentVariables environmentVariables)
         {
-            using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
-            {
-                var query = "SELECT * FROM Payments.Payments WHERE UKPRN = @ukprn AND CollectionPeriodMonth = @month AND CollectionPeriodYear = @year AND FundingSource IN (2, 3)";
-                return connection.Query<CoFinancePaymentEntity>(query, new { ukprn, month, year }).ToArray();
-            }
+            return GetCoInvestedPaymentsForPeriod(ukprn, year, month, FundingSource.CoInvestedSfa, environmentVariables);
+        }
+
+        internal static CoFinancePaymentEntity[] GetCoInvestedEmployerPaymentsForPeriod(long ukprn, int year, int month, EnvironmentVariables environmentVariables)
+        {
+            return GetCoInvestedPaymentsForPeriod(ukprn, year, month, FundingSource.CoInvestedEmployer, environmentVariables);
         }
 
         internal static CoFinancePaymentEntity[] GetAccountCoInvestedPaymentsForPeriod(long ukprn, long accountId, int year, int month, EnvironmentVariables environmentVariables)
@@ -31,5 +34,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                 return connection.Query<CoFinancePaymentEntity>(query, new { ukprn, month, year, accountId }).ToArray();
             }
         }
+
+        private static CoFinancePaymentEntity[] GetCoInvestedPaymentsForPeriod(long ukprn, int year, int month, FundingSource fundingSource, EnvironmentVariables environmentVariables)
+        {
+            using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
+            {
+                var query = "SELECT * FROM Payments.Payments WHERE UKPRN = @ukprn AND CollectionPeriodMonth = @month AND CollectionPeriodYear = @year AND FundingSource = @fundingSource";
+                return connection.Query<CoFinancePaymentEntity>(query, new { ukprn, month, year, fundingSource }).ToArray();
+            }
+        }
+
     }
 }
