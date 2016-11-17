@@ -19,7 +19,7 @@ Given the account has a balance of <balance>
 When payment of <due amount> is due
 Then a levy payment of <levy amount> is made
 And a government payment of <government amount> is made
-And a employer payment of<employer amount> is expected
+And a employer payment of <employer amount> is expected
 Examples:
 | balance | due amount | levy amount | government amount | employer amount |
 | 99999   | 1000       | 1000        | 0                 | 0               |

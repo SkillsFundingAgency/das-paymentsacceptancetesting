@@ -103,7 +103,7 @@ testRunner.Then(string.Format("a levy payment of {0} is made", levyAmount), ((st
 #line 21
 testRunner.And(string.Format("a government payment of {0} is made", governmentAmount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 22
-testRunner.And(string.Format("a employer payment of{0} is expected", employerAmount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And(string.Format("a employer payment of {0} is expected", employerAmount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

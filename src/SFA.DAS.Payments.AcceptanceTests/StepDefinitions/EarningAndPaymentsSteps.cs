@@ -456,22 +456,201 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             EarningAndPaymentsContext.SetDefaultProvider();
 
             var provider = EarningAndPaymentsContext.GetDefaultProvider();
+            var learner = EarningAndPaymentsContext.CreateLearner(15000);
+            
+            SetupEarningsData(provider, learner);
 
-            //setup a learner
-            var learner = new Contexts.Learner
+            
+            var committment = EarningAndPaymentsContext.ReferenceDataContext.Commitments.First();
+            var account = EarningAndPaymentsContext.ReferenceDataContext.Employers.FirstOrDefault(x => x.Name == committment.Employer);
+
+
+            //Save the previous earning
+            EarningsDataHelper.SaveEarnedAmount(provider.Ukprn,
+                                                committment.Id,
+                                                account.AccountId,
+                                                learner.Uln,
+                                                "R01",
+                                                08,
+                                                2016,
+                                                1,
+                                                previousAmount, environmentVariables);
+
+        }
+
+        [When(@"an earning of (.*) is calculated for period R01")]
+        public void AnEarningIsCalculatedForThePeriod(decimal earnedAmount)
+        {
+
+            // Setup reference data
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+
+            //save the periodiosed values
+            EarningsDataHelper.SavePeriodisedValuesForUkprn(EarningAndPaymentsContext.GetDefaultProvider().Ukprn,
+                                                            new Dictionary<string, decimal> { { "Period_1", earnedAmount } },
+                                                            environmentVariables);
+
+
+            // Process month end now
+            SubmitMonthEnd(new DateTime(2016, 09, 01).NextCensusDate(),
+                            environmentVariables,
+                            new ProcessService(new TestLogger()));
+        }
+
+
+        [Then(@"a payment of (.*) is due")]
+        public void ThenAPaymentIsDue(decimal dueAmount)
+        {
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+
+            //Get the due amount 
+            var earning = PaymentsDueDataHelper.GetPaymentsDueForPeriod(EarningAndPaymentsContext.GetDefaultProvider().Ukprn,
+                                                                        2016,
+                                                                        08,
+                                                                        environmentVariables)
+                                                                        .FirstOrDefault();
+
+            if (dueAmount != 0)
             {
-                Name = string.Empty,
-                Uln = long.Parse(IdentifierGenerator.GenerateIdentifier(10, false)),
-                LearningDelivery = new LearningDelivery
-                {
-                    AgreedPrice = 15000,
-                    LearnerType = LearnerType.ProgrammeOnlyDas,
-                    StartDate = new DateTime(2017, 09, 01),
-                    PlannedEndDate = new DateTime(2018, 09, 08),
-                    ActualEndDate = null,
-                    CompletionStatus = CompletionStatus.InProgress
-                }
-            };
+                Assert.IsNotNull(earning, $"Expected earning for the period but nothing found");
+                Assert.AreEqual(dueAmount, earning.AmountDue, $"Expected earning of {dueAmount} for period R01 but found {earning.AmountDue}");
+            }
+            else
+            {
+                Assert.IsNull(earning, $"There was no expected earning for the period but earnigs data found");
+
+            }
+        }
+
+        #region Payment Type Breakdown 
+
+        [Given(@"the account has a balance of (.*)")]
+        public void GivenTheAccountHasABalance(decimal balance)
+        {
+            // Setup reference data
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+
+            EarningAndPaymentsContext.SetDefaultProvider();
+
+            var provider = EarningAndPaymentsContext.GetDefaultProvider();
+            var learner = EarningAndPaymentsContext.CreateLearner(15000);
+
+
+            //setup the data for learnig delivery,learner and earnings
+            SetupEarningsData(provider, learner);
+
+            var committment = EarningAndPaymentsContext.ReferenceDataContext.Commitments.First();
+            var account = EarningAndPaymentsContext.ReferenceDataContext.Employers.FirstOrDefault(x => x.Name == committment.Employer);
+
+
+            //Update the balance to the value passed in
+            AccountDataHelper.UpdateAccountBalance(account.AccountId, balance, environmentVariables);
+
+        }
+
+
+        [When(@"payment of (.*) is due")]
+        public void WhenAPaymentIsDue(decimal dueAmount)
+        {
+
+            // Setup reference data
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+
+            //save the periodiosed values
+            EarningsDataHelper.SavePeriodisedValuesForUkprn(EarningAndPaymentsContext.GetDefaultProvider().Ukprn,
+                                                            new Dictionary<string, decimal> { { "Period_1", dueAmount } },
+                                                            environmentVariables);
+
+
+            // Process month end now
+            SubmitMonthEnd(new DateTime(2016, 09, 01).NextCensusDate(),
+                            environmentVariables,
+                            new ProcessService(new TestLogger()));
+        }
+
+
+        [Then(@"a levy payment of (.*) is made")]
+        public void ThenALevyPaymentIsMade(decimal levyAmount)
+        {
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+
+            //Get the due amount 
+            var levyEntity = LevyPaymentDataHelper.GetLevyPaymentsForPeriod(EarningAndPaymentsContext.GetDefaultProvider().Ukprn,
+                                                                        2016,
+                                                                        08,
+                                                                        environmentVariables)
+                                                                        .FirstOrDefault();
+
+            if (levyAmount != 0)
+            {
+                Assert.IsNotNull(levyEntity, $"Expected Levy earning for the period but nothing found");
+                Assert.AreEqual(levyAmount, levyEntity.Amount, $"Expected earning of {levyAmount} for period R01 but found {levyEntity.Amount}");
+            }
+            else
+            {
+                Assert.IsNull(levyEntity, $"There was no expected levy amount for the period but levy amount data found");
+
+            }
+        }
+
+        [Then(@"a government payment of (.*) is made")]
+        public void ThenAGovernmentPaymentIsMade(decimal governmentAmount)
+        {
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+
+            //Get the due amount 
+            var governmentDueEntity = CoFinancePaymentsDataHelper.GetCoInvestedPaymentsForPeriod(EarningAndPaymentsContext.GetDefaultProvider().Ukprn,
+                                                                        2016,
+                                                                        08,
+                                                                        environmentVariables)
+                                                                        .Where(x => x.FundingSource == 2)
+                                                                        .FirstOrDefault();
+
+            if (governmentAmount != 0)
+            {
+                Assert.IsNotNull(governmentDueEntity, $"Expected goverment due for the period but nothing found");
+                Assert.AreEqual(governmentAmount, governmentDueEntity.Amount, $"Expected government payment of {governmentAmount} for period R01 but found {governmentDueEntity.Amount}");
+            }
+            else
+            {
+                Assert.IsNull(governmentDueEntity, $"There was no expected goverment due amount for the period but data was found");
+
+            }
+        }
+
+        [Then(@"a employer payment of (.*) is expected")]
+        public void ThenAEmployerAmountIsExpected(decimal employerAmount)
+        {
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+
+            //Get the due amount 
+            var employerPaymentEntity = CoFinancePaymentsDataHelper.GetCoInvestedPaymentsForPeriod(EarningAndPaymentsContext.GetDefaultProvider().Ukprn,
+                                                                        2016,
+                                                                        08,
+                                                                        environmentVariables)
+                                                                        .Where(x => x.FundingSource == 3)
+                                                                        .FirstOrDefault();
+
+            if (employerAmount != 0)
+            {
+                Assert.IsNotNull(employerPaymentEntity, $"Expected Levy earning for the period but nothing found");
+                Assert.AreEqual(employerAmount, employerPaymentEntity.Amount, $"Expected earning of {employerAmount} for period R01 but found {employerPaymentEntity.Amount}");
+            }
+            else
+            {
+                Assert.IsNull(employerPaymentEntity, $"There was no expected levy amount for the period but levy amount data found");
+
+            }
+        }
+
+
+
+        #endregion
+
+        #region Helpers
+        private void SetupEarningsData(Provider provider, Contexts.Learner learner)
+        {
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
             EarningAndPaymentsContext.AddProviderLearner(provider, learner);
 
@@ -516,11 +695,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                                                                             2,
                                                                             3000,
                                                                             environmentVariables);
-
-            var committment = EarningAndPaymentsContext.ReferenceDataContext.Commitments.First();
-            var account = EarningAndPaymentsContext.ReferenceDataContext.Employers.FirstOrDefault(x => x.Name == committment.Employer);
-
-            //save the learning deliver values
+             //save the learning deliver values
             EarningsDataHelper.SaveLearningDeliveryValuesForUkprn(provider.Ukprn,
                                                                     learner.Uln,
                                                                     15000,
@@ -529,77 +704,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                                                                     1000,
                                                                     3000,
                                                                     environmentVariables);
-
-            //Save the previous earning
-            EarningsDataHelper.SaveEarnedAmount(provider.Ukprn,
-                                                committment.Id,
-                                                account.AccountId,
-                                                learner.Uln,
-                                                "R01",
-                                                08,
-                                                2016,
-                                                1,
-                                                previousAmount, environmentVariables);
-
-
-
-
-        }
-
-        [When(@"an earning of (.*) is calculated for period R01")]
-        public void AnEarningIsCalculatedForThePeriod(decimal earnedAmount)
-        {
-
-            // Setup reference data
-            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
-
-            //save the periodiosed values
-            EarningsDataHelper.SavePeriodisedValuesForUkprn(EarningAndPaymentsContext.GetDefaultProvider().Ukprn,
-                                                            new Dictionary<string, decimal> { { "Period_1", earnedAmount } },
-                                                            environmentVariables);
-
-
-            // Process month end now
-            SubmitMonthEnd(new DateTime(2016, 09, 01).NextCensusDate(),
-                            environmentVariables,
-                            new ProcessService(new TestLogger()));
-        }
-
-
-        [Then(@"a payment of (.*) is due")]
-        public void ThenAPaymentIsDue(decimal dueAmount)
-        {
-            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
-
-            //Get the due amount 
-            var earning = PaymentsDueDataHelper.GetPaymentsDueForPeriod(EarningAndPaymentsContext.GetDefaultProvider().Ukprn,
-                                                                        2016,
-                                                                        08,
-                                                                        environmentVariables)
-                                                                        .FirstOrDefault();
-
-            if (dueAmount != 0)
-            {
-                Assert.IsNotNull(earning, $"Expected earning for the period but nothing found");
-                Assert.AreEqual(dueAmount, earning.AmountDue, $"Expected earning of {dueAmount} for period R02 but found {earning.AmountDue}");
-            }
-            else
-            {
-                Assert.IsNull(earning, $"There was no expected earning for the period but earnigs data found");
-
-            }
-        }
-
-        #region Payment Type Breakdown 
-
-        [Given(@"the account has a balance of (*.)")]
-        public void GivenTheAccountHasABalance(decimal balance)
-        {
-
-        }
-
-
-
+        } 
         #endregion
     }
 }

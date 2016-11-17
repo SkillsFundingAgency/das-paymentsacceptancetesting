@@ -83,5 +83,25 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
 
             return Providers[0];
         }
+
+        public Learner CreateLearner(decimal agreedPrice)
+        {
+            var learner = new Contexts.Learner
+            {
+                Name = string.Empty,
+                Uln = long.Parse(IdentifierGenerator.GenerateIdentifier(10, false)),
+                LearningDelivery = new LearningDelivery
+                {
+                    AgreedPrice = agreedPrice,
+                    LearnerType = LearnerType.ProgrammeOnlyDas,
+                    StartDate = new DateTime(2017, 09, 01),
+                    PlannedEndDate = new DateTime(2018, 09, 08),
+                    ActualEndDate = null,
+                    CompletionStatus = CompletionStatus.InProgress
+                }
+            };
+
+            return learner;
+        }
     }
 }
