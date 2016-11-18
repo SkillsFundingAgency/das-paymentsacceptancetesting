@@ -87,16 +87,18 @@
     <Compile Include="Builders\IlrLearnersBuilder.cs" />
     <Compile Include="Builders\IlrLearningDeliveryBuilder.cs" />
     <Compile Include="Builders\IlrSubmissionDefaults.cs" />
-    <Compile Include="Contexts\Commitment.cs" />
-    <Compile Include="DataHelpers\Entities\PaymentEntity.cs" />
+    <Compile Include="Entities\Commitment.cs" />
+    <Compile Include="Entities\Employer.cs" />
+    <Compile Include="Entities\Learner.cs" />
+    <Compile Include="Entities\LearningDelivery.cs" />
+    <Compile Include="Entities\PaymentEntity.cs" />
+    <Compile Include="Entities\PeriodisedValuesEntity.cs" />
+    <Compile Include="Entities\Provider.cs" />
+    <Compile Include="Entities\RequiredPaymentEntity.cs" />
     <Compile Include="Enums\CompletionStatus.cs" />
     <Compile Include="Contexts\EarningAndPaymentsContext.cs" />
-    <Compile Include="Contexts\Employer.cs" />
     <Compile Include="Enums\FundingSource.cs" />
-    <Compile Include="Contexts\Learner.cs" />
-    <Compile Include="Contexts\LearningDelivery.cs" />
     <Compile Include="Enums\LearnerType.cs" />
-    <Compile Include="Contexts\Provider.cs" />
     <Compile Include="Contexts\ReferenceDataContext.cs" />
     <Compile Include="Enums\TransactionType.cs" />
     <Compile Include="DataHelpers\AcceptanceTestDataHelper.cs" />
@@ -104,8 +106,6 @@
     <Compile Include="DataHelpers\PaymentsDataHelper.cs" />
     <Compile Include="DataHelpers\CommitmentDataHelper.cs" />
     <Compile Include="DataHelpers\EarningsDataHelper.cs" />
-    <Compile Include="DataHelpers\Entities\PeriodisedValuesEntity.cs" />
-    <Compile Include="DataHelpers\Entities\RequiredPaymentEntity.cs" />
     <Compile Include="DataHelpers\IdentifierGenerator.cs" />
     <Compile Include="DataHelpers\LearnerDataHelper.cs" />
     <Compile Include="DataHelpers\PaymentsDueDataHelper.cs" />
@@ -141,7 +141,9 @@
     <None Include="..\..\features\provider_due_amount.feature">
       <Link>Features\provider_due_amount.feature</Link>
     </None>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="App.Release.config">
       <DependentUpon>App.config</DependentUpon>
     </None>

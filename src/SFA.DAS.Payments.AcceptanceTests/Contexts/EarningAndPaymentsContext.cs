@@ -7,6 +7,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
 {
     public class EarningAndPaymentsContext
     {
+
         public ReferenceDataContext ReferenceDataContext { get; set; }
         public Provider[] Providers { get; private set; }
 
