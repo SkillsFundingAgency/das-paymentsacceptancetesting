@@ -107,6 +107,29 @@ testRunner.And(string.Format("the provider is due {0} from the employer", paymen
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Earnings distribution")]
+        [NUnit.Framework.TestCaseAttribute("15000", "12", "1000", "3000", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("15000", "6", "2000", "3000", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("7500", "12", "500", "1500", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("7500", "6", "1000", "1500", new string[0])]
+        public virtual void EarningsDistribution(string agreedPrice, string censusMonths, string monthlyEarnings, string completionPayment, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Earnings distribution", exampleTags);
+#line 30
+this.ScenarioSetup(scenarioInfo);
+#line 31
+testRunner.When(string.Format("the planned course duration covers {0} months", censusMonths), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 32
+testRunner.And(string.Format("an agreed price of {0}", agreedPrice), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 33
+testRunner.Then(string.Format("the monthly earnings is {0}", monthlyEarnings), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 34
+testRunner.And(string.Format("the completion payment is {0}", completionPayment), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

@@ -87,6 +87,7 @@
     <Compile Include="Builders\IlrLearnersBuilder.cs" />
     <Compile Include="Builders\IlrLearningDeliveryBuilder.cs" />
     <Compile Include="Builders\IlrSubmissionDefaults.cs" />
+    <Compile Include="Entities\AE_LearningDelivery.cs" />
     <Compile Include="Entities\Commitment.cs" />
     <Compile Include="Entities\Employer.cs" />
     <Compile Include="Entities\Learner.cs" />

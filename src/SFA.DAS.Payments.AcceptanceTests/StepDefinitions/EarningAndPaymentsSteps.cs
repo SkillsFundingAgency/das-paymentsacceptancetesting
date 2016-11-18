@@ -456,7 +456,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             EarningAndPaymentsContext.SetDefaultProvider();
 
             var provider = EarningAndPaymentsContext.GetDefaultProvider();
-            var learner = EarningAndPaymentsContext.CreateLearner(15000);
+            var learner = EarningAndPaymentsContext.CreateLearner(15000, new DateTime(2017, 08, 01), new DateTime(2018, 07, 01));
             
             SetupEarningsData(provider, learner);
 
@@ -528,7 +528,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             EarningAndPaymentsContext.SetDefaultProvider();
 
             var provider = EarningAndPaymentsContext.GetDefaultProvider();
-            var learner = EarningAndPaymentsContext.CreateLearner(15000);
+            var learner = EarningAndPaymentsContext.CreateLearner(15000, new DateTime(2017, 08, 01), new DateTime(2018, 07, 01));
 
 
             //setup the data for learnig delivery,learner and earnings
@@ -637,6 +637,92 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
         }
 
 
+
+        #endregion
+
+        #region Earnings Distribution
+
+        [When(@"the planned course duration covers (.*) months")]
+        public void WhenThePlannedCourseDurationCoversMonths(int months)
+        {
+            ScenarioContext.Current.Add("months", months);
+        }
+
+        [When(@"an agreed price of (.*)")]
+        public void WhenAnAgreedPriceOf(decimal agreedPrice)
+        {
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+            //get months value
+            var months = ScenarioContext.Current.Get<int>("months");
+
+            EarningAndPaymentsContext.SetDefaultProvider();
+
+            var provider = EarningAndPaymentsContext.GetDefaultProvider();
+
+            var startDate = new DateTime(2017, 08, 01);
+            var learner = EarningAndPaymentsContext.CreateLearner(agreedPrice, startDate, startDate.AddMonths(months));
+
+            // Store spec values in context
+            EarningAndPaymentsContext.AddProviderLearner(provider, learner);
+
+
+            //set a default employer
+            EarningAndPaymentsContext.ReferenceDataContext.SetDefaultEmployer(
+                                                new Dictionary<string, decimal> {
+                                                    { "All", int.MaxValue }
+                                                });
+
+            // Setup reference data
+            SetupReferenceData(environmentVariables);
+
+            // Process months
+            var ilrStartDate = startDate.NextCensusDate();
+         
+            SubmitIlr(provider.Ukprn, provider.Learners,
+                ilrStartDate.GetAcademicYear(),
+                ilrStartDate.NextCensusDate(),
+                environmentVariables,
+                new ProcessService(new TestLogger()),
+                provider.EarnedByPeriod);
+        }
+
+        [Then(@"the monthly earnings is (.*)")]
+        public void ThenTheMonthlyEarningsIs(decimal monthlyEarnings)
+        {
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+
+            var learner = EarningAndPaymentsContext.GetDefaultProvider().Learners.FirstOrDefault();
+            var output = LearnerDataHelper.GetAELearningDelivery(EarningAndPaymentsContext.GetDefaultProvider().Ukprn,
+                                                                learner.Uln,
+                                                                learner.LearningDelivery.StartDate,
+                                                                learner.LearningDelivery.PlannedEndDate,
+                                                                environmentVariables);
+
+           
+            Assert.IsNotNull(output, $"Expected AE Learning Delivery but nothing found");
+            Assert.AreEqual(monthlyEarnings, output.MonthlyInstallment, $"Expected monthly installment of {monthlyEarnings} but found {output.MonthlyInstallment}");
+          
+
+        }
+
+        [Then(@"the completion payment is (.*)")]
+        public void ThenTheCompletionPaymentIs(decimal completionPayment)
+        {
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+
+            var learner = EarningAndPaymentsContext.GetDefaultProvider().Learners.FirstOrDefault();
+            var output = LearnerDataHelper.GetAELearningDelivery(EarningAndPaymentsContext.GetDefaultProvider().Ukprn,
+                                                                learner.Uln,
+                                                                learner.LearningDelivery.StartDate,
+                                                                learner.LearningDelivery.PlannedEndDate,
+                                                                environmentVariables);
+
+
+            Assert.IsNotNull(output, $"Expected AE Learning Delivery but nothing found");
+            Assert.AreEqual(completionPayment, output.CompletionPayment, $"Expected completion payment of {completionPayment} but found {output.CompletionPayment}");
+
+
+        }
 
         #endregion
 

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using SFA.DAS.Payments.AcceptanceTests.Builders;
+using SFA.DAS.Payments.AcceptanceTests.Entities;
 
 namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 {
@@ -102,6 +103,19 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                 " VALUES (@ukprn,@fileName,getDate(),1)",
                     new { ukprn,fileName });
 
+            }
+        }
+
+        internal static AE_LearningDelivery GetAELearningDelivery(long ukprn,
+                                                                long uln,
+                                                                 DateTime learnStartDate,
+                                                                DateTime learnPlanEndDate,
+                                                                EnvironmentVariables environmentVariables)
+        {
+            using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
+            {
+                var query = "SELECT * FROM [Rulebase].[AE_LearningDelivery] WHERE UKPRN = @ukprn AND ULN = @uln AND LearnStartDate= @learnStartDate AND LearnPlanEndDate =@learnPlanEndDate ";
+                return connection.QuerySingleOrDefault<AE_LearningDelivery>(query, new { ukprn, uln, learnStartDate,learnPlanEndDate});
             }
         }
     }
