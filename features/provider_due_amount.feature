@@ -13,17 +13,15 @@ Examples:
 | 0               | 0             | 0          |
 
 
-
 Scenario Outline: Payment type breakdown
-Given the account has a balance of <balance>
-When payment of <due amount> is due
-Then a levy payment of <levy amount> is made
-And a government payment of <government amount> is made
-And a employer payment of <employer amount> is expected
+Given an employer levy balance of <employer levy balance>
+When a payment of <due amount> is due
+Then the employer levy account is debited by <levy account debit>
+And the provider is paid <paid by SFA> by the SFA
+And the provider is due <payment due from employer> from the employer
+
 Examples:
-| balance | due amount | levy amount | government amount | employer amount |
-| 99999   | 1000       | 1000        | 0                 | 0               |
-| 500     | 1000       | 500         | 450               | 50              |
-| 0       | 1000       | 0           | 900               | 100             |
-
-
+| employer levy balance | due amount | levy account debit | paid by SFA | payment due from employer |
+| 99999                 | 1000       | 1000               | 0           | 0                         |
+| 500                   | 1000       | 500                | 450         | 50                        |
+| 0                     | 1000       | 0                  | 900         | 100                       |

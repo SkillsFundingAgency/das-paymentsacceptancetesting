@@ -89,21 +89,21 @@ testRunner.Then(string.Format("a payment of {0} is due", dueAmount), ((string)(n
         [NUnit.Framework.TestCaseAttribute("99999", "1000", "1000", "0", "0", new string[0])]
         [NUnit.Framework.TestCaseAttribute("500", "1000", "500", "450", "50", new string[0])]
         [NUnit.Framework.TestCaseAttribute("0", "1000", "0", "900", "100", new string[0])]
-        public virtual void PaymentTypeBreakdown(string balance, string dueAmount, string levyAmount, string governmentAmount, string employerAmount, string[] exampleTags)
+        public virtual void PaymentTypeBreakdown(string employerLevyBalance, string dueAmount, string levyAccountDebit, string paidBySFA, string paymentDueFromEmployer, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Payment type breakdown", exampleTags);
-#line 17
+#line 16
 this.ScenarioSetup(scenarioInfo);
+#line 17
+testRunner.Given(string.Format("an employer levy balance of {0}", employerLevyBalance), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 18
-testRunner.Given(string.Format("the account has a balance of {0}", balance), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.When(string.Format("a payment of {0} is due", dueAmount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 19
-testRunner.When(string.Format("payment of {0} is due", dueAmount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.Then(string.Format("the employer levy account is debited by {0}", levyAccountDebit), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 20
-testRunner.Then(string.Format("a levy payment of {0} is made", levyAmount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And(string.Format("the provider is paid {0} by the SFA", paidBySFA), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 21
-testRunner.And(string.Format("a government payment of {0} is made", governmentAmount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 22
-testRunner.And(string.Format("a employer payment of {0} is expected", employerAmount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And(string.Format("the provider is due {0} from the employer", paymentDueFromEmployer), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

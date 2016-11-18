@@ -88,6 +88,7 @@
     <Compile Include="Builders\IlrLearningDeliveryBuilder.cs" />
     <Compile Include="Builders\IlrSubmissionDefaults.cs" />
     <Compile Include="Contexts\Commitment.cs" />
+    <Compile Include="DataHelpers\Entities\PaymentEntity.cs" />
     <Compile Include="Enums\CompletionStatus.cs" />
     <Compile Include="Contexts\EarningAndPaymentsContext.cs" />
     <Compile Include="Contexts\Employer.cs" />
@@ -100,16 +101,13 @@
     <Compile Include="Enums\TransactionType.cs" />
     <Compile Include="DataHelpers\AcceptanceTestDataHelper.cs" />
     <Compile Include="DataHelpers\AccountDataHelper.cs" />
-    <Compile Include="DataHelpers\CoFinancePaymentsDataHelper.cs" />
+    <Compile Include="DataHelpers\PaymentsDataHelper.cs" />
     <Compile Include="DataHelpers\CommitmentDataHelper.cs" />
     <Compile Include="DataHelpers\EarningsDataHelper.cs" />
-    <Compile Include="DataHelpers\Entities\CoFinancePaymentEntity.cs" />
-    <Compile Include="DataHelpers\Entities\LevyPaymentEntity.cs" />
     <Compile Include="DataHelpers\Entities\PeriodisedValuesEntity.cs" />
     <Compile Include="DataHelpers\Entities\RequiredPaymentEntity.cs" />
     <Compile Include="DataHelpers\IdentifierGenerator.cs" />
     <Compile Include="DataHelpers\LearnerDataHelper.cs" />
-    <Compile Include="DataHelpers\LevyPaymentDataHelper.cs" />
     <Compile Include="DataHelpers\PaymentsDueDataHelper.cs" />
     <Compile Include="ExecutionEnvironment\EnvironmentVariablesFactory.cs" />
     <Compile Include="ExecutionEnvironment\TestStatusWatcher.cs" />

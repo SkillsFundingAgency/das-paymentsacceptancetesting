@@ -341,9 +341,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 
             var levyPaymentDate = periodDate.AddMonths(-1);
 
-            var levyPayments = LevyPaymentDataHelper.GetAccountLevyPaymentsForPeriod(ukprn, accountId,
-                levyPaymentDate.Year, levyPaymentDate.Month, environmentVariables)
-                               ?? new LevyPaymentEntity[0];
+            var levyPayments = PaymentsDataHelper.GetAccountPaymentsForPeriod(ukprn, accountId,
+                levyPaymentDate.Year, levyPaymentDate.Month,FundingSource.Levy, environmentVariables)
+                               ?? new PaymentEntity[0];
 
             var actualLevyPayment = levyPayments.Length == 0 ? 0m : levyPayments.Sum(p => p.Amount);
             var expectedLevyPayment = decimal.Parse(levyPaidRow[colIndex]);
@@ -357,9 +357,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                 return;
             }
 
-            var cofinancePayments = CoFinancePaymentsDataHelper.GetCoInvestedGovernmentPaymentsForPeriod(ukprn,
-                periodDate.Year, periodDate.Month, environmentVariables)
-                                    ?? new CoFinancePaymentEntity[0];
+            var cofinancePayments = PaymentsDataHelper.GetPaymentsForPeriod(ukprn,
+                periodDate.Year, periodDate.Month,FundingSource.CoInvestedSfa, environmentVariables)
+                                    ?? new PaymentEntity[0];
 
             var actualGovtPayment = cofinancePayments.Sum(p => p.Amount);
             var expectedGovtPayment = decimal.Parse(govtCofundRow[colIndex]);
@@ -375,11 +375,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 
             var employerPaymentDate = periodDate.AddMonths(-1);
 
-            var cofinancePayments = CoFinancePaymentsDataHelper.GetAccountCoInvestedPaymentsForPeriod(ukprn, accountId,
-                employerPaymentDate.Year, employerPaymentDate.Month, environmentVariables)
-                                    ?? new CoFinancePaymentEntity[0];
+            var cofinancePayments = PaymentsDataHelper.GetAccountPaymentsForPeriod(ukprn, accountId,
+                employerPaymentDate.Year, employerPaymentDate.Month,FundingSource.CoInvestedEmployer, environmentVariables)
+                                    ?? new PaymentEntity[0];
 
-            var actualEmployerPayment = cofinancePayments.Where(p => p.FundingSource == 3).Sum(p => p.Amount);
+            var actualEmployerPayment = cofinancePayments.Sum(p => p.Amount);
             var expectedEmployerPayment = decimal.Parse(employerCofundRow[colIndex]);
             Assert.AreEqual(expectedEmployerPayment, actualEmployerPayment, $"Expected a employer co-finance payment of {expectedEmployerPayment} but made a payment of {actualEmployerPayment} for {periodName}");
         }
@@ -490,13 +490,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                                                             new Dictionary<string, decimal> { { "Period_1", earnedAmount } },
                                                             environmentVariables);
 
-
-            // Process month end now
-            SubmitMonthEnd(new DateTime(2016, 09, 01).NextCensusDate(),
-                            environmentVariables,
-                            new ProcessService(new TestLogger()));
+            RunMonthEnd(new DateTime(2016, 09, 01));
         }
-
 
         [Then(@"a payment of (.*) is due")]
         public void ThenAPaymentIsDue(decimal dueAmount)
@@ -506,7 +501,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             //Get the due amount 
             var earning = PaymentsDueDataHelper.GetPaymentsDueForPeriod(EarningAndPaymentsContext.GetDefaultProvider().Ukprn,
                                                                         2016,
-                                                                        08,
+                                                                        09,
                                                                         environmentVariables)
                                                                         .FirstOrDefault();
 
@@ -524,8 +519,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 
         #region Payment Type Breakdown 
 
-        [Given(@"the account has a balance of (.*)")]
-        public void GivenTheAccountHasABalance(decimal balance)
+        [Given(@"an employer levy balance of (.*)")]
+        public void GivenTheAccountHasABalance(decimal employerLevyBalance)
         {
             // Setup reference data
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
@@ -544,12 +539,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 
 
             //Update the balance to the value passed in
-            AccountDataHelper.UpdateAccountBalance(account.AccountId, balance, environmentVariables);
+            AccountDataHelper.UpdateAccountBalance(account.AccountId, employerLevyBalance, environmentVariables);
 
         }
 
 
-        [When(@"payment of (.*) is due")]
+        [When(@"a payment of (.*) is due")]
         public void WhenAPaymentIsDue(decimal dueAmount)
         {
 
@@ -562,29 +557,27 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                                                             environmentVariables);
 
 
-            // Process month end now
-            SubmitMonthEnd(new DateTime(2016, 09, 01).NextCensusDate(),
-                            environmentVariables,
-                            new ProcessService(new TestLogger()));
+            RunMonthEnd(new DateTime(2016, 09, 01));
         }
 
 
-        [Then(@"a levy payment of (.*) is made")]
-        public void ThenALevyPaymentIsMade(decimal levyAmount)
+        [Then(@"the employer levy account is debited by (.*)")]
+        public void ThenALevyPaymentIsMade(decimal levyAccountDebit)
         {
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
             //Get the due amount 
-            var levyEntity = LevyPaymentDataHelper.GetLevyPaymentsForPeriod(EarningAndPaymentsContext.GetDefaultProvider().Ukprn,
+            var levyEntity = PaymentsDataHelper.GetPaymentsForPeriod(EarningAndPaymentsContext.GetDefaultProvider().Ukprn,
                                                                         2016,
-                                                                        08,
+                                                                        09,
+                                                                        FundingSource.Levy,
                                                                         environmentVariables)
                                                                         .FirstOrDefault();
 
-            if (levyAmount != 0)
+            if (levyAccountDebit != 0)
             {
                 Assert.IsNotNull(levyEntity, $"Expected Levy earning for the period but nothing found");
-                Assert.AreEqual(levyAmount, levyEntity.Amount, $"Expected earning of {levyAmount} for period R01 but found {levyEntity.Amount}");
+                Assert.AreEqual(levyAccountDebit, levyEntity.Amount, $"Expected earning of {levyAccountDebit} for period R01 but found {levyEntity.Amount}");
             }
             else
             {
@@ -593,22 +586,23 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             }
         }
 
-        [Then(@"a government payment of (.*) is made")]
-        public void ThenAGovernmentPaymentIsMade(decimal governmentAmount)
+        [Then(@"the provider is paid (.*) by the SFA")]
+        public void ThenAGovernmentPaymentIsMade(decimal paidBySFA)
         {
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
             //Get the due amount 
-            var governmentDueEntity = CoFinancePaymentsDataHelper.GetCoInvestedGovernmentPaymentsForPeriod(EarningAndPaymentsContext.GetDefaultProvider().Ukprn,
+            var governmentDueEntity = PaymentsDataHelper.GetPaymentsForPeriod(EarningAndPaymentsContext.GetDefaultProvider().Ukprn,
                                                                         2016,
-                                                                        08,
+                                                                        09,
+                                                                        FundingSource.CoInvestedSfa,
                                                                         environmentVariables)
                                                                         .FirstOrDefault();
 
-            if (governmentAmount != 0)
+            if (paidBySFA != 0)
             {
                 Assert.IsNotNull(governmentDueEntity, $"Expected goverment due for the period but nothing found");
-                Assert.AreEqual(governmentAmount, governmentDueEntity.Amount, $"Expected government payment of {governmentAmount} for period R01 but found {governmentDueEntity.Amount}");
+                Assert.AreEqual(paidBySFA, governmentDueEntity.Amount, $"Expected government payment of {paidBySFA} for period R01 but found {governmentDueEntity.Amount}");
             }
             else
             {
@@ -617,22 +611,23 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             }
         }
 
-        [Then(@"a employer payment of (.*) is expected")]
-        public void ThenAEmployerAmountIsExpected(decimal employerAmount)
+        [Then(@"the provider is due (.*) from the employer")]
+        public void ThenAEmployerAmountIsExpected(decimal paymentDueFromEmployer)
         {
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
             //Get the due amount 
-            var employerPaymentEntity = CoFinancePaymentsDataHelper.GetCoInvestedEmployerPaymentsForPeriod(EarningAndPaymentsContext.GetDefaultProvider().Ukprn,
+            var employerPaymentEntity = PaymentsDataHelper.GetPaymentsForPeriod(EarningAndPaymentsContext.GetDefaultProvider().Ukprn,
                                                                         2016,
-                                                                        08,
+                                                                        09,
+                                                                        FundingSource.CoInvestedEmployer,
                                                                         environmentVariables)
                                                                        .FirstOrDefault();
 
-            if (employerAmount != 0)
+            if (paymentDueFromEmployer != 0)
             {
                 Assert.IsNotNull(employerPaymentEntity, $"Expected employer amount for the period but nothing found");
-                Assert.AreEqual(employerAmount, employerPaymentEntity.Amount, $"Expected employer amount of {employerAmount} for period R01 but found {employerPaymentEntity.Amount}");
+                Assert.AreEqual(paymentDueFromEmployer, employerPaymentEntity.Amount, $"Expected employer amount of {paymentDueFromEmployer} for period R01 but found {employerPaymentEntity.Amount}");
             }
             else
             {
@@ -646,6 +641,24 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
         #endregion
 
         #region Helpers
+
+        private void RunMonthEnd(DateTime date)
+        {
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+
+            var periodDate = new DateTime(2016, 09, 20);
+            var academicYear = date.GetAcademicYear();
+            var periodId = 1;
+
+            SetupEnvironmentVariablesForMonth(date, academicYear, environmentVariables, ref periodId);
+
+
+            // Process month end now
+            SubmitMonthEnd(new DateTime(2016, 09, 20).NextCensusDate(),
+                            environmentVariables,
+                            new ProcessService(new TestLogger()));
+        
+         }
         private void SetupEarningsData(Provider provider, Contexts.Learner learner)
         {
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
