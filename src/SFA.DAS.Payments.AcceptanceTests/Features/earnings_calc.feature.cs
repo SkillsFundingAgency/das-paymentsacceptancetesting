@@ -24,7 +24,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "provider_due_amount.feature"
+#line 1 "earnings_calc.feature"
 #line hidden
         
         [NUnit.Framework.TestFixtureSetUpAttribute()]
@@ -85,30 +85,6 @@ testRunner.Then(string.Format("a payment of {0} is due", dueAmount), ((string)(n
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Payment type breakdown")]
-        [NUnit.Framework.TestCaseAttribute("99999", "1000", "1000", "0", "0", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("500", "1000", "500", "450", "50", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("0", "1000", "0", "900", "100", new string[0])]
-        public virtual void PaymentTypeBreakdown(string employerLevyBalance, string dueAmount, string levyAccountDebit, string paidBySFA, string paymentDueFromEmployer, string[] exampleTags)
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Payment type breakdown", exampleTags);
-#line 16
-this.ScenarioSetup(scenarioInfo);
-#line 17
-testRunner.Given(string.Format("an employer levy balance of {0}", employerLevyBalance), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 18
-testRunner.When(string.Format("a payment of {0} is due", dueAmount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 19
-testRunner.Then(string.Format("the employer levy account is debited by {0}", levyAccountDebit), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 20
-testRunner.And(string.Format("the provider is paid {0} by the SFA", paidBySFA), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 21
-testRunner.And(string.Format("the provider is due {0} from the employer", paymentDueFromEmployer), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Earnings distribution")]
         [NUnit.Framework.TestCaseAttribute("15000", "12", "1000", "3000", new string[0])]
         [NUnit.Framework.TestCaseAttribute("15000", "6", "2000", "3000", new string[0])]
@@ -117,15 +93,15 @@ testRunner.And(string.Format("the provider is due {0} from the employer", paymen
         public virtual void EarningsDistribution(string agreedPrice, string censusMonths, string monthlyEarnings, string completionPayment, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Earnings distribution", exampleTags);
-#line 30
+#line 15
 this.ScenarioSetup(scenarioInfo);
-#line 31
+#line 16
 testRunner.When(string.Format("the planned course duration covers {0} months", censusMonths), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 32
+#line 17
 testRunner.And(string.Format("an agreed price of {0}", agreedPrice), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 33
+#line 18
 testRunner.Then(string.Format("the monthly earnings is {0}", monthlyEarnings), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 34
+#line 19
 testRunner.And(string.Format("the completion payment is {0}", completionPayment), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

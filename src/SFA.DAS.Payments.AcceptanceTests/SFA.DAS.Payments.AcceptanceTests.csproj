@@ -113,23 +113,27 @@
     <Compile Include="ExecutionEnvironment\EnvironmentVariablesFactory.cs" />
     <Compile Include="ExecutionEnvironment\TestStatusWatcher.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Features\earnings_calc.feature.cs" />
     <Compile Include="Features\ILR_is_submitted_late.feature.cs" />
     <Compile Include="Features\learner_finishes_early.feature.cs" />
     <Compile Include="Features\learner_finishes_late.feature.cs" />
     <Compile Include="Features\learner_finishes_on_time.feature.cs" />
-    <Compile Include="Features\provider_due_amount.feature.cs" />
+    <Compile Include="Features\payments_calc.feature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RowKeys.cs" />
     <Compile Include="SpecFlowHooks.cs" />
     <Compile Include="StepDefinitions\Base\BaseCalculationSteps.cs" />
-    <Compile Include="StepDefinitions\EarningAndPaymentsSteps.cs" />
-    <Compile Include="StepDefinitions\EarningStepDefinitions.cs" />
-    <Compile Include="StepDefinitions\PaymentStepDefinitions.cs" />
-    <Compile Include="StepDefinitions\ReferenceDataSteps.cs" />
+    <Compile Include="StepDefinitions\Integration\EarningAndPaymentsSteps.cs" />
+    <Compile Include="StepDefinitions\Intermediate\EarningStepDefinitions.cs" />
+    <Compile Include="StepDefinitions\Intermediate\PaymentStepDefinitions.cs" />
+    <Compile Include="StepDefinitions\Base\ReferenceDataSteps.cs" />
     <Compile Include="ExecutionEnvironment\TestLogger.cs" />
     <Compile Include="Translators\IlrTranslator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\features\earnings_calc.feature">
+      <Link>Features\earnings_calc.feature</Link>
+    </None>
     <None Include="..\..\features\ILR_is_submitted_late.feature">
       <Link>Features\ILR_is_submitted_late.feature</Link>
     </None>
@@ -142,8 +146,8 @@
     <None Include="..\..\features\learner_finishes_on_time.feature">
       <Link>Features\learner_finishes_on_time.feature</Link>
     </None>
-    <None Include="..\..\features\provider_due_amount.feature">
-      <Link>Features\provider_due_amount.feature</Link>
+    <None Include="..\..\features\payments_calc.feature">
+      <Link>Features\payments_calc.feature</Link>
     </None>
     <None Include="App.config">
       <SubType>Designer</SubType>
