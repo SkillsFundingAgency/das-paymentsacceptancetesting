@@ -12,9 +12,9 @@ using TechTalk.SpecFlow;
 namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 {
     [Binding]
-    public class PaymentStepDefinitions : BaseCalculationSteps
+    public class PaymentStepDefinitions : BaseStepDefinitions
     {
-        public PaymentStepDefinitions(EarningAndPaymentsContext earningAndPaymentsContext)
+        public PaymentStepDefinitions(StepDefinitionsContext earningAndPaymentsContext)
             : base(earningAndPaymentsContext)
         { }
             #region Payment Type Breakdown 
@@ -25,17 +25,17 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             // Setup reference data
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
-            EarningAndPaymentsContext.SetDefaultProvider();
+            StepDefinitionsContext.SetDefaultProvider();
 
-            var provider = EarningAndPaymentsContext.GetDefaultProvider();
-            var learner = EarningAndPaymentsContext.CreateLearner(15000, new DateTime(2017, 08, 01), new DateTime(2018, 07, 01));
+            var provider = StepDefinitionsContext.GetDefaultProvider();
+            var learner = StepDefinitionsContext.CreateLearner(15000, new DateTime(2017, 08, 01), new DateTime(2018, 07, 01));
 
 
             //setup the data for learnig delivery,learner and earnings
             SetupEarningsData(provider, learner);
 
-            var committment = EarningAndPaymentsContext.ReferenceDataContext.Commitments.First();
-            var account = EarningAndPaymentsContext.ReferenceDataContext.Employers.FirstOrDefault(x => x.Name == committment.Employer);
+            var committment = StepDefinitionsContext.ReferenceDataContext.Commitments.First();
+            var account = StepDefinitionsContext.ReferenceDataContext.Employers.FirstOrDefault(x => x.Name == committment.Employer);
 
 
             //Update the balance to the value passed in
@@ -52,7 +52,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
             //save the periodiosed values
-            EarningsDataHelper.SavePeriodisedValuesForUkprn(EarningAndPaymentsContext.GetDefaultProvider().Ukprn,
+            EarningsDataHelper.SavePeriodisedValuesForUkprn(StepDefinitionsContext.GetDefaultProvider().Ukprn,
                                                             new Dictionary<string, decimal> { { "Period_1", dueAmount } },
                                                             environmentVariables);
 
@@ -67,7 +67,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
             //Get the due amount 
-            var levyEntity = PaymentsDataHelper.GetPaymentsForPeriod(EarningAndPaymentsContext.GetDefaultProvider().Ukprn,
+            var levyEntity = PaymentsDataHelper.GetPaymentsForPeriod(StepDefinitionsContext.GetDefaultProvider().Ukprn,
                                                                         2016,
                                                                         09,
                                                                         FundingSource.Levy,
@@ -92,7 +92,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
             //Get the due amount 
-            var governmentDueEntity = PaymentsDataHelper.GetPaymentsForPeriod(EarningAndPaymentsContext.GetDefaultProvider().Ukprn,
+            var governmentDueEntity = PaymentsDataHelper.GetPaymentsForPeriod(StepDefinitionsContext.GetDefaultProvider().Ukprn,
                                                                         2016,
                                                                         09,
                                                                         FundingSource.CoInvestedSfa,
@@ -117,7 +117,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
             //Get the due amount 
-            var employerPaymentEntity = PaymentsDataHelper.GetPaymentsForPeriod(EarningAndPaymentsContext.GetDefaultProvider().Ukprn,
+            var employerPaymentEntity = PaymentsDataHelper.GetPaymentsForPeriod(StepDefinitionsContext.GetDefaultProvider().Ukprn,
                                                                         2016,
                                                                         09,
                                                                         FundingSource.CoInvestedEmployer,

@@ -13,23 +13,25 @@ using System.Text;
 using System.Threading.Tasks;
 using IlrBuilder = SFA.DAS.Payments.AcceptanceTests.Builders.IlrBuilder;
 using LearningDelivery = SFA.DAS.Payments.AcceptanceTests.Contexts.LearningDelivery;
+using TechTalk.SpecFlow;
+using SFA.DAS.Payments.AcceptanceTests.Translators;
 
 namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 {
-    public class BaseCalculationSteps
+    public class BaseStepDefinitions
 
     {
 
         #region Properties
-        protected EarningAndPaymentsContext EarningAndPaymentsContext { get; set; }
+        protected StepDefinitionsContext StepDefinitionsContext { get; set; }
         protected EnvironmentVariables EnvironmentVariables { get; set; }
 
         #endregion
 
         #region Constructor
-        public BaseCalculationSteps(EarningAndPaymentsContext earningAndPaymentsContext)
+        public BaseStepDefinitions(StepDefinitionsContext stepDefinitionsContext)
         {
-            EarningAndPaymentsContext = earningAndPaymentsContext;
+            StepDefinitionsContext = stepDefinitionsContext;
             EnvironmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
         }
@@ -37,14 +39,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 
         protected void SetupReferenceData()
         {
-            foreach (var employer in EarningAndPaymentsContext.ReferenceDataContext.Employers)
+            foreach (var employer in StepDefinitionsContext.ReferenceDataContext.Employers)
             {
                 AccountDataHelper.CreateAccount(employer.AccountId, employer.AccountId.ToString(), 0.00m, EnvironmentVariables);
             }
 
             AccountDataHelper.UpdateAudit(EnvironmentVariables);
 
-            foreach (var provider in EarningAndPaymentsContext.Providers)
+            foreach (var provider in StepDefinitionsContext.Providers)
             {
                 foreach (var learner in provider.Learners)
                 {
@@ -61,14 +63,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             var commitmentPriority = 1;
             var accountId = long.Parse(IdentifierGenerator.GenerateIdentifier(8, false));
 
-            var commitment = EarningAndPaymentsContext.ReferenceDataContext.Commitments?.SingleOrDefault(c => c.Learner == learner.Name);
+            var commitment = StepDefinitionsContext.ReferenceDataContext.Commitments?.SingleOrDefault(c => c.Learner == learner.Name);
 
             if (commitment != null)
             {
                 commitmentId = commitment.Id;
                 commitmentPriority = commitment.Priority;
 
-                var employer = EarningAndPaymentsContext.ReferenceDataContext.Employers?.SingleOrDefault(e => e.Name == commitment.Employer);
+                var employer = StepDefinitionsContext.ReferenceDataContext.Employers?.SingleOrDefault(e => e.Name == commitment.Employer);
 
                 if (employer != null)
                 {
@@ -101,7 +103,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 
         protected void UpdateAccountsBalances(string month)
         {
-            foreach (var employer in EarningAndPaymentsContext.ReferenceDataContext.Employers)
+            foreach (var employer in StepDefinitionsContext.ReferenceDataContext.Employers)
             {
                 AccountDataHelper.UpdateAccountBalance(employer.AccountId, employer.GetBalanceForMonth(month), EnvironmentVariables);
             }
@@ -124,11 +126,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
         }
         protected void SetupEarningsData(Provider provider, Contexts.Learner learner)
         {
-            EarningAndPaymentsContext.AddProviderLearner(provider, learner);
+            StepDefinitionsContext.AddProviderLearner(provider, learner);
 
 
             //set a default employer
-            EarningAndPaymentsContext.ReferenceDataContext.SetDefaultEmployer(
+            StepDefinitionsContext.ReferenceDataContext.SetDefaultEmployer(
                                                 new Dictionary<string, decimal> {
                                                     { "All", int.MaxValue }
                                                 });
@@ -233,6 +235,54 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             earnedByPeriod.AddOrUpdate("05/" + academicYear.Substring(2), periodEarnings.Period_10);
             earnedByPeriod.AddOrUpdate("06/" + academicYear.Substring(2), periodEarnings.Period_11);
             earnedByPeriod.AddOrUpdate("07/" + academicYear.Substring(2), periodEarnings.Period_12);
+        }
+
+
+        protected void SetupContextProviders(Table table)
+        {
+            if (table.ContainsColumn("Provider"))
+            {
+                for (var rowIndex = 0; rowIndex < table.RowCount; rowIndex++)
+                {
+                    StepDefinitionsContext.AddProvider(table.Rows[rowIndex]["Provider"]);
+                }
+            }
+            else
+            {
+                StepDefinitionsContext.SetDefaultProvider();
+            }
+        }
+
+        protected void SetupContexLearners(Table table)
+        {
+            for (var rowIndex = 0; rowIndex < table.RowCount; rowIndex++)
+            {
+                var learner = new Contexts.Learner
+                {
+                    Name = table.Rows[rowIndex].ContainsKey("ULN") ? table.Rows[rowIndex]["ULN"] : string.Empty,
+                    Uln = long.Parse(IdentifierGenerator.GenerateIdentifier(10, false)),
+                    LearningDelivery = new LearningDelivery
+                    {
+                        AgreedPrice = decimal.Parse(table.Rows[rowIndex]["agreed price"]),
+                        LearnerType = LearnerType.ProgrammeOnlyDas,
+                        StartDate = DateTime.Parse(table.Rows[rowIndex]["start date"]),
+                        PlannedEndDate = DateTime.Parse(table.Rows[rowIndex]["planned end date"]),
+                        ActualEndDate =
+                            !table.Header.Contains("actual end date") ||
+                            string.IsNullOrWhiteSpace(table.Rows[rowIndex]["actual end date"])
+                                ? null
+                                : (DateTime?)DateTime.Parse(table.Rows[rowIndex]["actual end date"]),
+                        CompletionStatus =
+                            IlrTranslator.TranslateCompletionStatus(table.Rows[rowIndex]["completion status"])
+                    }
+                };
+
+                var provider = table.ContainsColumn("Provider")
+                    ? table.Rows[rowIndex]["Provider"]
+                    : "provider";
+
+                StepDefinitionsContext.AddProviderLearner(provider, learner);
+            }
         }
 
     }

@@ -13,9 +13,9 @@ using TechTalk.SpecFlow;
 namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 {
     [Binding]
-    public class EarningStepDefinitions : BaseCalculationSteps
+    public class EarningStepDefinitions : BaseStepDefinitions
     {
-        public EarningStepDefinitions(EarningAndPaymentsContext earningAndPaymentsContext)
+        public EarningStepDefinitions(StepDefinitionsContext earningAndPaymentsContext)
             :base(earningAndPaymentsContext)
         {
 
@@ -26,16 +26,16 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
         {
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
-            EarningAndPaymentsContext.SetDefaultProvider();
+            StepDefinitionsContext.SetDefaultProvider();
 
-            var provider = EarningAndPaymentsContext.GetDefaultProvider();
-            var learner = EarningAndPaymentsContext.CreateLearner(15000, new DateTime(2017, 08, 01), new DateTime(2018, 07, 01));
+            var provider = StepDefinitionsContext.GetDefaultProvider();
+            var learner = StepDefinitionsContext.CreateLearner(15000, new DateTime(2017, 08, 01), new DateTime(2018, 07, 01));
 
             SetupEarningsData(provider, learner);
 
 
-            var committment = EarningAndPaymentsContext.ReferenceDataContext.Commitments.First();
-            var account = EarningAndPaymentsContext.ReferenceDataContext.Employers.FirstOrDefault(x => x.Name == committment.Employer);
+            var committment = StepDefinitionsContext.ReferenceDataContext.Commitments.First();
+            var account = StepDefinitionsContext.ReferenceDataContext.Employers.FirstOrDefault(x => x.Name == committment.Employer);
 
 
             //Save the previous earning
@@ -59,7 +59,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
             //save the periodiosed values
-            EarningsDataHelper.SavePeriodisedValuesForUkprn(EarningAndPaymentsContext.GetDefaultProvider().Ukprn,
+            EarningsDataHelper.SavePeriodisedValuesForUkprn(StepDefinitionsContext.GetDefaultProvider().Ukprn,
                                                             new Dictionary<string, decimal> { { "Period_1", earnedAmount } },
                                                             environmentVariables);
 
@@ -72,7 +72,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
             //Get the due amount 
-            var earning = PaymentsDueDataHelper.GetPaymentsDueForPeriod(EarningAndPaymentsContext.GetDefaultProvider().Ukprn,
+            var earning = PaymentsDueDataHelper.GetPaymentsDueForPeriod(StepDefinitionsContext.GetDefaultProvider().Ukprn,
                                                                         2016,
                                                                         09,
                                                                         environmentVariables)
@@ -106,19 +106,19 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             //get months value
             var months = ScenarioContext.Current.Get<int>("months");
 
-            EarningAndPaymentsContext.SetDefaultProvider();
+            StepDefinitionsContext.SetDefaultProvider();
 
-            var provider = EarningAndPaymentsContext.GetDefaultProvider();
+            var provider = StepDefinitionsContext.GetDefaultProvider();
 
             var startDate = new DateTime(2017, 08, 01);
-            var learner = EarningAndPaymentsContext.CreateLearner(agreedPrice, startDate, startDate.AddMonths(months));
+            var learner = StepDefinitionsContext.CreateLearner(agreedPrice, startDate, startDate.AddMonths(months));
 
             // Store spec values in context
-            EarningAndPaymentsContext.AddProviderLearner(provider, learner);
+            StepDefinitionsContext.AddProviderLearner(provider, learner);
 
 
             //set a default employer
-            EarningAndPaymentsContext.ReferenceDataContext.SetDefaultEmployer(
+            StepDefinitionsContext.ReferenceDataContext.SetDefaultEmployer(
                                                 new Dictionary<string, decimal> {
                                                     { "All", int.MaxValue }
                                                 });
@@ -141,8 +141,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
         {
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
-            var learner = EarningAndPaymentsContext.GetDefaultProvider().Learners.FirstOrDefault();
-            var output = LearnerDataHelper.GetAELearningDelivery(EarningAndPaymentsContext.GetDefaultProvider().Ukprn,
+            var learner = StepDefinitionsContext.GetDefaultProvider().Learners.FirstOrDefault();
+            var output = LearnerDataHelper.GetAELearningDelivery(StepDefinitionsContext.GetDefaultProvider().Ukprn,
                                                                 learner.Uln,
                                                                 learner.LearningDelivery.StartDate,
                                                                 learner.LearningDelivery.PlannedEndDate,
@@ -160,8 +160,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
         {
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
-            var learner = EarningAndPaymentsContext.GetDefaultProvider().Learners.FirstOrDefault();
-            var output = LearnerDataHelper.GetAELearningDelivery(EarningAndPaymentsContext.GetDefaultProvider().Ukprn,
+            var learner = StepDefinitionsContext.GetDefaultProvider().Learners.FirstOrDefault();
+            var output = LearnerDataHelper.GetAELearningDelivery(StepDefinitionsContext.GetDefaultProvider().Ukprn,
                                                                 learner.Uln,
                                                                 learner.LearningDelivery.StartDate,
                                                                 learner.LearningDelivery.PlannedEndDate,
