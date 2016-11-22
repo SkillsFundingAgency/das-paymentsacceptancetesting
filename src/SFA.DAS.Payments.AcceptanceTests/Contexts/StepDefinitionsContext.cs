@@ -16,7 +16,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
             ReferenceDataContext = referenceDataContext;
         }
 
-        public void AddProvider(string name)
+       
+        public void AddProvider(string name,long? ukprn = null)
         {
             var providers = Providers?.ToList() ?? new List<Provider>();
 
@@ -28,7 +29,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
             providers.Add(new Provider
             {
                 Name = name,
-                Ukprn = long.Parse(IdentifierGenerator.GenerateIdentifier(8, false))
+                Ukprn = ukprn.HasValue ? ukprn.Value : long.Parse(IdentifierGenerator.GenerateIdentifier(8, false))
             });
 
             Providers = providers.ToArray();

@@ -1,4 +1,8 @@
-﻿using SFA.DAS.Payments.AcceptanceTests.Contexts;
+﻿using NUnit.Framework;
+using ProviderPayments.TestStack.Core;
+using SFA.DAS.Payments.AcceptanceTests.Contexts;
+using SFA.DAS.Payments.AcceptanceTests.DataHelpers;
+using SFA.DAS.Payments.AcceptanceTests.ExecutionEnvironment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,28 +21,41 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
 
         }
 
-        [Given(@"There is no employer data in the committments")]
-        public void GivenThereIsNoEmployerDataInTheCommittments()
+        [Given(@"There is no employer data in the committments for UKPRN (.*)")]
+        public void GivenThereIsNoEmployerDataInTheCommittmentsForUKPRN(long ukprn)
         {
-            ScenarioContext.Current.Pending();
+            StepDefinitionsContext.AddProvider("provider", ukprn);
         }
+
 
         [When(@"an ILR file is submitted with the following data for UKPRN (.*):")]
         public void WhenAnILRFileIsSubmittedWithTheFollowingDataForUKPRN(long ukprn, Table table)
         {
-            // Store spec values in context
-            SetupContextProviders(table);
+           
             SetupContexLearners(table);
+                      
+            var provider = StepDefinitionsContext.GetDefaultProvider();
 
-            // Setup reference data
-            SetupReferenceData();
+            var startDate = StepDefinitionsContext.GetIlrStartDate().NextCensusDate();
+            
+            SubmitIlr(ukprn, provider.Learners,
+                startDate.GetAcademicYear(),
+                startDate.NextCensusDate(),
+                new ProcessService(new TestLogger()),
+                provider.EarnedByPeriod);
         }
 
 
         [Then(@"a datalock error (.*) is produced")]
         public void ThenADatalockErrorOfDLOCK_WillBeProduced(string errorCode)
         {
-            ScenarioContext.Current.Pending();
+            var provider = StepDefinitionsContext.GetDefaultProvider();
+            var startDate = StepDefinitionsContext.GetIlrStartDate().NextCensusDate();
+
+            var validationError = ValidationErrorsDataHelper.GetValidationErrors(provider.Ukprn, startDate.Year, startDate.Month,EnvironmentVariables);
+
+            Assert.IsNotNull(validationError, "There is no validation error entity present");
+            Assert.IsNotNull(validationError.Any(x => x.RuleId == errorCode));
         }
 
     }

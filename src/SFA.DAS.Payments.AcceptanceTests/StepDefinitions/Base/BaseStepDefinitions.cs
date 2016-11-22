@@ -246,7 +246,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                 {
                     StepDefinitionsContext.AddProvider(table.Rows[rowIndex]["Provider"]);
                 }
-            }
+            }   
             else
             {
                 StepDefinitionsContext.SetDefaultProvider();

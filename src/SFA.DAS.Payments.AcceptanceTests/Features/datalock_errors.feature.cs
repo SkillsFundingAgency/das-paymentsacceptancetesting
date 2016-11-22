@@ -18,8 +18,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.1.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("The ILR is submitted late")]
-    public partial class TheILRIsSubmittedLateFeature
+    [NUnit.Framework.DescriptionAttribute("Datalock validation fails for different reasons")]
+    public partial class DatalockValidationFailsForDifferentReasonsFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -31,9 +31,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-GB"), "The ILR is submitted late", "    When a provider submits an ILR several months after learning has started (but" +
-                    " before the academic year boundary), the earnings calculation is updated retrosp" +
-                    "ectively and the provider gets paid for the preceding months.", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-GB"), "Datalock validation fails for different reasons", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -65,106 +63,36 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
             testRunner.CollectScenarioErrors();
         }
         
-        public virtual void FeatureBackground()
-        {
-#line 5
-    #line 6
-        testRunner.Given("the apprenticeship funding band maximum for each learner is 17000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 7
-        testRunner.And("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-        }
-        
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("A DAS learner, levy available, learner finishes on time")]
-        public virtual void ADASLearnerLevyAvailableLearnerFinishesOnTime()
+        [NUnit.Framework.DescriptionAttribute("No matching record found in an employer digital account for the UKPRN then datalo" +
+            "ck DLOCK_01 will be produced")]
+        public virtual void NoMatchingRecordFoundInAnEmployerDigitalAccountForTheUKPRNThenDatalockDLOCK_01WillBeProduced()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("A DAS learner, levy available, learner finishes on time", ((string[])(null)));
-#line 9
-    this.ScenarioSetup(scenarioInfo);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("No matching record found in an employer digital account for the UKPRN then datalo" +
+                    "ck DLOCK_01 will be produced", ((string[])(null)));
+#line 4
+this.ScenarioSetup(scenarioInfo);
 #line 5
-    this.FeatureBackground();
+testRunner.Given("There is no employer data in the committments for UKPRN 999999", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "learner type",
                         "agreed price",
                         "start date",
                         "planned end date",
+                        "actual end date",
                         "completion status"});
             table1.AddRow(new string[] {
                         "programme only DAS",
                         "15000",
                         "01/09/2017",
                         "08/09/2018",
-                        "continuing"});
-#line 10
-        testRunner.When("an ILR file is submitted in 12/17 with the following data:", ((string)(null)), table1, "When ");
-#line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Type",
-                        "09/17",
-                        "10/17",
-                        "11/17",
-                        "12/17",
-                        "01/18",
-                        "02/18",
-                        "..."});
-            table2.AddRow(new string[] {
-                        "Provider Earned Total",
-                        "1000",
-                        "1000",
-                        "1000",
-                        "1000",
-                        "1000",
-                        "1000",
-                        "..."});
-            table2.AddRow(new string[] {
-                        "Provider Earned from SFA",
-                        "1000",
-                        "1000",
-                        "1000",
-                        "1000",
-                        "1000",
-                        "1000",
-                        "..."});
-            table2.AddRow(new string[] {
-                        "Provider Paid by SFA",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "4000",
-                        "1000",
-                        "..."});
-            table2.AddRow(new string[] {
-                        "Levy account debited",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "4000",
-                        "1000",
-                        "..."});
-            table2.AddRow(new string[] {
-                        "SFA Levy employer budget",
-                        "1000",
-                        "1000",
-                        "1000",
-                        "1000",
-                        "1000",
-                        "1000",
-                        "..."});
-            table2.AddRow(new string[] {
-                        "SFA Levy co-funding budget",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "1000",
-                        "1000",
-                        "..."});
-#line 13
-        testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table2, "Then ");
+                        "08/08/2018",
+                        "completed"});
+#line 6
+testRunner.When("an ILR file is submitted with the following data for UKPRN 999999:", ((string)(null)), table1, "When ");
+#line 9
+testRunner.Then("a datalock error DLOCK_01 is produced", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
