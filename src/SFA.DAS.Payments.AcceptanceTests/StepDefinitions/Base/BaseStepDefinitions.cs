@@ -183,10 +183,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
         protected void SetupEnvironmentVariablesForMonth(DateTime date, string academicYear,  ref int periodId)
         {
             EnvironmentVariables.CurrentYear = academicYear;
-            EnvironmentVariables.SummarisationPeriod = new SummarisationCollectionPeriod
+            EnvironmentVariables.CollectionPeriod = new CollectionPeriod
             {
                 PeriodId = periodId++,
-                CollectionPeriod = "R" + (new DateTime(date.Year, date.Month, 1)).GetPeriodNumber().ToString("00"),
+                Period = "R" + (new DateTime(date.Year, date.Month, 1)).GetPeriodNumber().ToString("00"),
                 CalendarMonth = date.Month,
                 CalendarYear = date.Year,
                 ActualsSchemaPeriod = date.Year + date.Month.ToString("00"),
