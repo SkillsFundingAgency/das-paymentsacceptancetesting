@@ -12,12 +12,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 {
     internal static class ValidationErrorsDataHelper
     {
-        internal static VlidationErrorEntity[] GetValidationErrors(long ukprn, int year, int month, EnvironmentVariables environmentVariables)
+        internal static VlidationErrorEntity[] GetValidationErrors(long ukprn,  EnvironmentVariables environmentVariables)
         {
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
             {
-                var query = "SELECT * FROM [DataLock].[ValidationError] WHERE UKPRN = @ukprn AND CollectionPeriodMonth = @month AND CollectionPeriodYear = @year";
-                return connection.Query<VlidationErrorEntity>(query, new { ukprn, month, year }).ToArray();
+                var query = "SELECT * FROM [DataLock].[ValidationError] WHERE UKPRN = @ukprn ";
+                return connection.Query<VlidationErrorEntity>(query, new { ukprn}).ToArray();
             }
         }
     }

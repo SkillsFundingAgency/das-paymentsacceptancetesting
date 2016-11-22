@@ -52,7 +52,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             var provider = StepDefinitionsContext.GetDefaultProvider();
             var startDate = StepDefinitionsContext.GetIlrStartDate().NextCensusDate();
 
-            var validationError = ValidationErrorsDataHelper.GetValidationErrors(provider.Ukprn, startDate.Year, startDate.Month,EnvironmentVariables);
+            var validationError = ValidationErrorsDataHelper.GetValidationErrors(provider.Ukprn,EnvironmentVariables);
 
             Assert.IsNotNull(validationError, "There is no validation error entity present");
             Assert.IsNotNull(validationError.Any(x => x.RuleId == errorCode));
