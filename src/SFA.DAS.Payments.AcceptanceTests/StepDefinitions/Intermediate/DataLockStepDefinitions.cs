@@ -58,5 +58,46 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             Assert.IsNotNull(validationError.Any(x => x.RuleId == errorCode));
         }
 
+        [Given(@"No matching record found in the employer digital account for the ULN (.*)")]
+        public void GivenNoMatchingRecordFoundInTheEmployerDigitalAccountForTheULN(long uln)
+        {
+            
+            StepDefinitionsContext.SetDefaultProvider();
+            //set a default employer
+            StepDefinitionsContext.ReferenceDataContext.SetDefaultEmployer(
+                                                new Dictionary<string, decimal> {
+                                                    { "All", int.MaxValue }
+                                                });
+            //var employer = StepDefinitionsContext.ReferenceDataContext.Employers[0];
+            //AccountDataHelper.CreateAccount(employer.AccountId, employer.AccountId.ToString(), 0.00m, EnvironmentVariables);
+          
+        }
+
+        [When(@"an ILR file is submitted with the following data for the ULN (.*):")]
+        public void WhenAnILRFileIsSubmittedWithTheFollowingDataForTheULN(long uln, Table table)
+        {
+           
+
+            SetupContexLearners(table);
+
+            var provider = StepDefinitionsContext.GetDefaultProvider();
+            //set the uln to a dummy number passed in
+            provider.Learners.ToList().ForEach(x => x.Uln = uln);
+
+            SetupReferenceData();
+            
+            var startDate = StepDefinitionsContext.GetIlrStartDate().NextCensusDate();
+
+            //flip the ULN's again so not found for processing
+            provider.Learners.ToList().ForEach(x => x.Uln = uln + 99);
+
+            SubmitIlr(provider.Ukprn, provider.Learners,
+                startDate.GetAcademicYear(),
+                startDate.NextCensusDate(),
+                new ProcessService(new TestLogger()),
+                provider.EarnedByPeriod);
+        }
+
+
     }
 }

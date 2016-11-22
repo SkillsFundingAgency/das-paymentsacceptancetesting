@@ -96,6 +96,40 @@ testRunner.Then("a datalock error DLOCK_01 is produced", ((string)(null)), ((Tec
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("No matching record found in the employer digital account for the ULN then dataloc" +
+            "k DLOCK_02 will be produced")]
+        public virtual void NoMatchingRecordFoundInTheEmployerDigitalAccountForTheULNThenDatalockDLOCK_02WillBeProduced()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("No matching record found in the employer digital account for the ULN then dataloc" +
+                    "k DLOCK_02 will be produced", ((string[])(null)));
+#line 12
+this.ScenarioSetup(scenarioInfo);
+#line 13
+testRunner.Given("No matching record found in the employer digital account for the ULN 999999", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "learner type",
+                        "agreed price",
+                        "start date",
+                        "planned end date",
+                        "actual end date",
+                        "completion status"});
+            table2.AddRow(new string[] {
+                        "programme only DAS",
+                        "15000",
+                        "01/09/2017",
+                        "08/09/2018",
+                        "08/08/2018",
+                        "completed"});
+#line 14
+testRunner.When("an ILR file is submitted with the following data for the ULN 999999:", ((string)(null)), table2, "When ");
+#line 17
+testRunner.Then("a datalock error DLOCK_02 is produced", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
