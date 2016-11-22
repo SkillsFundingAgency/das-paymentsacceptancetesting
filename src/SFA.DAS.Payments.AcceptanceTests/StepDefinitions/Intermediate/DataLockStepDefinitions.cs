@@ -99,8 +99,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
         }
 
 
-        [Given(@"No matching record found in the employer digital account for the standard code (.*)")]
-        public void GivenNoMatchingRecordFoundInTheEmployerDigitalAccountForTheStandardCode(long standardCode)
+        [Given(@"No matching record found in the employer digital account")]
+        public void GivenNoMatchingRecordFoundInTheEmployerDigitalAccountForTheStandardCode()
         {
             StepDefinitionsContext.SetDefaultProvider();
             //set a default employer
@@ -114,8 +114,72 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
         [When(@"an ILR file is submitted with the following data for the standard code (.*):")]
         public void WhenAnILRFileIsSubmittedWithTheFollowingDataForTheStandardCode(long standardCode, Table table)
         {
+            SubmitIlrDataWithParameters(standardCode,
+                                        IlrBuilder.Defaults.FrameworkCode,
+                                        IlrBuilder.Defaults.ProgrammeType,
+                                        IlrBuilder.Defaults.PathwayCode,
+                                        0,
+                                        table);
+
+        }
+
+
+
+        [When(@"an ILR file is submitted with the following data for the framework code (.*):")]
+        public void WhenAnILRFileIsSubmittedWithTheFollowingDataForTheFrameworkCode(int frameworkCode, Table table)
+        {
+            SubmitIlrDataWithParameters(IlrBuilder.Defaults.StandardCode,
+                                       frameworkCode,
+                                       IlrBuilder.Defaults.ProgrammeType,
+                                       IlrBuilder.Defaults.PathwayCode,
+                                       0,
+                                       table);
+        }
+
+        [When(@"an ILR file is submitted with the following data for the  programme type (.*):")]
+        public void WhenAnILRFileIsSubmittedWithTheFollowingDataForTheProgrammeType(int programmeType, Table table)
+        {
+            SubmitIlrDataWithParameters(IlrBuilder.Defaults.StandardCode,
+                                      IlrBuilder.Defaults.FrameworkCode,
+                                      programmeType,
+                                      IlrBuilder.Defaults.PathwayCode,
+                                      0,
+                                      table);
+        }
+
+        [When(@"an ILR file is submitted with the following data for the  pathway code (.*):")]
+        public void WhenAnILRFileIsSubmittedWithTheFollowingDataForThePathwayCode(int pathwayCode, Table table)
+        {
+            SubmitIlrDataWithParameters(IlrBuilder.Defaults.StandardCode,
+                                       IlrBuilder.Defaults.FrameworkCode,
+                                       IlrBuilder.Defaults.ProgrammeType,
+                                       pathwayCode,
+                                       0,
+                                       table);
+        }
+
+
+        [When(@"an ILR file is submitted with the following data for the  negotiated cost (.*):")]
+        public void WhenAnILRFileIsSubmittedWithTheFollowingDataForTheNegotiatedCost(decimal negotiatedCost, Table table)
+        {
+            SubmitIlrDataWithParameters(IlrBuilder.Defaults.StandardCode,
+                                      IlrBuilder.Defaults.FrameworkCode,
+                                      IlrBuilder.Defaults.ProgrammeType,
+                                      IlrBuilder.Defaults.PathwayCode,
+                                      negotiatedCost,
+                                      table);
+        }
+
+
+        private void SubmitIlrDataWithParameters(long standardCode,
+                                                int frameworkCode,
+                                                int programmeType,
+                                                int pathwayCode,
+                                                decimal negotiatedCost,
+                                                Table table)
+        {
             SetupContexLearners(table);
-            
+
             var provider = StepDefinitionsContext.GetDefaultProvider();
             var employer = StepDefinitionsContext.ReferenceDataContext.Employers[0];
             AccountDataHelper.CreateAccount(employer.AccountId, employer.AccountId.ToString(), 0.00m, EnvironmentVariables);
@@ -129,62 +193,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
                employer.AccountId.ToString(),
                learner.LearningDelivery.StartDate,
                learner.LearningDelivery.PlannedEndDate,
-               learner.LearningDelivery.AgreedPrice,
-               standardCode,    
-               IlrBuilder.Defaults.FrameworkCode,
-               IlrBuilder.Defaults.ProgrammeType,
-               IlrBuilder.Defaults.PathwayCode,
-               1,"1", EnvironmentVariables);
-            }
-
-            var startDate = StepDefinitionsContext.GetIlrStartDate().NextCensusDate();
-            SubmitIlr(provider.Ukprn, provider.Learners,
-                startDate.GetAcademicYear(),
-                startDate.NextCensusDate(),
-                new ProcessService(new TestLogger()),
-                provider.EarnedByPeriod);
-
-        }
-
-
-
-
-        [Given(@"No matching record found in the employer digital account for various parameters")]
-        public void GivenNoMatchingRecordFoundInTheEmployerDigitalAccountForVariousParameters()
-        {
-            StepDefinitionsContext.SetDefaultProvider();
-            //set a default employer
-            StepDefinitionsContext.ReferenceDataContext.SetDefaultEmployer(
-                                                new Dictionary<string, decimal> {
-                                                    { "All", int.MaxValue }
-                                                });
-
-        }
-
-        [When(@"an ILR file is submitted with the following data for the (.*), (.*),(.*),(.*) and (.*):")]
-        public void WhenAnILRFileIsSubmittedWithTheFollowingDataForTheAnd(long standardCode, 
-                                                                            int frameworkCode, 
-                                                                            int programmeType, 
-                                                                            int pathwayCode,
-                                                                            decimal negotiatedCost, 
-                                                                            Table table)
-        {
-            SetupContexLearners(table);
-
-            var provider = StepDefinitionsContext.GetDefaultProvider();
-            var employer = StepDefinitionsContext.ReferenceDataContext.Employers[0];
-            AccountDataHelper.CreateAccount(employer.AccountId, employer.AccountId.ToString(), negotiatedCost, EnvironmentVariables);
-
-            foreach (var learner in provider.Learners)
-            {
-                CommitmentDataHelper.CreateCommitment(
-               long.Parse(IdentifierGenerator.GenerateIdentifier(6, false)),
-               provider.Ukprn,
-               learner.Uln,
-               employer.AccountId.ToString(),
-               learner.LearningDelivery.StartDate,
-               learner.LearningDelivery.PlannedEndDate,
-               learner.LearningDelivery.AgreedPrice,
+               negotiatedCost>0 ? negotiatedCost : learner.LearningDelivery.AgreedPrice,
                standardCode,
                frameworkCode,
                programmeType,
@@ -199,6 +208,58 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
                 new ProcessService(new TestLogger()),
                 provider.EarnedByPeriod);
         }
+
+
+        //[Given(@"No matching record found in the employer digital account for various parameters")]
+        //public void GivenNoMatchingRecordFoundInTheEmployerDigitalAccountForVariousParameters()
+        //{
+        //    StepDefinitionsContext.SetDefaultProvider();
+        //    //set a default employer
+        //    StepDefinitionsContext.ReferenceDataContext.SetDefaultEmployer(
+        //                                        new Dictionary<string, decimal> {
+        //                                            { "All", int.MaxValue }
+        //                                        });
+
+        //}
+
+        //[When(@"an ILR file is submitted with the following data for the (.*), (.*),(.*),(.*) and (.*):")]
+        //public void WhenAnILRFileIsSubmittedWithTheFollowingDataForTheAnd(long standardCode, 
+        //                                                                    int frameworkCode, 
+        //                                                                    int programmeType, 
+        //                                                                    int pathwayCode,
+        //                                                                    decimal negotiatedCost, 
+        //                                                                    Table table)
+        //{
+        //    SetupContexLearners(table);
+
+        //    var provider = StepDefinitionsContext.GetDefaultProvider();
+        //    var employer = StepDefinitionsContext.ReferenceDataContext.Employers[0];
+        //    AccountDataHelper.CreateAccount(employer.AccountId, employer.AccountId.ToString(), negotiatedCost, EnvironmentVariables);
+
+        //    foreach (var learner in provider.Learners)
+        //    {
+        //        CommitmentDataHelper.CreateCommitment(
+        //       long.Parse(IdentifierGenerator.GenerateIdentifier(6, false)),
+        //       provider.Ukprn,
+        //       learner.Uln,
+        //       employer.AccountId.ToString(),
+        //       learner.LearningDelivery.StartDate,
+        //       learner.LearningDelivery.PlannedEndDate,
+        //       learner.LearningDelivery.AgreedPrice,
+        //       standardCode,
+        //       frameworkCode,
+        //       programmeType,
+        //       pathwayCode,
+        //       1, "1", EnvironmentVariables);
+        //    }
+
+        //    var startDate = StepDefinitionsContext.GetIlrStartDate().NextCensusDate();
+        //    SubmitIlr(provider.Ukprn, provider.Learners,
+        //        startDate.GetAcademicYear(),
+        //        startDate.NextCensusDate(),
+        //        new ProcessService(new TestLogger()),
+        //        provider.EarnedByPeriod);
+        //}
 
     }
 }
