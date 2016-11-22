@@ -130,6 +130,41 @@ testRunner.Then("a datalock error DLOCK_02 is produced", ((string)(null)), ((Tec
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("No matching record found in the employer digital account for the standard code th" +
+            "en datalock DLOCK_03 will be produced")]
+        public virtual void NoMatchingRecordFoundInTheEmployerDigitalAccountForTheStandardCodeThenDatalockDLOCK_03WillBeProduced()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("No matching record found in the employer digital account for the standard code th" +
+                    "en datalock DLOCK_03 will be produced", ((string[])(null)));
+#line 20
+this.ScenarioSetup(scenarioInfo);
+#line 21
+testRunner.Given("No matching record found in the employer digital account for the standard code 99" +
+                    "9999", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "learner type",
+                        "agreed price",
+                        "start date",
+                        "planned end date",
+                        "actual end date",
+                        "completion status"});
+            table3.AddRow(new string[] {
+                        "programme only DAS",
+                        "15000",
+                        "01/09/2017",
+                        "08/09/2018",
+                        "08/08/2018",
+                        "completed"});
+#line 22
+testRunner.When("an ILR file is submitted with the following data for the standard code 999999:", ((string)(null)), table3, "When ");
+#line 25
+testRunner.Then("a datalock error DLOCK_03 is produced", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

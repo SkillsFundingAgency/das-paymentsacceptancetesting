@@ -57,7 +57,21 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             CommitmentDataHelper.UpdateEventStreamPointer(EnvironmentVariables);
         }
 
+       
         protected void AddLearnerCommitment(long ukprn, Contexts.Learner learner)
+        {
+            AddLearnerCommitment(ukprn, learner,
+                IlrBuilder.Defaults.StandardCode,
+                IlrBuilder.Defaults.FrameworkCode,
+                IlrBuilder.Defaults.ProgrammeType,
+                IlrBuilder.Defaults.PathwayCode);
+        }
+        protected void AddLearnerCommitment(long ukprn, 
+                                            Contexts.Learner learner, 
+                                            long? standardCode = null,
+                                            int? frameworkCode = null,
+                                            int? programmeType = null,
+                                            int? pathwayCode = null)
         {
             var commitmentId = long.Parse(IdentifierGenerator.GenerateIdentifier(6, false));
             var commitmentPriority = 1;
@@ -86,10 +100,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                 learner.LearningDelivery.StartDate,
                 learner.LearningDelivery.PlannedEndDate,
                 learner.LearningDelivery.AgreedPrice,
-                IlrBuilder.Defaults.StandardCode,
-                IlrBuilder.Defaults.FrameworkCode,
-                IlrBuilder.Defaults.ProgrammeType,
-                IlrBuilder.Defaults.PathwayCode,
+                standardCode.HasValue? standardCode.Value :  IlrBuilder.Defaults.StandardCode,
+                frameworkCode.HasValue? frameworkCode.Value : IlrBuilder.Defaults.FrameworkCode,
+                programmeType.HasValue ? programmeType.Value : IlrBuilder.Defaults.ProgrammeType,
+                pathwayCode.HasValue ? pathwayCode.Value : IlrBuilder.Defaults.PathwayCode,
                 commitmentPriority,
                 "1",EnvironmentVariables);
         }
