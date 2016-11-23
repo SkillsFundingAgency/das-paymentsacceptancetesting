@@ -1,5 +1,5 @@
 ﻿using System;
-using SFA.DAS.Payments.AcceptanceTests.Contexts;
+using SFA.DAS.Payments.AcceptanceTests.Enums;
 
 namespace SFA.DAS.Payments.AcceptanceTests.Translators
 {

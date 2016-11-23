@@ -24,7 +24,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "provider_due_amount.feature"
+#line 1 "earnings_calc.feature"
 #line hidden
         
         [NUnit.Framework.TestFixtureSetUpAttribute()]
@@ -80,6 +80,29 @@ testRunner.Given(string.Format("a provider has previously earned {0} in period R
 testRunner.When(string.Format("an earning of {0} is calculated for period R01", earnedAmount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 7
 testRunner.Then(string.Format("a payment of {0} is due", dueAmount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Earnings distribution")]
+        [NUnit.Framework.TestCaseAttribute("15000", "12", "1000", "3000", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("15000", "6", "2000", "3000", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("7500", "12", "500", "1500", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("7500", "6", "1000", "1500", new string[0])]
+        public virtual void EarningsDistribution(string agreedPrice, string censusMonths, string monthlyEarnings, string completionPayment, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Earnings distribution", exampleTags);
+#line 15
+this.ScenarioSetup(scenarioInfo);
+#line 16
+testRunner.When(string.Format("the planned course duration covers {0} months", censusMonths), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 17
+testRunner.And(string.Format("an agreed price of {0}", agreedPrice), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 18
+testRunner.Then(string.Format("the monthly earnings is {0}", monthlyEarnings), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 19
+testRunner.And(string.Format("the completion payment is {0}", completionPayment), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

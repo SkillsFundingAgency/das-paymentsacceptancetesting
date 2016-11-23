@@ -87,46 +87,60 @@
     <Compile Include="Builders\IlrLearnersBuilder.cs" />
     <Compile Include="Builders\IlrLearningDeliveryBuilder.cs" />
     <Compile Include="Builders\IlrSubmissionDefaults.cs" />
-    <Compile Include="Contexts\Commitment.cs" />
-    <Compile Include="Contexts\CompletionStatus.cs" />
-    <Compile Include="Contexts\EarningAndPaymentsContext.cs" />
-    <Compile Include="Contexts\Employer.cs" />
-    <Compile Include="Contexts\Learner.cs" />
-    <Compile Include="Contexts\LearningDelivery.cs" />
-    <Compile Include="Contexts\LearnerType.cs" />
-    <Compile Include="Contexts\Provider.cs" />
+    <Compile Include="DataHelpers\ValidationErrorsDataHelper.cs" />
+    <Compile Include="Entities\AE_LearningDelivery.cs" />
+    <Compile Include="Entities\Commitment.cs" />
+    <Compile Include="Entities\Employer.cs" />
+    <Compile Include="Entities\Learner.cs" />
+    <Compile Include="Entities\LearningDelivery.cs" />
+    <Compile Include="Entities\PaymentEntity.cs" />
+    <Compile Include="Entities\PeriodisedValuesEntity.cs" />
+    <Compile Include="Entities\Provider.cs" />
+    <Compile Include="Entities\RequiredPaymentEntity.cs" />
+    <Compile Include="Entities\VlidationErrorEntity.cs" />
+    <Compile Include="Enums\CompletionStatus.cs" />
+    <Compile Include="Contexts\StepDefinitionsContext.cs" />
+    <Compile Include="Enums\FundingSource.cs" />
+    <Compile Include="Enums\LearnerType.cs" />
     <Compile Include="Contexts\ReferenceDataContext.cs" />
-    <Compile Include="Contexts\TransactionType.cs" />
+    <Compile Include="Enums\TransactionType.cs" />
     <Compile Include="DataHelpers\AcceptanceTestDataHelper.cs" />
     <Compile Include="DataHelpers\AccountDataHelper.cs" />
-    <Compile Include="DataHelpers\CoFinancePaymentsDataHelper.cs" />
+    <Compile Include="DataHelpers\PaymentsDataHelper.cs" />
     <Compile Include="DataHelpers\CommitmentDataHelper.cs" />
     <Compile Include="DataHelpers\EarningsDataHelper.cs" />
-    <Compile Include="DataHelpers\Entities\CoFinancePaymentEntity.cs" />
-    <Compile Include="DataHelpers\Entities\LevyPaymentEntity.cs" />
-    <Compile Include="DataHelpers\Entities\PeriodisedValuesEntity.cs" />
-    <Compile Include="DataHelpers\Entities\RequiredPaymentEntity.cs" />
     <Compile Include="DataHelpers\IdentifierGenerator.cs" />
     <Compile Include="DataHelpers\LearnerDataHelper.cs" />
-    <Compile Include="DataHelpers\LevyPaymentDataHelper.cs" />
     <Compile Include="DataHelpers\PaymentsDueDataHelper.cs" />
     <Compile Include="ExecutionEnvironment\EnvironmentVariablesFactory.cs" />
     <Compile Include="ExecutionEnvironment\TestStatusWatcher.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Features\datalock_errors.feature.cs" />
+    <Compile Include="Features\earnings_calc.feature.cs" />
     <Compile Include="Features\ILR_is_submitted_late.feature.cs" />
     <Compile Include="Features\learner_finishes_early.feature.cs" />
     <Compile Include="Features\learner_finishes_late.feature.cs" />
     <Compile Include="Features\learner_finishes_on_time.feature.cs" />
-    <Compile Include="Features\provider_due_amount.feature.cs" />
+    <Compile Include="Features\payments_calc.feature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RowKeys.cs" />
     <Compile Include="SpecFlowHooks.cs" />
-    <Compile Include="StepDefinitions\EarningAndPaymentsSteps.cs" />
-    <Compile Include="StepDefinitions\ReferenceDataSteps.cs" />
+    <Compile Include="StepDefinitions\Base\BaseStepDefinitions.cs" />
+    <Compile Include="StepDefinitions\Integration\EarningAndPaymentsSteps.cs" />
+    <Compile Include="StepDefinitions\Intermediate\DataLockStepDefinitions.cs" />
+    <Compile Include="StepDefinitions\Intermediate\EarningStepDefinitions.cs" />
+    <Compile Include="StepDefinitions\Intermediate\PaymentStepDefinitions.cs" />
+    <Compile Include="StepDefinitions\Base\ReferenceDataSteps.cs" />
     <Compile Include="ExecutionEnvironment\TestLogger.cs" />
     <Compile Include="Translators\IlrTranslator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\features\datalock_errors.feature">
+      <Link>Features\datalock_errors.feature</Link>
+    </None>
+    <None Include="..\..\features\earnings_calc.feature">
+      <Link>Features\earnings_calc.feature</Link>
+    </None>
     <None Include="..\..\features\ILR_is_submitted_late.feature">
       <Link>Features\ILR_is_submitted_late.feature</Link>
     </None>
@@ -139,10 +153,12 @@
     <None Include="..\..\features\learner_finishes_on_time.feature">
       <Link>Features\learner_finishes_on_time.feature</Link>
     </None>
-    <None Include="..\..\features\provider_due_amount.feature">
-      <Link>Features\provider_due_amount.feature</Link>
+    <None Include="..\..\features\payments_calc.feature">
+      <Link>Features\payments_calc.feature</Link>
     </None>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="App.Release.config">
       <DependentUpon>App.config</DependentUpon>
     </None>

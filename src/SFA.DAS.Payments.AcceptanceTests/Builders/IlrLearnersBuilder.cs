@@ -22,7 +22,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
             parentBuilder.Submission.Learners = Learners;
         }
 
-        public IlrLearnersBuilder WithLearners(Contexts.Learner[] learners)
+        public IlrLearnersBuilder WithLearners(Entities.Learner[] learners)
         {
 
             Learners = learners.Select(l =>
