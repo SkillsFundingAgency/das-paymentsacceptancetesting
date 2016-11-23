@@ -3,11 +3,8 @@ using ProviderPayments.TestStack.Core;
 using SFA.DAS.Payments.AcceptanceTests.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.DataHelpers;
 using SFA.DAS.Payments.AcceptanceTests.ExecutionEnvironment;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base;
 using TechTalk.SpecFlow;
 
 namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate

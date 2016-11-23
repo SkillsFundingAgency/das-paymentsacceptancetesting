@@ -1,22 +1,21 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using IlrGenerator;
 using ProviderPayments.TestStack.Core;
 using ProviderPayments.TestStack.Core.Domain;
 using SFA.DAS.Payments.AcceptanceTests.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.DataHelpers;
-using SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities;
+using SFA.DAS.Payments.AcceptanceTests.Entities;
+using SFA.DAS.Payments.AcceptanceTests.Enums;
 using SFA.DAS.Payments.AcceptanceTests.ExecutionEnvironment;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IlrBuilder = SFA.DAS.Payments.AcceptanceTests.Builders.IlrBuilder;
-using LearningDelivery = SFA.DAS.Payments.AcceptanceTests.Contexts.LearningDelivery;
-using TechTalk.SpecFlow;
 using SFA.DAS.Payments.AcceptanceTests.Translators;
+using TechTalk.SpecFlow;
+using IlrBuilder = SFA.DAS.Payments.AcceptanceTests.Builders.IlrBuilder;
+using Learner = SFA.DAS.Payments.AcceptanceTests.Entities.Learner;
+using LearningDelivery = SFA.DAS.Payments.AcceptanceTests.Entities.LearningDelivery;
 
-namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
+namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 {
     public class BaseStepDefinitions
 
@@ -57,7 +56,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             CommitmentDataHelper.UpdateEventStreamPointer(EnvironmentVariables);
         }
 
-        protected void AddLearnerCommitment(long ukprn, Contexts.Learner learner)
+        protected void AddLearnerCommitment(long ukprn, Learner learner)
         {
             var commitmentId = long.Parse(IdentifierGenerator.GenerateIdentifier(6, false));
             var commitmentPriority = 1;
@@ -124,7 +123,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             SubmitMonthEnd(new DateTime(2016, 09, 20).NextCensusDate(),new ProcessService(new TestLogger()));
 
         }
-        protected void SetupEarningsData(Provider provider, Contexts.Learner learner)
+        protected void SetupEarningsData(Provider provider, Learner learner)
         {
             StepDefinitionsContext.AddProviderLearner(provider, learner);
 
@@ -194,10 +193,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             };
         }
 
-        protected void SubmitIlr(long ukprn, Contexts.Learner[] learners, string academicYear, DateTime date
+        protected void SubmitIlr(long ukprn, Learner[] learners, string academicYear, DateTime date
           , ProcessService processService, Dictionary<string, decimal> earnedByPeriod)
         {
-            var submissionLearners = learners.Select(l => new Contexts.Learner
+            var submissionLearners = learners.Select(l => new Learner
             {
                 Name = l.Name,
                 Uln = l.Uln,
@@ -257,7 +256,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
         {
             for (var rowIndex = 0; rowIndex < table.RowCount; rowIndex++)
             {
-                var learner = new Contexts.Learner
+                var learner = new Learner
                 {
                     Name = table.Rows[rowIndex].ContainsKey("ULN") ? table.Rows[rowIndex]["ULN"] : string.Empty,
                     Uln = long.Parse(IdentifierGenerator.GenerateIdentifier(10, false)),

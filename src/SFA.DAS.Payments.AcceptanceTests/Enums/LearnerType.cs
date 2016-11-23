@@ -1,4 +1,4 @@
-﻿namespace SFA.DAS.Payments.AcceptanceTests.Contexts
+﻿namespace SFA.DAS.Payments.AcceptanceTests.Enums
 {
     public enum LearnerType
     {

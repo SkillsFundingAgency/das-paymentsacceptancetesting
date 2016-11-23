@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using SFA.DAS.Payments.AcceptanceTests.DataHelpers;
+using SFA.DAS.Payments.AcceptanceTests.Entities;
+using SFA.DAS.Payments.AcceptanceTests.Enums;
 
 namespace SFA.DAS.Payments.AcceptanceTests.Contexts
 {
@@ -88,7 +90,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
 
         public Learner CreateLearner(decimal agreedPrice,DateTime startDate,DateTime endDate)
         {
-            var learner = new Contexts.Learner
+            var learner = new Learner
             {
                 Name = string.Empty,
                 Uln = long.Parse(IdentifierGenerator.GenerateIdentifier(10, false)),

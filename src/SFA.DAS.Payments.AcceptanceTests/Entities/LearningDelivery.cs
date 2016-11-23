@@ -1,6 +1,7 @@
 ﻿using System;
+using SFA.DAS.Payments.AcceptanceTests.Enums;
 
-namespace SFA.DAS.Payments.AcceptanceTests.Contexts
+namespace SFA.DAS.Payments.AcceptanceTests.Entities
 {
     public class LearningDelivery
     {

@@ -2,9 +2,9 @@
 using System.Linq;
 using Dapper;
 using ProviderPayments.TestStack.Core;
-using SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities;
 using System.Collections.Generic;
 using System;
+using SFA.DAS.Payments.AcceptanceTests.Entities;
 
 namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 {

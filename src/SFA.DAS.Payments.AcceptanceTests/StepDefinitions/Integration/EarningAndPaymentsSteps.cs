@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using IlrGenerator;
 using NUnit.Framework;
 using ProviderPayments.TestStack.Core;
-using ProviderPayments.TestStack.Core.Domain;
 using SFA.DAS.Payments.AcceptanceTests.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.DataHelpers;
-using SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities;
+using SFA.DAS.Payments.AcceptanceTests.Entities;
+using SFA.DAS.Payments.AcceptanceTests.Enums;
 using SFA.DAS.Payments.AcceptanceTests.ExecutionEnvironment;
-using SFA.DAS.Payments.AcceptanceTests.Translators;
+using SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base;
 using TechTalk.SpecFlow;
-using IlrBuilder = SFA.DAS.Payments.AcceptanceTests.Builders.IlrBuilder;
-using LearningDelivery = SFA.DAS.Payments.AcceptanceTests.Contexts.LearningDelivery;
 
-namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
+namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
 {
     [Binding]
     public class EarningAndPaymentsSteps : BaseStepDefinitions
@@ -274,12 +270,5 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             var expectedPaymentDue = decimal.Parse(paymentsRow[colIndex]);
             Assert.AreEqual(expectedPaymentDue, actualPaymentDue, $"Expected a {paymentType} payment due of {expectedPaymentDue} but made a payment of {actualPaymentDue} for {periodName}");
         }
-        
-        
-
-        
-
-        
-
     }
 }
