@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"[]>
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>Provider earnings and payments where learner completes later than planned and is funded by levy</title>
+    <title>Datalock validation fails for different reasons</title>
     <link rel="stylesheet" href="css/master.css" type="text/css" />
     <link rel="stylesheet" href="css/print.css" type="text/css" media="print" />
     <script src="js/jquery.js" type="text/javascript"></script>
@@ -42,7 +42,7 @@ $(document).ready(function() {
             </span>
           </li>
           <li class="file">
-            <a href="datalock_errors.html">Datalock validation fails for different reasons</a>
+            <span class="current">Datalock validation fails for different reasons</span>
             <span class="float-right">
               <i class="icon-ok passed" title="Successful"> </i>
             </span>
@@ -54,7 +54,7 @@ $(document).ready(function() {
             </span>
           </li>
           <li class="file">
-            <span class="current">Provider earnings and payments where learner completes later than planned and is funded by levy</span>
+            <a href="learner_finishes_late.html">Provider earnings and payments where learner completes later than planned and is funded by levy</a>
             <span class="float-right">
               <i class="icon-ok passed" title="Successful"> </i>
             </span>
@@ -77,46 +77,26 @@ $(document).ready(function() {
         <div class="float-right">
           <i class="icon-ok passed" title="Successful"> </i>
         </div>
-        <h1>Provider earnings and payments where learner completes later than planned and is funded by levy</h1>
-        <div class="description">
-          <pre>
-            <code>The earnings and payment rules for late completions are the same as for learners finishing on time, except that the completion payment is held back until completion.
-</code>
-          </pre>
-        </div>
+        <h1>Datalock validation fails for different reasons</h1>
         <ul id="scenarios">
-          <li class="scenario">
-            <div class="float-right">
-              <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
-            </div>
-            <div class="scenario-heading">
-              <h2></h2>
-            </div>
-            <div class="steps">
-              <ul>
-                <li class="step">
-                  <span class="keyword">Given </span>the apprenticeship funding band maximum for each learner is 17000</li>
-                <li class="step">
-                  <span class="keyword">And </span>levy balance &gt; agreed price for all months</li>
-              </ul>
-            </div>
-          </li>
           <li class="scenario">
             <div class="float-right">
               <i class="icon-ok passed" title="Successful"> </i>
             </div>
-            <div class="scenario-heading" id="a-das-learner-levy-available-learner-finishes-late">
-              <h2>A DAS learner, levy available, learner finishes late</h2>
+            <div class="scenario-heading" id="no-matching-record-found-in-an-employer-digital-account-for-the-ukprn-then-datalock-dlock01-will-be-produced">
+              <h2>No matching record found in an employer digital account for the UKPRN then datalock DLOCK_01 will be produced</h2>
             </div>
             <div class="steps">
               <ul>
                 <li class="step">
-                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>learner type</th><th>agreed price</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th> </th></tr></thead><tbody><tr><td>programme only DAS</td><td>15000</td><td>01/09/2017</td><td>08/09/2018</td><td>08/10/2018</td><td>completed</td></tr></tbody></table></div></li>
+                  <span class="keyword">Given </span>There is no employer data in the committments for UKPRN 999999</li>
                 <li class="step">
-                  <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>09/17</th><th>10/17</th><th>11/17</th><th>...</th><th>08/18</th><th>09/18</th><th>10/18</th><th>11/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>0</td><td>3000</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>0</td><td>3000</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>1000</td><td>0</td><td>3000</td></tr><tr><td>Levy account debited</td><td>0</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>1000</td><td>0</td><td>3000</td></tr><tr><td>SFA Levy employer budget</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>0</td><td>3000</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody></table></div></li>
+                  <span class="keyword">When </span>an ILR file is submitted with the following data for UKPRN 999999:<div class="table_container"><table class="datatable"><thead><tr><th>learner type</th><th>agreed price</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th> </th></tr></thead><tbody><tr><td>programme only DAS</td><td>15000</td><td>01/09/2017</td><td>08/09/2018</td><td>08/08/2018</td><td>completed</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">Then </span>a datalock error DLOCK_01 is produced</li>
               </ul>
             </div>
-            <a class="scenario-link" href="javascript:showImageLink('a-das-learner-levy-available-learner-finishes-late')" title="Copy scenario link to clipboard.">
+            <a class="scenario-link" href="javascript:showImageLink('no-matching-record-found-in-an-employer-digital-account-for-the-ukprn-then-datalock-dlock01-will-be-produced')" title="Copy scenario link to clipboard.">
               <i class="icon-link"> </i>
             </a>
           </li>

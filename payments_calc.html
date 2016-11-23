@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"[]>
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>Provider earnings and payments where learner completes later than planned and is funded by levy</title>
+    <title>Calculate the payments</title>
     <link rel="stylesheet" href="css/master.css" type="text/css" />
     <link rel="stylesheet" href="css/print.css" type="text/css" media="print" />
     <script src="js/jquery.js" type="text/javascript"></script>
@@ -36,7 +36,7 @@ $(document).ready(function() {
             </span>
           </li>
           <li class="file">
-            <a href="payments_calc.html">Calculate the payments</a>
+            <span class="current">Calculate the payments</span>
             <span class="float-right">
               <i class="icon-ok passed" title="Successful"> </i>
             </span>
@@ -54,7 +54,7 @@ $(document).ready(function() {
             </span>
           </li>
           <li class="file">
-            <span class="current">Provider earnings and payments where learner completes later than planned and is funded by levy</span>
+            <a href="learner_finishes_late.html">Provider earnings and payments where learner completes later than planned and is funded by levy</a>
             <span class="float-right">
               <i class="icon-ok passed" title="Successful"> </i>
             </span>
@@ -77,48 +77,89 @@ $(document).ready(function() {
         <div class="float-right">
           <i class="icon-ok passed" title="Successful"> </i>
         </div>
-        <h1>Provider earnings and payments where learner completes later than planned and is funded by levy</h1>
-        <div class="description">
-          <pre>
-            <code>The earnings and payment rules for late completions are the same as for learners finishing on time, except that the completion payment is held back until completion.
-</code>
-          </pre>
-        </div>
+        <h1>Calculate the payments</h1>
         <ul id="scenarios">
-          <li class="scenario">
-            <div class="float-right">
-              <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
-            </div>
-            <div class="scenario-heading">
-              <h2></h2>
-            </div>
-            <div class="steps">
-              <ul>
-                <li class="step">
-                  <span class="keyword">Given </span>the apprenticeship funding band maximum for each learner is 17000</li>
-                <li class="step">
-                  <span class="keyword">And </span>levy balance &gt; agreed price for all months</li>
-              </ul>
-            </div>
-          </li>
           <li class="scenario">
             <div class="float-right">
               <i class="icon-ok passed" title="Successful"> </i>
             </div>
-            <div class="scenario-heading" id="a-das-learner-levy-available-learner-finishes-late">
-              <h2>A DAS learner, levy available, learner finishes late</h2>
+            <div class="scenario-heading" id="payment-type-breakdown">
+              <h2>Payment type breakdown</h2>
             </div>
             <div class="steps">
               <ul>
                 <li class="step">
-                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>learner type</th><th>agreed price</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th> </th></tr></thead><tbody><tr><td>programme only DAS</td><td>15000</td><td>01/09/2017</td><td>08/09/2018</td><td>08/10/2018</td><td>completed</td></tr></tbody></table></div></li>
+                  <span class="keyword">Given </span>an employer levy balance of &lt;employer levy balance&gt;</li>
                 <li class="step">
-                  <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>09/17</th><th>10/17</th><th>11/17</th><th>...</th><th>08/18</th><th>09/18</th><th>10/18</th><th>11/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>0</td><td>3000</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>0</td><td>3000</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>1000</td><td>0</td><td>3000</td></tr><tr><td>Levy account debited</td><td>0</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>1000</td><td>0</td><td>3000</td></tr><tr><td>SFA Levy employer budget</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>0</td><td>3000</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody></table></div></li>
+                  <span class="keyword">When </span>a payment of &lt;due amount&gt; is due</li>
+                <li class="step">
+                  <span class="keyword">Then </span>the employer levy account is debited by &lt;levy account debit&gt;</li>
+                <li class="step">
+                  <span class="keyword">And </span>the provider is paid &lt;paid by SFA&gt; by the SFA</li>
+                <li class="step">
+                  <span class="keyword">And </span>the provider is due &lt;payment due from employer&gt; from the employer</li>
               </ul>
             </div>
-            <a class="scenario-link" href="javascript:showImageLink('a-das-learner-levy-available-learner-finishes-late')" title="Copy scenario link to clipboard.">
+            <a class="scenario-link" href="javascript:showImageLink('payment-type-breakdown')" title="Copy scenario link to clipboard.">
               <i class="icon-link"> </i>
             </a>
+            <div>
+              <div class="examples">
+                <h3>Examples: </h3>
+                <div class="table_container">
+                  <table class="datatable">
+                    <thead>
+                      <tr>
+                        <th>employer levy balance</th>
+                        <th>due amount</th>
+                        <th>levy account debit</th>
+                        <th>paid by SFA</th>
+                        <th>payment due from employer</th>
+                        <th> </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>99999</td>
+                        <td>1000</td>
+                        <td>1000</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>
+                          <div class="float-right">
+                            <i class="icon-ok passed" title="Successful"> </i>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>500</td>
+                        <td>1000</td>
+                        <td>500</td>
+                        <td>450</td>
+                        <td>50</td>
+                        <td>
+                          <div class="float-right">
+                            <i class="icon-ok passed" title="Successful"> </i>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>0</td>
+                        <td>1000</td>
+                        <td>0</td>
+                        <td>900</td>
+                        <td>100</td>
+                        <td>
+                          <div class="float-right">
+                            <i class="icon-ok passed" title="Successful"> </i>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
           </li>
         </ul>
       </div>

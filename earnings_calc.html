@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"[]>
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>Business definitions</title>
+    <title>Amount due is calculated based on previously earned amount</title>
     <link rel="stylesheet" href="css/master.css" type="text/css" />
     <link rel="stylesheet" href="css/print.css" type="text/css" media="print" />
     <script src="js/jquery.js" type="text/javascript"></script>
@@ -24,13 +24,13 @@ $(document).ready(function() {
             <a href="index.html">Home</a>
           </li>
           <li class="file">
-            <a href="earnings_calc.html">Amount due is calculated based on previously earned amount</a>
+            <span class="current">Amount due is calculated based on previously earned amount</span>
             <span class="float-right">
               <i class="icon-ok passed" title="Successful"> </i>
             </span>
           </li>
           <li class="file">
-            <span class="current">Business definitions</span>
+            <a href="definitions.html">Business definitions</a>
             <span class="float-right">
               <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
             </span>
@@ -75,38 +75,28 @@ $(document).ready(function() {
       </div>
       <div id="feature">
         <div class="float-right">
-          <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
+          <i class="icon-ok passed" title="Successful"> </i>
         </div>
-        <h1>Business definitions</h1>
+        <h1>Amount due is calculated based on previously earned amount</h1>
         <ul id="scenarios">
           <li class="scenario">
             <div class="float-right">
-              <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
+              <i class="icon-ok passed" title="Successful"> </i>
             </div>
-            <div class="scenario-heading" id="learner-type">
-              <h2>Learner type</h2>
+            <div class="scenario-heading" id="calculating-payments-due">
+              <h2>Calculating payments due</h2>
             </div>
             <div class="steps">
               <ul>
                 <li class="step">
-                  <span class="keyword">When </span>the learner is age &lt;Age&gt;</li>
+                  <span class="keyword">Given </span>a provider has previously earned &lt;previous amount&gt; in period R01</li>
                 <li class="step">
-                  <span class="keyword">And </span>the contract type is &lt;DAS contract status&gt;</li>
+                  <span class="keyword">When </span>an earning of &lt;earned amount&gt; is calculated for period R01</li>
                 <li class="step">
-                  <span class="keyword">And </span>English is &lt;English component&gt;</li>
-                <li class="step">
-                  <span class="keyword">And </span>maths is &lt;Maths component&gt;</li>
-                <li class="step">
-                  <span class="keyword">And </span>learning support is &lt;Has learning support&gt;</li>
-                <li class="step">
-                  <span class="keyword">And </span>incentive payments due are &lt;Incentive payments&gt;</li>
-                <li class="step">
-                  <span class="keyword">And </span>no ILR validation errors</li>
-                <li class="step">
-                  <span class="keyword">Then </span>the learner is &lt;learner type&gt;</li>
+                  <span class="keyword">Then </span>a payment of &lt;due amount&gt; is due</li>
               </ul>
             </div>
-            <a class="scenario-link" href="javascript:showImageLink('learner-type')" title="Copy scenario link to clipboard.">
+            <a class="scenario-link" href="javascript:showImageLink('calculating-payments-due')" title="Copy scenario link to clipboard.">
               <i class="icon-link"> </i>
             </a>
             <div>
@@ -116,42 +106,50 @@ $(document).ready(function() {
                   <table class="datatable">
                     <thead>
                       <tr>
-                        <th>Age</th>
-                        <th>DAS contract status</th>
-                        <th>English component</th>
-                        <th>Maths component</th>
-                        <th>Has learning support</th>
-                        <th>Incentive payments</th>
-                        <th>learner type</th>
+                        <th>previous amount</th>
+                        <th>earned amount</th>
+                        <th>due amount</th>
                         <th> </th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td>30</td>
-                        <td>DAS</td>
-                        <td>no</td>
-                        <td>no</td>
-                        <td>does not exist</td>
-                        <td>none</td>
-                        <td>programme only DAS</td>
+                        <td>0</td>
+                        <td>1000</td>
+                        <td>1000</td>
                         <td>
                           <div class="float-right">
-                            <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
+                            <i class="icon-ok passed" title="Successful"> </i>
                           </div>
                         </td>
                       </tr>
                       <tr>
-                        <td>30</td>
-                        <td>non-DAS</td>
-                        <td>no</td>
-                        <td>no</td>
-                        <td>does not exist</td>
-                        <td>none</td>
-                        <td>programme non-DAS</td>
+                        <td>500</td>
+                        <td>1000</td>
+                        <td>500</td>
                         <td>
                           <div class="float-right">
-                            <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
+                            <i class="icon-ok passed" title="Successful"> </i>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>1000</td>
+                        <td>1000</td>
+                        <td>0</td>
+                        <td>
+                          <div class="float-right">
+                            <i class="icon-ok passed" title="Successful"> </i>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>
+                          <div class="float-right">
+                            <i class="icon-ok passed" title="Successful"> </i>
                           </div>
                         </td>
                       </tr>
@@ -163,79 +161,7 @@ $(document).ready(function() {
           </li>
           <li class="scenario">
             <div class="float-right">
-              <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
-            </div>
-            <div class="scenario-heading" id="calculating-census-months">
-              <h2>Calculating census months</h2>
-            </div>
-            <div class="steps">
-              <ul>
-                <li class="step">
-                  <span class="keyword">Given </span>the census date is the last date of the month</li>
-                <li class="step">
-                  <span class="keyword">When </span>the start date is &lt;start date&gt;</li>
-                <li class="step">
-                  <span class="keyword">And </span>the planned end date is &lt;planned end date&gt;</li>
-                <li class="step">
-                  <span class="keyword">Then </span>the number of census months is &lt;census months&gt;</li>
-              </ul>
-            </div>
-            <a class="scenario-link" href="javascript:showImageLink('calculating-census-months')" title="Copy scenario link to clipboard.">
-              <i class="icon-link"> </i>
-            </a>
-            <div>
-              <div class="examples">
-                <h3>Examples: </h3>
-                <div class="table_container">
-                  <table class="datatable">
-                    <thead>
-                      <tr>
-                        <th>start date</th>
-                        <th>planned end date</th>
-                        <th>census months</th>
-                        <th> </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>01/09/2017</td>
-                        <td>08/09/2018</td>
-                        <td>12</td>
-                        <td>
-                          <div class="float-right">
-                            <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>01/09/2017</td>
-                        <td>29/09/2018</td>
-                        <td>12</td>
-                        <td>
-                          <div class="float-right">
-                            <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>01/09/2017</td>
-                        <td>30/09/2018</td>
-                        <td>13</td>
-                        <td>
-                          <div class="float-right">
-                            <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="scenario">
-            <div class="float-right">
-              <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
+              <i class="icon-ok passed" title="Successful"> </i>
             </div>
             <div class="scenario-heading" id="earnings-distribution">
               <h2>Earnings distribution</h2>
@@ -245,7 +171,7 @@ $(document).ready(function() {
                 <li class="step">
                   <span class="keyword">When </span>the planned course duration covers &lt;census months&gt; months</li>
                 <li class="step">
-                  <span class="keyword">And </span>an agreed price of 15000</li>
+                  <span class="keyword">And </span>an agreed price of &lt;agreed price&gt;</li>
                 <li class="step">
                   <span class="keyword">Then </span>the monthly earnings is &lt;monthly earnings&gt;</li>
                 <li class="step">
@@ -262,6 +188,7 @@ $(document).ready(function() {
                   <table class="datatable">
                     <thead>
                       <tr>
+                        <th>agreed price</th>
                         <th>census months</th>
                         <th>monthly earnings</th>
                         <th>completion payment</th>
@@ -270,22 +197,46 @@ $(document).ready(function() {
                     </thead>
                     <tbody>
                       <tr>
+                        <td>15000</td>
                         <td>12</td>
                         <td>1000</td>
                         <td>3000</td>
                         <td>
                           <div class="float-right">
-                            <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
+                            <i class="icon-ok passed" title="Successful"> </i>
                           </div>
                         </td>
                       </tr>
                       <tr>
+                        <td>15000</td>
                         <td>6</td>
                         <td>2000</td>
                         <td>3000</td>
                         <td>
                           <div class="float-right">
-                            <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
+                            <i class="icon-ok passed" title="Successful"> </i>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>7500</td>
+                        <td>12</td>
+                        <td>500</td>
+                        <td>1500</td>
+                        <td>
+                          <div class="float-right">
+                            <i class="icon-ok passed" title="Successful"> </i>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>7500</td>
+                        <td>6</td>
+                        <td>1000</td>
+                        <td>1500</td>
+                        <td>
+                          <div class="float-right">
+                            <i class="icon-ok passed" title="Successful"> </i>
                           </div>
                         </td>
                       </tr>
