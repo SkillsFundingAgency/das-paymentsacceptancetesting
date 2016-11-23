@@ -1,16 +1,15 @@
-﻿using NUnit.Framework;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using NUnit.Framework;
 using ProviderPayments.TestStack.Core;
 using SFA.DAS.Payments.AcceptanceTests.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.DataHelpers;
 using SFA.DAS.Payments.AcceptanceTests.ExecutionEnvironment;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base;
 using TechTalk.SpecFlow;
 
-namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
+namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
 {
     [Binding]
     public class EarningStepDefinitions : BaseStepDefinitions
@@ -35,8 +34,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 
 
             var committment = StepDefinitionsContext.ReferenceDataContext.Commitments.First();
-            var account = StepDefinitionsContext.ReferenceDataContext.Employers.FirstOrDefault(x => x.Name == committment.Employer);
-
+            var account = StepDefinitionsContext.ReferenceDataContext.Employers.First(x => x.Name == committment.Employer);
 
             //Save the previous earning
             EarningsDataHelper.SaveEarnedAmount(provider.Ukprn,
@@ -102,7 +100,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
         [When(@"an agreed price of (.*)")]
         public void WhenAnAgreedPriceOf(decimal agreedPrice)
         {
-            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
             //get months value
             var months = ScenarioContext.Current.Get<int>("months");
 
@@ -141,7 +138,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
         {
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
-            var learner = StepDefinitionsContext.GetDefaultProvider().Learners.FirstOrDefault();
+            var learner = StepDefinitionsContext.GetDefaultProvider().Learners.First();
             var output = LearnerDataHelper.GetAELearningDelivery(StepDefinitionsContext.GetDefaultProvider().Ukprn,
                                                                 learner.Uln,
                                                                 learner.LearningDelivery.StartDate,
@@ -160,7 +157,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
         {
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
-            var learner = StepDefinitionsContext.GetDefaultProvider().Learners.FirstOrDefault();
+            var learner = StepDefinitionsContext.GetDefaultProvider().Learners.First();
             var output = LearnerDataHelper.GetAELearningDelivery(StepDefinitionsContext.GetDefaultProvider().Ukprn,
                                                                 learner.Uln,
                                                                 learner.LearningDelivery.StartDate,

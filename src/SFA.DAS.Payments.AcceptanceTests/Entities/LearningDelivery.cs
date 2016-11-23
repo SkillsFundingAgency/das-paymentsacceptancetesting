@@ -1,7 +1,7 @@
 ﻿using System;
 using IlrBuilder = SFA.DAS.Payments.AcceptanceTests.Builders.IlrBuilder;
 
-namespace SFA.DAS.Payments.AcceptanceTests.Contexts
+namespace SFA.DAS.Payments.AcceptanceTests.Entities
 {
     public class LearningDelivery
     {

@@ -1,15 +1,15 @@
-﻿using NUnit.Framework;
-using SFA.DAS.Payments.AcceptanceTests.Contexts;
-using SFA.DAS.Payments.AcceptanceTests.DataHelpers;
-using SFA.DAS.Payments.AcceptanceTests.ExecutionEnvironment;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NUnit.Framework;
+using SFA.DAS.Payments.AcceptanceTests.Contexts;
+using SFA.DAS.Payments.AcceptanceTests.DataHelpers;
+using SFA.DAS.Payments.AcceptanceTests.Enums;
+using SFA.DAS.Payments.AcceptanceTests.ExecutionEnvironment;
+using SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base;
 using TechTalk.SpecFlow;
 
-namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
+namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
 {
     [Binding]
     public class PaymentStepDefinitions : BaseStepDefinitions
@@ -35,7 +35,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             SetupEarningsData(provider, learner);
 
             var committment = StepDefinitionsContext.ReferenceDataContext.Commitments.First();
-            var account = StepDefinitionsContext.ReferenceDataContext.Employers.FirstOrDefault(x => x.Name == committment.Employer);
+            var account = StepDefinitionsContext.ReferenceDataContext.Employers.First(x => x.Name == committment.Employer);
 
 
             //Update the balance to the value passed in
@@ -87,7 +87,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
         }
 
         [Then(@"the provider is paid (.*) by the SFA")]
-        public void ThenAGovernmentPaymentIsMade(decimal paidBySFA)
+        public void ThenAGovernmentPaymentIsMade(decimal paidBySfa)
         {
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
@@ -99,10 +99,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                                                                         environmentVariables)
                                                                         .FirstOrDefault();
 
-            if (paidBySFA != 0)
+            if (paidBySfa != 0)
             {
                 Assert.IsNotNull(governmentDueEntity, $"Expected goverment due for the period but nothing found");
-                Assert.AreEqual(paidBySFA, governmentDueEntity.Amount, $"Expected government payment of {paidBySFA} for period R01 but found {governmentDueEntity.Amount}");
+                Assert.AreEqual(paidBySfa, governmentDueEntity.Amount, $"Expected government payment of {paidBySfa} for period R01 but found {governmentDueEntity.Amount}");
             }
             else
             {

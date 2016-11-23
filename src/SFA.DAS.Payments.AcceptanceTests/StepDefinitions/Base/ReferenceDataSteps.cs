@@ -2,9 +2,11 @@
 using System.Linq;
 using SFA.DAS.Payments.AcceptanceTests.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.DataHelpers;
+using SFA.DAS.Payments.AcceptanceTests.Entities;
+using SFA.DAS.Payments.AcceptanceTests.Enums;
 using TechTalk.SpecFlow;
 
-namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
+namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 {
     [Binding]
     public class ReferenceDataSteps

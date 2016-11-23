@@ -1,12 +1,7 @@
 ﻿using ProviderPayments.TestStack.Core;
 using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Dapper;
-using SFA.DAS.Payments.AcceptanceTests.Builders;
 using SFA.DAS.Payments.AcceptanceTests.Entities;
 
 namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
