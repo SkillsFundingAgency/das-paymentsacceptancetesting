@@ -8,6 +8,8 @@ using System.Linq;
 using SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base;
 using TechTalk.SpecFlow;
 using IlrBuilder = SFA.DAS.Payments.AcceptanceTests.Builders.IlrBuilder;
+using System;
+using System.Collections.Generic;
 
 namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
 {

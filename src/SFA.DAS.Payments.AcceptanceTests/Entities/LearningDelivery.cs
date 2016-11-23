@@ -1,5 +1,6 @@
 ﻿using System;
 using IlrBuilder = SFA.DAS.Payments.AcceptanceTests.Builders.IlrBuilder;
+using SFA.DAS.Payments.AcceptanceTests.Enums;
 
 namespace SFA.DAS.Payments.AcceptanceTests.Entities
 {

@@ -65,7 +65,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                 IlrBuilder.Defaults.PathwayCode);
         }
         protected void AddLearnerCommitment(long ukprn, 
-                                            Contexts.Learner learner, 
+                                            Learner learner, 
                                             long? standardCode = null,
                                             int? frameworkCode = null,
                                             int? programmeType = null,
