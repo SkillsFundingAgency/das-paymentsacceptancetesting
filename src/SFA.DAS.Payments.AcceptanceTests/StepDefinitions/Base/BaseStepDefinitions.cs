@@ -120,7 +120,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 
 
             // Process month end now
-            SubmitMonthEnd(new DateTime(2016, 09, 20).NextCensusDate(),new ProcessService(new TestLogger()));
+            SubmitMonthEnd(periodDate.NextCensusDate(),new ProcessService(new TestLogger()));
 
         }
         protected void SetupEarningsData(Provider provider, Learner learner)
