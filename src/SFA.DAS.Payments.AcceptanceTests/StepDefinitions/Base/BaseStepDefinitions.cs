@@ -222,7 +222,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                     StartDate = l.LearningDelivery.StartDate,
                     PlannedEndDate = l.LearningDelivery.PlannedEndDate,
                     ActualEndDate = date >= l.LearningDelivery.ActualEndDate ? l.LearningDelivery.ActualEndDate : null,
-                    CompletionStatus = l.LearningDelivery.CompletionStatus
+                    CompletionStatus = l.LearningDelivery.CompletionStatus,
+                    StandardCode = l.LearningDelivery.StandardCode,
+                    FrameworkCode= l.LearningDelivery.FrameworkCode,
+                    PathwayCode=l.LearningDelivery.PathwayCode,
+                    ProgrammeType=l.LearningDelivery.ProgrammeType
+                    
                 }
             }).ToArray();
 
@@ -287,7 +292,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                                 ? null
                                 : (DateTime?)DateTime.Parse(table.Rows[rowIndex]["actual end date"]),
                         CompletionStatus =
-                            IlrTranslator.TranslateCompletionStatus(table.Rows[rowIndex]["completion status"])
+                            IlrTranslator.TranslateCompletionStatus(table.Rows[rowIndex]["completion status"]),
+
+                        StandardCode = table.Header.Contains("standard code") ? Int32.Parse(table.Rows[rowIndex]["standard code"]) : IlrBuilder.Defaults.StandardCode,
+                        FrameworkCode = table.Header.Contains("framework code") ? Int32.Parse(table.Rows[rowIndex]["framework code"]) : IlrBuilder.Defaults.FrameworkCode,
+                        ProgrammeType = table.Header.Contains("programme type") ? Int32.Parse(table.Rows[rowIndex]["programme type"]) : IlrBuilder.Defaults.ProgrammeType,
+                        PathwayCode = table.Header.Contains("pathway code") ? Int32.Parse(table.Rows[rowIndex]["pathway code"]) : IlrBuilder.Defaults.PathwayCode
+
                     }
                 };
 

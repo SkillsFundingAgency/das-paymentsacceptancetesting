@@ -149,16 +149,19 @@ testRunner.Given("No matching record found in the employer digital account", ((s
                         "start date",
                         "planned end date",
                         "actual end date",
-                        "completion status"});
+                        "completion status",
+                        "standard code"});
             table3.AddRow(new string[] {
                         "programme only DAS",
                         "15000",
                         "01/09/2017",
                         "08/09/2018",
                         "08/08/2018",
-                        "completed"});
+                        "completed",
+                        "99999"});
 #line 22
-testRunner.When("an ILR file is submitted with the following data for the standard code 999999:", ((string)(null)), table3, "When ");
+testRunner.When("an ILR file is submitted with the following data where standard code does not mat" +
+                    "ch:", ((string)(null)), table3, "When ");
 #line 25
 testRunner.Then("a datalock error DLOCK_03 is produced", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -183,16 +186,21 @@ testRunner.Given("No matching record found in the employer digital account", ((s
                         "start date",
                         "planned end date",
                         "actual end date",
-                        "completion status"});
+                        "completion status",
+                        "standard code",
+                        "framework code"});
             table4.AddRow(new string[] {
                         "programme only DAS",
                         "15000",
                         "01/09/2017",
                         "08/09/2018",
                         "08/08/2018",
-                        "completed"});
+                        "completed",
+                        "0",
+                        "99999"});
 #line 30
-testRunner.When("an ILR file is submitted with the following data for the framework code 999999:", ((string)(null)), table4, "When ");
+testRunner.When("an ILR file is submitted with the following data where framework code does not ma" +
+                    "tch:", ((string)(null)), table4, "When ");
 #line 33
 testRunner.Then("a datalock error DLOCK_04 is produced", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -217,16 +225,21 @@ testRunner.Given("No matching record found in the employer digital account", ((s
                         "start date",
                         "planned end date",
                         "actual end date",
-                        "completion status"});
+                        "completion status",
+                        "standard code",
+                        "programme type"});
             table5.AddRow(new string[] {
                         "programme only DAS",
                         "15000",
                         "01/09/2017",
                         "08/09/2018",
                         "08/08/2018",
-                        "completed"});
+                        "completed",
+                        "0",
+                        "99999"});
 #line 38
-testRunner.When("an ILR file is submitted with the following data for the  programme type 999999:", ((string)(null)), table5, "When ");
+testRunner.When("an ILR file is submitted with the following data where programme type does not ma" +
+                    "tch:", ((string)(null)), table5, "When ");
 #line 41
 testRunner.Then("a datalock error DLOCK_05 is produced", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -251,16 +264,21 @@ testRunner.Given("No matching record found in the employer digital account", ((s
                         "start date",
                         "planned end date",
                         "actual end date",
-                        "completion status"});
+                        "completion status",
+                        "standard code",
+                        "pathway code"});
             table6.AddRow(new string[] {
                         "programme only DAS",
                         "15000",
                         "01/09/2017",
                         "08/09/2018",
                         "08/08/2018",
-                        "completed"});
+                        "completed",
+                        "0",
+                        "99999"});
 #line 46
-testRunner.When("an ILR file is submitted with the following data for the  pathway code 999999:", ((string)(null)), table6, "When ");
+testRunner.When("an ILR file is submitted with the following data where pathway code does not matc" +
+                    "h:", ((string)(null)), table6, "When ");
 #line 49
 testRunner.Then("a datalock error DLOCK_06 is produced", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -294,10 +312,80 @@ testRunner.Given("No matching record found in the employer digital account", ((s
                         "08/08/2018",
                         "completed"});
 #line 53
-testRunner.When("an ILR file is submitted with the following data for the  negotiated cost 999999:" +
-                    "", ((string)(null)), table7, "When ");
+testRunner.When("an ILR file is submitted with the following data where negotiated cost does not m" +
+                    "atch:", ((string)(null)), table7, "When ");
 #line 56
 testRunner.Then("a datalock error DLOCK_07 is produced", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("The start month recorded in the employer digital account is after the ILR learnin" +
+            "g delivery start month then datalock DLOCK_08 will be produced")]
+        public virtual void TheStartMonthRecordedInTheEmployerDigitalAccountIsAfterTheILRLearningDeliveryStartMonthThenDatalockDLOCK_08WillBeProduced()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The start month recorded in the employer digital account is after the ILR learnin" +
+                    "g delivery start month then datalock DLOCK_08 will be produced", ((string[])(null)));
+#line 59
+this.ScenarioSetup(scenarioInfo);
+#line 60
+testRunner.Given("No matching record found in the employer digital account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                        "learner type",
+                        "agreed price",
+                        "start date",
+                        "planned end date",
+                        "actual end date",
+                        "completion status"});
+            table8.AddRow(new string[] {
+                        "programme only DAS",
+                        "15000",
+                        "01/09/2017",
+                        "08/09/2018",
+                        "08/08/2018",
+                        "completed"});
+#line 61
+testRunner.When("an ILR file is submitted with the following data where there are multiple matchin" +
+                    "g commitments:", ((string)(null)), table8, "When ");
+#line 64
+testRunner.Then("a datalock error DLOCK_08 is produced", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("The start month recorded in the employer digital account is after the ILR learnin" +
+            "g delivery start month then datalock DLOCK_09 will be produced")]
+        public virtual void TheStartMonthRecordedInTheEmployerDigitalAccountIsAfterTheILRLearningDeliveryStartMonthThenDatalockDLOCK_09WillBeProduced()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The start month recorded in the employer digital account is after the ILR learnin" +
+                    "g delivery start month then datalock DLOCK_09 will be produced", ((string[])(null)));
+#line 66
+this.ScenarioSetup(scenarioInfo);
+#line 67
+testRunner.Given("No matching record found in the employer digital account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+                        "learner type",
+                        "agreed price",
+                        "start date",
+                        "planned end date",
+                        "actual end date",
+                        "completion status"});
+            table9.AddRow(new string[] {
+                        "programme only DAS",
+                        "15000",
+                        "02/09/2017",
+                        "08/09/2018",
+                        "08/08/2018",
+                        "completed"});
+#line 68
+testRunner.When("an ILR file is submitted with the following data where learning delivery start do" +
+                    "es not match:", ((string)(null)), table9, "When ");
+#line 71
+testRunner.Then("a datalock error DLOCK_09 is produced", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

@@ -40,10 +40,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
                             ActualStartDate = l.LearningDelivery.StartDate,
                             PlannedEndDate = l.LearningDelivery.PlannedEndDate,
                             ActualEndDate = l.LearningDelivery.ActualEndDate,
-                            StandardCode = Defaults.StandardCode,
-                            ProgrammeType = Defaults.ProgrammeType,
-                            FrameworkCode = Defaults.FrameworkCode,
-                            PathwayCode = Defaults.PathwayCode,
+
+                            StandardCode = l.LearningDelivery.StandardCode,
+                            ProgrammeType = l.LearningDelivery.ProgrammeType,
+                            FrameworkCode = l.LearningDelivery.FrameworkCode,
+                            PathwayCode = l.LearningDelivery.PathwayCode,
+
                             TrainingCost = tnp1,
                             EndpointAssesmentCost = tnp2
                         }
