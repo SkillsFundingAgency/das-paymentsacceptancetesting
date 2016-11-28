@@ -29,6 +29,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
             {
                 var tnp1 = l.LearningDelivery.AgreedPrice * 0.8m;
                 var tnp2 = l.LearningDelivery.AgreedPrice - tnp1;
+
+                if (l.LearningDelivery.StandardCode == 0)
+                {
+                    tnp1 = tnp1 + tnp2;
+                    tnp2 = 0;
+                }
                 return new Learner
                 {
                     Uln = l.Uln,

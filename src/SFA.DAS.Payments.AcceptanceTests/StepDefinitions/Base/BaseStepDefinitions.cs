@@ -277,28 +277,48 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                 var learner = new Learner
                 {
                     Name = table.Rows[rowIndex].ContainsKey("ULN") ? table.Rows[rowIndex]["ULN"] : string.Empty,
-                    Uln = long.Parse(IdentifierGenerator.GenerateIdentifier(10, false)),
+                   
                     LearningDelivery = new LearningDelivery
                     {
                         AgreedPrice = decimal.Parse(table.Rows[rowIndex]["agreed price"]),
                         LearnerType = LearnerType.ProgrammeOnlyDas,
                         StartDate = DateTime.Parse(table.Rows[rowIndex]["start date"]),
-                        PlannedEndDate = DateTime.Parse(table.Rows[rowIndex]["planned end date"]),
+                        PlannedEndDate = table.Header.Contains("planned end date") ? 
+                                        DateTime.Parse(table.Rows[rowIndex]["planned end date"]) : 
+                                        DateTime.Parse(table.Rows[rowIndex]["start date"]).AddMonths(12),
                         ActualEndDate =
                             !table.Header.Contains("actual end date") ||
                             string.IsNullOrWhiteSpace(table.Rows[rowIndex]["actual end date"])
                                 ? null
                                 : (DateTime?)DateTime.Parse(table.Rows[rowIndex]["actual end date"]),
-                        CompletionStatus =
-                            IlrTranslator.TranslateCompletionStatus(table.Rows[rowIndex]["completion status"]),
+                        CompletionStatus = table.Header.Contains("completion status") ?
+                            IlrTranslator.TranslateCompletionStatus(table.Rows[rowIndex]["completion status"]) :
+                            CompletionStatus.InProgress,
 
-                        StandardCode = table.Header.Contains("standard code") ? Int32.Parse(table.Rows[rowIndex]["standard code"]) : IlrBuilder.Defaults.StandardCode,
                         FrameworkCode = table.Header.Contains("framework code") ? Int32.Parse(table.Rows[rowIndex]["framework code"]) : IlrBuilder.Defaults.FrameworkCode,
                         ProgrammeType = table.Header.Contains("programme type") ? Int32.Parse(table.Rows[rowIndex]["programme type"]) : IlrBuilder.Defaults.ProgrammeType,
                         PathwayCode = table.Header.Contains("pathway code") ? Int32.Parse(table.Rows[rowIndex]["pathway code"]) : IlrBuilder.Defaults.PathwayCode
 
                     }
                 };
+
+
+                if (table.Rows[rowIndex].ContainsKey("ULN"))
+                {
+                    long uln = 0;
+                    long.TryParse(table.Rows[rowIndex]["ULN"], out uln);
+                    learner.Uln = uln;
+                }
+
+                learner.Uln = learner.Uln > 0 ? learner.Uln : long.Parse(IdentifierGenerator.GenerateIdentifier(10, false));
+   
+                var standardCode = table.Header.Contains("standard code") ? Int32.Parse(table.Rows[rowIndex]["standard code"]) : IlrBuilder.Defaults.StandardCode;
+
+                learner.LearningDelivery.StandardCode = learner.LearningDelivery.FrameworkCode > 0 &&
+                                                        learner.LearningDelivery.PathwayCode > 0 &&
+                                                        learner.LearningDelivery.ProgrammeType > 0 ? 0 : standardCode;
+
+
 
                 var provider = table.ContainsColumn("Provider")
                     ? table.Rows[rowIndex]["Provider"]
