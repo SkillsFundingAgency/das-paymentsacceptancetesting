@@ -1,5 +1,4 @@
 ﻿using ProviderPayments.TestStack.Core;
-using SFA.DAS.Payments.AcceptanceTests.Entities;
 using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
