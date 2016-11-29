@@ -29,6 +29,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
             {
                 var tnp1 = l.LearningDelivery.AgreedPrice * 0.8m;
                 var tnp2 = l.LearningDelivery.AgreedPrice - tnp1;
+
+                if (l.LearningDelivery.StandardCode == 0)
+                {
+                    tnp1 = tnp1 + tnp2;
+                    tnp2 = 0;
+                }
                 return new Learner
                 {
                     Uln = l.Uln,
@@ -40,10 +46,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
                             ActualStartDate = l.LearningDelivery.StartDate,
                             PlannedEndDate = l.LearningDelivery.PlannedEndDate,
                             ActualEndDate = l.LearningDelivery.ActualEndDate,
-                            StandardCode = Defaults.StandardCode,
-                            ProgrammeType = Defaults.ProgrammeType,
-                            FrameworkCode = Defaults.FrameworkCode,
-                            PathwayCode = Defaults.PathwayCode,
+
+                            StandardCode = l.LearningDelivery.StandardCode,
+                            ProgrammeType = l.LearningDelivery.ProgrammeType,
+                            FrameworkCode = l.LearningDelivery.FrameworkCode,
+                            PathwayCode = l.LearningDelivery.PathwayCode,
+
                             TrainingCost = tnp1,
                             EndpointAssesmentCost = tnp2
                         }
