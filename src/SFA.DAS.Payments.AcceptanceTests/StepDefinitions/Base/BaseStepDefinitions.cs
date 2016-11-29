@@ -91,7 +91,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                 IlrBuilder.Defaults.ProgrammeType,
                 IlrBuilder.Defaults.PathwayCode,
                 commitmentPriority,
-                "1",EnvironmentVariables);
+                "1",
+                1,
+                "Active",
+                true,
+                EnvironmentVariables);
         }
 
         protected void SubmitMonthEnd(DateTime date, ProcessService processService)
