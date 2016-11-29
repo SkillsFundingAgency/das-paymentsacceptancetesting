@@ -29,5 +29,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                 connection.Execute("INSERT INTO EventStreamPointer SELECT ISNULL(MAX(EventId),0) + 1, GETDATE() FROM EventStreamPointer");
             }
         }
+
+
+        internal static void DeleteCommmitment(long ukprn, long uln,EnvironmentVariables environmentVariables)
+        {
+            using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
+            {
+                connection.Execute("DELETE FROM dbo.DasCommitments Where UKPRN=@ukprn AND ULN=@uln AND AccountId =@accountId",
+                new {ukprn,uln });
+            }
+        }
     }
 }

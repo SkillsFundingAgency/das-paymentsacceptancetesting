@@ -167,6 +167,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             LearnerDataHelper.SaveLearningDelivery(provider.Ukprn,
                                                     learner.LearningDelivery.StartDate,
                                                     learner.LearningDelivery.PlannedEndDate,
+                                                    IlrBuilder.Defaults.StandardCode,
+                                                    IlrBuilder.Defaults.ProgrammeType,
                                                     EnvironmentVariables);
 
             //save learning delivery FAM

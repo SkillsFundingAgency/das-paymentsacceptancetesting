@@ -1,5 +1,9 @@
+
 Feature: Datalock validation fails for different reasons
 
+#####################################################################
+#These scenarios are for ILR submission related data lock errors
+#####################################################################
 Scenario: When no matching record found in an employer digital account for the UKPRN then datalock DLOCK_01 will be produced
 
     Given the following commitment exists for an apprentice:
@@ -135,3 +139,22 @@ Scenario: When the start month recorded in the employer digital account is after
       
     Then a datalock error DLOCK_09 is produced
   
+
+    
+#####################################################################
+#These scenarios are for Period End submission related data lock errors
+#####################################################################
+
+Scenario: When monthky payment process runs and no matching record is found in an employer digital account for the UKPRN then datalock DLOCK_01 will be produced
+
+    Given the following commitment exists for an apprentice:
+
+        | UKPRN   | ULN  | standard code | agreed price | start date |
+        | 9999999 | 1234 | 1             | 10000        | 01/05/2017 |
+      
+    When monthly payment process runs for the following ILR data:
+        
+        | UKPRN   | ULN  | standard code | agreed price | start date |
+        | 1000000 | 1234 | 1             | 10000        | 01/05/2017 |
+	
+    Then a datalock error DLOCK_01 is produced
