@@ -436,6 +436,14 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "10000",
                         "01/05/2017"});
+            table15.AddRow(new string[] {
+                        "9999999",
+                        "1234",
+                        "450",
+                        "2",
+                        "1",
+                        "10000",
+                        "01/05/2017"});
 #line 109
     testRunner.Given("the following commitments exist for an apprentice:", ((string)(null)), table15, "Given ");
 #line hidden

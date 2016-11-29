@@ -110,8 +110,8 @@ Scenario: When there is more than one matching commitment in the employer digita
 
         | UKPRN   | ULN  | framework code | programme type | pathway code | agreed price | start date |
         | 9999999 | 1234 | 450            | 2              | 1            | 10000        | 01/05/2017 |
-     
-      
+        | 9999999 | 1234 | 450            | 2              | 1            | 10000        | 01/05/2017 |
+
     When and ILR is submitted with the following data:
         
         | UKPRN   | ULN  | framework code | programme type | pathway code | agreed price | start date |

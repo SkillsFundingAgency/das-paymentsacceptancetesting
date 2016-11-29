@@ -36,7 +36,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
         public void GivenTheFollowingCommitmentsExistForAnApprentice(Table table)
         {
             SetupCommitments(table);
-            SetupCommitments(table);
+          
         }
 
 
@@ -87,39 +87,42 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
 
             AccountDataHelper.CreateAccount(employer.AccountId, employer.AccountId.ToString(), 0.00m, EnvironmentVariables);
 
-            var row = table.Rows[0];
-
-            var ukprn = long.Parse(row["UKPRN"]);
-            var startDate = DateTime.Parse(row["start date"]);
-
-
-            var frameworkCode = table.Header.Contains("framework code") ? Int32.Parse(row["framework code"]) : IlrBuilder.Defaults.FrameworkCode;
-            var programmeType = table.Header.Contains("programme type") ? Int32.Parse(row["programme type"]) : IlrBuilder.Defaults.ProgrammeType;
-            var pathwayCode = table.Header.Contains("pathway code") ? Int32.Parse(row["pathway code"]) : IlrBuilder.Defaults.PathwayCode;
-
-            var standardCode = table.Header.Contains("standard code") ? Int32.Parse(row["standard code"]) : IlrBuilder.Defaults.StandardCode;
-
-            if (frameworkCode > 0 && programmeType > 0 && pathwayCode > 0)
+            foreach (var row in table.Rows)
             {
-                standardCode = 0;
+                //var row = table.Rows[0];
+
+                var ukprn = long.Parse(row["UKPRN"]);
+                var startDate = DateTime.Parse(row["start date"]);
+
+
+                var frameworkCode = table.Header.Contains("framework code") ? Int32.Parse(row["framework code"]) : IlrBuilder.Defaults.FrameworkCode;
+                var programmeType = table.Header.Contains("programme type") ? Int32.Parse(row["programme type"]) : IlrBuilder.Defaults.ProgrammeType;
+                var pathwayCode = table.Header.Contains("pathway code") ? Int32.Parse(row["pathway code"]) : IlrBuilder.Defaults.PathwayCode;
+
+                var standardCode = table.Header.Contains("standard code") ? Int32.Parse(row["standard code"]) : IlrBuilder.Defaults.StandardCode;
+
+                if (frameworkCode > 0 && programmeType > 0 && pathwayCode > 0)
+                {
+                    standardCode = 0;
+                }
+
+
+                StepDefinitionsContext.AddProvider("provider", ukprn);
+
+                CommitmentDataHelper.CreateCommitment(
+                                long.Parse(IdentifierGenerator.GenerateIdentifier(6, false)),
+                                ukprn,
+                                long.Parse(row["ULN"]),
+                                employer.AccountId.ToString(),
+                                startDate,
+                                startDate.AddMonths(12),
+                                decimal.Parse(row["agreed price"]),
+                                standardCode,
+                                frameworkCode,
+                                 programmeType,
+                                pathwayCode,
+                                1, "1", EnvironmentVariables);
             }
-
-
-            StepDefinitionsContext.AddProvider("provider", ukprn);
-
-            CommitmentDataHelper.CreateCommitment(
-                            long.Parse(IdentifierGenerator.GenerateIdentifier(6, false)),
-                            ukprn,
-                            long.Parse(row["ULN"]),
-                            employer.AccountId.ToString(),
-                            startDate,
-                            startDate.AddMonths(12),
-                            decimal.Parse(row["agreed price"]),
-                            standardCode,
-                            frameworkCode,
-                             programmeType,
-                            pathwayCode,
-                            1, "1", EnvironmentVariables);
 
         }
 
