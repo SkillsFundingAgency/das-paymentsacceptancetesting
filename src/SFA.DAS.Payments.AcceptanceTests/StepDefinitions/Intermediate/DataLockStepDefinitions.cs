@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
 {
-    [Binding]
+    [Binding, Scope(Feature  = "Datalock validation fails for different reasons")]
     public class DataLockStepDefinitions : BaseStepDefinitions
     {
         public DataLockStepDefinitions(StepDefinitionsContext context)
@@ -40,7 +40,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
         }
 
 
-        [When(@"and ILR is submitted with the following data:")]
+        [When(@"an ILR file is submitted with the following data:")]
         public void WhenAndILRIsSubmittedWithTheFollowingData(Table table)
         {
 

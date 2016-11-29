@@ -7,7 +7,7 @@ Scenario: When no matching record found in an employer digital account for the U
         | UKPRN   | ULN  | standard code | agreed price | start date |
         | 9999999 | 1234 | 1             | 10000        | 01/05/2017 |
       
-    When and ILR is submitted with the following data:
+    When an ILR file is submitted with the following data:
         
         | UKPRN   | ULN  | standard code | agreed price | start date |
         | 1000000 | 1234 | 1             | 10000        | 01/05/2017 |
@@ -21,7 +21,7 @@ Scenario: When no matching record found in an employer digital account for the U
         | UKPRN   | ULN  | standard code | agreed price | start date |
         | 9999999 | 1234 | 1             | 10000        | 01/05/2017 |
       
-    When and ILR is submitted with the following data:
+    When an ILR file is submitted with the following data:
         
         | UKPRN   | ULN  | standard code | agreed price | start date |
         | 9999999 | 3456 | 1             | 10000        | 01/05/2017 |
@@ -35,7 +35,7 @@ Scenario: When no matching record found in an employer digital account for the s
         | UKPRN   | ULN  | standard code | agreed price | start date |
         | 9999999 | 1234 | 1             | 10000        | 01/05/2017 |
       
-    When and ILR is submitted with the following data:
+    When an ILR file is submitted with the following data:
         
         | UKPRN   | ULN  | standard code | agreed price | start date |
         | 9999999 | 1234 | 2             | 10000        | 01/05/2017 |
@@ -51,7 +51,7 @@ Scenario: When no matching record found in an employer digital account for the f
         | UKPRN   | ULN  | framework code | programme type | pathway code | agreed price | start date |
         | 9999999 | 1234 | 450            | 2              | 1            | 10000        | 01/05/2017 |
       
-    When and ILR is submitted with the following data:
+    When an ILR file is submitted with the following data:
         
         | UKPRN   | ULN  | framework code | programme type | pathway code | agreed price | start date |
         | 9999999 | 1234 | 451            | 2              | 1            | 10000        | 01/05/2017 |
@@ -66,7 +66,7 @@ Scenario: When no matching record found in an employer digital account for the f
         | UKPRN   | ULN  | framework code | programme type | pathway code | agreed price | start date |
         | 9999999 | 1234 | 450            | 2              | 1            | 10000        | 01/05/2017 |
       
-    When and ILR is submitted with the following data:
+    When an ILR file is submitted with the following data:
         
         | UKPRN   | ULN  | framework code | programme type | pathway code | agreed price | start date |
         | 9999999 | 1234 | 450            | 3              | 1            | 10000        | 01/05/2017 |
@@ -80,7 +80,7 @@ Scenario: When no matching record found in an employer digital account for the f
         | UKPRN   | ULN  | framework code | programme type | pathway code | agreed price | start date |
         | 9999999 | 1234 | 450            | 2              | 1            | 10000        | 01/05/2017 |
       
-    When and ILR is submitted with the following data:
+    When an ILR file is submitted with the following data:
         
         | UKPRN   | ULN  | framework code | programme type | pathway code | agreed price | start date |
         | 9999999 | 1234 | 450            | 2              | 2            | 10000        | 01/05/2017 |
@@ -95,7 +95,7 @@ Scenario: When no matching record found in an employer digital account for for t
         | UKPRN   | ULN  | framework code | programme type | pathway code | agreed price | start date |
         | 9999999 | 1234 | 450            | 2              | 1            | 10000        | 01/05/2017 |
       
-    When and ILR is submitted with the following data:
+    When an ILR file is submitted with the following data:
         
         | UKPRN   | ULN  | framework code | programme type | pathway code | agreed price | start date |
         | 9999999 | 1234 | 450            | 2              | 1            | 10001        | 01/05/2017 |
@@ -112,7 +112,7 @@ Scenario: When there is more than one matching commitment in the employer digita
         | 9999999 | 1234 | 450            | 2              | 1            | 10000        | 01/05/2017 |
         | 9999999 | 1234 | 450            | 2              | 1            | 10000        | 01/05/2017 |
 
-    When and ILR is submitted with the following data:
+    When an ILR file is submitted with the following data:
         
         | UKPRN   | ULN  | framework code | programme type | pathway code | agreed price | start date |
         | 9999999 | 1234 | 450            | 2              | 1            | 10000        | 01/05/2017 |
@@ -128,7 +128,7 @@ Scenario: When the start month recorded in the employer digital account is after
         | UKPRN   | ULN  | framework code | programme type | pathway code | agreed price | start date |
         | 9999999 | 1234 | 450            | 2              | 1            | 10000        | 01/05/2017 |
       
-    When and ILR is submitted with the following data:
+    When an ILR file is submitted with the following data:
         
         | UKPRN   | ULN  | framework code | programme type | pathway code | agreed price | start date |
         | 9999999 | 1234 | 450            | 2              | 1            | 10000        | 30/04/2017 |

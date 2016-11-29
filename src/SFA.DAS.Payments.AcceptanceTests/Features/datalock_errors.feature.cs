@@ -101,7 +101,7 @@ this.ScenarioSetup(scenarioInfo);
                         "10000",
                         "01/05/2017"});
 #line 10
-    testRunner.When("and ILR is submitted with the following data:", ((string)(null)), table2, "When ");
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table2, "When ");
 #line 15
     testRunner.Then("a datalock error DLOCK_01 is produced", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -146,7 +146,7 @@ this.ScenarioSetup(scenarioInfo);
                         "10000",
                         "01/05/2017"});
 #line 24
-    testRunner.When("and ILR is submitted with the following data:", ((string)(null)), table4, "When ");
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table4, "When ");
 #line 29
     testRunner.Then("a datalock error DLOCK_02 is produced", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -191,7 +191,7 @@ this.ScenarioSetup(scenarioInfo);
                         "10000",
                         "01/05/2017"});
 #line 38
-    testRunner.When("and ILR is submitted with the following data:", ((string)(null)), table6, "When ");
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table6, "When ");
 #line 43
     testRunner.Then("a datalock error DLOCK_03 is produced", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -244,7 +244,7 @@ this.ScenarioSetup(scenarioInfo);
                         "10000",
                         "01/05/2017"});
 #line 54
-    testRunner.When("and ILR is submitted with the following data:", ((string)(null)), table8, "When ");
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table8, "When ");
 #line 59
     testRunner.Then("a datalock error DLOCK_04 is produced", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -297,7 +297,7 @@ this.ScenarioSetup(scenarioInfo);
                         "10000",
                         "01/05/2017"});
 #line 69
-    testRunner.When("and ILR is submitted with the following data:", ((string)(null)), table10, "When ");
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table10, "When ");
 #line 74
     testRunner.Then("a datalock error DLOCK_05 is produced", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -350,7 +350,7 @@ this.ScenarioSetup(scenarioInfo);
                         "10000",
                         "01/05/2017"});
 #line 83
-    testRunner.When("and ILR is submitted with the following data:", ((string)(null)), table12, "When ");
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table12, "When ");
 #line 88
     testRunner.Then("a datalock error DLOCK_06 is produced", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -403,7 +403,7 @@ this.ScenarioSetup(scenarioInfo);
                         "10001",
                         "01/05/2017"});
 #line 98
-    testRunner.When("and ILR is submitted with the following data:", ((string)(null)), table14, "When ");
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table14, "When ");
 #line 103
     testRunner.Then("a datalock error DLOCK_07 is produced", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -464,7 +464,7 @@ this.ScenarioSetup(scenarioInfo);
                         "10000",
                         "01/05/2017"});
 #line 115
-    testRunner.When("and ILR is submitted with the following data:", ((string)(null)), table16, "When ");
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table16, "When ");
 #line 120
     testRunner.Then("a datalock error DLOCK_08 is produced", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -517,7 +517,7 @@ this.ScenarioSetup(scenarioInfo);
                         "10000",
                         "30/04/2017"});
 #line 131
-    testRunner.When("and ILR is submitted with the following data:", ((string)(null)), table18, "When ");
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table18, "When ");
 #line 136
     testRunner.Then("a datalock error DLOCK_09 is produced", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
