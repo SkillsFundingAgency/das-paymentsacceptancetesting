@@ -88,16 +88,16 @@
     <Compile Include="Builders\IlrLearningDeliveryBuilder.cs" />
     <Compile Include="Builders\IlrSubmissionDefaults.cs" />
     <Compile Include="DataHelpers\ValidationErrorsDataHelper.cs" />
-    <Compile Include="Entities\AE_LearningDelivery.cs" />
+    <Compile Include="DataHelpers\Entities\AE_LearningDelivery.cs" />
     <Compile Include="Entities\Commitment.cs" />
     <Compile Include="Entities\Employer.cs" />
     <Compile Include="Entities\Learner.cs" />
     <Compile Include="Entities\LearningDelivery.cs" />
-    <Compile Include="Entities\PaymentEntity.cs" />
-    <Compile Include="Entities\PeriodisedValuesEntity.cs" />
+    <Compile Include="DataHelpers\Entities\PaymentEntity.cs" />
+    <Compile Include="DataHelpers\Entities\PeriodisedValuesEntity.cs" />
     <Compile Include="Entities\Provider.cs" />
-    <Compile Include="Entities\RequiredPaymentEntity.cs" />
-    <Compile Include="Entities\VlidationErrorEntity.cs" />
+    <Compile Include="DataHelpers\Entities\RequiredPaymentEntity.cs" />
+    <Compile Include="DataHelpers\Entities\VlidationErrorEntity.cs" />
     <Compile Include="Enums\CompletionStatus.cs" />
     <Compile Include="Contexts\StepDefinitionsContext.cs" />
     <Compile Include="Enums\FundingSource.cs" />
@@ -117,6 +117,7 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Features\datalock_errors.feature.cs" />
     <Compile Include="Features\earnings_calc.feature.cs" />
+    <Compile Include="Features\employer_stops_payments.feature.cs" />
     <Compile Include="Features\ILR_is_submitted_late.feature.cs" />
     <Compile Include="Features\learner_finishes_early.feature.cs" />
     <Compile Include="Features\learner_finishes_late.feature.cs" />
@@ -140,6 +141,9 @@
     </None>
     <None Include="..\..\features\earnings_calc.feature">
       <Link>Features\earnings_calc.feature</Link>
+    </None>
+    <None Include="..\..\features\employer_stops_payments.feature">
+      <Link>Features\employer_stops_payments.feature</Link>
     </None>
     <None Include="..\..\features\ILR_is_submitted_late.feature">
       <Link>Features\ILR_is_submitted_late.feature</Link>
@@ -167,6 +171,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

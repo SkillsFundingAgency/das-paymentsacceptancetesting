@@ -2,6 +2,7 @@
 using System.Linq;
 using Dapper;
 using ProviderPayments.TestStack.Core;
+using SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities;
 using SFA.DAS.Payments.AcceptanceTests.Entities;
 using SFA.DAS.Payments.AcceptanceTests.Enums;
 

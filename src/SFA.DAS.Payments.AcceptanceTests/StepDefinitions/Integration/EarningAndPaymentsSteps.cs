@@ -4,6 +4,7 @@ using NUnit.Framework;
 using ProviderPayments.TestStack.Core;
 using SFA.DAS.Payments.AcceptanceTests.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.DataHelpers;
+using SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities;
 using SFA.DAS.Payments.AcceptanceTests.Entities;
 using SFA.DAS.Payments.AcceptanceTests.Enums;
 using SFA.DAS.Payments.AcceptanceTests.ExecutionEnvironment;
@@ -15,61 +16,44 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
     [Binding]
     public class EarningAndPaymentsSteps : BaseStepDefinitions
     {
-
         public EarningAndPaymentsSteps(StepDefinitionsContext earningAndPaymentsContext)
             :base(earningAndPaymentsContext)
         {
-
         }
 
         [When(@"an ILR file is submitted with the following data:")]
         public void WhenAnIlrFileIsSubmittedWithTheFollowingData(Table table)
         {
-            
-            // Store spec values in context
-            SetupContextProviders(table);
-            SetupContexLearners(table);
-
-            // Setup reference data
-            SetupReferenceData();
-
-            // Process months
             var startDate = StepDefinitionsContext.GetIlrStartDate().NextCensusDate();
-            ProcessMonths(startDate);
+            ProcessIlrFileSubmissions(startDate, table);
+        }
+
+        [When(@"an ILR file is submitted every month with the following data:")]
+        public void WhenAnIlrFileIsSubmittedEveryMonthWithTheFollowingData(Table table)
+        {
+            var startDate = StepDefinitionsContext.GetIlrStartDate().NextCensusDate();
+            ProcessIlrFileSubmissions(startDate, table);
         }
 
         [When(@"an ILR file is submitted in (.*) with the following data:")]
         public void WhenAnIlrFileIsSubmittedInAMonthWithTheFollowingData(string month, Table table)
         {
-           
-
-            // Store spec values in context
-            SetupContextProviders(table);
-            SetupContexLearners(table);
-
-            // Setup reference data
-            SetupReferenceData();
-
-            // Process months
             var submissionDate = new DateTime(int.Parse(month.Substring(3)) + 2000, int.Parse(month.Substring(0, 2)), 1).NextCensusDate();
-            ProcessMonths(submissionDate);
+            ProcessIlrFileSubmissions(submissionDate, table);
+        }
+
+        [When(@"an ILR file is submitted for the first time in (.*) with the following data:")]
+        public void WhenAnIlrFileIsSubmittedForTheFirstTimeInAMonthWithTheFollowingData(string month, Table table)
+        {
+            var submissionDate = new DateTime(int.Parse(month.Substring(3)) + 2000, int.Parse(month.Substring(0, 2)), 1).NextCensusDate();
+            ProcessIlrFileSubmissions(submissionDate, table);
         }
 
         [When(@"the providers submit the following ILR files:")]
         public void WhenTheProvidersSubmitTheFollowingIlrFiles(Table table)
         {
-          
-
-            // Store spec values in context
-            SetupContextProviders(table);
-            SetupContexLearners(table);
-
-            // Setup reference data
-            SetupReferenceData();
-
-            // Process months
             var startDate = StepDefinitionsContext.GetIlrStartDate().NextCensusDate();
-            ProcessMonths(startDate);
+            ProcessIlrFileSubmissions(startDate, table);
         }
 
         [Then(@"the provider earnings and payments break down as follows:")]
@@ -116,7 +100,19 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             }
         }
 
-        
+        private void ProcessIlrFileSubmissions(DateTime firstSubmission, Table table)
+        {
+            // Store spec values in context
+            SetupContextProviders(table);
+            SetupContexLearners(table);
+
+            // Setup reference data
+            SetupReferenceData();
+
+            // Process months
+            ProcessMonths(firstSubmission);
+        }
+
         private void ProcessMonths(DateTime start)
         {
             var processService = new ProcessService(new TestLogger());

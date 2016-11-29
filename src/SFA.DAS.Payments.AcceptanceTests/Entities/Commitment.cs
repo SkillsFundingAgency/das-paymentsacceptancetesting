@@ -7,5 +7,7 @@
         public string Learner { get; set; }
         public string Employer { get; set; }
         public string Provider { get; set; }
+        public bool Payable { get; set; }
+        public string StopPeriod { get; set; }
     }
 }

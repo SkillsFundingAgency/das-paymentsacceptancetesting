@@ -85,22 +85,22 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
 #line 5
     this.FeatureBackground();
 #line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                         "learner type",
                         "agreed price",
                         "start date",
                         "planned end date",
                         "completion status"});
-            table2.AddRow(new string[] {
+            table8.AddRow(new string[] {
                         "programme only DAS",
                         "15000",
                         "01/09/2017",
                         "08/09/2018",
                         "continuing"});
 #line 10
-        testRunner.When("an ILR file is submitted in 12/17 with the following data:", ((string)(null)), table2, "When ");
+        testRunner.When("an ILR file is submitted in 12/17 with the following data:", ((string)(null)), table8, "When ");
 #line hidden
-            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
                         "09/17",
                         "10/17",
@@ -109,7 +109,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "01/18",
                         "02/18",
                         "..."});
-            table3.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Provider Earned Total",
                         "1000",
                         "1000",
@@ -118,7 +118,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "1000",
                         "1000",
                         "..."});
-            table3.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Provider Earned from SFA",
                         "1000",
                         "1000",
@@ -127,7 +127,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "1000",
                         "1000",
                         "..."});
-            table3.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Provider Paid by SFA",
                         "0",
                         "0",
@@ -136,7 +136,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "4000",
                         "1000",
                         "..."});
-            table3.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "Levy account debited",
                         "0",
                         "0",
@@ -145,7 +145,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "4000",
                         "1000",
                         "..."});
-            table3.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "SFA Levy employer budget",
                         "1000",
                         "1000",
@@ -154,7 +154,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "1000",
                         "1000",
                         "..."});
-            table3.AddRow(new string[] {
+            table9.AddRow(new string[] {
                         "SFA Levy co-funding budget",
                         "0",
                         "0",
@@ -164,7 +164,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "1000",
                         "..."});
 #line 13
-        testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table3, "Then ");
+        testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table9, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

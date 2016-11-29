@@ -1,4 +1,4 @@
-﻿namespace SFA.DAS.Payments.AcceptanceTests.Entities
+﻿namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities
 {
     public class VlidationErrorEntity
     {

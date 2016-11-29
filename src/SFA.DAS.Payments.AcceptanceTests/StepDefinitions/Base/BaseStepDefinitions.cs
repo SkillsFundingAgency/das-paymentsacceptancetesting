@@ -6,6 +6,7 @@ using ProviderPayments.TestStack.Core;
 using ProviderPayments.TestStack.Core.Domain;
 using SFA.DAS.Payments.AcceptanceTests.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.DataHelpers;
+using SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities;
 using SFA.DAS.Payments.AcceptanceTests.Entities;
 using SFA.DAS.Payments.AcceptanceTests.Enums;
 using SFA.DAS.Payments.AcceptanceTests.ExecutionEnvironment;
