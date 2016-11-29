@@ -1,5 +1,4 @@
-﻿
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using ProviderPayments.TestStack.Core;
 using SFA.DAS.Payments.AcceptanceTests.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.DataHelpers;
@@ -121,7 +120,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
                                 frameworkCode,
                                  programmeType,
                                 pathwayCode,
-                                1, "1", EnvironmentVariables);
+                                1, "1", 1, "Active", true, EnvironmentVariables);
             }
 
         }
