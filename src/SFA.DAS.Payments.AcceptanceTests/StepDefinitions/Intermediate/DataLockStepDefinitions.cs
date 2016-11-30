@@ -75,6 +75,31 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             Assert.IsTrue(validationError.Any(x => x.RuleId == errorCode));
         }
 
+        [When(@"monthly payment process runs for the following ILR data:")]
+        public void WhenMonthlyPaymentProcessRunsForTheFollowingILRData(Table table)
+        {
+            // Setup reference data
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+
+            SetupContexLearners(table);
+
+            var provider = StepDefinitionsContext.GetDefaultProvider();
+            provider.Ukprn = long.Parse( table.Rows[0]["UKPRN"]);
+            var learner = provider.Learners[0];
+           
+          
+            var startDate = StepDefinitionsContext.GetIlrStartDate().NextCensusDate();
+
+            SetupValidLearnersData(provider.Ukprn, learner);
+
+            var dueAmount = learner.LearningDelivery.AgreedPrice * 0.8m / 12;
+            EarningsDataHelper.SavePeriodisedValuesForUkprn(provider.Ukprn,
+                                                      new Dictionary<string, decimal> { { "Period_1", dueAmount } },
+                                                      environmentVariables);
+
+            //Run the month end
+            RunMonthEnd(startDate);
+        }
 
 
 
@@ -109,6 +134,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
 
 
                 StepDefinitionsContext.AddProvider("provider", ukprn);
+            
 
                 CommitmentDataHelper.CreateCommitment(
                     new CommitmentEntity

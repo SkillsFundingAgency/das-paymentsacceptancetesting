@@ -3,6 +3,7 @@ using System;
 using System.Data.SqlClient;
 using Dapper;
 using SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities;
+using SFA.DAS.Payments.AcceptanceTests.Entities;
 
 namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 {
@@ -25,8 +26,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
         }
 
         internal static void SaveLearningDelivery(long ukprn, 
-                                                DateTime learnStartDate,
-                                                DateTime learnPlanEndDate, 
+                                               LearningDelivery learningDelivery,
                                                 EnvironmentVariables environmentVariables)
         {
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
@@ -34,9 +34,16 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 
                 connection.Execute("INSERT INTO [Valid].[LearningDelivery]" + 
                 "  ([UKPRN],[LearnRefNumber],[LearnAimRef],[AimType],[AimSeqNumber],[LearnStartDate],[LearnPlanEndDate]," +
-                "[FundModel],[ProgType],[StdCode])" +
-                " VALUES (@ukprn,'1','ZPROG001',1,1,@learnStartDate,@learnPlanEndDate,36,25,98765)",
-                    new { ukprn,  learnStartDate,learnPlanEndDate });
+                "[FundModel],[ProgType],[StdCode],FWorkCode,PWayCode)" +
+                " VALUES (@ukprn,'1','ZPROG001',1,1,@StartDate,@PlannedEndDate,36,@ProgrammeType,@StandardCode,@FrameworkCode,@PathwayCode)",
+                    new { ukprn,
+                        learningDelivery.StartDate,
+                        learningDelivery.PlannedEndDate,
+                        learningDelivery.ProgrammeType,
+                        StandardCode = learningDelivery.StandardCode > 0 ? learningDelivery.StandardCode : (long?)null,
+                        learningDelivery.FrameworkCode,
+                        learningDelivery.PathwayCode
+                    });
 
             }
 

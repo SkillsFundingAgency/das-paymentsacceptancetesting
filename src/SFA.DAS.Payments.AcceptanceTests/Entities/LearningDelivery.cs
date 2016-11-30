@@ -26,5 +26,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Entities
         public int ProgrammeType { get; set; }
         public int PathwayCode { get; set; }
 
+        public decimal MonthlyPayment { get; set; }
+        public decimal CompletionPayment { get; set; }
+
     }
 }

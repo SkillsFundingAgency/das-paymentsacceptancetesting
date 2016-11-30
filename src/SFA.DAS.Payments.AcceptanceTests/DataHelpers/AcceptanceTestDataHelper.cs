@@ -41,6 +41,21 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
             {
                 connection.Execute("DELETE FROM Valid.LearningProvider");
+                connection.Execute("DELETE FROM Valid.LearningDelivery");
+                connection.Execute("DELETE FROM Valid.LearningDeliveryFAM");
+                connection.Execute("DELETE FROM Valid.TrailblazerApprenticeshipFinancialRecord");
+
+                connection.Execute("DELETE FROM Rulebase.AE_LearningDelivery");
+                connection.Execute("DELETE FROM Rulebase.AE_LearningDelivery_PeriodisedValues");
+
+                connection.Execute("DELETE FROM dbo.FileDetails");
+                connection.Execute("DELETE FROM dbo.DasCommitments");
+                connection.Execute("DELETE FROM dbo.DasAccounts");
+
+               
+                connection.Execute("DELETE FROM DataLock.ValidationError");
+
+                connection.Execute("DELETE FROM Valid.Learner");
             }
         }
 

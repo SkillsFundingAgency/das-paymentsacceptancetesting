@@ -5,6 +5,8 @@ using ProviderPayments.TestStack.Core;
 using System.Collections.Generic;
 using System;
 using SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities;
+using IlrBuilder = SFA.DAS.Payments.AcceptanceTests.Builders.IlrBuilder;
+using SFA.DAS.Payments.AcceptanceTests.Entities;
 
 namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 {
@@ -55,25 +57,34 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
         
         }
 
-
+        
         internal static void SaveLearningDeliveryValuesForUkprn(long ukprn, 
                                                                 long uln,
-                                                                decimal negotiatedPrice,
-                                                                DateTime learnStartDate, 
-                                                                DateTime learnPlanEndDate,
-                                                                decimal monthlyInstallment, 
-                                                                decimal completionPayment,
+                                                                LearningDelivery learningDelivery,
                                                                 EnvironmentVariables environmentVariables)
         {
+
+           
 
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
             {
                
-                    connection.Execute("INSERT INTO [Rulebase].[AE_LearningDelivery] " +
-                                       "(LearnRefNumber,AimSeqNumber,Ukprn,uln,NiNumber,StdCode,ProgType,NegotiatedPrice,learnStartDate,learnPlanEndDate,monthlyInstallment,monthlyInstallmentUncapped,completionPayment,completionPaymentUncapped) " +
+                connection.Execute("INSERT INTO [Rulebase].[AE_LearningDelivery] " +
+                                       "(LearnRefNumber,AimSeqNumber,Ukprn,uln,NiNumber,StdCode,ProgType,FWorkCode,PWayCode,NegotiatedPrice,learnStartDate,learnPlanEndDate," +
+                                       "monthlyInstallment,monthlyInstallmentUncapped,completionPayment,completionPaymentUncapped) " +
                                        "VALUES " +
-                                       "('1', 1, @ukprn, @uln,'AB123456C',98765,25,@negotiatedPrice,@LearnStartDate,@LearnPlanEndDate,@MonthlyInstallment,@MonthlyInstallment,@CompletionPayment,@CompletionPayment)",
-                        new { ukprn,@uln, negotiatedPrice, learnStartDate,learnPlanEndDate,monthlyInstallment,completionPayment });
+                                       "('1', 1, @ukprn, @uln,'AB123456C',@standardCode,@ProgrammeType,@FrameworkCode,@PathwayCode,@AgreedPrice," +
+                                       "@StartDate,@PlannedEndDate,@MonthlyPayment,@MonthlyPayment,@CompletionPayment,@CompletionPayment)",
+                        new { ukprn,@uln,
+                                standardCode = learningDelivery.StandardCode > 0 ? learningDelivery.StandardCode : (long?)null,
+                                learningDelivery.ProgrammeType,
+                                learningDelivery.AgreedPrice,
+                                learningDelivery.FrameworkCode,
+                                learningDelivery.PathwayCode,
+                                learningDelivery.StartDate,
+                                learningDelivery.PlannedEndDate,
+                               learningDelivery.MonthlyPayment,
+                                learningDelivery.CompletionPayment });
                 
             }
 
