@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"[]>
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Employer stops payments on a commitment</title>
+    <link rel="stylesheet" href="css/master.css" type="text/css" />
+    <link rel="stylesheet" href="css/print.css" type="text/css" media="print" />
+    <script src="js/jquery.js" type="text/javascript"></script>
+    <script src="js/scripts.js" type="text/javascript"></script>
+    <script type="text/javascript">
+$(document).ready(function() {
+  initializeToc();
+});
+</script>
+    <!-- We are using Font Awesome - http://fortawesome.github.com/Font-Awesome - licensed under CC BY 3.0 -->
+  </head>
+  <body>
+    <div id="container">
+      <div id="top" />
+      <div id="toc">
+        <p class="tocCollapser" title="Collapse Table of Content">«</p>
+        <ul class="features">
+          <li class="file" id="root">
+            <a href="index.html">Home</a>
+          </li>
+          <li class="file">
+            <a href="earnings_calc.html">Amount due is calculated based on previously earned amount</a>
+            <span class="float-right">
+              <i class="icon-minus-sign failed" title="Failed"> </i>
+            </span>
+          </li>
+          <li class="file">
+            <a href="definitions.html">Business definitions</a>
+            <span class="float-right">
+              <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
+            </span>
+          </li>
+          <li class="file">
+            <a href="payments_calc.html">Calculate the payments</a>
+            <span class="float-right">
+              <i class="icon-minus-sign failed" title="Failed"> </i>
+            </span>
+          </li>
+          <li class="file">
+            <a href="datalock_errors.html">Datalock validation fails for different reasons</a>
+            <span class="float-right">
+              <i class="icon-minus-sign failed" title="Failed"> </i>
+            </span>
+          </li>
+          <li class="file">
+            <span class="current">Employer stops payments on a commitment</span>
+            <span class="float-right">
+              <i class="icon-minus-sign failed" title="Failed"> </i>
+            </span>
+          </li>
+          <li class="file">
+            <a href="learner_finishes_early.html">Provider earnings and payments where learner completes earlier than planned and is funded by levy</a>
+            <span class="float-right">
+              <i class="icon-minus-sign failed" title="Failed"> </i>
+            </span>
+          </li>
+          <li class="file">
+            <a href="learner_finishes_late.html">Provider earnings and payments where learner completes later than planned and is funded by levy</a>
+            <span class="float-right">
+              <i class="icon-minus-sign failed" title="Failed"> </i>
+            </span>
+          </li>
+          <li class="file">
+            <a href="learner_finishes_on_time.html">Provider earnings and payments where learner completes on time and is funded by levy</a>
+            <span class="float-right">
+              <i class="icon-minus-sign failed" title="Failed"> </i>
+            </span>
+          </li>
+          <li class="file">
+            <a href="ILR_is_submitted_late.html">The ILR is submitted late</a>
+            <span class="float-right">
+              <i class="icon-minus-sign failed" title="Failed"> </i>
+            </span>
+          </li>
+        </ul>
+      </div>
+      <div id="feature">
+        <div class="float-right">
+          <i class="icon-minus-sign failed" title="Failed"> </i>
+        </div>
+        <h1>Employer stops payments on a commitment</h1>
+        <ul id="scenarios">
+          <li class="scenario">
+            <div class="float-right">
+              <i class="icon-minus-sign failed" title="Failed"> </i>
+            </div>
+            <div class="scenario-heading" id="commitment-payments-are-stopped-midway-through-the-learning-episode">
+              <h2>Commitment payments are stopped midway through the learning episode</h2>
+            </div>
+            <div class="steps">
+              <ul>
+                <li class="step">
+                  <span class="keyword">Given </span>levy balance &gt; agreed price for all months</li>
+                <li class="step">
+                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>agreed price</th><th>status</th><th>stopped on</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>15000</td><td>Paused</td><td>11/17</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">When </span>an ILR file is submitted every month with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>agreed price</th><th>learner type</th><th>start date</th><th>planned end date</th><th>completion status</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>15000</td><td>programme only DAS</td><td>01/09/2017</td><td>08/09/2018</td><td>continuing</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>...</th><th>03/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>1000</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td></tr><tr><td>Provider Earned from SFA</td><td>1000</td><td>1000</td><td>0</td><td>0</td><td>...</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>1000</td><td>1000</td><td>0</td><td>...</td><td>0</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td></tr><tr><td>Levy account debited</td><td>0</td><td>1000</td><td>1000</td><td>0</td><td>...</td><td>0</td></tr><tr><td>SFA Levy employer budget</td><td>1000</td><td>1000</td><td>0</td><td>0</td><td>...</td><td>0</td></tr><tr><td>SFA Levy co-funded budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td></tr><tr><td>SFA non-Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td></tr></tbody></table></div></li>
+              </ul>
+            </div>
+            <a class="scenario-link" href="javascript:showImageLink('commitment-payments-are-stopped-midway-through-the-learning-episode')" title="Copy scenario link to clipboard.">
+              <i class="icon-link"> </i>
+            </a>
+          </li>
+          <li class="scenario">
+            <div class="float-right">
+              <i class="icon-minus-sign failed" title="Failed"> </i>
+            </div>
+            <div class="scenario-heading" id="the-provider-submits-the-first-ilr-file-after-the-commitment-payments-have-been-stopped">
+              <h2>The provider submits the first ILR file after the commitment payments have been stopped</h2>
+            </div>
+            <div class="steps">
+              <ul>
+                <li class="step">
+                  <span class="keyword">Given </span>levy balance &gt; agreed price for all months</li>
+                <li class="step">
+                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>agreed price</th><th>status</th><th>stopped on</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>15000</td><td>Paused</td><td>11/17</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">When </span>an ILR file is submitted for the first time in 12/17 with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>agreed price</th><th>learner type</th><th>start date</th><th>planned end date</th><th>completion status</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>15000</td><td>programme only DAS</td><td>01/09/2017</td><td>08/09/2018</td><td>continuing</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>...</th><th>03/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>1000</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td></tr><tr><td>Provider Earned from SFA</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td></tr><tr><td>Levy account debited</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td></tr><tr><td>SFA Levy employer budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td></tr><tr><td>SFA Levy co-funded budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td></tr><tr><td>SFA non-Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td></tr></tbody></table></div></li>
+              </ul>
+            </div>
+            <a class="scenario-link" href="javascript:showImageLink('the-provider-submits-the-first-ilr-file-after-the-commitment-payments-have-been-stopped')" title="Copy scenario link to clipboard.">
+              <i class="icon-link"> </i>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div id="footer">
+        <p>Generated on: 30 November 2016 13:01:32</p>
+        <p>Produced by Pickles, version 2.8.2.0</p>
+      </div>
+    </div>
+  </body>
+</html>
