@@ -8,6 +8,7 @@ using SFA.DAS.Payments.AcceptanceTests.Enums;
 using SFA.DAS.Payments.AcceptanceTests.ExecutionEnvironment;
 using SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base;
 using TechTalk.SpecFlow;
+using IlrBuilder = SFA.DAS.Payments.AcceptanceTests.Builders.IlrBuilder;
 
 namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
 {
@@ -30,7 +31,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             var provider = StepDefinitionsContext.GetDefaultProvider();
             var learner = StepDefinitionsContext.CreateLearner(15000, new DateTime(2017, 08, 01), new DateTime(2018, 07, 01));
 
+            learner.LearningDelivery.StartDate = new DateTime(2017, 09, 01);
+            learner.LearningDelivery.PlannedEndDate = new DateTime(2018, 09, 08);
+            learner.LearningDelivery.AgreedPrice= 15000;
+            learner.LearningDelivery.StandardCode= IlrBuilder.Defaults.StandardCode;
 
+            
             //setup the data for learnig delivery,learner and earnings
             SetupEarningsData(provider, learner);
 

@@ -89,67 +89,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
           
             var startDate = StepDefinitionsContext.GetIlrStartDate().NextCensusDate();
 
-           
-            LearnerDataHelper.SaveFileDetails(provider.Ukprn,
-                                             EnvironmentVariables);
+            SetupValidLearnersData(provider.Ukprn, learner);
 
-            //Save Learning Provider
-            LearnerDataHelper.SaveLearningProvider(provider.Ukprn,
-                                                    EnvironmentVariables);
-
-            //Save the Learner
-            LearnerDataHelper.SaveLearner(provider.Ukprn,
-                                        learner.Uln,
-                                        EnvironmentVariables);
-
-            //save Learner delivery
-            LearnerDataHelper.SaveLearningDelivery(provider.Ukprn,
-                                                    learner.LearningDelivery.StartDate,
-                                                    learner.LearningDelivery.PlannedEndDate,
-                                                    learner.LearningDelivery.StandardCode,
-                                                    learner.LearningDelivery.ProgrammeType,
-                                                    EnvironmentVariables);
-
-            //save learning delivery FAM
-            LearnerDataHelper.SaveLearningDeliveryFAM(provider.Ukprn, EnvironmentVariables);
-
-
-            LearnerDataHelper.SaveTrailblazerApprenticeshipFinancialRecord(provider.Ukprn,
-                                                                            1,
-                                                                              learner.LearningDelivery.StandardCode > 0 ? 
-                                                                              learner.LearningDelivery.AgreedPrice * 0.8m :
-                                                                              learner.LearningDelivery.AgreedPrice,
-                                                                           EnvironmentVariables);
-
-            //save Trailblazer
-            if (learner.LearningDelivery.StandardCode > 0)
-            {
-                
-                LearnerDataHelper.SaveTrailblazerApprenticeshipFinancialRecord(provider.Ukprn,
-                                                                            2,
-                                                                            learner.LearningDelivery.AgreedPrice * 0.2m,
-                                                                            EnvironmentVariables);
-            }
-            //save the learning deliver values
-            EarningsDataHelper.SaveLearningDeliveryValuesForUkprn(provider.Ukprn,
-                                                                    learner.Uln,
-                                                                    learner.LearningDelivery.AgreedPrice,
-                                                                    learner.LearningDelivery.StartDate,
-                                                                    learner.LearningDelivery.StartDate.AddMonths(12),
-                                                                    (learner.LearningDelivery.AgreedPrice * 0.8m)/12,
-                                                                    learner.LearningDelivery.AgreedPrice - ((learner.LearningDelivery.AgreedPrice * 0.8m) / 12),
-                                                                    learner.LearningDelivery.StandardCode,
-                                                                    learner.LearningDelivery.ProgrammeType,
-                                                                    EnvironmentVariables);
-
-            //var committment = StepDefinitionsContext.ReferenceDataContext.Commitments.First();
-            //var account = StepDefinitionsContext.ReferenceDataContext.Employers.First(x => x.Name == committment.Employer);
-
-            //Delete the commitment
-
-            //var committment = StepDefinitionsContext.ReferenceDataContext.Commitments.First();
-            //CommitmentDataHelper.DeleteCommmitment(provider.Ukprn, learner.Uln,EnvironmentVariables);
-            RunMonthEnd(provider.Learners[0].LearningDelivery.StartDate);
+            //Run the month end
+            RunMonthEnd(startDate);
         }
 
 

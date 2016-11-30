@@ -56,43 +56,28 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
         
         }
 
-        internal static void        SaveLearningDeliveryValuesForUkprn(long ukprn,
-                                                               long uln,
-                                                               decimal negotiatedPrice,
-                                                               DateTime learnStartDate,
-                                                               DateTime learnPlanEndDate,
-                                                               decimal monthlyInstallment,
-                                                               decimal completionPayment,
-                                                               EnvironmentVariables environmentVariables)
-        {
-            SaveLearningDeliveryValuesForUkprn(ukprn, uln, negotiatedPrice,
-                                                learnStartDate, learnPlanEndDate, monthlyInstallment,
-                                                completionPayment,
-                                                IlrBuilder.Defaults.StandardCode,
-                                                IlrBuilder.Defaults.ProgrammeType,
-                                                environmentVariables);
-        }
-
+        
         internal static void SaveLearningDeliveryValuesForUkprn(long ukprn, 
                                                                 long uln,
-                                                                decimal negotiatedPrice,
-                                                                DateTime learnStartDate, 
-                                                                DateTime learnPlanEndDate,
-                                                                decimal monthlyInstallment, 
-                                                                decimal completionPayment,
-                                                                long standardCode,
-                                                                int programmeType,
+                                                                LearningDelivery learningDelivery,
                                                                 EnvironmentVariables environmentVariables)
         {
+
+           
 
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
             {
                
                     connection.Execute("INSERT INTO [Rulebase].[AE_LearningDelivery] " +
-                                       "(LearnRefNumber,AimSeqNumber,Ukprn,uln,NiNumber,StdCode,ProgType,NegotiatedPrice,learnStartDate,learnPlanEndDate,monthlyInstallment,monthlyInstallmentUncapped,completionPayment,completionPaymentUncapped) " +
+                                       "(LearnRefNumber,AimSeqNumber,Ukprn,uln,NiNumber,StdCode,ProgType,NegotiatedPrice,learnStartDate,learnPlanEndDate," +
+                                       "monthlyInstallment,monthlyInstallmentUncapped,completionPayment,completionPaymentUncapped) " +
                                        "VALUES " +
-                                       "('1', 1, @ukprn, @uln,'AB123456C',@standardCode,@programmeType,@negotiatedPrice,@LearnStartDate,@LearnPlanEndDate,@MonthlyInstallment,@MonthlyInstallment,@CompletionPayment,@CompletionPayment)",
-                        new { ukprn,@uln,standardCode,programmeType, negotiatedPrice, learnStartDate,learnPlanEndDate,monthlyInstallment,completionPayment });
+                                       "('1', 1, @ukprn, @uln,'AB123456C',@standardCode,@ProgrammeType,@AgreedPrice," +
+                                       "@StartDate,@PlannedEndDate,@MonthlyPayment,@MonthlyPayment,@CompletionPayment,@CompletionPayment)",
+                        new { ukprn,@uln, learningDelivery.StandardCode,
+                                learningDelivery.ProgrammeType, learningDelivery.AgreedPrice,learningDelivery.StartDate,
+                                learningDelivery.PlannedEndDate,
+                               learningDelivery.MonthlyPayment,learningDelivery.CompletionPayment });
                 
             }
 

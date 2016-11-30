@@ -24,6 +24,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
         #region Properties
         protected StepDefinitionsContext StepDefinitionsContext { get; set; }
         protected EnvironmentVariables EnvironmentVariables { get; set; }
+        public object DateTimeSpan { get; private set; }
 
         #endregion
 
@@ -150,47 +151,66 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             //setup committment and employer ref data
             SetupReferenceData();
 
+            SetupValidLearnersData(provider.Ukprn, learner);
+
+
+
+        }
+
+        protected void SetupValidLearnersData(long ukprn, Learner learner)
+        {
             //Save File Details
-            LearnerDataHelper.SaveFileDetails(provider.Ukprn,
+            LearnerDataHelper.SaveFileDetails(ukprn,
                                                 EnvironmentVariables);
 
             //Save Learning Provider
-            LearnerDataHelper.SaveLearningProvider(provider.Ukprn,
+            LearnerDataHelper.SaveLearningProvider(ukprn,
                                                     EnvironmentVariables);
 
             //Save the Learner
-            LearnerDataHelper.SaveLearner(provider.Ukprn,
+            LearnerDataHelper.SaveLearner(ukprn,
                                         learner.Uln,
                                         EnvironmentVariables);
 
             //save Learner delivery
-            LearnerDataHelper.SaveLearningDelivery(provider.Ukprn,
+            LearnerDataHelper.SaveLearningDelivery(ukprn,
                                                     learner.LearningDelivery.StartDate,
                                                     learner.LearningDelivery.PlannedEndDate,
-                                                    IlrBuilder.Defaults.StandardCode,
-                                                    IlrBuilder.Defaults.ProgrammeType,
+                                                    learner.LearningDelivery.StandardCode,
+                                                    learner.LearningDelivery.ProgrammeType,
                                                     EnvironmentVariables);
 
             //save learning delivery FAM
-            LearnerDataHelper.SaveLearningDeliveryFAM(provider.Ukprn, EnvironmentVariables);
+            LearnerDataHelper.SaveLearningDeliveryFAM(ukprn, EnvironmentVariables);
+
+
+            LearnerDataHelper.SaveTrailblazerApprenticeshipFinancialRecord(ukprn,
+                                                                            1,
+                                                                              learner.LearningDelivery.StandardCode > 0 ?
+                                                                              learner.LearningDelivery.AgreedPrice * 0.8m :
+                                                                              learner.LearningDelivery.AgreedPrice,
+                                                                           EnvironmentVariables);
 
             //save Trailblazer
-            LearnerDataHelper.SaveTrailblazerApprenticeshipFinancialRecord(provider.Ukprn,
-                                                                            1,
-                                                                            12000,
-                                                                            EnvironmentVariables);
-            LearnerDataHelper.SaveTrailblazerApprenticeshipFinancialRecord(provider.Ukprn,
+            if (learner.LearningDelivery.StandardCode > 0)
+            {
+
+                LearnerDataHelper.SaveTrailblazerApprenticeshipFinancialRecord(ukprn,
                                                                             2,
-                                                                            3000,
+                                                                            learner.LearningDelivery.AgreedPrice * 0.2m,
                                                                             EnvironmentVariables);
+            }
+
+          var months =  ((learner.LearningDelivery.StartDate.Year - learner.LearningDelivery.PlannedEndDate.Year) * 12) + 
+                        learner.LearningDelivery.StartDate.Month - learner.LearningDelivery.PlannedEndDate.Month;
+
+            learner.LearningDelivery.MonthlyPayment = (learner.LearningDelivery.AgreedPrice * 0.8m) / months;
+            learner.LearningDelivery.CompletionPayment = learner.LearningDelivery.AgreedPrice - ((learner.LearningDelivery.AgreedPrice * 0.8m) / months);
+
             //save the learning deliver values
-            EarningsDataHelper.SaveLearningDeliveryValuesForUkprn(provider.Ukprn,
+            EarningsDataHelper.SaveLearningDeliveryValuesForUkprn(ukprn,
                                                                     learner.Uln,
-                                                                    15000,
-                                                                    new DateTime(2017, 09, 01),
-                                                                    new DateTime(2018, 09, 08),
-                                                                    1000,
-                                                                    3000,
+                                                                    learner.LearningDelivery,
                                                                     EnvironmentVariables);
         }
 
