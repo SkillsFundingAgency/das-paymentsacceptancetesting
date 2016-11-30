@@ -21,28 +21,24 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
         public DataLockStepDefinitions(StepDefinitionsContext context)
             : base(context)
         {
-
         }
 
 
         [Given(@"the following commitment exists for an apprentice:")]
         public void GivenTheFollowingCommitmentExistsForAnApprentice(Table table)
         {
-
             SetupCommitments(table);
-
         }
 
         [Given(@"the following commitments exist for an apprentice:")]
         public void GivenTheFollowingCommitmentsExistForAnApprentice(Table table)
         {
             SetupCommitments(table);
-          
         }
 
 
         [When(@"an ILR file is submitted with the following data:")]
-        public void WhenAndILRIsSubmittedWithTheFollowingData(Table table)
+        public void WhenAndIlrIsSubmittedWithTheFollowingData(Table table)
         {
 
             SetupContexLearners(table);
@@ -67,7 +63,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
         public void ThenADatalockErrorOfDLOCK_WillBeProduced(string errorCode)
         {
             var provider = StepDefinitionsContext.GetDefaultProvider();
-            var startDate = StepDefinitionsContext.GetIlrStartDate().NextCensusDate();
 
             var validationError = ValidationErrorsDataHelper.GetValidationErrors(provider.Ukprn, EnvironmentVariables);
 
@@ -76,7 +71,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
         }
 
         [When(@"monthly payment process runs for the following ILR data:")]
-        public void WhenMonthlyPaymentProcessRunsForTheFollowingILRData(Table table)
+        public void WhenMonthlyPaymentProcessRunsForTheFollowingIlrData(Table table)
         {
             // Setup reference data
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
@@ -106,35 +101,45 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
         private void SetupCommitments(Table table)
         {
             StepDefinitionsContext.ReferenceDataContext.SetDefaultEmployer(
-                                             new Dictionary<string, decimal> {
-                                                    { "All", int.MaxValue }
-                                             });
+                new Dictionary<string, decimal>
+                {
+                    {"All", int.MaxValue}
+                });
+
             var employer = StepDefinitionsContext.ReferenceDataContext.Employers[0];
 
             AccountDataHelper.CreateAccount(employer.AccountId, employer.AccountId.ToString(), 0.00m, EnvironmentVariables);
 
             foreach (var row in table.Rows)
             {
-                //var row = table.Rows[0];
-
                 var ukprn = long.Parse(row["UKPRN"]);
                 var startDate = DateTime.Parse(row["start date"]);
 
 
-                var frameworkCode = table.Header.Contains("framework code") ? Int32.Parse(row["framework code"]) : IlrBuilder.Defaults.FrameworkCode;
-                var programmeType = table.Header.Contains("programme type") ? Int32.Parse(row["programme type"]) : IlrBuilder.Defaults.ProgrammeType;
-                var pathwayCode = table.Header.Contains("pathway code") ? Int32.Parse(row["pathway code"]) : IlrBuilder.Defaults.PathwayCode;
+                var frameworkCode = table.Header.Contains("framework code")
+                    ? int.Parse(row["framework code"])
+                    : IlrBuilder.Defaults.FrameworkCode;
+                var programmeType = table.Header.Contains("programme type")
+                    ? int.Parse(row["programme type"])
+                    : IlrBuilder.Defaults.ProgrammeType;
+                var pathwayCode = table.Header.Contains("pathway code")
+                    ? int.Parse(row["pathway code"])
+                    : IlrBuilder.Defaults.PathwayCode;
 
-                var standardCode = table.Header.Contains("standard code") ? Int32.Parse(row["standard code"]) : IlrBuilder.Defaults.StandardCode;
+                var standardCode = table.Header.Contains("standard code")
+                    ? int.Parse(row["standard code"])
+                    : IlrBuilder.Defaults.StandardCode;
 
                 if (frameworkCode > 0 && programmeType > 0 && pathwayCode > 0)
                 {
                     standardCode = 0;
                 }
 
+                var status = row.ContainsKey("status")
+                    ? GetCommitmentStatusOrThrow(row["status"])
+                    : CommitmentPaymentStatus.Active;
 
                 StepDefinitionsContext.AddProvider("provider", ukprn);
-            
 
                 CommitmentDataHelper.CreateCommitment(
                     new CommitmentEntity
@@ -152,16 +157,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
                         PathwayCode = pathwayCode,
                         Priority = 1,
                         VersionId = "1",
-                        PaymentStatus = (int)CommitmentPaymentStatus.Active,
-                        PaymentStatusDescription = CommitmentPaymentStatus.Active.ToString(),
-                        Payable = true
+                        PaymentStatus = (int)status,
+                        PaymentStatusDescription = status.ToString(),
+                        Payable = status == CommitmentPaymentStatus.Active || status == CommitmentPaymentStatus.Completed
                     },
                     EnvironmentVariables);
             }
-
         }
-
-
-
     }
 }

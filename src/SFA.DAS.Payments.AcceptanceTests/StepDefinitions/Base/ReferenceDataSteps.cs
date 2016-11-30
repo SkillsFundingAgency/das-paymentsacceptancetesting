@@ -87,7 +87,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                     Provider = table.Rows[rowIndex].ContainsKey("Provider") ? table.Rows[rowIndex]["Provider"] : "provider",
                     Status = table.Rows[rowIndex].ContainsKey("status")
                                 ? GetStatus(table.Rows[rowIndex]["status"])
-                                : CommitmentPaymentStatus.Active ,
+                                : CommitmentPaymentStatus.Active,
                     StopPeriod = table.Rows[rowIndex].ContainsKey("stopped on") ? table.Rows[rowIndex]["stopped on"] : string.Empty
                 };
             }
