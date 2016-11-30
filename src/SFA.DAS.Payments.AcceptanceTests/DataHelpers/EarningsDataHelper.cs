@@ -4,8 +4,9 @@ using Dapper;
 using ProviderPayments.TestStack.Core;
 using System.Collections.Generic;
 using System;
-using SFA.DAS.Payments.AcceptanceTests.Entities;
+using SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities;
 using IlrBuilder = SFA.DAS.Payments.AcceptanceTests.Builders.IlrBuilder;
+using SFA.DAS.Payments.AcceptanceTests.Entities;
 
 namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 {

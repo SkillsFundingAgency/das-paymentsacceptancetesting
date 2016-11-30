@@ -1,5 +1,4 @@
-﻿
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using ProviderPayments.TestStack.Core;
 using SFA.DAS.Payments.AcceptanceTests.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.DataHelpers;
@@ -10,6 +9,8 @@ using TechTalk.SpecFlow;
 using IlrBuilder = SFA.DAS.Payments.AcceptanceTests.Builders.IlrBuilder;
 using System;
 using System.Collections.Generic;
+using SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities;
+using SFA.DAS.Payments.AcceptanceTests.Enums;
 
 
 namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
@@ -136,18 +137,26 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             
 
                 CommitmentDataHelper.CreateCommitment(
-                                long.Parse(IdentifierGenerator.GenerateIdentifier(6, false)),
-                                ukprn,
-                                long.Parse(row["ULN"]),
-                                employer.AccountId.ToString(),
-                                startDate,
-                                startDate.AddMonths(12),
-                                decimal.Parse(row["agreed price"]),
-                                standardCode,
-                                frameworkCode,
-                                 programmeType,
-                                pathwayCode,
-                                1, "1", EnvironmentVariables);
+                    new CommitmentEntity
+                    {
+                        CommitmentId = long.Parse(IdentifierGenerator.GenerateIdentifier(6, false)),
+                        Ukprn = ukprn,
+                        Uln = long.Parse(row["ULN"]),
+                        AccountId = employer.AccountId.ToString(),
+                        StartDate = startDate,
+                        EndDate = startDate.AddMonths(12),
+                        AgreedCost = decimal.Parse(row["agreed price"]),
+                        StandardCode = standardCode,
+                        FrameworkCode = frameworkCode,
+                        ProgrammeType = programmeType,
+                        PathwayCode = pathwayCode,
+                        Priority = 1,
+                        VersionId = "1",
+                        PaymentStatus = (int)CommitmentPaymentStatus.Active,
+                        PaymentStatusDescription = CommitmentPaymentStatus.Active.ToString(),
+                        Payable = true
+                    },
+                    EnvironmentVariables);
             }
 
         }
