@@ -154,8 +154,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
             table21.AddRow(new string[] {
                         "Levy account debited",
                         "0",
-                        "1000",
-                        "1000",
+                        "0",
+                        "0",
                         "0",
                         "...",
                         "0"});
@@ -163,10 +163,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "SFA Levy employer budget",
                         "1000",
                         "1000",
-                        "1000",
-                        "2000",
+                        "0",
+                        "0",
                         "...",
-                        "5000"});
+                        "0"});
             table21.AddRow(new string[] {
                         "SFA Levy co-funded budget",
                         "0",
