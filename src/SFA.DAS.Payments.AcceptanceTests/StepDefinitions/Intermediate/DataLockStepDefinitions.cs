@@ -91,6 +91,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
 
             SetupValidLearnersData(provider.Ukprn, learner);
 
+            var dueAmount = learner.LearningDelivery.AgreedPrice * 0.8m / 12;
+            EarningsDataHelper.SavePeriodisedValuesForUkprn(provider.Ukprn,
+                                                      new Dictionary<string, decimal> { { "Period_1", dueAmount } },
+                                                      environmentVariables);
+
             //Run the month end
             RunMonthEnd(startDate);
         }

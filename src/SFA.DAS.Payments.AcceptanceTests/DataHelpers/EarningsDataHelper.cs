@@ -68,16 +68,22 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
             {
                
-                    connection.Execute("INSERT INTO [Rulebase].[AE_LearningDelivery] " +
-                                       "(LearnRefNumber,AimSeqNumber,Ukprn,uln,NiNumber,StdCode,ProgType,NegotiatedPrice,learnStartDate,learnPlanEndDate," +
+                connection.Execute("INSERT INTO [Rulebase].[AE_LearningDelivery] " +
+                                       "(LearnRefNumber,AimSeqNumber,Ukprn,uln,NiNumber,StdCode,ProgType,FWorkCode,PWayCode,NegotiatedPrice,learnStartDate,learnPlanEndDate," +
                                        "monthlyInstallment,monthlyInstallmentUncapped,completionPayment,completionPaymentUncapped) " +
                                        "VALUES " +
-                                       "('1', 1, @ukprn, @uln,'AB123456C',@standardCode,@ProgrammeType,@AgreedPrice," +
+                                       "('1', 1, @ukprn, @uln,'AB123456C',@standardCode,@ProgrammeType,@FrameworkCode,@PathwayCode,@AgreedPrice," +
                                        "@StartDate,@PlannedEndDate,@MonthlyPayment,@MonthlyPayment,@CompletionPayment,@CompletionPayment)",
-                        new { ukprn,@uln, learningDelivery.StandardCode,
-                                learningDelivery.ProgrammeType, learningDelivery.AgreedPrice,learningDelivery.StartDate,
+                        new { ukprn,@uln,
+                                standardCode = learningDelivery.StandardCode > 0 ? learningDelivery.StandardCode : (long?)null,
+                                learningDelivery.ProgrammeType,
+                                learningDelivery.AgreedPrice,
+                                learningDelivery.FrameworkCode,
+                                learningDelivery.PathwayCode,
+                                learningDelivery.StartDate,
                                 learningDelivery.PlannedEndDate,
-                               learningDelivery.MonthlyPayment,learningDelivery.CompletionPayment });
+                               learningDelivery.MonthlyPayment,
+                                learningDelivery.CompletionPayment });
                 
             }
 

@@ -174,10 +174,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 
             //save Learner delivery
             LearnerDataHelper.SaveLearningDelivery(ukprn,
-                                                    learner.LearningDelivery.StartDate,
-                                                    learner.LearningDelivery.PlannedEndDate,
-                                                    learner.LearningDelivery.StandardCode,
-                                                    learner.LearningDelivery.ProgrammeType,
+                                                    learner.LearningDelivery,
                                                     EnvironmentVariables);
 
             //save learning delivery FAM
@@ -201,8 +198,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                                                                             EnvironmentVariables);
             }
 
-          var months =  ((learner.LearningDelivery.StartDate.Year - learner.LearningDelivery.PlannedEndDate.Year) * 12) + 
-                        learner.LearningDelivery.StartDate.Month - learner.LearningDelivery.PlannedEndDate.Month;
+          var months =  ((learner.LearningDelivery.PlannedEndDate.Year - learner.LearningDelivery.StartDate.Year) * 12) + 
+                        learner.LearningDelivery.PlannedEndDate.Month - learner.LearningDelivery.StartDate.Month;
 
             learner.LearningDelivery.MonthlyPayment = (learner.LearningDelivery.AgreedPrice * 0.8m) / months;
             learner.LearningDelivery.CompletionPayment = learner.LearningDelivery.AgreedPrice - ((learner.LearningDelivery.AgreedPrice * 0.8m) / months);
