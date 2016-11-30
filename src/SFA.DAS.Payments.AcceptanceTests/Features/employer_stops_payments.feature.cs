@@ -154,8 +154,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
             table39.AddRow(new string[] {
                         "Levy account debited",
                         "0",
-                        "0",
-                        "0",
+                        "1000",
+                        "1000",
                         "0",
                         "...",
                         "0"});
