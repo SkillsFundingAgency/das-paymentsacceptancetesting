@@ -15,8 +15,8 @@ Feature: Employer stops payments on a commitment
             | Provider Earned from Employer | 0     | 0     | 0     | 0     | ... | 0     |
             | Provider Paid by SFA          | 0     | 1000  | 1000  | 0     | ... | 0     |
             | Payment due from Employer     | 0     | 0     | 0     | 0     | ... | 0     |
-            | Levy account debited          | 0     | 1000  | 1000  | 0     | ... | 0     |
-            | SFA Levy employer budget      | 1000  | 1000  | 1000  | 2000  | ... | 5000  |
+            | Levy account debited          | 0     | 0     | 0     | 0     | ... | 0     |
+            | SFA Levy employer budget      | 0     | 1000  | 1000  | 0     | ... | 0     |
             | SFA Levy co-funded budget     | 0     | 0     | 0     | 0     | ... | 0     |
             | SFA non-Levy co-funding budget| 0     | 0     | 0     | 0     | ... | 0     |
 
