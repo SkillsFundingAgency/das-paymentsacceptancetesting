@@ -2,7 +2,7 @@
 using System;
 using System.Data.SqlClient;
 using Dapper;
-using SFA.DAS.Payments.AcceptanceTests.Entities;
+using SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities;
 
 namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 {

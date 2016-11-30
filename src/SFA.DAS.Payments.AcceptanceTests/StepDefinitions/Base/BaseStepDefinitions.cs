@@ -6,6 +6,7 @@ using ProviderPayments.TestStack.Core;
 using ProviderPayments.TestStack.Core.Domain;
 using SFA.DAS.Payments.AcceptanceTests.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.DataHelpers;
+using SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities;
 using SFA.DAS.Payments.AcceptanceTests.Entities;
 using SFA.DAS.Payments.AcceptanceTests.Enums;
 using SFA.DAS.Payments.AcceptanceTests.ExecutionEnvironment;
@@ -91,19 +92,26 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             }
 
             CommitmentDataHelper.CreateCommitment(
-                commitmentId,
-                ukprn,
-                learner.Uln,
-                accountId.ToString(),
-                learner.LearningDelivery.StartDate,
-                learner.LearningDelivery.PlannedEndDate,
-                learner.LearningDelivery.AgreedPrice,
-                standardCode.HasValue? standardCode.Value :  IlrBuilder.Defaults.StandardCode,
-                frameworkCode.HasValue? frameworkCode.Value : IlrBuilder.Defaults.FrameworkCode,
-                programmeType.HasValue ? programmeType.Value : IlrBuilder.Defaults.ProgrammeType,
-                pathwayCode.HasValue ? pathwayCode.Value : IlrBuilder.Defaults.PathwayCode,
-                commitmentPriority,
-                "1",EnvironmentVariables);
+                new CommitmentEntity
+                {
+                    CommitmentId = commitmentId,
+                    Ukprn = ukprn,
+                    Uln = learner.Uln,
+                    AccountId = accountId.ToString(),
+                    StartDate = learner.LearningDelivery.StartDate,
+                    EndDate = learner.LearningDelivery.PlannedEndDate,
+                    AgreedCost = learner.LearningDelivery.AgreedPrice,
+                    StandardCode = standardCode ?? IlrBuilder.Defaults.StandardCode,
+                    FrameworkCode = frameworkCode ?? IlrBuilder.Defaults.FrameworkCode,
+                    ProgrammeType = programmeType ?? IlrBuilder.Defaults.ProgrammeType,
+                    PathwayCode = pathwayCode ?? IlrBuilder.Defaults.PathwayCode,
+                    Priority = commitmentPriority,
+                    VersionId = "1",
+                        PaymentStatus = (int)CommitmentPaymentStatus.Active,
+                        PaymentStatusDescription = CommitmentPaymentStatus.Active.ToString(),
+                    Payable = true
+                },
+                EnvironmentVariables);
         }
 
         protected void SubmitMonthEnd(DateTime date, ProcessService processService)
@@ -111,8 +119,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             var summarisationStatusWatcher = new TestStatusWatcher(EnvironmentVariables, $"Summarise {date:dd/MM/yy}");
             processService.RunSummarisation(EnvironmentVariables, summarisationStatusWatcher);
         }
-
-
+        
         protected void UpdateAccountsBalances(string month)
         {
             foreach (var employer in StepDefinitionsContext.ReferenceDataContext.Employers)
@@ -253,8 +260,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             earnedByPeriod.AddOrUpdate("06/" + academicYear.Substring(2), periodEarnings.Period_11);
             earnedByPeriod.AddOrUpdate("07/" + academicYear.Substring(2), periodEarnings.Period_12);
         }
-
-
+        
         protected void SetupContextProviders(Table table)
         {
             if (table.ContainsColumn("Provider"))
@@ -295,9 +301,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                             IlrTranslator.TranslateCompletionStatus(table.Rows[rowIndex]["completion status"]) :
                             CompletionStatus.InProgress,
 
-                        FrameworkCode = table.Header.Contains("framework code") ? Int32.Parse(table.Rows[rowIndex]["framework code"]) : IlrBuilder.Defaults.FrameworkCode,
-                        ProgrammeType = table.Header.Contains("programme type") ? Int32.Parse(table.Rows[rowIndex]["programme type"]) : IlrBuilder.Defaults.ProgrammeType,
-                        PathwayCode = table.Header.Contains("pathway code") ? Int32.Parse(table.Rows[rowIndex]["pathway code"]) : IlrBuilder.Defaults.PathwayCode
+                        FrameworkCode = table.Header.Contains("framework code") ? int.Parse(table.Rows[rowIndex]["framework code"]) : IlrBuilder.Defaults.FrameworkCode,
+                        ProgrammeType = table.Header.Contains("programme type") ? int.Parse(table.Rows[rowIndex]["programme type"]) : IlrBuilder.Defaults.ProgrammeType,
+                        PathwayCode = table.Header.Contains("pathway code") ? int.Parse(table.Rows[rowIndex]["pathway code"]) : IlrBuilder.Defaults.PathwayCode
 
                     }
                 };
@@ -312,7 +318,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 
                 learner.Uln = learner.Uln > 0 ? learner.Uln : long.Parse(IdentifierGenerator.GenerateIdentifier(10, false));
    
-                var standardCode = table.Header.Contains("standard code") ? Int32.Parse(table.Rows[rowIndex]["standard code"]) : IlrBuilder.Defaults.StandardCode;
+                var standardCode = table.Header.Contains("standard code") ? int.Parse(table.Rows[rowIndex]["standard code"]) : IlrBuilder.Defaults.StandardCode;
 
                 learner.LearningDelivery.StandardCode = learner.LearningDelivery.FrameworkCode > 0 &&
                                                         learner.LearningDelivery.PathwayCode > 0 &&
@@ -328,5 +334,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             }
         }
 
+        protected void UpdateCommitmentsPaymentStatuses(DateTime censusDate)
+        {
+            foreach (var commitment in StepDefinitionsContext.ReferenceDataContext.Commitments)
+            {
+                if (commitment.StopPeriodCensusDate.HasValue && commitment.StopPeriodCensusDate <= censusDate)
+                {
+                    CommitmentDataHelper.UpdateCommitmentStatus(commitment.Id, commitment.Status, EnvironmentVariables);
+                }
+            }
+        }
     }
 }

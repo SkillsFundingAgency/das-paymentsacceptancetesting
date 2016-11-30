@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using SFA.DAS.Payments.AcceptanceTests.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.DataHelpers;
@@ -80,10 +81,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                 commitments[rowIndex] = new Commitment
                 {
                     Id = long.Parse(IdentifierGenerator.GenerateIdentifier(6, false)),
-                    Priority = int.Parse(table.Rows[rowIndex]["priority"]),
+                    Priority = table.Rows[rowIndex].ContainsKey("priority") ? int.Parse(table.Rows[rowIndex]["priority"]) : 1,
                     Learner = table.Rows[rowIndex]["ULN"],
                     Employer = table.Rows[rowIndex].ContainsKey("Employer") ? table.Rows[rowIndex]["Employer"] : "employer",
-                    Provider = table.Rows[rowIndex].ContainsKey("Provider") ? table.Rows[rowIndex]["Provider"] : "provider"
+                    Provider = table.Rows[rowIndex].ContainsKey("Provider") ? table.Rows[rowIndex]["Provider"] : "provider",
+                    Status = table.Rows[rowIndex].ContainsKey("status")
+                                ? GetStatus(table.Rows[rowIndex]["status"])
+                                : CommitmentPaymentStatus.Active ,
+                    StopPeriod = table.Rows[rowIndex].ContainsKey("stopped on") ? table.Rows[rowIndex]["stopped on"] : string.Empty
                 };
             }
 
@@ -124,6 +129,18 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             };
 
             ReferenceDataContext.AddEmployer(employer);
+        }
+
+        private CommitmentPaymentStatus GetStatus(string status)
+        {
+            CommitmentPaymentStatus paymentStatus;
+
+            if (Enum.TryParse(status, true, out paymentStatus))
+            {
+                return paymentStatus;
+            }
+
+            throw new ArgumentException($"Invalid commitment status value: {status}");
         }
     }
 }

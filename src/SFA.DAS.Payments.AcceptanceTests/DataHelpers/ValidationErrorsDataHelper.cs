@@ -1,8 +1,8 @@
 ﻿using ProviderPayments.TestStack.Core;
-using SFA.DAS.Payments.AcceptanceTests.Entities;
 using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
+using SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities;
 
 namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 {
