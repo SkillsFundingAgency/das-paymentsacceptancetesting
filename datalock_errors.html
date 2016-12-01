@@ -68,7 +68,7 @@ $(document).ready(function() {
           <li class="file">
             <a href="learner_finishes_on_time.html">Provider earnings and payments where learner completes on time and is funded by levy</a>
             <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
+              <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
             </span>
           </li>
           <li class="file">
@@ -276,10 +276,32 @@ $(document).ready(function() {
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>450</td><td>2</td><td>1</td><td>10000</td><td>30/04/2017</td></tr></tbody></table></div></li>
                 <li class="step">
-                  <span class="keyword">Then </span>a datalock error DLOCK_09 is produced<span class="comment">#####################################################################<br />#These scenarios are for Period End submission related data lock errors<br />#####################################################################</span></li>
+                  <span class="keyword">Then </span>a datalock error DLOCK_09 is produced</li>
               </ul>
             </div>
             <a class="scenario-link" href="javascript:showImageLink('when-the-start-month-recorded-in-the-employer-digital-account-is-after-the-start-month-in-the-ilr-then-datalock-dlock09-will-be-produced')" title="Copy scenario link to clipboard.">
+              <i class="icon-link"> </i>
+            </a>
+          </li>
+          <li class="scenario">
+            <div class="float-right">
+              <i class="icon-ok passed" title="Successful"> </i>
+            </div>
+            <div class="scenario-heading" id="when-the-employer-has-stopped-commitment-payments-in-the-employer-digital-account-then-datalock-dlock10-will-be-produced">
+              <h2>When the employer has stopped commitment payments in the employer digital account then datalock DLOCK_10 will be produced</h2>
+              <p class="tags">Tags: <span>@ILRSubmissionDataLockErrors</span></p>
+            </div>
+            <div class="steps">
+              <ul>
+                <li class="step">
+                  <span class="keyword">Given </span>the following commitments exist for an apprentice:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th>status</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>450</td><td>2</td><td>1</td><td>10000</td><td>01/05/2017</td><td>Paused</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>450</td><td>2</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">Then </span>a datalock error DLOCK_10 is produced<span class="comment">#####################################################################<br />#These scenarios are for Period End submission related data lock errors<br />#####################################################################</span></li>
+              </ul>
+            </div>
+            <a class="scenario-link" href="javascript:showImageLink('when-the-employer-has-stopped-commitment-payments-in-the-employer-digital-account-then-datalock-dlock10-will-be-produced')" title="Copy scenario link to clipboard.">
               <i class="icon-link"> </i>
             </a>
           </li>
@@ -481,10 +503,32 @@ $(document).ready(function() {
               <i class="icon-link"> </i>
             </a>
           </li>
+          <li class="scenario">
+            <div class="float-right">
+              <i class="icon-ok passed" title="Successful"> </i>
+            </div>
+            <div class="scenario-heading" id="when-monthly-payment-process-runs-and-the-employer-has-stopped-commitment-payments-in-the-employer-digital-account-then-datalock-dlock10-will-be-produced">
+              <h2>When monthly payment process runs and the employer has stopped commitment payments in the employer digital account then datalock DLOCK_10 will be produced</h2>
+              <p class="tags">Tags: <span>@PeriodEndDataLockErrors</span></p>
+            </div>
+            <div class="steps">
+              <ul>
+                <li class="step">
+                  <span class="keyword">Given </span>the following commitments exist for an apprentice:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th>status</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>450</td><td>2</td><td>1</td><td>10000</td><td>01/05/2017</td><td>Paused</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>450</td><td>2</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">Then </span>a datalock error DLOCK_10 is produced</li>
+              </ul>
+            </div>
+            <a class="scenario-link" href="javascript:showImageLink('when-monthly-payment-process-runs-and-the-employer-has-stopped-commitment-payments-in-the-employer-digital-account-then-datalock-dlock10-will-be-produced')" title="Copy scenario link to clipboard.">
+              <i class="icon-link"> </i>
+            </a>
+          </li>
         </ul>
       </div>
       <div id="footer">
-        <p>Generated on: 30 November 2016 15:33:32</p>
+        <p>Generated on: 1 December 2016 11:53:40</p>
         <p>Produced by Pickles, version 2.8.2.0</p>
       </div>
     </div>
