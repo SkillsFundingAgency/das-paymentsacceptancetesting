@@ -37,6 +37,18 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
             }
         }
 
+        internal static decimal GetBalancingPaymentForUkprn(long ukprn,string periodName, EnvironmentVariables environmentVariables)
+        {
+            using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
+            {
+                var query = $"SELECT {periodName} " + 
+                            "FROM Rulebase.AE_LearningDelivery_PeriodisedValues " +
+                            "WHERE UKPRN = @ukprn AND AttributeName='ProgrammeAimBalPayment' ";
+                           
+                return connection.Query<decimal>(query, new { ukprn }).FirstOrDefault();
+            }
+        }
+
         internal static void SavePeriodisedValuesForUkprn(long ukprn,
                                                             Dictionary<string,decimal> periods,
                                                             EnvironmentVariables environmentVariables)

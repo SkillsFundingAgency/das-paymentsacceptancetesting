@@ -88,7 +88,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
             return Providers[0];
         }
 
-        public Learner CreateLearner(decimal agreedPrice,DateTime startDate,DateTime endDate)
+        public Learner CreateLearner(decimal agreedPrice,DateTime startDate,DateTime endDate, DateTime? actualEndDate = null)
         {
             var learner = new Learner
             {
@@ -100,7 +100,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
                     LearnerType = LearnerType.ProgrammeOnlyDas,
                     StartDate = startDate,
                     PlannedEndDate = endDate,
-                    ActualEndDate = null,
+                    ActualEndDate = actualEndDate,
                     CompletionStatus = CompletionStatus.InProgress
                 }
             };
