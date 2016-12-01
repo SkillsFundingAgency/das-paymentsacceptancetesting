@@ -25,7 +25,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
         #region Properties
         protected StepDefinitionsContext StepDefinitionsContext { get; set; }
         protected EnvironmentVariables EnvironmentVariables { get; set; }
-        public object DateTimeSpan { get; private set; }
 
         #endregion
 
@@ -58,14 +57,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             CommitmentDataHelper.UpdateEventStreamPointer(EnvironmentVariables);
         }
 
-        protected void AddLearnerCommitment(long ukprn, Learner learner)
-        {
-            AddLearnerCommitment(ukprn, learner,
-                IlrBuilder.Defaults.StandardCode,
-                IlrBuilder.Defaults.FrameworkCode,
-                IlrBuilder.Defaults.ProgrammeType,
-                IlrBuilder.Defaults.PathwayCode);
-        }
         protected void AddLearnerCommitment(long ukprn, 
                                             Learner learner, 
                                             long? standardCode = null,
@@ -108,8 +99,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                     PathwayCode = pathwayCode ?? IlrBuilder.Defaults.PathwayCode,
                     Priority = commitmentPriority,
                     VersionId = "1",
-                        PaymentStatus = (int)CommitmentPaymentStatus.Active,
-                        PaymentStatusDescription = CommitmentPaymentStatus.Active.ToString(),
+                    PaymentStatus = (int)CommitmentPaymentStatus.Active,
+                    PaymentStatusDescription = CommitmentPaymentStatus.Active.ToString(),
                     Payable = true
                 },
                 EnvironmentVariables);
@@ -362,6 +353,18 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                     CommitmentDataHelper.UpdateCommitmentStatus(commitment.Id, commitment.Status, EnvironmentVariables);
                 }
             }
+        }
+
+        protected CommitmentPaymentStatus GetCommitmentStatusOrThrow(string status)
+        {
+            CommitmentPaymentStatus paymentStatus;
+
+            if (Enum.TryParse(status, true, out paymentStatus))
+            {
+                return paymentStatus;
+            }
+
+            throw new ArgumentException($"Invalid commitment status value: {status}");
         }
     }
 }
