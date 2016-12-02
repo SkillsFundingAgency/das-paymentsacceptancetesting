@@ -28,7 +28,7 @@ Examples:
 
 
 @EarningsDistribution
-Scenario Outline: Earnings distribution when learner finsihes early
+Scenario Outline: Earnings distribution when learner finishes early
 When the planned course duration covers <census months> months
 And Learner finishes <number of months> months <early/late>
 And an agreed price of <agreed price>
@@ -37,10 +37,10 @@ And the completion payment is <completion payment>
 And the balancing payment is <balancing payment>
 Examples:
 | agreed price | number of months | early/late | census months | monthly earnings | completion payment | balancing payment |
-| 15000        | 4                | early      | 12            | 1000             | 3000               | 3000              |
-| 15000        | 1                | early      | 6             | 2000             | 3000               | 0                 |
-| 7500         | 3                | early      | 12            | 500              | 1500               | 1000              |
-| 7500         | 2                | early      | 6             | 1000             | 1500               | 1000              |
+| 15000        | 4                | early      | 12            | 1000             | 3000               | 4000              |
+| 15000        | 1                | early      | 6             | 2000             | 3000               | 2000              |   
+| 7500         | 3                | early      | 12            | 500              | 1500               | 1500              |
+| 7500         | 2                | early      | 6             | 1000             | 1500               | 2000              |
 | 15000        | 4                | late       | 12            | 1000             | 3000               | 0                 |
 | 15000        | 1                | late       | 6             | 2000             | 3000               | 0                 |
 | 7500         | 3                | late       | 12            | 500              | 1500               | 0                 |

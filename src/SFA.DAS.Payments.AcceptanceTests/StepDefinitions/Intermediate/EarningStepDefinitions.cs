@@ -8,6 +8,8 @@ using SFA.DAS.Payments.AcceptanceTests.DataHelpers;
 using SFA.DAS.Payments.AcceptanceTests.ExecutionEnvironment;
 using SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base;
 using TechTalk.SpecFlow;
+using IlrBuilder = SFA.DAS.Payments.AcceptanceTests.Builders.IlrBuilder;
+
 
 namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
 {
@@ -98,8 +100,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
         [When(@"Learner finishes (.*) months (.*)")]
         public void WhenLearnerFinishesMonthsEarly(int months,string earlyOrLate)
         {
-            ScenarioContext.Current.Add("earlyOrLate", earlyOrLate);
-            ScenarioContext.Current.Add("monthsVariation", months);
+           
+            if (earlyOrLate== "early")
+                ScenarioContext.Current.Add("monthsVariation", (months + 1)*-1);
+            else
+                ScenarioContext.Current.Add("monthsVariation", months - 1);
         }
 
         [When(@"the planned course duration covers (.*) months")]
@@ -118,16 +123,17 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
 
             var provider = StepDefinitionsContext.GetDefaultProvider();
 
-            var startDate = new DateTime(2016, 08, 01);
+            var startDate = new DateTime(2016,08,15);
+            var ilrStartDate = startDate.NextCensusDate();
+
             var plannedEndDate = startDate.AddMonths(censusMonths);
             DateTime? actualEndDate = null;
 
             if (ScenarioContext.Current.ContainsKey("monthsVariation"))
             {
                 var monthsVariation = ScenarioContext.Current.Get<int>("monthsVariation");
-                var earlyOrLate = ScenarioContext.Current.Get<string>("earlyOrLate");
-                
-                actualEndDate = plannedEndDate.AddMonths(monthsVariation * (earlyOrLate == "early" ? -1 : 1));
+                  
+                actualEndDate = plannedEndDate.AddMonths(monthsVariation);
             }
 
             var learner = StepDefinitionsContext.CreateLearner(agreedPrice, startDate, plannedEndDate,actualEndDate);
@@ -147,7 +153,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             SetupReferenceData();
 
             // Process months
-            var ilrStartDate = startDate.NextCensusDate();
+           
 
             SubmitIlr(provider.Ukprn, provider.Learners,
                 ilrStartDate.GetAcademicYear(),
