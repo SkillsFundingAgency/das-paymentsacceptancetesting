@@ -122,7 +122,7 @@ testRunner.And(string.Format("the completion payment is {0}", completionPayment)
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Earnings distribution when learner finsihes early")]
+        [NUnit.Framework.DescriptionAttribute("Earnings distribution when learner finishes early")]
         [NUnit.Framework.CategoryAttribute("EarningsDistribution")]
         [NUnit.Framework.TestCaseAttribute("15000", "4", "early", "12", "1000", "3000", "4000", new string[0])]
         [NUnit.Framework.TestCaseAttribute("15000", "1", "early", "6", "2000", "3000", "2000", new string[0])]
@@ -132,7 +132,7 @@ testRunner.And(string.Format("the completion payment is {0}", completionPayment)
         [NUnit.Framework.TestCaseAttribute("15000", "1", "late", "6", "2000", "3000", "0", new string[0])]
         [NUnit.Framework.TestCaseAttribute("7500", "3", "late", "12", "500", "1500", "0", new string[0])]
         [NUnit.Framework.TestCaseAttribute("7500", "2", "late", "6", "1000", "1500", "0", new string[0])]
-        public virtual void EarningsDistributionWhenLearnerFinsihesEarly(string agreedPrice, string numberOfMonths, string earlyLate, string censusMonths, string monthlyEarnings, string completionPayment, string balancingPayment, string[] exampleTags)
+        public virtual void EarningsDistributionWhenLearnerFinishesEarly(string agreedPrice, string numberOfMonths, string earlyLate, string censusMonths, string monthlyEarnings, string completionPayment, string balancingPayment, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "EarningsDistribution"};
@@ -140,7 +140,7 @@ testRunner.And(string.Format("the completion payment is {0}", completionPayment)
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Earnings distribution when learner finsihes early", @__tags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Earnings distribution when learner finishes early", @__tags);
 #line 31
 this.ScenarioSetup(scenarioInfo);
 #line 32
