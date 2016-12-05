@@ -97,27 +97,26 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
 
         #region Earnings Distribution
 
-        [When(@"Learner finishes (.*) months (.*)")]
-        public void WhenLearnerFinishesMonthsEarly(int months,string earlyOrLate)
+
+        [When(@"the actual duration of learning is (.*) months")]
+        public void WhenTheActualDurationOfLearningIsMonths(int actualCensusMonths)
         {
-           
-            if (earlyOrLate== "early")
-                ScenarioContext.Current.Add("monthsVariation", (months + 1)*-1);
-            else
-                ScenarioContext.Current.Add("monthsVariation", months - 1);
+            ScenarioContext.Current.Add("actualCensusMonths", actualCensusMonths);
         }
 
+      
+       
         [When(@"the planned course duration covers (.*) months")]
         public void WhenThePlannedCourseDurationCoversMonths(int months)
         {
-            ScenarioContext.Current.Add("censusMonths", months);
+            ScenarioContext.Current.Add("plannedCensusMonths", months);
         }
 
-        [When(@"an agreed price of (.*)")]
+        [When(@"there is an agreed price of (.*)")]
         public void WhenAnAgreedPriceOf(decimal agreedPrice)
         {
             //get months value
-            var censusMonths = ScenarioContext.Current.Get<int>("censusMonths");
+            var plannedCensusMonths = ScenarioContext.Current.Get<int>("plannedCensusMonths");
 
             StepDefinitionsContext.SetDefaultProvider();
 
@@ -126,14 +125,19 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             var startDate = new DateTime(2016,08,15);
             var ilrStartDate = startDate.NextCensusDate();
 
-            var plannedEndDate = startDate.AddMonths(censusMonths);
+            var plannedEndDate = startDate.AddMonths(plannedCensusMonths);
             DateTime? actualEndDate = null;
 
-            if (ScenarioContext.Current.ContainsKey("monthsVariation"))
+            if (ScenarioContext.Current.ContainsKey("actualCensusMonths"))
             {
-                var monthsVariation = ScenarioContext.Current.Get<int>("monthsVariation");
-                  
-                actualEndDate = plannedEndDate.AddMonths(monthsVariation);
+                var actualCensusMonths = ScenarioContext.Current.Get<int>("actualCensusMonths");
+                int variation;
+                if (actualCensusMonths < plannedCensusMonths)
+                    variation =  (plannedCensusMonths - actualCensusMonths + 1) *-1;
+                else
+                    variation = actualCensusMonths - plannedCensusMonths - 1;
+                
+                actualEndDate = plannedEndDate.AddMonths(variation);
             }
 
             var learner = StepDefinitionsContext.CreateLearner(agreedPrice, startDate, plannedEndDate,actualEndDate);
