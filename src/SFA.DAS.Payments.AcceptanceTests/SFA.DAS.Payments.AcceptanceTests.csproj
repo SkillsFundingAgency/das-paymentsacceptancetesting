@@ -93,7 +93,7 @@
     <Compile Include="Entities\Commitment.cs" />
     <Compile Include="Entities\Employer.cs" />
     <Compile Include="Entities\Learner.cs" />
-    <Compile Include="Entities\LearningDelivery.cs" />
+    <Compile Include="Entities\ApprenticeshipPriceEpisode.cs" />
     <Compile Include="DataHelpers\Entities\PaymentEntity.cs" />
     <Compile Include="DataHelpers\Entities\PeriodisedValuesEntity.cs" />
     <Compile Include="Entities\Provider.cs" />

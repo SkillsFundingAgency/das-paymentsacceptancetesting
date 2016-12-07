@@ -27,8 +27,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
 
             Learners = learners.Select(l =>
             {
-                var tnp1 = l.LearningDelivery.AgreedPrice * 0.8m;
-                var tnp2 = l.LearningDelivery.AgreedPrice - tnp1;
+                var tnp1 = l.LearningDelivery.PriceEpisodeTotalTNPPrice * 0.8m;
+                var tnp2 = l.LearningDelivery.PriceEpisodeTotalTNPPrice - tnp1;
 
                 if (l.LearningDelivery.StandardCode == 0)
                 {
@@ -43,9 +43,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
                         new LearningDelivery
                         {
                             ActFamCodeValue = (short) l.LearningDelivery.LearnerType,
-                            ActualStartDate = l.LearningDelivery.StartDate,
-                            PlannedEndDate = l.LearningDelivery.PlannedEndDate,
-                            ActualEndDate = l.LearningDelivery.ActualEndDate,
+                            ActualStartDate = l.LearningDelivery.EpisodeStartDate,
+                            PlannedEndDate = l.LearningDelivery.PriceEpisodePlannedEndDate,
+                            ActualEndDate = l.LearningDelivery.PriceEpisodeActualEndDate,
 
                             StandardCode = l.LearningDelivery.StandardCode,
                             ProgrammeType = l.LearningDelivery.ProgrammeType,

@@ -31,9 +31,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             var provider = StepDefinitionsContext.GetDefaultProvider();
             var learner = StepDefinitionsContext.CreateLearner(15000, new DateTime(2017, 08, 01), new DateTime(2018, 07, 01));
 
-            learner.LearningDelivery.StartDate = new DateTime(2017, 09, 01);
-            learner.LearningDelivery.PlannedEndDate = new DateTime(2018, 09, 08);
-            learner.LearningDelivery.AgreedPrice= 15000;
+            learner.LearningDelivery.EpisodeStartDate = new DateTime(2017, 09, 01);
+            learner.LearningDelivery.PriceEpisodePlannedEndDate = new DateTime(2018, 09, 08);
+            learner.LearningDelivery.PriceEpisodeTotalTNPPrice= 15000;
             learner.LearningDelivery.StandardCode= IlrBuilder.Defaults.StandardCode;
 
             

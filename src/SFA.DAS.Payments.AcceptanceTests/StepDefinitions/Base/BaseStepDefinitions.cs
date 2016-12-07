@@ -14,7 +14,7 @@ using SFA.DAS.Payments.AcceptanceTests.Translators;
 using TechTalk.SpecFlow;
 using IlrBuilder = SFA.DAS.Payments.AcceptanceTests.Builders.IlrBuilder;
 using Learner = SFA.DAS.Payments.AcceptanceTests.Entities.Learner;
-using LearningDelivery = SFA.DAS.Payments.AcceptanceTests.Entities.LearningDelivery;
+using ApprenticeshipPriceEpisode = SFA.DAS.Payments.AcceptanceTests.Entities.ApprenticeshipPriceEpisode;
 
 namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 {
@@ -90,9 +90,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                     Ukprn = ukprn,
                     Uln = learner.Uln,
                     AccountId = accountId.ToString(),
-                    StartDate = learner.LearningDelivery.StartDate,
-                    EndDate = learner.LearningDelivery.PlannedEndDate,
-                    AgreedCost = learner.LearningDelivery.AgreedPrice,
+                    StartDate = learner.LearningDelivery.EpisodeStartDate,
+                    EndDate = learner.LearningDelivery.PriceEpisodePlannedEndDate,
+                    AgreedCost = learner.LearningDelivery.PriceEpisodeTotalTNPPrice,
                     StandardCode = standardCode ?? IlrBuilder.Defaults.StandardCode,
                     FrameworkCode = frameworkCode ?? IlrBuilder.Defaults.FrameworkCode,
                     ProgrammeType = programmeType ?? IlrBuilder.Defaults.ProgrammeType,
@@ -157,6 +157,16 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 
         protected void SetupValidLearnersData(long ukprn, Learner learner)
         {
+
+            learner.LearningDelivery.TNP1 = learner.LearningDelivery.StandardCode > 0 ?
+                                                                           learner.LearningDelivery.PriceEpisodeTotalTNPPrice * 0.8m :
+                                                                           learner.LearningDelivery.PriceEpisodeTotalTNPPrice;
+
+            if (learner.LearningDelivery.StandardCode > 0)
+            {
+                learner.LearningDelivery.TNP2= learner.LearningDelivery.PriceEpisodeTotalTNPPrice * 0.2m,
+                                                                           
+            }
             //Save File Details
             LearnerDataHelper.SaveFileDetails(ukprn,
                                                 EnvironmentVariables);
@@ -179,12 +189,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             LearnerDataHelper.SaveLearningDeliveryFAM(ukprn, EnvironmentVariables);
 
 
-            LearnerDataHelper.SaveTrailblazerApprenticeshipFinancialRecord(ukprn,
-                                                                            1,
-                                                                              learner.LearningDelivery.StandardCode > 0 ?
-                                                                              learner.LearningDelivery.AgreedPrice * 0.8m :
-                                                                              learner.LearningDelivery.AgreedPrice,
-                                                                           EnvironmentVariables);
+            LearnerDataHelper.SaveTrailblazerApprenticeshipFinancialRecord(ukprn,1,learner.LearningDelivery.TNP1.Value,EnvironmentVariables);
 
             //save Trailblazer
             if (learner.LearningDelivery.StandardCode > 0)
@@ -192,19 +197,19 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 
                 LearnerDataHelper.SaveTrailblazerApprenticeshipFinancialRecord(ukprn,
                                                                             2,
-                                                                            learner.LearningDelivery.AgreedPrice * 0.2m,
+                                                                            learner.LearningDelivery.PriceEpisodeTotalTNPPrice * 0.2m,
                                                                             EnvironmentVariables);
+               
             }
 
-          var months =  ((learner.LearningDelivery.PlannedEndDate.Year - learner.LearningDelivery.StartDate.Year) * 12) + 
-                        learner.LearningDelivery.PlannedEndDate.Month - learner.LearningDelivery.StartDate.Month;
+            var months =  ((learner.LearningDelivery.PriceEpisodePlannedEndDate.Year - learner.LearningDelivery.EpisodeStartDate.Year) * 12) + 
+                        learner.LearningDelivery.PriceEpisodePlannedEndDate.Month - learner.LearningDelivery.EpisodeStartDate.Month;
 
-            learner.LearningDelivery.MonthlyPayment = (learner.LearningDelivery.AgreedPrice * 0.8m) / months;
-            learner.LearningDelivery.CompletionPayment = learner.LearningDelivery.AgreedPrice - ((learner.LearningDelivery.AgreedPrice * 0.8m) / months);
+            learner.LearningDelivery.PriceEpisodeInstalmentValue = (learner.LearningDelivery.PriceEpisodeTotalTNPPrice * 0.8m) / months;
+            learner.LearningDelivery.PriceEpisodeCompletionElement = learner.LearningDelivery.PriceEpisodeTotalTNPPrice - ((learner.LearningDelivery.PriceEpisodeTotalTNPPrice * 0.8m) / months);
 
             //save the learning deliver values
             EarningsDataHelper.SaveLearningDeliveryValuesForUkprn(ukprn,
-                                                                    learner.Uln,
                                                                     learner.LearningDelivery,
                                                                     EnvironmentVariables);
         }
@@ -230,13 +235,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             {
                 Name = l.Name,
                 Uln = l.Uln,
-                LearningDelivery = new LearningDelivery
+                LearningDelivery = new ApprenticeshipPriceEpisode
                 {
-                    AgreedPrice = l.LearningDelivery.AgreedPrice,
+                    PriceEpisodeTotalTNPPrice = l.LearningDelivery.PriceEpisodeTotalTNPPrice,
                     LearnerType = l.LearningDelivery.LearnerType,
-                    StartDate = l.LearningDelivery.StartDate,
-                    PlannedEndDate = l.LearningDelivery.PlannedEndDate,
-                    ActualEndDate = date >= l.LearningDelivery.ActualEndDate ? l.LearningDelivery.ActualEndDate : null,
+                    EpisodeStartDate = l.LearningDelivery.EpisodeStartDate,
+                    PriceEpisodePlannedEndDate = l.LearningDelivery.PriceEpisodePlannedEndDate,
+                    PriceEpisodeActualEndDate = date >= l.LearningDelivery.PriceEpisodeActualEndDate ? l.LearningDelivery.PriceEpisodeActualEndDate : null,
                     CompletionStatus = l.LearningDelivery.CompletionStatus,
                     StandardCode = l.LearningDelivery.StandardCode,
                     FrameworkCode= l.LearningDelivery.FrameworkCode,
@@ -294,15 +299,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                 {
                     Name = table.Rows[rowIndex].ContainsKey("ULN") ? table.Rows[rowIndex]["ULN"] : string.Empty,
                    
-                    LearningDelivery = new LearningDelivery
+                    LearningDelivery = new ApprenticeshipPriceEpisode
                     {
-                        AgreedPrice = decimal.Parse(table.Rows[rowIndex]["agreed price"]),
+                        PriceEpisodeTotalTNPPrice = decimal.Parse(table.Rows[rowIndex]["agreed price"]),
                         LearnerType = LearnerType.ProgrammeOnlyDas,
-                        StartDate = DateTime.Parse(table.Rows[rowIndex]["start date"]),
-                        PlannedEndDate = table.Header.Contains("planned end date") ? 
+                        EpisodeStartDate = DateTime.Parse(table.Rows[rowIndex]["start date"]),
+                        PriceEpisodePlannedEndDate = table.Header.Contains("planned end date") ? 
                                         DateTime.Parse(table.Rows[rowIndex]["planned end date"]) : 
                                         DateTime.Parse(table.Rows[rowIndex]["start date"]).AddMonths(12),
-                        ActualEndDate =
+                        PriceEpisodeActualEndDate =
                             !table.Header.Contains("actual end date") ||
                             string.IsNullOrWhiteSpace(table.Rows[rowIndex]["actual end date"])
                                 ? null

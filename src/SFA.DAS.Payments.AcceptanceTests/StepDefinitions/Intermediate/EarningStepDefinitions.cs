@@ -174,8 +174,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             var learner = StepDefinitionsContext.GetDefaultProvider().Learners.First();
             var output = LearnerDataHelper.GetAELearningDelivery(StepDefinitionsContext.GetDefaultProvider().Ukprn,
                                                                 learner.Uln,
-                                                                learner.LearningDelivery.StartDate,
-                                                                learner.LearningDelivery.PlannedEndDate,
+                                                                learner.LearningDelivery.EpisodeStartDate,
+                                                                learner.LearningDelivery.PriceEpisodePlannedEndDate,
                                                                 environmentVariables);
 
 
@@ -193,8 +193,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             var learner = StepDefinitionsContext.GetDefaultProvider().Learners.First();
             var output = LearnerDataHelper.GetAELearningDelivery(StepDefinitionsContext.GetDefaultProvider().Ukprn,
                                                                 learner.Uln,
-                                                                learner.LearningDelivery.StartDate,
-                                                                learner.LearningDelivery.PlannedEndDate,
+                                                                learner.LearningDelivery.EpisodeStartDate,
+                                                                learner.LearningDelivery.PriceEpisodePlannedEndDate,
                                                                 environmentVariables);
 
 
@@ -210,7 +210,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
             var learner = StepDefinitionsContext.GetDefaultProvider().Learners.First();
-            var endDate = learner.LearningDelivery.ActualEndDate == null ? learner.LearningDelivery.PlannedEndDate : learner.LearningDelivery.ActualEndDate.Value;
+            var endDate = learner.LearningDelivery.PriceEpisodeActualEndDate == null ? learner.LearningDelivery.PriceEpisodePlannedEndDate : learner.LearningDelivery.PriceEpisodeActualEndDate.Value;
             var periodNumber = endDate.GetPeriodNumber();
 
             var output = EarningsDataHelper.GetBalancingPaymentForUkprn(StepDefinitionsContext.GetDefaultProvider().Ukprn,

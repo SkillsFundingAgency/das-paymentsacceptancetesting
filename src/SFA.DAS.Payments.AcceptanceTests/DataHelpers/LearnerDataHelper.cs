@@ -26,7 +26,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
         }
 
         internal static void SaveLearningDelivery(long ukprn, 
-                                               LearningDelivery learningDelivery,
+                                               ApprenticeshipPriceEpisode learningDelivery,
                                                 EnvironmentVariables environmentVariables)
         {
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
@@ -37,8 +37,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                 "[FundModel],[ProgType],[StdCode],FWorkCode,PWayCode)" +
                 " VALUES (@ukprn,'1','ZPROG001',1,1,@StartDate,@PlannedEndDate,36,@ProgrammeType,@StandardCode,@FrameworkCode,@PathwayCode)",
                     new { ukprn,
-                        learningDelivery.StartDate,
-                        learningDelivery.PlannedEndDate,
+                        learningDelivery.EpisodeStartDate,
+                        learningDelivery.PriceEpisodePlannedEndDate,
                         learningDelivery.ProgrammeType,
                         StandardCode = learningDelivery.StandardCode > 0 ? learningDelivery.StandardCode : (long?)null,
                         learningDelivery.FrameworkCode,

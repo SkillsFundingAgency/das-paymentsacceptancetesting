@@ -94,13 +94,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
             {
                 Name = string.Empty,
                 Uln = long.Parse(IdentifierGenerator.GenerateIdentifier(10, false)),
-                LearningDelivery = new LearningDelivery
+                LearningDelivery = new ApprenticeshipPriceEpisode
                 {
-                    AgreedPrice = agreedPrice,
+                    PriceEpisodeTotalTNPPrice = agreedPrice,
                     LearnerType = LearnerType.ProgrammeOnlyDas,
-                    StartDate = startDate,
-                    PlannedEndDate = endDate,
-                    ActualEndDate = actualEndDate,
+                    EpisodeStartDate = startDate,
+                    PriceEpisodePlannedEndDate = endDate,
+                    PriceEpisodeActualEndDate = actualEndDate,
                     CompletionStatus = CompletionStatus.InProgress
                 }
             };

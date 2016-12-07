@@ -4,6 +4,6 @@
     {
         public string Name { get; set; }
         public long Uln { get; set; }
-        public LearningDelivery LearningDelivery { get; set; }
+        public ApprenticeshipPriceEpisode LearningDelivery { get; set; }
     }
 }

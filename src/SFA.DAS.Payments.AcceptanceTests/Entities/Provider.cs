@@ -10,14 +10,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.Entities
         public long Ukprn { get; set; }
         public DateTime IlrStartDate
         {
-            get { return Learners.Min(l => l.LearningDelivery.StartDate); }
+            get { return Learners.Min(l => l.LearningDelivery.EpisodeStartDate); }
         }
         public DateTime IlrEndDate
         {
             get
             {
-                var maxActualEndDate = Learners.Max(l => l.LearningDelivery.ActualEndDate) ?? DateTime.MinValue;
-                var maxEndDate = Learners.Max(l => l.LearningDelivery.PlannedEndDate);
+                var maxActualEndDate = Learners.Max(l => l.LearningDelivery.PriceEpisodeActualEndDate) ?? DateTime.MinValue;
+                var maxEndDate = Learners.Max(l => l.LearningDelivery.PriceEpisodePlannedEndDate);
 
                 return maxActualEndDate > maxEndDate
                     ? maxActualEndDate
