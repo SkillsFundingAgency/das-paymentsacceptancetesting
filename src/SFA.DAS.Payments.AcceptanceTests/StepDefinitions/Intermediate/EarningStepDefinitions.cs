@@ -8,6 +8,8 @@ using SFA.DAS.Payments.AcceptanceTests.DataHelpers;
 using SFA.DAS.Payments.AcceptanceTests.ExecutionEnvironment;
 using SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base;
 using TechTalk.SpecFlow;
+using IlrBuilder = SFA.DAS.Payments.AcceptanceTests.Builders.IlrBuilder;
+
 
 namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
 {
@@ -64,6 +66,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             RunMonthEnd(new DateTime(2016, 09, 01));
         }
 
+
+       
+
+
         [Then(@"a payment of (.*) is due")]
         public void ThenAPaymentIsDue(decimal dueAmount)
         {
@@ -91,25 +97,52 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
 
         #region Earnings Distribution
 
+
+        [When(@"the actual duration of learning is (.*) months")]
+        public void WhenTheActualDurationOfLearningIsMonths(int actualCensusMonths)
+        {
+            ScenarioContext.Current.Add("actualCensusMonths", actualCensusMonths);
+        }
+
+      
+       
         [When(@"the planned course duration covers (.*) months")]
         public void WhenThePlannedCourseDurationCoversMonths(int months)
         {
-            ScenarioContext.Current.Add("months", months);
+            ScenarioContext.Current.Add("plannedCensusMonths", months);
         }
 
-        [When(@"an agreed price of (.*)")]
+        [When(@"there is an agreed price of (.*)")]
         public void WhenAnAgreedPriceOf(decimal agreedPrice)
         {
             //get months value
-            var months = ScenarioContext.Current.Get<int>("months");
+            var plannedCensusMonths = ScenarioContext.Current.Get<int>("plannedCensusMonths");
 
             StepDefinitionsContext.SetDefaultProvider();
 
             var provider = StepDefinitionsContext.GetDefaultProvider();
 
-            var startDate = new DateTime(2017, 08, 01);
-            var learner = StepDefinitionsContext.CreateLearner(agreedPrice, startDate, startDate.AddMonths(months));
+            var startDate = new DateTime(2016,08,15);
+            var ilrStartDate = startDate.NextCensusDate();
 
+            var plannedEndDate = startDate.AddMonths(plannedCensusMonths);
+            DateTime? actualEndDate = null;
+
+            if (ScenarioContext.Current.ContainsKey("actualCensusMonths"))
+            {
+                var actualCensusMonths = ScenarioContext.Current.Get<int>("actualCensusMonths");
+                int variation;
+                if (actualCensusMonths < plannedCensusMonths)
+                    variation =  (plannedCensusMonths - actualCensusMonths + 1) *-1;
+                else
+                    variation = actualCensusMonths - plannedCensusMonths - 1;
+                
+                actualEndDate = plannedEndDate.AddMonths(variation);
+            }
+
+            var learner = StepDefinitionsContext.CreateLearner(agreedPrice, startDate, plannedEndDate,actualEndDate);
+
+            
             // Store spec values in context
             StepDefinitionsContext.AddProviderLearner(provider, learner);
 
@@ -124,11 +157,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             SetupReferenceData();
 
             // Process months
-            var ilrStartDate = startDate.NextCensusDate();
+           
 
             SubmitIlr(provider.Ukprn, provider.Learners,
                 ilrStartDate.GetAcademicYear(),
-                ilrStartDate.NextCensusDate(),
+                actualEndDate.HasValue? actualEndDate.Value : plannedEndDate,
                 new ProcessService(new TestLogger()),
                 provider.EarnedByPeriod);
         }
@@ -170,6 +203,26 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
 
 
         }
+
+        [Then(@"the balancing payment is (.*)")]
+        public void ThenTheBalancingPaymentIs(decimal balancingPayment)
+        {
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+
+            var learner = StepDefinitionsContext.GetDefaultProvider().Learners.First();
+            var endDate = learner.LearningDelivery.ActualEndDate == null ? learner.LearningDelivery.PlannedEndDate : learner.LearningDelivery.ActualEndDate.Value;
+            var periodNumber = endDate.GetPeriodNumber();
+
+            var output = EarningsDataHelper.GetBalancingPaymentForUkprn(StepDefinitionsContext.GetDefaultProvider().Ukprn,
+                                                                $"Period_{periodNumber}",
+                                                                environmentVariables);
+
+
+            Assert.IsNotNull(output, $"Expected balancing payment value but nothing found");
+            Assert.AreEqual(balancingPayment, output, $"Expected balancing payment of {balancingPayment} but found {output}");
+
+        }
+
 
         #endregion
     }
