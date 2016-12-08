@@ -15,6 +15,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
                 new Learner
                 {
                     Uln = Defaults.FirstUln + parentBuilder.Submission.Learners.Length,
+                    LearnRefNumber=  Defaults.FirstUln + parentBuilder.Submission.Learners.Length.ToString(),
                     LearningDeliveries = new LearningDelivery[0]
                 }
             };
@@ -38,6 +39,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
                 return new Learner
                 {
                     Uln = l.Uln,
+                    LearnRefNumber=l.LearnRefNumber,
                     LearningDeliveries = new[]
                     {
                         new LearningDelivery

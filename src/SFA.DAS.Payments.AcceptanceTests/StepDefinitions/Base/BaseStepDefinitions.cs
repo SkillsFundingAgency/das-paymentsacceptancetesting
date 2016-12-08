@@ -164,7 +164,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 
             if (learner.LearningDelivery.StandardCode > 0)
             {
-                learner.LearningDelivery.TNP2= learner.LearningDelivery.PriceEpisodeTotalTNPPrice * 0.2m,
+                learner.LearningDelivery.TNP2 = learner.LearningDelivery.PriceEpisodeTotalTNPPrice * 0.2m;
                                                                            
             }
             //Save File Details
@@ -178,28 +178,25 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             //Save the Learner
             LearnerDataHelper.SaveLearner(ukprn,
                                         learner.Uln,
+                                        learner.LearnRefNumber,
                                         EnvironmentVariables);
 
             //save Learner delivery
             LearnerDataHelper.SaveLearningDelivery(ukprn,
+                                                    learner.LearnRefNumber,
                                                     learner.LearningDelivery,
                                                     EnvironmentVariables);
 
             //save learning delivery FAM
-            LearnerDataHelper.SaveLearningDeliveryFAM(ukprn, EnvironmentVariables);
+            LearnerDataHelper.SaveLearningDeliveryFAM(ukprn,learner.LearnRefNumber, EnvironmentVariables);
 
 
-            LearnerDataHelper.SaveTrailblazerApprenticeshipFinancialRecord(ukprn,1,learner.LearningDelivery.TNP1.Value,EnvironmentVariables);
+            LearnerDataHelper.SaveTrailblazerApprenticeshipFinancialRecord(ukprn,1,learner.LearnRefNumber,learner.LearningDelivery.TNP1.Value,EnvironmentVariables);
 
             //save Trailblazer
-            if (learner.LearningDelivery.StandardCode > 0)
+            if (learner.LearningDelivery.TNP2.HasValue )
             {
-
-                LearnerDataHelper.SaveTrailblazerApprenticeshipFinancialRecord(ukprn,
-                                                                            2,
-                                                                            learner.LearningDelivery.PriceEpisodeTotalTNPPrice * 0.2m,
-                                                                            EnvironmentVariables);
-               
+                LearnerDataHelper.SaveTrailblazerApprenticeshipFinancialRecord(ukprn,2, learner.LearnRefNumber,learner.LearningDelivery.TNP2.Value,EnvironmentVariables);
             }
 
             var months =  ((learner.LearningDelivery.PriceEpisodePlannedEndDate.Year - learner.LearningDelivery.EpisodeStartDate.Year) * 12) + 
@@ -209,7 +206,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             learner.LearningDelivery.PriceEpisodeCompletionElement = learner.LearningDelivery.PriceEpisodeTotalTNPPrice - ((learner.LearningDelivery.PriceEpisodeTotalTNPPrice * 0.8m) / months);
 
             //save the learning deliver values
-            EarningsDataHelper.SaveLearningDeliveryValuesForUkprn(ukprn,
+            EarningsDataHelper.SaveLearningDeliveryValuesForUkprn(ukprn,learner.LearnRefNumber,
                                                                     learner.LearningDelivery,
                                                                     EnvironmentVariables);
         }
@@ -235,6 +232,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             {
                 Name = l.Name,
                 Uln = l.Uln,
+                LearnRefNumber=l.LearnRefNumber,
                 LearningDelivery = new ApprenticeshipPriceEpisode
                 {
                     PriceEpisodeTotalTNPPrice = l.LearningDelivery.PriceEpisodeTotalTNPPrice,

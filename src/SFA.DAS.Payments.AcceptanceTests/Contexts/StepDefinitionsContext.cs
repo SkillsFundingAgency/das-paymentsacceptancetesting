@@ -94,6 +94,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
             {
                 Name = string.Empty,
                 Uln = long.Parse(IdentifierGenerator.GenerateIdentifier(10, false)),
+                LearnRefNumber= IdentifierGenerator.GenerateIdentifier(10, false),
                 LearningDelivery = new ApprenticeshipPriceEpisode
                 {
                     PriceEpisodeTotalTNPPrice = agreedPrice,

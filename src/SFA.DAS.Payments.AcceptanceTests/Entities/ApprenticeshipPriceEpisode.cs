@@ -16,7 +16,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.Entities
 
         }
 
-        public string PriceEpisodeIdentifier { get; set; }
+        public string PriceEpisodeIdentifier {
+            get {
+                if (StandardCode > 0)
+                    return $"{StandardCode}-{ProgrammeType}-{EpisodeStartDate.ToString("yyyy-MM-dd")}";
+                else
+                    return $"{FrameworkCode}-{ProgrammeType}-{PathwayCode}-{EpisodeStartDate.ToString("yyyy-MM-dd")}"; 
+            }
+        }
         public decimal PriceEpisodeTotalTNPPrice { get; set; }
         public LearnerType LearnerType { get; set; }
         public DateTime EpisodeStartDate { get; set; }

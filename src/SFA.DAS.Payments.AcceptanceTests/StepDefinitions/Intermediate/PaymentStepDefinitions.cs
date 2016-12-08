@@ -56,10 +56,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
 
             // Setup reference data
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+            var provider = StepDefinitionsContext.GetDefaultProvider();
+            var learner = provider.Learners[0];
 
             //save the periodiosed values
             EarningsDataHelper.SavePeriodisedValuesForUkprn(StepDefinitionsContext.GetDefaultProvider().Ukprn,
-                                                            new Dictionary<string, decimal> { { "Period_1", dueAmount } },
+                                                            learner.LearnRefNumber,
+                                                            new Dictionary<int, decimal> { { 1, dueAmount } },
+                                                            learner.LearningDelivery.EpisodeStartDate,
+                                                            learner.LearningDelivery.PriceEpisodeIdentifier,
                                                             environmentVariables);
 
 

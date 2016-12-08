@@ -50,7 +50,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
         }
 
         internal static void SavePeriodisedValuesForUkprn(long ukprn,
-                                                            Dictionary<string,decimal> periods,
+                                                            string learnRefNumber,
+                                                            Dictionary<int,decimal> periods,
                                                             DateTime episodeStartDate,
                                                             string priceEpisodeIdentifier,
                                                             EnvironmentVariables environmentVariables)
@@ -58,21 +59,45 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
             {
+                var periodColumns = new System.Text.StringBuilder();
+                var periodValues = new System.Text.StringBuilder();
+
                 foreach (var period in periods.Keys)
                 {
-                    var periodValue = periods[period];
-                    connection.Execute("INSERT INTO [Rulebase].[AEC_ApprenticeshipPriceEpisode_PeriodisedValues] " +
-                                       $"(Ukprn,LearnRefNumber,AimSeqNumber,EpisodeStartDate,PriceEpisodeIdentifier,AttributeName,{period}) " +
+                    var periodAmount = periods[period];
+
+
+                    connection.Execute("INSERT INTO [Rulebase].[AEC_ApprenticeshipPriceEpisode_Period] " +
+                                       $"(Ukprn,LearnRefNumber,AimSeqNumber,EpisodeStartDate,PriceEpisodeIdentifier,Period,PriceEpisodeOnProgPayment) " +
                                        "VALUES " +
-                                       "(@ukprn, '1',1,@episodeStartDate,@PriceEpisodeIdentifier, 'PriceEpisodeOnProgPayment', @periodValue)",
-                        new { ukprn, periodValue,episodeStartDate,priceEpisodeIdentifier });
+                                       "(@ukprn,@learnRefNumber ,1,@episodeStartDate,@PriceEpisodeIdentifier,@Period, @periodAmount)",
+                        new { ukprn, learnRefNumber, episodeStartDate, priceEpisodeIdentifier,period,periodAmount});
+
+                    periodColumns.Append($"Period_{period},");
+                    periodValues.Append($"{periodAmount},");
+
                 }
-                }
-        
+
+                var columnNames = periodColumns.ToString();
+                columnNames=columnNames.Remove(columnNames.Length - 1, 1);
+
+
+                var columnValues = periodValues.ToString();
+                columnValues = columnValues.Remove(columnValues.Length - 1, 1);
+
+                connection.Execute("INSERT INTO [Rulebase].[AEC_ApprenticeshipPriceEpisode_PeriodisedValues] " +
+                                   $"(Ukprn,LearnRefNumber,AimSeqNumber,EpisodeStartDate,PriceEpisodeIdentifier,AttributeName,{columnNames}) " +
+                                   "VALUES " +
+                                   $"(@ukprn,@learnRefNumber ,1,@episodeStartDate,@PriceEpisodeIdentifier, 'PriceEpisodeOnProgPayment', {columnValues})",
+                    new { ukprn, learnRefNumber, episodeStartDate, priceEpisodeIdentifier });
+
+            }
+
         }
 
         
         internal static void SaveLearningDeliveryValuesForUkprn(long ukprn, 
+                                                                string learnRefNumber,
                                                                 ApprenticeshipPriceEpisode priceEpisode,
                                                                 EnvironmentVariables environmentVariables)
         {
@@ -83,11 +108,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
             {
                
                 connection.Execute("INSERT INTO [Rulebase].[AEC_ApprenticeshipPriceEpisode] " +
-                                       "(Ukprn,LearnRefNumber,AimSeqNumber,PriceEpisodeTotalTNPPrice," + 
+                                       "(Ukprn,LearnRefNumber,AimSeqNumber,PriceEpisodeIdentifier,PriceEpisodeTotalTNPPrice," + 
                                        " EpisodeStartDate,PriceEpisodePlannedEndDate," +
-                                       "PriceEpisodeInstalmentValue,PriceEpisodeCompletionElement) " +
+                                       "PriceEpisodeInstalmentValue,PriceEpisodeCompletionElement," +
+                                       "TNP1,TNP2,TNP3,TNP4) " +
                                        "VALUES " +
-                                       "(@ukprn,'1', 1, " +
+                                       "(@ukprn,@LearnRefNumber, 1, " +
+                                       " @PriceEpisodeIdentifier," + 
                                        " @PriceEpisodeTotalTNPPrice," +
                                        " @EpisodeStartDate," +
                                        " @PriceEpisodePlannedEndDate," +
@@ -98,6 +125,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                                        " @TNP3,"+
                                        " @TNP4)",
                         new { ukprn,
+                                learnRefNumber,
+                                priceEpisode.PriceEpisodeIdentifier,
                                 priceEpisode.PriceEpisodeTotalTNPPrice,
                                 priceEpisode.EpisodeStartDate,
                                 priceEpisode.PriceEpisodePlannedEndDate,
@@ -117,6 +146,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                                             long commitmentId,
                                             long accountId,
                                             long uln,
+                                            string learnRefNumber,
                                             string collectionPeriodName,
                                             int collectionPeriodMonth,
                                             int collectionPeriodYear,
@@ -142,7 +172,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                                        ",TransactionType,AmountDue) " +
                                        "VALUES " +
                                         "(@commitmentId,@commitmentVersionId" +
-                                       ",@accountId,@accountVersionId,@uln,'1'" +
+                                       ",@accountId,@accountVersionId,@uln,@learnRefNumber" +
                                        ",1,@ukprn,@collectionPeriodMonth" +
                                        ",@collectionPeriodYear,@collectionPeriodName" +
                                        ",@collectionPeriodMonth,@collectionPeriodYear" +
@@ -153,6 +183,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                             accountId,
                             accountVersionId,
                             uln,
+                            learnRefNumber,
                             ukprn,
                             collectionPeriodName,
                             collectionPeriodMonth,
