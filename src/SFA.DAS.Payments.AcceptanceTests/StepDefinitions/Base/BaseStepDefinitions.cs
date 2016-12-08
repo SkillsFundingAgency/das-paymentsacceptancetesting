@@ -330,7 +330,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                 }
 
                 learner.Uln = learner.Uln > 0 ? learner.Uln : long.Parse(IdentifierGenerator.GenerateIdentifier(10, false));
-   
+                learner.LearnRefNumber = learner.Uln.ToString();
+
                 var standardCode = table.Header.Contains("standard code") ? int.Parse(table.Rows[rowIndex]["standard code"]) : IlrBuilder.Defaults.StandardCode;
 
                 learner.LearningDelivery.StandardCode = learner.LearningDelivery.FrameworkCode > 0 &&

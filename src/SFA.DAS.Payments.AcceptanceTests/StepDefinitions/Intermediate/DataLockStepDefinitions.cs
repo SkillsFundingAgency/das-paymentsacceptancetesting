@@ -88,6 +88,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             SetupValidLearnersData(provider.Ukprn, learner);
 
             var dueAmount = learner.LearningDelivery.PriceEpisodeTotalTNPPrice * 0.8m / 12;
+
+            
             EarningsDataHelper.SavePeriodisedValuesForUkprn(provider.Ukprn,
                                                       learner.LearnRefNumber,  
                                                       new Dictionary<int, decimal> { { 1, dueAmount } },
@@ -98,6 +100,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             RunMonthEnd(startDate);
         }
 
+     
 
 
         private void SetupCommitments(Table table)

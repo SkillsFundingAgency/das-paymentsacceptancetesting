@@ -59,7 +59,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
             {
-                var periodColumns = new System.Text.StringBuilder();
+                
                 var periodValues = new System.Text.StringBuilder();
 
                 foreach (var period in periods.Keys)
@@ -73,20 +73,24 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                                        "(@ukprn,@learnRefNumber ,1,@episodeStartDate,@PriceEpisodeIdentifier,@Period, @periodAmount)",
                         new { ukprn, learnRefNumber, episodeStartDate, priceEpisodeIdentifier,period,periodAmount});
 
-                    periodColumns.Append($"Period_{period},");
-                    periodValues.Append($"{periodAmount},");
+                  
+                    
 
                 }
 
-                var columnNames = periodColumns.ToString();
-                columnNames=columnNames.Remove(columnNames.Length - 1, 1);
-
+                //populate all period values, default to 0 if none found
+                for (var i = 1; i <= 12; i++)
+                {
+                    periodValues.Append($"{periods.Values.ElementAtOrDefault(i - 1)},");
+                  
+                }
 
                 var columnValues = periodValues.ToString();
                 columnValues = columnValues.Remove(columnValues.Length - 1, 1);
 
                 connection.Execute("INSERT INTO [Rulebase].[AEC_ApprenticeshipPriceEpisode_PeriodisedValues] " +
-                                   $"(Ukprn,LearnRefNumber,AimSeqNumber,EpisodeStartDate,PriceEpisodeIdentifier,AttributeName,{columnNames}) " +
+                                   "(Ukprn,LearnRefNumber,AimSeqNumber,EpisodeStartDate,PriceEpisodeIdentifier,AttributeName, " +
+                                   "Period_1,Period_2,Period_3,Period_4,Period_5,Period_6,Period_7,Period_8,Period_9,Period_10,Period_11,Period_12)" +
                                    "VALUES " +
                                    $"(@ukprn,@learnRefNumber ,1,@episodeStartDate,@PriceEpisodeIdentifier, 'PriceEpisodeOnProgPayment', {columnValues})",
                     new { ukprn, learnRefNumber, episodeStartDate, priceEpisodeIdentifier });
