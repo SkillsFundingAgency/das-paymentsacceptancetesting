@@ -84,7 +84,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             //Get the due amount 
             var earning = PaymentsDueDataHelper.GetPaymentsDueForPeriod(StepDefinitionsContext.GetDefaultProvider().Ukprn,
                                                                         2016,
-                                                                        08,
+                                                                        09,
                                                                         environmentVariables)
                                                                         .FirstOrDefault();
 
