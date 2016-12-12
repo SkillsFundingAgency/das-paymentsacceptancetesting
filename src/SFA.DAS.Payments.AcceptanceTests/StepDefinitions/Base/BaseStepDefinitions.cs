@@ -145,7 +145,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                 var accountId = employer?.AccountId ?? long.Parse(IdentifierGenerator.GenerateIdentifier(8, false));
 
                 var commitmentStartDate = commitment.StartDate ?? learner.LearningDelivery.StartDate;
-                var priceEpisode = learner.LearningDelivery.PriceEpisodes.Single(pe => pe.StartDate == commitmentStartDate);
+                var commitmentEndDate = commitment.ActualEndDate ?? commitment.EndDate ?? learner.LearningDelivery.PlannedEndDate;
+                var priceEpisode = learner.LearningDelivery.PriceEpisodes.Where(pe => pe.StartDate >= commitmentStartDate && pe.StartDate <= commitmentEndDate).OrderBy(pe => pe.StartDate).FirstOrDefault();
 
                 CommitmentDataHelper.CreateCommitment(
                     new CommitmentEntity
@@ -290,7 +291,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
         }
 
         protected void SubmitIlr(long ukprn, Learner[] learners, string academicYear, DateTime date
-          , ProcessService processService, Dictionary<string, decimal> earnedByPeriod)
+          , ProcessService processService, Dictionary<string, decimal> earnedByPeriod, Dictionary<string, DataLockMatch[]> dataLockMatchesByPeriod)
         {
             var submissionLearners = learners.Select(l => new Learner
             {
@@ -337,6 +338,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             earnedByPeriod.AddOrUpdate("05/" + academicYear.Substring(2), periodEarnings.Period_10);
             earnedByPeriod.AddOrUpdate("06/" + academicYear.Substring(2), periodEarnings.Period_11);
             earnedByPeriod.AddOrUpdate("07/" + academicYear.Substring(2), periodEarnings.Period_12);
+
+            var dataLockMatches = DataLockDataHelper.GetDataLockMatchesForUkprn(ukprn, EnvironmentVariables) ?? new DataLockMatch[0];
+            dataLockMatchesByPeriod.AddOrUpdate(date.GetPeriod(), dataLockMatches);
         }
         
         protected void SetupContextProviders(Table table)
@@ -362,20 +366,24 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 
                 if (table.Header.Contains("Total training price") && table.Header.Contains("Residual training price"))
                 {
+                    var startDate = DateTime.Parse(table.Rows[rowIndex]["Total training price effective date"]);
+
                     priceEpisodes.Add(new PriceEpisode
                     {
-                        Id = GetPriceEpisodeIdentifier(),
-                        StartDate = DateTime.Parse(table.Rows[rowIndex]["Total training price effective date"]),
+                        Id = GetPriceEpisodeIdentifier(startDate),
+                        StartDate = startDate,
                         EndDate = DateTime.Parse(table.Rows[rowIndex]["Residual training price effective date"]).AddDays(-1),
                         TotalPrice = decimal.Parse(table.Rows[rowIndex]["Total training price"]) + decimal.Parse(table.Rows[rowIndex]["Total assessment price"]),
                         Tnp1 = decimal.Parse(table.Rows[rowIndex]["Total training price"]),
                         Tnp2 = decimal.Parse(table.Rows[rowIndex]["Total assessment price"])
                     });
 
+                    startDate = DateTime.Parse(table.Rows[rowIndex]["Residual training price effective date"]);
+
                     priceEpisodes.Add(new PriceEpisode
                     {
-                        Id = GetPriceEpisodeIdentifier(),
-                        StartDate = DateTime.Parse(table.Rows[rowIndex]["Residual training price effective date"]),
+                        Id = GetPriceEpisodeIdentifier(startDate),
+                        StartDate = startDate,
                         TotalPrice = decimal.Parse(table.Rows[rowIndex]["Residual training price"]) + decimal.Parse(table.Rows[rowIndex]["Residual assessment price"]),
                         Tnp3 = decimal.Parse(table.Rows[rowIndex]["Residual training price"]),
                         Tnp4 = decimal.Parse(table.Rows[rowIndex]["Residual assessment price"])
@@ -383,10 +391,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                 }
                 else
                 {
+                    var startDate = DateTime.Parse(table.Rows[rowIndex]["start date"]);
+
                     priceEpisodes.Add(new PriceEpisode
                     {
-                        Id = GetPriceEpisodeIdentifier(),
-                        StartDate = DateTime.Parse(table.Rows[rowIndex]["start date"]),
+                        Id = GetPriceEpisodeIdentifier(startDate),
+                        StartDate = startDate,
                         TotalPrice = decimal.Parse(table.Rows[rowIndex]["agreed price"]),
                         Tnp1 = decimal.Parse(table.Rows[rowIndex]["agreed price"]) * 0.8m,
                         Tnp2 = decimal.Parse(table.Rows[rowIndex]["agreed price"]) - decimal.Parse(table.Rows[rowIndex]["agreed price"]) * 0.8m
@@ -471,9 +481,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             throw new ArgumentException($"Invalid commitment status value: {status}");
         }
 
-        private string GetPriceEpisodeIdentifier()
+        private string GetPriceEpisodeIdentifier(DateTime date)
         {
-            return IdentifierGenerator.GenerateIdentifier(25);
+            return $"{IlrBuilder.Defaults.StandardCode}-25-{date.ToString("yyyy-MM-dd")}";
         }
     }
 }

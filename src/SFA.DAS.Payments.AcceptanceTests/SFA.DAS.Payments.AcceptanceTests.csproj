@@ -87,10 +87,12 @@
     <Compile Include="Builders\IlrLearnersBuilder.cs" />
     <Compile Include="Builders\IlrLearningDeliveryBuilder.cs" />
     <Compile Include="Builders\IlrSubmissionDefaults.cs" />
+    <Compile Include="DataHelpers\DataLockDataHelper.cs" />
     <Compile Include="DataHelpers\Entities\CommitmentEntity.cs" />
     <Compile Include="DataHelpers\ValidationErrorsDataHelper.cs" />
     <Compile Include="DataHelpers\Entities\AEC_ApprenticeshipPriceEpisode.cs" />
     <Compile Include="Entities\Commitment.cs" />
+    <Compile Include="Entities\DataLockMatch.cs" />
     <Compile Include="Entities\Employer.cs" />
     <Compile Include="Entities\Learner.cs" />
     <Compile Include="Entities\LearningDelivery.cs" />

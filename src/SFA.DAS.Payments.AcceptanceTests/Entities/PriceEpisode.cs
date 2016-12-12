@@ -18,5 +18,24 @@ namespace SFA.DAS.Payments.AcceptanceTests.Entities
 
         public decimal MonthlyPayment { get; set; }
         public decimal CompletionPayment { get; set; }
+
+        public string DataLockMatchKey
+        {
+            get
+            {
+                if (EndDate.HasValue)
+                {
+                    var endDate = EndDate.Value == EndDate.Value.NextCensusDate()
+                        ? EndDate.Value
+                        : EndDate.Value.AddMonths(-1);
+
+                    return StartDate.GetPeriod() + " - " + endDate.GetPeriod();
+                }
+                else
+                {
+                    return StartDate.GetPeriod() + " onwards";
+                }
+            }
+        }
     }
 }

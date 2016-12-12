@@ -30,15 +30,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
 
             Learners = learners.Select(l =>
             {
-                //var tnp1 = l.LearningDelivery.PriceEpisodes[0].TotalPrice * 0.8m;
-                //var tnp2 = l.LearningDelivery.PriceEpisodes[0].TotalPrice - tnp1;
-
-                //if (l.LearningDelivery.StandardCode == 0)
-                //{
-                //    tnp1 = tnp1 + tnp2;
-                //    tnp2 = 0;
-                //}
-
                 return new Learner
                 {
                     Uln = l.Uln,
@@ -56,9 +47,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
                             ProgrammeType = l.LearningDelivery.ProgrammeType,
                             FrameworkCode = l.LearningDelivery.FrameworkCode,
                             PathwayCode = l.LearningDelivery.PathwayCode,
-
-                            //TrainingCost = tnp1,
-                            //EndpointAssesmentCost = tnp2,
 
                             FinancialRecords = GetLearningDeliveryFinancialRecords(l.LearningDelivery)
                         }

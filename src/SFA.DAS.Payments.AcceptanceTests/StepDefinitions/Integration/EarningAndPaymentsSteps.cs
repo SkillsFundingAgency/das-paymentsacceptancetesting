@@ -132,7 +132,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
 
                 foreach (var provider in StepDefinitionsContext.Providers)
                 {
-                    SubmitIlr(provider.Ukprn, provider.Learners, academicYear, date, processService, provider.EarnedByPeriod);
+                    SubmitIlr(provider.Ukprn, provider.Learners, academicYear, date, processService, provider.EarnedByPeriod, provider.DataLockMatchesByPeriod);
                 }
 
                 SubmitMonthEnd(date, processService);

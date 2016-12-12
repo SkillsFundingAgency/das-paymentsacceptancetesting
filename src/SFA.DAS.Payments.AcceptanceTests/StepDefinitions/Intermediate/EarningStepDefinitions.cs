@@ -167,9 +167,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
 
             SubmitIlr(provider.Ukprn, provider.Learners,
                 ilrStartDate.GetAcademicYear(),
-                actualEndDate.HasValue? actualEndDate.Value : plannedEndDate,
+                actualEndDate ?? plannedEndDate,
                 new ProcessService(new TestLogger()),
-                provider.EarnedByPeriod);
+                provider.EarnedByPeriod,
+                provider.DataLockMatchesByPeriod);
         }
 
         [Then(@"the monthly earnings is (.*)")]

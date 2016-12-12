@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities;
+using SFA.DAS.Payments.AcceptanceTests.Entities;
 using TechTalk.SpecFlow;
 
 namespace SFA.DAS.Payments.AcceptanceTests
@@ -91,6 +92,17 @@ namespace SFA.DAS.Payments.AcceptanceTests
             }
         }
 
+        internal static void AddOrUpdate(this Dictionary<string, DataLockMatch[]> dictionary, string key, DataLockMatch[] value)
+        {
+            if (dictionary.ContainsKey(key))
+            {
+                dictionary[key] = value;
+            }
+            else
+            {
+                dictionary.Add(key, value);
+            }
+        }
 
         internal static TableRow RowWithKey(this TableRows rows, string key)
         {
@@ -101,6 +113,15 @@ namespace SFA.DAS.Payments.AcceptanceTests
         {
             var month = date.Month < 10 ? "0" + date.Month : date.Month.ToString();
             return $"{month}/{date.Year - 2000}";
+        }
+
+
+        internal static DateTime GetCensusDate(this string period)
+        {
+            var month = int.Parse(period.Split('/')[0]);
+            var year = int.Parse(period.Split('/')[1]) + 2000;
+
+            return new DateTime(year, month, 1).NextCensusDate();
         }
     }
 }

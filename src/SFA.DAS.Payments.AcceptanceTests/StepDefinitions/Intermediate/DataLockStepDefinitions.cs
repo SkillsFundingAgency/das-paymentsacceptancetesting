@@ -51,7 +51,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
                 startDate.GetAcademicYear(),
                 startDate.NextCensusDate(),
                 new ProcessService(new TestLogger()),
-                provider.EarnedByPeriod);
+                provider.EarnedByPeriod,
+                provider.DataLockMatchesByPeriod);
 
             //Update the UKPRN to the one from ILR as this is the one which will be in the validation error table
             provider.Ukprn = ukprn;

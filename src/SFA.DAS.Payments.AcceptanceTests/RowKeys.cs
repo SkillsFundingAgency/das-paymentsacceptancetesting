@@ -15,5 +15,7 @@
         public const string OnProgramPayment = "On-program";
         public const string CompletionPayment = "Completion";
         public const string BalancingPayment = "Balancing";
+
+        public const string DataLockMatchingCommitment = "Matching commitment";
     }
 }
