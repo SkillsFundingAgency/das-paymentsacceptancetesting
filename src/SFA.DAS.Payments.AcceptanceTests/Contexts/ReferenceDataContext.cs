@@ -47,10 +47,18 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
             {
                 Name = "employer",
                 AccountId = long.Parse(IdentifierGenerator.GenerateIdentifier(8, false)),
+                LearnersType = LearnerType.ProgrammeOnlyDas,
                 MonthlyAccountBalance = monthlyBalance
             };
 
             Employers = new[] { employer };
+        }
+
+        public void SetEmployerLearnersType(string employerName, LearnerType learnersType)
+        {
+            var employer = Employers.Single(e => e.Name == employerName);
+
+            employer.LearnersType = learnersType;
         }
     }
 }

@@ -36,5 +36,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                 connection.Execute("INSERT INTO DasAccountsAudit (ReadDateTime,AccountsRead,CompletedSuccessfully) SELECT GETDATE(), COUNT(AccountId),1 FROM dbo.DasAccounts");
             }
         }
+
+        internal static void ClearAccounts(EnvironmentVariables environmentVariables)
+        {
+            using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
+            {
+                connection.Execute("DELETE FROM dbo.DasAccounts");
+                connection.Execute("DELETE FROM dbo.DasAccountsAudit");
+            }
+        }
     }
 }

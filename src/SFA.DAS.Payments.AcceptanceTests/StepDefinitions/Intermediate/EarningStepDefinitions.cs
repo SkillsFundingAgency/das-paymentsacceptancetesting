@@ -65,8 +65,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             EarningsDataHelper.SavePeriodisedValuesForUkprn(StepDefinitionsContext.GetDefaultProvider().Ukprn,
                                                             learner.LearnRefNumber,
                                                             new Dictionary<int, decimal> { { 1, earnedAmount } },
-                                                            learner.LearningDelivery.EpisodeStartDate,
-                                                            learner.LearningDelivery.PriceEpisodeIdentifier,
+                                                            learner.LearningDelivery.PriceEpisodes[0].StartDate,
+                                                            learner.LearningDelivery.PriceEpisodes[0].Id,
                                                             environmentVariables);
 
             RunMonthEnd(new DateTime(2016, 09, 01));
@@ -180,8 +180,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             var learner = StepDefinitionsContext.GetDefaultProvider().Learners.First();
             var output = LearnerDataHelper.GetAELearningDelivery(StepDefinitionsContext.GetDefaultProvider().Ukprn,
                                                                 learner.LearnRefNumber,
-                                                                learner.LearningDelivery.EpisodeStartDate,
-                                                                learner.LearningDelivery.PriceEpisodePlannedEndDate,
+                                                                learner.LearningDelivery.StartDate,
+                                                                learner.LearningDelivery.PlannedEndDate,
                                                                 environmentVariables);
 
 
@@ -199,8 +199,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             var learner = StepDefinitionsContext.GetDefaultProvider().Learners.First();
             var output = LearnerDataHelper.GetAELearningDelivery(StepDefinitionsContext.GetDefaultProvider().Ukprn,
                                                                 learner.LearnRefNumber,
-                                                                learner.LearningDelivery.EpisodeStartDate,
-                                                                learner.LearningDelivery.PriceEpisodePlannedEndDate,
+                                                                learner.LearningDelivery.StartDate,
+                                                                learner.LearningDelivery.PlannedEndDate,
                                                                 environmentVariables);
 
 
@@ -216,7 +216,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
             var learner = StepDefinitionsContext.GetDefaultProvider().Learners.First();
-            var endDate = learner.LearningDelivery.PriceEpisodeActualEndDate == null ? learner.LearningDelivery.PriceEpisodePlannedEndDate : learner.LearningDelivery.PriceEpisodeActualEndDate.Value;
+            var endDate = learner.LearningDelivery.ActualEndDate ?? learner.LearningDelivery.PlannedEndDate;
             var periodNumber = endDate.GetPeriodNumber();
 
             var output = EarningsDataHelper.GetBalancingPaymentForUkprn(StepDefinitionsContext.GetDefaultProvider().Ukprn,

@@ -7,6 +7,6 @@
 
         public string LearnRefNumber { get; set; }
             
-        public ApprenticeshipPriceEpisode LearningDelivery { get; set; }
+        public LearningDelivery LearningDelivery { get; set; }
     }
 }

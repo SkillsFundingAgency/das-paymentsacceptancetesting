@@ -10,8 +10,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.Entities
         public string Learner { get; set; }
         public string Employer { get; set; }
         public string Provider { get; set; }
+
+        public decimal? AgreedPrice { get; set; }
+
         public CommitmentPaymentStatus Status { get; set; }
         public string StopPeriod { get; set; }
+
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+        public DateTime? ActualEndDate { get; set; }
 
         public DateTime? StopPeriodCensusDate
         {

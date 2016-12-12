@@ -96,7 +96,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             }
         }
 
-        private void ProcessIlrFileSubmissions(Table table, DateTime? firstSubmissionDate = null)
+        private void ProcessIlrFileSubmissions(Table table, DateTime? firstSubmissionDate = null, DateTime? actualSubmissionDate = null)
         {
             // Store spec values in context
             SetupContextProviders(table);

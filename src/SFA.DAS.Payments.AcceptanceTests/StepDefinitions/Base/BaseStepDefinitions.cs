@@ -14,7 +14,7 @@ using SFA.DAS.Payments.AcceptanceTests.Translators;
 using TechTalk.SpecFlow;
 using IlrBuilder = SFA.DAS.Payments.AcceptanceTests.Builders.IlrBuilder;
 using Learner = SFA.DAS.Payments.AcceptanceTests.Entities.Learner;
-using ApprenticeshipPriceEpisode = SFA.DAS.Payments.AcceptanceTests.Entities.ApprenticeshipPriceEpisode;
+using LearningDelivery = SFA.DAS.Payments.AcceptanceTests.Entities.LearningDelivery;
 
 namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 {
@@ -57,12 +57,36 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             CommitmentDataHelper.UpdateEventStreamPointer(EnvironmentVariables);
         }
 
-        protected void AddLearnerCommitment(long ukprn, 
-                                            Learner learner, 
-                                            long? standardCode = null,
-                                            int? frameworkCode = null,
-                                            int? programmeType = null,
-                                            int? pathwayCode = null)
+        protected void SetupPeriodReferenceData(DateTime date)
+        {
+            AccountDataHelper.ClearAccounts(EnvironmentVariables);
+            CommitmentDataHelper.ClearCommitments(EnvironmentVariables);
+
+            var period = date.GetPeriod();
+
+            foreach (var employer in StepDefinitionsContext.ReferenceDataContext.Employers)
+            {
+                AccountDataHelper.CreateAccount(
+                    employer.AccountId,
+                    employer.AccountId.ToString(),
+                    employer.GetBalanceForMonth(period),
+                    EnvironmentVariables);
+            }
+
+            AccountDataHelper.UpdateAudit(EnvironmentVariables);
+
+            foreach (var provider in StepDefinitionsContext.Providers)
+            {
+                foreach (var learner in provider.Learners)
+                {
+                    AddLearnerCommitmentsForPeriod(date, provider.Ukprn, learner);
+                }
+            }
+
+            CommitmentDataHelper.UpdateEventStreamPointer(EnvironmentVariables);
+        }
+
+        protected void AddLearnerCommitment(long ukprn, Learner learner)
         {
             var commitmentId = long.Parse(IdentifierGenerator.GenerateIdentifier(6, false));
             var commitmentPriority = 1;
@@ -90,13 +114,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                     Ukprn = ukprn,
                     Uln = learner.Uln,
                     AccountId = accountId.ToString(),
-                    StartDate = learner.LearningDelivery.EpisodeStartDate,
-                    EndDate = learner.LearningDelivery.PriceEpisodePlannedEndDate,
-                    AgreedCost = learner.LearningDelivery.PriceEpisodeTotalTNPPrice,
-                    StandardCode = standardCode ?? IlrBuilder.Defaults.StandardCode,
-                    FrameworkCode = frameworkCode ?? IlrBuilder.Defaults.FrameworkCode,
-                    ProgrammeType = programmeType ?? IlrBuilder.Defaults.ProgrammeType,
-                    PathwayCode = pathwayCode ?? IlrBuilder.Defaults.PathwayCode,
+                    StartDate = learner.LearningDelivery.StartDate,
+                    EndDate = learner.LearningDelivery.PlannedEndDate,
+                    AgreedCost = learner.LearningDelivery.PriceEpisodes[0].TotalPrice,
+                    StandardCode = IlrBuilder.Defaults.StandardCode,
+                    FrameworkCode = IlrBuilder.Defaults.FrameworkCode,
+                    ProgrammeType = IlrBuilder.Defaults.ProgrammeType,
+                    PathwayCode = IlrBuilder.Defaults.PathwayCode,
                     Priority = commitmentPriority,
                     VersionId = "1",
                     PaymentStatus = (int)CommitmentPaymentStatus.Active,
@@ -104,6 +128,47 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                     Payable = true
                 },
                 EnvironmentVariables);
+        }
+
+        protected void AddLearnerCommitmentsForPeriod(DateTime date, long ukprn, Learner learner)
+        {
+            var learnerCommitments = StepDefinitionsContext.ReferenceDataContext.Commitments.Where(c => c.Learner == learner.Name);
+
+            foreach (var commitment in learnerCommitments)
+            {
+                if (commitment.StartDate > date)
+                {
+                    continue;
+                }
+
+                var employer = StepDefinitionsContext.ReferenceDataContext.Employers?.SingleOrDefault(e => e.Name == commitment.Employer);
+                var accountId = employer?.AccountId ?? long.Parse(IdentifierGenerator.GenerateIdentifier(8, false));
+
+                var commitmentStartDate = commitment.StartDate ?? learner.LearningDelivery.StartDate;
+                var priceEpisode = learner.LearningDelivery.PriceEpisodes.Single(pe => pe.StartDate == commitmentStartDate);
+
+                CommitmentDataHelper.CreateCommitment(
+                    new CommitmentEntity
+                    {
+                        CommitmentId = commitment.Id,
+                        Ukprn = ukprn,
+                        Uln = learner.Uln,
+                        AccountId = accountId.ToString(),
+                        StartDate = commitmentStartDate,
+                        EndDate = commitment.ActualEndDate ?? commitment.EndDate ?? learner.LearningDelivery.PlannedEndDate,
+                        AgreedCost = commitment.AgreedPrice ?? priceEpisode.TotalPrice,
+                        StandardCode = IlrBuilder.Defaults.StandardCode,
+                        FrameworkCode = IlrBuilder.Defaults.FrameworkCode,
+                        ProgrammeType = IlrBuilder.Defaults.ProgrammeType,
+                        PathwayCode = IlrBuilder.Defaults.PathwayCode,
+                        Priority = commitment.Priority,
+                        VersionId = "1",
+                        PaymentStatus = (int) CommitmentPaymentStatus.Active,
+                        PaymentStatusDescription = CommitmentPaymentStatus.Active.ToString(),
+                        Payable = true
+                    },
+                    EnvironmentVariables);
+            }
         }
 
         protected void SubmitMonthEnd(DateTime date, ProcessService processService)
@@ -158,13 +223,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
         protected void SetupValidLearnersData(long ukprn, Learner learner)
         {
 
-            learner.LearningDelivery.TNP1 = learner.LearningDelivery.StandardCode > 0 ?
-                                                                           learner.LearningDelivery.PriceEpisodeTotalTNPPrice * 0.8m :
-                                                                           learner.LearningDelivery.PriceEpisodeTotalTNPPrice;
+            learner.LearningDelivery.PriceEpisodes[0].Tnp1 = learner.LearningDelivery.StandardCode > 0 ?
+                                                                           learner.LearningDelivery.PriceEpisodes[0].TotalPrice * 0.8m :
+                                                                           learner.LearningDelivery.PriceEpisodes[0].TotalPrice;
 
             if (learner.LearningDelivery.StandardCode > 0)
             {
-                learner.LearningDelivery.TNP2 = learner.LearningDelivery.PriceEpisodeTotalTNPPrice * 0.2m;
+                learner.LearningDelivery.PriceEpisodes[0].Tnp2 = learner.LearningDelivery.PriceEpisodes[0].TotalPrice * 0.2m;
                                                                            
             }
             //Save File Details
@@ -190,20 +255,19 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             //save learning delivery FAM
             LearnerDataHelper.SaveLearningDeliveryFAM(ukprn,learner.LearnRefNumber, EnvironmentVariables);
 
-
-            LearnerDataHelper.SaveTrailblazerApprenticeshipFinancialRecord(ukprn,1,learner.LearnRefNumber,learner.LearningDelivery.TNP1.Value,EnvironmentVariables);
+            LearnerDataHelper.SaveTrailblazerApprenticeshipFinancialRecord(ukprn,1,learner.LearnRefNumber,learner.LearningDelivery.PriceEpisodes[0].Tnp1.Value,EnvironmentVariables);
 
             //save Trailblazer
-            if (learner.LearningDelivery.TNP2.HasValue )
+            if (learner.LearningDelivery.PriceEpisodes[0].Tnp2.HasValue )
             {
-                LearnerDataHelper.SaveTrailblazerApprenticeshipFinancialRecord(ukprn,2, learner.LearnRefNumber,learner.LearningDelivery.TNP2.Value,EnvironmentVariables);
+                LearnerDataHelper.SaveTrailblazerApprenticeshipFinancialRecord(ukprn,2, learner.LearnRefNumber,learner.LearningDelivery.PriceEpisodes[0].Tnp2.Value,EnvironmentVariables);
             }
 
-            var months =  ((learner.LearningDelivery.PriceEpisodePlannedEndDate.Year - learner.LearningDelivery.EpisodeStartDate.Year) * 12) + 
-                        learner.LearningDelivery.PriceEpisodePlannedEndDate.Month - learner.LearningDelivery.EpisodeStartDate.Month;
+            var months =  ((learner.LearningDelivery.PlannedEndDate.Year - learner.LearningDelivery.StartDate.Year) * 12) + 
+                        learner.LearningDelivery.PlannedEndDate.Month - learner.LearningDelivery.StartDate.Month;
 
-            learner.LearningDelivery.PriceEpisodeInstalmentValue = (learner.LearningDelivery.PriceEpisodeTotalTNPPrice * 0.8m) / months;
-            learner.LearningDelivery.PriceEpisodeCompletionElement = learner.LearningDelivery.PriceEpisodeTotalTNPPrice - ((learner.LearningDelivery.PriceEpisodeTotalTNPPrice * 0.8m) / months);
+            learner.LearningDelivery.PriceEpisodes[0].MonthlyPayment = learner.LearningDelivery.PriceEpisodes[0].TotalPrice * 0.8m / months;
+            learner.LearningDelivery.PriceEpisodes[0].CompletionPayment = learner.LearningDelivery.PriceEpisodes[0].TotalPrice * 0.2m; //- ((learner.LearningDelivery.PriceEpisodes[0].TotalPrice * 0.8m) / months);
 
             //save the learning deliver values
             EarningsDataHelper.SaveLearningDeliveryValuesForUkprn(ukprn,learner.LearnRefNumber,
@@ -233,19 +297,20 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                 Name = l.Name,
                 Uln = l.Uln,
                 LearnRefNumber=l.LearnRefNumber,
-                LearningDelivery = new ApprenticeshipPriceEpisode
+                LearningDelivery = new LearningDelivery
                 {
-                    PriceEpisodeTotalTNPPrice = l.LearningDelivery.PriceEpisodeTotalTNPPrice,
                     LearnerType = l.LearningDelivery.LearnerType,
-                    EpisodeStartDate = l.LearningDelivery.EpisodeStartDate,
-                    PriceEpisodePlannedEndDate = l.LearningDelivery.PriceEpisodePlannedEndDate,
-                    PriceEpisodeActualEndDate = date >= l.LearningDelivery.PriceEpisodeActualEndDate ? l.LearningDelivery.PriceEpisodeActualEndDate : null,
+                    StartDate = l.LearningDelivery.StartDate,
+                    PlannedEndDate = l.LearningDelivery.PlannedEndDate,
+                    ActualEndDate = date >= l.LearningDelivery.ActualEndDate 
+                                        ? l.LearningDelivery.ActualEndDate
+                                        : null,
                     CompletionStatus = l.LearningDelivery.CompletionStatus,
                     StandardCode = l.LearningDelivery.StandardCode,
                     FrameworkCode= l.LearningDelivery.FrameworkCode,
                     PathwayCode=l.LearningDelivery.PathwayCode,
-                    ProgrammeType=l.LearningDelivery.ProgrammeType
-                    
+                    ProgrammeType=l.LearningDelivery.ProgrammeType,
+                    PriceEpisodes = l.LearningDelivery.PriceEpisodes
                 }
             }).ToArray();
 
@@ -293,19 +358,53 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
         {
             for (var rowIndex = 0; rowIndex < table.RowCount; rowIndex++)
             {
+                var priceEpisodes = new List<PriceEpisode>();
+
+                if (table.Header.Contains("Total training price") && table.Header.Contains("Residual training price"))
+                {
+                    priceEpisodes.Add(new PriceEpisode
+                    {
+                        Id = GetPriceEpisodeIdentifier(),
+                        StartDate = DateTime.Parse(table.Rows[rowIndex]["Total training price effective date"]),
+                        EndDate = DateTime.Parse(table.Rows[rowIndex]["Residual training price effective date"]).AddDays(-1),
+                        TotalPrice = decimal.Parse(table.Rows[rowIndex]["Total training price"]) + decimal.Parse(table.Rows[rowIndex]["Total assessment price"]),
+                        Tnp1 = decimal.Parse(table.Rows[rowIndex]["Total training price"]),
+                        Tnp2 = decimal.Parse(table.Rows[rowIndex]["Total assessment price"])
+                    });
+
+                    priceEpisodes.Add(new PriceEpisode
+                    {
+                        Id = GetPriceEpisodeIdentifier(),
+                        StartDate = DateTime.Parse(table.Rows[rowIndex]["Residual training price effective date"]),
+                        TotalPrice = decimal.Parse(table.Rows[rowIndex]["Residual training price"]) + decimal.Parse(table.Rows[rowIndex]["Residual assessment price"]),
+                        Tnp3 = decimal.Parse(table.Rows[rowIndex]["Residual training price"]),
+                        Tnp4 = decimal.Parse(table.Rows[rowIndex]["Residual assessment price"])
+                    });
+                }
+                else
+                {
+                    priceEpisodes.Add(new PriceEpisode
+                    {
+                        Id = GetPriceEpisodeIdentifier(),
+                        StartDate = DateTime.Parse(table.Rows[rowIndex]["start date"]),
+                        TotalPrice = decimal.Parse(table.Rows[rowIndex]["agreed price"]),
+                        Tnp1 = decimal.Parse(table.Rows[rowIndex]["agreed price"]) * 0.8m,
+                        Tnp2 = decimal.Parse(table.Rows[rowIndex]["agreed price"]) - decimal.Parse(table.Rows[rowIndex]["agreed price"]) * 0.8m
+                    });
+                }
+
                 var learner = new Learner
                 {
                     Name = table.Rows[rowIndex].ContainsKey("ULN") ? table.Rows[rowIndex]["ULN"] : string.Empty,
                    
-                    LearningDelivery = new ApprenticeshipPriceEpisode
+                    LearningDelivery = new LearningDelivery
                     {
-                        PriceEpisodeTotalTNPPrice = decimal.Parse(table.Rows[rowIndex]["agreed price"]),
                         LearnerType = LearnerType.ProgrammeOnlyDas,
-                        EpisodeStartDate = DateTime.Parse(table.Rows[rowIndex]["start date"]),
-                        PriceEpisodePlannedEndDate = table.Header.Contains("planned end date") ? 
+                        StartDate = DateTime.Parse(table.Rows[rowIndex]["start date"]),
+                        PlannedEndDate = table.Header.Contains("planned end date") ? 
                                         DateTime.Parse(table.Rows[rowIndex]["planned end date"]) : 
                                         DateTime.Parse(table.Rows[rowIndex]["start date"]).AddMonths(12),
-                        PriceEpisodeActualEndDate =
+                        ActualEndDate =
                             !table.Header.Contains("actual end date") ||
                             string.IsNullOrWhiteSpace(table.Rows[rowIndex]["actual end date"])
                                 ? null
@@ -316,8 +415,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 
                         FrameworkCode = table.Header.Contains("framework code") ? int.Parse(table.Rows[rowIndex]["framework code"]) : IlrBuilder.Defaults.FrameworkCode,
                         ProgrammeType = table.Header.Contains("programme type") ? int.Parse(table.Rows[rowIndex]["programme type"]) : IlrBuilder.Defaults.ProgrammeType,
-                        PathwayCode = table.Header.Contains("pathway code") ? int.Parse(table.Rows[rowIndex]["pathway code"]) : IlrBuilder.Defaults.PathwayCode
+                        PathwayCode = table.Header.Contains("pathway code") ? int.Parse(table.Rows[rowIndex]["pathway code"]) : IlrBuilder.Defaults.PathwayCode,
 
+                        PriceEpisodes = priceEpisodes.ToArray()
                     }
                 };
 
@@ -369,6 +469,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             }
 
             throw new ArgumentException($"Invalid commitment status value: {status}");
+        }
+
+        private string GetPriceEpisodeIdentifier()
+        {
+            return IdentifierGenerator.GenerateIdentifier(25);
         }
     }
 }

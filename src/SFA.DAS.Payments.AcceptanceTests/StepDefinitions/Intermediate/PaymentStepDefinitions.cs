@@ -29,11 +29,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             StepDefinitionsContext.SetDefaultProvider();
 
             var provider = StepDefinitionsContext.GetDefaultProvider();
-            var learner = StepDefinitionsContext.CreateLearner(15000, new DateTime(2017, 08, 01), new DateTime(2018, 07, 01));
+            var learner = StepDefinitionsContext.CreateLearner(15000, new DateTime(2017, 09, 01), new DateTime(2018, 09, 08));
 
-            learner.LearningDelivery.EpisodeStartDate = new DateTime(2017, 09, 01);
-            learner.LearningDelivery.PriceEpisodePlannedEndDate = new DateTime(2018, 09, 08);
-            learner.LearningDelivery.PriceEpisodeTotalTNPPrice= 15000;
+            learner.LearningDelivery.PriceEpisodes[0].TotalPrice = 15000;
             learner.LearningDelivery.StandardCode= IlrBuilder.Defaults.StandardCode;
 
             
@@ -63,8 +61,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             EarningsDataHelper.SavePeriodisedValuesForUkprn(StepDefinitionsContext.GetDefaultProvider().Ukprn,
                                                             learner.LearnRefNumber,
                                                             new Dictionary<int, decimal> { { 1, dueAmount } },
-                                                            learner.LearningDelivery.EpisodeStartDate,
-                                                            learner.LearningDelivery.PriceEpisodeIdentifier,
+                                                            learner.LearningDelivery.PriceEpisodes[0].StartDate,
+                                                            learner.LearningDelivery.PriceEpisodes[0].Id,
                                                             environmentVariables);
 
 

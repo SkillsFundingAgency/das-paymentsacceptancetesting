@@ -56,7 +56,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                                                             string priceEpisodeIdentifier,
                                                             EnvironmentVariables environmentVariables)
         {
-
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
             {
                 
@@ -68,21 +67,16 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 
 
                     connection.Execute("INSERT INTO [Rulebase].[AEC_ApprenticeshipPriceEpisode_Period] " +
-                                       $"(Ukprn,LearnRefNumber,AimSeqNumber,EpisodeStartDate,PriceEpisodeIdentifier,Period,PriceEpisodeOnProgPayment) " +
+                                       "(Ukprn,LearnRefNumber,AimSeqNumber,EpisodeStartDate,PriceEpisodeIdentifier,Period,PriceEpisodeOnProgPayment) " +
                                        "VALUES " +
                                        "(@ukprn,@learnRefNumber ,1,@episodeStartDate,@PriceEpisodeIdentifier,@Period, @periodAmount)",
                         new { ukprn, learnRefNumber, episodeStartDate, priceEpisodeIdentifier,period,periodAmount});
-
-                  
-                    
-
                 }
 
                 //populate all period values, default to 0 if none found
                 for (var i = 1; i <= 12; i++)
                 {
                     periodValues.Append($"{periods.Values.ElementAtOrDefault(i - 1)},");
-                  
                 }
 
                 var columnValues = periodValues.ToString();
@@ -94,56 +88,55 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                                    "VALUES " +
                                    $"(@ukprn,@learnRefNumber ,1,@episodeStartDate,@PriceEpisodeIdentifier, 'PriceEpisodeOnProgPayment', {columnValues})",
                     new { ukprn, learnRefNumber, episodeStartDate, priceEpisodeIdentifier });
-
             }
-
         }
 
         
         internal static void SaveLearningDeliveryValuesForUkprn(long ukprn, 
                                                                 string learnRefNumber,
-                                                                ApprenticeshipPriceEpisode priceEpisode,
+                                                                LearningDelivery learningDelivery,
                                                                 EnvironmentVariables environmentVariables)
         {
-
-           
-
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
             {
-               
-                connection.Execute("INSERT INTO [Rulebase].[AEC_ApprenticeshipPriceEpisode] " +
-                                       "(Ukprn,LearnRefNumber,AimSeqNumber,PriceEpisodeIdentifier,PriceEpisodeTotalTNPPrice," + 
-                                       " EpisodeStartDate,PriceEpisodePlannedEndDate," +
-                                       "PriceEpisodeInstalmentValue,PriceEpisodeCompletionElement," +
-                                       "TNP1,TNP2,TNP3,TNP4) " +
-                                       "VALUES " +
-                                       "(@ukprn,@LearnRefNumber, 1, " +
-                                       " @PriceEpisodeIdentifier," + 
-                                       " @PriceEpisodeTotalTNPPrice," +
-                                       " @EpisodeStartDate," +
-                                       " @PriceEpisodePlannedEndDate," +
-                                       " @PriceEpisodeInstalmentValue," +
-                                       " @PriceEpisodeCompletionElement," +
-                                       " @TNP1," +
-                                       " @TNP2," +
-                                       " @TNP3,"+
-                                       " @TNP4)",
-                        new { ukprn,
-                                learnRefNumber,
-                                priceEpisode.PriceEpisodeIdentifier,
-                                priceEpisode.PriceEpisodeTotalTNPPrice,
-                                priceEpisode.EpisodeStartDate,
-                                priceEpisode.PriceEpisodePlannedEndDate,
-                                priceEpisode.PriceEpisodeInstalmentValue,
-                                priceEpisode.PriceEpisodeCompletionElement,
-                                priceEpisode.TNP1,
-                                priceEpisode.TNP2,
-                                priceEpisode.TNP3,
-                                priceEpisode.TNP4,
-                        });
-                
-            }
+                foreach (var priceEpisode in learningDelivery.PriceEpisodes)
+                {
 
+                    connection.Execute("INSERT INTO [Rulebase].[AEC_ApprenticeshipPriceEpisode] " +
+                                           "(Ukprn,LearnRefNumber,AimSeqNumber,PriceEpisodeIdentifier,PriceEpisodeTotalTNPPrice," +
+                                           " EpisodeStartDate,PriceEpisodePlannedEndDate," +
+                                           "PriceEpisodeInstalmentValue,PriceEpisodeCompletionElement," +
+                                           "TNP1,TNP2,TNP3,TNP4) " +
+                                           "VALUES " +
+                                           "(@ukprn,@learnRefNumber, 1, " +
+                                           " @priceEpisodeIdentifier," +
+                                           " @priceEpisodeTotalTNPPrice," +
+                                           " @episodeStartDate," +
+                                           " @episodeEndDate," +
+                                           " @monthlyPayment," +
+                                           " @completionPayment," +
+                                           " @tnp1," +
+                                           " @tnp2," +
+                                           " @tnp3," +
+                                           " @tnp4)",
+                            new
+                            {
+                                ukprn = ukprn,
+                                learnRefNumber = learnRefNumber,
+                                priceEpisodeIdentifier = priceEpisode.Id,
+                                priceEpisodeTotalTNPPrice = priceEpisode.TotalPrice,
+                                episodeStartDate = priceEpisode.StartDate,
+                                episodeEndDate = priceEpisode.EndDate,
+                                monthlyPayment = priceEpisode.MonthlyPayment,
+                                completionPayment = priceEpisode.CompletionPayment,
+                                tnp1 = priceEpisode.Tnp1,
+                                tnp2 = priceEpisode.Tnp2,
+                                tnp3 = priceEpisode.Tnp3,
+                                tnp4 = priceEpisode.Tnp4,
+                            });
+
+                }
+            }
         }
 
         internal static void SaveEarnedAmount(long ukprn,
