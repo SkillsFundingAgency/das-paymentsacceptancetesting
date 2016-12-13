@@ -102,7 +102,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "DAS",
                         "01/11/2017"});
 #line 11
-  testRunner.When("the learner changes employers", ((string)(null)), table49, "When ");
+        testRunner.When("the learner changes employers", ((string)(null)), table49, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table50 = new TechTalk.SpecFlow.Table(new string[] {
                         "Employer",
@@ -126,7 +126,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "",
                         "5625"});
 #line 15
-  testRunner.And("the following commitments exist on 03/12/2017:", ((string)(null)), table50, "And ");
+        testRunner.And("the following commitments exist on 03/12/2017:", ((string)(null)), table50, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table51 = new TechTalk.SpecFlow.Table(new string[] {
                         "ULN",
@@ -291,7 +291,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "DAS",
                         "10/11/2017"});
 #line 45
-  testRunner.When("the learner changes employers", ((string)(null)), table54, "When ");
+        testRunner.When("the learner changes employers", ((string)(null)), table54, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table55 = new TechTalk.SpecFlow.Table(new string[] {
                         "Employer",
@@ -315,7 +315,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "",
                         "5625"});
 #line 49
-  testRunner.And("the following commitments exist on 03/12/2017:", ((string)(null)), table55, "And ");
+        testRunner.And("the following commitments exist on 03/12/2017:", ((string)(null)), table55, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table56 = new TechTalk.SpecFlow.Table(new string[] {
                         "ULN",
@@ -480,7 +480,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "DAS",
                         "10/11/2017"});
 #line 79
-  testRunner.When("the learner changes employers", ((string)(null)), table59, "When ");
+        testRunner.When("the learner changes employers", ((string)(null)), table59, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table60 = new TechTalk.SpecFlow.Table(new string[] {
                         "Employer",
@@ -504,7 +504,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "",
                         "5625"});
 #line 83
-  testRunner.And("the following commitments exist on 03/12/2017:", ((string)(null)), table60, "And ");
+        testRunner.And("the following commitments exist on 03/12/2017:", ((string)(null)), table60, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table61 = new TechTalk.SpecFlow.Table(new string[] {
                         "ULN",

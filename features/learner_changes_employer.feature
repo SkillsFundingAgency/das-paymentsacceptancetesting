@@ -7,12 +7,12 @@ Feature: Provider earnings and payments where a learner changes employers
         Given The learner is programme only DAS 
         And the ABC has a levy balance > agreed price for all months
         And the XYZ has a levy balance > agreed price for all months
-		
-		When the learner changes employers
+
+        When the learner changes employers
             | Employer | Type | ILR employment start date |
             | ABC      | DAS  | 01/08/2017                |
             | XYZ      | DAS  | 01/11/2017                |
-		And the following commitments exist on 03/12/2017:
+        And the following commitments exist on 03/12/2017:
             | Employer | ULN       | price effective date | planned end date | actual end date | agreed price |
             | ABC      | learner a | 01/08/2017           | 31/08/2018       | 31/10/2017      | 15000        |
             | XYZ      | learner a | 01/11/2017           | 31/08/2018       |                 | 5625         |
@@ -41,12 +41,12 @@ Feature: Provider earnings and payments where a learner changes employers
         Given The learner is programme only DAS 
         And the ABC has a levy balance > agreed price for all months
         And the XYZ has a levy balance > agreed price for all months
-		
-		When the learner changes employers
+
+        When the learner changes employers
             | Employer | Type | ILR employment start date |
             | ABC      | DAS  | 04/08/2017                |
             | XYZ      | DAS  | 10/11/2017                |
-		And the following commitments exist on 03/12/2017:
+        And the following commitments exist on 03/12/2017:
             | Employer | ULN       | price effective date | planned end date | actual end date | agreed price |
             | ABC      | learner a | 01/08/2017           | 31/08/2018       | 31/10/2017      | 15000        |
             | XYZ      | learner a | 01/11/2017           | 31/08/2018       |                 | 5625         |
@@ -75,12 +75,12 @@ Feature: Provider earnings and payments where a learner changes employers
         Given The learner is programme only DAS 
         And the ABC has a levy balance > agreed price for all months
         And the XYZ has a levy balance > agreed price for all months
-		
-		When the learner changes employers
+
+        When the learner changes employers
             | Employer | Type | ILR employment start date |
             | ABC      | DAS  | 04/08/2017                |
             | XYZ      | DAS  | 10/11/2017                |
-		And the following commitments exist on 03/12/2017:
+        And the following commitments exist on 03/12/2017:
             | Employer | ULN       | price effective date | planned end date | actual end date | agreed price |
             | ABC      | learner a | 01/08/2017           | 31/08/2018       | 31/10/2017      | 15000        |
             | XYZ      | learner a | 01/11/2017           | 31/08/2018       |                 | 5625         |
