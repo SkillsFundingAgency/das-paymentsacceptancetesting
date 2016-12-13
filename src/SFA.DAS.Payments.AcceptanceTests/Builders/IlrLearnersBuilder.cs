@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using IlrGenerator;
 using PriceEpisode = SFA.DAS.Payments.AcceptanceTests.Entities.PriceEpisode;
 using System.Collections.Generic;
@@ -78,25 +79,40 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
                 return new FinancialRecord[0];
             }
 
-            var financialRecords = new FinancialRecord[]
-            {
-                new FinancialRecord
-                {
-                    Type = "TNP",
-                    Code = episode.Tnp1 != null ? 1 : 3,
-                    Date = episode.StartDate,
-                    Amount = episode.Tnp1 != null ? (int)episode.Tnp1 : (int)episode.Tnp3
-                },
-                new FinancialRecord
-                {
-                    Type = "TNP",
-                    Code = episode.Tnp2 != null ? 2 : 4,
-                    Date = episode.StartDate,
-                    Amount = episode.Tnp2 != null ? (int)episode.Tnp2 : (int)episode.Tnp4
-                }
-            };
+            var financialRecords = new List<FinancialRecord>();
 
-            return financialRecords;
+            if (episode.Tnp1 != null)
+            {
+                financialRecords.Add(GetFinancialRecord(1, (int)episode.Tnp1, episode.StartDate));
+            }
+
+            if (episode.Tnp2 != null)
+            {
+                financialRecords.Add(GetFinancialRecord(2, (int)episode.Tnp2, episode.StartDate));
+            }
+
+            if (episode.Tnp3 != null)
+            {
+                financialRecords.Add(GetFinancialRecord(3, (int)episode.Tnp3, episode.StartDate));
+            }
+
+            if (episode.Tnp4 != null)
+            {
+                financialRecords.Add(GetFinancialRecord(4, (int)episode.Tnp4, episode.StartDate));
+            }
+
+            return financialRecords.ToArray();
+        }
+
+        private FinancialRecord GetFinancialRecord(int code, int amount, DateTime date)
+        {
+            return new FinancialRecord
+            {
+                Type = "TNP",
+                Code = code,
+                Date = date,
+                Amount = amount
+            };
         }
     }
 }

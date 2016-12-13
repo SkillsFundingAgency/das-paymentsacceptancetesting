@@ -133,7 +133,7 @@
     <Compile Include="RowKeys.cs" />
     <Compile Include="SpecFlowHooks.cs" />
     <Compile Include="StepDefinitions\Base\BaseStepDefinitions.cs" />
-    <Compile Include="StepDefinitions\Integration\ChangesInCircumstancesSteps.cs" />
+    <Compile Include="StepDefinitions\Integration\DataLockSteps.cs" />
     <Compile Include="StepDefinitions\Integration\EarningAndPaymentsSteps.cs" />
     <Compile Include="StepDefinitions\Intermediate\DataLockStepDefinitions.cs" />
     <Compile Include="StepDefinitions\Intermediate\EarningStepDefinitions.cs" />

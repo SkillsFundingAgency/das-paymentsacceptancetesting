@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using SFA.DAS.Payments.AcceptanceTests.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.DataHelpers;
@@ -122,13 +121,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             ReferenceDataContext.AddEmployer(employer);
         }
 
-        [When(@"the following commitments exist on (.*):")]
+        [Given(@"the following commitments exist on (.*):")]
         public void WhenTheFollowingCommitmentsExistOnADate(string date, Table table)
         {
             BuildContextCommitments(table);
         }
 
-        [When(@"the learner changes employers")]
+        [Given(@"the learner changes employers")]
         public void WhenALearnerChangesFromOneDasEmployerToAnotherDasEmployer(Table table)
         {
             for (var rowIndex = 0; rowIndex < table.RowCount; rowIndex++)

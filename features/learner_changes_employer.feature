@@ -7,8 +7,7 @@ Feature: Provider earnings and payments where a learner changes employers
         Given The learner is programme only DAS 
         And the ABC has a levy balance > agreed price for all months
         And the XYZ has a levy balance > agreed price for all months
-
-        When the learner changes employers
+        And the learner changes employers
             | Employer | Type | ILR employment start date |
             | ABC      | DAS  | 01/08/2017                |
             | XYZ      | DAS  | 01/11/2017                |
@@ -16,7 +15,7 @@ Feature: Provider earnings and payments where a learner changes employers
             | Employer | ULN       | price effective date | planned end date | actual end date | agreed price |
             | ABC      | learner a | 01/08/2017           | 31/08/2018       | 31/10/2017      | 15000        |
             | XYZ      | learner a | 01/11/2017           | 31/08/2018       |                 | 5625         |
-        And an ILR file is submitted on 03/12/2017 with the following data:
+        When an ILR file is submitted on 03/12/2017 with the following data:
             | ULN       | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date | Residual training price | Residual training price effective date | Residual assessment price | Residual assessment price effective date |
             | learner a | 01/08/2017 | 04/08/2018       |                 | continuing        | 12000                | 01/08/2017                          | 3000                   | 01/08/2017                            | 5000                    | 01/11/2017                             | 625                       | 01/11/2017                               |
         Then the data lock status of the ILR in 03/12/2017 is:
@@ -41,8 +40,7 @@ Feature: Provider earnings and payments where a learner changes employers
         Given The learner is programme only DAS 
         And the ABC has a levy balance > agreed price for all months
         And the XYZ has a levy balance > agreed price for all months
-
-        When the learner changes employers
+        And the learner changes employers
             | Employer | Type | ILR employment start date |
             | ABC      | DAS  | 04/08/2017                |
             | XYZ      | DAS  | 10/11/2017                |
@@ -50,7 +48,7 @@ Feature: Provider earnings and payments where a learner changes employers
             | Employer | ULN       | price effective date | planned end date | actual end date | agreed price |
             | ABC      | learner a | 01/08/2017           | 31/08/2018       | 31/10/2017      | 15000        |
             | XYZ      | learner a | 01/11/2017           | 31/08/2018       |                 | 5625         |
-        And an ILR file is submitted on 03/12/2017 with the following data:
+        When an ILR file is submitted on 03/12/2017 with the following data:
             | ULN       | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date | Residual training price | Residual training price effective date | Residual assessment price | Residual assessment price effective date |
             | learner a | 04/08/2017 | 04/08/2018       |                 | continuing        | 12000                | 04/08/2017                          | 3000                   | 04/08/2017                            | 5000                    | 10/11/2017                             | 625                       | 10/11/2017                               |
         Then the data lock status of the ILR in 03/12/2017 is:
@@ -75,8 +73,7 @@ Feature: Provider earnings and payments where a learner changes employers
         Given The learner is programme only DAS 
         And the ABC has a levy balance > agreed price for all months
         And the XYZ has a levy balance > agreed price for all months
-
-        When the learner changes employers
+        And the learner changes employers
             | Employer | Type | ILR employment start date |
             | ABC      | DAS  | 04/08/2017                |
             | XYZ      | DAS  | 10/11/2017                |
@@ -84,7 +81,7 @@ Feature: Provider earnings and payments where a learner changes employers
             | Employer | ULN       | price effective date | planned end date | actual end date | agreed price |
             | ABC      | learner a | 01/08/2017           | 31/08/2018       | 31/10/2017      | 15000        |
             | XYZ      | learner a | 01/11/2017           | 31/08/2018       |                 | 5625         |
-        And an ILR file is submitted on 03/12/2017 with the following data:
+        When an ILR file is submitted on 03/12/2017 with the following data:
             | ULN       | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date | Residual training price | Residual training price effective date | Residual assessment price | Residual assessment price effective date |
             | learner a | 04/08/2017 | 04/08/2018       |                 | continuing        | 12000                | 04/08/2017                          | 3000                   | 04/08/2017                            | 5000                    | 25/10/2017                             | 625                       | 25/10/2017                               |
         Then the data lock status of the ILR in 03/12/2017 is:
