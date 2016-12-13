@@ -340,7 +340,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             earnedByPeriod.AddOrUpdate("07/" + academicYear.Substring(2), periodEarnings.Period_12);
 
             var dataLockMatches = DataLockDataHelper.GetDataLockMatchesForUkprn(ukprn, EnvironmentVariables) ?? new DataLockMatch[0];
-            dataLockMatchesByPeriod.AddOrUpdate(date.GetPeriod(), dataLockMatches);
+            dataLockMatchesByPeriod.Add(date.GetPeriod(), dataLockMatches);
         }
         
         protected void SetupContextProviders(Table table)

@@ -92,18 +92,6 @@ namespace SFA.DAS.Payments.AcceptanceTests
             }
         }
 
-        internal static void AddOrUpdate(this Dictionary<string, DataLockMatch[]> dictionary, string key, DataLockMatch[] value)
-        {
-            if (dictionary.ContainsKey(key))
-            {
-                dictionary[key] = value;
-            }
-            else
-            {
-                dictionary.Add(key, value);
-            }
-        }
-
         internal static TableRow RowWithKey(this TableRows rows, string key)
         {
             return rows.FirstOrDefault(r => r[0].Equals(key, StringComparison.OrdinalIgnoreCase));
