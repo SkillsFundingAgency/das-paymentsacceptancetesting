@@ -14,6 +14,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
         public Commitment[] Commitments { get; set; }
         public Employer[] Employers { get; private set; }
 
+        public LearningDeliveryFam[] LearningDeliveryFams { get; set; }
+
+
         public ReferenceDataContext()
         {
             SetDefaultCommitment();
@@ -59,6 +62,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
             var employer = Employers.Single(e => e.Name == employerName);
 
             employer.LearnersType = learnersType;
+        }
+
+        public void AddLearningDeliveryFam(LearningDeliveryFam learningDeliveryFam)
+        {
+            var fams = LearningDeliveryFams?.ToList() ?? new List<LearningDeliveryFam>();
+            fams.Add(learningDeliveryFam);
+
+            LearningDeliveryFams = fams.ToArray();
+
         }
     }
 }

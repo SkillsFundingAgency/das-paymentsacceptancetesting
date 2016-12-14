@@ -9,6 +9,7 @@ using SFA.DAS.Payments.AcceptanceTests.Enums;
 using SFA.DAS.Payments.AcceptanceTests.ExecutionEnvironment;
 using SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base;
 using TechTalk.SpecFlow;
+using SFA.DAS.Payments.AcceptanceTests.Entities;
 
 namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
 {
@@ -57,6 +58,36 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
         {
             ProcessIlrFileSubmissions(table);
         }
+
+        [When(@"an ILR file is submitted on (.*) with the following data:"),Scope(Scenario = "Earnings and payments for a DAS learner, levy available, where a learner switches from DAS to Non Das employer at the end of month")]
+        public void WhenAnIlrFileIsSubmittedOnADayWithTheFollowingDataNoSubmission(string date, Table table)
+        {
+            ScenarioContext.Current.Add("learners", table);
+            
+        }
+
+        [When(@"the Contract type in the ILR is:")]
+        public void WhenTheContractTypeInTheILRIs(Table table)
+        {
+            Table learnerTable = null;
+
+            ScenarioContext.Current.TryGetValue<Table>("learners",out learnerTable);
+
+            for (var rowIndex = 0; rowIndex < table.RowCount; rowIndex++)
+            {
+                var famCode = new LearningDeliveryFam
+                {
+                    FamCode = table.Rows[rowIndex]["contract type"] == "DAS" ? 1 : 2,
+                    StartDate = DateTime.Parse(table.Rows[rowIndex]["date from"]),
+                    EndDate = DateTime.Parse(table.Rows[rowIndex]["date to"])
+                };
+                StepDefinitionsContext.ReferenceDataContext.AddLearningDeliveryFam(famCode);
+            }
+            ProcessIlrFileSubmissions(learnerTable);
+
+            //ScenarioContext.Current.Pending();
+        }
+
 
         [Then(@"the provider earnings and payments break down as follows:")]
         public void ThenTheProviderEarningsBreakDownAsFollows(Table table)

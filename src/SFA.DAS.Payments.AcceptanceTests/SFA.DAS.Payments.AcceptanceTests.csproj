@@ -98,6 +98,7 @@
     <Compile Include="Entities\LearningDelivery.cs" />
     <Compile Include="DataHelpers\Entities\PaymentEntity.cs" />
     <Compile Include="DataHelpers\Entities\PeriodisedValuesEntity.cs" />
+    <Compile Include="Entities\LearningDeliveryFam.cs" />
     <Compile Include="Entities\PriceEpisode.cs" />
     <Compile Include="Entities\Provider.cs" />
     <Compile Include="DataHelpers\Entities\RequiredPaymentEntity.cs" />

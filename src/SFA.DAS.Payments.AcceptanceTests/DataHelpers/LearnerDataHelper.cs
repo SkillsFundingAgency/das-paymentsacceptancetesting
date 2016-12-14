@@ -55,15 +55,17 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 
         internal static void SaveLearningDeliveryFAM(long ukprn,
                                                   string learnRefNumber,
+                                                  DateTime startDate,
+                                                  DateTime? endDate,
                                                 EnvironmentVariables environmentVariables)
         {
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
             {
 
                 connection.Execute("INSERT INTO [Valid].[LearningDeliveryFAM]" +
-                            " ([UKPRN],[LearnRefNumber],[AimSeqNumber],[LearnDelFAMType],[LearnDelFAMCode])" +
-                " VALUES (@ukprn,@learnRefNumber,1,'ACT',1)",
-                    new { ukprn,learnRefNumber});
+                            " ([UKPRN],[LearnRefNumber],[AimSeqNumber],[LearnDelFAMType],[LearnDelFAMCode],[LearnDelFAMDateFrom],[LearnDelFAMDateTo])" +
+                             " VALUES (@ukprn,@learnRefNumber,1,'ACT',1,@startDate,@endDate)",
+                    new { ukprn,learnRefNumber,startDate,endDate});
 
             }
         }
@@ -80,7 +82,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 
                 connection.Execute("INSERT INTO [Valid].[TrailblazerApprenticeshipFinancialRecord]" +
                             " ([UKPRN],[LearnRefNumber],[AimSeqNumber],[TBFinType],[TBFinCode],[TBFinAmount])" +
-                " VALUES (@ukprn,@learnRefNumber,1,'TNP',@tbFinCode,@tbFinAmount)",
+                            " VALUES (@ukprn,@learnRefNumber,1,'TNP',@tbFinCode,@tbFinAmount)",
                     new { ukprn,learnRefNumber,tbFinCode,tbFinAmount});
 
             }
@@ -93,7 +95,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 
                 connection.Execute("INSERT INTO [Valid].[LearningProvider]" +
                             " ([UKPRN])" +
-                " VALUES (@ukprn)",
+                            " VALUES (@ukprn)",
                     new { ukprn});
 
             }
