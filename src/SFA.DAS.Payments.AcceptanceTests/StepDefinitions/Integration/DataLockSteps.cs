@@ -45,8 +45,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                         var priceEpisodeActualMatches = periodMatches
                             .Where(
                                 m =>
-                                    m.PriceEpisodeId == priceEpisode.Id &&
-                                    m.PriceEpisodeStartDate == priceEpisode.StartDate)
+                                    m.PriceEpisodeId == priceEpisode.Id)
                             .ToArray();
 
                         Assert.AreEqual(1, priceEpisodeActualMatches.Length,
@@ -67,8 +66,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                         var priceEpisodeActualMatches = periodMatches
                             .Where(
                                 m =>
-                                    m.PriceEpisodeId == priceEpisode.Id &&
-                                    m.PriceEpisodeStartDate == priceEpisode.StartDate)
+                                    m.PriceEpisodeId == priceEpisode.Id)
                             .ToArray();
 
                         Assert.AreEqual(0, priceEpisodeActualMatches.Length,
