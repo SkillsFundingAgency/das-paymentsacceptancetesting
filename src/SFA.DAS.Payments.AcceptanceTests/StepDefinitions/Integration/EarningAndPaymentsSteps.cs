@@ -133,6 +133,17 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             }
         }
 
+        [Then(@"a (.*) error message will be produced")]
+        public void ThenADLOCK_ErrorMessageWillBeProduced(string errorCode)
+        {
+            var provider = StepDefinitionsContext.GetDefaultProvider();
+
+            var validationError = ValidationErrorsDataHelper.GetValidationErrors(provider.Ukprn, EnvironmentVariables);
+
+            Assert.IsNotNull(validationError, "There is no validation error entity present");
+            Assert.IsTrue(validationError.Any(x => x.RuleId == errorCode));
+        }
+
         private void ProcessIlrFileSubmissions(Table table, DateTime? firstSubmissionDate = null)
         {
             SetupContextProviders(table);
