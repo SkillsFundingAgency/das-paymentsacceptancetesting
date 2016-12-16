@@ -31,6 +31,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                                 "SUM(Period_12) AS Period_12 " +
                             "FROM Rulebase.AEC_ApprenticeshipPriceEpisode_PeriodisedValues " +
                             "WHERE UKPRN = @ukprn " +
+                            "AND AttributeName IN ('PriceEpisodeOnProgPayment', 'PriceEpisodeCompletionPayment', 'PriceEpisodeBalancePayment') " +
                             "GROUP BY UKPRN";
                 return connection.Query<PeriodisedValuesEntity>(query, new { ukprn }).ToArray();
             }
