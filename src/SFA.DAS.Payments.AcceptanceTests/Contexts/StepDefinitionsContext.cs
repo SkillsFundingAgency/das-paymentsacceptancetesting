@@ -73,11 +73,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
             provider.Learners = learners.ToArray();
         }
 
-        public Dictionary<string, decimal> GetProviderEarnedByPeriod(long ukprn)
+        public Dictionary<string, decimal> GetProviderEarnedByPeriod(long ukprn, long? uln = null)
         {
             var provider = Providers.Single(p => p.Ukprn == ukprn);
-
-            return provider.EarnedByPeriod;
+            if (uln == null)
+                return provider.EarnedByPeriod;
+            else
+                return provider.EarnedByPeriodByUln[uln.Value];
         }
 
         public Provider GetDefaultProvider()

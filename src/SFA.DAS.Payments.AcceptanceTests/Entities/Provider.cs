@@ -27,12 +27,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.Entities
         public Learner[] Learners { get; set; }
         public Dictionary<string, decimal> EarnedByPeriod { get; set; }
 
+        public Dictionary<long, Dictionary<string, decimal>> EarnedByPeriodByUln { get; set; }
+
         public Dictionary<string, DataLockMatch[]> DataLockMatchesByPeriod { get; set; } 
 
         public Provider()
         {
             EarnedByPeriod = new Dictionary<string, decimal>();
             DataLockMatchesByPeriod = new Dictionary<string, DataLockMatch[]>();
+            EarnedByPeriodByUln = new Dictionary<long, Dictionary<string, decimal>>();
         }
     }
 }

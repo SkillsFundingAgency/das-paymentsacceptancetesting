@@ -11,7 +11,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 {
     internal static class EarningsDataHelper
     {
-        internal static PeriodisedValuesEntity[] GetPeriodisedValuesForUkprn(long ukprn, EnvironmentVariables environmentVariables)
+        internal static PeriodisedValuesEntity[] GetPeriodisedValuesForUkprnSummary(long ukprn, EnvironmentVariables environmentVariables)
         {
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
             {
@@ -32,6 +32,35 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                             "FROM Rulebase.AEC_ApprenticeshipPriceEpisode_PeriodisedValues " +
                             "WHERE UKPRN = @ukprn " +
                             "GROUP BY UKPRN";
+                return connection.Query<PeriodisedValuesEntity>(query, new { ukprn }).ToArray();
+            }
+        }
+
+        internal static PeriodisedValuesEntity[] GetPeriodisedValuesForUkprn(long ukprn, EnvironmentVariables environmentVariables)
+        {
+            using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
+            {
+                var query = "SELECT " +
+                                "pv.Ukprn, " +
+                                "l.ULN, " +
+                                "SUM(Period_1) AS Period_1, " +
+                                "SUM(Period_2) AS Period_2, " +
+                                "SUM(Period_3) AS Period_3, " +
+                                "SUM(Period_4) AS Period_4, " +
+                                "SUM(Period_5) AS Period_5, " +
+                                "SUM(Period_6) AS Period_6, " +
+                                "SUM(Period_7) AS Period_7, " +
+                                "SUM(Period_8) AS Period_8, " +
+                                "SUM(Period_9) AS Period_9, " +
+                                "SUM(Period_10) AS Period_10, " +
+                                "SUM(Period_11) AS Period_11, " +
+                                "SUM(Period_12) AS Period_12 " +
+                            "FROM Rulebase.AEC_ApprenticeshipPriceEpisode_PeriodisedValues pv " +
+                            " Join Valid.Learner l " +
+                            " ON l.UKPRN = pv.UKPRN AND pv.LearnRefNumber = l.LearnRefNumber " +
+                            "WHERE pv.UKPRN = @ukprn " + 
+                            " Group By pv.UKPRN, l.ULN";
+                           
                 return connection.Query<PeriodisedValuesEntity>(query, new { ukprn }).ToArray();
             }
         }

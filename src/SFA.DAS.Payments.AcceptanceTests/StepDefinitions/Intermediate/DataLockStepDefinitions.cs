@@ -47,12 +47,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             var ukprn = long.Parse(table.Rows[0]["UKPRN"]);
             var startDate = StepDefinitionsContext.GetIlrStartDate().NextCensusDate();
 
-            SubmitIlr(ukprn, provider.Learners,
+            SubmitIlr(provider,
                 startDate.GetAcademicYear(),
                 startDate.NextCensusDate(),
-                new ProcessService(new TestLogger()),
-                provider.EarnedByPeriod,
-                provider.DataLockMatchesByPeriod);
+                new ProcessService(new TestLogger()));
 
             //Update the UKPRN to the one from ILR as this is the one which will be in the validation error table
             provider.Ukprn = ukprn;
