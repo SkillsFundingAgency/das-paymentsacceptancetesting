@@ -14,7 +14,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionEnvironment
                 DedsDatabaseConnectionString = ConfigurationManager.AppSettings["DedsConnectionString"],
                 WorkingDirectory = ConfigurationManager.AppSettings["WorkingDir"],
                 CurrentYear = DateTime.Today.GetAcademicYear(),
-                LogLevel = "DEBUG"
+                LogLevel = "DEBUG",
+
+                AccountsApiBaseUrl = "",
+                AccountsApiClientSecret = "",
+                AccountsApiClientToken = "",
+                AccountsApiIdentifierUri = "",
+                AccountsApiTenant = ""
             };
         }
     }
