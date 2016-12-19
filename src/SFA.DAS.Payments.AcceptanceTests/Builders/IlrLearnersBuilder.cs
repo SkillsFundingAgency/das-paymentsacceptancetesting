@@ -1,5 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using IlrGenerator;
+using PriceEpisode = SFA.DAS.Payments.AcceptanceTests.Entities.PriceEpisode;
+using System.Collections.Generic;
 
 namespace SFA.DAS.Payments.AcceptanceTests.Builders
 {
@@ -15,6 +18,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
                 new Learner
                 {
                     Uln = Defaults.FirstUln + parentBuilder.Submission.Learners.Length,
+                    LearnRefNumber=  Defaults.FirstUln + parentBuilder.Submission.Learners.Length.ToString(),
                     LearningDeliveries = new LearningDelivery[0]
                 }
             };
@@ -27,17 +31,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
 
             Learners = learners.Select(l =>
             {
-                var tnp1 = l.LearningDelivery.AgreedPrice * 0.8m;
-                var tnp2 = l.LearningDelivery.AgreedPrice - tnp1;
-
-                if (l.LearningDelivery.StandardCode == 0)
-                {
-                    tnp1 = tnp1 + tnp2;
-                    tnp2 = 0;
-                }
                 return new Learner
                 {
                     Uln = l.Uln,
+                    LearnRefNumber=l.LearnRefNumber,
                     LearningDeliveries = new[]
                     {
                         new LearningDelivery
@@ -52,8 +49,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
                             FrameworkCode = l.LearningDelivery.FrameworkCode,
                             PathwayCode = l.LearningDelivery.PathwayCode,
 
-                            TrainingCost = tnp1,
-                            EndpointAssesmentCost = tnp2
+                            FinancialRecords = GetLearningDeliveryFinancialRecords(l.LearningDelivery)
                         }
                     }
                 };
@@ -62,6 +58,61 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
             Submission.Learners = Learners;
 
             return this;
+        }
+
+        private FinancialRecord[] GetLearningDeliveryFinancialRecords(Entities.LearningDelivery learningDelivery)
+        {
+            var financialRecords = new List<FinancialRecord>();
+
+            foreach (var priceEpisode in learningDelivery.PriceEpisodes)
+            {
+                financialRecords.AddRange(GetPriceEpisodeFinancialRecords(priceEpisode));
+            }
+
+            return financialRecords.ToArray();
+        }
+
+        private FinancialRecord[] GetPriceEpisodeFinancialRecords(PriceEpisode episode)
+        {
+            if (episode == null)
+            {
+                return new FinancialRecord[0];
+            }
+
+            var financialRecords = new List<FinancialRecord>();
+
+            if (episode.Tnp1 != null)
+            {
+                financialRecords.Add(GetFinancialRecord(1, (int)episode.Tnp1, episode.StartDate));
+            }
+
+            if (episode.Tnp2 != null)
+            {
+                financialRecords.Add(GetFinancialRecord(2, (int)episode.Tnp2, episode.StartDate));
+            }
+
+            if (episode.Tnp3 != null)
+            {
+                financialRecords.Add(GetFinancialRecord(3, (int)episode.Tnp3, episode.StartDate));
+            }
+
+            if (episode.Tnp4 != null)
+            {
+                financialRecords.Add(GetFinancialRecord(4, (int)episode.Tnp4, episode.StartDate));
+            }
+
+            return financialRecords.ToArray();
+        }
+
+        private FinancialRecord GetFinancialRecord(int code, int amount, DateTime date)
+        {
+            return new FinancialRecord
+            {
+                Type = "TNP",
+                Code = code,
+                Date = date,
+                Amount = amount
+            };
         }
     }
 }

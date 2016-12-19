@@ -11,6 +11,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
     {
         internal static void SaveLearner(long ukprn, 
                                         long uln, 
+                                        string learnRefNumber,
                                         EnvironmentVariables environmentVariables)
         {
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
@@ -18,14 +19,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 
                 connection.Execute("INSERT INTO [Valid].[Learner]" +
                 "([UKPRN],[LearnRefNumber],[ULN],[Ethnicity],[Sex],[LLDDHealthProb])" +
-                "VALUES (@ukprn,'1',@uln,98,'M',2)",
-                    new { ukprn, uln});
+                "VALUES (@ukprn,@learnRefNumber,@uln,98,'M',2)",
+                    new { ukprn, learnRefNumber , uln });
 
             }
 
         }
 
         internal static void SaveLearningDelivery(long ukprn, 
+                                                string learnRefNumber,
                                                LearningDelivery learningDelivery,
                                                 EnvironmentVariables environmentVariables)
         {
@@ -35,8 +37,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                 connection.Execute("INSERT INTO [Valid].[LearningDelivery]" + 
                 "  ([UKPRN],[LearnRefNumber],[LearnAimRef],[AimType],[AimSeqNumber],[LearnStartDate],[LearnPlanEndDate]," +
                 "[FundModel],[ProgType],[StdCode],FWorkCode,PWayCode)" +
-                " VALUES (@ukprn,'1','ZPROG001',1,1,@StartDate,@PlannedEndDate,36,@ProgrammeType,@StandardCode,@FrameworkCode,@PathwayCode)",
+                " VALUES (@ukprn,@learnRefNumber,'ZPROG001',1,1,@StartDate,@PlannedEndDate,36,@ProgrammeType,@StandardCode,@FrameworkCode,@PathwayCode)",
                     new { ukprn,
+                        learnRefNumber,
                         learningDelivery.StartDate,
                         learningDelivery.PlannedEndDate,
                         learningDelivery.ProgrammeType,
@@ -51,15 +54,16 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
         }
 
         internal static void SaveLearningDeliveryFAM(long ukprn,
-                                               EnvironmentVariables environmentVariables)
+                                                  string learnRefNumber,
+                                                EnvironmentVariables environmentVariables)
         {
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
             {
 
                 connection.Execute("INSERT INTO [Valid].[LearningDeliveryFAM]" +
                             " ([UKPRN],[LearnRefNumber],[AimSeqNumber],[LearnDelFAMType],[LearnDelFAMCode])" +
-                " VALUES (@ukprn,'1',1,'ACT',1)",
-                    new { ukprn});
+                " VALUES (@ukprn,@learnRefNumber,1,'ACT',1)",
+                    new { ukprn,learnRefNumber});
 
             }
         }
@@ -67,6 +71,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 
         internal static void SaveTrailblazerApprenticeshipFinancialRecord(long ukprn,
                                                                    int tbFinCode,
+                                                                    string learnRefNumber,
                                                                    decimal tbFinAmount,
                                                                    EnvironmentVariables environmentVariables)
         {
@@ -75,8 +80,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 
                 connection.Execute("INSERT INTO [Valid].[TrailblazerApprenticeshipFinancialRecord]" +
                             " ([UKPRN],[LearnRefNumber],[AimSeqNumber],[TBFinType],[TBFinCode],[TBFinAmount])" +
-                " VALUES (@ukprn,'1',1,'TNP',@tbFinCode,@tbFinAmount)",
-                    new { ukprn,tbFinCode,tbFinAmount});
+                " VALUES (@ukprn,@learnRefNumber,1,'TNP',@tbFinCode,@tbFinAmount)",
+                    new { ukprn,learnRefNumber,tbFinCode,tbFinAmount});
 
             }
         }
@@ -108,16 +113,16 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
             }
         }
 
-        internal static AE_LearningDelivery GetAELearningDelivery(long ukprn,
-                                                                long uln,
+        internal static AEC_ApprenticeshipPriceEpisode GetAELearningDelivery(long ukprn,
+                                                                string learnRefNumber,
                                                                  DateTime learnStartDate,
                                                                 DateTime learnPlanEndDate,
                                                                 EnvironmentVariables environmentVariables)
         {
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
             {
-                var query = "SELECT * FROM [Rulebase].[AE_LearningDelivery] WHERE UKPRN = @ukprn AND ULN = @uln AND LearnStartDate= @learnStartDate AND LearnPlanEndDate =@learnPlanEndDate ";
-                return connection.QuerySingleOrDefault<AE_LearningDelivery>(query, new { ukprn, uln, learnStartDate,learnPlanEndDate});
+                var query = "SELECT * FROM [Rulebase].[AEC_ApprenticeshipPriceEpisode] WHERE UKPRN = @ukprn AND LearnRefNumber = @learnRefNumber AND EpisodeStartDate= @learnStartDate AND PriceEpisodePlannedEndDate=@learnPlanEndDate ";
+                return connection.QuerySingleOrDefault<AEC_ApprenticeshipPriceEpisode>(query, new { ukprn, learnRefNumber, learnStartDate,learnPlanEndDate});
             }
         }
     }

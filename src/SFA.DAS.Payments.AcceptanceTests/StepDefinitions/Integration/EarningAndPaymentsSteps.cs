@@ -52,6 +52,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             ProcessIlrFileSubmissions(table);
         }
 
+        [When(@"an ILR file is submitted on (.*) with the following data:")]
+        public void WhenAnIlrFileIsSubmittedOnADayWithTheFollowingData(string date, Table table)
+        {
+            ProcessIlrFileSubmissions(table);
+        }
+
         [Then(@"the provider earnings and payments break down as follows:")]
         public void ThenTheProviderEarningsBreakDownAsFollows(Table table)
         {
@@ -98,14 +104,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
 
         private void ProcessIlrFileSubmissions(Table table, DateTime? firstSubmissionDate = null)
         {
-            // Store spec values in context
             SetupContextProviders(table);
             SetupContexLearners(table);
 
-            // Setup reference data
-            SetupReferenceData();
-
-            // Process months
             var startDate = firstSubmissionDate ?? StepDefinitionsContext.GetIlrStartDate().NextCensusDate();
             ProcessMonths(startDate);
         }
@@ -123,6 +124,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             {
                 var period = date.GetPeriod();
 
+                SetupPeriodReferenceData(date);
+
                 UpdateAccountsBalances(period);
                 UpdateCommitmentsPaymentStatuses(date);
 
@@ -132,7 +135,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
 
                 foreach (var provider in StepDefinitionsContext.Providers)
                 {
-                    SubmitIlr(provider.Ukprn, provider.Learners, academicYear, date, processService, provider.EarnedByPeriod);
+                    SubmitIlr(provider.Ukprn, provider.Learners, academicYear, date, processService, provider.EarnedByPeriod, provider.DataLockMatchesByPeriod);
                 }
 
                 SubmitMonthEnd(date, processService);

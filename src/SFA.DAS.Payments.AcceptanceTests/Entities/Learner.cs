@@ -4,6 +4,9 @@
     {
         public string Name { get; set; }
         public long Uln { get; set; }
+
+        public string LearnRefNumber { get; set; }
+            
         public LearningDelivery LearningDelivery { get; set; }
     }
 }

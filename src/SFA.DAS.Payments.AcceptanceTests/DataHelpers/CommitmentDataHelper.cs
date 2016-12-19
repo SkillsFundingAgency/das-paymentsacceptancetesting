@@ -96,5 +96,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                                    });
             }
         }
+        internal static void ClearCommitments(EnvironmentVariables environmentVariables)
+        {
+            using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
+            {
+                connection.Execute("DELETE FROM dbo.DasCommitments");
+                connection.Execute("DELETE FROM dbo.EventStreamPointer");
+            }
+        }
+
     }
 }

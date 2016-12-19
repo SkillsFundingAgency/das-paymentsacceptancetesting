@@ -8,7 +8,6 @@ using SFA.DAS.Payments.AcceptanceTests.DataHelpers;
 using SFA.DAS.Payments.AcceptanceTests.ExecutionEnvironment;
 using SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base;
 using TechTalk.SpecFlow;
-using IlrBuilder = SFA.DAS.Payments.AcceptanceTests.Builders.IlrBuilder;
 
 
 namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
@@ -43,6 +42,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
                                                 committment.Id,
                                                 account.AccountId,
                                                 learner.Uln,
+                                                learner.LearnRefNumber,
                                                 "R01",
                                                 08,
                                                 2016,
@@ -57,10 +57,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
 
             // Setup reference data
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+            var provider = StepDefinitionsContext.GetDefaultProvider();
+            var learner = provider.Learners[0];
 
             //save the periodiosed values
             EarningsDataHelper.SavePeriodisedValuesForUkprn(StepDefinitionsContext.GetDefaultProvider().Ukprn,
-                                                            new Dictionary<string, decimal> { { "Period_1", earnedAmount } },
+                                                            learner.LearnRefNumber,
+                                                            new Dictionary<int, decimal> { { 1, earnedAmount } },
+                                                            learner.LearningDelivery.PriceEpisodes[0].Id,
                                                             environmentVariables);
 
             RunMonthEnd(new DateTime(2016, 09, 01));
@@ -161,9 +165,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
 
             SubmitIlr(provider.Ukprn, provider.Learners,
                 ilrStartDate.GetAcademicYear(),
-                actualEndDate.HasValue? actualEndDate.Value : plannedEndDate,
+                actualEndDate ?? plannedEndDate,
                 new ProcessService(new TestLogger()),
-                provider.EarnedByPeriod);
+                provider.EarnedByPeriod,
+                provider.DataLockMatchesByPeriod);
         }
 
         [Then(@"the monthly earnings is (.*)")]
@@ -173,14 +178,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
 
             var learner = StepDefinitionsContext.GetDefaultProvider().Learners.First();
             var output = LearnerDataHelper.GetAELearningDelivery(StepDefinitionsContext.GetDefaultProvider().Ukprn,
-                                                                learner.Uln,
+                                                                learner.LearnRefNumber,
                                                                 learner.LearningDelivery.StartDate,
                                                                 learner.LearningDelivery.PlannedEndDate,
                                                                 environmentVariables);
 
 
             Assert.IsNotNull(output, $"Expected AE Learning Delivery but nothing found");
-            Assert.AreEqual(monthlyEarnings, output.MonthlyInstallment, $"Expected monthly installment of {monthlyEarnings} but found {output.MonthlyInstallment}");
+            Assert.AreEqual(monthlyEarnings, output.PriceEpisodeInstalmentValue, $"Expected monthly installment of {monthlyEarnings} but found {output.PriceEpisodeInstalmentValue}");
 
 
         }
@@ -192,14 +197,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
 
             var learner = StepDefinitionsContext.GetDefaultProvider().Learners.First();
             var output = LearnerDataHelper.GetAELearningDelivery(StepDefinitionsContext.GetDefaultProvider().Ukprn,
-                                                                learner.Uln,
+                                                                learner.LearnRefNumber,
                                                                 learner.LearningDelivery.StartDate,
                                                                 learner.LearningDelivery.PlannedEndDate,
                                                                 environmentVariables);
 
 
             Assert.IsNotNull(output, $"Expected AE Learning Delivery but nothing found");
-            Assert.AreEqual(completionPayment, output.CompletionPayment, $"Expected completion payment of {completionPayment} but found {output.CompletionPayment}");
+            Assert.AreEqual(completionPayment, output.PriceEpisodeCompletionElement, $"Expected completion payment of {completionPayment} but found {output.PriceEpisodeCompletionElement}");
 
 
         }
@@ -210,7 +215,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
             var learner = StepDefinitionsContext.GetDefaultProvider().Learners.First();
-            var endDate = learner.LearningDelivery.ActualEndDate == null ? learner.LearningDelivery.PlannedEndDate : learner.LearningDelivery.ActualEndDate.Value;
+            var endDate = learner.LearningDelivery.ActualEndDate ?? learner.LearningDelivery.PlannedEndDate;
             var periodNumber = endDate.GetPeriodNumber();
 
             var output = EarningsDataHelper.GetBalancingPaymentForUkprn(StepDefinitionsContext.GetDefaultProvider().Ukprn,

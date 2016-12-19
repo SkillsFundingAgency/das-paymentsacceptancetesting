@@ -45,8 +45,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                 connection.Execute("DELETE FROM Valid.LearningDeliveryFAM");
                 connection.Execute("DELETE FROM Valid.TrailblazerApprenticeshipFinancialRecord");
 
-                connection.Execute("DELETE FROM Rulebase.AE_LearningDelivery");
-                connection.Execute("DELETE FROM Rulebase.AE_LearningDelivery_PeriodisedValues");
+                connection.Execute("DELETE FROM Rulebase.AEC_ApprenticeshipPriceEpisode_Period");
+                connection.Execute("DELETE FROM Rulebase.AEC_ApprenticeshipPriceEpisode_PeriodisedValues");
+                connection.Execute("DELETE FROM Rulebase.AEC_ApprenticeshipPriceEpisode");
+
 
                 connection.Execute("DELETE FROM dbo.FileDetails");
                 connection.Execute("DELETE FROM dbo.DasCommitments");

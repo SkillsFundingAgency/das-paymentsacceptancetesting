@@ -91,7 +91,6 @@ namespace SFA.DAS.Payments.AcceptanceTests
             }
         }
 
-
         internal static TableRow RowWithKey(this TableRows rows, string key)
         {
             return rows.FirstOrDefault(r => r[0].Equals(key, StringComparison.OrdinalIgnoreCase));
@@ -101,6 +100,15 @@ namespace SFA.DAS.Payments.AcceptanceTests
         {
             var month = date.Month < 10 ? "0" + date.Month : date.Month.ToString();
             return $"{month}/{date.Year - 2000}";
+        }
+
+
+        internal static DateTime GetCensusDate(this string period)
+        {
+            var month = int.Parse(period.Split('/')[0]);
+            var year = int.Parse(period.Split('/')[1]) + 2000;
+
+            return new DateTime(year, month, 1).NextCensusDate();
         }
     }
 }
