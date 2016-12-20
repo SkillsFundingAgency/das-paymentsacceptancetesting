@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using IlrBuilder = SFA.DAS.Payments.AcceptanceTests.Builders.IlrBuilder;
 using SFA.DAS.Payments.AcceptanceTests.Enums;
 
 namespace SFA.DAS.Payments.AcceptanceTests.Entities
 {
-    public class LearningDelivery
+    public class LearningDelivery 
     {
         public LearningDelivery()
         {
@@ -12,10 +14,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Entities
             FrameworkCode = IlrBuilder.Defaults.FrameworkCode;
             PathwayCode = IlrBuilder.Defaults.PathwayCode;
             ProgrammeType = IlrBuilder.Defaults.ProgrammeType;
-
-
         }
-        public decimal AgreedPrice { get; set; }
+
         public LearnerType LearnerType { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime PlannedEndDate { get; set; }
@@ -26,8 +26,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.Entities
         public int ProgrammeType { get; set; }
         public int PathwayCode { get; set; }
 
-        public decimal MonthlyPayment { get; set; }
-        public decimal CompletionPayment { get; set; }
+        public PriceEpisode[] PriceEpisodes { get; set; }
 
+        public void AddPriceEpisode(PriceEpisode priceEpisode)
+        {
+            var priceEpisodes = PriceEpisodes?.ToList() ?? new List<PriceEpisode>();
+
+            priceEpisodes.Add(priceEpisode);
+
+            PriceEpisodes = priceEpisodes.ToArray();
+        }
     }
 }

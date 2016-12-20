@@ -82,7 +82,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
 
         public Provider GetDefaultProvider()
         {
-            if (Providers == null || Providers.Count() == 0)
+            if (Providers == null || !Providers.Any())
                 throw new NullReferenceException("There are no providers set");
 
             return Providers[0];
@@ -94,14 +94,25 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
             {
                 Name = string.Empty,
                 Uln = long.Parse(IdentifierGenerator.GenerateIdentifier(10, false)),
+                LearnRefNumber= IdentifierGenerator.GenerateIdentifier(10, false),
                 LearningDelivery = new LearningDelivery
                 {
-                    AgreedPrice = agreedPrice,
                     LearnerType = LearnerType.ProgrammeOnlyDas,
                     StartDate = startDate,
                     PlannedEndDate = endDate,
                     ActualEndDate = actualEndDate,
-                    CompletionStatus = CompletionStatus.InProgress
+                    CompletionStatus = CompletionStatus.InProgress,
+                    PriceEpisodes = new []
+                    {
+                        new PriceEpisode
+                        {
+                            Id = IdentifierGenerator.GenerateIdentifier(25),
+                            StartDate = startDate,
+                            TotalPrice = agreedPrice,
+                            Tnp1 = agreedPrice * 0.8m,
+                            Tnp2 = agreedPrice * 0.2m
+                        }
+                    }
                 }
             };
 

@@ -5,7 +5,6 @@ using ProviderPayments.TestStack.Core;
 using System.Collections.Generic;
 using System;
 using SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities;
-using IlrBuilder = SFA.DAS.Payments.AcceptanceTests.Builders.IlrBuilder;
 using SFA.DAS.Payments.AcceptanceTests.Entities;
 
 namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
@@ -30,8 +29,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                                 "SUM(Period_10) AS Period_10, " +
                                 "SUM(Period_11) AS Period_11, " +
                                 "SUM(Period_12) AS Period_12 " +
-                            "FROM Rulebase.AE_LearningDelivery_PeriodisedValues " +
+                            "FROM Rulebase.AEC_ApprenticeshipPriceEpisode_PeriodisedValues " +
                             "WHERE UKPRN = @ukprn " +
+                            "AND AttributeName IN ('PriceEpisodeOnProgPayment', 'PriceEpisodeCompletionPayment', 'PriceEpisodeBalancePayment') " +
                             "GROUP BY UKPRN";
                 return connection.Query<PeriodisedValuesEntity>(query, new { ukprn }).ToArray();
             }
@@ -41,71 +41,108 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
         {
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
             {
-                var query = $"SELECT {periodName} " + 
-                            "FROM Rulebase.AE_LearningDelivery_PeriodisedValues " +
-                            "WHERE UKPRN = @ukprn AND AttributeName='ProgrammeAimBalPayment' ";
+                var query = $"SELECT {periodName} " +
+                            "FROM Rulebase.AEC_ApprenticeshipPriceEpisode_PeriodisedValues " +
+                            "WHERE UKPRN = @ukprn AND AttributeName='PriceEpisodeBalancePayment' ";
                            
                 return connection.Query<decimal>(query, new { ukprn }).FirstOrDefault();
             }
         }
 
         internal static void SavePeriodisedValuesForUkprn(long ukprn,
-                                                            Dictionary<string,decimal> periods,
+                                                            string learnRefNumber,
+                                                            Dictionary<int,decimal> periods,
+                                                            string priceEpisodeIdentifier,
                                                             EnvironmentVariables environmentVariables)
         {
-
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
             {
+                
+                var periodValues = new System.Text.StringBuilder();
+
                 foreach (var period in periods.Keys)
                 {
-                    var periodValue = periods[period];
-                    connection.Execute("INSERT INTO [Rulebase].[AE_LearningDelivery_PeriodisedValues] " +
-                                       $"(Ukprn,LearnRefNumber,AimSeqNumber,AttributeName,{period}) " +
+                    var periodAmount = periods[period];
+
+
+                    connection.Execute("INSERT INTO [Rulebase].[AEC_ApprenticeshipPriceEpisode_Period] " +
+                                       "(Ukprn,LearnRefNumber,PriceEpisodeIdentifier,Period,PriceEpisodeOnProgPayment) " +
                                        "VALUES " +
-                                       "(@ukprn, '1',1, 'ProgrammeAimOnProgPayment', @periodValue)",
-                        new { ukprn, periodValue });
+                                       "(@ukprn,@learnRefNumber,@PriceEpisodeIdentifier,@Period, @periodAmount)",
+                        new { ukprn, learnRefNumber, priceEpisodeIdentifier,period,periodAmount});
                 }
+
+                //populate all period values, default to 0 if none found
+                for (var i = 1; i <= 12; i++)
+                {
+                    periodValues.Append($"{periods.Values.ElementAtOrDefault(i - 1)},");
                 }
-        
+
+                var columnValues = periodValues.ToString();
+                columnValues = columnValues.Remove(columnValues.Length - 1, 1);
+
+                connection.Execute("INSERT INTO [Rulebase].[AEC_ApprenticeshipPriceEpisode_PeriodisedValues] " +
+                                   "(Ukprn,LearnRefNumber,PriceEpisodeIdentifier,AttributeName, " +
+                                   "Period_1,Period_2,Period_3,Period_4,Period_5,Period_6,Period_7,Period_8,Period_9,Period_10,Period_11,Period_12)" +
+                                   "VALUES " +
+                                   $"(@ukprn,@learnRefNumber,@PriceEpisodeIdentifier, 'PriceEpisodeOnProgPayment', {columnValues})",
+                    new { ukprn, learnRefNumber, priceEpisodeIdentifier });
+            }
         }
 
         
         internal static void SaveLearningDeliveryValuesForUkprn(long ukprn, 
-                                                                long uln,
+                                                                string learnRefNumber,
                                                                 LearningDelivery learningDelivery,
                                                                 EnvironmentVariables environmentVariables)
         {
-
-           
-
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
             {
-               
-                connection.Execute("INSERT INTO [Rulebase].[AE_LearningDelivery] " +
-                                       "(LearnRefNumber,AimSeqNumber,Ukprn,uln,NiNumber,StdCode,ProgType,FWorkCode,PWayCode,NegotiatedPrice,learnStartDate,learnPlanEndDate," +
-                                       "monthlyInstallment,monthlyInstallmentUncapped,completionPayment,completionPaymentUncapped) " +
-                                       "VALUES " +
-                                       "('1', 1, @ukprn, @uln,'AB123456C',@standardCode,@ProgrammeType,@FrameworkCode,@PathwayCode,@AgreedPrice," +
-                                       "@StartDate,@PlannedEndDate,@MonthlyPayment,@MonthlyPayment,@CompletionPayment,@CompletionPayment)",
-                        new { ukprn,@uln,
-                                standardCode = learningDelivery.StandardCode > 0 ? learningDelivery.StandardCode : (long?)null,
-                                learningDelivery.ProgrammeType,
-                                learningDelivery.AgreedPrice,
-                                learningDelivery.FrameworkCode,
-                                learningDelivery.PathwayCode,
-                                learningDelivery.StartDate,
-                                learningDelivery.PlannedEndDate,
-                               learningDelivery.MonthlyPayment,
-                                learningDelivery.CompletionPayment });
-                
-            }
+                foreach (var priceEpisode in learningDelivery.PriceEpisodes)
+                {
 
+                    connection.Execute("INSERT INTO [Rulebase].[AEC_ApprenticeshipPriceEpisode] " +
+                                           "(Ukprn,LearnRefNumber,PriceEpisodeAimSeqNumber,PriceEpisodeIdentifier,PriceEpisodeTotalTNPPrice," +
+                                           " EpisodeEffectiveTNPStartDate,PriceEpisodePlannedEndDate," +
+                                           "PriceEpisodeInstalmentValue,PriceEpisodeCompletionElement," +
+                                           "TNP1,TNP2,TNP3,TNP4) " +
+                                           "VALUES " +
+                                           "(@ukprn,@learnRefNumber, 1, " +
+                                           " @priceEpisodeIdentifier," +
+                                           " @priceEpisodeTotalTNPPrice," +
+                                           " @episodeStartDate," +
+                                           " @episodeEndDate," +
+                                           " @monthlyPayment," +
+                                           " @completionPayment," +
+                                           " @tnp1," +
+                                           " @tnp2," +
+                                           " @tnp3," +
+                                           " @tnp4)",
+                            new
+                            {
+                                ukprn = ukprn,
+                                learnRefNumber = learnRefNumber,
+                                priceEpisodeIdentifier = priceEpisode.Id,
+                                priceEpisodeTotalTNPPrice = priceEpisode.TotalPrice,
+                                episodeStartDate = priceEpisode.StartDate,
+                                episodeEndDate = priceEpisode.EndDate,
+                                monthlyPayment = priceEpisode.MonthlyPayment,
+                                completionPayment = priceEpisode.CompletionPayment,
+                                tnp1 = priceEpisode.Tnp1,
+                                tnp2 = priceEpisode.Tnp2,
+                                tnp3 = priceEpisode.Tnp3,
+                                tnp4 = priceEpisode.Tnp4,
+                            });
+
+                }
+            }
         }
 
         internal static void SaveEarnedAmount(long ukprn,
                                             long commitmentId,
                                             long accountId,
                                             long uln,
+                                            string learnRefNumber,
                                             string collectionPeriodName,
                                             int collectionPeriodMonth,
                                             int collectionPeriodYear,
@@ -131,7 +168,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                                        ",TransactionType,AmountDue) " +
                                        "VALUES " +
                                         "(@commitmentId,@commitmentVersionId" +
-                                       ",@accountId,@accountVersionId,@uln,'1'" +
+                                       ",@accountId,@accountVersionId,@uln,@learnRefNumber" +
                                        ",1,@ukprn,@collectionPeriodMonth" +
                                        ",@collectionPeriodYear,@collectionPeriodName" +
                                        ",@collectionPeriodMonth,@collectionPeriodYear" +
@@ -142,6 +179,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                             accountId,
                             accountVersionId,
                             uln,
+                            learnRefNumber,
                             ukprn,
                             collectionPeriodName,
                             collectionPeriodMonth,

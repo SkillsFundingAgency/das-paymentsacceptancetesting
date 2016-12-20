@@ -104,7 +104,7 @@ Scenario: When no matching record found in an employer digital account for for t
     When an ILR file is submitted with the following data:
         
         | UKPRN   | ULN  | framework code | programme type | pathway code | agreed price | start date |
-        | 9999999 | 1234 | 450            | 2              | 1            | 10001        | 01/05/2017 |
+        | 9999999 | 1234 | 450            | 2              | 1            | 10010        | 01/05/2017 |
       
     Then a datalock error DLOCK_07 is produced
 

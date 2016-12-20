@@ -29,11 +29,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             StepDefinitionsContext.SetDefaultProvider();
 
             var provider = StepDefinitionsContext.GetDefaultProvider();
-            var learner = StepDefinitionsContext.CreateLearner(15000, new DateTime(2017, 08, 01), new DateTime(2018, 07, 01));
+            var learner = StepDefinitionsContext.CreateLearner(15000, new DateTime(2017, 09, 01), new DateTime(2018, 09, 08));
 
-            learner.LearningDelivery.StartDate = new DateTime(2017, 09, 01);
-            learner.LearningDelivery.PlannedEndDate = new DateTime(2018, 09, 08);
-            learner.LearningDelivery.AgreedPrice= 15000;
+            learner.LearningDelivery.PriceEpisodes[0].TotalPrice = 15000;
             learner.LearningDelivery.StandardCode= IlrBuilder.Defaults.StandardCode;
 
             
@@ -56,10 +54,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
 
             // Setup reference data
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+            var provider = StepDefinitionsContext.GetDefaultProvider();
+            var learner = provider.Learners[0];
 
             //save the periodiosed values
             EarningsDataHelper.SavePeriodisedValuesForUkprn(StepDefinitionsContext.GetDefaultProvider().Ukprn,
-                                                            new Dictionary<string, decimal> { { "Period_1", dueAmount } },
+                                                            learner.LearnRefNumber,
+                                                            new Dictionary<int, decimal> { { 1, dueAmount } },
+                                                            learner.LearningDelivery.PriceEpisodes[0].Id,
                                                             environmentVariables);
 
 
