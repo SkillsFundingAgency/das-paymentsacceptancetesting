@@ -94,7 +94,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             EarningsDataHelper.SavePeriodisedValuesForUkprn(provider.Ukprn,
                                                       learner.LearnRefNumber,  
                                                       new Dictionary<int, decimal> { { 1, dueAmount } },
-                                                      startDate,learner.LearningDelivery.PriceEpisodes[0].Id,
+                                                      learner.LearningDelivery.PriceEpisodes[0].Id,
                                                       environmentVariables);
 
             //Run the month end

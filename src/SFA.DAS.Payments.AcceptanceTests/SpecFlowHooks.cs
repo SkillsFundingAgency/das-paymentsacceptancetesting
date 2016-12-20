@@ -20,11 +20,14 @@ namespace SFA.DAS.Payments.AcceptanceTests
         }
 
         [BeforeTestRun]
-        public static void PrepateDeds()
+        public static void PrepareDeds()
         {
-            var processService = new ProcessService(new TestLogger());
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
+            var databaseHelper = new DatabaseHelper(environmentVariables);
+            databaseHelper.RunDedsScrips();
+
+            var processService = new ProcessService(new TestLogger());
             processService.RebuildDedsDatabase(ComponentType.DataLockSubmission, environmentVariables);
             processService.RebuildDedsDatabase(ComponentType.DataLockPeriodEnd, environmentVariables);
             processService.RebuildDedsDatabase(ComponentType.EarningsCalculator, environmentVariables);

@@ -6,6 +6,5 @@ namespace SFA.DAS.Payments.AcceptanceTests.Entities
     {
         public long CommitmentId { get; set; }
         public string PriceEpisodeId { get; set; }
-        public DateTime PriceEpisodeStartDate { get; set; }
     }
 }
