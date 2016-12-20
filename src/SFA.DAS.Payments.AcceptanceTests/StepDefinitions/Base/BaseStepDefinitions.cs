@@ -254,7 +254,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                                                     EnvironmentVariables);
 
             //save learning delivery FAM
-            LearnerDataHelper.SaveLearningDeliveryFAM(ukprn,learner.LearnRefNumber, EnvironmentVariables);
+            LearnerDataHelper.SaveLearningDeliveryFAM(ukprn,learner.LearnRefNumber,learner.LearningDelivery.StartDate,learner.LearningDelivery.PlannedEndDate, EnvironmentVariables);
 
             LearnerDataHelper.SaveTrailblazerApprenticeshipFinancialRecord(ukprn,1,learner.LearnRefNumber,learner.LearningDelivery.PriceEpisodes[0].Tnp1.Value,EnvironmentVariables);
 
@@ -300,6 +300,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                 LearnRefNumber=l.LearnRefNumber,
                 LearningDelivery = new LearningDelivery
                 {
+                    LearningDeliveryFams=l.LearningDelivery.LearningDeliveryFams,
                     LearnerType = l.LearningDelivery.LearnerType,
                     StartDate = l.LearningDelivery.StartDate,
                     PlannedEndDate = l.LearningDelivery.PlannedEndDate,
@@ -406,9 +407,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                 var learner = new Learner
                 {
                     Name = table.Rows[rowIndex].ContainsKey("ULN") ? table.Rows[rowIndex]["ULN"] : string.Empty,
-                   
+
                     LearningDelivery = new LearningDelivery
                     {
+                        LearningDeliveryFams = StepDefinitionsContext.ReferenceDataContext.LearningDeliveryFams,
                         LearnerType = LearnerType.ProgrammeOnlyDas,
                         StartDate = DateTime.Parse(table.Rows[rowIndex]["start date"]),
                         PlannedEndDate = table.Header.Contains("planned end date") ? 

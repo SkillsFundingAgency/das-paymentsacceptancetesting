@@ -34,11 +34,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
                 return new Learner
                 {
                     Uln = l.Uln,
-                    LearnRefNumber=l.LearnRefNumber,
+                    LearnRefNumber = l.LearnRefNumber,
                     LearningDeliveries = new[]
                     {
                         new LearningDelivery
                         {
+                           
                             ActFamCodeValue = (short) l.LearningDelivery.LearnerType,
                             ActualStartDate = l.LearningDelivery.StartDate,
                             PlannedEndDate = l.LearningDelivery.PlannedEndDate,
@@ -49,7 +50,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
                             FrameworkCode = l.LearningDelivery.FrameworkCode,
                             PathwayCode = l.LearningDelivery.PathwayCode,
 
-                            FinancialRecords = GetLearningDeliveryFinancialRecords(l.LearningDelivery)
+                            FinancialRecords = GetLearningDeliveryFinancialRecords(l.LearningDelivery),
+                            FamRecords= TransformFamRecords(l.LearningDelivery.LearningDeliveryFams)
                         }
                     }
                 };
@@ -58,6 +60,22 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
             Submission.Learners = Learners;
 
             return this;
+        }
+
+        private LearningDeliveryActFamRecord[] TransformFamRecords(Entities.LearningDeliveryFam[] learningDeliveryFams)
+        {
+            if (learningDeliveryFams == null)
+                return null;
+
+            var result = new List<LearningDeliveryActFamRecord>();
+            learningDeliveryFams.ToList().ForEach(
+                x => result.Add(new LearningDeliveryActFamRecord() {
+                    Code = x.FamCode,
+                    From = x.StartDate,
+                    To = x.EndDate
+                }));
+
+            return result.ToArray();
         }
 
         private FinancialRecord[] GetLearningDeliveryFinancialRecords(Entities.LearningDelivery learningDelivery)

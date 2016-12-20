@@ -12,6 +12,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.Entities
 
         public decimal GetBalanceForMonth(string month)
         {
+            if(MonthlyAccountBalance.Count == 0)
+            {
+                return 0;
+            }
             if (MonthlyAccountBalance.ContainsKey("All"))
             {
                 return MonthlyAccountBalance["All"];

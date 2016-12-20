@@ -132,10 +132,26 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
         {
             for (var rowIndex = 0; rowIndex < table.RowCount; rowIndex++)
             {
-                var employer = table.Rows[rowIndex]["Employer"];
+                var employerName = table.Rows[rowIndex]["Employer"];
                 var type = table.Rows[rowIndex]["Type"] == "DAS" ? LearnerType.ProgrammeOnlyDas : LearnerType.ProgrammeOnlyNonDas;
 
-                ReferenceDataContext.SetEmployerLearnersType(employer, type);
+                if (!ReferenceDataContext.Employers.Any(x => x.Name.Equals(employerName, StringComparison.CurrentCultureIgnoreCase)))
+                {
+                    var employer = new Employer
+                    {
+                        Name = employerName,
+                        AccountId = long.Parse(IdentifierGenerator.GenerateIdentifier(8, false)),
+                        LearnersType = type,
+                        MonthlyAccountBalance = new Dictionary<string, decimal>()
+                    };
+
+                    ReferenceDataContext.AddEmployer(employer);
+                }
+                else
+                {
+
+                    ReferenceDataContext.SetEmployerLearnersType(employerName, type);
+                }
             }
         }
 

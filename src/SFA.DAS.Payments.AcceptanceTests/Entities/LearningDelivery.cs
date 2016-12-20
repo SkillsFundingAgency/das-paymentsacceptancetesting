@@ -14,6 +14,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Entities
             FrameworkCode = IlrBuilder.Defaults.FrameworkCode;
             PathwayCode = IlrBuilder.Defaults.PathwayCode;
             ProgrammeType = IlrBuilder.Defaults.ProgrammeType;
+           
         }
 
         public LearnerType LearnerType { get; set; }
@@ -27,6 +28,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Entities
         public int PathwayCode { get; set; }
 
         public PriceEpisode[] PriceEpisodes { get; set; }
+
+        public LearningDeliveryFam[] LearningDeliveryFams { get; set; }
 
         public void AddPriceEpisode(PriceEpisode priceEpisode)
         {
