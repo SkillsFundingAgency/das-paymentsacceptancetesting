@@ -31,6 +31,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                                 "SUM(Period_12) AS Period_12 " +
                             "FROM Rulebase.AEC_ApprenticeshipPriceEpisode_PeriodisedValues " +
                             "WHERE UKPRN = @ukprn " +
+                            "AND AttributeName IN ('PriceEpisodeOnProgPayment', 'PriceEpisodeCompletionPayment', 'PriceEpisodeBalancePayment') " +
                             "GROUP BY UKPRN";
                 return connection.Query<PeriodisedValuesEntity>(query, new { ukprn }).ToArray();
             }
@@ -80,7 +81,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
         internal static void SavePeriodisedValuesForUkprn(long ukprn,
                                                             string learnRefNumber,
                                                             Dictionary<int,decimal> periods,
-                                                            DateTime episodeStartDate,
                                                             string priceEpisodeIdentifier,
                                                             EnvironmentVariables environmentVariables)
         {
@@ -95,10 +95,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 
 
                     connection.Execute("INSERT INTO [Rulebase].[AEC_ApprenticeshipPriceEpisode_Period] " +
-                                       "(Ukprn,LearnRefNumber,AimSeqNumber,EpisodeStartDate,PriceEpisodeIdentifier,Period,PriceEpisodeOnProgPayment) " +
+                                       "(Ukprn,LearnRefNumber,PriceEpisodeIdentifier,Period,PriceEpisodeOnProgPayment) " +
                                        "VALUES " +
-                                       "(@ukprn,@learnRefNumber ,1,@episodeStartDate,@PriceEpisodeIdentifier,@Period, @periodAmount)",
-                        new { ukprn, learnRefNumber, episodeStartDate, priceEpisodeIdentifier,period,periodAmount});
+                                       "(@ukprn,@learnRefNumber,@PriceEpisodeIdentifier,@Period, @periodAmount)",
+                        new { ukprn, learnRefNumber, priceEpisodeIdentifier,period,periodAmount});
                 }
 
                 //populate all period values, default to 0 if none found
@@ -111,11 +111,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                 columnValues = columnValues.Remove(columnValues.Length - 1, 1);
 
                 connection.Execute("INSERT INTO [Rulebase].[AEC_ApprenticeshipPriceEpisode_PeriodisedValues] " +
-                                   "(Ukprn,LearnRefNumber,AimSeqNumber,EpisodeStartDate,PriceEpisodeIdentifier,AttributeName, " +
+                                   "(Ukprn,LearnRefNumber,PriceEpisodeIdentifier,AttributeName, " +
                                    "Period_1,Period_2,Period_3,Period_4,Period_5,Period_6,Period_7,Period_8,Period_9,Period_10,Period_11,Period_12)" +
                                    "VALUES " +
-                                   $"(@ukprn,@learnRefNumber ,1,@episodeStartDate,@PriceEpisodeIdentifier, 'PriceEpisodeOnProgPayment', {columnValues})",
-                    new { ukprn, learnRefNumber, episodeStartDate, priceEpisodeIdentifier });
+                                   $"(@ukprn,@learnRefNumber,@PriceEpisodeIdentifier, 'PriceEpisodeOnProgPayment', {columnValues})",
+                    new { ukprn, learnRefNumber, priceEpisodeIdentifier });
             }
         }
 
@@ -131,8 +131,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                 {
 
                     connection.Execute("INSERT INTO [Rulebase].[AEC_ApprenticeshipPriceEpisode] " +
-                                           "(Ukprn,LearnRefNumber,AimSeqNumber,PriceEpisodeIdentifier,PriceEpisodeTotalTNPPrice," +
-                                           " EpisodeStartDate,PriceEpisodePlannedEndDate," +
+                                           "(Ukprn,LearnRefNumber,PriceEpisodeAimSeqNumber,PriceEpisodeIdentifier,PriceEpisodeTotalTNPPrice," +
+                                           " EpisodeEffectiveTNPStartDate,PriceEpisodePlannedEndDate," +
                                            "PriceEpisodeInstalmentValue,PriceEpisodeCompletionElement," +
                                            "TNP1,TNP2,TNP3,TNP4) " +
                                            "VALUES " +

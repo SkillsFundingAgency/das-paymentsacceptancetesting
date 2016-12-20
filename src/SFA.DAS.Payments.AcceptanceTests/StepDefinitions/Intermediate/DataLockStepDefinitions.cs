@@ -44,16 +44,17 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             SetupContexLearners(table);
 
             var provider = StepDefinitionsContext.GetDefaultProvider();
-            var ukprn = long.Parse(table.Rows[0]["UKPRN"]);
+         
             var startDate = StepDefinitionsContext.GetIlrStartDate().NextCensusDate();
 
+            //Update the UKPRN to the one from ILR as this is the one which will be in the validation error table
+            provider.Ukprn = long.Parse(table.Rows[0]["UKPRN"]); ;
             SubmitIlr(provider,
                 startDate.GetAcademicYear(),
                 startDate.NextCensusDate(),
                 new ProcessService(new TestLogger()));
 
-            //Update the UKPRN to the one from ILR as this is the one which will be in the validation error table
-            provider.Ukprn = ukprn;
+           
         }
 
 
@@ -92,7 +93,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             EarningsDataHelper.SavePeriodisedValuesForUkprn(provider.Ukprn,
                                                       learner.LearnRefNumber,  
                                                       new Dictionary<int, decimal> { { 1, dueAmount } },
-                                                      startDate,learner.LearningDelivery.PriceEpisodes[0].Id,
+                                                      learner.LearningDelivery.PriceEpisodes[0].Id,
                                                       environmentVariables);
 
             //Run the month end

@@ -61,7 +61,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             EarningsDataHelper.SavePeriodisedValuesForUkprn(StepDefinitionsContext.GetDefaultProvider().Ukprn,
                                                             learner.LearnRefNumber,
                                                             new Dictionary<int, decimal> { { 1, dueAmount } },
-                                                            learner.LearningDelivery.PriceEpisodes[0].StartDate,
                                                             learner.LearningDelivery.PriceEpisodes[0].Id,
                                                             environmentVariables);
 

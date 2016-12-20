@@ -531,7 +531,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 
         private string GetPriceEpisodeIdentifier(DateTime date)
         {
-            return $"{IlrBuilder.Defaults.StandardCode}-25-{date.ToString("yyyy-MM-dd")}";
+            return $"25-{IlrBuilder.Defaults.StandardCode}-{date.ToString("dd/MM/yyyy")}";
         }
     }
 }
