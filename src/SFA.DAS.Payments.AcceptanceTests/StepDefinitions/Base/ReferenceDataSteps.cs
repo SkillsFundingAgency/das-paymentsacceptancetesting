@@ -195,7 +195,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                                 : (DateTime?)null,
                     AgreedPrice = table.Rows[rowIndex].ContainsKey("agreed price")
                                 ? decimal.Parse(table.Rows[rowIndex]["agreed price"])
-                                : (decimal?)null
+                                : (decimal?)null,
+                    StandardCode = table.Rows[rowIndex].ContainsKey("standard code")
+                                ? long.Parse(table.Rows[rowIndex]["standard code"])
+                                : (long?)null
                 };
             }
 

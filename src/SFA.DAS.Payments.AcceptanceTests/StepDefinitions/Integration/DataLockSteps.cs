@@ -68,7 +68,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                                 m =>
                                     m.PriceEpisodeId == priceEpisode.Id)
                             .ToArray();
-
+                                
                         Assert.AreEqual(0, priceEpisodeActualMatches.Length,
                             $"Expecting no data lock match for period {period} for a price episode that spans {priceEpisode.DataLockMatchKey}.");
                     }

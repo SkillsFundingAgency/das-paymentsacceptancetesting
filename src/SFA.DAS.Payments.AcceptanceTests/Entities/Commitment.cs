@@ -19,6 +19,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Entities
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public DateTime? ActualEndDate { get; set; }
+        public long? StandardCode { get; set; }
 
         public DateTime? StopPeriodCensusDate
         {

@@ -31,36 +31,58 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
 
             Learners = learners.Select(l =>
             {
-                return new Learner
+                var learner = new Learner
                 {
                     Uln = l.Uln,
-                    LearnRefNumber = l.LearnRefNumber,
-                    LearningDeliveries = new[]
-                    {
+                    LearnRefNumber = l.LearnRefNumber
+                };
+
+                var learningDeliveries = new List<LearningDelivery>();
+
+                foreach(var ld in l.LearningDeliveries)
+                {
+                    learningDeliveries.Add(
                         new LearningDelivery
                         {
-                           
-                            ActFamCodeValue = (short) l.LearningDelivery.LearnerType,
-                            ActualStartDate = l.LearningDelivery.StartDate,
-                            PlannedEndDate = l.LearningDelivery.PlannedEndDate,
-                            ActualEndDate = l.LearningDelivery.ActualEndDate,
 
-                            StandardCode = l.LearningDelivery.StandardCode,
-                            ProgrammeType = l.LearningDelivery.ProgrammeType,
-                            FrameworkCode = l.LearningDelivery.FrameworkCode,
-                            PathwayCode = l.LearningDelivery.PathwayCode,
+                            ActFamCodeValue = (short)ld.LearnerType,
+                            ActualStartDate = ld.StartDate,
+                            PlannedEndDate = ld.PlannedEndDate,
+                            ActualEndDate = ld.ActualEndDate,
 
-                            FinancialRecords = GetLearningDeliveryFinancialRecords(l.LearningDelivery),
-                            FamRecords= TransformFamRecords(l.LearningDelivery.LearningDeliveryFams)
+                            StandardCode = ld.StandardCode,
+                            ProgrammeType = ld.ProgrammeType,
+                            FrameworkCode = ld.FrameworkCode,
+                            PathwayCode = ld.PathwayCode,
+                            CompletionStatus= TransformCompletionStatus(ld.CompletionStatus),
+                            FinancialRecords = GetLearningDeliveryFinancialRecords(ld),
+                            FamRecords = TransformFamRecords(ld.LearningDeliveryFams)
                         }
-                    }
-                };
+                    );
+                }
+                learner.LearningDeliveries = learningDeliveries.ToArray();
+                return learner;
             }).ToArray();
 
             Submission.Learners = Learners;
 
             return this;
         }
+
+        private IlrGenerator.CompletionStatus TransformCompletionStatus(Enums.CompletionStatus status)
+        {
+            if (status == Enums.CompletionStatus.Completed)
+                return CompletionStatus.Completed;
+            else if (status == Enums.CompletionStatus.Transferred)
+                return CompletionStatus.Transferred;
+            else if (status == Enums.CompletionStatus.PlannedBreak)
+                return CompletionStatus.PlannedBreak;
+           else
+                return CompletionStatus.Continuing;
+
+
+        }
+
 
         private LearningDeliveryActFamRecord[] TransformFamRecords(Entities.LearningDeliveryFam[] learningDeliveryFams)
         {
