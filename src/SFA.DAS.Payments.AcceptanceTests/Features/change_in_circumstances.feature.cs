@@ -88,6 +88,7 @@ this.ScenarioSetup(scenarioInfo);
 this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "commitment Id",
                         "ULN",
                         "standard code",
                         "price effective date",
@@ -95,17 +96,19 @@ this.FeatureBackground();
                         "actual end date",
                         "agreed price"});
             table1.AddRow(new string[] {
+                        "1",
                         "learner a",
                         "51",
                         "01/08/2017",
-                        "31/08/2018",
-                        "02/11/2017",
+                        "01/08/2018",
+                        "31/10/2017",
                         "15000"});
             table1.AddRow(new string[] {
+                        "2",
                         "learner a",
                         "52",
                         "03/11/2017",
-                        "30/11/2018",
+                        "01/08/2018",
                         "",
                         "5625"});
 #line 10
@@ -126,8 +129,8 @@ testRunner.Given("the following commitments exist on 03/12/2017:", ((string)(nul
                         "learner a",
                         "51",
                         "03/08/2017",
-                        "04/08/2018",
-                        "02/11/2017",
+                        "01/08/2018",
+                        "31/10/2017",
                         "transferred",
                         "12000",
                         "03/08/2017",
@@ -137,7 +140,7 @@ testRunner.Given("the following commitments exist on 03/12/2017:", ((string)(nul
                         "learner a",
                         "52",
                         "03/11/2017",
-                        "30/11/2018",
+                        "01/08/2018",
                         "",
                         "continuing",
                         "4500",
@@ -149,55 +152,66 @@ testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
+                        "08/17 - 10/17",
+                        "11/17 onwards"});
+            table3.AddRow(new string[] {
+                        "Matching commitment",
+                        "1",
+                        "2"});
+#line 20
+testRunner.Then("the data lock status of the ILR in 03/12/2017 is:", ((string)(null)), table3, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Type",
                         "08/17",
                         "09/17",
                         "10/17",
                         "11/17",
                         "12/17"});
-            table3.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Provider Earned Total",
                         "1000",
                         "1000",
                         "1000",
                         "500",
-                        "0"});
-            table3.AddRow(new string[] {
+                        "500"});
+            table4.AddRow(new string[] {
                         "Provider Earned from SFA",
                         "1000",
                         "1000",
                         "1000",
                         "500",
-                        "0"});
-            table3.AddRow(new string[] {
+                        "500"});
+            table4.AddRow(new string[] {
                         "Provider Paid by SFA",
                         "0",
                         "1000",
                         "1000",
                         "1000",
                         "500"});
-            table3.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "Employer Levy account debited",
                         "0",
                         "1000",
                         "1000",
                         "1000",
                         "500"});
-            table3.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "SFA Levy employer budget",
                         "1000",
                         "1000",
                         "1000",
                         "500",
                         "0"});
-            table3.AddRow(new string[] {
+            table4.AddRow(new string[] {
                         "SFA Levy co-funding budget",
                         "0",
                         "0",
                         "0",
                         "0",
                         "0"});
-#line 22
-testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table3, "Then ");
+#line 24
+testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table4, "And ");
 #line hidden
             this.ScenarioCleanup();
         }

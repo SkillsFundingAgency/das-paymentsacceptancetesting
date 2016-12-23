@@ -40,7 +40,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                 {
                     if (ExpectingDataLockMatchForPriceEpisode(priceEpisode.DataLockMatchKey, matchesRow))
                     {
-                        var employer = matchesRow[priceEpisode.DataLockMatchKey];
+                        var matchingValue = matchesRow[priceEpisode.DataLockMatchKey];
 
                         var priceEpisodeActualMatches = periodMatches
                             .Where(
@@ -49,7 +49,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                             .ToArray();
 
                         Assert.AreEqual(1, priceEpisodeActualMatches.Length,
-                            $"Expecting to find a data lock match for employer {employer} in period {period} and the price episode that spans {priceEpisode.DataLockMatchKey}.");
+                            $"Expecting to find a data lock match for employer {matchingValue} in period {period} and the price episode that spans {priceEpisode.DataLockMatchKey}.");
 
                         var commitments = StepDefinitionsContext.ReferenceDataContext.Commitments
                             .Where(c => c.Id == priceEpisodeActualMatches[0].CommitmentId)
@@ -58,8 +58,18 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                         Assert.AreEqual(1, commitments.Length,
                             $"Expecting to find a matching commitment for period {period} and the price episode that spans {priceEpisode.DataLockMatchKey}.");
 
-                        Assert.AreEqual(employer, commitments[0].Employer,
-                            $"Expecting to find a matching commitment for employer {employer} in period {period} for a price episode that spans {priceEpisode.DataLockMatchKey}.");
+                        if (!string.IsNullOrEmpty(commitments[0].ComitmentIdenifier))
+                        {
+                           
+                            Assert.AreEqual(matchingValue, commitments[0].ComitmentIdenifier,
+                                $"Expecting to find a matching commitment for commitment id  {matchingValue} in period {period} for a price episode that spans {priceEpisode.DataLockMatchKey}.");
+                        }
+                        else
+                        {
+                            Assert.AreEqual(matchingValue, commitments[0].Employer,
+                                $"Expecting to find a matching commitment for employer {matchingValue} in period {period} for a price episode that spans {priceEpisode.DataLockMatchKey}.");
+
+                        }
                     }
                     else
                     {
@@ -68,7 +78,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                                 m =>
                                     m.PriceEpisodeId == priceEpisode.Id)
                             .ToArray();
-                                
+
                         Assert.AreEqual(0, priceEpisodeActualMatches.Length,
                             $"Expecting no data lock match for period {period} for a price episode that spans {priceEpisode.DataLockMatchKey}.");
                     }

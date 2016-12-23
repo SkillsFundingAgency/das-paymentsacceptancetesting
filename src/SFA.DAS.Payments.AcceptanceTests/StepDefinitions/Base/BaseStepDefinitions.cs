@@ -381,7 +381,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                     ? table.Rows[rowIndex]["Provider"]
                     : "provider";
 
-                var priceEpisodes = SetupPriceEpisodes(table, rowIndex);
+              
 
                 var learningDelivery = new LearningDelivery
                 {
@@ -404,14 +404,17 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                     ProgrammeType = table.Header.Contains("programme type") ? int.Parse(table.Rows[rowIndex]["programme type"]) : IlrBuilder.Defaults.ProgrammeType,
                     PathwayCode = table.Header.Contains("pathway code") ? int.Parse(table.Rows[rowIndex]["pathway code"]) : IlrBuilder.Defaults.PathwayCode,
 
-                    PriceEpisodes = priceEpisodes.ToArray()
+                   
                 };
 
                 var standardCode = table.Header.Contains("standard code") ? int.Parse(table.Rows[rowIndex]["standard code"]) : IlrBuilder.Defaults.StandardCode;
                 learningDelivery.StandardCode = learningDelivery.FrameworkCode > 0 &&
                                                         learningDelivery.PathwayCode > 0 &&
                                                         learningDelivery.ProgrammeType > 0 ? 0 : standardCode;
-                
+
+                var priceEpisodes = SetupPriceEpisodes(table, rowIndex,learningDelivery.StandardCode);
+                learningDelivery.PriceEpisodes = priceEpisodes.ToArray();
+
                 Learner learner = null;
                 if (table.Rows[rowIndex].ContainsKey("ULN"))
                 {
@@ -443,7 +446,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             }
         }
 
-        private List<PriceEpisode> SetupPriceEpisodes(Table table, int rowIndex)
+        private List<PriceEpisode> SetupPriceEpisodes(Table table, int rowIndex,long? standardCode)
         {
             var priceEpisodes = new List<PriceEpisode>();
 
@@ -454,7 +457,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 
                 priceEpisodes.Add(new PriceEpisode
                 {
-                    Id = GetPriceEpisodeIdentifier(startDate),
+                    Id = GetPriceEpisodeIdentifier(startDate,standardCode),
                     StartDate = startDate,
                     EndDate = string.IsNullOrEmpty(table.Rows[rowIndex]["actual end date"]) ? (DateTime?)null :  DateTime.Parse(table.Rows[rowIndex]["actual end date"]),
                     TotalPrice = decimal.Parse(table.Rows[rowIndex]["Total training price"]) + decimal.Parse(table.Rows[rowIndex]["Total assessment price"]),
@@ -469,7 +472,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 
                 priceEpisodes.Add(new PriceEpisode
                 {
-                    Id = GetPriceEpisodeIdentifier(startDate),
+                    Id = GetPriceEpisodeIdentifier(startDate,standardCode),
                     StartDate = startDate,
                     EndDate = DateTime.Parse(table.Rows[rowIndex]["Residual training price effective date"]).AddDays(-1),
                     TotalPrice = decimal.Parse(table.Rows[rowIndex]["Total training price"]) + decimal.Parse(table.Rows[rowIndex]["Total assessment price"]),
@@ -481,7 +484,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 
                 priceEpisodes.Add(new PriceEpisode
                 {
-                    Id = GetPriceEpisodeIdentifier(startDate),
+                    Id = GetPriceEpisodeIdentifier(startDate,standardCode),
                     StartDate = startDate,
                     TotalPrice = decimal.Parse(table.Rows[rowIndex]["Residual training price"]) + decimal.Parse(table.Rows[rowIndex]["Residual assessment price"]),
                     Tnp3 = decimal.Parse(table.Rows[rowIndex]["Residual training price"]),
@@ -494,7 +497,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 
                 priceEpisodes.Add(new PriceEpisode
                 {
-                    Id = GetPriceEpisodeIdentifier(startDate),
+                    Id = GetPriceEpisodeIdentifier(startDate,standardCode),
                     StartDate = startDate,
                     TotalPrice = decimal.Parse(table.Rows[rowIndex]["agreed price"]),
                     Tnp1 = decimal.Parse(table.Rows[rowIndex]["agreed price"]) * 0.8m,
@@ -527,9 +530,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             throw new ArgumentException($"Invalid commitment status value: {status}");
         }
 
-        private string GetPriceEpisodeIdentifier(DateTime date)
+        private string GetPriceEpisodeIdentifier(DateTime date,long? standardCode)
         {
-            return $"25-{IlrBuilder.Defaults.StandardCode}-{date.ToString("dd/MM/yyyy")}";
+            return $"25-{(standardCode.HasValue? standardCode.Value : IlrBuilder.Defaults.StandardCode)}-{date.ToString("dd/MM/yyyy")}";
         }
     }
 }

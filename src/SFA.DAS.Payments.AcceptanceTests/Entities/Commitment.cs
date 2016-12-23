@@ -35,5 +35,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Entities
                         .NextCensusDate();
             }
         }
+
+        public string ComitmentIdenifier { get; set; }
     }
 }

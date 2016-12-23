@@ -198,7 +198,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                                 : (decimal?)null,
                     StandardCode = table.Rows[rowIndex].ContainsKey("standard code")
                                 ? long.Parse(table.Rows[rowIndex]["standard code"])
-                                : (long?)null
+                                : (long?)null,
+                    ComitmentIdenifier = table.Rows[rowIndex].ContainsKey("commitment Id") 
+                                        ? table.Rows[rowIndex]["commitment Id"]
+                                        : null,
                 };
             }
 
