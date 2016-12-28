@@ -111,7 +111,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
                 StartDate = startDate,
                 PlannedEndDate = endDate,
                 ActualEndDate = actualEndDate,
-                CompletionStatus = CompletionStatus.Continuing,
+                CompletionStatus = CompletionStatus.Completed,
                 PriceEpisodes = new[]
                  {
                         new PriceEpisode
