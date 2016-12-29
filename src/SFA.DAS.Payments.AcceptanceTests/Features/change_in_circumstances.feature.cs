@@ -348,6 +348,124 @@ testRunner.And("the provider earnings and payments break down as follows:", ((st
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Apprentice goes on a planned break midway through the learning episode and this i" +
+            "s notified through the ILR")]
+        public virtual void ApprenticeGoesOnAPlannedBreakMidwayThroughTheLearningEpisodeAndThisIsNotifiedThroughTheILR()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Apprentice goes on a planned break midway through the learning episode and this i" +
+                    "s notified through the ILR", ((string[])(null)));
+#line 64
+this.ScenarioSetup(scenarioInfo);
+#line 3
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+                        "commitment Id",
+                        "ULN",
+                        "price effective date",
+                        "planned end date",
+                        "actual end date",
+                        "agreed price"});
+            table9.AddRow(new string[] {
+                        "1",
+                        "learner a",
+                        "01/09/2017",
+                        "08/09/2018",
+                        "30/10/2018",
+                        "15000"});
+#line 66
+testRunner.Given("the following commitments exist on 03/12/2017:", ((string)(null)), table9, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ULN",
+                        "start date",
+                        "planned end date",
+                        "actual end date",
+                        "completion status",
+                        "Total training price",
+                        "Total training price effective date",
+                        "Total assessment price",
+                        "Total assessment price effective date"});
+            table10.AddRow(new string[] {
+                        "learner a",
+                        "01/09/2017",
+                        "08/09/2018",
+                        "30/10/2017",
+                        "planned break",
+                        "12000",
+                        "01/09/2017",
+                        "3000",
+                        "01/09/2017"});
+            table10.AddRow(new string[] {
+                        "learner a",
+                        "03/01/2018",
+                        "30/11/2018",
+                        "",
+                        "continuing",
+                        "12000",
+                        "03/01/2018",
+                        "3000",
+                        "03/01/2018"});
+#line 70
+testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table10, "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Type",
+                        "09/17",
+                        "10/17",
+                        "11/17",
+                        "12/17",
+                        "01/18",
+                        "02/18",
+                        "...",
+                        "08/18"});
+            table11.AddRow(new string[] {
+                        "Provider Earned from SFA",
+                        "1000",
+                        "1000",
+                        "0",
+                        "0",
+                        "909.09",
+                        "909.09",
+                        "...",
+                        "909.09"});
+            table11.AddRow(new string[] {
+                        "Provider Paid by SFA",
+                        "0",
+                        "1000",
+                        "1000",
+                        "0",
+                        "0",
+                        "909.09",
+                        "...",
+                        "909.09"});
+            table11.AddRow(new string[] {
+                        "Employer Levy account debited",
+                        "0",
+                        "1000",
+                        "1000",
+                        "0",
+                        "0",
+                        "909.09",
+                        "...",
+                        "909.09"});
+            table11.AddRow(new string[] {
+                        "SFA Levy employer budget",
+                        "1000",
+                        "1000",
+                        "0",
+                        "0",
+                        "909.09",
+                        "909.09",
+                        "...",
+                        "909.09"});
+#line 76
+testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table11, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

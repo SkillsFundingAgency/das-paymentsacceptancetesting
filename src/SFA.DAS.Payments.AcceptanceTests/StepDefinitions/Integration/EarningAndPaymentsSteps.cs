@@ -227,7 +227,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
 
             var expectedEarning = decimal.Parse(earnedRow[colIndex]);
             Assert.IsTrue(earnedByPeriod.ContainsKey(periodName), $"Expected earning for period {periodName} but none found");
-            Assert.AreEqual(expectedEarning, earnedByPeriod[periodName], $"Expected earning of {expectedEarning} for period {periodName} but found {earnedByPeriod[periodName]}");
+            Assert.AreEqual(expectedEarning, Math.Round(earnedByPeriod[periodName],2), $"Expected earning of {expectedEarning} for period {periodName} but found {earnedByPeriod[periodName]}");
         }
         private void VerifyLevyPayments(long ukprn, string periodName, DateTime periodDate, long accountId,
             int colIndex, TableRow levyPaidRow)
@@ -245,7 +245,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
 
             var actualLevyPayment = levyPayments.Length == 0 ? 0m : levyPayments.Sum(p => p.Amount);
             var expectedLevyPayment = decimal.Parse(levyPaidRow[colIndex]);
-            Assert.AreEqual(expectedLevyPayment, actualLevyPayment, $"Expected a levy payment of {expectedLevyPayment} but made a payment of {actualLevyPayment} for {periodName}");
+            Assert.AreEqual(expectedLevyPayment, Math.Round(actualLevyPayment,2), $"Expected a levy payment of {expectedLevyPayment} but made a payment of {actualLevyPayment} for {periodName}");
         }
         private void VerifyGovtCofinancePayments(long ukprn, string periodName, DateTime periodDate,
             int colIndex, TableRow govtCofundRow)
@@ -261,7 +261,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
 
             var actualGovtPayment = cofinancePayments.Sum(p => p.Amount);
             var expectedGovtPayment = decimal.Parse(govtCofundRow[colIndex]);
-            Assert.AreEqual(expectedGovtPayment, actualGovtPayment, $"Expected a government co-finance payment of {expectedGovtPayment} but made a payment of {actualGovtPayment} for {periodName}");
+            Assert.AreEqual(expectedGovtPayment, Math.Round(actualGovtPayment,2), $"Expected a government co-finance payment of {expectedGovtPayment} but made a payment of {actualGovtPayment} for {periodName}");
         }
         private void VerifyEmployerCofinancePayments(long ukprn, string periodName, DateTime periodDate, long accountId,
             int colIndex, TableRow employerCofundRow)
@@ -279,7 +279,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
 
             var actualEmployerPayment = cofinancePayments.Sum(p => p.Amount);
             var expectedEmployerPayment = decimal.Parse(employerCofundRow[colIndex]);
-            Assert.AreEqual(expectedEmployerPayment, actualEmployerPayment, $"Expected a employer co-finance payment of {expectedEmployerPayment} but made a payment of {actualEmployerPayment} for {periodName}");
+            Assert.AreEqual(expectedEmployerPayment, Math.Round(actualEmployerPayment,2), $"Expected a employer co-finance payment of {expectedEmployerPayment} but made a payment of {actualEmployerPayment} for {periodName}");
         }
         private void VerifyPaymentsDueByTransactionType(long ukprn, string periodName, DateTime periodDate, int colIndex, TransactionType paymentType,
             TableRow paymentsRow)
@@ -297,7 +297,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
 
             var actualPaymentDue = paymentsDue.Length == 0 ? 0m : paymentsDue.Where(p => p.TransactionType == (int)paymentType).Sum(p => p.AmountDue);
             var expectedPaymentDue = decimal.Parse(paymentsRow[colIndex]);
-            Assert.AreEqual(expectedPaymentDue, actualPaymentDue, $"Expected a {paymentType} payment due of {expectedPaymentDue} but made a payment of {actualPaymentDue} for {periodName}");
+            Assert.AreEqual(expectedPaymentDue, Math.Round(actualPaymentDue,2), $"Expected a {paymentType} payment due of {expectedPaymentDue} but made a payment of {actualPaymentDue} for {periodName}");
         }
     }
 }

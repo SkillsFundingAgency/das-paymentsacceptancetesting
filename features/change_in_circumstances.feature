@@ -58,3 +58,25 @@ And the provider earnings and payments break down as follows:
 
 
 		
+
+
+			
+Scenario:Apprentice goes on a planned break midway through the learning episode and this is notified through the ILR
+ 
+Given the following commitments exist on 03/12/2017:
+      | commitment Id | ULN       | price effective date | planned end date | actual end date | agreed price |
+      | 1             | learner a | 01/09/2017           | 08/09/2018       | 30/10/2018      | 15000        |
+    
+When an ILR file is submitted on 03/12/2017 with the following data:
+		| ULN       | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date |
+		| learner a | 01/09/2017 | 08/09/2018       | 30/10/2017      | planned break     | 12000                | 01/09/2017                          | 3000                   | 01/09/2017                            |
+		| learner a | 03/01/2018 | 30/11/2018       |                 | continuing        | 12000                | 03/01/2018                          | 3000                   | 03/01/2018                            |
+
+		        
+Then the provider earnings and payments break down as follows:
+        | Type                          | 09/17 | 10/17 | 11/17 | 12/17 | 01/18  | 02/18  | ... | 08/18  |
+        | Provider Earned from SFA      | 1000  | 1000  | 0     | 0     | 909.09 | 909.09 | ... | 909.09 |
+        | Provider Paid by SFA          | 0     | 1000  | 1000  | 0     | 0      | 909.09 | ... | 909.09 |
+        | Employer Levy account debited | 0     | 1000  | 1000  | 0     | 0      | 909.09 | ... | 909.09 |
+        | SFA Levy employer budget      | 1000  | 1000  | 0     | 0     | 909.09 | 909.09 | ... | 909.09 |
+
