@@ -14,6 +14,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 
         internal static PaymentEntity[] GetAccountPaymentsForPeriod(long ukprn, long accountId, int year, int month, FundingSource fundingSource, EnvironmentVariables environmentVariables)
         {
+            var collectionPeriodMonth = month + 1;
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
             {
                 var query = @"SELECT * 
@@ -22,8 +23,18 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                                     AND CollectionPeriodMonth = @month 
                                     AND CollectionPeriodYear = @year 
                                     AND FundingSource =@fundingSource
-                                    AND CommitmentId IN (SELECT CommitmentId FROM dbo.DasCommitments WHERE AccountId = @accountId)";
-                return connection.Query<PaymentEntity>(query, new { ukprn, month, year, accountId,fundingSource }).ToArray();
+                                        AND CommitmentId IN (SELECT CommitmentId FROM dbo.DasCommitments WHERE AccountId = @accountId)
+                            UNION
+SELECT * 
+                                FROM Payments.Payments 
+                                WHERE UKPRN = @ukprn 
+                                    AND CollectionPeriodMonth = @collectionPeriodMonth 
+                                    AND CollectionPeriodYear = @year 
+                                    AND DeliveryMonth<CollectionPeriodMonth
+                                    AND FundingSource =@fundingSource
+                                    AND CommitmentId IN (SELECT CommitmentId FROM dbo.DasCommitments WHERE AccountId = @accountId)
+";
+                return connection.Query<PaymentEntity>(query, new { ukprn, month, year, collectionPeriodMonth, accountId,fundingSource }).ToArray();
             }
         }
 

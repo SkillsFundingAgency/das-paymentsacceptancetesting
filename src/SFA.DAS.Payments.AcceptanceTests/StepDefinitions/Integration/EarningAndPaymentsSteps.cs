@@ -44,6 +44,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
         public void WhenAnIlrFileIsSubmittedForTheFirstTimeInAMonthWithTheFollowingData(string month, Table table)
         {
             var submissionDate = new DateTime(int.Parse(month.Substring(3)) + 2000, int.Parse(month.Substring(0, 2)), 1).NextCensusDate();
+           
             ProcessIlrFileSubmissions(table, submissionDate);
         }
 
@@ -139,6 +140,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             SetupContexLearners(table);
 
             var startDate = firstSubmissionDate ?? StepDefinitionsContext.GetIlrStartDate().NextCensusDate();
+
+            if (firstSubmissionDate != null)
+                ScenarioContext.Current.Add("firstSubmissionDate", firstSubmissionDate);
+
             ProcessMonths(startDate);
         }
 
@@ -240,7 +245,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             var levyPaymentDate = periodDate.AddMonths(-1);
 
             var levyPayments = PaymentsDataHelper.GetAccountPaymentsForPeriod(ukprn, accountId,
-                levyPaymentDate.Year, levyPaymentDate.Month,FundingSource.Levy, EnvironmentVariables)
+                levyPaymentDate.Year, levyPaymentDate.Month,
+                        FundingSource.Levy, EnvironmentVariables)
                                ?? new PaymentEntity[0];
 
             var actualLevyPayment = levyPayments.Length == 0 ? 0m : levyPayments.Sum(p => p.Amount);
@@ -274,7 +280,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             var employerPaymentDate = periodDate.AddMonths(-1);
 
             var cofinancePayments = PaymentsDataHelper.GetAccountPaymentsForPeriod(ukprn, accountId,
-                employerPaymentDate.Year, employerPaymentDate.Month,FundingSource.CoInvestedEmployer, EnvironmentVariables)
+                employerPaymentDate.Year, employerPaymentDate.Month,
+                FundingSource.CoInvestedEmployer, EnvironmentVariables)
                                     ?? new PaymentEntity[0];
 
             var actualEmployerPayment = cofinancePayments.Sum(p => p.Amount);
