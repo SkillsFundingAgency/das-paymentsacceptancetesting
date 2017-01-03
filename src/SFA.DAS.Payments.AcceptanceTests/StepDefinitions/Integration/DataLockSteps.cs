@@ -2,6 +2,7 @@
 using System.Linq;
 using NUnit.Framework;
 using SFA.DAS.Payments.AcceptanceTests.Contexts;
+using SFA.DAS.Payments.AcceptanceTests.DataHelpers;
 using SFA.DAS.Payments.AcceptanceTests.Entities;
 using SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base;
 using TechTalk.SpecFlow;
@@ -27,6 +28,17 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             {
                 VerifyProviderDataLockMatchesForPeriod(period, matchesRow, provider);
             }
+        }
+
+        [Then(@"a (.*) error message will be produced")]
+        public void ThenADataLockErrorMessageWillBeProduced(string errorCode)
+        {
+            var provider = StepDefinitionsContext.GetDefaultProvider();
+
+            var validationError = ValidationErrorsDataHelper.GetValidationErrors(provider.Ukprn, EnvironmentVariables);
+
+            Assert.IsNotNull(validationError, "There is no validation error entity present");
+            Assert.IsTrue(validationError.Any(x => x.RuleId == errorCode));
         }
 
         private void VerifyProviderDataLockMatchesForPeriod(string period, TableRow matchesRow, Provider provider)
