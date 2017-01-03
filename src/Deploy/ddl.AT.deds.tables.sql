@@ -31,6 +31,7 @@ IF NOT EXISTS (SELECT [object_id] FROM sys.tables WHERE [name] = 'Logs' AND [sch
 			[LogDtTm] [datetime] NOT NULL,
 			[LogMessage] [nvarchar](max) NOT NULL,
 			[ExceptionDetails] [nvarchar](max) NULL,
+			[ScenarioTitle] [nvarchar](max) NULL
 			CONSTRAINT [PK__Logs__5E54864804C01630] PRIMARY KEY CLUSTERED 
 			(
 			[LogId] ASC
