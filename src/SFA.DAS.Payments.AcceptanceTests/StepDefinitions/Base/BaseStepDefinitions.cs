@@ -290,34 +290,36 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             };
         }
 
-        protected void SubmitIlr(long ukprn, Learner[] learners, string academicYear, DateTime date
-          , ProcessService processService, Dictionary<string, decimal> earnedByPeriod, Dictionary<string, DataLockMatch[]> dataLockMatchesByPeriod)
+        protected void SubmitIlr(Provider provider, 
+                                string academicYear, 
+                                DateTime date, 
+                                ProcessService processService)
         {
-            var submissionLearners = learners.Select(l => new Learner
+            var submissionLearners =provider.Learners.Select(l => new Learner
             {
                 Name = l.Name,
                 Uln = l.Uln,
-                LearnRefNumber=l.LearnRefNumber,
+                LearnRefNumber = l.LearnRefNumber,
                 LearningDelivery = new LearningDelivery
                 {
-                    LearningDeliveryFams=l.LearningDelivery.LearningDeliveryFams,
+                    LearningDeliveryFams = l.LearningDelivery.LearningDeliveryFams,
                     LearnerType = l.LearningDelivery.LearnerType,
                     StartDate = l.LearningDelivery.StartDate,
                     PlannedEndDate = l.LearningDelivery.PlannedEndDate,
-                    ActualEndDate = date >= l.LearningDelivery.ActualEndDate 
+                    ActualEndDate = date >= l.LearningDelivery.ActualEndDate
                                         ? l.LearningDelivery.ActualEndDate
                                         : null,
                     CompletionStatus = l.LearningDelivery.CompletionStatus,
                     StandardCode = l.LearningDelivery.StandardCode,
-                    FrameworkCode= l.LearningDelivery.FrameworkCode,
-                    PathwayCode=l.LearningDelivery.PathwayCode,
-                    ProgrammeType=l.LearningDelivery.ProgrammeType,
+                    FrameworkCode = l.LearningDelivery.FrameworkCode,
+                    PathwayCode = l.LearningDelivery.PathwayCode,
+                    ProgrammeType = l.LearningDelivery.ProgrammeType,
                     PriceEpisodes = l.LearningDelivery.PriceEpisodes
                 }
             }).ToArray();
 
             IlrSubmission submission = IlrBuilder.CreateAIlrSubmission()
-                .WithUkprn(ukprn)
+                .WithUkprn(provider.Ukprn)
                 .WithMultipleLearners()
                     .WithLearners(submissionLearners);
 
@@ -326,7 +328,39 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             var ilrStatusWatcher = new TestStatusWatcher(EnvironmentVariables, $"Submit ILR to {date:dd/MM/yy}");
             processService.RunIlrSubmission(submission, EnvironmentVariables, ilrStatusWatcher);
 
-            var periodEarnings = EarningsDataHelper.GetPeriodisedValuesForUkprn(ukprn, EnvironmentVariables).LastOrDefault() ?? new PeriodisedValuesEntity();
+            var periodEarnings = EarningsDataHelper.GetPeriodisedValuesForUkprnSummary(provider.Ukprn, EnvironmentVariables).LastOrDefault() ?? new PeriodisedValuesEntity();
+            PopulateEarnedByPeriodValues(academicYear, provider.EarnedByPeriod, periodEarnings);
+
+            //populate by Uln values
+            var periodEarningsByUln = EarningsDataHelper.GetPeriodisedValuesForUkprn(provider.Ukprn, EnvironmentVariables);
+            PopulateEarnedByPeriodByUln(academicYear, provider.EarnedByPeriodByUln, periodEarningsByUln);
+            
+
+            var dataLockMatches = DataLockDataHelper.GetDataLockMatchesForUkprn(provider.Ukprn, EnvironmentVariables) ?? new DataLockMatch[0];
+            provider.DataLockMatchesByPeriod.Add(date.GetPeriod(), dataLockMatches);
+        }
+
+        private static void PopulateEarnedByPeriodByUln(string academicYear, Dictionary<long, Dictionary<string, decimal>> earnedByPeriodByUln, PeriodisedValuesEntity[] periodEarnings)
+        {
+
+            foreach (var data in periodEarnings)
+            {
+                var earnedByPeriod = new Dictionary<string, decimal>();
+                if (!earnedByPeriodByUln.ContainsKey(data.Uln))
+                {
+                    earnedByPeriodByUln.Add(data.Uln, earnedByPeriod);
+                }
+                else
+                {
+                    earnedByPeriod = earnedByPeriodByUln[data.Uln];
+                }
+                PopulateEarnedByPeriodValues(academicYear, earnedByPeriod, data);
+            }
+            
+        }
+
+        private static void PopulateEarnedByPeriodValues(string academicYear, Dictionary<string, decimal> earnedByPeriod, PeriodisedValuesEntity periodEarnings)
+        {
             earnedByPeriod.AddOrUpdate("08/" + academicYear.Substring(0, 2), periodEarnings.Period_1);
             earnedByPeriod.AddOrUpdate("09/" + academicYear.Substring(0, 2), periodEarnings.Period_2);
             earnedByPeriod.AddOrUpdate("10/" + academicYear.Substring(0, 2), periodEarnings.Period_3);
@@ -339,11 +373,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             earnedByPeriod.AddOrUpdate("05/" + academicYear.Substring(2), periodEarnings.Period_10);
             earnedByPeriod.AddOrUpdate("06/" + academicYear.Substring(2), periodEarnings.Period_11);
             earnedByPeriod.AddOrUpdate("07/" + academicYear.Substring(2), periodEarnings.Period_12);
-
-            var dataLockMatches = DataLockDataHelper.GetDataLockMatchesForUkprn(ukprn, EnvironmentVariables) ?? new DataLockMatch[0];
-            dataLockMatchesByPeriod.Add(date.GetPeriod(), dataLockMatches);
         }
-        
+
         protected void SetupContextProviders(Table table)
         {
             if (table.ContainsColumn("Provider"))
@@ -388,6 +419,21 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                         TotalPrice = decimal.Parse(table.Rows[rowIndex]["Residual training price"]) + decimal.Parse(table.Rows[rowIndex]["Residual assessment price"]),
                         Tnp3 = decimal.Parse(table.Rows[rowIndex]["Residual training price"]),
                         Tnp4 = decimal.Parse(table.Rows[rowIndex]["Residual assessment price"])
+                    });
+                }
+                else if (table.Header.Contains("Total training price") && 
+                        table.Header.Contains("Total assessment price") &&
+                        !table.Header.Contains("Residual training price"))
+                {
+                    var startDate = DateTime.Parse(table.Rows[rowIndex]["start date"]);
+
+                    priceEpisodes.Add(new PriceEpisode
+                    {
+                        Id = GetPriceEpisodeIdentifier(startDate),
+                        StartDate = startDate,
+                        TotalPrice = decimal.Parse(table.Rows[rowIndex]["Total training price"]) + decimal.Parse(table.Rows[rowIndex]["Total assessment price"]),
+                        Tnp1 = decimal.Parse(table.Rows[rowIndex]["Total training price"]),
+                        Tnp2 = decimal.Parse(table.Rows[rowIndex]["Total assessment price"]) 
                     });
                 }
                 else

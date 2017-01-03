@@ -140,7 +140,7 @@ Feature: Provider earnings and payments where a learner changes employers
 
 
     Scenario:  Earnings and payments for a DAS learner, levy available, commitment entered for a new employer in the middle of the month, and there is a change to the employer and negotiated cost in the middle of a month in the ILR
-        Given The learner is programme only DAS 
+        Given The learner is programme only DAS
         And the ABC has a levy balance > agreed price for all months
         And the XYZ has a levy balance > agreed price for all months
         And the learner changes employers
