@@ -65,11 +65,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         
         public virtual void FeatureBackground()
         {
-#line 4
-#line 6
-testRunner.Given("Two learners are programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 7
-    testRunner.And("the apprenticeship funding band maximum for each learner is 17000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 3
+    #line 4
+        testRunner.Given("Two learners are programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 5
+        testRunner.And("the apprenticeship funding band maximum for each learner is 17000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
         }
         
@@ -80,10 +80,10 @@ testRunner.Given("Two learners are programme only DAS", ((string)(null)), ((Tech
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Earnings and payments for two DAS learners, levy is spent in priority order and a" +
                     "vailable for both learners", ((string[])(null)));
-#line 9
-this.ScenarioSetup(scenarioInfo);
-#line 4
-this.FeatureBackground();
+#line 7
+    this.ScenarioSetup(scenarioInfo);
+#line 3
+    this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table123 = new TechTalk.SpecFlow.Table(new string[] {
                         "08/17",
@@ -101,8 +101,8 @@ this.FeatureBackground();
                         "2000",
                         "2000",
                         "2000"});
-#line 11
-testRunner.Given("the employer\'s levy balance is:", ((string)(null)), table123, "Given ");
+#line 8
+        testRunner.Given("the employer\'s levy balance is:", ((string)(null)), table123, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table124 = new TechTalk.SpecFlow.Table(new string[] {
                         "priority",
@@ -122,8 +122,8 @@ testRunner.Given("the employer\'s levy balance is:", ((string)(null)), table123,
                         "01/08/2017",
                         "28/08/2018",
                         "15000"});
-#line 15
-testRunner.And("the following commitments exist on 03/12/2017:", ((string)(null)), table124, "And ");
+#line 11
+        testRunner.And("the following commitments exist on 03/12/2017:", ((string)(null)), table124, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table125 = new TechTalk.SpecFlow.Table(new string[] {
                         "ULN",
@@ -149,8 +149,8 @@ testRunner.And("the following commitments exist on 03/12/2017:", ((string)(null)
                         "continuing",
                         "12000",
                         "3000"});
-#line 20
-testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table125, "When ");
+#line 15
+        testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table125, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table126 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -242,8 +242,8 @@ testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:
                         "...",
                         "0",
                         "0"});
-#line 25
-testRunner.Then("the provider earnings and payments break down for ULN 123 as follows:", ((string)(null)), table126, "Then ");
+#line 19
+        testRunner.Then("the provider earnings and payments break down for ULN 123 as follows:", ((string)(null)), table126, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table127 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -335,8 +335,8 @@ testRunner.Then("the provider earnings and payments break down for ULN 123 as fo
                         "...",
                         "0",
                         "0"});
-#line 37
-testRunner.And("the provider earnings and payments break down for ULN 456 as follows:", ((string)(null)), table127, "And ");
+#line 30
+        testRunner.And("the provider earnings and payments break down for ULN 456 as follows:", ((string)(null)), table127, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table128 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -428,8 +428,8 @@ testRunner.And("the provider earnings and payments break down for ULN 456 as fol
                         "...",
                         "0",
                         "0"});
-#line 49
-testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table128, "And ");
+#line 41
+        testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table128, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -441,10 +441,10 @@ testRunner.And("the provider earnings and payments break down as follows:", ((st
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Earnings and payments for two DAS learners, levy is spent in priority order and i" +
                     "s available for one learner only", ((string[])(null)));
-#line 63
-this.ScenarioSetup(scenarioInfo);
-#line 4
-this.FeatureBackground();
+#line 54
+    this.ScenarioSetup(scenarioInfo);
+#line 3
+    this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table129 = new TechTalk.SpecFlow.Table(new string[] {
                         "08/17",
@@ -462,8 +462,8 @@ this.FeatureBackground();
                         "1000",
                         "1000",
                         "1000"});
-#line 65
-testRunner.Given("the employer\'s levy balance is:", ((string)(null)), table129, "Given ");
+#line 55
+        testRunner.Given("the employer\'s levy balance is:", ((string)(null)), table129, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table130 = new TechTalk.SpecFlow.Table(new string[] {
                         "priority",
@@ -483,8 +483,8 @@ testRunner.Given("the employer\'s levy balance is:", ((string)(null)), table129,
                         "01/08/2017",
                         "28/08/2018",
                         "15000"});
-#line 69
-testRunner.And("the following commitments exist on 03/12/2017:", ((string)(null)), table130, "And ");
+#line 58
+        testRunner.And("the following commitments exist on 03/12/2017:", ((string)(null)), table130, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table131 = new TechTalk.SpecFlow.Table(new string[] {
                         "ULN",
@@ -510,8 +510,8 @@ testRunner.And("the following commitments exist on 03/12/2017:", ((string)(null)
                         "continuing",
                         "12000",
                         "3000"});
-#line 74
-testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table131, "When ");
+#line 62
+        testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table131, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table132 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -603,8 +603,8 @@ testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:
                         "...",
                         "0",
                         "0"});
-#line 79
-testRunner.Then("the provider earnings and payments break down for ULN 123 as follows:", ((string)(null)), table132, "Then ");
+#line 66
+        testRunner.Then("the provider earnings and payments break down for ULN 123 as follows:", ((string)(null)), table132, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table133 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -696,8 +696,8 @@ testRunner.Then("the provider earnings and payments break down for ULN 123 as fo
                         "...",
                         "0",
                         "0"});
-#line 91
-testRunner.And("the provider earnings and payments break down for ULN 456 as follows:", ((string)(null)), table133, "And ");
+#line 77
+        testRunner.And("the provider earnings and payments break down for ULN 456 as follows:", ((string)(null)), table133, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table134 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -789,8 +789,8 @@ testRunner.And("the provider earnings and payments break down for ULN 456 as fol
                         "...",
                         "0",
                         "0"});
-#line 103
-testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table134, "And ");
+#line 88
+        testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table134, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -802,10 +802,10 @@ testRunner.And("the provider earnings and payments break down as follows:", ((st
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Earnings and payments for two DAS learners, levy is spent in priority order and t" +
                     "here is enough levy to fund one and a half learners", ((string[])(null)));
-#line 116
-this.ScenarioSetup(scenarioInfo);
-#line 4
-this.FeatureBackground();
+#line 101
+    this.ScenarioSetup(scenarioInfo);
+#line 3
+    this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table135 = new TechTalk.SpecFlow.Table(new string[] {
                         "08/17",
@@ -823,8 +823,8 @@ this.FeatureBackground();
                         "1500",
                         "1500",
                         "1500"});
-#line 118
-testRunner.Given("the employer\'s levy balance is:", ((string)(null)), table135, "Given ");
+#line 102
+        testRunner.Given("the employer\'s levy balance is:", ((string)(null)), table135, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table136 = new TechTalk.SpecFlow.Table(new string[] {
                         "priority",
@@ -844,8 +844,8 @@ testRunner.Given("the employer\'s levy balance is:", ((string)(null)), table135,
                         "01/08/2017",
                         "28/08/2018",
                         "15000"});
-#line 122
-testRunner.And("the following commitments exist on 03/12/2017:", ((string)(null)), table136, "And ");
+#line 105
+        testRunner.And("the following commitments exist on 03/12/2017:", ((string)(null)), table136, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table137 = new TechTalk.SpecFlow.Table(new string[] {
                         "ULN",
@@ -871,8 +871,8 @@ testRunner.And("the following commitments exist on 03/12/2017:", ((string)(null)
                         "continuing",
                         "12000",
                         "3000"});
-#line 127
-testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table137, "When ");
+#line 109
+        testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table137, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table138 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -964,8 +964,8 @@ testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:
                         "...",
                         "0",
                         "0"});
-#line 134
-testRunner.Then("the provider earnings and payments break down for ULN 123 as follows:", ((string)(null)), table138, "Then ");
+#line 113
+        testRunner.Then("the provider earnings and payments break down for ULN 123 as follows:", ((string)(null)), table138, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table139 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -1057,8 +1057,8 @@ testRunner.Then("the provider earnings and payments break down for ULN 123 as fo
                         "...",
                         "0",
                         "0"});
-#line 146
-testRunner.And("the provider earnings and payments break down for ULN 456 as follows:", ((string)(null)), table139, "And ");
+#line 124
+        testRunner.And("the provider earnings and payments break down for ULN 456 as follows:", ((string)(null)), table139, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table140 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -1150,8 +1150,8 @@ testRunner.And("the provider earnings and payments break down for ULN 456 as fol
                         "...",
                         "0",
                         "0"});
-#line 158
-testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table140, "And ");
+#line 135
+        testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table140, "And ");
 #line hidden
             this.ScenarioCleanup();
         }

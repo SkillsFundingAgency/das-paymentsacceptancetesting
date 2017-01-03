@@ -9,52 +9,39 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 {
     internal static class PaymentsDataHelper
     {
-
-
-
         internal static PaymentEntity[] GetAccountPaymentsForPeriod(long ukprn, long accountId, long? uln, int year, int month, FundingSource fundingSource, EnvironmentVariables environmentVariables)
         {
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
             {
-                var query = @"SELECT * 
+                var query = @"SELECT p.* 
                                 FROM Payments.Payments p
-                                JOIN dbo.DasCommitments c On c.CommitmentId = p.CommitmentId
+                                    JOIN PaymentsDue.RequiredPayments rp ON rp.Id = p.RequiredPaymentId 
                                 WHERE p.UKPRN = @ukprn 
                                     AND p.CollectionPeriodMonth = @month 
                                     AND p.CollectionPeriodYear = @year 
                                     AND p.FundingSource = @fundingSource
-                                    AND c.AccountId = @accountId";
-                query = uln.HasValue ? query + "   AND c.ULN = " + uln.Value : query;
-                return connection.Query<PaymentEntity>(query, new { ukprn, month, year, accountId, fundingSource }).ToArray();
+                                    AND rp.AccountId = @accountId";
+
+                query = uln.HasValue ? query + " AND rp.Uln = @uln" : query;
+                return connection.Query<PaymentEntity>(query, new { ukprn, month, year, accountId, fundingSource, uln }).ToArray();
             }
-
-
         }
 
         internal static PaymentEntity[] GetPaymentsForPeriod(long ukprn, long? uln, int year, int month, FundingSource fundingSource, EnvironmentVariables environmentVariables)
         {
-            if (uln.HasValue)
+            using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
             {
-                using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
-                {
-                    var query = "SELECT * FROM Payments.Payments p " +
-                        " JOIN dbo.DasCommitments c On c.CommitmentId = p.CommitmentId" +
-                        " WHERE p.UKPRN = @ukprn AND CollectionPeriodMonth = @month AND " +
-                        " CollectionPeriodYear = @year AND FundingSource = @fundingSource AND " +
-                        " c.ULN = @uln";
-                    return connection.Query<PaymentEntity>(query, new { ukprn, month, year, fundingSource,uln = uln.Value }).ToArray();
-                }
-            }
-            else
-            {
-                using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
-                {
-                    var query = "SELECT * FROM Payments.Payments WHERE UKPRN = @ukprn AND CollectionPeriodMonth = @month AND CollectionPeriodYear = @year AND FundingSource = @fundingSource";
-                    return connection.Query<PaymentEntity>(query, new { ukprn, month, year, fundingSource }).ToArray();
-                }
-            }
+                var query = @"SELECT p.* 
+                                    FROM Payments.Payments p 
+                                        JOIN PaymentsDue.RequiredPayments rp ON rp.Id = p.RequiredPaymentId 
+                                    WHERE p.UKPRN = @ukprn 
+                                        AND p.CollectionPeriodMonth = @month 
+                                        AND p.CollectionPeriodYear = @year 
+                                        AND p.FundingSource = @fundingSource";
 
+                query = uln.HasValue ? query + " AND rp.Uln = @uln" : query;
+                return connection.Query<PaymentEntity>(query, new { ukprn, month, year, fundingSource, uln }).ToArray();
+            }
         }
-
     }
 }

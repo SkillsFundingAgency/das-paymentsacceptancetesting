@@ -132,9 +132,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
         }
 
         [Then(@"the provider earnings and payments break down for ULN (.*) as follows:")]
-        public void ThenTheProviderEarningsAndPaymentsBreakDownForULNAsFollows(long uln, Table table)
+        public void ThenTheProviderEarningsAndPaymentsBreakDownForAUlnAsFollows(long uln, Table table)
         {
-            var provider = StepDefinitionsContext.Providers.SingleOrDefault();
+            var provider = StepDefinitionsContext.Providers.Single();
 
             Assert.IsTrue(provider.EarnedByPeriodByUln.ContainsKey(uln));
 
