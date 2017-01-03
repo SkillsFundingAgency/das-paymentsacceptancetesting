@@ -67,11 +67,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
         }
 
         [When(@"the Contract type in the ILR is:")]
-        public void WhenTheContractTypeInTheILRIs(Table table)
+        public void WhenTheContractTypeInTheIlrIs(Table table)
         {
-            Table learnerTable = null;
+            Table learnerTable;
 
-            ScenarioContext.Current.TryGetValue<Table>("learners",out learnerTable);
+            ScenarioContext.Current.TryGetValue("learners",out learnerTable);
 
             for (var rowIndex = 0; rowIndex < table.RowCount; rowIndex++)
             {
@@ -84,8 +84,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                 StepDefinitionsContext.ReferenceDataContext.AddLearningDeliveryFam(famCode);
             }
             ProcessIlrFileSubmissions(learnerTable);
-
-            //ScenarioContext.Current.Pending();
         }
 
 
@@ -131,17 +129,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                 VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, TransactionType.Completion, completionRow);
                 VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, TransactionType.Balancing, balancingRow);
             }
-        }
-
-        [Then(@"a (.*) error message will be produced")]
-        public void ThenADLOCK_ErrorMessageWillBeProduced(string errorCode)
-        {
-            var provider = StepDefinitionsContext.GetDefaultProvider();
-
-            var validationError = ValidationErrorsDataHelper.GetValidationErrors(provider.Ukprn, EnvironmentVariables);
-
-            Assert.IsNotNull(validationError, "There is no validation error entity present");
-            Assert.IsTrue(validationError.Any(x => x.RuleId == errorCode));
         }
 
         private void ProcessIlrFileSubmissions(Table table, DateTime? firstSubmissionDate = null)
