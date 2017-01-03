@@ -67,11 +67,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
         }
 
         [When(@"the Contract type in the ILR is:")]
-        public void WhenTheContractTypeInTheILRIs(Table table)
+        public void WhenTheContractTypeInTheIlrIs(Table table)
         {
-            Table learnerTable = null;
+            Table learnerTable;
 
-            ScenarioContext.Current.TryGetValue<Table>("learners",out learnerTable);
+            ScenarioContext.Current.TryGetValue("learners",out learnerTable);
 
             for (var rowIndex = 0; rowIndex < table.RowCount; rowIndex++)
             {
@@ -84,8 +84,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                 StepDefinitionsContext.ReferenceDataContext.AddLearningDeliveryFam(famCode);
             }
             ProcessIlrFileSubmissions(learnerTable);
-
-            //ScenarioContext.Current.Pending();
         }
 
 
