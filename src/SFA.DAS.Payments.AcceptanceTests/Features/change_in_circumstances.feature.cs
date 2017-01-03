@@ -373,7 +373,7 @@ this.FeatureBackground();
                         "learner a",
                         "01/09/2017",
                         "08/09/2018",
-                        "30/10/2018",
+                        "31/10/2018",
                         "15000"});
 #line 66
 testRunner.Given("the following commitments exist on 03/12/2017:", ((string)(null)), table9, "Given ");
@@ -392,7 +392,7 @@ testRunner.Given("the following commitments exist on 03/12/2017:", ((string)(nul
                         "learner a",
                         "01/09/2017",
                         "08/09/2018",
-                        "30/10/2017",
+                        "31/10/2017",
                         "planned break",
                         "12000",
                         "01/09/2017",
@@ -401,7 +401,7 @@ testRunner.Given("the following commitments exist on 03/12/2017:", ((string)(nul
             table10.AddRow(new string[] {
                         "learner a",
                         "03/01/2018",
-                        "30/11/2018",
+                        "08/11/2018",
                         "",
                         "continuing",
                         "12000",
@@ -427,10 +427,10 @@ testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:
                         "1000",
                         "0",
                         "0",
-                        "909.09",
-                        "909.09",
+                        "1000",
+                        "1000",
                         "...",
-                        "909.09"});
+                        "1000"});
             table11.AddRow(new string[] {
                         "Provider Paid by SFA",
                         "0",
@@ -438,9 +438,9 @@ testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:
                         "1000",
                         "0",
                         "0",
-                        "909.09",
+                        "1000",
                         "...",
-                        "909.09"});
+                        "1000"});
             table11.AddRow(new string[] {
                         "Employer Levy account debited",
                         "0",
@@ -448,19 +448,19 @@ testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:
                         "1000",
                         "0",
                         "0",
-                        "909.09",
+                        "1000",
                         "...",
-                        "909.09"});
+                        "1000"});
             table11.AddRow(new string[] {
                         "SFA Levy employer budget",
                         "1000",
                         "1000",
                         "0",
                         "0",
-                        "909.09",
-                        "909.09",
+                        "1000",
+                        "1000",
                         "...",
-                        "909.09"});
+                        "1000"});
 #line 76
 testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table11, "Then ");
 #line hidden
