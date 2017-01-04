@@ -124,8 +124,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                     PathwayCode = IlrBuilder.Defaults.PathwayCode,
                     Priority = commitmentPriority,
                     VersionId = "1",
-                    PaymentStatus = (int)CommitmentPaymentStatus.Active,
-                    PaymentStatusDescription = CommitmentPaymentStatus.Active.ToString(),
+                    PaymentStatus = (int)commitment.Status,
+                    PaymentStatusDescription = commitment.Status.ToString(),
                     Payable = true
                 },
                 EnvironmentVariables);
@@ -165,8 +165,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                         PathwayCode = IlrBuilder.Defaults.PathwayCode,
                         Priority = commitment.Priority,
                         VersionId = "1",
-                        PaymentStatus = (int) CommitmentPaymentStatus.Active,
-                        PaymentStatusDescription = CommitmentPaymentStatus.Active.ToString(),
+                        PaymentStatus = (int) commitment.Status,
+                        PaymentStatusDescription = commitment.Status.ToString(),
                         Payable = true
                     },
                     EnvironmentVariables);
