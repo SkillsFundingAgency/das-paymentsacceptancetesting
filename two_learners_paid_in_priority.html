@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"[]>
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>2 learners, paid in priority order</title>
+    <link rel="stylesheet" href="css/master.css" type="text/css" />
+    <link rel="stylesheet" href="css/print.css" type="text/css" media="print" />
+    <script src="js/jquery.js" type="text/javascript"></script>
+    <script src="js/scripts.js" type="text/javascript"></script>
+    <script type="text/javascript">
+$(document).ready(function() {
+  initializeToc();
+});
+</script>
+    <!-- We are using Font Awesome - http://fortawesome.github.com/Font-Awesome - licensed under CC BY 3.0 -->
+  </head>
+  <body>
+    <div id="container">
+      <div id="top" />
+      <div id="toc">
+        <p class="tocCollapser" title="Collapse Table of Content">«</p>
+        <ul class="features">
+          <li class="file" id="root">
+            <a href="index.html">Home</a>
+          </li>
+          <li class="file">
+            <span class="current">2 learners, paid in priority order</span>
+            <span class="float-right">
+              <i class="icon-minus-sign failed" title="Failed"> </i>
+            </span>
+          </li>
+          <li class="file">
+            <a href="earnings_calc.html">Amount due is calculated based on previously earned amount</a>
+            <span class="float-right">
+              <i class="icon-minus-sign failed" title="Failed"> </i>
+            </span>
+          </li>
+          <li class="file">
+            <a href="definitions.html">Business definitions</a>
+            <span class="float-right">
+              <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
+            </span>
+          </li>
+          <li class="file">
+            <a href="payments_calc.html">Calculate the payments</a>
+            <span class="float-right">
+              <i class="icon-minus-sign failed" title="Failed"> </i>
+            </span>
+          </li>
+          <li class="file">
+            <a href="datalock_errors.html">Datalock validation fails for different reasons</a>
+            <span class="float-right">
+              <i class="icon-minus-sign failed" title="Failed"> </i>
+            </span>
+          </li>
+          <li class="file">
+            <a href="employer_stops_payments.html">Employer stops payments on a commitment</a>
+            <span class="float-right">
+              <i class="icon-ok passed" title="Successful"> </i>
+            </span>
+          </li>
+          <li class="file">
+            <a href="learner_changes_employer.html">Provider earnings and payments where a learner changes employers</a>
+            <span class="float-right">
+              <i class="icon-ok passed" title="Successful"> </i>
+            </span>
+          </li>
+          <li class="file">
+            <a href="learner_finishes_early.html">Provider earnings and payments where learner completes earlier than planned and is funded by levy</a>
+            <span class="float-right">
+              <i class="icon-ok passed" title="Successful"> </i>
+            </span>
+          </li>
+          <li class="file">
+            <a href="learner_finishes_late.html">Provider earnings and payments where learner completes later than planned and is funded by levy</a>
+            <span class="float-right">
+              <i class="icon-ok passed" title="Successful"> </i>
+            </span>
+          </li>
+          <li class="file">
+            <a href="learner_finishes_on_time.html">Provider earnings and payments where learner completes on time and is funded by levy</a>
+            <span class="float-right">
+              <i class="icon-minus-sign failed" title="Failed"> </i>
+            </span>
+          </li>
+          <li class="file">
+            <a href="ILR_is_submitted_late.html">The ILR is submitted late</a>
+            <span class="float-right">
+              <i class="icon-minus-sign failed" title="Failed"> </i>
+            </span>
+          </li>
+        </ul>
+      </div>
+      <div id="feature">
+        <div class="float-right">
+          <i class="icon-minus-sign failed" title="Failed"> </i>
+        </div>
+        <h1>2 learners, paid in priority order</h1>
+        <ul id="scenarios">
+          <li class="scenario">
+            <div class="float-right">
+              <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
+            </div>
+            <div class="scenario-heading">
+              <h2></h2>
+            </div>
+            <div class="steps">
+              <ul>
+                <li class="step">
+                  <span class="keyword">Given </span>Two learners are programme only DAS</li>
+                <li class="step">
+                  <span class="keyword">And </span>the apprenticeship funding band maximum for each learner is 17000</li>
+              </ul>
+            </div>
+          </li>
+          <li class="scenario">
+            <div class="float-right">
+              <i class="icon-minus-sign failed" title="Failed"> </i>
+            </div>
+            <div class="scenario-heading" id="earnings-and-payments-for-two-das-learners-levy-is-spent-in-priority-order-and-available-for-both-learners">
+              <h2>Earnings and payments for two DAS learners, levy is spent in priority order and available for both learners</h2>
+            </div>
+            <div class="steps">
+              <ul>
+                <li class="step">
+                  <span class="keyword">Given </span>the employer's levy balance is:<div class="table_container"><table class="datatable"><thead><tr><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>...</th><th>08/18</th><th>09/18</th><th> </th></tr></thead><tbody><tr><td>2000</td><td>2000</td><td>2000</td><td>2000</td><td>2000</td><td>2000</td><td>2000</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the following commitments exist on 03/12/2017:<div class="table_container"><table class="datatable"><thead><tr><th>priority</th><th>ULN</th><th>Price effective date</th><th>planned end date</th><th>Agreed Price</th><th> </th></tr></thead><tbody><tr><td>1</td><td>123</td><td>01/08/2017</td><td>28/08/2018</td><td>15000</td></tr><tr><td>2</td><td>456</td><td>01/08/2017</td><td>28/08/2018</td><td>15000</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">When </span>an ILR file is submitted on 03/12/2017 with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>Total training price</th><th>Total assessment price</th><th> </th></tr></thead><tbody><tr><td>123</td><td>01/08/2017</td><td>28/08/2018</td><td></td><td>continuing</td><td>12000</td><td>3000</td></tr><tr><td>456</td><td>01/08/2017</td><td>28/08/2018</td><td></td><td>continuing</td><td>12000</td><td>3000</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">Then </span>the provider earnings and payments break down for ULN 123 as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>...</th><th>07/18</th><th>08/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>1000</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>1000</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>1000</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Levy account debited</td><td>0</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>1000</td></tr><tr><td>SFA Levy employer budget</td><td>1000</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>0</td></tr><tr><td>SFA Levy co-funded budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>SFA non-Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the provider earnings and payments break down for ULN 456 as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>...</th><th>07/18</th><th>08/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>1000</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>1000</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>1000</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Levy account debited</td><td>0</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>1000</td></tr><tr><td>SFA Levy employer budget</td><td>1000</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>0</td></tr><tr><td>SFA Levy co-funded budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>SFA non-Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>...</th><th>07/18</th><th>08/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>2000</td><td>2000</td><td>2000</td><td>2000</td><td>...</td><td>2000</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>2000</td><td>2000</td><td>2000</td><td>2000</td><td>...</td><td>2000</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>2000</td><td>2000</td><td>2000</td><td>...</td><td>2000</td><td>2000</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Levy account debited</td><td>0</td><td>2000</td><td>2000</td><td>2000</td><td>...</td><td>2000</td><td>2000</td></tr><tr><td>SFA Levy employer budget</td><td>2000</td><td>2000</td><td>2000</td><td>2000</td><td>...</td><td>2000</td><td>0</td></tr><tr><td>SFA Levy co-funded budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>SFA non-Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr></tbody></table></div></li>
+              </ul>
+            </div>
+            <a class="scenario-link" href="javascript:showImageLink('earnings-and-payments-for-two-das-learners-levy-is-spent-in-priority-order-and-available-for-both-learners')" title="Copy scenario link to clipboard.">
+              <i class="icon-link"> </i>
+            </a>
+          </li>
+          <li class="scenario">
+            <div class="float-right">
+              <i class="icon-minus-sign failed" title="Failed"> </i>
+            </div>
+            <div class="scenario-heading" id="earnings-and-payments-for-two-das-learners-levy-is-spent-in-priority-order-and-is-available-for-one-learner-only">
+              <h2>Earnings and payments for two DAS learners, levy is spent in priority order and is available for one learner only</h2>
+            </div>
+            <div class="steps">
+              <ul>
+                <li class="step">
+                  <span class="keyword">Given </span>the employer's levy balance is:<div class="table_container"><table class="datatable"><thead><tr><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>...</th><th>08/18</th><th>09/18</th><th> </th></tr></thead><tbody><tr><td>1000</td><td>1000</td><td>1000</td><td>1000</td><td>1000</td><td>1000</td><td>1000</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the following commitments exist on 03/12/2017:<div class="table_container"><table class="datatable"><thead><tr><th>priority</th><th>ULN</th><th>Price effective date</th><th>planned end date</th><th>Agreed Price</th><th> </th></tr></thead><tbody><tr><td>1</td><td>123</td><td>01/08/2017</td><td>28/08/2018</td><td>15000</td></tr><tr><td>2</td><td>456</td><td>01/08/2017</td><td>28/08/2018</td><td>15000</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">When </span>an ILR file is submitted on 03/12/2017 with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>Total training price</th><th>Total assessment price</th><th> </th></tr></thead><tbody><tr><td>123</td><td>01/08/2017</td><td>28/08/2018</td><td></td><td>continuing</td><td>12000</td><td>3000</td></tr><tr><td>456</td><td>01/08/2017</td><td>28/08/2018</td><td></td><td>continuing</td><td>12000</td><td>3000</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">Then </span>the provider earnings and payments break down for ULN 123 as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>...</th><th>07/18</th><th>08/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>1000</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>1000</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>1000</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Levy account debited</td><td>0</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>1000</td></tr><tr><td>SFA Levy employer budget</td><td>1000</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>0</td></tr><tr><td>SFA Levy co-funded budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>SFA non-Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the provider earnings and payments break down for ULN 456 as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>...</th><th>07/18</th><th>08/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>1000</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>900</td><td>900</td><td>900</td><td>900</td><td>...</td><td>900</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>100</td><td>100</td><td>100</td><td>100</td><td>...</td><td>100</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>900</td><td>900</td><td>900</td><td>...</td><td>900</td><td>900</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>100</td><td>100</td><td>100</td><td>...</td><td>100</td><td>100</td></tr><tr><td>Levy account debited</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>SFA Levy employer budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>SFA Levy co-funded budget</td><td>900</td><td>900</td><td>900</td><td>900</td><td>...</td><td>900</td><td>0</td></tr><tr><td>SFA non-Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>...</th><th>07/18</th><th>08/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>2000</td><td>2000</td><td>2000</td><td>2000</td><td>...</td><td>2000</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>1900</td><td>1900</td><td>1900</td><td>1900</td><td>...</td><td>1900</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>100</td><td>100</td><td>100</td><td>100</td><td>...</td><td>100</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>1900</td><td>1900</td><td>1900</td><td>...</td><td>1900</td><td>1900</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>100</td><td>100</td><td>100</td><td>...</td><td>100</td><td>100</td></tr><tr><td>Levy account debited</td><td>0</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>1000</td></tr><tr><td>SFA Levy employer budget</td><td>1000</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>0</td></tr><tr><td>SFA Levy co-funded budget</td><td>900</td><td>900</td><td>900</td><td>900</td><td>...</td><td>900</td><td>0</td></tr><tr><td>SFA non-Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr></tbody></table></div></li>
+              </ul>
+            </div>
+            <a class="scenario-link" href="javascript:showImageLink('earnings-and-payments-for-two-das-learners-levy-is-spent-in-priority-order-and-is-available-for-one-learner-only')" title="Copy scenario link to clipboard.">
+              <i class="icon-link"> </i>
+            </a>
+          </li>
+          <li class="scenario">
+            <div class="float-right">
+              <i class="icon-minus-sign failed" title="Failed"> </i>
+            </div>
+            <div class="scenario-heading" id="earnings-and-payments-for-two-das-learners-levy-is-spent-in-priority-order-and-there-is-enough-levy-to-fund-one-and-a-half-learners">
+              <h2>Earnings and payments for two DAS learners, levy is spent in priority order and there is enough levy to fund one and a half learners</h2>
+            </div>
+            <div class="steps">
+              <ul>
+                <li class="step">
+                  <span class="keyword">Given </span>the employer's levy balance is:<div class="table_container"><table class="datatable"><thead><tr><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>...</th><th>08/18</th><th>09/18</th><th> </th></tr></thead><tbody><tr><td>1500</td><td>1500</td><td>1500</td><td>1500</td><td>1500</td><td>1500</td><td>1500</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the following commitments exist on 03/12/2017:<div class="table_container"><table class="datatable"><thead><tr><th>priority</th><th>ULN</th><th>Price effective date</th><th>planned end date</th><th>Agreed Price</th><th> </th></tr></thead><tbody><tr><td>1</td><td>123</td><td>01/08/2017</td><td>28/08/2018</td><td>15000</td></tr><tr><td>2</td><td>456</td><td>01/08/2017</td><td>28/08/2018</td><td>15000</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">When </span>an ILR file is submitted on 03/12/2017 with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>Total training price</th><th>Total assessment price</th><th> </th></tr></thead><tbody><tr><td>123</td><td>01/08/2017</td><td>28/08/2018</td><td></td><td>continuing</td><td>12000</td><td>3000</td></tr><tr><td>456</td><td>01/08/2017</td><td>28/08/2018</td><td></td><td>continuing</td><td>12000</td><td>3000</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">Then </span>the provider earnings and payments break down for ULN 123 as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>...</th><th>07/18</th><th>08/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>1000</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>1000</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>1000</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Levy account debited</td><td>0</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>1000</td></tr><tr><td>SFA Levy employer budget</td><td>1000</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>0</td></tr><tr><td>SFA Levy co-funded budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>SFA non-Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the provider earnings and payments break down for ULN 456 as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>...</th><th>07/18</th><th>08/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>1000</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>950</td><td>950</td><td>950</td><td>950</td><td>...</td><td>950</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>50</td><td>50</td><td>50</td><td>50</td><td>...</td><td>50</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>950</td><td>950</td><td>950</td><td>...</td><td>950</td><td>950</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>50</td><td>50</td><td>50</td><td>...</td><td>50</td><td>50</td></tr><tr><td>Levy account debited</td><td>0</td><td>500</td><td>500</td><td>500</td><td>...</td><td>500</td><td>500</td></tr><tr><td>SFA Levy employer budget</td><td>500</td><td>500</td><td>500</td><td>500</td><td>...</td><td>500</td><td>0</td></tr><tr><td>SFA Levy co-funded budget</td><td>450</td><td>450</td><td>450</td><td>450</td><td>...</td><td>450</td><td>0</td></tr><tr><td>SFA non-Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>...</th><th>07/18</th><th>08/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>2000</td><td>2000</td><td>2000</td><td>2000</td><td>...</td><td>2000</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>1950</td><td>1950</td><td>1950</td><td>1950</td><td>...</td><td>1950</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>50</td><td>50</td><td>50</td><td>50</td><td>...</td><td>50</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>1950</td><td>1950</td><td>1950</td><td>...</td><td>1950</td><td>1950</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>50</td><td>50</td><td>50</td><td>...</td><td>50</td><td>50</td></tr><tr><td>Levy account debited</td><td>0</td><td>1500</td><td>1500</td><td>1500</td><td>...</td><td>1500</td><td>1500</td></tr><tr><td>SFA Levy employer budget</td><td>1500</td><td>1500</td><td>1500</td><td>1500</td><td>...</td><td>1500</td><td>0</td></tr><tr><td>SFA Levy co-funded budget</td><td>450</td><td>450</td><td>450</td><td>450</td><td>...</td><td>450</td><td>0</td></tr><tr><td>SFA non-Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr></tbody></table></div></li>
+              </ul>
+            </div>
+            <a class="scenario-link" href="javascript:showImageLink('earnings-and-payments-for-two-das-learners-levy-is-spent-in-priority-order-and-there-is-enough-levy-to-fund-one-and-a-half-learners')" title="Copy scenario link to clipboard.">
+              <i class="icon-link"> </i>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div id="footer">
+        <p>Generated on: 4 January 2017 14:25:11</p>
+        <p>Produced by Pickles, version 2.8.2.0</p>
+      </div>
+    </div>
+  </body>
+</html>
