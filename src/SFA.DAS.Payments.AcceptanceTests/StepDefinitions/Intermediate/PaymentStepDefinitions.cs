@@ -75,7 +75,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
             //Get the due amount 
-            var levyEntity = PaymentsDataHelper.GetPaymentsForPeriod(StepDefinitionsContext.GetDefaultProvider().Ukprn,
+            var levyEntity = PaymentsDataHelper.GetPaymentsForPeriod(StepDefinitionsContext.GetDefaultProvider().Ukprn,null,
                                                                         2016,
                                                                         09,
                                                                         FundingSource.Levy,
@@ -100,7 +100,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
             //Get the due amount 
-            var governmentDueEntity = PaymentsDataHelper.GetPaymentsForPeriod(StepDefinitionsContext.GetDefaultProvider().Ukprn,
+            var governmentDueEntity = PaymentsDataHelper.GetPaymentsForPeriod(StepDefinitionsContext.GetDefaultProvider().Ukprn,null,
                                                                         2016,
                                                                         09,
                                                                         FundingSource.CoInvestedSfa,
@@ -125,7 +125,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
             //Get the due amount 
-            var employerPaymentEntity = PaymentsDataHelper.GetPaymentsForPeriod(StepDefinitionsContext.GetDefaultProvider().Ukprn,
+            var employerPaymentEntity = PaymentsDataHelper.GetPaymentsForPeriod(StepDefinitionsContext.GetDefaultProvider().Ukprn,null,
                                                                         2016,
                                                                         09,
                                                                         FundingSource.CoInvestedEmployer,

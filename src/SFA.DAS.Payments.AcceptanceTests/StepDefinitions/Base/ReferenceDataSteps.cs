@@ -31,6 +31,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             ReferenceDataContext.LearnerType = LearnerType.ProgrammeOnlyNonDas;
         }
 
+        [Given(@"Two learners are programme only DAS")]
+        public void GivenTwoLearnersAreProgrammeOnlyDAS()
+        {
+            ReferenceDataContext.LearnerType = LearnerType.ProgrammeOnlyDas;
+        }
+
+
         [Given(@"the agreed price is (.*)")]
         public void GivenTheAgreedPriceIs(decimal agreedPrice)
         {
@@ -49,6 +56,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             ReferenceDataContext.FundingMaximum = fundingMaximum;
         }
 
+     
         [Given(@"levy balance = (.*) for all months")]
         public void GivenLevyBalanceAgreedPrice(int levyBalance)
         {
@@ -69,6 +77,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             for (var colIndex = 0; colIndex < table.Header.Count; colIndex++)
             {
                 var period = table.Header.ElementAt(colIndex);
+              
                 var balance = decimal.Parse(table.Rows[0][period]);
 
                 monthlyAccountBalance.Add(period, balance);
