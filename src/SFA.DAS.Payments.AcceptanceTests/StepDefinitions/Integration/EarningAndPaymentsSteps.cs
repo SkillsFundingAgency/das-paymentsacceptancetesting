@@ -9,6 +9,7 @@ using SFA.DAS.Payments.AcceptanceTests.Enums;
 using SFA.DAS.Payments.AcceptanceTests.ExecutionEnvironment;
 using SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base;
 using TechTalk.SpecFlow;
+using SFA.DAS.Payments.AcceptanceTests.Entities;
 
 namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
 {
@@ -58,12 +59,40 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             ProcessIlrFileSubmissions(table);
         }
 
+        [When(@"an ILR file is submitted on (.*) with the following data:"),Scope(Scenario = "Earnings and payments for a DAS learner, levy available, where a learner switches from DAS to Non Das employer at the end of month")]
+        public void WhenAnIlrFileIsSubmittedOnADayWithTheFollowingDataNoSubmission(string date, Table table)
+        {
+            ScenarioContext.Current.Add("learners", table);
+            
+        }
+
+        [When(@"the Contract type in the ILR is:")]
+        public void WhenTheContractTypeInTheIlrIs(Table table)
+        {
+            Table learnerTable;
+
+            ScenarioContext.Current.TryGetValue("learners",out learnerTable);
+
+            for (var rowIndex = 0; rowIndex < table.RowCount; rowIndex++)
+            {
+                var famCode = new LearningDeliveryFam
+                {
+                    FamCode = table.Rows[rowIndex]["contract type"] == "DAS" ? 1 : 2,
+                    StartDate = DateTime.Parse(table.Rows[rowIndex]["date from"]),
+                    EndDate = DateTime.Parse(table.Rows[rowIndex]["date to"])
+                };
+                StepDefinitionsContext.ReferenceDataContext.AddLearningDeliveryFam(famCode);
+            }
+            ProcessIlrFileSubmissions(learnerTable);
+        }
+
+
         [Then(@"the provider earnings and payments break down as follows:")]
         public void ThenTheProviderEarningsBreakDownAsFollows(Table table)
         {
             var provider = StepDefinitionsContext.Providers[0];
 
-            VerifyProviderEarningsAndPayments(provider.Ukprn, table);
+            VerifyProviderEarningsAndPayments(provider.Ukprn,null, table);
         }
 
         [Then(@"the earnings and payments break down for (.*) is as follows:")]
@@ -71,7 +100,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
         {
             var provider = StepDefinitionsContext.Providers.Single(p => p.Name == providerName);
 
-            VerifyProviderEarningsAndPayments(provider.Ukprn, table);
+            VerifyProviderEarningsAndPayments(provider.Ukprn,null, table);
         }
 
         [Then(@"the transaction types for the payments are:")]
@@ -101,6 +130,17 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                 VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, TransactionType.Balancing, balancingRow);
             }
         }
+
+        [Then(@"the provider earnings and payments break down for ULN (.*) as follows:")]
+        public void ThenTheProviderEarningsAndPaymentsBreakDownForAUlnAsFollows(long uln, Table table)
+        {
+            var provider = StepDefinitionsContext.Providers.Single();
+
+            Assert.IsTrue(provider.EarnedByPeriodByUln.ContainsKey(uln));
+
+            VerifyProviderEarningsAndPayments(provider.Ukprn,uln, table);
+        }
+
 
         private void ProcessIlrFileSubmissions(Table table, DateTime? firstSubmissionDate = null)
         {
@@ -135,7 +175,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
 
                 foreach (var provider in StepDefinitionsContext.Providers)
                 {
-                    SubmitIlr(provider.Ukprn, provider.Learners, academicYear, date, processService, provider.EarnedByPeriod, provider.DataLockMatchesByPeriod);
+                    SubmitIlr(provider, 
+                                academicYear, 
+                                date, 
+                                processService);
                 }
 
                 SubmitMonthEnd(date, processService);
@@ -144,7 +187,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             }
         }
        
-        private void VerifyProviderEarningsAndPayments(long ukprn, Table table)
+        private void VerifyProviderEarningsAndPayments(long ukprn, long? uln , Table table)
         {
             
             var earnedRow = table.Rows.RowWithKey(RowKeys.Earnings);
@@ -163,8 +206,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                 var periodDate = new DateTime(periodYear, periodMonth, 1).NextCensusDate();
 
 
-                VerifyEarningsForPeriod(ukprn, periodName, colIndex, earnedRow);
-                VerifyGovtCofinancePayments(ukprn, periodName, periodDate, colIndex, govtCofundRow);
+                VerifyEarningsForPeriod(ukprn,uln, periodName, colIndex, earnedRow);
+                VerifyGovtCofinancePayments(ukprn,uln, periodName, periodDate, colIndex, govtCofundRow);
 
                 foreach (var employer in StepDefinitionsContext.ReferenceDataContext.Employers)
                 {
@@ -174,20 +217,20 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                     var employerCofundRow = table.Rows.RowWithKey(RowKeys.DefaultCoFinanceEmployerPayment)
                                             ?? table.Rows.RowWithKey($"{RowKeys.CoFinanceEmployerPayment}{employer.Name}");
 
-                    VerifyLevyPayments(ukprn, periodName, periodDate, employer.AccountId, colIndex, levyPaidRow);
-                    VerifyEmployerCofinancePayments(ukprn, periodName, periodDate, employer.AccountId, colIndex, employerCofundRow);
+                    VerifyLevyPayments(ukprn,uln, periodName, periodDate, employer.AccountId, colIndex, levyPaidRow);
+                    VerifyEmployerCofinancePayments(ukprn,uln, periodName, periodDate, employer.AccountId, colIndex, employerCofundRow);
                 }
             }
         }
 
-        private void VerifyEarningsForPeriod(long ukprn, string periodName, int colIndex, TableRow earnedRow)
+        private void VerifyEarningsForPeriod(long ukprn, long? uln , string periodName, int colIndex, TableRow earnedRow)
         {
             if (earnedRow == null)
             {
                 return;
             }
 
-            var earnedByPeriod = StepDefinitionsContext.GetProviderEarnedByPeriod(ukprn);
+            var earnedByPeriod = StepDefinitionsContext.GetProviderEarnedByPeriod(ukprn,uln);
 
             if (!earnedByPeriod.ContainsKey(periodName))
             {
@@ -198,8 +241,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             Assert.IsTrue(earnedByPeriod.ContainsKey(periodName), $"Expected earning for period {periodName} but none found");
             Assert.AreEqual(expectedEarning, earnedByPeriod[periodName], $"Expected earning of {expectedEarning} for period {periodName} but found {earnedByPeriod[periodName]}");
         }
-        private void VerifyLevyPayments(long ukprn, string periodName, DateTime periodDate, long accountId,
-            int colIndex, TableRow levyPaidRow)
+        private void VerifyLevyPayments(long ukprn,
+                                        long? uln, 
+                                        string periodName, 
+                                        DateTime periodDate, 
+                                        long accountId,
+                                        int colIndex, 
+                                        TableRow levyPaidRow)
         {
             if (levyPaidRow == null)
             {
@@ -208,7 +256,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
 
             var levyPaymentDate = periodDate.AddMonths(-1);
 
-            var levyPayments = PaymentsDataHelper.GetAccountPaymentsForPeriod(ukprn, accountId,
+            var levyPayments = PaymentsDataHelper.GetAccountPaymentsForPeriod(ukprn, accountId,uln,
                 levyPaymentDate.Year, levyPaymentDate.Month,FundingSource.Levy, EnvironmentVariables)
                                ?? new PaymentEntity[0];
 
@@ -216,23 +264,29 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             var expectedLevyPayment = decimal.Parse(levyPaidRow[colIndex]);
             Assert.AreEqual(expectedLevyPayment, actualLevyPayment, $"Expected a levy payment of {expectedLevyPayment} but made a payment of {actualLevyPayment} for {periodName}");
         }
-        private void VerifyGovtCofinancePayments(long ukprn, string periodName, DateTime periodDate,
-            int colIndex, TableRow govtCofundRow)
+        private void VerifyGovtCofinancePayments(long ukprn, 
+                                                long? uln,
+                                                string periodName, 
+                                                DateTime periodDate,
+                                                int colIndex,
+                                                TableRow govtCofundRow)
         {
             if (govtCofundRow == null)
             {
                 return;
             }
 
-            var cofinancePayments = PaymentsDataHelper.GetPaymentsForPeriod(ukprn,
-                periodDate.Year, periodDate.Month,FundingSource.CoInvestedSfa, EnvironmentVariables)
+            var cofinancePayments = PaymentsDataHelper.GetPaymentsForPeriod(ukprn,uln,
+                                                                     periodDate.Year, periodDate.Month,
+                                                                     FundingSource.CoInvestedSfa, 
+                                                                     EnvironmentVariables)
                                     ?? new PaymentEntity[0];
 
             var actualGovtPayment = cofinancePayments.Sum(p => p.Amount);
             var expectedGovtPayment = decimal.Parse(govtCofundRow[colIndex]);
             Assert.AreEqual(expectedGovtPayment, actualGovtPayment, $"Expected a government co-finance payment of {expectedGovtPayment} but made a payment of {actualGovtPayment} for {periodName}");
         }
-        private void VerifyEmployerCofinancePayments(long ukprn, string periodName, DateTime periodDate, long accountId,
+        private void VerifyEmployerCofinancePayments(long ukprn,long? uln, string periodName, DateTime periodDate, long accountId,
             int colIndex, TableRow employerCofundRow)
         {
             if (employerCofundRow == null)
@@ -242,7 +296,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
 
             var employerPaymentDate = periodDate.AddMonths(-1);
 
-            var cofinancePayments = PaymentsDataHelper.GetAccountPaymentsForPeriod(ukprn, accountId,
+            var cofinancePayments = PaymentsDataHelper.GetAccountPaymentsForPeriod(ukprn, accountId,uln,
                 employerPaymentDate.Year, employerPaymentDate.Month,FundingSource.CoInvestedEmployer, EnvironmentVariables)
                                     ?? new PaymentEntity[0];
 
