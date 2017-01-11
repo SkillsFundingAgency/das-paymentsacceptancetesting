@@ -3,7 +3,6 @@ using System.Linq;
 using Dapper;
 using ProviderPayments.TestStack.Core;
 using System.Collections.Generic;
-using System;
 using SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities;
 using SFA.DAS.Payments.AcceptanceTests.Entities;
 
@@ -93,12 +92,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                 {
                     var periodAmount = periods[period];
 
-
                     connection.Execute("INSERT INTO [Rulebase].[AEC_ApprenticeshipPriceEpisode_Period] " +
                                        "(Ukprn,LearnRefNumber,PriceEpisodeIdentifier,Period,PriceEpisodeOnProgPayment) " +
                                        "VALUES " +
                                        "(@ukprn,@learnRefNumber,@PriceEpisodeIdentifier,@Period, @periodAmount)",
-                        new { ukprn, learnRefNumber, priceEpisodeIdentifier,period,periodAmount});
+                        new { ukprn, learnRefNumber, priceEpisodeIdentifier, period, periodAmount });
                 }
 
                 //populate all period values, default to 0 if none found
@@ -170,8 +168,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
         internal static void SaveEarnedAmount(long ukprn,
                                             long commitmentId,
                                             long accountId,
-                                            long uln,
-                                            string learnRefNumber,
+                                            Learner learner,
                                             string collectionPeriodName,
                                             int collectionPeriodMonth,
                                             int collectionPeriodYear,
@@ -179,48 +176,73 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                                             decimal amountDue,
                                             EnvironmentVariables environmentVariables)
         {
-
-          
-
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
             {
 
-                var accountVersionId = IdentifierGenerator.GenerateIdentifier(8, false).ToString();
-                var commitmentVersionId = IdentifierGenerator.GenerateIdentifier(8, false).ToString();
+                var accountVersionId = IdentifierGenerator.GenerateIdentifier(8, false);
+                var commitmentVersionId = IdentifierGenerator.GenerateIdentifier(8, false);
 
-                connection.Execute("INSERT INTO PaymentsDue.RequiredPayments" +
-                                       "(CommitmentId,CommitmentVersionId" +
-                                       ",AccountId,AccountVersionId,uln,LearnRefNumber" +
-                                       ",AimSeqNumber,Ukprn,DeliveryMonth" +
-                                       ",DeliveryYear,CollectionPeriodName" +
-                                       ",CollectionPeriodMonth,CollectionPeriodYear" +
-                                       ",TransactionType,AmountDue) " +
-                                       "VALUES " +
-                                        "(@commitmentId,@commitmentVersionId" +
-                                       ",@accountId,@accountVersionId,@uln,@learnRefNumber" +
-                                       ",1,@ukprn,@collectionPeriodMonth" +
-                                       ",@collectionPeriodYear,@collectionPeriodName" +
-                                       ",@collectionPeriodMonth,@collectionPeriodYear" +
-                                       ",@transactionType,@amountDue) ", 
-                        new {
-                            commitmentId,
-                            commitmentVersionId,
-                            accountId,
-                            accountVersionId,
-                            uln,
-                            learnRefNumber,
-                            ukprn,
-                            collectionPeriodName,
-                            collectionPeriodMonth,
-                            collectionPeriodYear,
-                            transactionType,
-                            amountDue
-                        });
-
-            
+                connection.Execute("INSERT INTO PaymentsDue.RequiredPayments (" +
+                                       "CommitmentId," +
+                                       "CommitmentVersionId," +
+                                       "AccountId," +
+                                       "AccountVersionId," +
+                                       "uln," +
+                                       "LearnRefNumber," +
+                                       "AimSeqNumber," +
+                                       "Ukprn," +
+                                       "DeliveryMonth," +
+                                       "DeliveryYear," +
+                                       "CollectionPeriodName," +
+                                       "CollectionPeriodMonth," +
+                                       "CollectionPeriodYear," +
+                                       "TransactionType," +
+                                       "AmountDue," +
+                                       "StandardCode," +
+                                       "ProgrammeType," +
+                                       "FrameworkCode," +
+                                       "PathwayCode" +
+                                   ") VALUES (" +
+                                       "@commitmentId," +
+                                       "@commitmentVersionId," +
+                                       "@accountId," +
+                                       "@accountVersionId," +
+                                       "@uln," +
+                                       "@learnRefNumber," +
+                                       "1," +
+                                       "@ukprn," +
+                                       "@collectionPeriodMonth," +
+                                       "@collectionPeriodYear," +
+                                       "@collectionPeriodName," +
+                                       "@collectionPeriodMonth," +
+                                       "@collectionPeriodYear," +
+                                       "@transactionType," +
+                                       "@amountDue," +
+                                       "@standardCode," +
+                                       "@programmeType," +
+                                       "@frameworkCode," +
+                                       "@pathwayCode" +
+                                   ")",
+                    new
+                    {
+                        commitmentId,
+                        commitmentVersionId,
+                        accountId,
+                        accountVersionId,
+                        uln = learner.Uln,
+                        learnRefNumber = learner.LearnRefNumber,
+                        ukprn,
+                        collectionPeriodName,
+                        collectionPeriodMonth,
+                        collectionPeriodYear,
+                        transactionType,
+                        amountDue,
+                        standardCode = learner.LearningDelivery.StandardCode == 0 ? (long?)null : learner.LearningDelivery.StandardCode,
+                        programmeType = learner.LearningDelivery.ProgrammeType == 0 ? (int?)null : learner.LearningDelivery.ProgrammeType,
+                        frameworkCode = learner.LearningDelivery.FrameworkCode == 0 ? (int?)null : learner.LearningDelivery.FrameworkCode,
+                        pathwayCode = learner.LearningDelivery.PathwayCode == 0 ? (int?)null : learner.LearningDelivery.PathwayCode
+                    });
             }
-
         }
-
     }
 }
