@@ -35,6 +35,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
                 {
                     Uln = l.Uln,
                     LearnRefNumber = l.LearnRefNumber,
+                    DateOfBirth=l.DateOfBirth,
                     LearningDeliveries = new[]
                     {
                         new LearningDelivery
