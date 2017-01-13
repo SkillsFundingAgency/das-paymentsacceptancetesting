@@ -300,7 +300,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "...",
                         "0",
                         "0",
-                        ""});
+                        "0"});
 #line 39
         testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table96, "Then ");
 #line hidden
@@ -462,7 +462,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "...",
                         "0",
                         "0",
-                        ""});
+                        "0"});
 #line 64
         testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table100, "Then ");
 #line hidden
@@ -471,12 +471,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("A non-DAS learner, learner finishes on time")]
-        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         public virtual void ANon_DASLearnerLearnerFinishesOnTime()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("A non-DAS learner, learner finishes on time", new string[] {
-                        "ignore"});
-#line 78
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("A non-DAS learner, learner finishes on time", ((string[])(null)));
+#line 77
     this.ScenarioSetup(scenarioInfo);
 #line 16
     this.FeatureBackground();
@@ -495,7 +493,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "08/09/2018",
                         "08/09/2018",
                         "completed"});
-#line 79
+#line 78
         testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table101, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table102 = new TechTalk.SpecFlow.Table(new string[] {
@@ -588,7 +586,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "900",
                         "2700",
                         "0"});
-#line 82
+#line 81
         testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table102, "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -599,7 +597,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         public virtual void _1DASLearnerNotEnoughLevyToCoverFullPayment()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("1 DAS Learner, not enough levy to cover full payment", ((string[])(null)));
-#line 95
+#line 94
  this.ScenarioSetup(scenarioInfo);
 #line 16
     this.FeatureBackground();
@@ -618,7 +616,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "500",
                         "500",
                         "1500"});
-#line 96
+#line 95
         testRunner.Given("the employer\'s levy balance is:", ((string)(null)), table103, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table104 = new TechTalk.SpecFlow.Table(new string[] {
@@ -635,7 +633,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "08/09/2018",
                         "08/09/2018",
                         "completed"});
-#line 99
+#line 98
         testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table104, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table105 = new TechTalk.SpecFlow.Table(new string[] {
@@ -727,8 +725,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "...",
                         "0",
                         "0",
-                        ""});
-#line 102
+                        "0"});
+#line 101
         testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table105, "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -739,13 +737,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         public virtual void _2Learners2Employers1Provider_EnoughLevy()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("2 learners, 2 employers, 1 provider - enough levy", ((string[])(null)));
-#line 115
+#line 114
     this.ScenarioSetup(scenarioInfo);
 #line 16
     this.FeatureBackground();
-#line 116
+#line 115
         testRunner.Given("the employer 1 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 117
+#line 116
         testRunner.And("the employer 2 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table106 = new TechTalk.SpecFlow.Table(new string[] {
@@ -766,7 +764,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "learner b",
                         "1",
                         "15000"});
-#line 118
+#line 117
         testRunner.And("the following commitments exist:", ((string)(null)), table106, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table107 = new TechTalk.SpecFlow.Table(new string[] {
@@ -793,7 +791,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "08/09/2018",
                         "08/09/2018",
                         "completed"});
-#line 122
+#line 121
         testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table107, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table108 = new TechTalk.SpecFlow.Table(new string[] {
@@ -913,7 +911,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "0",
                         "0"});
-#line 126
+#line 125
         testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table108, "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -924,7 +922,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         public virtual void _2Learners2Employers1Provider_NotEnoughLevy()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("2 learners, 2 employers, 1 provider - not enough levy", ((string[])(null)));
-#line 142
+#line 141
     this.ScenarioSetup(scenarioInfo);
 #line 16
     this.FeatureBackground();
@@ -943,7 +941,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "100",
                         "250",
                         "500"});
-#line 143
+#line 142
         testRunner.Given("the employer 1 has a levy balance of:", ((string)(null)), table109, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table110 = new TechTalk.SpecFlow.Table(new string[] {
@@ -960,7 +958,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "500",
                         "500",
                         "1500"});
-#line 146
+#line 145
         testRunner.And("the employer 2 has a levy balance of:", ((string)(null)), table110, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table111 = new TechTalk.SpecFlow.Table(new string[] {
@@ -981,7 +979,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "learner b",
                         "1",
                         "15000"});
-#line 149
+#line 148
         testRunner.And("the following commitments exist:", ((string)(null)), table111, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table112 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1008,7 +1006,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "08/09/2018",
                         "08/09/2018",
                         "completed"});
-#line 153
+#line 152
         testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table112, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table113 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1128,7 +1126,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "0",
                         "0"});
-#line 157
+#line 156
         testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table113, "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -1139,11 +1137,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         public virtual void _2Learners1Employer2Providers_EnoughLevy()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("2 learners, 1 employer, 2 providers - enough levy", ((string[])(null)));
-#line 173
+#line 172
     this.ScenarioSetup(scenarioInfo);
 #line 16
     this.FeatureBackground();
-#line 174
+#line 173
         testRunner.Given("the employer 1 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table114 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1164,7 +1162,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "learner b",
                         "2",
                         "15000"});
-#line 175
+#line 174
         testRunner.And("the following commitments exist:", ((string)(null)), table114, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table115 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1194,7 +1192,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "08/09/2018",
                         "08/09/2018",
                         "completed"});
-#line 179
+#line 178
         testRunner.When("the providers submit the following ILR files:", ((string)(null)), table115, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table116 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1287,7 +1285,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "0",
                         "0"});
-#line 183
+#line 182
         testRunner.Then("the earnings and payments break down for provider A is as follows:", ((string)(null)), table116, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table117 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1380,7 +1378,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "0",
                         "0"});
-#line 194
+#line 193
         testRunner.And("the earnings and payments break down for provider B is as follows:", ((string)(null)), table117, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1391,7 +1389,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         public virtual void _2Learners1Employer2Providers_NotEnoughLevy()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("2 learners, 1 employer, 2 providers - not enough levy", ((string[])(null)));
-#line 207
+#line 206
     this.ScenarioSetup(scenarioInfo);
 #line 16
     this.FeatureBackground();
@@ -1410,7 +1408,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "750",
                         "1000",
                         "1000"});
-#line 208
+#line 207
         testRunner.Given("the employer 1 has a levy balance of:", ((string)(null)), table118, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table119 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1431,7 +1429,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "learner b",
                         "2",
                         "15000"});
-#line 211
+#line 210
         testRunner.And("the following commitments exist:", ((string)(null)), table119, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table120 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1461,7 +1459,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "08/09/2018",
                         "08/09/2018",
                         "completed"});
-#line 215
+#line 214
         testRunner.When("the providers submit the following ILR files:", ((string)(null)), table120, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table121 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1554,7 +1552,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "0",
                         "0"});
-#line 219
+#line 218
         testRunner.Then("the earnings and payments break down for provider A is as follows:", ((string)(null)), table121, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table122 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1647,7 +1645,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "0",
                         "0"});
-#line 230
+#line 229
         testRunner.And("the earnings and payments break down for provider B is as follows:", ((string)(null)), table122, "And ");
 #line hidden
             this.ScenarioCleanup();
