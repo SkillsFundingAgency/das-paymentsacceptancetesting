@@ -175,7 +175,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "1000",
                         "...",
                         "1000",
-                        "1000"});
+                        "0"});
             table87.AddRow(new string[] {
                         "Completion",
                         "0",
@@ -189,7 +189,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "...",
                         "0",
-                        "0"});
+                        "1000"});
 #line 21
         testRunner.And("the transaction types for the payments are:", ((string)(null)), table87, "And ");
 #line hidden
@@ -295,7 +295,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "1000",
                         "...",
                         "1000",
-                        "1000"});
+                        "0"});
             table90.AddRow(new string[] {
                         "Completion",
                         "0",
@@ -309,7 +309,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "...",
                         "0",
-                        "1000"});
+                        "2000"});
 #line 39
         testRunner.And("the transaction types for the payments are:", ((string)(null)), table90, "And ");
 #line hidden

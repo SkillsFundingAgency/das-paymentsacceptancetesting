@@ -58,7 +58,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                             "FROM Rulebase.AEC_ApprenticeshipPriceEpisode_PeriodisedValues pv " +
                             " Join Valid.Learner l " +
                             " ON l.UKPRN = pv.UKPRN AND pv.LearnRefNumber = l.LearnRefNumber " +
-                            "WHERE pv.UKPRN = @ukprn " + 
+                            " WHERE pv.UKPRN = @ukprn " +
+                            " AND AttributeName IN ('PriceEpisodeOnProgPayment', 'PriceEpisodeCompletionPayment', 'PriceEpisodeBalancePayment') " +
                             " Group By pv.UKPRN, l.ULN";
                            
                 return connection.Query<PeriodisedValuesEntity>(query, new { ukprn }).ToArray();

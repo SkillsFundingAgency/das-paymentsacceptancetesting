@@ -128,7 +128,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             var startDate = new DateTime(2016,08,15);
             var ilrStartDate = startDate.NextCensusDate();
 
-            var plannedEndDate = startDate.AddMonths(plannedCensusMonths);
+            var plannedEndDate = startDate.AddMonths(plannedCensusMonths-1).NextCensusDate();
             DateTime? actualEndDate = null;
 
             if (ScenarioContext.Current.ContainsKey("actualCensusMonths"))
@@ -136,9 +136,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
                 var actualCensusMonths = ScenarioContext.Current.Get<int>("actualCensusMonths");
                 int variation;
                 if (actualCensusMonths < plannedCensusMonths)
-                    variation =  (plannedCensusMonths - actualCensusMonths + 1) *-1;
+                    variation =  (plannedCensusMonths - actualCensusMonths ) *-1;
                 else
-                    variation = actualCensusMonths - plannedCensusMonths - 1;
+                    variation = actualCensusMonths - plannedCensusMonths;
                 
                 actualEndDate = plannedEndDate.AddMonths(variation);
             }

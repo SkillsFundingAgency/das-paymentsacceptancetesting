@@ -39,7 +39,7 @@ Examples:
 | agreed price | early/late | planned census months | actual census months in learning | monthly earnings | completion payment | balancing payment |
 | 15000        | early      | 12                    | 8                                | 1000             | 3000               | 4000              |
 | 15000        | early      | 6                     | 5                                | 2000             | 3000               | 2000              |
-| 7500         | early      | 12                    | 9                               | 500              | 1500               | 1500              |
+| 7500         | early      | 12                    | 9                                | 500              | 1500               | 1500              |
 | 7500         | early      | 6                     | 4                                | 1000             | 1500               | 2000              |
 | 15000        | late       | 12                    | 16                               | 1000             | 3000               | 0                 |
 | 15000        | late       | 6                     | 7                                | 2000             | 3000               | 0                 |
