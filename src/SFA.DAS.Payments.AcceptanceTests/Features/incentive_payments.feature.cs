@@ -113,6 +113,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "09/17",
                         "10/17",
                         "11/17",
+                        "12/17",
                         "...",
                         "08/18",
                         "09/18"});
@@ -120,40 +121,45 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "Provider Earned",
                         "1000",
                         "1000",
+                        "1000",
                         "2000",
                         "1000",
                         "...",
-                        "2000",
+                        "1000",
                         "0"});
             table51.AddRow(new string[] {
                         "Provider Paid",
                         "0",
                         "1000",
                         "1000",
+                        "1000",
                         "2000",
                         "...",
                         "1000",
-                        "2000"});
+                        "1000"});
             table51.AddRow(new string[] {
                         "Levy account debited",
                         "0",
                         "1000",
                         "1000",
                         "1000",
-                        "...",
-                        "1000",
-                        "1000"});
-            table51.AddRow(new string[] {
-                        "SFA Levy budget",
-                        "1000",
-                        "1000",
-                        "1000",
                         "1000",
                         "...",
                         "1000",
                         "0"});
             table51.AddRow(new string[] {
-                        "SFA co-funding budget",
+                        "SFA Levy employer budget",
+                        "1000",
+                        "1000",
+                        "1000",
+                        "1000",
+                        "1000",
+                        "...",
+                        "0",
+                        "0"});
+            table51.AddRow(new string[] {
+                        "SFA Levy co-funded budget",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -162,7 +168,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "0"});
             table51.AddRow(new string[] {
-                        "SFA additional payments budget",
+                        "SFA Levy additional payments budget",
+                        "0",
                         "0",
                         "0",
                         "1000",
@@ -172,6 +179,63 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0"});
 #line 14
     testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table51, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table52 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Payment type",
+                        "09/17",
+                        "10/17",
+                        "11/17",
+                        "12/17",
+                        "...",
+                        "08/18",
+                        "09/18"});
+            table52.AddRow(new string[] {
+                        "On-program",
+                        "1000",
+                        "1000",
+                        "1000",
+                        "1000",
+                        "...",
+                        "1000",
+                        "0"});
+            table52.AddRow(new string[] {
+                        "Completion",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "...",
+                        "0",
+                        "0"});
+            table52.AddRow(new string[] {
+                        "Balancing",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "...",
+                        "0",
+                        "0"});
+            table52.AddRow(new string[] {
+                        "Employer 16-18 incentive",
+                        "0",
+                        "0",
+                        "0",
+                        "500",
+                        "...",
+                        "0",
+                        "500"});
+            table52.AddRow(new string[] {
+                        "Provider 16-18 incentive",
+                        "0",
+                        "0",
+                        "0",
+                        "500",
+                        "...",
+                        "0",
+                        "500"});
+#line 23
+    testRunner.And("the transaction types for the payments are:", ((string)(null)), table52, "And ");
 #line hidden
             this.ScenarioCleanup();
         }

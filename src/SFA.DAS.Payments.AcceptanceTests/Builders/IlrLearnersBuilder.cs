@@ -3,6 +3,7 @@ using System.Linq;
 using IlrGenerator;
 using PriceEpisode = SFA.DAS.Payments.AcceptanceTests.Entities.PriceEpisode;
 using System.Collections.Generic;
+using SFA.DAS.Payments.AcceptanceTests.Enums;
 
 namespace SFA.DAS.Payments.AcceptanceTests.Builders
 {
@@ -41,7 +42,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
                         new LearningDelivery
                         {
                            
-                            ActFamCodeValue = (short) l.LearningDelivery.LearnerType,
+                            ActFamCodeValue = GetActFamCode(l.LearningDelivery.LearnerType),
                             ActualStartDate = l.LearningDelivery.StartDate,
                             PlannedEndDate = l.LearningDelivery.PlannedEndDate,
                             ActualEndDate = l.LearningDelivery.ActualEndDate,
@@ -63,6 +64,21 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
             return this;
         }
 
+        private short GetActFamCode(LearnerType learnerType)
+        {
+            short result = 1;
+            switch (learnerType)
+            {
+                case LearnerType.ProgrammeOnlyDas:
+                case LearnerType.ProgrammeOnlyDas16To18:
+                    result = 1;
+                    break;
+                default:
+                    result = 2;
+                    break;
+            }
+            return result;
+        }
         private LearningDeliveryActFamRecord[] TransformFamRecords(Entities.LearningDeliveryFam[] learningDeliveryFams)
         {
             if (learningDeliveryFams == null)
