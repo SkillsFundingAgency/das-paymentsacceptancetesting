@@ -46,7 +46,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
                             ActualStartDate = l.LearningDelivery.StartDate,
                             PlannedEndDate = l.LearningDelivery.PlannedEndDate,
                             ActualEndDate = l.LearningDelivery.ActualEndDate,
-
+                            CompletionStatus = l.LearningDelivery.CompletionStatus == Enums.CompletionStatus.Completed  
+                                                ? IlrGenerator.CompletionStatus.Completed 
+                                                : IlrGenerator.CompletionStatus.Continuing,
                             StandardCode = l.LearningDelivery.StandardCode,
                             ProgrammeType = l.LearningDelivery.ProgrammeType,
                             FrameworkCode = l.LearningDelivery.FrameworkCode,
