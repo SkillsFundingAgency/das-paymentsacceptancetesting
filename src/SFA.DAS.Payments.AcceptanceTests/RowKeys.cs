@@ -10,7 +10,7 @@
         public const string DefaultCoFinanceEmployerPayment = "Payment due from Employer";
         public const string CoFinanceEmployerPayment = "Payment due from ";
 
-        public const string CoFinanceGovernmentPaymentForLevyContracts = "SFA Levy co-funded budget";
+        public const string CoFinanceGovernmentPaymentForLevyContracts = "SFA Levy co-funding budget";
         public const string CoFinanceGovernmentPaymentForNonLevyContracts = "SFA non-Levy co-funding budget";
 
         public const string OnProgramPayment = "On-program";

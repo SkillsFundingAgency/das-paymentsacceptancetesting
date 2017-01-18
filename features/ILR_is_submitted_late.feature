@@ -17,4 +17,4 @@ Feature: The ILR is submitted late
             | Provider Paid by SFA       | 0     | 0     | 0     | 0     | 4000  | 1000  | ... |
             | Levy account debited       | 0     | 0     | 0     | 0     | 4000  | 1000  | ... |
             | SFA Levy employer budget   | 1000  | 1000  | 1000  | 1000  | 1000  | 1000  | ... |
-            | SFA Levy co-funding budget | 0     | 0     | 0     | 0     | 1000  | 1000  | ... |
+            | SFA Levy co-funding budget | 0     | 0     | 0     | 0     | 0     | 0     | ... |

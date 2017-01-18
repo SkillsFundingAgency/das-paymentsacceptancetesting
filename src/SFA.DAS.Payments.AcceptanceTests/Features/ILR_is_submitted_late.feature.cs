@@ -160,8 +160,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "0",
                         "0",
-                        "1000",
-                        "1000",
+                        "0",
+                        "0",
                         "..."});
 #line 13
         testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table48, "Then ");
