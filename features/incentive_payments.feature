@@ -17,7 +17,7 @@ Feature: 1 learner aged 16-18, levy available, earns incentives
 		  | Provider Paid                       | 0     | 1000  | 1000  | 1000  | 2000  | ... | 1000  | 1000  |
 		  | Levy account debited                | 0     | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     |
 		  | SFA Levy employer budget            | 1000  | 1000  | 1000  | 1000  | 1000  | ... | 0     | 0     |
-		  | SFA Levy co-funded budget           | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+		  | SFA Levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
 		  | SFA Levy additional payments budget | 0     | 0     | 0     | 1000  | 0     | ... | 1000  | 0     |
 
     And the transaction types for the payments are:

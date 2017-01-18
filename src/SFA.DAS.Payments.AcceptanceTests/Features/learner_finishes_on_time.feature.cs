@@ -284,7 +284,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "0"});
             table100.AddRow(new string[] {
-                        "SFA Levy co-funded budget",
+                        "SFA Levy co-funding budget",
                         "900",
                         "900",
                         "900",
@@ -446,7 +446,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "1500",
                         "0"});
             table104.AddRow(new string[] {
-                        "SFA Levy co-funded budget",
+                        "SFA Levy co-funding budget",
                         "1350",
                         "900",
                         "900",
@@ -569,7 +569,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "0"});
             table106.AddRow(new string[] {
-                        "SFA Levy co-funded budget",
+                        "SFA Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -709,7 +709,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "1500",
                         "0"});
             table109.AddRow(new string[] {
-                        "SFA Levy co-funded budget",
+                        "SFA Levy co-funding budget",
                         "450",
                         "450",
                         "450",
@@ -894,7 +894,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "3000",
                         "0"});
             table112.AddRow(new string[] {
-                        "SFA Levy co-funded budget",
+                        "SFA Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -1109,7 +1109,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "2000",
                         "0"});
             table117.AddRow(new string[] {
-                        "SFA Levy co-funded budget",
+                        "SFA Levy co-funding budget",
                         "900",
                         "810",
                         "810",
@@ -1268,7 +1268,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "1500",
                         "0"});
             table120.AddRow(new string[] {
-                        "SFA Levy co-funded budget",
+                        "SFA Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -1361,7 +1361,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "3000",
                         "0"});
             table121.AddRow(new string[] {
-                        "SFA Levy co-funded budget",
+                        "SFA Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -1535,7 +1535,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "1000",
                         "0"});
             table125.AddRow(new string[] {
-                        "SFA Levy co-funded budget",
+                        "SFA Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -1628,7 +1628,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "0"});
             table126.AddRow(new string[] {
-                        "SFA Levy co-funded budget",
+                        "SFA Levy co-funding budget",
                         "675",
                         "675",
                         "675",
