@@ -227,7 +227,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                 VerifyEarningsForPeriod(ukprn,uln, periodName, colIndex, earnedRow);
                 VerifyGovtCofinanceLevyContractPayments(ukprn,uln, periodName, periodDate, colIndex, govtCofundLevyContractRow);
                 VerifyGovtCofinanceNonLevyContractPayments(ukprn, uln, periodName, periodDate, colIndex, govtCofundNonLevyContractRow);
-                VerifyGovtAdditionalPayments(ukprn, uln, periodName, periodDate, colIndex, govtAdditionalPaymentsRow);
+                VerifyAdditionalGovtFundedEarnings(ukprn, uln, periodName, periodDate, colIndex, govtAdditionalPaymentsRow);
 
                 if (StepDefinitionsContext.ReferenceDataContext.Employers != null)
                 {
@@ -407,33 +407,32 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             Assert.AreEqual(expectedPaymentDue, actualPaymentDue, $"Expected {string.Join(" and ",paymentTypes)} payment due of {expectedPaymentDue} but made a payment of {actualPaymentDue} for {periodName}");
         }
 
-        private void VerifyGovtAdditionalPayments(long ukprn,
+        private void VerifyAdditionalGovtFundedEarnings(long ukprn,
                                       long? uln,
                                       string periodName,
                                       DateTime periodDate,
                                       int colIndex,
-                                      TableRow additionalPaymentsRow)
+                                      TableRow additionalEarningsRow)
         {
-            if (additionalPaymentsRow == null)
+            if (additionalEarningsRow == null)
             {
                 return;
             }
 
-            var paymentsDueDate = periodDate.AddMonths(-1);
+            var additionalEarnings = PaymentsDataHelper.GetPaymentsForPeriod(
+                                                       ukprn,
+                                                       uln,
+                                                       periodDate.Year,
+                                                       periodDate.Month,
+                                                       FundingSource.FullyFundedSfa,
+                                                       ContractType.ContractWithEmployer,
+                                                       EnvironmentVariables)
+                                   ?? new PaymentEntity[0];
 
-            var paymentsDue = PaymentsDueDataHelper.GetPaymentsDueForPeriod(ukprn,
-                paymentsDueDate.Year, paymentsDueDate.Month, EnvironmentVariables)
-                              ?? new RequiredPaymentEntity[0];
+            var actualEarningsDue = additionalEarnings.Length == 0 ? 0m : additionalEarnings.Sum(p => p.Amount);
 
-            var actualPaymentDue = paymentsDue.Length == 0 ? 0m : paymentsDue.Where(p => 
-                                                        p.TransactionType ==(int)TransactionType.First16To18EmployerIncentive ||
-                                                        p.TransactionType == (int)TransactionType.First16To18ProviderIncentive ||
-                                                        p.TransactionType == (int)TransactionType.Second16To18EmployerIncentive||
-                                                        p.TransactionType == (int)TransactionType.Second16To18ProviderIncentive)
-                                                        .Sum(p => p.AmountDue);
-
-            var expectedPaymentDue = decimal.Parse(additionalPaymentsRow[colIndex]);
-            Assert.AreEqual(expectedPaymentDue, actualPaymentDue, $"Expected additional payment due of {expectedPaymentDue} but made a payment of {actualPaymentDue} for {periodName}");
+            var expectedPaymentDue = decimal.Parse(additionalEarningsRow[colIndex]);
+            Assert.AreEqual(expectedPaymentDue, actualEarningsDue, $"Expected additional earnings of {expectedPaymentDue} but earned a payment of {actualEarningsDue} for {periodName}");
 
         }
     }
