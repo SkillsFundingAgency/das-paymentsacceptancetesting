@@ -553,15 +553,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
         private LearnerType GetLearnerType(string learnerType)
         {
             LearnerType result = LearnerType.ProgrammeOnlyDas;
-            switch (learnerType.ToLowerInvariant())
+            switch (learnerType.Replace(" ",string.Empty).ToLowerInvariant())
                 {
-                    case "programme only non - das":
+                    case "programmeonlynon-das":
                         result= LearnerType.ProgrammeOnlyNonDas;
                         break;
-                    case "programme only das":
+                    case "programmeonlydas":
                         result = LearnerType.ProgrammeOnlyDas;
                         break;
-                    case "16-18 programme only das":
+                    case "16-18programmeonlydas":
                         result = LearnerType.ProgrammeOnlyDas16To18;
                         break;
 

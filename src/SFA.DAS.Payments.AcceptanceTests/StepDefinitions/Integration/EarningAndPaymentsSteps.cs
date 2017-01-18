@@ -403,9 +403,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
 
             var actualPaymentDue = paymentsDue.Length == 0 ? 0m : paymentsDue.Where(p => paymentTypesFilter.Contains(p.TransactionType)).Sum(p => p.AmountDue);
             var expectedPaymentDue = decimal.Parse(paymentsRow[colIndex]);
-
-            //TODO: Change the below to sort out payment types in the string
-            Assert.AreEqual(expectedPaymentDue, actualPaymentDue, $"Expected {paymentTypes} payment due of {expectedPaymentDue} but made a payment of {actualPaymentDue} for {periodName}");
+            
+            Assert.AreEqual(expectedPaymentDue, actualPaymentDue, $"Expected {string.Join(" and ",paymentTypes)} payment due of {expectedPaymentDue} but made a payment of {actualPaymentDue} for {periodName}");
         }
 
         private void VerifyGovtAdditionalPayments(long ukprn,
