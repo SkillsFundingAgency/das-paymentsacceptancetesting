@@ -22,7 +22,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                                     AND p.FundingSource = @fundingSource
                                     AND rp.ApprenticeshipContractType = @contractType";
 
-                query = uln.HasValue ? query + " AND rp.AccountId = @accountId " : query; 
+                query = accountId.HasValue ? query + " AND rp.AccountId = @accountId " : query; 
                 query = uln.HasValue ? query + " AND rp.Uln = @uln" : query;
                 return connection.Query<PaymentEntity>(query, new { ukprn, month, year, accountId, fundingSource, uln, contractType }).ToArray();
             }

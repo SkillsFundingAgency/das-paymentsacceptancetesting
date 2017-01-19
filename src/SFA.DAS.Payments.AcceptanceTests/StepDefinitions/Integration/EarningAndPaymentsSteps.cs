@@ -339,7 +339,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
 
             var cofinancePayments = PaymentsDataHelper.GetAccountPaymentsForPeriod(
                                                         ukprn,
-                                                        learnersType==LearnerType.ProgrammeOnlyNonDas?  accountId : (long?)null,
+                                                        learnersType == LearnerType.ProgrammeOnlyNonDas ?  (long?)null : accountId ,
                                                         uln,
                                                         employerPaymentDate.Year,
                                                         employerPaymentDate.Month,
