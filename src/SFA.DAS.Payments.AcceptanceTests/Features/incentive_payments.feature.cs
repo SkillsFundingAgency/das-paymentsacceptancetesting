@@ -118,7 +118,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "08/18",
                         "09/18"});
             table51.AddRow(new string[] {
-                        "Provider Earned",
+                        "Provider Earned Total",
                         "1000",
                         "1000",
                         "1000",
@@ -128,7 +128,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "1000",
                         "0"});
             table51.AddRow(new string[] {
-                        "Provider Paid",
+                        "Provider Paid by SFA",
                         "0",
                         "1000",
                         "1000",
@@ -236,6 +236,132 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "500"});
 #line 23
     testRunner.And("the transaction types for the payments are:", ((string)(null)), table52, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Payment for a 16-18 DAS learner, levy available, incentives not paid as data lock" +
+            " fails")]
+        public virtual void PaymentForA16_18DASLearnerLevyAvailableIncentivesNotPaidAsDataLockFails()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Payment for a 16-18 DAS learner, levy available, incentives not paid as data lock" +
+                    " fails", ((string[])(null)));
+#line 32
+this.ScenarioSetup(scenarioInfo);
+#line 34
+    testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table53 = new TechTalk.SpecFlow.Table(new string[] {
+                        "commitment number",
+                        "ULN",
+                        "price effective date",
+                        "planned end date",
+                        "agreed price",
+                        "status"});
+            table53.AddRow(new string[] {
+                        "1",
+                        "learner a",
+                        "01/09/2017",
+                        "01/08/2018",
+                        "15000",
+                        "active"});
+#line 35
+    testRunner.And("the following commitments exist:", ((string)(null)), table53, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table54 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ULN",
+                        "learner type",
+                        "agreed price",
+                        "start date",
+                        "planned end date",
+                        "actual end date",
+                        "completion status"});
+            table54.AddRow(new string[] {
+                        "learner a",
+                        "16-18 programme only DAS",
+                        "15000",
+                        "28/08/2017",
+                        "08/08/2018",
+                        "",
+                        "continuing"});
+#line 39
+     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table54, "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table55 = new TechTalk.SpecFlow.Table(new string[] {
+                        "type",
+                        "08/17 onwards"});
+            table55.AddRow(new string[] {
+                        "matching commitment",
+                        ""});
+#line 43
+    testRunner.Then("the data lock status will be as follows:", ((string)(null)), table55, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table56 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Type",
+                        "09/17",
+                        "10/17",
+                        "11/17",
+                        "12/17",
+                        "...",
+                        "08/18",
+                        "09/18"});
+            table56.AddRow(new string[] {
+                        "Provider Earned Total",
+                        "1000",
+                        "1000",
+                        "2000",
+                        "1000",
+                        "...",
+                        "1000",
+                        "0"});
+            table56.AddRow(new string[] {
+                        "Provider Paid by SFA",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "...",
+                        "0",
+                        "0"});
+            table56.AddRow(new string[] {
+                        "Levy account debited",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "...",
+                        "0",
+                        "0"});
+            table56.AddRow(new string[] {
+                        "SFA Levy employer budget",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "...",
+                        "0",
+                        "0"});
+            table56.AddRow(new string[] {
+                        "SFA Levy co-funding budget",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "...",
+                        "0",
+                        "0"});
+            table56.AddRow(new string[] {
+                        "SFA Levy additional payments budget",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "...",
+                        "0",
+                        "0"});
+#line 47
+ testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table56, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
