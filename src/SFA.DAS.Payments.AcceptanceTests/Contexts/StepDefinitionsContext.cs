@@ -90,20 +90,21 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
             return Providers[0];
         }
 
-        public Learner CreateLearner(decimal agreedPrice,DateTime startDate,DateTime endDate, DateTime? actualEndDate = null)
+        public Learner CreateLearner(decimal agreedPrice,DateTime startDate,DateTime endDate, DateTime? actualEndDate = null, CompletionStatus completionStatus = CompletionStatus.InProgress)
         {
             var learner = new Learner
             {
                 Name = string.Empty,
                 Uln = long.Parse(IdentifierGenerator.GenerateIdentifier(10, false)),
                 LearnRefNumber= IdentifierGenerator.GenerateIdentifier(10, false),
+               
                 LearningDelivery = new LearningDelivery
                 {
                     LearnerType = LearnerType.ProgrammeOnlyDas,
                     StartDate = startDate,
                     PlannedEndDate = endDate,
                     ActualEndDate = actualEndDate,
-                    CompletionStatus = CompletionStatus.InProgress,
+                    CompletionStatus = completionStatus,
                     PriceEpisodes = new []
                     {
                         new PriceEpisode

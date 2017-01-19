@@ -30,8 +30,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                                 "SUM(Period_12) AS Period_12 " +
                             "FROM Rulebase.AEC_ApprenticeshipPriceEpisode_PeriodisedValues " +
                             "WHERE UKPRN = @ukprn " +
-                            "AND AttributeName IN ('PriceEpisodeOnProgPayment', 'PriceEpisodeCompletionPayment', 'PriceEpisodeBalancePayment') " +
-                            "GROUP BY UKPRN";
+                            "AND AttributeName IN ('PriceEpisodeOnProgPayment', 'PriceEpisodeCompletionPayment', 'PriceEpisodeBalancePayment', " +
+                            "'PriceEpisodeFirstEmp1618Pay','PriceEpisodeFirstProv1618Pay','PriceEpisodeSecondEmp1618Pay','PriceEpisodeSecondProv1618Pay') " +
+                            " GROUP BY UKPRN";
                 return connection.Query<PeriodisedValuesEntity>(query, new { ukprn }).ToArray();
             }
         }
@@ -59,7 +60,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                             " Join Valid.Learner l " +
                             " ON l.UKPRN = pv.UKPRN AND pv.LearnRefNumber = l.LearnRefNumber " +
                             " WHERE pv.UKPRN = @ukprn " +
-                            " AND AttributeName IN ('PriceEpisodeOnProgPayment', 'PriceEpisodeCompletionPayment', 'PriceEpisodeBalancePayment') " +
+                            " AND AttributeName IN ('PriceEpisodeOnProgPayment', 'PriceEpisodeCompletionPayment', 'PriceEpisodeBalancePayment'," +
+                            " 'PriceEpisodeFirstEmp1618Pay','PriceEpisodeFirstProv1618Pay','PriceEpisodeSecondEmp1618Pay','PriceEpisodeSecondProv1618Pay') " +
                             " Group By pv.UKPRN, l.ULN";
                            
                 return connection.Query<PeriodisedValuesEntity>(query, new { ukprn }).ToArray();

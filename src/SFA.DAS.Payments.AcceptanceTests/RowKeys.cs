@@ -12,10 +12,13 @@
 
         public const string CoFinanceGovernmentPaymentForLevyContracts = "SFA Levy co-funding budget";
         public const string CoFinanceGovernmentPaymentForNonLevyContracts = "SFA non-Levy co-funding budget";
+        public const string SfaAdditionalPaymentsBudget = "SFA Levy additional payments budget";
 
         public const string OnProgramPayment = "On-program";
         public const string CompletionPayment = "Completion";
         public const string BalancingPayment = "Balancing";
+        public const string EmployerIncentive = "Employer 16-18 incentive";
+        public const string ProviderIncentive = "Provider 16-18 incentive";
 
         public const string DataLockMatchingCommitment = "Matching commitment";
     }
