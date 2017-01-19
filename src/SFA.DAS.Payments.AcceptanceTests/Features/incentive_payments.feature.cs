@@ -263,7 +263,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "learner a",
                         "01/09/2017",
-                        "01/08/2018",
+                        "01/09/2018",
                         "15000",
                         "active"});
 #line 35
@@ -282,7 +282,7 @@ this.ScenarioSetup(scenarioInfo);
                         "16-18 programme only DAS",
                         "15000",
                         "28/08/2017",
-                        "08/08/2018",
+                        "29/08/2018",
                         "",
                         "continuing"});
 #line 39
@@ -299,6 +299,7 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table56 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
+                        "08/17",
                         "09/17",
                         "10/17",
                         "11/17",
@@ -308,6 +309,7 @@ this.ScenarioSetup(scenarioInfo);
                         "09/18"});
             table56.AddRow(new string[] {
                         "Provider Earned Total",
+                        "1000",
                         "1000",
                         "1000",
                         "2000",
@@ -321,11 +323,13 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0",
+                        "0",
                         "...",
                         "0",
                         "0"});
             table56.AddRow(new string[] {
                         "Levy account debited",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -339,6 +343,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0",
+                        "0",
                         "...",
                         "0",
                         "0"});
@@ -348,11 +353,13 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0",
+                        "0",
                         "...",
                         "0",
                         "0"});
             table56.AddRow(new string[] {
                         "SFA Levy additional payments budget",
+                        "0",
                         "0",
                         "0",
                         "0",

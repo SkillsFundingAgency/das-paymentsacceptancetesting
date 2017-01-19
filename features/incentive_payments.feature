@@ -34,21 +34,22 @@ Scenario: Payment for a 16-18 DAS learner, levy available, incentives not paid a
     Given levy balance > agreed price for all months
     And the following commitments exist:
 		| commitment number | ULN       | price effective date  | planned end date   | agreed price | status   |
-		| 1                 | learner a | 01/09/2017            | 01/08/2018         | 15000        | active   |
+		| 1                 | learner a | 01/09/2017            | 01/09/2018         | 15000        | active   |
     
      When an ILR file is submitted with the following data:
 		| ULN       | learner type             | agreed price | start date | planned end date | actual end date | completion status |
-		| learner a | 16-18 programme only DAS | 15000        | 28/08/2017 | 08/08/2018       |                 | continuing        |
+		| learner a | 16-18 programme only DAS | 15000        | 28/08/2017 | 29/08/2018       |                 | continuing        |
       
     Then the data lock status will be as follows:
 		| type                | 08/17 onwards |   
 		| matching commitment |               |   
       
 	And the provider earnings and payments break down as follows:
-		| Type                                | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
-		| Provider Earned Total               | 1000  | 1000  | 2000  | 1000  | ... | 1000  | 0     |
-		| Provider Paid by SFA                | 0     | 0     | 0     | 0     | ... | 0     | 0     |
-		| Levy account debited                | 0     | 0     | 0     | 0     | ... | 0     | 0     |
-		| SFA Levy employer budget            | 0     | 0     | 0     | 0     | ... | 0     | 0     |
-		| SFA Levy co-funding budget          | 0     | 0     | 0     | 0     | ... | 0     | 0     |
-		| SFA Levy additional payments budget | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+		| Type                                | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
+		| Provider Earned Total               | 1000  | 1000  | 1000  | 2000  | 1000  | ... | 1000  | 0     |
+		| Provider Paid by SFA                | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+		| Levy account debited                | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+		| SFA Levy employer budget            | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+		| SFA Levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+		| SFA Levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+      
