@@ -762,7 +762,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "1000",
                         "1000",
                         "1000",
-                        "500",
+                        "450",
                         "450"});
             table77.AddRow(new string[] {
                         "Provider Earned from ABC",
@@ -776,15 +776,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "0",
                         "0",
-                        "0",
+                        "50",
                         "50"});
             table77.AddRow(new string[] {
                         "Provider Paid by SFA",
-                        "",
+                        "0",
                         "1000",
                         "1000",
                         "1000",
-                        "0"});
+                        "450"});
             table77.AddRow(new string[] {
                         "Payment due from ABC",
                         "0",
@@ -798,7 +798,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "0",
                         "0",
-                        "0"});
+                        "50"});
             table77.AddRow(new string[] {
                         "ABC Levy account debited",
                         "0",
@@ -811,7 +811,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "1000",
                         "1000",
                         "1000",
-                        "500",
+                        "0",
                         "0"});
             table77.AddRow(new string[] {
                         "SFA Levy co-funding budget",

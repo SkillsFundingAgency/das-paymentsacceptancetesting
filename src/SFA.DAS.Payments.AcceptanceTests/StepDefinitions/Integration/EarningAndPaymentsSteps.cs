@@ -240,7 +240,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                                                 ?? table.Rows.RowWithKey($"{RowKeys.CoFinanceEmployerPayment}{employer.Name}");
 
                         VerifyLevyPayments(ukprn, uln, periodName, periodDate, employer.AccountId, colIndex, levyPaidRow);
-                        VerifyEmployerCofinancePayments(ukprn, uln, periodName, periodDate, employer.AccountId, colIndex, employerCofundRow);
+                        VerifyEmployerCofinancePayments(ukprn, uln, periodName, periodDate, employer.AccountId, colIndex, employerCofundRow, employer.LearnersType);
                     }
                 }
             }
@@ -347,7 +347,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             Assert.AreEqual(expectedGovtPayment, actualGovtPayment, $"Expected a non levy contract government co-finance payment of {expectedGovtPayment} but made a payment of {actualGovtPayment} for {periodName}");
         }
         private void VerifyEmployerCofinancePayments(long ukprn,long? uln, string periodName, DateTime periodDate, long accountId,
-            int colIndex, TableRow employerCofundRow)
+            int colIndex, TableRow employerCofundRow, LearnerType learnersType)
         {
             if (employerCofundRow == null)
             {
@@ -358,12 +358,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
 
             var cofinancePayments = PaymentsDataHelper.GetAccountPaymentsForPeriod(
                                                         ukprn,
-                                                        accountId,
+                                                        learnersType == LearnerType.ProgrammeOnlyNonDas ?  (long?)null : accountId ,
                                                         uln,
                                                         employerPaymentDate.Year,
                                                         employerPaymentDate.Month,
                                                         FundingSource.CoInvestedEmployer,
-                                                        ContractType.ContractWithEmployer,
+                                                         learnersType == LearnerType.ProgrammeOnlyNonDas ? ContractType.ContractWithSfa : ContractType.ContractWithEmployer,
                                                         EnvironmentVariables)
                                     ?? new PaymentEntity[0];
 
