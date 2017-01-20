@@ -42,10 +42,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                         learnRefNumber,
                         learningDelivery.StartDate,
                         learningDelivery.PlannedEndDate,
-                        learningDelivery.ProgrammeType,
+                        ProgrammeType = learningDelivery.ProgrammeType > 0 ? learningDelivery.ProgrammeType : (int?)null,
                         StandardCode = learningDelivery.StandardCode > 0 ? learningDelivery.StandardCode : (long?)null,
-                        learningDelivery.FrameworkCode,
-                        learningDelivery.PathwayCode
+                        FrameworkCode = learningDelivery.FrameworkCode > 0 ? learningDelivery.FrameworkCode : (int?)null,
+                        PathwayCode = learningDelivery.PathwayCode > 0 ? learningDelivery.PathwayCode : (int?)null
                     });
 
             }

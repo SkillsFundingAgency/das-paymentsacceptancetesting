@@ -25,7 +25,7 @@ Feature: 2 learners, paid in priority order
                 | Payment due from Employer      | 0     | 0     | 0     | 0     | ... | 0     | 0     |
                 | Levy account debited           | 0     | 1000  | 1000  | 1000  | ... | 1000  | 1000  |
                 | SFA Levy employer budget       | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     |
-                | SFA Levy co-funded budget      | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+                | SFA Levy co-funding budget     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
                 | SFA non-Levy co-funding budget | 0     | 0     | 0     | 0     | ... | 0     | 0     |
         And the provider earnings and payments break down for ULN 456 as follows:
                 | Type                           | 08/17 | 09/17 | 10/17 | 11/17 | ... | 07/18 | 08/18 |
@@ -36,7 +36,7 @@ Feature: 2 learners, paid in priority order
                 | Payment due from Employer      | 0     | 0     | 0     | 0     | ... | 0     | 0     |
                 | Levy account debited           | 0     | 1000  | 1000  | 1000  | ... | 1000  | 1000  |
                 | SFA Levy employer budget       | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     |
-                | SFA Levy co-funded budget      | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+                | SFA Levy co-funding budget     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
                 | SFA non-Levy co-funding budget | 0     | 0     | 0     | 0     | ... | 0     | 0     |
         And the provider earnings and payments break down as follows:
                 | Type                           | 08/17 | 09/17 | 10/17 | 11/17 | ... | 07/18 | 08/18 |
@@ -47,7 +47,7 @@ Feature: 2 learners, paid in priority order
                 | Payment due from Employer      | 0     | 0     | 0     | 0     | ... | 0     | 0     |
                 | Levy account debited           | 0     | 2000  | 2000  | 2000  | ... | 2000  | 2000  |
                 | SFA Levy employer budget       | 2000  | 2000  | 2000  | 2000  | ... | 2000  | 0     |
-                | SFA Levy co-funded budget      | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+                | SFA Levy co-funding budget     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
                 | SFA non-Levy co-funding budget | 0     | 0     | 0     | 0     | ... | 0     | 0     |
 
 
@@ -72,7 +72,7 @@ Feature: 2 learners, paid in priority order
                 | Payment due from Employer      | 0     | 0     | 0     | 0     | ... | 0     | 0     |
                 | Levy account debited           | 0     | 1000  | 1000  | 1000  | ... | 1000  | 1000  |
                 | SFA Levy employer budget       | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     |
-                | SFA Levy co-funded budget      | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+                | SFA Levy co-funding budget     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
                 | SFA non-Levy co-funding budget | 0     | 0     | 0     | 0     | ... | 0     | 0     |
         And the provider earnings and payments break down for ULN 456 as follows:
                 | Type                           | 08/17 | 09/17 | 10/17 | 11/17 | ... | 07/18 | 08/18 |
@@ -83,7 +83,7 @@ Feature: 2 learners, paid in priority order
                 | Payment due from Employer      | 0     | 100   | 100   | 100   | ... | 100   | 100   |
                 | Levy account debited           | 0     | 0     | 0     | 0     | ... | 0     | 0     |
                 | SFA Levy employer budget       | 0     | 0     | 0     | 0     | ... | 0     | 0     |
-                | SFA Levy co-funded budget      | 900   | 900   | 900   | 900   | ... | 900   | 0     |
+                | SFA Levy co-funding budget     | 900   | 900   | 900   | 900   | ... | 900   | 0     |
                 | SFA non-Levy co-funding budget | 0     | 0     | 0     | 0     | ... | 0     | 0     |
         And the provider earnings and payments break down as follows:
                 | Type                           | 08/17 | 09/17 | 10/17 | 11/17 | ... | 07/18 | 08/18 |
@@ -94,7 +94,7 @@ Feature: 2 learners, paid in priority order
                 | Payment due from Employer      | 0     | 100   | 100   | 100   | ... | 100   | 100   |
                 | Levy account debited           | 0     | 1000  | 1000  | 1000  | ... | 1000  | 1000  |
                 | SFA Levy employer budget       | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     |
-                | SFA Levy co-funded budget      | 900   | 900   | 900   | 900   | ... | 900   | 0     |
+                | SFA Levy co-funding budget     | 900   | 900   | 900   | 900   | ... | 900   | 0     |
                 | SFA non-Levy co-funding budget | 0     | 0     | 0     | 0     | ... | 0     | 0     |
 
 
@@ -119,7 +119,7 @@ Feature: 2 learners, paid in priority order
                 | Payment due from Employer      | 0     | 0     | 0     | 0     | ... | 0     | 0     |
                 | Levy account debited           | 0     | 1000  | 1000  | 1000  | ... | 1000  | 1000  |
                 | SFA Levy employer budget       | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     |
-                | SFA Levy co-funded budget      | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+                | SFA Levy co-funding budget     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
                 | SFA non-Levy co-funding budget | 0     | 0     | 0     | 0     | ... | 0     | 0     |
         And the provider earnings and payments break down for ULN 456 as follows:
                 | Type                           | 08/17 | 09/17 | 10/17 | 11/17 | ... | 07/18 | 08/18 |
@@ -130,7 +130,7 @@ Feature: 2 learners, paid in priority order
                 | Payment due from Employer      | 0     | 50    | 50    | 50    | ... | 50    | 50    |
                 | Levy account debited           | 0     | 500   | 500   | 500   | ... | 500   | 500   |
                 | SFA Levy employer budget       | 500   | 500   | 500   | 500   | ... | 500   | 0     |
-                | SFA Levy co-funded budget      | 450   | 450   | 450   | 450   | ... | 450   | 0     |
+                | SFA Levy co-funding budget     | 450   | 450   | 450   | 450   | ... | 450   | 0     |
                 | SFA non-Levy co-funding budget | 0     | 0     | 0     | 0     | ... | 0     | 0     |
         And the provider earnings and payments break down as follows:
                 | Type                           | 08/17 | 09/17 | 10/17 | 11/17 | ... | 07/18 | 08/18 |
@@ -141,5 +141,5 @@ Feature: 2 learners, paid in priority order
                 | Payment due from Employer      | 0     | 50    | 50    | 50    | ... | 50    | 50    |
                 | Levy account debited           | 0     | 1500  | 1500  | 1500  | ... | 1500  | 1500  |
                 | SFA Levy employer budget       | 1500  | 1500  | 1500  | 1500  | ... | 1500  | 0     |
-                | SFA Levy co-funded budget      | 450   | 450   | 450   | 450   | ... | 450   | 0     |
+                | SFA Levy co-funding budget     | 450   | 450   | 450   | 450   | ... | 450   | 0     |
                 | SFA non-Levy co-funding budget | 0     | 0     | 0     | 0     | ... | 0     | 0     |
