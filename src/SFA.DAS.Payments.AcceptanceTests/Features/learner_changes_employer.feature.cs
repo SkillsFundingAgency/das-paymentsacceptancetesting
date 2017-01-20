@@ -784,13 +784,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "1000",
                         "1000",
                         "1000",
-<<<<<<< HEAD
                         "450"});
-            table69.AddRow(new string[] {
-=======
-                        "0"});
             table77.AddRow(new string[] {
->>>>>>> 44792a66d160741920ed2b131976f2df851fea00
                         "Payment due from ABC",
                         "0",
                         "0",
@@ -803,13 +798,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "0",
                         "0",
-<<<<<<< HEAD
                         "50"});
-            table69.AddRow(new string[] {
-=======
-                        "0"});
             table77.AddRow(new string[] {
->>>>>>> 44792a66d160741920ed2b131976f2df851fea00
                         "ABC Levy account debited",
                         "0",
                         "1000",
