@@ -307,6 +307,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                 Name = l.Name,
                 Uln = l.Uln,
                 LearnRefNumber = l.LearnRefNumber,
+                DateOfBirth=l.DateOfBirth,
                 LearningDelivery = new LearningDelivery
                 {
                     LearningDeliveryFams = l.LearningDelivery.LearningDeliveryFams,
@@ -457,16 +458,18 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                     });
                 }
 
+              
+
                 var learner = new Learner
                 {
                     Name = table.Rows[rowIndex].ContainsKey("ULN") ? table.Rows[rowIndex]["ULN"] : string.Empty,
-
+                 
                     LearningDelivery = new LearningDelivery
                     {
                         LearningDeliveryFams = StepDefinitionsContext.ReferenceDataContext.LearningDeliveryFams,
-                        LearnerType = table.Header.Contains("learner type")
-                            ? GetLearnerType(table.Rows[rowIndex]["learner type"])
-                            : LearnerType.ProgrammeOnlyDas,
+                        LearnerType = table.Header.Contains("learner type") ?
+                                    GetLearnerType(table.Rows[rowIndex]["learner type"])
+                                    : LearnerType.ProgrammeOnlyDas,
                         StartDate = DateTime.Parse(table.Rows[rowIndex]["start date"]),
                         PlannedEndDate = table.Header.Contains("planned end date") ? 
                                         DateTime.Parse(table.Rows[rowIndex]["planned end date"]) : 
@@ -478,7 +481,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                                 : (DateTime?)DateTime.Parse(table.Rows[rowIndex]["actual end date"]),
                         CompletionStatus = table.Header.Contains("completion status") ?
                             IlrTranslator.TranslateCompletionStatus(table.Rows[rowIndex]["completion status"]) :
-                            CompletionStatus.InProgress,
+                            Enums.CompletionStatus.InProgress,
 
                         FrameworkCode = table.Header.Contains("framework code") ? int.Parse(table.Rows[rowIndex]["framework code"]) : IlrBuilder.Defaults.FrameworkCode,
                         ProgrammeType = table.Header.Contains("programme type") ? int.Parse(table.Rows[rowIndex]["programme type"]) : IlrBuilder.Defaults.ProgrammeType,
@@ -498,6 +501,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 
                 learner.Uln = learner.Uln > 0 ? learner.Uln : long.Parse(IdentifierGenerator.GenerateIdentifier(10, false));
                 learner.LearnRefNumber = learner.Uln.ToString();
+
+                learner.DateOfBirth = learner.LearningDelivery.LearnerType == LearnerType.ProgrammeOnlyDas16To18 ?
+                                      learner.LearningDelivery.StartDate.AddYears(-17) :
+                                      new DateTime(1985, 10, 10);
 
                 var standardCode = table.Header.Contains("standard code") ? int.Parse(table.Rows[rowIndex]["standard code"]) : IlrBuilder.Defaults.StandardCode;
 
@@ -545,9 +552,21 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 
         private LearnerType GetLearnerType(string learnerType)
         {
-            return learnerType.Equals("programme only non-DAS", StringComparison.OrdinalIgnoreCase)
-                ? LearnerType.ProgrammeOnlyNonDas
-                : LearnerType.ProgrammeOnlyDas;
+            LearnerType result = LearnerType.ProgrammeOnlyDas;
+            switch (learnerType.Replace(" ",string.Empty).ToLowerInvariant())
+                {
+                    case "programmeonlynon-das":
+                        result= LearnerType.ProgrammeOnlyNonDas;
+                        break;
+                    case "programmeonlydas":
+                        result = LearnerType.ProgrammeOnlyDas;
+                        break;
+                    case "16-18programmeonlydas":
+                        result = LearnerType.ProgrammeOnlyDas16To18;
+                        break;
+
+                }
+            return result;
         }
     }
 }

@@ -143,7 +143,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
                 actualEndDate = plannedEndDate.AddMonths(variation);
             }
 
-            var learner = StepDefinitionsContext.CreateLearner(agreedPrice, startDate, plannedEndDate,actualEndDate);
+            var learner = StepDefinitionsContext.CreateLearner(agreedPrice, startDate, plannedEndDate,actualEndDate,Enums.CompletionStatus.Completed);
 
             
             // Store spec values in context
