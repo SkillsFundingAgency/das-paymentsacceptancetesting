@@ -10,6 +10,7 @@ using SFA.DAS.Payments.AcceptanceTests.ExecutionEnvironment;
 using SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base;
 using TechTalk.SpecFlow;
 using SFA.DAS.Payments.AcceptanceTests.Entities;
+using System.Collections.Generic;
 
 namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
 {
@@ -112,6 +113,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             var onProgramRow = table.Rows.RowWithKey(RowKeys.OnProgramPayment);
             var completionRow = table.Rows.RowWithKey(RowKeys.CompletionPayment);
             var balancingRow = table.Rows.RowWithKey(RowKeys.BalancingPayment);
+            var employerIncentiveRow = table.Rows.RowWithKey(RowKeys.EmployerIncentive);
+            var providerIncentiveRow = table.Rows.RowWithKey(RowKeys.ProviderIncentive);
 
             for (var colIndex = 1; colIndex < table.Header.Count; colIndex++)
             {
@@ -128,6 +131,20 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                 VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, TransactionType.OnProgram, onProgramRow);
                 VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, TransactionType.Completion, completionRow);
                 VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, TransactionType.Balancing, balancingRow);
+
+                VerifyPaymentsDueByTransactionType(ukprn, periodName, 
+                                                    periodDate, colIndex, 
+                                                    new TransactionType[] {
+                                                            TransactionType.First16To18EmployerIncentive,
+                                                            TransactionType.Second16To18EmployerIncentive  }, 
+                                                    employerIncentiveRow);
+                VerifyPaymentsDueByTransactionType(ukprn, periodName, 
+                                                    periodDate, colIndex, 
+                                                    new TransactionType[] {
+                                                            TransactionType.First16To18ProviderIncentive,
+                                                            TransactionType.Second16To18ProviderIncentive},
+                                                    providerIncentiveRow);
+
             }
         }
 
@@ -187,11 +204,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             }
         }
        
-        private void VerifyProviderEarningsAndPayments(long ukprn, long? uln , Table table)
+        private void VerifyProviderEarningsAndPayments(long ukprn, long? uln, Table table)
         {
-            
             var earnedRow = table.Rows.RowWithKey(RowKeys.Earnings);
-            var govtCofundRow = table.Rows.RowWithKey(RowKeys.CoFinanceGovernmentPayment);
+            var govtCofundLevyContractRow = table.Rows.RowWithKey(RowKeys.CoFinanceGovernmentPaymentForLevyContracts);
+            var govtCofundNonLevyContractRow = table.Rows.RowWithKey(RowKeys.CoFinanceGovernmentPaymentForNonLevyContracts);
+            var govtAdditionalPaymentsRow = table.Rows.RowWithKey(RowKeys.SfaAdditionalPaymentsBudget);
 
             for (var colIndex = 1; colIndex < table.Header.Count; colIndex++)
             {
@@ -207,18 +225,23 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
 
 
                 VerifyEarningsForPeriod(ukprn,uln, periodName, colIndex, earnedRow);
-                VerifyGovtCofinancePayments(ukprn,uln, periodName, periodDate, colIndex, govtCofundRow);
+                VerifyGovtCofinanceLevyContractPayments(ukprn,uln, periodName, periodDate, colIndex, govtCofundLevyContractRow);
+                VerifyGovtCofinanceNonLevyContractPayments(ukprn, uln, periodName, periodDate, colIndex, govtCofundNonLevyContractRow);
+                VerifyAdditionalGovtFundedEarnings(ukprn, uln, periodName, periodDate, colIndex, govtAdditionalPaymentsRow);
 
-                foreach (var employer in StepDefinitionsContext.ReferenceDataContext.Employers)
+                if (StepDefinitionsContext.ReferenceDataContext.Employers != null)
                 {
-                    var levyPaidRow = table.Rows.RowWithKey(RowKeys.DefaultLevyPayment)
-                        ?? table.Rows.RowWithKey($"{employer.Name}{RowKeys.LevyPayment}");
+                    foreach (var employer in StepDefinitionsContext.ReferenceDataContext.Employers)
+                    {
+                        var levyPaidRow = table.Rows.RowWithKey(RowKeys.DefaultLevyPayment)
+                            ?? table.Rows.RowWithKey($"{employer.Name}{RowKeys.LevyPayment}");
 
-                    var employerCofundRow = table.Rows.RowWithKey(RowKeys.DefaultCoFinanceEmployerPayment)
-                                            ?? table.Rows.RowWithKey($"{RowKeys.CoFinanceEmployerPayment}{employer.Name}");
+                        var employerCofundRow = table.Rows.RowWithKey(RowKeys.DefaultCoFinanceEmployerPayment)
+                                                ?? table.Rows.RowWithKey($"{RowKeys.CoFinanceEmployerPayment}{employer.Name}");
 
-                    VerifyLevyPayments(ukprn,uln, periodName, periodDate, employer.AccountId, colIndex, levyPaidRow);
-                    VerifyEmployerCofinancePayments(ukprn,uln, periodName, periodDate, employer.AccountId, colIndex, employerCofundRow);
+                        VerifyLevyPayments(ukprn, uln, periodName, periodDate, employer.AccountId, colIndex, levyPaidRow);
+                        VerifyEmployerCofinancePayments(ukprn, uln, periodName, periodDate, employer.AccountId, colIndex, employerCofundRow, employer.LearnersType);
+                    }
                 }
             }
         }
@@ -256,15 +279,22 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
 
             var levyPaymentDate = periodDate.AddMonths(-1);
 
-            var levyPayments = PaymentsDataHelper.GetAccountPaymentsForPeriod(ukprn, accountId,uln,
-                levyPaymentDate.Year, levyPaymentDate.Month,FundingSource.Levy, EnvironmentVariables)
+            var levyPayments = PaymentsDataHelper.GetAccountPaymentsForPeriod(
+                                                    ukprn,
+                                                    accountId,
+                                                    uln,
+                                                    levyPaymentDate.Year,
+                                                    levyPaymentDate.Month,
+                                                    FundingSource.Levy,
+                                                    ContractType.ContractWithEmployer,
+                                                    EnvironmentVariables)
                                ?? new PaymentEntity[0];
 
             var actualLevyPayment = levyPayments.Length == 0 ? 0m : levyPayments.Sum(p => p.Amount);
             var expectedLevyPayment = decimal.Parse(levyPaidRow[colIndex]);
             Assert.AreEqual(expectedLevyPayment, actualLevyPayment, $"Expected a levy payment of {expectedLevyPayment} but made a payment of {actualLevyPayment} for {periodName}");
         }
-        private void VerifyGovtCofinancePayments(long ukprn, 
+        private void VerifyGovtCofinanceLevyContractPayments(long ukprn, 
                                                 long? uln,
                                                 string periodName, 
                                                 DateTime periodDate,
@@ -276,18 +306,48 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                 return;
             }
 
-            var cofinancePayments = PaymentsDataHelper.GetPaymentsForPeriod(ukprn,uln,
-                                                                     periodDate.Year, periodDate.Month,
-                                                                     FundingSource.CoInvestedSfa, 
-                                                                     EnvironmentVariables)
+            var cofinancePayments = PaymentsDataHelper.GetPaymentsForPeriod(
+                                                        ukprn,
+                                                        uln,
+                                                        periodDate.Year,
+                                                        periodDate.Month,
+                                                        FundingSource.CoInvestedSfa,
+                                                        ContractType.ContractWithEmployer,
+                                                        EnvironmentVariables)
                                     ?? new PaymentEntity[0];
 
             var actualGovtPayment = cofinancePayments.Sum(p => p.Amount);
             var expectedGovtPayment = decimal.Parse(govtCofundRow[colIndex]);
-            Assert.AreEqual(expectedGovtPayment, actualGovtPayment, $"Expected a government co-finance payment of {expectedGovtPayment} but made a payment of {actualGovtPayment} for {periodName}");
+            Assert.AreEqual(expectedGovtPayment, actualGovtPayment, $"Expected a levy contract government co-finance payment of {expectedGovtPayment} but made a payment of {actualGovtPayment} for {periodName}");
+        }
+        private void VerifyGovtCofinanceNonLevyContractPayments(long ukprn,
+                                                long? uln,
+                                                string periodName,
+                                                DateTime periodDate,
+                                                int colIndex,
+                                                TableRow govtCofundRow)
+        {
+            if (govtCofundRow == null)
+            {
+                return;
+            }
+
+            var cofinancePayments = PaymentsDataHelper.GetPaymentsForPeriod(
+                                                        ukprn,
+                                                        uln,
+                                                        periodDate.Year,
+                                                        periodDate.Month,
+                                                        FundingSource.CoInvestedSfa,
+                                                        ContractType.ContractWithSfa,
+                                                        EnvironmentVariables)
+                                    ?? new PaymentEntity[0];
+
+            var actualGovtPayment = cofinancePayments.Sum(p => p.Amount);
+            var expectedGovtPayment = decimal.Parse(govtCofundRow[colIndex]);
+            Assert.AreEqual(expectedGovtPayment, actualGovtPayment, $"Expected a non levy contract government co-finance payment of {expectedGovtPayment} but made a payment of {actualGovtPayment} for {periodName}");
         }
         private void VerifyEmployerCofinancePayments(long ukprn,long? uln, string periodName, DateTime periodDate, long accountId,
-            int colIndex, TableRow employerCofundRow)
+            int colIndex, TableRow employerCofundRow, LearnerType learnersType)
         {
             if (employerCofundRow == null)
             {
@@ -296,31 +356,84 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
 
             var employerPaymentDate = periodDate.AddMonths(-1);
 
-            var cofinancePayments = PaymentsDataHelper.GetAccountPaymentsForPeriod(ukprn, accountId,uln,
-                employerPaymentDate.Year, employerPaymentDate.Month,FundingSource.CoInvestedEmployer, EnvironmentVariables)
+            var cofinancePayments = PaymentsDataHelper.GetAccountPaymentsForPeriod(
+                                                        ukprn,
+                                                        learnersType == LearnerType.ProgrammeOnlyNonDas ?  (long?)null : accountId ,
+                                                        uln,
+                                                        employerPaymentDate.Year,
+                                                        employerPaymentDate.Month,
+                                                        FundingSource.CoInvestedEmployer,
+                                                         learnersType == LearnerType.ProgrammeOnlyNonDas ? ContractType.ContractWithSfa : ContractType.ContractWithEmployer,
+                                                        EnvironmentVariables)
                                     ?? new PaymentEntity[0];
 
             var actualEmployerPayment = cofinancePayments.Sum(p => p.Amount);
             var expectedEmployerPayment = decimal.Parse(employerCofundRow[colIndex]);
             Assert.AreEqual(expectedEmployerPayment, actualEmployerPayment, $"Expected a employer co-finance payment of {expectedEmployerPayment} but made a payment of {actualEmployerPayment} for {periodName}");
         }
-        private void VerifyPaymentsDueByTransactionType(long ukprn, string periodName, DateTime periodDate, int colIndex, TransactionType paymentType,
-            TableRow paymentsRow)
+        private void VerifyPaymentsDueByTransactionType(long ukprn, 
+                                                        string periodName, 
+                                                        DateTime periodDate, 
+                                                        int colIndex, 
+                                                        TransactionType paymentType, 
+                                                        TableRow paymentsRow)
+        {
+            VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, new TransactionType[] { paymentType }, paymentsRow);
+        }
+
+        private void VerifyPaymentsDueByTransactionType(long ukprn, 
+                                                        string periodName, 
+                                                        DateTime periodDate, 
+                                                        int colIndex, 
+                                                        TransactionType[] paymentTypes,
+                                                        TableRow paymentsRow)
         {
             if (paymentsRow == null)
             {
                 return;
             }
 
+            var paymentTypesFilter = Array.ConvertAll(paymentTypes, value => (int)value);
+            
             var paymentsDueDate = periodDate.AddMonths(-1);
 
             var paymentsDue = PaymentsDueDataHelper.GetPaymentsDueForPeriod(ukprn,
                 paymentsDueDate.Year, paymentsDueDate.Month, EnvironmentVariables)
                               ?? new RequiredPaymentEntity[0];
 
-            var actualPaymentDue = paymentsDue.Length == 0 ? 0m : paymentsDue.Where(p => p.TransactionType == (int)paymentType).Sum(p => p.AmountDue);
+            var actualPaymentDue = paymentsDue.Length == 0 ? 0m : paymentsDue.Where(p => paymentTypesFilter.Contains(p.TransactionType)).Sum(p => p.AmountDue);
             var expectedPaymentDue = decimal.Parse(paymentsRow[colIndex]);
-            Assert.AreEqual(expectedPaymentDue, actualPaymentDue, $"Expected a {paymentType} payment due of {expectedPaymentDue} but made a payment of {actualPaymentDue} for {periodName}");
+            
+            Assert.AreEqual(expectedPaymentDue, actualPaymentDue, $"Expected {string.Join(" and ",paymentTypes)} payment due of {expectedPaymentDue} but made a payment of {actualPaymentDue} for {periodName}");
+        }
+
+        private void VerifyAdditionalGovtFundedEarnings(long ukprn,
+                                      long? uln,
+                                      string periodName,
+                                      DateTime periodDate,
+                                      int colIndex,
+                                      TableRow additionalEarningsRow)
+        {
+            if (additionalEarningsRow == null)
+            {
+                return;
+            }
+
+            var additionalEarnings = PaymentsDataHelper.GetPaymentsForPeriod(
+                                                       ukprn,
+                                                       uln,
+                                                       periodDate.Year,
+                                                       periodDate.Month,
+                                                       FundingSource.FullyFundedSfa,
+                                                       ContractType.ContractWithEmployer,
+                                                       EnvironmentVariables)
+                                   ?? new PaymentEntity[0];
+
+            var actualEarningsDue = additionalEarnings.Length == 0 ? 0m : additionalEarnings.Sum(p => p.Amount);
+
+            var expectedPaymentDue = decimal.Parse(additionalEarningsRow[colIndex]);
+            Assert.AreEqual(expectedPaymentDue, actualEarningsDue, $"Expected additional earnings of {expectedPaymentDue} but earned a payment of {actualEarningsDue} for {periodName}");
+
         }
     }
 }

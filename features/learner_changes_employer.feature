@@ -123,17 +123,18 @@ Feature: Provider earnings and payments where a learner changes employers
             | Type                | 08/17 - 10/17 | 11/17 onwards |
             | Matching commitment | ABC           |               |
         And the provider earnings and payments break down as follows:
-            | Type                       | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 |
-            | Provider Earned Total      | 1000  | 1000  | 1000  | 500   | 500   |
-            | Provider Earned from SFA   | 1000  | 1000  | 1000  | 500   | 450   |
-            | Provider Earned from ABC   | 0     | 0     | 0     | 0     | 0     |
-            | Provider Earned from XYZ   | 0     | 0     | 0     | 0     | 50    |
-            | Provider Paid by SFA       |       | 1000  | 1000  | 1000  | 0     |
-            | Payment due from ABC       | 0     | 0     | 0     | 0     | 0     |
-            | Payment due from XYZ       | 0     | 0     | 0     | 0     | 0     |
-            | ABC Levy account debited   | 0     | 1000  | 1000  | 1000  | 0     |
-            | SFA Levy employer budget   | 1000  | 1000  | 1000  | 500   | 0     |
-            | SFA Levy co-funding budget | 0     | 0     | 0     | 0     | 0     |
+            | Type                           | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 |
+            | Provider Earned Total          | 1000  | 1000  | 1000  | 500   | 500   |
+            | Provider Earned from SFA       | 1000  | 1000  | 1000  | 450   | 450   |
+            | Provider Earned from ABC       | 0     | 0     | 0     | 0     | 0     |
+            | Provider Earned from XYZ       | 0     | 0     | 0     | 50    | 50    |
+            | Provider Paid by SFA           | 0     | 1000  | 1000  | 1000  | 450   |
+            | Payment due from ABC           | 0     | 0     | 0     | 0     | 0     |
+            | Payment due from XYZ           | 0     | 0     | 0     | 0     | 50    |
+            | ABC Levy account debited       | 0     | 1000  | 1000  | 1000  | 0     |
+            | SFA Levy employer budget       | 1000  | 1000  | 1000  | 0     | 0     |
+            | SFA Levy co-funding budget     | 0     | 0     | 0     | 0     | 0     |
+            | SFA non-Levy co-funding budget | 0     | 0     | 0     | 450   | 450   |
 
 
 #change of employer mid month

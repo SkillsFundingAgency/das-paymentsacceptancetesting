@@ -98,7 +98,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
             return Providers.SingleOrDefault(x=> x.Name.Equals(provider,StringComparison.CurrentCultureIgnoreCase));
         }
 
-        public Learner CreateLearner(decimal agreedPrice,DateTime startDate,DateTime endDate, DateTime? actualEndDate = null)
+        public Learner CreateLearner(decimal agreedPrice, DateTime startDate, DateTime endDate, DateTime? actualEndDate = null, CompletionStatus completionStatus = CompletionStatus.Continuing)
         {
             var learner = new Learner
             {
@@ -113,13 +113,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
                 StartDate = startDate,
                 PlannedEndDate = endDate,
                 ActualEndDate = actualEndDate,
-                CompletionStatus = CompletionStatus.Completed,
+                CompletionStatus = completionStatus,
                 PriceEpisodes = new[]
                  {
                         new PriceEpisode
                         {
                             Id = IdentifierGenerator.GenerateIdentifier(25),
                             StartDate = startDate,
+                            EndDate = actualEndDate.HasValue ? actualEndDate : endDate,
                             TotalPrice = agreedPrice,
                             Tnp1 = agreedPrice * 0.8m,
                             Tnp2 = agreedPrice * 0.2m

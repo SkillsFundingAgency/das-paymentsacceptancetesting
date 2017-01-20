@@ -45,8 +45,8 @@ Feature: Provider earnings and payments where learner completes on time and is f
             | Payment due from Employer     | 0     | 100   | 100   | ... | 100   | 100   | 300   |
             | Levy account debited          | 0     | 0     | 0     | ... | 0     | 0     | 0     |
             | SFA Levy employer budget      | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-            | SFA Levy co-funded budget     | 900   | 900   | 900   | ... | 900   | 2700  | 0     |
-            | SFA non-Levy co-funding budget| 0     | 0     | 0     | ... | 0     | 0     |       |
+            | SFA Levy co-funding budget    | 900   | 900   | 900   | ... | 900   | 2700  | 0     |
+            | SFA non-Levy co-funding budget| 0     | 0     | 0     | ... | 0     | 0     | 0     |
 
 
     Scenario: 2 DAS learners, only enough levy to cover 1
@@ -70,11 +70,10 @@ Feature: Provider earnings and payments where learner completes on time and is f
             | Payment due from Employer     | 0     | 150   | 100   | ... | 100   | 100   | 300   |
             | Levy account debited          | 0     | 0     | 500   | ... | 500   | 500   | 1500  |
             | SFA Levy employer budget      | 0     | 500   | 500   | ... | 500   | 1500  | 0     |
-            | SFA Levy co-funded budget     | 1350  | 900   | 900   | ... | 900   | 2700  | 0     |
-            | SFA non-Levy co-funding budget| 0     | 0     | 0     | ... | 0     | 0     |       |
+            | SFA Levy co-funding budget    | 1350  | 900   | 900   | ... | 900   | 2700  | 0     |
+            | SFA non-Levy co-funding budget| 0     | 0     | 0     | ... | 0     | 0     | 0     |
 
 
-    @ignore
     Scenario: A non-DAS learner, learner finishes on time
         When an ILR file is submitted with the following data:
             | agreed price | learner type           | start date | planned end date | actual end date | completion status |
@@ -88,7 +87,7 @@ Feature: Provider earnings and payments where learner completes on time and is f
             | Payment due from Employer     | 0     | 100   | 100   | ... | 100   | 100   | 300   |
             | Levy account debited          | 0     | 0     | 0     | ... | 0     | 0     | 0     |
             | SFA Levy employer budget      | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-            | SFA Levy co-funded budget     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+            | SFA Levy co-funding budget    | 0     | 0     | 0     | ... | 0     | 0     | 0     |
             | SFA non-Levy co-funding budget| 900   | 900   | 900   | ... | 900   | 2700  | 0     |
 
 
@@ -108,8 +107,8 @@ Feature: Provider earnings and payments where learner completes on time and is f
             | Payment due from Employer     | 0     | 50    | 50    | ... | 50    | 50    | 150   |
             | Levy account debited          | 0     | 500   | 500   | ... | 500   | 500   | 1500  |
             | SFA Levy employer budget      | 500   | 500   | 500   | ... | 500   | 1500  | 0     |
-            | SFA Levy co-funded budget     | 450   | 450   | 450   | ... | 450   | 1350  | 0     |
-            | SFA non-Levy co-funding budget| 0     | 0     | 0     | ... | 0     | 0     |       |
+            | SFA Levy co-funding budget    | 450   | 450   | 450   | ... | 450   | 1350  | 0     |
+            | SFA non-Levy co-funding budget| 0     | 0     | 0     | ... | 0     | 0     | 0     |
 
             
     Scenario: 2 learners, 2 employers, 1 provider - enough levy
@@ -135,7 +134,7 @@ Feature: Provider earnings and payments where learner completes on time and is f
             | employer 1 Levy account debited | 0     | 500   | 500   | ... | 500   | 500   | 1500  |
             | employer 2 Levy account debited | 0     | 1000  | 1000  | ... | 1000  | 1000  | 3000  |
             | SFA Levy employer budget        | 1500  | 1500  | 1500  | ... | 1500  | 3000  | 0     |
-            | SFA Levy co-funded budget       | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+            | SFA Levy co-funding budget      | 0     | 0     | 0     | ... | 0     | 0     | 0     |
             | SFA non-Levy co-funding budget  | 0     | 0     | 0     | ... | 0     | 0     | 0     |
 
 
@@ -166,7 +165,7 @@ Feature: Provider earnings and payments where learner completes on time and is f
             | employer 1 Levy account debited | 0     | 0     | 100   | ... | 100   | 250   | 500   |
             | employer 2 Levy account debited | 0     | 500   | 500   | ... | 500   | 500   | 1500  |
             | SFA Levy employer budget        | 500   | 600   | 600   | ... | 750   | 2000  | 0     |
-            | SFA Levy co-funded budget       | 900   | 810   | 810   | ... | 675   | 2250  | 0     |
+            | SFA Levy co-funding budget      | 900   | 810   | 810   | ... | 675   | 2250  | 0     |
             | SFA non-Levy co-funding budget  | 0     | 0     | 0     | ... | 0     | 0     | 0     |
             
             
@@ -189,7 +188,7 @@ Feature: Provider earnings and payments where learner completes on time and is f
             | Payment due from Employer       | 0     | 0     | 0     | ... | 0     | 0     | 0     |
             | employer 1 Levy account debited | 0     | 500   | 500   | ... | 500   | 500   | 1500  |
             | SFA Levy employer budget        | 0     | 500   | 500   | ... | 500   | 1500  | 0     |
-            | SFA Levy co-funded budget       | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+            | SFA Levy co-funding budget      | 0     | 0     | 0     | ... | 0     | 0     | 0     |
             | SFA non-Levy co-funding budget  | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         And the earnings and payments break down for provider B is as follows:
             | Type                            | 09/17 | 10/17 | 11/17 | ... | 08/18 | 09/18 | 10/18 |
@@ -200,7 +199,7 @@ Feature: Provider earnings and payments where learner completes on time and is f
             | Payment due from Employer       | 0     | 0     | 0     | ... | 0     | 0     | 0     |
             | employer 1 Levy account debited | 0     | 1000  | 1000  | ... | 1000  | 1000  | 3000  |
             | SFA Levy employer budget        | 1000  | 1000  | 1000  | ... | 1000  | 3000  | 0     |
-            | SFA Levy co-funded budget       | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+            | SFA Levy co-funding budget      | 0     | 0     | 0     | ... | 0     | 0     | 0     |
             | SFA non-Levy co-funding budget  | 0     | 0     | 0     | ... | 0     | 0     | 0     |
 
         
@@ -225,7 +224,7 @@ Feature: Provider earnings and payments where learner completes on time and is f
             | Payment due from Employer 1     | 0     | 0     | 0     | ... | 0     | 0     | 50    |
             | employer 1 Levy account debited | 0     | 500   | 500   | ... | 500   | 500   | 1000  |
             | SFA Levy employer budget        | 0     | 500   | 500   | ... | 500   | 1000  | 0     |
-            | SFA Levy co-funded budget       | 0     | 0     | 0     | ... | 0     | 450   | 0     |
+            | SFA Levy co-funding budget      | 0     | 0     | 0     | ... | 0     | 450   | 0     |
             | SFA non-Levy co-funding budget  | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         And the earnings and payments break down for provider B is as follows:
             | Type                            | 09/17 | 10/17 | 11/17 | ... | 08/18 | 09/18 | 10/18 |
@@ -236,5 +235,5 @@ Feature: Provider earnings and payments where learner completes on time and is f
             | Payment due from Employer 1     | 0     | 75    | 75    | ... | 75    | 50    | 300   |
             | employer 1 Levy account debited | 0     | 250   | 250   | ... | 250   | 500   | 0     |
             | SFA Levy employer budget        | 250   | 250   | 250   | ... | 500   | 0     | 0     |
-            | SFA Levy co-funded budget       | 675   | 675   | 675   | ... | 450   | 2700  | 0     |
+            | SFA Levy co-funding budget      | 675   | 675   | 675   | ... | 450   | 2700  | 0     |
             | SFA non-Levy co-funding budget  | 0     | 0     | 0     | ... | 0     | 0     | 0     |

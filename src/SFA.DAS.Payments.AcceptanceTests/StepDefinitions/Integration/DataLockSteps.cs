@@ -30,6 +30,31 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             }
         }
 
+        [Then(@"the data lock status will be as follows:")]
+        public void ThenTheDataLockStatusWillBeAsFollows(Table table)
+        {
+           
+            var start = StepDefinitionsContext.GetIlrStartDate().NextCensusDate();
+            var date = start.NextCensusDate();
+            var endDate = StepDefinitionsContext.GetIlrEndDate();
+            var lastCensusDate = endDate.NextCensusDate();
+
+            while (date <= lastCensusDate)
+            {
+                var period = date.GetPeriod();
+
+                var matchesRow = table.Rows.RowWithKey(RowKeys.DataLockMatchingCommitment);
+
+                foreach (var provider in StepDefinitionsContext.Providers)
+                {
+                    VerifyProviderDataLockMatchesForPeriod(period, matchesRow, provider);
+                }
+
+                date = date.AddDays(15).NextCensusDate();
+            }
+        }
+
+
         [Then(@"a (.*) error message will be produced")]
         public void ThenADataLockErrorMessageWillBeProduced(string errorCode)
         {

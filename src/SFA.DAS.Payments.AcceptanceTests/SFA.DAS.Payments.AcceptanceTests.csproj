@@ -105,6 +105,7 @@
     <Compile Include="DataHelpers\Entities\VlidationErrorEntity.cs" />
     <Compile Include="Enums\CompletionStatus.cs" />
     <Compile Include="Contexts\StepDefinitionsContext.cs" />
+    <Compile Include="Enums\ContractType.cs" />
     <Compile Include="Enums\FundingSource.cs" />
     <Compile Include="Enums\LearnerType.cs" />
     <Compile Include="Contexts\ReferenceDataContext.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="Features\earnings_calc.feature.cs" />
     <Compile Include="Features\employer_stops_payments.feature.cs" />
     <Compile Include="Features\ILR_is_submitted_late.feature.cs" />
+    <Compile Include="Features\incentive_payments.feature.cs" />
     <Compile Include="Features\learner_changes_employer.feature.cs" />
     <Compile Include="Features\learner_finishes_early.feature.cs" />
     <Compile Include="Features\learner_finishes_late.feature.cs" />
@@ -167,6 +169,10 @@
     </None>
     <None Include="..\..\features\ILR_is_submitted_late.feature">
       <Link>Features\ILR_is_submitted_late.feature</Link>
+    </None>
+    <None Include="..\..\features\incentive_payments.feature">
+      <Link>Features\incentive_payments.feature</Link>
+      <LastGenOutput>incentive_payments.feature.cs</LastGenOutput>
     </None>
     <None Include="..\..\features\learner_changes_employer.feature">
       <Link>Features\learner_changes_employer.feature</Link>
