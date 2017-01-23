@@ -142,22 +142,6 @@ Scenario: When the start month recorded in the employer digital account is after
     Then a datalock error DLOCK_09 is produced
   
 
-@ILRSubmissionDataLockErrors	
-Scenario: When the employer has stopped commitment payments in the employer digital account then datalock DLOCK_10 will be produced
-
-    Given the following commitments exist for an apprentice:
-
-        | UKPRN   | ULN  | framework code | programme type | pathway code | agreed price | start date | status |
-        | 9999999 | 1234 | 450            | 2              | 1            | 10000        | 01/05/2017 | Paused |
-
-    When an ILR file is submitted with the following data:
-        
-        | UKPRN   | ULN  | framework code | programme type | pathway code | agreed price | start date |
-        | 9999999 | 1234 | 450            | 2              | 1            | 10000        | 01/05/2017 |
-      
-    Then a datalock error DLOCK_10 is produced
-
-    
 #####################################################################
 #These scenarios are for Period End submission related data lock errors
 #####################################################################
@@ -301,19 +285,3 @@ Scenario: When monthly payment process runs and the start month recorded in the 
         | 9999999 | 1234 | 450            | 2              | 1            | 10000        | 30/04/2017 |
       
     Then a datalock error DLOCK_09 is produced
-
-    
-@PeriodEndDataLockErrors	
-Scenario: When monthly payment process runs and the employer has stopped commitment payments in the employer digital account then datalock DLOCK_10 will be produced
-
-    Given the following commitments exist for an apprentice:
-
-        | UKPRN   | ULN  | framework code | programme type | pathway code | agreed price | start date | status |
-        | 9999999 | 1234 | 450            | 2              | 1            | 10000        | 01/05/2017 | Paused |
-
-    When an ILR file is submitted with the following data:
-        
-        | UKPRN   | ULN  | framework code | programme type | pathway code | agreed price | start date |
-        | 9999999 | 1234 | 450            | 2              | 1            | 10000        | 01/05/2017 |
-      
-    Then a datalock error DLOCK_10 is produced
