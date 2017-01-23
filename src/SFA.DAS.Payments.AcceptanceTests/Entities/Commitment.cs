@@ -8,9 +8,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.Entities
         public Commitment()
         {
             Status = CommitmentPaymentStatus.Active;
+            //VersionId = 1;
         }
 
         public long Id { get; set; }
+        public long VersionId { get; set; }
         public int Priority { get; set; }
         public string Learner { get; set; }
         public string Employer { get; set; }
@@ -46,6 +48,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.Entities
             }
         }
 
-        public string ComitmentIdenifier { get; set; }
+        public string CommitmentIdenifier { get; set; }
+
+        public DateTime? EffectiveFrom { get; set; }
+        public DateTime? EffectiveTo { get; set; }
     }
 }

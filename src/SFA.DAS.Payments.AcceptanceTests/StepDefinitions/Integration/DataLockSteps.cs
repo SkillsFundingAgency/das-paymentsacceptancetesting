@@ -95,10 +95,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                         Assert.AreEqual(1, commitments.Length,
                             $"Expecting to find a matching commitment for period {period} and the price episode that spans {priceEpisode.DataLockMatchKey}.");
 
-                        if (!string.IsNullOrEmpty(commitments[0].ComitmentIdenifier))
+                        if (!string.IsNullOrEmpty(commitments[0].CommitmentIdenifier))
                         {
                            
-                            Assert.AreEqual(matchingValue, commitments[0].ComitmentIdenifier,
+                            Assert.AreEqual(matchingValue, commitments[0].CommitmentIdenifier,
                                 $"Expecting to find a matching commitment for commitment id  {matchingValue} in period {period} for a price episode that spans {priceEpisode.DataLockMatchKey}.");
                         }
                         else

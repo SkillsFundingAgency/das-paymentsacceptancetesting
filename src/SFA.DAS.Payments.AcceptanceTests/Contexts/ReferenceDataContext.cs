@@ -3,6 +3,7 @@ using System.Linq;
 using SFA.DAS.Payments.AcceptanceTests.DataHelpers;
 using SFA.DAS.Payments.AcceptanceTests.Entities;
 using SFA.DAS.Payments.AcceptanceTests.Enums;
+using IlrBuilder = SFA.DAS.Payments.AcceptanceTests.Builders.IlrBuilder;
 
 namespace SFA.DAS.Payments.AcceptanceTests.Contexts
 {
@@ -36,6 +37,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
             {
                 Employer = "employer",
                 Id = long.Parse(IdentifierGenerator.GenerateIdentifier(6, false)),
+                VersionId = 1,
                 Learner = string.Empty,
                 Priority = 1,
                 Provider = "provider"

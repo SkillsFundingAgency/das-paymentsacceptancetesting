@@ -66,12 +66,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         public virtual void FeatureBackground()
         {
 #line 3
-#line 4
-testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+    #line 4
+        testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 5
-testRunner.And("the apprenticeship funding band maximum is 17000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the apprenticeship funding band maximum is 17000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 6
-testRunner.And("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
         }
         
@@ -83,36 +83,42 @@ testRunner.And("levy balance > agreed price for all months", ((string)(null)), (
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Earnings and payments for a DAS learner, levy available, where the apprenticeship" +
                     " standard changes and data lock is passed in both instances", ((string[])(null)));
 #line 8
-this.ScenarioSetup(scenarioInfo);
+    this.ScenarioSetup(scenarioInfo);
 #line 3
-this.FeatureBackground();
+    this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "commitment Id",
+                        "version Id",
                         "ULN",
                         "standard code",
                         "price effective date",
                         "planned end date",
-                        "actual end date",
-                        "agreed price"});
+                        "agreed price",
+                        "effective from",
+                        "effective to"});
             table1.AddRow(new string[] {
+                        "1",
                         "1",
                         "learner a",
                         "51",
                         "01/08/2017",
                         "01/08/2018",
-                        "31/10/2017",
-                        "15000"});
+                        "15000",
+                        "01/08/2017",
+                        "31/10/2017"});
             table1.AddRow(new string[] {
+                        "1",
                         "2",
                         "learner a",
                         "52",
-                        "03/11/2017",
+                        "01/08/2017",
                         "01/08/2018",
-                        "",
-                        "5625"});
-#line 10
-testRunner.Given("the following commitments exist on 03/12/2017:", ((string)(null)), table1, "Given ");
+                        "5625",
+                        "03/11/2017",
+                        ""});
+#line 9
+        testRunner.Given("the following commitments exist on 03/12/2017:", ((string)(null)), table1, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "ULN",
@@ -147,8 +153,8 @@ testRunner.Given("the following commitments exist on 03/12/2017:", ((string)(nul
                         "03/11/2017",
                         "1125",
                         "03/11/2017"});
-#line 15
-testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table2, "When ");
+#line 13
+        testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table2, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -158,8 +164,8 @@ testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:
                         "Matching commitment",
                         "1",
                         "2"});
-#line 20
-testRunner.Then("the data lock status of the ILR in 03/12/2017 is:", ((string)(null)), table3, "Then ");
+#line 17
+        testRunner.Then("the data lock status of the ILR in 03/12/2017 is:", ((string)(null)), table3, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -210,8 +216,8 @@ testRunner.Then("the data lock status of the ILR in 03/12/2017 is:", ((string)(n
                         "0",
                         "0",
                         "0"});
-#line 24
-testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table4, "And ");
+#line 20
+        testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table4, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -223,10 +229,10 @@ testRunner.And("the provider earnings and payments break down as follows:", ((st
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ILR changes before second Commitment starts (i.e. there is only one existing Comm" +
                     "itment in place)", ((string[])(null)));
-#line 35
-this.ScenarioSetup(scenarioInfo);
+#line 30
+    this.ScenarioSetup(scenarioInfo);
 #line 3
-this.FeatureBackground();
+    this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         "commitment Id",
@@ -234,7 +240,6 @@ this.FeatureBackground();
                         "standard code",
                         "price effective date",
                         "planned end date",
-                        "actual end date",
                         "agreed price"});
             table5.AddRow(new string[] {
                         "1",
@@ -242,10 +247,9 @@ this.FeatureBackground();
                         "51",
                         "03/08/2017",
                         "04/08/2018",
-                        "31/10/2017",
                         "15000"});
-#line 37
-testRunner.Given("the following commitments exist on 03/12/2017:", ((string)(null)), table5, "Given ");
+#line 31
+        testRunner.Given("the following commitments exist on 03/12/2017:", ((string)(null)), table5, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                         "ULN",
@@ -280,8 +284,8 @@ testRunner.Given("the following commitments exist on 03/12/2017:", ((string)(nul
                         "03/11/2017",
                         "1125",
                         "03/11/2017"});
-#line 41
-testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table6, "When ");
+#line 34
+        testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table6, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -290,9 +294,9 @@ testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:
             table7.AddRow(new string[] {
                         "Matching commitment",
                         "1",
-                        "FAIL"});
-#line 46
-testRunner.Then("the data lock status of the ILR in 03/12/2017 is:", ((string)(null)), table7, "Then ");
+                        ""});
+#line 38
+        testRunner.Then("the data lock status of the ILR in 03/12/2017 is:", ((string)(null)), table7, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -343,8 +347,8 @@ testRunner.Then("the data lock status of the ILR in 03/12/2017 is:", ((string)(n
                         "0",
                         "0",
                         "0"});
-#line 50
-testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table8, "And ");
+#line 41
+        testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table8, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -356,40 +360,43 @@ testRunner.And("the provider earnings and payments break down as follows:", ((st
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("New Commitment which is not reflected in the updated ILR submission (i.e. new Com" +
                     "mitment but no corresponding change in the ILR).", ((string[])(null)));
-#line 60
-this.ScenarioSetup(scenarioInfo);
+#line 51
+    this.ScenarioSetup(scenarioInfo);
 #line 3
-this.FeatureBackground();
+    this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                         "commitment Id",
+                        "version Id",
                         "ULN",
                         "standard code",
                         "price effective date",
                         "planned end date",
-                        "actual end date",
                         "agreed price",
-                        "status"});
+                        "effective from",
+                        "effective to"});
             table9.AddRow(new string[] {
+                        "1",
                         "1",
                         "learner a",
                         "51",
                         "03/08/2017",
                         "04/08/2018",
-                        "31/10/2017",
                         "15000",
-                        "cancelled"});
+                        "03/08/2017",
+                        "31/10/2017"});
             table9.AddRow(new string[] {
+                        "1",
                         "2",
                         "learner a",
                         "52",
-                        "01/11/2017",
+                        "03/08/2017",
                         "04/08/2018",
-                        "",
                         "5625",
-                        "active"});
-#line 62
-testRunner.Given("the following commitments exist on 03/12/2017:", ((string)(null)), table9, "Given ");
+                        "01/11/2017",
+                        ""});
+#line 52
+        testRunner.Given("the following commitments exist on 03/12/2017:", ((string)(null)), table9, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                         "ULN",
@@ -413,19 +420,17 @@ testRunner.Given("the following commitments exist on 03/12/2017:", ((string)(nul
                         "03/08/2017",
                         "3000",
                         "03/08/2017"});
-#line 68
-testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table10, "When ");
+#line 56
+        testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table10, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
-                        "08/17 - 10/17",
-                        "11/17 onwards"});
+                        "08/17 onwards"});
             table11.AddRow(new string[] {
                         "Matching commitment",
-                        "1",
-                        "FAIL"});
-#line 72
-testRunner.Then("the data lock status of the ILR in 03/12/2017 is:", ((string)(null)), table11, "Then ");
+                        "1"});
+#line 59
+        testRunner.Then("the data lock status of the ILR in 03/12/2017 is:", ((string)(null)), table11, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -483,8 +488,8 @@ testRunner.Then("the data lock status of the ILR in 03/12/2017 is:", ((string)(n
                         "0",
                         "0",
                         "0"});
-#line 76
-testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table12, "And ");
+#line 62
+        testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table12, "And ");
 #line hidden
             this.ScenarioCleanup();
         }

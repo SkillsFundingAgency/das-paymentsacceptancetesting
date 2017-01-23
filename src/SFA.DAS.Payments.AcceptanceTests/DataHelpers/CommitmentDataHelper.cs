@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using System;
+using System.Data.SqlClient;
 using Dapper;
 using ProviderPayments.TestStack.Core;
 using SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities;
@@ -10,11 +11,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
     {
         internal static void CreateCommitment(CommitmentEntity commitment, EnvironmentVariables environmentVariables)
         {
-
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
             {
                 connection.Execute("INSERT INTO DasCommitments ("
                                         + "CommitmentId, "
+                                        + "VersionId, "
                                         + "Uln, "
                                         + "Ukprn, "
                                         + "AccountId, "
@@ -25,28 +26,29 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                                         + "ProgrammeType, "
                                         + "FrameworkCode, "
                                         + "PathwayCode, "
-                                        + "Priority, "
-                                        + "VersionId, "
                                         + "PaymentStatus, "
                                         + "PaymentStatusDescription, "
-                                        + "Payable"
+                                        + "Priority, "
+                                        + "EffectiveFromDate, "
+                                        + "EffectiveToDate"
                                     + ") VALUES ("
-                                        + "@CommitmentId, "
-                                        + "@Uln, "
-                                        + "@Ukprn, "
-                                        + "@AccountId, "
-                                        + "@StartDate, "
-                                        + "@EndDate, "
-                                        + "@AgreedCost, "
-                                        + "@StandardCode, "
-                                        + "@ProgrammeType, "
-                                        + "@FrameworkCode, "
-                                        + "@PathwayCode, "
-                                        + "@Priority, "
-                                        + "@VersionId, "
-                                        + "@PaymentStatus, "
-                                        + "@PaymentStatusDescription, "
-                                        + "@Payable"
+                                        + "@commitmentId, "
+                                        + "@versionId, "
+                                        + "@uln, "
+                                        + "@ukprn, "
+                                        + "@accountId, "
+                                        + "@startDate, "
+                                        + "@endDate, "
+                                        + "@agreedCost, "
+                                        + "@standardCode, "
+                                        + "@programmeType, "
+                                        + "@frameworkCode, "
+                                        + "@pathwayCode, "
+                                        + "@paymentStatus, "
+                                        + "@paymentStatusDescription, "
+                                        + "@priority, "
+                                        + "@effectiveFromDate, "
+                                        + "@effectiveToDate"
                                     + ")",
                     new
                     {
@@ -57,15 +59,16 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                         startDate = commitment.StartDate,
                         endDate = commitment.EndDate,
                         agreedCost = commitment.AgreedCost,
-                        standardCode = commitment.StandardCode,
-                        frameworkCode = commitment.FrameworkCode,
-                        programmeType = commitment.ProgrammeType,
-                        pathwayCode = commitment.PathwayCode,
+                        standardCode = commitment.StandardCode > 0 ? commitment.StandardCode : (long?)null,
+                        frameworkCode = commitment.FrameworkCode > 0 ? commitment.FrameworkCode : (int?)null,
+                        programmeType = commitment.ProgrammeType > 0 ? commitment.ProgrammeType : (int?)null,
+                        pathwayCode = commitment.PathwayCode > 0 ? commitment.PathwayCode : (int?)null,
                         priority = commitment.Priority,
                         versionId = commitment.VersionId,
                         paymentStatus = commitment.PaymentStatus,
                         paymentStatusDescription = commitment.PaymentStatusDescription,
-                        payable = commitment.Payable
+                        effectiveFromDate = commitment.EffectiveFrom,
+                        effectiveToDate = commitment.EffectiveTo
                     });
             }
         }
@@ -78,24 +81,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
             }
         }
 
-        internal static void UpdateCommitmentStatus(long commitmentId, CommitmentPaymentStatus paymentStatus, EnvironmentVariables environmentVariables)
-        {
-            using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
-            {
-                connection.Execute("UPDATE dbo.DasCommitments SET " +
-                                       "PaymentStatus = @paymentStatus, " +
-                                       "PaymentStatusDescription = @paymentStatusDescription, " +
-                                       "Payable = @payable " +
-                                   "WHERE CommitmentId = @commitmentId",
-                                   new
-                                   {
-                                       commitmentId = commitmentId,
-                                       paymentStatus = (int)paymentStatus,
-                                       paymentStatusDescription = paymentStatus.ToString(),
-                                       payable = paymentStatus == CommitmentPaymentStatus.Active || paymentStatus == CommitmentPaymentStatus.Completed
-                                   });
-            }
-        }
         internal static void ClearCommitments(EnvironmentVariables environmentVariables)
         {
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
@@ -105,5 +90,74 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
             }
         }
 
+        internal static void UpdateCommitmentEffectiveTo(long commitmentId, long versionId, DateTime effectiveTo, EnvironmentVariables environmentVariables)
+        {
+            using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
+            {
+                connection.Execute("UPDATE dbo.DasCommitments SET " +
+                                       "EffectiveToDate = @effectiveTo " +
+                                   "WHERE CommitmentId = @commitmentId " +
+                                   "AND VersionId = @versionId",
+                                   new
+                                   {
+                                       effectiveTo,
+                                       commitmentId,
+                                       versionId
+                                   });
+            }
+        }
+
+        internal static void CreateNewCommmitmentVersion(long commitmentId, long versionId, CommitmentPaymentStatus paymentStatus, DateTime effectiveFrom, EnvironmentVariables environmentVariables)
+        {
+            using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
+            {
+                connection.Execute("INSERT INTO DasCommitments ("
+                                        + "CommitmentId, "
+                                        + "VersionId, "
+                                        + "Uln, "
+                                        + "Ukprn, "
+                                        + "AccountId, "
+                                        + "StartDate, "
+                                        + "EndDate, "
+                                        + "AgreedCost, "
+                                        + "StandardCode, "
+                                        + "ProgrammeType, "
+                                        + "FrameworkCode, "
+                                        + "PathwayCode, "
+                                        + "PaymentStatus, "
+                                        + "PaymentStatusDescription, "
+                                        + "Priority, "
+                                        + "EffectiveFromDate"
+                                    + ") "
+                                    + "SELECT "
+                                        + "CommitmentId, "
+                                        + "VersionId + 1, "
+                                        + "Uln, "
+                                        + "Ukprn, "
+                                        + "AccountId, "
+                                        + "StartDate, "
+                                        + "EndDate, "
+                                        + "AgreedCost, "
+                                        + "StandardCode, "
+                                        + "ProgrammeType, "
+                                        + "FrameworkCode, "
+                                        + "PathwayCode, "
+                                        + "@paymentStatus, "
+                                        + "@paymentStatusDescription, "
+                                        + "Priority, "
+                                        + "@effectiveFromDate "
+                                    + "FROM DasCommitments "
+                                    + "WHERE CommitmentId = @commitmentId "
+                                    + "AND VersionId = @versionId",
+                    new
+                    {
+                        commitmentId,
+                        versionId,
+                        paymentStatus = (int)paymentStatus,
+                        paymentStatusDescription = paymentStatus.ToString(),
+                        effectiveFromDate = effectiveFrom
+                    });
+            }
+        }
     }
 }

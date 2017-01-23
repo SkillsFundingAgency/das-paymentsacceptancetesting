@@ -20,7 +20,6 @@ using CompletionStatus = SFA.DAS.Payments.AcceptanceTests.Enums.CompletionStatus
 namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 {
     public class BaseStepDefinitions
-
     {
 
         #region Properties
@@ -131,10 +130,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                     ProgrammeType = IlrBuilder.Defaults.ProgrammeType,
                     PathwayCode = IlrBuilder.Defaults.PathwayCode,
                     Priority = commitmentPriority,
-                    VersionId = "1",
+                    VersionId = commitment.VersionId,
                     PaymentStatus = (int)commitment.Status,
                     PaymentStatusDescription = commitment.Status.ToString(),
-                    Payable = true
+                    EffectiveFrom = learner.LearningDelivery.StartDate
                 },
                 EnvironmentVariables);
         }
@@ -150,10 +149,16 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                     continue;
                 }
 
+                if (commitment.EffectiveFrom.HasValue && commitment.EffectiveFrom.Value > date)
+                {
+                    continue;
+                }
+
                 var employer = StepDefinitionsContext.ReferenceDataContext.Employers?.SingleOrDefault(e => e.Name == commitment.Employer);
                 var accountId = employer?.AccountId ?? long.Parse(IdentifierGenerator.GenerateIdentifier(8, false));
 
                 var commitmentStartDate = commitment.StartDate ?? learner.LearningDelivery.StartDate;
+                var commitmentEffectiveFromDate = commitment.EffectiveFrom ?? commitmentStartDate;
                 var commitmentEndDate = commitment.ActualEndDate ?? commitment.EndDate ?? learner.LearningDelivery.PlannedEndDate;
                 var priceEpisode = learner.LearningDelivery.PriceEpisodes.Where(pe => pe.StartDate >= commitmentStartDate && pe.StartDate <= commitmentEndDate).OrderBy(pe => pe.StartDate).FirstOrDefault();
 
@@ -172,10 +177,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                         ProgrammeType = IlrBuilder.Defaults.ProgrammeType,
                         PathwayCode = IlrBuilder.Defaults.PathwayCode,
                         Priority = commitment.Priority,
-                        VersionId = "1",
-                        PaymentStatus = (int) commitment.Status,
-                        PaymentStatusDescription = commitment.Status.ToString(),
-                        Payable = true
+                        VersionId = commitment.VersionId,
+                        PaymentStatus = commitment.StopPeriodCensusDate.HasValue 
+                                            ? (int)CommitmentPaymentStatus.Active
+                                            : (int)commitment.Status,
+                        PaymentStatusDescription = commitment.StopPeriodCensusDate.HasValue
+                                            ? CommitmentPaymentStatus.Active.ToString()
+                                            : commitment.Status.ToString(),
+                        EffectiveFrom = commitmentEffectiveFromDate,
+                        EffectiveTo = commitment.EffectiveTo
                     },
                     EnvironmentVariables);
             }
@@ -420,7 +430,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                 var learningDelivery = new LearningDelivery
                 {
                     LearningDeliveryFams = StepDefinitionsContext.ReferenceDataContext.LearningDeliveryFams,
-                    LearnerType = LearnerType.ProgrammeOnlyDas,
+                    LearnerType = table.Header.Contains("learner type")
+                                    ? GetLearnerType(table.Rows[rowIndex]["learner type"])
+                                    : LearnerType.ProgrammeOnlyDas,
                     StartDate = DateTime.Parse(table.Rows[rowIndex]["start date"]),
                     PlannedEndDate = table.Header.Contains("planned end date") ?
                                        DateTime.Parse(table.Rows[rowIndex]["planned end date"]) :
@@ -564,7 +576,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             {
                 if (commitment.StopPeriodCensusDate.HasValue && commitment.StopPeriodCensusDate <= censusDate)
                 {
-                    CommitmentDataHelper.UpdateCommitmentStatus(commitment.Id, commitment.Status, EnvironmentVariables);
+                    CommitmentDataHelper.UpdateCommitmentEffectiveTo(commitment.Id, commitment.VersionId, commitment.StopPeriodCensusDate.Value.AddDays(-1), EnvironmentVariables);
+                    CommitmentDataHelper.CreateNewCommmitmentVersion(commitment.Id, commitment.VersionId, commitment.Status, commitment.StopPeriodCensusDate.Value, EnvironmentVariables);
                 }
             }
         }
@@ -589,7 +602,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
         private LearnerType GetLearnerType(string learnerType)
         {
             LearnerType result = LearnerType.ProgrammeOnlyDas;
-            switch (learnerType.Replace(" ",string.Empty).ToLowerInvariant())
+            switch (learnerType.Replace(" ", string.Empty).ToLowerInvariant())
                 {
                     case "programmeonlynon-das":
                         result= LearnerType.ProgrammeOnlyNonDas;

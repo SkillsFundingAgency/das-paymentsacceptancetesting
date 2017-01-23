@@ -29,10 +29,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             StepDefinitionsContext.SetDefaultProvider();
 
             var provider = StepDefinitionsContext.GetDefaultProvider();
-            var learner = StepDefinitionsContext.CreateLearner(15000, new DateTime(2017, 09, 01), new DateTime(2018, 09, 08));
+            var learner = StepDefinitionsContext.CreateLearner(15000, new DateTime(2017, 08, 01), new DateTime(2018, 08, 08));
 
             learner.LearningDelivery.PriceEpisodes[0].TotalPrice = 15000;
-            learner.LearningDelivery.StandardCode= IlrBuilder.Defaults.StandardCode;
+            learner.LearningDelivery.StandardCode = IlrBuilder.Defaults.StandardCode;
             
             //setup the data for learnig delivery,learner and earnings
             SetupEarningsData(provider, learner);
@@ -42,7 +42,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
 
             //Update the balance to the value passed in
             AccountDataHelper.UpdateAccountBalance(account.AccountId, employerLevyBalance, environmentVariables);
-
         }
 
         [When(@"a payment of (.*) is due")]
@@ -60,7 +59,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
                                                             learner.LearningDelivery.PriceEpisodes[0].Id,
                                                             environmentVariables);
 
-            RunMonthEnd(new DateTime(2016, 09, 01));
+            RunMonthEnd(new DateTime(2017, 09, 01));
         }
 
         [Then(@"the employer levy account is debited by (.*)")]
@@ -72,7 +71,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             var levyEntity = PaymentsDataHelper.GetPaymentsForPeriod(
                                                     StepDefinitionsContext.GetDefaultProvider().Ukprn,
                                                     null,
-                                                    2016,
+                                                    2017,
                                                     09,
                                                     FundingSource.Levy,
                                                     ContractType.ContractWithEmployer,
@@ -99,7 +98,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             var governmentDueEntity = PaymentsDataHelper.GetPaymentsForPeriod(
                                                             StepDefinitionsContext.GetDefaultProvider().Ukprn,
                                                             null,
-                                                            2016,
+                                                            2017,
                                                             09,
                                                             FundingSource.CoInvestedSfa,
                                                             ContractType.ContractWithEmployer,
@@ -126,7 +125,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             var employerPaymentEntity = PaymentsDataHelper.GetPaymentsForPeriod(
                                                             StepDefinitionsContext.GetDefaultProvider().Ukprn,
                                                             null,
-                                                            2016,
+                                                            2017,
                                                             09,
                                                             FundingSource.CoInvestedEmployer,
                                                             ContractType.ContractWithEmployer,
