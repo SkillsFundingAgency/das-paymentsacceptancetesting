@@ -242,38 +242,37 @@ Scenario:  Earnings and payments for a DAS learner, levy available, commitment e
 			
 Scenario: Apprentice changes from a non-DAS to DAS employer, levy is available for the DAS employer
     
-        Given that the learner is programme only DAS
-        And the levy balance > agreed price for all months corresponding to the commitment
+        Given The learner is programme only DAS
+        And the XYZ has a levy balance > agreed price for all months
 		And the learner changes employers
             | Employer | Type    | ILR employment start date |
             | ABC      | Non DAS | 06/08/2017                |
-            | XYZ      | DAS     | 03/11/2017                |
-        And the following commitment exists:
-            | employer | ULN       | start date   | planned end date | agreed price | status |
-            | ABC      | learner a | 01/04/2018   | 01/08/2018       | 3500         | active |
-            
-        When an ILR file is submitted with the following data for learner A:
-            | start date | planned end date | actual end date | completion status |             
-            | 06/08/2017 | 08/08/2018       |                 | continuing        | 
-            
-            | ACT status 1 | ACT date from | ACT date to | ACT status 2 | ACT date from | ACT date to |
-            | 2            | 06/08/2017    | 31/03/2018  | 1            | 01/04/2018    |             |
-            
-            | TNP1   | TNP1 effective date | TNP2    | TNP2 effective date | TNP3   | TNP3 effective date | TNP4   | TNP4 effective date |
-            | 5000   | 06/08/2017          | 1000    | 06/08/2017          | 2500   | 01/04/2018          | 1000   | 01/04/2018          |
-            
-        Then the data lock status will be as follows:
-            | type                | 08/17 - 03/17 | 04/17 onwards |  
-            | matching commitment |               | ABC           |
-        
+            | XYZ      | DAS     | 01/04/2018                |
+        And the following commitments exist on 03/04/2017:
+            | Employer | ULN       | start date   | planned end date | agreed price | status |
+            | XYZ      | learner a | 01/04/2018   | 01/08/2018       | 3500         | active |
+        When an ILR file is submitted with the following data:
+            | ULN       | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date | Residual training price | Residual training price effective date | Residual assessment price | Residual assessment price effective date |
+            | learner a | 06/08/2017 | 08/08/2018       |                 | continuing        | 5000                 | 06/08/2017                          | 1000                   | 06/08/2017                            | 2500                    | 01/04/2018                             | 1000                      | 01/04/2018                               |
+	    And the Contract type in the ILR is:
+            | contract type | date from  | date to    |
+            | Non DAS       | 06/08/2017 | 31/03/2018 |
+            | DAS           | 01/04/2018 | 08/08/2018 |
+		Then the data lock status will be as follows:
+            | type                | 08/17 - 03/18 | 04/18 onwards |  
+            | matching commitment |               | XYZ           |
         And the provider earnings and payments break down as follows:
-            | Type                          | 08/17 | 09/17 | 10/17 | ... | 03/18 | 04/18 | 05/18 | 06/18 | 07/18 | 08/18 |
-            | Provider Earned Total         | 500   | 500   | 500   | ... | 500   | 700   | 700   | 700   | 700   |       |       
-            | Provider Earned from SFA      | 450   | 450   | 450   | ... | 450   | 700   | 700   | 700   | 700   |       |
-            | Provider Earned from Employer | 50    | 50    | 50    | ... | 50    | 0     | 0     | 0     | 0     |       |
-            | Provider Paid by SFA          | 0     | 450   | 450   | ... | 450   | 450   | 700   | 700   | 700   | 700   |
-            | Payment due from Employer     | 0     | 50    | 50    | ... | 50    | 50    | 0     | 0     | 0     |       |
-            | Levy account debited          | 0     | 0     | 0     | ... | 0     | 0     | 700   | 700   | 700   | 700   |
-            | SFA Levy employer budget      | 0     | 0     | 0     | ... | 0     | 700   | 700   | 700   | 700   |       |
-            | SFA Levy co-funded budget     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     | 0     |       |
-            | SFA non-Levy co-funding budget| 450   | 450   | 450   | ... | 450   | 0     | 0     | 0     | 0     |       |
+            | Type                           | 08/17 | 09/17 | 10/17 | ... | 03/18 | 04/18 | 05/18 | 06/18 | 07/18 | 08/18 |
+            | Provider Earned Total          | 400   | 400   | 400   | ... | 400   | 700   | 700   | 700   | 700   | 0     |
+            | Provider Earned from SFA       | 360   | 360   | 360   | ... | 360   | 700   | 700   | 700   | 700   | 0     |
+            | Provider Earned from ABC       | 40    | 40    | 40    | ... | 40    | 0     | 0     | 0     | 0     | 0     |
+            | Provider Earned from XYZ       | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     | 0     | 0     |
+            | Provider Paid by SFA           | 0     | 360   | 360   | ... | 360   | 360   | 700   | 700   | 700   | 700   |
+            | Payment due from ABC           | 0     | 40    | 40    | ... | 40    | 40    | 0     | 0     | 0     | 0     |
+            | Payment due from XYZ           | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     | 0     | 0     |
+            | XYZ Levy account debited       | 0     | 0     | 0     | ... | 0     | 0     | 700   | 700   | 700   | 700   |
+            | SFA Levy employer budget       | 0     | 0     | 0     | ... | 0     | 700   | 700   | 700   | 700   | 0     |
+            | SFA Levy co-funding budget     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     | 0     | 0     |
+            | SFA non-Levy co-funding budget | 360   | 360   | 360   | ... | 360   | 0     | 0     | 0     | 0     | 0     |
+
+

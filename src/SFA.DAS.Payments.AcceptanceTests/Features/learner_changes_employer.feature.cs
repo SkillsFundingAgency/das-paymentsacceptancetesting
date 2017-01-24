@@ -1403,6 +1403,261 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Apprentice changes from a non-DAS to DAS employer, levy is available for the DAS " +
+            "employer")]
+        public virtual void ApprenticeChangesFromANon_DASToDASEmployerLevyIsAvailableForTheDASEmployer()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Apprentice changes from a non-DAS to DAS employer, levy is available for the DAS " +
+                    "employer", ((string[])(null)));
+#line 243
+this.ScenarioSetup(scenarioInfo);
+#line 3
+    this.FeatureBackground();
+#line 245
+        testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 246
+        testRunner.And("the XYZ has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table93 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Employer",
+                        "Type",
+                        "ILR employment start date"});
+            table93.AddRow(new string[] {
+                        "ABC",
+                        "Non DAS",
+                        "06/08/2017"});
+            table93.AddRow(new string[] {
+                        "XYZ",
+                        "DAS",
+                        "01/04/2018"});
+#line 247
+  testRunner.And("the learner changes employers", ((string)(null)), table93, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table94 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Employer",
+                        "ULN",
+                        "start date",
+                        "planned end date",
+                        "agreed price",
+                        "status"});
+            table94.AddRow(new string[] {
+                        "XYZ",
+                        "learner a",
+                        "01/04/2018",
+                        "01/08/2018",
+                        "3500",
+                        "active"});
+#line 251
+        testRunner.And("the following commitments exist on 03/04/2017:", ((string)(null)), table94, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table95 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ULN",
+                        "start date",
+                        "planned end date",
+                        "actual end date",
+                        "completion status",
+                        "Total training price",
+                        "Total training price effective date",
+                        "Total assessment price",
+                        "Total assessment price effective date",
+                        "Residual training price",
+                        "Residual training price effective date",
+                        "Residual assessment price",
+                        "Residual assessment price effective date"});
+            table95.AddRow(new string[] {
+                        "learner a",
+                        "06/08/2017",
+                        "08/08/2018",
+                        "",
+                        "continuing",
+                        "5000",
+                        "06/08/2017",
+                        "1000",
+                        "06/08/2017",
+                        "2500",
+                        "01/04/2018",
+                        "1000",
+                        "01/04/2018"});
+#line 254
+        testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table95, "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table96 = new TechTalk.SpecFlow.Table(new string[] {
+                        "contract type",
+                        "date from",
+                        "date to"});
+            table96.AddRow(new string[] {
+                        "Non DAS",
+                        "06/08/2017",
+                        "31/03/2018"});
+            table96.AddRow(new string[] {
+                        "DAS",
+                        "01/04/2018",
+                        "08/08/2018"});
+#line 257
+     testRunner.And("the Contract type in the ILR is:", ((string)(null)), table96, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table97 = new TechTalk.SpecFlow.Table(new string[] {
+                        "type",
+                        "08/17 - 03/18",
+                        "04/18 onwards"});
+            table97.AddRow(new string[] {
+                        "matching commitment",
+                        "",
+                        "XYZ"});
+#line 261
+  testRunner.Then("the data lock status will be as follows:", ((string)(null)), table97, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table98 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Type",
+                        "08/17",
+                        "09/17",
+                        "10/17",
+                        "...",
+                        "03/18",
+                        "04/18",
+                        "05/18",
+                        "06/18",
+                        "07/18",
+                        "08/18"});
+            table98.AddRow(new string[] {
+                        "Provider Earned Total",
+                        "400",
+                        "400",
+                        "400",
+                        "...",
+                        "400",
+                        "700",
+                        "700",
+                        "700",
+                        "700",
+                        "0"});
+            table98.AddRow(new string[] {
+                        "Provider Earned from SFA",
+                        "360",
+                        "360",
+                        "360",
+                        "...",
+                        "360",
+                        "700",
+                        "700",
+                        "700",
+                        "700",
+                        "0"});
+            table98.AddRow(new string[] {
+                        "Provider Earned from ABC",
+                        "40",
+                        "40",
+                        "40",
+                        "...",
+                        "40",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"});
+            table98.AddRow(new string[] {
+                        "Provider Earned from XYZ",
+                        "0",
+                        "0",
+                        "0",
+                        "...",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"});
+            table98.AddRow(new string[] {
+                        "Provider Paid by SFA",
+                        "0",
+                        "360",
+                        "360",
+                        "...",
+                        "360",
+                        "360",
+                        "700",
+                        "700",
+                        "700",
+                        "700"});
+            table98.AddRow(new string[] {
+                        "Payment due from ABC",
+                        "0",
+                        "40",
+                        "40",
+                        "...",
+                        "40",
+                        "40",
+                        "0",
+                        "0",
+                        "0",
+                        "0"});
+            table98.AddRow(new string[] {
+                        "Payment due from XYZ",
+                        "0",
+                        "0",
+                        "0",
+                        "...",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"});
+            table98.AddRow(new string[] {
+                        "XYZ Levy account debited",
+                        "0",
+                        "0",
+                        "0",
+                        "...",
+                        "0",
+                        "0",
+                        "700",
+                        "700",
+                        "700",
+                        "700"});
+            table98.AddRow(new string[] {
+                        "SFA Levy employer budget",
+                        "0",
+                        "0",
+                        "0",
+                        "...",
+                        "0",
+                        "700",
+                        "700",
+                        "700",
+                        "700",
+                        "0"});
+            table98.AddRow(new string[] {
+                        "SFA Levy co-funding budget",
+                        "0",
+                        "0",
+                        "0",
+                        "...",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"});
+            table98.AddRow(new string[] {
+                        "SFA non-Levy co-funding budget",
+                        "360",
+                        "360",
+                        "360",
+                        "...",
+                        "360",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"});
+#line 264
+        testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table98, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
