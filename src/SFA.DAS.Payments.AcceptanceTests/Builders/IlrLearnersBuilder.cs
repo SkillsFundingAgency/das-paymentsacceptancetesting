@@ -36,7 +36,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
                 var learner = new Learner
                 {
                     Uln = l.Uln,
-                    LearnRefNumber = l.LearnRefNumber
+                    LearnRefNumber = l.LearnRefNumber,
+                    DateOfBirth = l.DateOfBirth
                 };
 
                 var learningDeliveries = new List<LearningDelivery>();
@@ -46,7 +47,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
                     learningDeliveries.Add(
                         new LearningDelivery
                         {
-
                             ActFamCodeValue = GetActFamCode(l.LearningDelivery.LearnerType),
                             ActualStartDate = ld.StartDate,
                             PlannedEndDate = ld.PlannedEndDate,
@@ -62,6 +62,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
                         }
                     );
                 }
+
                 learner.LearningDeliveries = learningDeliveries.ToArray();
                 return learner;
             }).ToArray();

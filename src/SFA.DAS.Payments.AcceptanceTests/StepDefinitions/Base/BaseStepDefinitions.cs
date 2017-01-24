@@ -483,6 +483,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                     learner.Uln = learner.Uln > 0 ? learner.Uln : long.Parse(IdentifierGenerator.GenerateIdentifier(10, false));
                     learner.LearnRefNumber = learner.Uln.ToString();
 
+                    learner.DateOfBirth = learningDelivery.LearnerType == LearnerType.ProgrammeOnlyDas16To18
+                        ? learningDelivery.StartDate.AddYears(-17)
+                        : new DateTime(1985, 10, 10);
+
                     StepDefinitionsContext.AddProviderLearner(provider, learner);
                 }
 
