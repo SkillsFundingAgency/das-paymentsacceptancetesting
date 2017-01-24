@@ -67,6 +67,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             
         }
 
+        [When(@"an ILR file is submitted with the following data:"), Scope(Scenario = "Apprentice changes from a non-DAS to DAS employer, levy is available for the DAS employer")]
+        public void WhenAnIlrFileIsSubmittedWithTheFollowingDataNoSubmission(Table table)
+        {
+            ScenarioContext.Current.Add("learners", table);
+
+        }
+
         [When(@"the Contract type in the ILR is:")]
         public void WhenTheContractTypeInTheIlrIs(Table table)
         {
