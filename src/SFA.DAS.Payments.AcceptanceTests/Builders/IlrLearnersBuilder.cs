@@ -72,7 +72,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
             return this;
         }
 
-        private IlrGenerator.CompletionStatus TransformCompletionStatus(Enums.CompletionStatus status)
+        private CompletionStatus TransformCompletionStatus(Enums.CompletionStatus status)
         {
             if (status == Enums.CompletionStatus.Completed)
                 return CompletionStatus.Completed;
@@ -87,6 +87,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
         private short GetActFamCode(LearnerType learnerType)
         {
             short result = 1;
+
             switch (learnerType)
             {
                 case LearnerType.ProgrammeOnlyDas:
@@ -97,6 +98,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
                     result = 2;
                     break;
             }
+
             return result;
         }
         private LearningDeliveryActFamRecord[] TransformFamRecords(Entities.LearningDeliveryFam[] learningDeliveryFams)

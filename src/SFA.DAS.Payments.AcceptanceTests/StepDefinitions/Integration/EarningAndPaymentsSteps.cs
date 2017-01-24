@@ -269,7 +269,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
 
             var expectedEarning = decimal.Parse(earnedRow[colIndex]);
             Assert.IsTrue(earnedByPeriod.ContainsKey(periodName), $"Expected earning for period {periodName} but none found");
-            Assert.AreEqual(expectedEarning, earnedByPeriod[periodName], $"Expected earning of {expectedEarning} for period {periodName} but found {earnedByPeriod[periodName]}");
+            Assert.AreEqual(expectedEarning, Math.Round(earnedByPeriod[periodName],2), $"Expected earning of {expectedEarning} for period {periodName} but found {earnedByPeriod[periodName]}");
         }
         private void VerifyLevyPayments(long ukprn,
                                         long? uln, 
@@ -299,7 +299,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
 
             var actualLevyPayment = levyPayments.Length == 0 ? 0m : levyPayments.Sum(p => p.Amount);
             var expectedLevyPayment = decimal.Parse(levyPaidRow[colIndex]);
-            Assert.AreEqual(expectedLevyPayment, actualLevyPayment, $"Expected a levy payment of {expectedLevyPayment} but made a payment of {actualLevyPayment} for {periodName}");
+            Assert.AreEqual(expectedLevyPayment, Math.Round(actualLevyPayment,2), $"Expected a levy payment of {expectedLevyPayment} but made a payment of {actualLevyPayment} for {periodName}");
         }
         private void VerifyGovtCofinanceLevyContractPayments(long ukprn, 
                                                 long? uln,
@@ -351,7 +351,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
 
             var actualGovtPayment = cofinancePayments.Sum(p => p.Amount);
             var expectedGovtPayment = decimal.Parse(govtCofundRow[colIndex]);
-            Assert.AreEqual(expectedGovtPayment, actualGovtPayment, $"Expected a non levy contract government co-finance payment of {expectedGovtPayment} but made a payment of {actualGovtPayment} for {periodName}");
+            Assert.AreEqual(expectedGovtPayment, Math.Round(actualGovtPayment,2), $"Expected a government co-finance payment of {expectedGovtPayment} but made a payment of {actualGovtPayment} for {periodName}");
         }
         private void VerifyEmployerCofinancePayments(long ukprn,long? uln, string periodName, DateTime periodDate, long accountId,
             int colIndex, TableRow employerCofundRow, LearnerType learnersType)
@@ -376,7 +376,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
 
             var actualEmployerPayment = cofinancePayments.Sum(p => p.Amount);
             var expectedEmployerPayment = decimal.Parse(employerCofundRow[colIndex]);
-            Assert.AreEqual(expectedEmployerPayment, actualEmployerPayment, $"Expected a employer co-finance payment of {expectedEmployerPayment} but made a payment of {actualEmployerPayment} for {periodName}");
+            Assert.AreEqual(expectedEmployerPayment, Math.Round(actualEmployerPayment,2), $"Expected a employer co-finance payment of {expectedEmployerPayment} but made a payment of {actualEmployerPayment} for {periodName}");
         }
         private void VerifyPaymentsDueByTransactionType(long ukprn, 
                                                         string periodName, 

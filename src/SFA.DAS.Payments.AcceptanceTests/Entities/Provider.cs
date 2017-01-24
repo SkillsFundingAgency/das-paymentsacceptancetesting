@@ -16,8 +16,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Entities
         {
             get
             {
-                var maxActualEndDate = Learners.Max(l => l.LearningDelivery.ActualEndDate) ?? DateTime.MinValue;
-                var maxEndDate = Learners.Max(l => l.LearningDelivery.PlannedEndDate);
+                var maxActualEndDate = Learners.Max(l => l.LearningDeliveries.Max(ld => ld.ActualEndDate)) ?? DateTime.MinValue;
+                var maxEndDate = Learners.Max(l => l.LearningDeliveries.Max(ld => ld.PlannedEndDate));
 
                 return maxActualEndDate > maxEndDate
                     ? maxActualEndDate
