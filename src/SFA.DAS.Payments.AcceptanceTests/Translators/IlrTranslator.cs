@@ -7,11 +7,22 @@ namespace SFA.DAS.Payments.AcceptanceTests.Translators
     {
         internal static CompletionStatus TranslateCompletionStatus(string completionStatus)
         {
+
             if (completionStatus.Equals("Completed", StringComparison.OrdinalIgnoreCase))
             {
                 return CompletionStatus.Completed;
             }
-            return CompletionStatus.InProgress;
+
+            else if (completionStatus.Equals("Transferred", StringComparison.OrdinalIgnoreCase))
+            {
+                return CompletionStatus.Transferred;
+            }
+
+            else if (completionStatus.Equals("Planned Break", StringComparison.OrdinalIgnoreCase))
+            {
+                return CompletionStatus.PlannedBreak;
+            }
+            return CompletionStatus.Continuing;
         }
     }
 }

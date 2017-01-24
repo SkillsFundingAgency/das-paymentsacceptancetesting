@@ -3,6 +3,7 @@
     public enum LearnerType
     {
         ProgrammeOnlyDas = 1,
-        ProgrammeOnlyNonDas = 2
+        ProgrammeOnlyNonDas = 2,
+        ProgrammeOnlyDas16To18 = 3
     }
 }

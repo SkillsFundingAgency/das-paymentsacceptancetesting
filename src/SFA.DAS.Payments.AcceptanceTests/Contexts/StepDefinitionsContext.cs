@@ -73,11 +73,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
             provider.Learners = learners.ToArray();
         }
 
-        public Dictionary<string, decimal> GetProviderEarnedByPeriod(long ukprn)
+        public Dictionary<string, decimal> GetProviderEarnedByPeriod(long ukprn, long? uln = null)
         {
             var provider = Providers.Single(p => p.Ukprn == ukprn);
-
-            return provider.EarnedByPeriod;
+            if (uln == null)
+                return provider.EarnedByPeriod;
+            else
+                return provider.EarnedByPeriodByUln[uln.Value];
         }
 
         public Provider GetDefaultProvider()
@@ -88,33 +90,44 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
             return Providers[0];
         }
 
-        public Learner CreateLearner(decimal agreedPrice,DateTime startDate,DateTime endDate, DateTime? actualEndDate = null)
+        public Provider GetProvider(string provider)
+        {
+            if (Providers == null || !Providers.Any())
+                throw new NullReferenceException("There are no providers set");
+
+            return Providers.SingleOrDefault(x=> x.Name.Equals(provider,StringComparison.CurrentCultureIgnoreCase));
+        }
+
+        public Learner CreateLearner(decimal agreedPrice, DateTime startDate, DateTime endDate, DateTime? actualEndDate = null, CompletionStatus completionStatus = CompletionStatus.Continuing)
         {
             var learner = new Learner
             {
                 Name = string.Empty,
                 Uln = long.Parse(IdentifierGenerator.GenerateIdentifier(10, false)),
-                LearnRefNumber= IdentifierGenerator.GenerateIdentifier(10, false),
-                LearningDelivery = new LearningDelivery
-                {
-                    LearnerType = LearnerType.ProgrammeOnlyDas,
-                    StartDate = startDate,
-                    PlannedEndDate = endDate,
-                    ActualEndDate = actualEndDate,
-                    CompletionStatus = CompletionStatus.InProgress,
-                    PriceEpisodes = new []
-                    {
+                LearnRefNumber = IdentifierGenerator.GenerateIdentifier(10, false)
+            };
+
+            learner.LearningDeliveries.Add(new LearningDelivery
+            {
+                LearnerType = LearnerType.ProgrammeOnlyDas,
+                StartDate = startDate,
+                PlannedEndDate = endDate,
+                ActualEndDate = actualEndDate,
+                CompletionStatus = completionStatus,
+                PriceEpisodes = new[]
+                 {
                         new PriceEpisode
                         {
                             Id = IdentifierGenerator.GenerateIdentifier(25),
                             StartDate = startDate,
+                            EndDate = actualEndDate.HasValue ? actualEndDate : endDate,
                             TotalPrice = agreedPrice,
                             Tnp1 = agreedPrice * 0.8m,
                             Tnp2 = agreedPrice * 0.2m
                         }
                     }
-                }
-            };
+                });
+            
 
             return learner;
         }

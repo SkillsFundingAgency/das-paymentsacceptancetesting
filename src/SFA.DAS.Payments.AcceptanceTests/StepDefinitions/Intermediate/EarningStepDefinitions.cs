@@ -33,41 +33,40 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
 
             SetupEarningsData(provider, learner);
 
-
             var committment = StepDefinitionsContext.ReferenceDataContext.Commitments.First();
             var account = StepDefinitionsContext.ReferenceDataContext.Employers.First(x => x.Name == committment.Employer);
 
             //Save the previous earning
-            EarningsDataHelper.SaveEarnedAmount(provider.Ukprn,
-                                                committment.Id,
-                                                account.AccountId,
-                                                learner.Uln,
-                                                learner.LearnRefNumber,
-                                                "R01",
-                                                08,
-                                                2016,
-                                                1,
-                                                previousAmount, environmentVariables);
-
+            EarningsDataHelper.SaveEarnedAmount(
+                                provider.Ukprn,
+                                committment.Id,
+                                account.AccountId,
+                                learner,
+                                "1617-R01",
+                                08,
+                                2017,
+                                1,
+                                previousAmount,
+                                environmentVariables);
         }
 
         [When(@"an earning of (.*) is calculated for period R01")]
         public void AnEarningIsCalculatedForThePeriod(decimal earnedAmount)
         {
-
             // Setup reference data
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
             var provider = StepDefinitionsContext.GetDefaultProvider();
             var learner = provider.Learners[0];
 
             //save the periodiosed values
-            EarningsDataHelper.SavePeriodisedValuesForUkprn(StepDefinitionsContext.GetDefaultProvider().Ukprn,
-                                                            learner.LearnRefNumber,
-                                                            new Dictionary<int, decimal> { { 1, earnedAmount } },
-                                                            learner.LearningDelivery.PriceEpisodes[0].Id,
-                                                            environmentVariables);
+            EarningsDataHelper.SavePeriodisedValuesForUkprn(
+                                StepDefinitionsContext.GetDefaultProvider().Ukprn,
+                                learner.LearnRefNumber,
+                                new Dictionary<int, decimal> {{1, earnedAmount}},
+                                learner.LearningDelivery.PriceEpisodes[0].Id,
+                                environmentVariables);
 
-            RunMonthEnd(new DateTime(2016, 09, 01));
+            RunMonthEnd(new DateTime(2017, 09, 01));
         }
 
 
@@ -80,35 +79,31 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
             //Get the due amount 
-            var earning = PaymentsDueDataHelper.GetPaymentsDueForPeriod(StepDefinitionsContext.GetDefaultProvider().Ukprn,
-                                                                        2016,
-                                                                        09,
-                                                                        environmentVariables)
-                                                                        .FirstOrDefault();
+            var earning = PaymentsDueDataHelper.GetPaymentsDueForPeriod(
+                                                    StepDefinitionsContext.GetDefaultProvider().Ukprn,
+                                                    2017,
+                                                    09,
+                                                    environmentVariables)
+                .FirstOrDefault();
 
             if (dueAmount != 0)
             {
-                Assert.IsNotNull(earning, $"Expected earning for the period but nothing found");
+                Assert.IsNotNull(earning, "Expected earning for the period but nothing found");
                 Assert.AreEqual(dueAmount, earning.AmountDue, $"Expected earning of {dueAmount} for period R01 but found {earning.AmountDue}");
             }
             else
             {
-                Assert.IsNull(earning, $"There was no expected earning for the period but earnigs data found");
-
+                Assert.IsNull(earning, "There was no expected earning for the period but earnigs data found");
             }
         }
 
-
         #region Earnings Distribution
-
 
         [When(@"the actual duration of learning is (.*) months")]
         public void WhenTheActualDurationOfLearningIsMonths(int actualCensusMonths)
         {
             ScenarioContext.Current.Add("actualCensusMonths", actualCensusMonths);
         }
-
-      
        
         [When(@"the planned course duration covers (.*) months")]
         public void WhenThePlannedCourseDurationCoversMonths(int months)
@@ -129,7 +124,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             var startDate = new DateTime(2016,08,15);
             var ilrStartDate = startDate.NextCensusDate();
 
-            var plannedEndDate = startDate.AddMonths(plannedCensusMonths);
+            var plannedEndDate = startDate.AddMonths(plannedCensusMonths-1).NextCensusDate();
             DateTime? actualEndDate = null;
 
             if (ScenarioContext.Current.ContainsKey("actualCensusMonths"))
@@ -137,14 +132,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
                 var actualCensusMonths = ScenarioContext.Current.Get<int>("actualCensusMonths");
                 int variation;
                 if (actualCensusMonths < plannedCensusMonths)
-                    variation =  (plannedCensusMonths - actualCensusMonths + 1) *-1;
+                    variation =  (plannedCensusMonths - actualCensusMonths ) *-1;
                 else
-                    variation = actualCensusMonths - plannedCensusMonths - 1;
+                    variation = actualCensusMonths - plannedCensusMonths;
                 
                 actualEndDate = plannedEndDate.AddMonths(variation);
             }
 
-            var learner = StepDefinitionsContext.CreateLearner(agreedPrice, startDate, plannedEndDate,actualEndDate);
+            var learner = StepDefinitionsContext.CreateLearner(agreedPrice, startDate, plannedEndDate,actualEndDate,Enums.CompletionStatus.Completed);
 
             
             // Store spec values in context
@@ -163,12 +158,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             // Process months
            
 
-            SubmitIlr(provider.Ukprn, provider.Learners,
+            SubmitIlr(provider,
                 ilrStartDate.GetAcademicYear(),
                 actualEndDate ?? plannedEndDate,
-                new ProcessService(new TestLogger()),
-                provider.EarnedByPeriod,
-                provider.DataLockMatchesByPeriod);
+                new ProcessService(new TestLogger()));
         }
 
         [Then(@"the monthly earnings is (.*)")]

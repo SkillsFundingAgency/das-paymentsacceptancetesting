@@ -29,11 +29,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             StepDefinitionsContext.SetDefaultProvider();
 
             var provider = StepDefinitionsContext.GetDefaultProvider();
-            var learner = StepDefinitionsContext.CreateLearner(15000, new DateTime(2017, 09, 01), new DateTime(2018, 09, 08));
+            var learner = StepDefinitionsContext.CreateLearner(15000, new DateTime(2017, 08, 01), new DateTime(2018, 08, 08));
 
             learner.LearningDelivery.PriceEpisodes[0].TotalPrice = 15000;
-            learner.LearningDelivery.StandardCode= IlrBuilder.Defaults.StandardCode;
-
+            learner.LearningDelivery.StandardCode = IlrBuilder.Defaults.StandardCode;
             
             //setup the data for learnig delivery,learner and earnings
             SetupEarningsData(provider, learner);
@@ -41,17 +40,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             var committment = StepDefinitionsContext.ReferenceDataContext.Commitments.First();
             var account = StepDefinitionsContext.ReferenceDataContext.Employers.First(x => x.Name == committment.Employer);
 
-
             //Update the balance to the value passed in
             AccountDataHelper.UpdateAccountBalance(account.AccountId, employerLevyBalance, environmentVariables);
-
         }
-
 
         [When(@"a payment of (.*) is due")]
         public void WhenAPaymentIsDue(decimal dueAmount)
         {
-
             // Setup reference data
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
             var provider = StepDefinitionsContext.GetDefaultProvider();
@@ -64,10 +59,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
                                                             learner.LearningDelivery.PriceEpisodes[0].Id,
                                                             environmentVariables);
 
-
-            RunMonthEnd(new DateTime(2016, 09, 01));
+            RunMonthEnd(new DateTime(2017, 09, 01));
         }
-
 
         [Then(@"the employer levy account is debited by (.*)")]
         public void ThenALevyPaymentIsMade(decimal levyAccountDebit)
@@ -75,22 +68,24 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
             //Get the due amount 
-            var levyEntity = PaymentsDataHelper.GetPaymentsForPeriod(StepDefinitionsContext.GetDefaultProvider().Ukprn,
-                                                                        2016,
-                                                                        09,
-                                                                        FundingSource.Levy,
-                                                                        environmentVariables)
-                                                                        .FirstOrDefault();
+            var levyEntity = PaymentsDataHelper.GetPaymentsForPeriod(
+                                                    StepDefinitionsContext.GetDefaultProvider().Ukprn,
+                                                    null,
+                                                    2017,
+                                                    09,
+                                                    FundingSource.Levy,
+                                                    ContractType.ContractWithEmployer,
+                                                    environmentVariables)
+                .FirstOrDefault();
 
             if (levyAccountDebit != 0)
             {
-                Assert.IsNotNull(levyEntity, $"Expected Levy earning for the period but nothing found");
+                Assert.IsNotNull(levyEntity, "Expected Levy earning for the period but nothing found");
                 Assert.AreEqual(levyAccountDebit, levyEntity.Amount, $"Expected earning of {levyAccountDebit} for period R01 but found {levyEntity.Amount}");
             }
             else
             {
-                Assert.IsNull(levyEntity, $"There was no expected levy amount for the period but levy amount data found");
-
+                Assert.IsNull(levyEntity, "There was no expected levy amount for the period but levy amount data found");
             }
         }
 
@@ -100,22 +95,24 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
             //Get the due amount 
-            var governmentDueEntity = PaymentsDataHelper.GetPaymentsForPeriod(StepDefinitionsContext.GetDefaultProvider().Ukprn,
-                                                                        2016,
-                                                                        09,
-                                                                        FundingSource.CoInvestedSfa,
-                                                                        environmentVariables)
-                                                                        .FirstOrDefault();
+            var governmentDueEntity = PaymentsDataHelper.GetPaymentsForPeriod(
+                                                            StepDefinitionsContext.GetDefaultProvider().Ukprn,
+                                                            null,
+                                                            2017,
+                                                            09,
+                                                            FundingSource.CoInvestedSfa,
+                                                            ContractType.ContractWithEmployer,
+                                                            environmentVariables)
+                .FirstOrDefault();
 
             if (paidBySfa != 0)
             {
-                Assert.IsNotNull(governmentDueEntity, $"Expected goverment due for the period but nothing found");
+                Assert.IsNotNull(governmentDueEntity, "Expected goverment due for the period but nothing found");
                 Assert.AreEqual(paidBySfa, governmentDueEntity.Amount, $"Expected government payment of {paidBySfa} for period R01 but found {governmentDueEntity.Amount}");
             }
             else
             {
-                Assert.IsNull(governmentDueEntity, $"There was no expected goverment due amount for the period but data was found");
-
+                Assert.IsNull(governmentDueEntity, "There was no expected goverment due amount for the period but data was found");
             }
         }
 
@@ -125,26 +122,26 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
             //Get the due amount 
-            var employerPaymentEntity = PaymentsDataHelper.GetPaymentsForPeriod(StepDefinitionsContext.GetDefaultProvider().Ukprn,
-                                                                        2016,
-                                                                        09,
-                                                                        FundingSource.CoInvestedEmployer,
-                                                                        environmentVariables)
-                                                                       .FirstOrDefault();
+            var employerPaymentEntity = PaymentsDataHelper.GetPaymentsForPeriod(
+                                                            StepDefinitionsContext.GetDefaultProvider().Ukprn,
+                                                            null,
+                                                            2017,
+                                                            09,
+                                                            FundingSource.CoInvestedEmployer,
+                                                            ContractType.ContractWithEmployer,
+                                                            environmentVariables)
+                .FirstOrDefault();
 
             if (paymentDueFromEmployer != 0)
             {
-                Assert.IsNotNull(employerPaymentEntity, $"Expected employer amount for the period but nothing found");
+                Assert.IsNotNull(employerPaymentEntity, "Expected employer amount for the period but nothing found");
                 Assert.AreEqual(paymentDueFromEmployer, employerPaymentEntity.Amount, $"Expected employer amount of {paymentDueFromEmployer} for period R01 but found {employerPaymentEntity.Amount}");
             }
             else
             {
-                Assert.IsNull(employerPaymentEntity, $"There was no expected employer amount for the period but employer amount data found");
-
+                Assert.IsNull(employerPaymentEntity, "There was no expected employer amount for the period but employer amount data found");
             }
         }
-
-
 
         #endregion
     }

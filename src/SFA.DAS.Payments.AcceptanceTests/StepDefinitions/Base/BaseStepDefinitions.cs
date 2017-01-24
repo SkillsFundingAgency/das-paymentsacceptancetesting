@@ -15,11 +15,11 @@ using TechTalk.SpecFlow;
 using IlrBuilder = SFA.DAS.Payments.AcceptanceTests.Builders.IlrBuilder;
 using Learner = SFA.DAS.Payments.AcceptanceTests.Entities.Learner;
 using LearningDelivery = SFA.DAS.Payments.AcceptanceTests.Entities.LearningDelivery;
+using CompletionStatus = SFA.DAS.Payments.AcceptanceTests.Enums.CompletionStatus;
 
 namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 {
     public class BaseStepDefinitions
-
     {
 
         #region Properties
@@ -64,21 +64,29 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 
             var period = date.GetPeriod();
 
-            foreach (var employer in StepDefinitionsContext.ReferenceDataContext.Employers)
+            if (StepDefinitionsContext.ReferenceDataContext.Employers != null)
             {
-                AccountDataHelper.CreateAccount(
-                    employer.AccountId,
-                    employer.AccountId.ToString(),
-                    employer.GetBalanceForMonth(period),
-                    EnvironmentVariables);
-            }
+                foreach (var employer in StepDefinitionsContext.ReferenceDataContext.Employers)
+                {
+                    AccountDataHelper.CreateAccount(
+                        employer.AccountId,
+                        employer.AccountId.ToString(),
+                        employer.GetBalanceForMonth(period),
+                        EnvironmentVariables);
+                }
 
-            AccountDataHelper.UpdateAudit(EnvironmentVariables);
+                AccountDataHelper.UpdateAudit(EnvironmentVariables);
+            }
 
             foreach (var provider in StepDefinitionsContext.Providers)
             {
                 foreach (var learner in provider.Learners)
                 {
+                    if (learner.LearningDelivery.LearnerType == LearnerType.ProgrammeOnlyNonDas)
+                    {
+                        continue;
+                    }
+
                     AddLearnerCommitmentsForPeriod(date, provider.Ukprn, learner);
                 }
             }
@@ -117,15 +125,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                     StartDate = learner.LearningDelivery.StartDate,
                     EndDate = learner.LearningDelivery.PlannedEndDate,
                     AgreedCost = learner.LearningDelivery.PriceEpisodes[0].TotalPrice,
-                    StandardCode = IlrBuilder.Defaults.StandardCode,
+                    StandardCode = commitment.StandardCode.HasValue ? commitment.StandardCode.Value : IlrBuilder.Defaults.StandardCode,
                     FrameworkCode = IlrBuilder.Defaults.FrameworkCode,
                     ProgrammeType = IlrBuilder.Defaults.ProgrammeType,
                     PathwayCode = IlrBuilder.Defaults.PathwayCode,
                     Priority = commitmentPriority,
-                    VersionId = "1",
-                    PaymentStatus = (int)CommitmentPaymentStatus.Active,
-                    PaymentStatusDescription = CommitmentPaymentStatus.Active.ToString(),
-                    Payable = true
+                    VersionId = commitment.VersionId,
+                    PaymentStatus = (int)commitment.Status,
+                    PaymentStatusDescription = commitment.Status.ToString(),
+                    EffectiveFrom = learner.LearningDelivery.StartDate
                 },
                 EnvironmentVariables);
         }
@@ -141,10 +149,16 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                     continue;
                 }
 
+                if (commitment.EffectiveFrom.HasValue && commitment.EffectiveFrom.Value > date)
+                {
+                    continue;
+                }
+
                 var employer = StepDefinitionsContext.ReferenceDataContext.Employers?.SingleOrDefault(e => e.Name == commitment.Employer);
                 var accountId = employer?.AccountId ?? long.Parse(IdentifierGenerator.GenerateIdentifier(8, false));
 
                 var commitmentStartDate = commitment.StartDate ?? learner.LearningDelivery.StartDate;
+                var commitmentEffectiveFromDate = commitment.EffectiveFrom ?? commitmentStartDate;
                 var commitmentEndDate = commitment.ActualEndDate ?? commitment.EndDate ?? learner.LearningDelivery.PlannedEndDate;
                 var priceEpisode = learner.LearningDelivery.PriceEpisodes.Where(pe => pe.StartDate >= commitmentStartDate && pe.StartDate <= commitmentEndDate).OrderBy(pe => pe.StartDate).FirstOrDefault();
 
@@ -158,15 +172,20 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                         StartDate = commitmentStartDate,
                         EndDate = commitment.ActualEndDate ?? commitment.EndDate ?? learner.LearningDelivery.PlannedEndDate,
                         AgreedCost = commitment.AgreedPrice ?? priceEpisode.TotalPrice,
-                        StandardCode = IlrBuilder.Defaults.StandardCode,
+                        StandardCode = commitment.StandardCode.HasValue? commitment.StandardCode.Value: IlrBuilder.Defaults.StandardCode,
                         FrameworkCode = IlrBuilder.Defaults.FrameworkCode,
                         ProgrammeType = IlrBuilder.Defaults.ProgrammeType,
                         PathwayCode = IlrBuilder.Defaults.PathwayCode,
                         Priority = commitment.Priority,
-                        VersionId = "1",
-                        PaymentStatus = (int) CommitmentPaymentStatus.Active,
-                        PaymentStatusDescription = CommitmentPaymentStatus.Active.ToString(),
-                        Payable = true
+                        VersionId = commitment.VersionId,
+                        PaymentStatus = commitment.StopPeriodCensusDate.HasValue 
+                                            ? (int)CommitmentPaymentStatus.Active
+                                            : (int)commitment.Status,
+                        PaymentStatusDescription = commitment.StopPeriodCensusDate.HasValue
+                                            ? CommitmentPaymentStatus.Active.ToString()
+                                            : commitment.Status.ToString(),
+                        EffectiveFrom = commitmentEffectiveFromDate,
+                        EffectiveTo = commitment.EffectiveTo
                     },
                     EnvironmentVariables);
             }
@@ -180,9 +199,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
         
         protected void UpdateAccountsBalances(string month)
         {
-            foreach (var employer in StepDefinitionsContext.ReferenceDataContext.Employers)
+            if (StepDefinitionsContext.ReferenceDataContext.Employers != null)
             {
-                AccountDataHelper.UpdateAccountBalance(employer.AccountId, employer.GetBalanceForMonth(month), EnvironmentVariables);
+                foreach (var employer in StepDefinitionsContext.ReferenceDataContext.Employers)
+                {
+                    AccountDataHelper.UpdateAccountBalance(employer.AccountId, employer.GetBalanceForMonth(month), EnvironmentVariables);
+                }
             }
         }
 
@@ -205,7 +227,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
         {
             StepDefinitionsContext.AddProviderLearner(provider, learner);
 
-
             //set a default employer
             StepDefinitionsContext.ReferenceDataContext.SetDefaultEmployer(
                                                 new Dictionary<string, decimal> {
@@ -216,9 +237,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             SetupReferenceData();
 
             SetupValidLearnersData(provider.Ukprn, learner);
-
-
-
         }
 
         protected void SetupValidLearnersData(long ukprn, Learner learner)
@@ -290,34 +308,47 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             };
         }
 
-        protected void SubmitIlr(long ukprn, Learner[] learners, string academicYear, DateTime date
-          , ProcessService processService, Dictionary<string, decimal> earnedByPeriod, Dictionary<string, DataLockMatch[]> dataLockMatchesByPeriod)
+        protected void SubmitIlr(Provider provider, 
+                                string academicYear, 
+                                DateTime date, 
+                                ProcessService processService)
         {
-            var submissionLearners = learners.Select(l => new Learner
-            {
-                Name = l.Name,
-                Uln = l.Uln,
-                LearnRefNumber=l.LearnRefNumber,
-                LearningDelivery = new LearningDelivery
+            var submissionLearners = provider.Learners.Select(l =>
+            { 
+                var learner = new Learner
                 {
-                    LearningDeliveryFams=l.LearningDelivery.LearningDeliveryFams,
-                    LearnerType = l.LearningDelivery.LearnerType,
-                    StartDate = l.LearningDelivery.StartDate,
-                    PlannedEndDate = l.LearningDelivery.PlannedEndDate,
-                    ActualEndDate = date >= l.LearningDelivery.ActualEndDate 
-                                        ? l.LearningDelivery.ActualEndDate
-                                        : null,
-                    CompletionStatus = l.LearningDelivery.CompletionStatus,
-                    StandardCode = l.LearningDelivery.StandardCode,
-                    FrameworkCode= l.LearningDelivery.FrameworkCode,
-                    PathwayCode=l.LearningDelivery.PathwayCode,
-                    ProgrammeType=l.LearningDelivery.ProgrammeType,
-                    PriceEpisodes = l.LearningDelivery.PriceEpisodes
+                    Name = l.Name,
+                    Uln = l.Uln,
+                    LearnRefNumber = l.LearnRefNumber,
+                    DateOfBirth = l.DateOfBirth,
+                };
+
+                foreach (var ld in l.LearningDeliveries)
+                {
+                    learner.LearningDeliveries.Add(
+                        new LearningDelivery
+                        {
+                            LearningDeliveryFams = ld.LearningDeliveryFams,
+                            LearnerType = ld.LearnerType,
+                            StartDate = ld.StartDate,
+                            PlannedEndDate = ld.PlannedEndDate,
+                            ActualEndDate = date >= ld.ActualEndDate
+                                ? ld.ActualEndDate
+                                : null,
+                            CompletionStatus = ld.CompletionStatus,
+                            StandardCode = ld.StandardCode,
+                            FrameworkCode = ld.FrameworkCode,
+                            PathwayCode = ld.PathwayCode,
+                            ProgrammeType = ld.ProgrammeType,
+                            PriceEpisodes = ld.PriceEpisodes
+                        });
                 }
+            
+                return learner;
             }).ToArray();
 
             IlrSubmission submission = IlrBuilder.CreateAIlrSubmission()
-                .WithUkprn(ukprn)
+                .WithUkprn(provider.Ukprn)
                 .WithMultipleLearners()
                     .WithLearners(submissionLearners);
 
@@ -326,7 +357,39 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             var ilrStatusWatcher = new TestStatusWatcher(EnvironmentVariables, $"Submit ILR to {date:dd/MM/yy}");
             processService.RunIlrSubmission(submission, EnvironmentVariables, ilrStatusWatcher);
 
-            var periodEarnings = EarningsDataHelper.GetPeriodisedValuesForUkprn(ukprn, EnvironmentVariables).LastOrDefault() ?? new PeriodisedValuesEntity();
+            var periodEarnings = EarningsDataHelper.GetPeriodisedValuesForUkprnSummary(provider.Ukprn, EnvironmentVariables).LastOrDefault() ?? new PeriodisedValuesEntity();
+            PopulateEarnedByPeriodValues(academicYear, provider.EarnedByPeriod, periodEarnings);
+
+            //populate by Uln values
+            var periodEarningsByUln = EarningsDataHelper.GetPeriodisedValuesForUkprn(provider.Ukprn, EnvironmentVariables);
+            PopulateEarnedByPeriodByUln(academicYear, provider.EarnedByPeriodByUln, periodEarningsByUln);
+            
+
+            var dataLockMatches = DataLockDataHelper.GetDataLockMatchesForUkprn(provider.Ukprn, EnvironmentVariables) ?? new DataLockMatch[0];
+            provider.DataLockMatchesByPeriod.Add(date.GetPeriod(), dataLockMatches);
+        }
+
+        private static void PopulateEarnedByPeriodByUln(string academicYear, Dictionary<long, Dictionary<string, decimal>> earnedByPeriodByUln, PeriodisedValuesEntity[] periodEarnings)
+        {
+
+            foreach (var data in periodEarnings)
+            {
+                var earnedByPeriod = new Dictionary<string, decimal>();
+                if (!earnedByPeriodByUln.ContainsKey(data.Uln))
+                {
+                    earnedByPeriodByUln.Add(data.Uln, earnedByPeriod);
+                }
+                else
+                {
+                    earnedByPeriod = earnedByPeriodByUln[data.Uln];
+                }
+                PopulateEarnedByPeriodValues(academicYear, earnedByPeriod, data);
+            }
+            
+        }
+
+        private static void PopulateEarnedByPeriodValues(string academicYear, Dictionary<string, decimal> earnedByPeriod, PeriodisedValuesEntity periodEarnings)
+        {
             earnedByPeriod.AddOrUpdate("08/" + academicYear.Substring(0, 2), periodEarnings.Period_1);
             earnedByPeriod.AddOrUpdate("09/" + academicYear.Substring(0, 2), periodEarnings.Period_2);
             earnedByPeriod.AddOrUpdate("10/" + academicYear.Substring(0, 2), periodEarnings.Period_3);
@@ -339,11 +402,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             earnedByPeriod.AddOrUpdate("05/" + academicYear.Substring(2), periodEarnings.Period_10);
             earnedByPeriod.AddOrUpdate("06/" + academicYear.Substring(2), periodEarnings.Period_11);
             earnedByPeriod.AddOrUpdate("07/" + academicYear.Substring(2), periodEarnings.Period_12);
-
-            var dataLockMatches = DataLockDataHelper.GetDataLockMatchesForUkprn(ukprn, EnvironmentVariables) ?? new DataLockMatch[0];
-            dataLockMatchesByPeriod.Add(date.GetPeriod(), dataLockMatches);
         }
-        
+
         protected void SetupContextProviders(Table table)
         {
             if (table.ContainsColumn("Provider"))
@@ -363,101 +423,155 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
         {
             for (var rowIndex = 0; rowIndex < table.RowCount; rowIndex++)
             {
-                var priceEpisodes = new List<PriceEpisode>();
-
-                if (table.Header.Contains("Total training price") && table.Header.Contains("Residual training price"))
-                {
-                    var startDate = DateTime.Parse(table.Rows[rowIndex]["Total training price effective date"]);
-
-                    priceEpisodes.Add(new PriceEpisode
-                    {
-                        Id = GetPriceEpisodeIdentifier(startDate),
-                        StartDate = startDate,
-                        EndDate = DateTime.Parse(table.Rows[rowIndex]["Residual training price effective date"]).AddDays(-1),
-                        TotalPrice = decimal.Parse(table.Rows[rowIndex]["Total training price"]) + decimal.Parse(table.Rows[rowIndex]["Total assessment price"]),
-                        Tnp1 = decimal.Parse(table.Rows[rowIndex]["Total training price"]),
-                        Tnp2 = decimal.Parse(table.Rows[rowIndex]["Total assessment price"])
-                    });
-
-                    startDate = DateTime.Parse(table.Rows[rowIndex]["Residual training price effective date"]);
-
-                    priceEpisodes.Add(new PriceEpisode
-                    {
-                        Id = GetPriceEpisodeIdentifier(startDate),
-                        StartDate = startDate,
-                        TotalPrice = decimal.Parse(table.Rows[rowIndex]["Residual training price"]) + decimal.Parse(table.Rows[rowIndex]["Residual assessment price"]),
-                        Tnp3 = decimal.Parse(table.Rows[rowIndex]["Residual training price"]),
-                        Tnp4 = decimal.Parse(table.Rows[rowIndex]["Residual assessment price"])
-                    });
-                }
-                else
-                {
-                    var startDate = DateTime.Parse(table.Rows[rowIndex]["start date"]);
-
-                    priceEpisodes.Add(new PriceEpisode
-                    {
-                        Id = GetPriceEpisodeIdentifier(startDate),
-                        StartDate = startDate,
-                        TotalPrice = decimal.Parse(table.Rows[rowIndex]["agreed price"]),
-                        Tnp1 = decimal.Parse(table.Rows[rowIndex]["agreed price"]) * 0.8m,
-                        Tnp2 = decimal.Parse(table.Rows[rowIndex]["agreed price"]) - decimal.Parse(table.Rows[rowIndex]["agreed price"]) * 0.8m
-                    });
-                }
-
-                var learner = new Learner
-                {
-                    Name = table.Rows[rowIndex].ContainsKey("ULN") ? table.Rows[rowIndex]["ULN"] : string.Empty,
-
-                    LearningDelivery = new LearningDelivery
-                    {
-                        LearningDeliveryFams = StepDefinitionsContext.ReferenceDataContext.LearningDeliveryFams,
-                        LearnerType = LearnerType.ProgrammeOnlyDas,
-                        StartDate = DateTime.Parse(table.Rows[rowIndex]["start date"]),
-                        PlannedEndDate = table.Header.Contains("planned end date") ? 
-                                        DateTime.Parse(table.Rows[rowIndex]["planned end date"]) : 
-                                        DateTime.Parse(table.Rows[rowIndex]["start date"]).AddMonths(12),
-                        ActualEndDate =
-                            !table.Header.Contains("actual end date") ||
-                            string.IsNullOrWhiteSpace(table.Rows[rowIndex]["actual end date"])
-                                ? null
-                                : (DateTime?)DateTime.Parse(table.Rows[rowIndex]["actual end date"]),
-                        CompletionStatus = table.Header.Contains("completion status") ?
-                            IlrTranslator.TranslateCompletionStatus(table.Rows[rowIndex]["completion status"]) :
-                            CompletionStatus.InProgress,
-
-                        FrameworkCode = table.Header.Contains("framework code") ? int.Parse(table.Rows[rowIndex]["framework code"]) : IlrBuilder.Defaults.FrameworkCode,
-                        ProgrammeType = table.Header.Contains("programme type") ? int.Parse(table.Rows[rowIndex]["programme type"]) : IlrBuilder.Defaults.ProgrammeType,
-                        PathwayCode = table.Header.Contains("pathway code") ? int.Parse(table.Rows[rowIndex]["pathway code"]) : IlrBuilder.Defaults.PathwayCode,
-
-                        PriceEpisodes = priceEpisodes.ToArray()
-                    }
-                };
-
-
-                if (table.Rows[rowIndex].ContainsKey("ULN"))
-                {
-                    long uln = 0;
-                    long.TryParse(table.Rows[rowIndex]["ULN"], out uln);
-                    learner.Uln = uln;
-                }
-
-                learner.Uln = learner.Uln > 0 ? learner.Uln : long.Parse(IdentifierGenerator.GenerateIdentifier(10, false));
-                learner.LearnRefNumber = learner.Uln.ToString();
-
-                var standardCode = table.Header.Contains("standard code") ? int.Parse(table.Rows[rowIndex]["standard code"]) : IlrBuilder.Defaults.StandardCode;
-
-                learner.LearningDelivery.StandardCode = learner.LearningDelivery.FrameworkCode > 0 &&
-                                                        learner.LearningDelivery.PathwayCode > 0 &&
-                                                        learner.LearningDelivery.ProgrammeType > 0 ? 0 : standardCode;
-
-
-
                 var provider = table.ContainsColumn("Provider")
                     ? table.Rows[rowIndex]["Provider"]
                     : "provider";
 
-                StepDefinitionsContext.AddProviderLearner(provider, learner);
+                var learningDelivery = new LearningDelivery
+                {
+                    LearningDeliveryFams = StepDefinitionsContext.ReferenceDataContext.LearningDeliveryFams,
+                    LearnerType = table.Header.Contains("learner type")
+                                    ? GetLearnerType(table.Rows[rowIndex]["learner type"])
+                                    : LearnerType.ProgrammeOnlyDas,
+                    StartDate = DateTime.Parse(table.Rows[rowIndex]["start date"]),
+                    PlannedEndDate = table.Header.Contains("planned end date") ?
+                                       DateTime.Parse(table.Rows[rowIndex]["planned end date"]) :
+                                       DateTime.Parse(table.Rows[rowIndex]["start date"]).AddMonths(12),
+                    ActualEndDate =
+                           !table.Header.Contains("actual end date") ||
+                           string.IsNullOrWhiteSpace(table.Rows[rowIndex]["actual end date"])
+                               ? null
+                               : (DateTime?)DateTime.Parse(table.Rows[rowIndex]["actual end date"]),
+                    CompletionStatus = table.Header.Contains("completion status") ?
+                           IlrTranslator.TranslateCompletionStatus(table.Rows[rowIndex]["completion status"]) :
+                           CompletionStatus.Continuing,
+
+                    FrameworkCode = table.Header.Contains("framework code") ? int.Parse(table.Rows[rowIndex]["framework code"]) : IlrBuilder.Defaults.FrameworkCode,
+                    ProgrammeType = table.Header.Contains("programme type") ? int.Parse(table.Rows[rowIndex]["programme type"]) : IlrBuilder.Defaults.ProgrammeType,
+                    PathwayCode = table.Header.Contains("pathway code") ? int.Parse(table.Rows[rowIndex]["pathway code"]) : IlrBuilder.Defaults.PathwayCode,
+                };
+
+                var standardCode = table.Header.Contains("standard code") ? int.Parse(table.Rows[rowIndex]["standard code"]) : IlrBuilder.Defaults.StandardCode;
+                learningDelivery.StandardCode = learningDelivery.FrameworkCode > 0 &&
+                                                        learningDelivery.PathwayCode > 0 &&
+                                                        learningDelivery.ProgrammeType > 0 ? 0 : standardCode;
+
+                var priceEpisodes = SetupPriceEpisodes(table, rowIndex,learningDelivery.StandardCode);
+                learningDelivery.PriceEpisodes = priceEpisodes.ToArray();
+
+                Learner learner = null;
+                if (table.Rows[rowIndex].ContainsKey("ULN"))
+                {
+                    var learners = StepDefinitionsContext.GetProvider(provider).Learners;
+
+                    if (learners!=null)
+                        learner = learners.SingleOrDefault(x => x.Name == table.Rows[rowIndex]["ULN"]) ;
+                }
+
+                if (learner == null)
+                {
+                    learner = new Learner();
+                    learner.Name = table.Rows[rowIndex].ContainsKey("ULN") ? table.Rows[rowIndex]["ULN"] : string.Empty;
+                
+                    if (table.Rows[rowIndex].ContainsKey("ULN"))
+                    {
+                        long uln = 0;
+                        long.TryParse(table.Rows[rowIndex]["ULN"], out uln);
+                        learner.Uln = uln;
+                    }
+
+                    learner.Uln = learner.Uln > 0 ? learner.Uln : long.Parse(IdentifierGenerator.GenerateIdentifier(10, false));
+                    learner.LearnRefNumber = learner.Uln.ToString();
+
+                    learner.DateOfBirth = learningDelivery.LearnerType == LearnerType.ProgrammeOnlyDas16To18
+                        ? learningDelivery.StartDate.AddYears(-17)
+                        : new DateTime(1985, 10, 10);
+
+                    StepDefinitionsContext.AddProviderLearner(provider, learner);
+                }
+
+                learner.LearningDeliveries.Add(learningDelivery);
             }
+        }
+
+        private List<PriceEpisode> SetupPriceEpisodes(Table table, int rowIndex,long? standardCode)
+        {
+            var priceEpisodes = new List<PriceEpisode>();
+
+           
+            if (table.Header.Contains("Total training price") &&
+                table.Header.Contains("Total training price effective date") && 
+                !table.Header.Contains("Residual training price"))
+            {
+                var startDate = DateTime.Parse(table.Rows[rowIndex]["Total training price effective date"]);
+
+                priceEpisodes.Add(new PriceEpisode
+                {
+                    Id = GetPriceEpisodeIdentifier(startDate,standardCode),
+                    StartDate = startDate,
+                    EndDate = string.IsNullOrEmpty(table.Rows[rowIndex]["actual end date"]) ? (DateTime?)null :  DateTime.Parse(table.Rows[rowIndex]["actual end date"]),
+                    TotalPrice = decimal.Parse(table.Rows[rowIndex]["Total training price"]) + decimal.Parse(table.Rows[rowIndex]["Total assessment price"]),
+                    Tnp1 = decimal.Parse(table.Rows[rowIndex]["Total training price"]),
+                    Tnp2 = decimal.Parse(table.Rows[rowIndex]["Total assessment price"])
+                });
+
+            }
+            else  if (table.Header.Contains("Total training price") && 
+                        table.Header.Contains("Residual training price") &&
+                        table.Header.Contains("Total training price effective date"))
+            {
+                var startDate = DateTime.Parse(table.Rows[rowIndex]["Total training price effective date"]);
+
+                priceEpisodes.Add(new PriceEpisode
+                {
+                    Id = GetPriceEpisodeIdentifier(startDate,standardCode),
+                    StartDate = startDate,
+                    EndDate = DateTime.Parse(table.Rows[rowIndex]["Residual training price effective date"]).AddDays(-1),
+                    TotalPrice = decimal.Parse(table.Rows[rowIndex]["Total training price"]) + decimal.Parse(table.Rows[rowIndex]["Total assessment price"]),
+                    Tnp1 = decimal.Parse(table.Rows[rowIndex]["Total training price"]),
+                    Tnp2 = decimal.Parse(table.Rows[rowIndex]["Total assessment price"])
+                });
+
+                startDate = DateTime.Parse(table.Rows[rowIndex]["Residual training price effective date"]);
+
+                priceEpisodes.Add(new PriceEpisode
+                {
+                    Id = GetPriceEpisodeIdentifier(startDate,standardCode),
+                    StartDate = startDate,
+                    TotalPrice = decimal.Parse(table.Rows[rowIndex]["Residual training price"]) + decimal.Parse(table.Rows[rowIndex]["Residual assessment price"]),
+                    Tnp3 = decimal.Parse(table.Rows[rowIndex]["Residual training price"]),
+                    Tnp4 = decimal.Parse(table.Rows[rowIndex]["Residual assessment price"])
+                });
+            }
+            else if (table.Header.Contains("Total training price") &&
+                      table.Header.Contains("Total assessment price") &&
+                      !table.Header.Contains("Residual training price"))
+            {
+                var startDate = DateTime.Parse(table.Rows[rowIndex]["start date"]);
+
+                priceEpisodes.Add(new PriceEpisode
+                {
+                    Id = GetPriceEpisodeIdentifier(startDate, standardCode),
+                    StartDate = startDate,
+                    TotalPrice = decimal.Parse(table.Rows[rowIndex]["Total training price"]) + decimal.Parse(table.Rows[rowIndex]["Total assessment price"]),
+                    Tnp1 = decimal.Parse(table.Rows[rowIndex]["Total training price"]),
+                    Tnp2 = decimal.Parse(table.Rows[rowIndex]["Total assessment price"])
+                });
+            }
+            else
+            {
+                var startDate = DateTime.Parse(table.Rows[rowIndex]["start date"]);
+
+                priceEpisodes.Add(new PriceEpisode
+                {
+                    Id = GetPriceEpisodeIdentifier(startDate,standardCode),
+                    StartDate = startDate,
+                    TotalPrice = decimal.Parse(table.Rows[rowIndex]["agreed price"]),
+                    Tnp1 = decimal.Parse(table.Rows[rowIndex]["agreed price"]) * 0.8m,
+                    Tnp2 = decimal.Parse(table.Rows[rowIndex]["agreed price"]) - decimal.Parse(table.Rows[rowIndex]["agreed price"]) * 0.8m
+                });
+            }
+            return priceEpisodes;
         }
 
         protected void UpdateCommitmentsPaymentStatuses(DateTime censusDate)
@@ -466,7 +580,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             {
                 if (commitment.StopPeriodCensusDate.HasValue && commitment.StopPeriodCensusDate <= censusDate)
                 {
-                    CommitmentDataHelper.UpdateCommitmentStatus(commitment.Id, commitment.Status, EnvironmentVariables);
+                    CommitmentDataHelper.UpdateCommitmentEffectiveTo(commitment.Id, commitment.VersionId, commitment.StopPeriodCensusDate.Value.AddDays(-1), EnvironmentVariables);
+                    CommitmentDataHelper.CreateNewCommmitmentVersion(commitment.Id, commitment.VersionId, commitment.Status, commitment.StopPeriodCensusDate.Value, EnvironmentVariables);
                 }
             }
         }
@@ -483,9 +598,28 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             throw new ArgumentException($"Invalid commitment status value: {status}");
         }
 
-        private string GetPriceEpisodeIdentifier(DateTime date)
+        private string GetPriceEpisodeIdentifier(DateTime date,long? standardCode)
         {
-            return $"25-{IlrBuilder.Defaults.StandardCode}-{date.ToString("dd/MM/yyyy")}";
+            return $"25-{(standardCode.HasValue? standardCode.Value : IlrBuilder.Defaults.StandardCode)}-{date.ToString("dd/MM/yyyy")}";
+        }
+
+        private LearnerType GetLearnerType(string learnerType)
+        {
+            LearnerType result = LearnerType.ProgrammeOnlyDas;
+            switch (learnerType.Replace(" ", string.Empty).ToLowerInvariant())
+                {
+                    case "programmeonlynon-das":
+                        result= LearnerType.ProgrammeOnlyNonDas;
+                        break;
+                    case "programmeonlydas":
+                        result = LearnerType.ProgrammeOnlyDas;
+                        break;
+                    case "16-18programmeonlydas":
+                        result = LearnerType.ProgrammeOnlyDas16To18;
+                        break;
+
+                }
+            return result;
         }
     }
 }

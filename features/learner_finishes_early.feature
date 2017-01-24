@@ -20,9 +20,9 @@ Feature: Provider earnings and payments where learner completes earlier than pla
             | SFA Levy co-funding budget | 0     | 0     | 0     | ... | 0     | 0     |
         And the transaction types for the payments are:
             | Transaction type | 10/17 | 11/17 | ... | 08/18 | 09/18 |
-            | On-program       | 1000  | 1000  | ... | 1000  | 1000  |
+            | On-program       | 1000  | 1000  | ... | 1000  | 0     |
             | Completion       | 0     | 0     | ... | 0     | 3000  |
-            | Balancing        | 0     | 0     | ... | 0     | 0     |
+            | Balancing        | 0     | 0     | ... | 0     | 1000  |
 
     Scenario: A DAS learner, levy available, learner finishes two months early
         When an ILR file is submitted with the following data:
@@ -38,6 +38,6 @@ Feature: Provider earnings and payments where learner completes earlier than pla
             | SFA Levy co-funding budget | 0     | 0     | 0     | ... | 0     | 0     |
         And the transaction types for the payments are:
             | Transaction type | 10/17 | 11/17 | ... | 07/18 | 08/18 |
-            | On-program       | 1000  | 1000  | ... | 1000  | 1000  |
+            | On-program       | 1000  | 1000  | ... | 1000  | 0     |
             | Completion       | 0     | 0     | ... | 0     | 3000  |
-            | Balancing        | 0     | 0     | ... | 0     | 1000  |
+            | Balancing        | 0     | 0     | ... | 0     | 2000  |

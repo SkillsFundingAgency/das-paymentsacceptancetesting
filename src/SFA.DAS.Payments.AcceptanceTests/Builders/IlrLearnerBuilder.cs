@@ -11,7 +11,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
             : base(parentBuilder.Submission)
         {
             Learner = new Learner
-            {
+            {   
                 Uln = Defaults.FirstUln + parentBuilder.Submission.Learners.Length,
                 LearningDeliveries = new LearningDelivery[0]
             };

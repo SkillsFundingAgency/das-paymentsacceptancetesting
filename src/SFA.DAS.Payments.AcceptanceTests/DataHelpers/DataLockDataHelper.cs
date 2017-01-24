@@ -15,7 +15,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                 var query = "SELECT " +
                                 "CommitmentId, " +
                                 "PriceEpisodeIdentifier AS PriceEpisodeId " +
-                            "FROM DataLock.DasLearnerCommitment " +
+                            "FROM DataLock.PriceEpisodeMatch " +
                             "WHERE Ukprn = @ukprn";
                 return connection.Query<DataLockMatch>(query, new { ukprn }).ToArray();
             }

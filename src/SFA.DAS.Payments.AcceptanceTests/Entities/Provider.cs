@@ -16,8 +16,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Entities
         {
             get
             {
-                var maxActualEndDate = Learners.Max(l => l.LearningDelivery.ActualEndDate) ?? DateTime.MinValue;
-                var maxEndDate = Learners.Max(l => l.LearningDelivery.PlannedEndDate);
+                var maxActualEndDate = Learners.Max(l => l.LearningDeliveries.Max(ld => ld.ActualEndDate)) ?? DateTime.MinValue;
+                var maxEndDate = Learners.Max(l => l.LearningDeliveries.Max(ld => ld.PlannedEndDate));
 
                 return maxActualEndDate > maxEndDate
                     ? maxActualEndDate
@@ -27,12 +27,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.Entities
         public Learner[] Learners { get; set; }
         public Dictionary<string, decimal> EarnedByPeriod { get; set; }
 
+        public Dictionary<long, Dictionary<string, decimal>> EarnedByPeriodByUln { get; set; }
+
         public Dictionary<string, DataLockMatch[]> DataLockMatchesByPeriod { get; set; } 
 
         public Provider()
         {
             EarnedByPeriod = new Dictionary<string, decimal>();
             DataLockMatchesByPeriod = new Dictionary<string, DataLockMatch[]>();
+            EarnedByPeriodByUln = new Dictionary<long, Dictionary<string, decimal>>();
         }
     }
 }

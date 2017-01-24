@@ -3,6 +3,8 @@ using System.Linq;
 using IlrGenerator;
 using PriceEpisode = SFA.DAS.Payments.AcceptanceTests.Entities.PriceEpisode;
 using System.Collections.Generic;
+using SFA.DAS.Payments.AcceptanceTests.Enums;
+using CompletionStatus = IlrGenerator.CompletionStatus;
 
 namespace SFA.DAS.Payments.AcceptanceTests.Builders
 {
@@ -31,30 +33,38 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
 
             Learners = learners.Select(l =>
             {
-                return new Learner
+                var learner = new Learner
                 {
                     Uln = l.Uln,
                     LearnRefNumber = l.LearnRefNumber,
-                    LearningDeliveries = new[]
-                    {
+                    DateOfBirth = l.DateOfBirth
+                };
+
+                var learningDeliveries = new List<LearningDelivery>();
+
+                foreach(var ld in l.LearningDeliveries)
+                {
+                    learningDeliveries.Add(
                         new LearningDelivery
                         {
-                           
-                            ActFamCodeValue = (short) l.LearningDelivery.LearnerType,
-                            ActualStartDate = l.LearningDelivery.StartDate,
-                            PlannedEndDate = l.LearningDelivery.PlannedEndDate,
-                            ActualEndDate = l.LearningDelivery.ActualEndDate,
+                            ActFamCodeValue = GetActFamCode(l.LearningDelivery.LearnerType),
+                            ActualStartDate = ld.StartDate,
+                            PlannedEndDate = ld.PlannedEndDate,
+                            ActualEndDate = ld.ActualEndDate,
 
-                            StandardCode = l.LearningDelivery.StandardCode,
-                            ProgrammeType = l.LearningDelivery.ProgrammeType,
-                            FrameworkCode = l.LearningDelivery.FrameworkCode,
-                            PathwayCode = l.LearningDelivery.PathwayCode,
-
-                            FinancialRecords = GetLearningDeliveryFinancialRecords(l.LearningDelivery),
-                            FamRecords= TransformFamRecords(l.LearningDelivery.LearningDeliveryFams)
+                            StandardCode = ld.StandardCode,
+                            ProgrammeType = ld.ProgrammeType,
+                            FrameworkCode = ld.FrameworkCode,
+                            PathwayCode = ld.PathwayCode,
+                            CompletionStatus= TransformCompletionStatus(ld.CompletionStatus),
+                            FinancialRecords = GetLearningDeliveryFinancialRecords(ld),
+                            FamRecords = TransformFamRecords(ld.LearningDeliveryFams)
                         }
-                    }
-                };
+                    );
+                }
+
+                learner.LearningDeliveries = learningDeliveries.ToArray();
+                return learner;
             }).ToArray();
 
             Submission.Learners = Learners;
@@ -62,6 +72,35 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
             return this;
         }
 
+        private CompletionStatus TransformCompletionStatus(Enums.CompletionStatus status)
+        {
+            if (status == Enums.CompletionStatus.Completed)
+                return CompletionStatus.Completed;
+            else if (status == Enums.CompletionStatus.Transferred)
+                return CompletionStatus.Transferred;
+            else if (status == Enums.CompletionStatus.PlannedBreak)
+                return CompletionStatus.PlannedBreak;
+           else
+                return CompletionStatus.Continuing;
+        }
+
+        private short GetActFamCode(LearnerType learnerType)
+        {
+            short result = 1;
+
+            switch (learnerType)
+            {
+                case LearnerType.ProgrammeOnlyDas:
+                case LearnerType.ProgrammeOnlyDas16To18:
+                    result = 1;
+                    break;
+                default:
+                    result = 2;
+                    break;
+            }
+
+            return result;
+        }
         private LearningDeliveryActFamRecord[] TransformFamRecords(Entities.LearningDeliveryFam[] learningDeliveryFams)
         {
             if (learningDeliveryFams == null)
