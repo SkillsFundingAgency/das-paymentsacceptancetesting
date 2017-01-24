@@ -36,29 +36,23 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             SetupCommitments(table);
         }
 
-
         [When(@"an ILR file is submitted with the following data:")]
         public void WhenAndIlrIsSubmittedWithTheFollowingData(Table table)
         {
-
             SetupContexLearners(table);
 
             var provider = StepDefinitionsContext.GetDefaultProvider();
-            var ukprn = long.Parse(table.Rows[0]["UKPRN"]);
+         
             var startDate = StepDefinitionsContext.GetIlrStartDate().NextCensusDate();
 
-            SubmitIlr(ukprn, provider.Learners,
+            //Update the UKPRN to the one from ILR as this is the one which will be in the validation error table
+            provider.Ukprn = long.Parse(table.Rows[0]["UKPRN"]);
+
+            SubmitIlr(provider,
                 startDate.GetAcademicYear(),
                 startDate.NextCensusDate(),
-                new ProcessService(new TestLogger()),
-                provider.EarnedByPeriod,
-                provider.DataLockMatchesByPeriod);
-
-            //Update the UKPRN to the one from ILR as this is the one which will be in the validation error table
-            provider.Ukprn = ukprn;
+                new ProcessService(new TestLogger()));
         }
-
-
 
         [Then(@"a datalock error (.*) is produced")]
         public void ThenADatalockErrorOfDLOCK_WillBeProduced(string errorCode)
@@ -100,9 +94,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             //Run the month end
             RunMonthEnd(startDate);
         }
-
-     
-
 
         private void SetupCommitments(Table table)
         {
@@ -162,10 +153,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
                         ProgrammeType = programmeType,
                         PathwayCode = pathwayCode,
                         Priority = 1,
-                        VersionId = "1",
+                        VersionId = 1,
                         PaymentStatus = (int)status,
                         PaymentStatusDescription = status.ToString(),
-                        Payable = status == CommitmentPaymentStatus.Active || status == CommitmentPaymentStatus.Completed
+                        EffectiveFrom = startDate
                     },
                     EnvironmentVariables);
             }

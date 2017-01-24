@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SFA.DAS.Payments.AcceptanceTests.Entities
 {
@@ -14,6 +15,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Entities
         public string LearnRefNumber { get; set; }
             
         public List<LearningDelivery> LearningDeliveries { get; set; }
+
+        public DateTime DateOfBirth { get; set; }
 
         public LearningDelivery LearningDelivery
         {

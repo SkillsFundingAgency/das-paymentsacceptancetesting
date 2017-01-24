@@ -6,7 +6,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities
     {
         public long CommitmentId { get; set; }
         public int Priority { get; set; }
-        public string VersionId { get; set; }
+        public long VersionId { get; set; }
 
         public long Ukprn { get; set; }
         public long Uln { get; set; }
@@ -25,7 +25,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities
 
         public int PaymentStatus { get; set; }
         public string PaymentStatusDescription { get; set; }
-        public bool Payable { get; set; }
+        //public bool Payable { get; set; }
 
+        public DateTime EffectiveFrom { get; set; }
+        public DateTime? EffectiveTo { get; set; }
     }
 }

@@ -15,5 +15,6 @@
         public decimal Period_10 { get; set; }
         public decimal Period_11 { get; set; }
         public decimal Period_12 { get; set; }
+        public long Uln { get; set; }
     }
 }

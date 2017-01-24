@@ -168,7 +168,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "...",
                         "0"});
             table54.AddRow(new string[] {
-                        "SFA Levy co-funded budget",
+                        "SFA Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -296,7 +296,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "...",
                         "0"});
             table57.AddRow(new string[] {
-                        "SFA Levy co-funded budget",
+                        "SFA Levy co-funding budget",
                         "0",
                         "0",
                         "0",

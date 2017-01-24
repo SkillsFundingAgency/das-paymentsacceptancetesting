@@ -31,6 +31,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             ReferenceDataContext.LearnerType = LearnerType.ProgrammeOnlyNonDas;
         }
 
+        [Given(@"Two learners are programme only DAS")]
+        public void GivenTwoLearnersAreProgrammeOnlyDAS()
+        {
+            ReferenceDataContext.LearnerType = LearnerType.ProgrammeOnlyDas;
+        }
+
+
         [Given(@"the agreed price is (.*)")]
         public void GivenTheAgreedPriceIs(decimal agreedPrice)
         {
@@ -49,6 +56,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             ReferenceDataContext.FundingMaximum = fundingMaximum;
         }
 
+     
         [Given(@"levy balance = (.*) for all months")]
         public void GivenLevyBalanceAgreedPrice(int levyBalance)
         {
@@ -69,6 +77,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             for (var colIndex = 0; colIndex < table.Header.Count; colIndex++)
             {
                 var period = table.Header.ElementAt(colIndex);
+              
                 var balance = decimal.Parse(table.Rows[0][period]);
 
                 monthlyAccountBalance.Add(period, balance);
@@ -149,7 +158,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                 }
                 else
                 {
-
                     ReferenceDataContext.SetEmployerLearnersType(employerName, type);
                 }
             }
@@ -176,32 +184,49 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                 commitments[rowIndex] = new Commitment
                 {
                     Id = long.Parse(IdentifierGenerator.GenerateIdentifier(6, false)),
-                    Priority = table.Rows[rowIndex].ContainsKey("priority") ? int.Parse(table.Rows[rowIndex]["priority"]) : 1,
+                    VersionId = table.Rows[rowIndex].ContainsKey("version Id")
+                        ? long.Parse(table.Rows[rowIndex]["version Id"])
+                        : 1,
+                    Priority = table.Rows[rowIndex].ContainsKey("priority")
+                        ? int.Parse(table.Rows[rowIndex]["priority"])
+                        : 1,
                     Learner = table.Rows[rowIndex]["ULN"],
-                    Employer = table.Rows[rowIndex].ContainsKey("Employer") ? table.Rows[rowIndex]["Employer"] : "employer",
-                    Provider = table.Rows[rowIndex].ContainsKey("Provider") ? table.Rows[rowIndex]["Provider"] : "provider",
+                    Employer = table.Rows[rowIndex].ContainsKey("Employer")
+                        ? table.Rows[rowIndex]["Employer"]
+                        : "employer",
+                    Provider = table.Rows[rowIndex].ContainsKey("Provider")
+                        ? table.Rows[rowIndex]["Provider"]
+                        : "provider",
                     Status = table.Rows[rowIndex].ContainsKey("status")
-                                ? GetStatus(table.Rows[rowIndex]["status"])
-                                : CommitmentPaymentStatus.Active,
-                    StopPeriod = table.Rows[rowIndex].ContainsKey("stopped on") ? table.Rows[rowIndex]["stopped on"] : string.Empty,
+                        ? GetStatus(table.Rows[rowIndex]["status"])
+                        : CommitmentPaymentStatus.Active,
+                    StopPeriod = table.Rows[rowIndex].ContainsKey("stopped on")
+                        ? table.Rows[rowIndex]["stopped on"]
+                        : string.Empty,
                     StartDate = table.Rows[rowIndex].ContainsKey("price effective date")
-                                ? DateTime.Parse(table.Rows[rowIndex]["price effective date"])
-                                : (DateTime?)null,
+                        ? DateTime.Parse(table.Rows[rowIndex]["price effective date"])
+                        : (DateTime?)null,
                     EndDate = table.Rows[rowIndex].ContainsKey("planned end date")
-                                ? DateTime.Parse(table.Rows[rowIndex]["planned end date"])
-                                : (DateTime?)null,
+                        ? DateTime.Parse(table.Rows[rowIndex]["planned end date"])
+                        : (DateTime?)null,
                     ActualEndDate = table.Rows[rowIndex].ContainsKey("actual end date") && !string.IsNullOrWhiteSpace(table.Rows[rowIndex]["actual end date"])
-                                ? DateTime.Parse(table.Rows[rowIndex]["actual end date"])
-                                : (DateTime?)null,
+                        ? DateTime.Parse(table.Rows[rowIndex]["actual end date"])
+                        : (DateTime?)null,
                     AgreedPrice = table.Rows[rowIndex].ContainsKey("agreed price")
-                                ? decimal.Parse(table.Rows[rowIndex]["agreed price"])
-                                : (decimal?)null,
+                        ? decimal.Parse(table.Rows[rowIndex]["agreed price"])
+                        : (decimal?) null,
                     StandardCode = table.Rows[rowIndex].ContainsKey("standard code")
-                                ? long.Parse(table.Rows[rowIndex]["standard code"])
-                                : (long?)null,
-                    ComitmentIdenifier = table.Rows[rowIndex].ContainsKey("commitment Id") 
-                                        ? table.Rows[rowIndex]["commitment Id"]
-                                        : null,
+                        ? long.Parse(table.Rows[rowIndex]["standard code"])
+                        : (long?) null,
+                    CommitmentIdenifier = table.Rows[rowIndex].ContainsKey("commitment Id")
+                        ? table.Rows[rowIndex]["commitment Id"]
+                        : null,
+                    EffectiveFrom = table.Rows[rowIndex].ContainsKey("effective from")
+                        ? DateTime.Parse(table.Rows[rowIndex]["effective from"])
+                        : (DateTime?) null,
+                    EffectiveTo = table.Rows[rowIndex].ContainsKey("effective to") && !string.IsNullOrWhiteSpace(table.Rows[rowIndex]["effective to"])
+                        ? DateTime.Parse(table.Rows[rowIndex]["effective to"])
+                        : (DateTime?)null
                 };
             }
 

@@ -76,10 +76,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("A DAS learner, levy available, learner finishes on time")]
-        public virtual void ADASLearnerLevyAvailableLearnerFinishesOnTime()
+        [NUnit.Framework.DescriptionAttribute("ILR submitted late for a DAS learner, levy available, learner finishes on time")]
+        public virtual void ILRSubmittedLateForADASLearnerLevyAvailableLearnerFinishesOnTime()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("A DAS learner, levy available, learner finishes on time", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ILR submitted late for a DAS learner, levy available, learner finishes on time", ((string[])(null)));
 #line 9
     this.ScenarioSetup(scenarioInfo);
 #line 5
@@ -160,8 +160,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "0",
                         "0",
-                        "1000",
-                        "1000",
+                        "0",
+                        "0",
                         "..."});
 #line 13
         testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table59, "Then ");

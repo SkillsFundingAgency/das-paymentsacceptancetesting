@@ -20,7 +20,6 @@ using CompletionStatus = SFA.DAS.Payments.AcceptanceTests.Enums.CompletionStatus
 namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 {
     public class BaseStepDefinitions
-
     {
 
         #region Properties
@@ -65,21 +64,29 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 
             var period = date.GetPeriod();
 
-            foreach (var employer in StepDefinitionsContext.ReferenceDataContext.Employers)
+            if (StepDefinitionsContext.ReferenceDataContext.Employers != null)
             {
-                AccountDataHelper.CreateAccount(
-                    employer.AccountId,
-                    employer.AccountId.ToString(),
-                    employer.GetBalanceForMonth(period),
-                    EnvironmentVariables);
-            }
+                foreach (var employer in StepDefinitionsContext.ReferenceDataContext.Employers)
+                {
+                    AccountDataHelper.CreateAccount(
+                        employer.AccountId,
+                        employer.AccountId.ToString(),
+                        employer.GetBalanceForMonth(period),
+                        EnvironmentVariables);
+                }
 
-            AccountDataHelper.UpdateAudit(EnvironmentVariables);
+                AccountDataHelper.UpdateAudit(EnvironmentVariables);
+            }
 
             foreach (var provider in StepDefinitionsContext.Providers)
             {
                 foreach (var learner in provider.Learners)
                 {
+                    if (learner.LearningDelivery.LearnerType == LearnerType.ProgrammeOnlyNonDas)
+                    {
+                        continue;
+                    }
+
                     AddLearnerCommitmentsForPeriod(date, provider.Ukprn, learner);
                 }
             }
@@ -123,10 +130,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                     ProgrammeType = IlrBuilder.Defaults.ProgrammeType,
                     PathwayCode = IlrBuilder.Defaults.PathwayCode,
                     Priority = commitmentPriority,
-                    VersionId = "1",
-                    PaymentStatus = (int)CommitmentPaymentStatus.Active,
-                    PaymentStatusDescription = CommitmentPaymentStatus.Active.ToString(),
-                    Payable = true
+                    VersionId = commitment.VersionId,
+                    PaymentStatus = (int)commitment.Status,
+                    PaymentStatusDescription = commitment.Status.ToString(),
+                    EffectiveFrom = learner.LearningDelivery.StartDate
                 },
                 EnvironmentVariables);
         }
@@ -142,10 +149,16 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                     continue;
                 }
 
+                if (commitment.EffectiveFrom.HasValue && commitment.EffectiveFrom.Value > date)
+                {
+                    continue;
+                }
+
                 var employer = StepDefinitionsContext.ReferenceDataContext.Employers?.SingleOrDefault(e => e.Name == commitment.Employer);
                 var accountId = employer?.AccountId ?? long.Parse(IdentifierGenerator.GenerateIdentifier(8, false));
 
                 var commitmentStartDate = commitment.StartDate ?? learner.LearningDelivery.StartDate;
+                var commitmentEffectiveFromDate = commitment.EffectiveFrom ?? commitmentStartDate;
                 var commitmentEndDate = commitment.ActualEndDate ?? commitment.EndDate ?? learner.LearningDelivery.PlannedEndDate;
                 var priceEpisode = learner.LearningDelivery.PriceEpisodes.Where(pe => pe.StartDate >= commitmentStartDate && pe.StartDate <= commitmentEndDate).OrderBy(pe => pe.StartDate).FirstOrDefault();
 
@@ -164,10 +177,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                         ProgrammeType = IlrBuilder.Defaults.ProgrammeType,
                         PathwayCode = IlrBuilder.Defaults.PathwayCode,
                         Priority = commitment.Priority,
-                        VersionId = "1",
-                        PaymentStatus = (int) CommitmentPaymentStatus.Active,
-                        PaymentStatusDescription = CommitmentPaymentStatus.Active.ToString(),
-                        Payable = true
+                        VersionId = commitment.VersionId,
+                        PaymentStatus = commitment.StopPeriodCensusDate.HasValue 
+                                            ? (int)CommitmentPaymentStatus.Active
+                                            : (int)commitment.Status,
+                        PaymentStatusDescription = commitment.StopPeriodCensusDate.HasValue
+                                            ? CommitmentPaymentStatus.Active.ToString()
+                                            : commitment.Status.ToString(),
+                        EffectiveFrom = commitmentEffectiveFromDate,
+                        EffectiveTo = commitment.EffectiveTo
                     },
                     EnvironmentVariables);
             }
@@ -181,9 +199,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
         
         protected void UpdateAccountsBalances(string month)
         {
-            foreach (var employer in StepDefinitionsContext.ReferenceDataContext.Employers)
+            if (StepDefinitionsContext.ReferenceDataContext.Employers != null)
             {
-                AccountDataHelper.UpdateAccountBalance(employer.AccountId, employer.GetBalanceForMonth(month), EnvironmentVariables);
+                foreach (var employer in StepDefinitionsContext.ReferenceDataContext.Employers)
+                {
+                    AccountDataHelper.UpdateAccountBalance(employer.AccountId, employer.GetBalanceForMonth(month), EnvironmentVariables);
+                }
             }
         }
 
@@ -206,7 +227,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
         {
             StepDefinitionsContext.AddProviderLearner(provider, learner);
 
-
             //set a default employer
             StepDefinitionsContext.ReferenceDataContext.SetDefaultEmployer(
                                                 new Dictionary<string, decimal> {
@@ -217,9 +237,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             SetupReferenceData();
 
             SetupValidLearnersData(provider.Ukprn, learner);
-
-
-
         }
 
         protected void SetupValidLearnersData(long ukprn, Learner learner)
@@ -291,18 +308,20 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             };
         }
 
-        protected void SubmitIlr(long ukprn, Learner[] learners, string academicYear, DateTime date
-          , ProcessService processService, Dictionary<string, decimal> earnedByPeriod, Dictionary<string, DataLockMatch[]> dataLockMatchesByPeriod)
+        protected void SubmitIlr(Provider provider, 
+                                string academicYear, 
+                                DateTime date, 
+                                ProcessService processService)
         {
-            var submissionLearners = learners.Select(l =>
+            var submissionLearners = provider.Learners.Select(l =>
             { 
                 var learner = new Learner
                 {
                     Name = l.Name,
                     Uln = l.Uln,
-                    LearnRefNumber = l.LearnRefNumber
+                    LearnRefNumber = l.LearnRefNumber,
+                    DateOfBirth = l.DateOfBirth,
                 };
-          
 
                 foreach (var ld in l.LearningDeliveries)
                 {
@@ -314,23 +333,22 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                             StartDate = ld.StartDate,
                             PlannedEndDate = ld.PlannedEndDate,
                             ActualEndDate = date >= ld.ActualEndDate
-                                            ? ld.ActualEndDate
-                                            : null,
+                                ? ld.ActualEndDate
+                                : null,
                             CompletionStatus = ld.CompletionStatus,
                             StandardCode = ld.StandardCode,
                             FrameworkCode = ld.FrameworkCode,
                             PathwayCode = ld.PathwayCode,
                             ProgrammeType = ld.ProgrammeType,
                             PriceEpisodes = ld.PriceEpisodes
-                        }
-                        );
+                        });
                 }
             
                 return learner;
             }).ToArray();
 
             IlrSubmission submission = IlrBuilder.CreateAIlrSubmission()
-                .WithUkprn(ukprn)
+                .WithUkprn(provider.Ukprn)
                 .WithMultipleLearners()
                     .WithLearners(submissionLearners);
 
@@ -339,7 +357,39 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             var ilrStatusWatcher = new TestStatusWatcher(EnvironmentVariables, $"Submit ILR to {date:dd/MM/yy}");
             processService.RunIlrSubmission(submission, EnvironmentVariables, ilrStatusWatcher);
 
-            var periodEarnings = EarningsDataHelper.GetPeriodisedValuesForUkprn(ukprn, EnvironmentVariables).LastOrDefault() ?? new PeriodisedValuesEntity();
+            var periodEarnings = EarningsDataHelper.GetPeriodisedValuesForUkprnSummary(provider.Ukprn, EnvironmentVariables).LastOrDefault() ?? new PeriodisedValuesEntity();
+            PopulateEarnedByPeriodValues(academicYear, provider.EarnedByPeriod, periodEarnings);
+
+            //populate by Uln values
+            var periodEarningsByUln = EarningsDataHelper.GetPeriodisedValuesForUkprn(provider.Ukprn, EnvironmentVariables);
+            PopulateEarnedByPeriodByUln(academicYear, provider.EarnedByPeriodByUln, periodEarningsByUln);
+            
+
+            var dataLockMatches = DataLockDataHelper.GetDataLockMatchesForUkprn(provider.Ukprn, EnvironmentVariables) ?? new DataLockMatch[0];
+            provider.DataLockMatchesByPeriod.Add(date.GetPeriod(), dataLockMatches);
+        }
+
+        private static void PopulateEarnedByPeriodByUln(string academicYear, Dictionary<long, Dictionary<string, decimal>> earnedByPeriodByUln, PeriodisedValuesEntity[] periodEarnings)
+        {
+
+            foreach (var data in periodEarnings)
+            {
+                var earnedByPeriod = new Dictionary<string, decimal>();
+                if (!earnedByPeriodByUln.ContainsKey(data.Uln))
+                {
+                    earnedByPeriodByUln.Add(data.Uln, earnedByPeriod);
+                }
+                else
+                {
+                    earnedByPeriod = earnedByPeriodByUln[data.Uln];
+                }
+                PopulateEarnedByPeriodValues(academicYear, earnedByPeriod, data);
+            }
+            
+        }
+
+        private static void PopulateEarnedByPeriodValues(string academicYear, Dictionary<string, decimal> earnedByPeriod, PeriodisedValuesEntity periodEarnings)
+        {
             earnedByPeriod.AddOrUpdate("08/" + academicYear.Substring(0, 2), periodEarnings.Period_1);
             earnedByPeriod.AddOrUpdate("09/" + academicYear.Substring(0, 2), periodEarnings.Period_2);
             earnedByPeriod.AddOrUpdate("10/" + academicYear.Substring(0, 2), periodEarnings.Period_3);
@@ -352,11 +402,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             earnedByPeriod.AddOrUpdate("05/" + academicYear.Substring(2), periodEarnings.Period_10);
             earnedByPeriod.AddOrUpdate("06/" + academicYear.Substring(2), periodEarnings.Period_11);
             earnedByPeriod.AddOrUpdate("07/" + academicYear.Substring(2), periodEarnings.Period_12);
-
-            var dataLockMatches = DataLockDataHelper.GetDataLockMatchesForUkprn(ukprn, EnvironmentVariables) ?? new DataLockMatch[0];
-            dataLockMatchesByPeriod.Add(date.GetPeriod(), dataLockMatches);
         }
-        
+
         protected void SetupContextProviders(Table table)
         {
             if (table.ContainsColumn("Provider"))
@@ -376,17 +423,16 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
         {
             for (var rowIndex = 0; rowIndex < table.RowCount; rowIndex++)
             {
-
                 var provider = table.ContainsColumn("Provider")
                     ? table.Rows[rowIndex]["Provider"]
                     : "provider";
 
-              
-
                 var learningDelivery = new LearningDelivery
                 {
                     LearningDeliveryFams = StepDefinitionsContext.ReferenceDataContext.LearningDeliveryFams,
-                    LearnerType = LearnerType.ProgrammeOnlyDas,
+                    LearnerType = table.Header.Contains("learner type")
+                                    ? GetLearnerType(table.Rows[rowIndex]["learner type"])
+                                    : LearnerType.ProgrammeOnlyDas,
                     StartDate = DateTime.Parse(table.Rows[rowIndex]["start date"]),
                     PlannedEndDate = table.Header.Contains("planned end date") ?
                                        DateTime.Parse(table.Rows[rowIndex]["planned end date"]) :
@@ -403,8 +449,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                     FrameworkCode = table.Header.Contains("framework code") ? int.Parse(table.Rows[rowIndex]["framework code"]) : IlrBuilder.Defaults.FrameworkCode,
                     ProgrammeType = table.Header.Contains("programme type") ? int.Parse(table.Rows[rowIndex]["programme type"]) : IlrBuilder.Defaults.ProgrammeType,
                     PathwayCode = table.Header.Contains("pathway code") ? int.Parse(table.Rows[rowIndex]["pathway code"]) : IlrBuilder.Defaults.PathwayCode,
-
-                   
                 };
 
                 var standardCode = table.Header.Contains("standard code") ? int.Parse(table.Rows[rowIndex]["standard code"]) : IlrBuilder.Defaults.StandardCode;
@@ -439,6 +483,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                     learner.Uln = learner.Uln > 0 ? learner.Uln : long.Parse(IdentifierGenerator.GenerateIdentifier(10, false));
                     learner.LearnRefNumber = learner.Uln.ToString();
 
+                    learner.DateOfBirth = learningDelivery.LearnerType == LearnerType.ProgrammeOnlyDas16To18
+                        ? learningDelivery.StartDate.AddYears(-17)
+                        : new DateTime(1985, 10, 10);
+
                     StepDefinitionsContext.AddProviderLearner(provider, learner);
                 }
 
@@ -450,8 +498,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
         {
             var priceEpisodes = new List<PriceEpisode>();
 
-            //TODO: refactor/review below setup
-            if (table.Header.Contains("Total training price") && !table.Header.Contains("Residual training price"))
+           
+            if (table.Header.Contains("Total training price") &&
+                table.Header.Contains("Total training price effective date") && 
+                !table.Header.Contains("Residual training price"))
             {
                 var startDate = DateTime.Parse(table.Rows[rowIndex]["Total training price effective date"]);
 
@@ -466,7 +516,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                 });
 
             }
-            else  if (table.Header.Contains("Total training price") && table.Header.Contains("Residual training price"))
+            else  if (table.Header.Contains("Total training price") && 
+                        table.Header.Contains("Residual training price") &&
+                        table.Header.Contains("Total training price effective date"))
             {
                 var startDate = DateTime.Parse(table.Rows[rowIndex]["Total training price effective date"]);
 
@@ -491,6 +543,21 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                     Tnp4 = decimal.Parse(table.Rows[rowIndex]["Residual assessment price"])
                 });
             }
+            else if (table.Header.Contains("Total training price") &&
+                      table.Header.Contains("Total assessment price") &&
+                      !table.Header.Contains("Residual training price"))
+            {
+                var startDate = DateTime.Parse(table.Rows[rowIndex]["start date"]);
+
+                priceEpisodes.Add(new PriceEpisode
+                {
+                    Id = GetPriceEpisodeIdentifier(startDate, standardCode),
+                    StartDate = startDate,
+                    TotalPrice = decimal.Parse(table.Rows[rowIndex]["Total training price"]) + decimal.Parse(table.Rows[rowIndex]["Total assessment price"]),
+                    Tnp1 = decimal.Parse(table.Rows[rowIndex]["Total training price"]),
+                    Tnp2 = decimal.Parse(table.Rows[rowIndex]["Total assessment price"])
+                });
+            }
             else
             {
                 var startDate = DateTime.Parse(table.Rows[rowIndex]["start date"]);
@@ -513,7 +580,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             {
                 if (commitment.StopPeriodCensusDate.HasValue && commitment.StopPeriodCensusDate <= censusDate)
                 {
-                    CommitmentDataHelper.UpdateCommitmentStatus(commitment.Id, commitment.Status, EnvironmentVariables);
+                    CommitmentDataHelper.UpdateCommitmentEffectiveTo(commitment.Id, commitment.VersionId, commitment.StopPeriodCensusDate.Value.AddDays(-1), EnvironmentVariables);
+                    CommitmentDataHelper.CreateNewCommmitmentVersion(commitment.Id, commitment.VersionId, commitment.Status, commitment.StopPeriodCensusDate.Value, EnvironmentVariables);
                 }
             }
         }
@@ -533,6 +601,25 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
         private string GetPriceEpisodeIdentifier(DateTime date,long? standardCode)
         {
             return $"25-{(standardCode.HasValue? standardCode.Value : IlrBuilder.Defaults.StandardCode)}-{date.ToString("dd/MM/yyyy")}";
+        }
+
+        private LearnerType GetLearnerType(string learnerType)
+        {
+            LearnerType result = LearnerType.ProgrammeOnlyDas;
+            switch (learnerType.Replace(" ", string.Empty).ToLowerInvariant())
+                {
+                    case "programmeonlynon-das":
+                        result= LearnerType.ProgrammeOnlyNonDas;
+                        break;
+                    case "programmeonlydas":
+                        result = LearnerType.ProgrammeOnlyDas;
+                        break;
+                    case "16-18programmeonlydas":
+                        result = LearnerType.ProgrammeOnlyDas16To18;
+                        break;
+
+                }
+            return result;
         }
     }
 }
