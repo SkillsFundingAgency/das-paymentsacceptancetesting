@@ -78,8 +78,8 @@ Feature: Provider earnings and payments where learner changes apprenticeship sta
             | learner a | 01/09/2017 | 08/09/2018       | 31/10/2017      | planned break     | 12000                | 01/09/2017                          | 3000                   | 01/09/2017                            |
             | learner a | 03/01/2018 | 08/11/2018       |                 | continuing        | 12000                | 03/01/2018                          | 3000                   | 03/01/2018                            |
         Then the provider earnings and payments break down as follows:
-            | Type                          | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 | 02/18 | ... | 08/18 |
-            | Provider Earned from SFA      | 1000  | 1000  | 0     | 0     | 1000  | 1000  | ... | 1000  |
-            | Provider Paid by SFA          | 0     | 1000  | 1000  | 0     | 0     | 1000  | ... | 1000  |
-            | Employer Levy account debited | 0     | 1000  | 1000  | 0     | 0     | 1000  | ... | 1000  |
-            | SFA Levy employer budget      | 1000  | 1000  | 0     | 0     | 1000  | 1000  | ... | 1000  |
+            | Type                          | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 | 02/18 | ... | 10/18 | 11/18 |
+            | Provider Earned from SFA      | 1000  | 1000  | 0     | 0     | 1000  | 1000  | ... | 1000  | 0     |
+            | Provider Paid by SFA          | 0     | 1000  | 1000  | 0     | 0     | 1000  | ... | 1000  | 1000  |
+            | Employer Levy account debited | 0     | 1000  | 1000  | 0     | 0     | 1000  | ... | 1000  | 1000  |
+            | SFA Levy employer budget      | 1000  | 1000  | 0     | 0     | 1000  | 1000  | ... | 1000  | 0     |

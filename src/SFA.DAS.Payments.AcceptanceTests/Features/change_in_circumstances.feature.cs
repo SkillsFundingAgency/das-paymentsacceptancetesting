@@ -565,7 +565,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "01/18",
                         "02/18",
                         "...",
-                        "08/18"});
+                        "10/18",
+                        "11/18"});
             table15.AddRow(new string[] {
                         "Provider Earned from SFA",
                         "1000",
@@ -575,7 +576,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "1000",
                         "1000",
                         "...",
-                        "1000"});
+                        "1000",
+                        "0"});
             table15.AddRow(new string[] {
                         "Provider Paid by SFA",
                         "0",
@@ -585,6 +587,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "1000",
                         "...",
+                        "1000",
                         "1000"});
             table15.AddRow(new string[] {
                         "Employer Levy account debited",
@@ -595,6 +598,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "1000",
                         "...",
+                        "1000",
                         "1000"});
             table15.AddRow(new string[] {
                         "SFA Levy employer budget",
@@ -605,7 +609,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "1000",
                         "1000",
                         "...",
-                        "1000"});
+                        "1000",
+                        "0"});
 #line 80
         testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table15, "Then ");
 #line hidden
