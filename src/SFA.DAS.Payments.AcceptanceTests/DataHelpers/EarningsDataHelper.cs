@@ -155,7 +155,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                                 priceEpisodeIdentifier = priceEpisode.Id,
                                 priceEpisodeTotalTNPPrice = priceEpisode.TotalPrice,
                                 episodeStartDate = priceEpisode.StartDate,
-                                episodeEndDate = priceEpisode.EndDate,
+                                episodeEndDate = priceEpisode.EndDate ?? learningDelivery.ActualEndDate ?? learningDelivery.PlannedEndDate,
                                 monthlyPayment = priceEpisode.MonthlyPayment,
                                 completionPayment = priceEpisode.CompletionPayment,
                                 tnp1 = priceEpisode.Tnp1,
