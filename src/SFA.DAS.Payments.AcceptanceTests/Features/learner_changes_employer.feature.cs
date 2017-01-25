@@ -1694,25 +1694,48 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
 #line hidden
             TechTalk.SpecFlow.Table table111 = new TechTalk.SpecFlow.Table(new string[] {
                         "Employer",
+                        "commitment Id",
+                        "version Id",
                         "ULN",
                         "price effective date",
                         "planned end date",
-                        "actual end date",
-                        "agreed price"});
+                        "agreed price",
+                        "status",
+                        "effective from",
+                        "effective to"});
             table111.AddRow(new string[] {
                         "ABC",
+                        "1",
+                        "1",
                         "learner a",
                         "01/08/2017",
                         "31/08/2018",
-                        "31/10/2017",
-                        "15000"});
+                        "15000",
+                        "active",
+                        "01/08/2017",
+                        "31/10/2017"});
+            table111.AddRow(new string[] {
+                        "ABC",
+                        "1",
+                        "2",
+                        "learner a",
+                        "01/08/2017",
+                        "31/08/2018",
+                        "15000",
+                        "cancelled",
+                        "01/11/2017",
+                        ""});
             table111.AddRow(new string[] {
                         "XYZ",
+                        "2",
+                        "1",
                         "learner a",
-                        "03/11/2017",
+                        "01/11/2017",
                         "31/08/2018",
-                        "",
-                        "5625"});
+                        "5625",
+                        "active",
+                        "01/11/2017",
+                        ""});
 #line 286
         testRunner.And("the following commitments exist on 03/12/2017:", ((string)(null)), table111, "And ");
 #line hidden
@@ -1744,8 +1767,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "03/11/2017",
                         "625",
                         "03/11/2017"});
-#line 290
-        testRunner.When("an ILR file is submitted for the first time in 12/17 with the following data:", ((string)(null)), table112, "When ");
+#line 291
+        testRunner.When("an ILR file is submitted for the first time on 28/11/17 with the following data:", ((string)(null)), table112, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table113 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -1784,7 +1807,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0"});
             table113.AddRow(new string[] {
                         "Provider Paid by SFA",
-                        "",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -1831,7 +1854,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "0",
                         "0"});
-#line 296
+#line 294
         testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table113, "Then ");
 #line hidden
             this.ScenarioCleanup();

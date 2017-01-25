@@ -34,17 +34,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             ProcessIlrFileSubmissions(table);
         }
 
-        [When(@"an ILR file is submitted in (.*) with the following data:")]
-        public void WhenAnIlrFileIsSubmittedInAMonthWithTheFollowingData(string month, Table table)
+        [When(@"an ILR file is submitted for the first time on (.*) with the following data:")]
+        public void WhenAnIlrFileIsSubmittedForTheFirstTimeInAMonthWithTheFollowingData(string date, Table table)
         {
-            var submissionDate = new DateTime(int.Parse(month.Substring(3)) + 2000, int.Parse(month.Substring(0, 2)), 1).NextCensusDate();
-            ProcessIlrFileSubmissions(table, submissionDate);
-        }
-
-        [When(@"an ILR file is submitted for the first time in (.*) with the following data:")]
-        public void WhenAnIlrFileIsSubmittedForTheFirstTimeInAMonthWithTheFollowingData(string month, Table table)
-        {
-            var submissionDate = new DateTime(int.Parse(month.Substring(3)) + 2000, int.Parse(month.Substring(0, 2)), 1).NextCensusDate();
+            var submissionDate = DateTime.Parse(date).NextCensusDate();
            
             ProcessIlrFileSubmissions(table, submissionDate);
         }

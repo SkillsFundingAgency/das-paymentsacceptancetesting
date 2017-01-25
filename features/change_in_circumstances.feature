@@ -16,7 +16,7 @@ Feature: Provider earnings and payments where learner changes apprenticeship sta
             | learner a | 52            | 03/11/2017 | 01/08/2018       |                 | continuing        | 4500                 | 03/11/2017                          | 1125                   | 03/11/2017                            |
         Then the data lock status of the ILR in 03/12/2017 is:
             | Type                | 08/17 - 10/17 | 11/17 onwards |
-            | Matching commitment | 1             | 2             |
+            | Matching commitment | 1             | 1             |
         And the provider earnings and payments break down as follows:
             | Type                          | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 |
             | Provider Earned Total         | 1000  | 1000  | 1000  | 500   | 500   |
