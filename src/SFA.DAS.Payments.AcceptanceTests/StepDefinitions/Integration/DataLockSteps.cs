@@ -69,55 +69,60 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
         private void VerifyProviderDataLockMatchesForPeriod(string period, TableRow matchesRow, Provider provider)
         {
             var periodMatches = provider.DataLockMatchesByPeriod[period];
-            var priceEpisodes = provider.Learners[0].LearningDelivery.PriceEpisodes;
 
-            foreach (var priceEpisode in priceEpisodes)
+            foreach (var learningDelivery in provider.Learners[0].LearningDeliveries)
             {
-                if (matchesRow.ContainsKey(priceEpisode.DataLockMatchKey))
+                var priceEpisodes = learningDelivery.PriceEpisodes;
+
+                foreach (var priceEpisode in priceEpisodes)
                 {
-                    if (ExpectingDataLockMatchForPriceEpisode(priceEpisode.DataLockMatchKey, matchesRow))
+                    if (matchesRow.ContainsKey(priceEpisode.DataLockMatchKey))
                     {
-                        var matchingValue = matchesRow[priceEpisode.DataLockMatchKey];
-
-                        var priceEpisodeActualMatches = periodMatches
-                            .Where(
-                                m =>
-                                    m.PriceEpisodeId == priceEpisode.Id)
-                            .ToArray();
-
-                        Assert.AreEqual(1, priceEpisodeActualMatches.Length,
-                            $"Expecting to find a data lock match for employer {matchingValue} in period {period} and the price episode that spans {priceEpisode.DataLockMatchKey}.");
-
-                        var commitments = StepDefinitionsContext.ReferenceDataContext.Commitments
-                            .Where(c => c.Id == priceEpisodeActualMatches[0].CommitmentId)
-                            .ToArray();
-
-                        Assert.AreEqual(1, commitments.Length,
-                            $"Expecting to find a matching commitment for period {period} and the price episode that spans {priceEpisode.DataLockMatchKey}.");
-
-                        if (!string.IsNullOrEmpty(commitments[0].CommitmentIdenifier))
+                        if (ExpectingDataLockMatchForPriceEpisode(priceEpisode.DataLockMatchKey, matchesRow))
                         {
-                           
-                            Assert.AreEqual(matchingValue, commitments[0].CommitmentIdenifier,
-                                $"Expecting to find a matching commitment for commitment id  {matchingValue} in period {period} for a price episode that spans {priceEpisode.DataLockMatchKey}.");
+                            var matchingValue = matchesRow[priceEpisode.DataLockMatchKey];
+
+                            var priceEpisodeActualMatches = periodMatches
+                                .Where(
+                                    m =>
+                                        m.PriceEpisodeId == priceEpisode.Id)
+                                .ToArray();
+
+                            Assert.AreEqual(1, priceEpisodeActualMatches.Length,
+                                $"Expecting to find a data lock match for employer {matchingValue} in period {period} and the price episode that spans {priceEpisode.DataLockMatchKey}.");
+
+                            var commitments = StepDefinitionsContext.ReferenceDataContext.Commitments
+                                .Where(c => c.Id == priceEpisodeActualMatches[0].CommitmentId)
+                                .Select(c => new { Id = c.Id, Employer = c.Employer })
+                                .Distinct()
+                                .ToArray();
+
+                            Assert.AreEqual(1, commitments.Length,
+                                $"Expecting to find a matching commitment for period {period} and the price episode that spans {priceEpisode.DataLockMatchKey}.");
+
+                            var matchingValueLong = 0L;
+                            if (long.TryParse(matchingValue, out matchingValueLong))
+                            {
+                                Assert.AreEqual(matchingValueLong, commitments[0].Id,
+                                    $"Expecting to find a matching commitment for commitment id  {matchingValue} in period {period} for a price episode that spans {priceEpisode.DataLockMatchKey}.");
+                            }
+                            else
+                            {
+                                Assert.AreEqual(matchingValue, commitments[0].Employer,
+                                    $"Expecting to find a matching commitment for employer {matchingValue} in period {period} for a price episode that spans {priceEpisode.DataLockMatchKey}.");
+                            }
                         }
                         else
                         {
-                            Assert.AreEqual(matchingValue, commitments[0].Employer,
-                                $"Expecting to find a matching commitment for employer {matchingValue} in period {period} for a price episode that spans {priceEpisode.DataLockMatchKey}.");
+                            var priceEpisodeActualMatches = periodMatches
+                                .Where(
+                                    m =>
+                                        m.PriceEpisodeId == priceEpisode.Id)
+                                .ToArray();
 
+                            Assert.AreEqual(0, priceEpisodeActualMatches.Length,
+                                $"Expecting no data lock match for period {period} for a price episode that spans {priceEpisode.DataLockMatchKey}.");
                         }
-                    }
-                    else
-                    {
-                        var priceEpisodeActualMatches = periodMatches
-                            .Where(
-                                m =>
-                                    m.PriceEpisodeId == priceEpisode.Id)
-                            .ToArray();
-
-                        Assert.AreEqual(0, priceEpisodeActualMatches.Length,
-                            $"Expecting no data lock match for period {period} for a price episode that spans {priceEpisode.DataLockMatchKey}.");
                     }
                 }
             }

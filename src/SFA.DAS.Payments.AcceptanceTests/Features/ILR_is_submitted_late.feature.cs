@@ -98,7 +98,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "08/09/2018",
                         "continuing"});
 #line 10
-        testRunner.When("an ILR file is submitted in 12/17 with the following data:", ((string)(null)), table58, "When ");
+        testRunner.When("an ILR file is submitted for the first time on 28/12/17 with the following data:", ((string)(null)), table58, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table59 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",

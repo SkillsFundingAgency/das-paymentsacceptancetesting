@@ -177,13 +177,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 
         private void BuildContextCommitments(Table table)
         {
-            var commitments = new Commitment[table.RowCount];
+            var commitments = new List<Commitment>();
 
             for (var rowIndex = 0; rowIndex < table.RowCount; rowIndex++)
             {
-                commitments[rowIndex] = new Commitment
+                var commitment = new Commitment
                 {
-                    Id = long.Parse(IdentifierGenerator.GenerateIdentifier(6, false)),
+                    Id = table.Rows[rowIndex].ContainsKey("commitment Id")
+                        ? long.Parse(table.Rows[rowIndex]["commitment Id"])
+                        : long.Parse(IdentifierGenerator.GenerateIdentifier(6, false)),
                     VersionId = table.Rows[rowIndex].ContainsKey("version Id")
                         ? long.Parse(table.Rows[rowIndex]["version Id"])
                         : 1,
@@ -214,23 +216,22 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                         : (DateTime?)null,
                     AgreedPrice = table.Rows[rowIndex].ContainsKey("agreed price")
                         ? decimal.Parse(table.Rows[rowIndex]["agreed price"])
-                        : (decimal?) null,
+                        : (decimal?)null,
                     StandardCode = table.Rows[rowIndex].ContainsKey("standard code")
                         ? long.Parse(table.Rows[rowIndex]["standard code"])
-                        : (long?) null,
-                    CommitmentIdenifier = table.Rows[rowIndex].ContainsKey("commitment Id")
-                        ? table.Rows[rowIndex]["commitment Id"]
-                        : null,
+                        : (long?)null,
                     EffectiveFrom = table.Rows[rowIndex].ContainsKey("effective from")
                         ? DateTime.Parse(table.Rows[rowIndex]["effective from"])
-                        : (DateTime?) null,
+                        : (DateTime?)null,
                     EffectiveTo = table.Rows[rowIndex].ContainsKey("effective to") && !string.IsNullOrWhiteSpace(table.Rows[rowIndex]["effective to"])
                         ? DateTime.Parse(table.Rows[rowIndex]["effective to"])
                         : (DateTime?)null
                 };
+
+                commitments.Add(commitment);
             }
 
-            ReferenceDataContext.Commitments = commitments;
+            ReferenceDataContext.Commitments = commitments.ToArray();
         }
     }
 }
