@@ -11,7 +11,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
     {
         internal static PaymentEntity[] GetAccountPaymentsForPeriod(long ukprn, long? accountId, long? uln, int year, int month, FundingSource fundingSource, ContractType contractType, EnvironmentVariables environmentVariables)
         {
-            //var collectionPeriodMonth = month + 1;
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
             {
                 var query = @"SELECT p.* 
@@ -26,24 +25,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                 query = accountId.HasValue ? query + " AND rp.AccountId = @accountId " : query; 
                 query = uln.HasValue ? query + " AND rp.Uln = @uln" : query;
                 return connection.Query<PaymentEntity>(query, new { ukprn, month, year, accountId, fundingSource, uln, contractType }).ToArray();
-//                var query = @"SELECT * 
-//                                FROM Payments.Payments 
-//                                WHERE UKPRN = @ukprn 
-//                                    AND CollectionPeriodMonth = @month 
-//                                    AND CollectionPeriodYear = @year 
-//                                    AND FundingSource =@fundingSource
-//                                        AND CommitmentId IN (SELECT CommitmentId FROM dbo.DasCommitments WHERE AccountId = @accountId)
-//                            UNION
-//SELECT * 
-//                                FROM Payments.Payments 
-//                                WHERE UKPRN = @ukprn 
-//                                    AND CollectionPeriodMonth = @collectionPeriodMonth 
-//                                    AND CollectionPeriodYear = @year 
-//                                    AND DeliveryMonth<CollectionPeriodMonth
-//                                    AND FundingSource =@fundingSource
-//                                    AND CommitmentId IN (SELECT CommitmentId FROM dbo.DasCommitments WHERE AccountId = @accountId)
-//";
-//                return connection.Query<PaymentEntity>(query, new { ukprn, month, year, collectionPeriodMonth, accountId,fundingSource }).ToArray();
             }
         }
 
