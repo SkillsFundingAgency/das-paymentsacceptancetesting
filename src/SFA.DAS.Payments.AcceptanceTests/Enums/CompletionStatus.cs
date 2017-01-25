@@ -2,7 +2,9 @@
 {
     public enum CompletionStatus
     {
-        InProgress,
-        Completed
+        Continuing = 1,
+        Completed = 2,
+        Transferred = 3,
+        PlannedBreak = 6
     }
 }

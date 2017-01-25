@@ -44,7 +44,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
                                 learner,
                                 "1617-R01",
                                 08,
-                                2016,
+                                2017,
                                 1,
                                 previousAmount,
                                 environmentVariables);
@@ -66,7 +66,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
                                 learner.LearningDelivery.PriceEpisodes[0].Id,
                                 environmentVariables);
 
-            RunMonthEnd(new DateTime(2016, 09, 01));
+            RunMonthEnd(new DateTime(2017, 09, 01));
         }
 
 
@@ -81,7 +81,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             //Get the due amount 
             var earning = PaymentsDueDataHelper.GetPaymentsDueForPeriod(
                                                     StepDefinitionsContext.GetDefaultProvider().Ukprn,
-                                                    2016,
+                                                    2017,
                                                     09,
                                                     environmentVariables)
                 .FirstOrDefault();
@@ -94,20 +94,16 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             else
             {
                 Assert.IsNull(earning, "There was no expected earning for the period but earnigs data found");
-
             }
         }
 
         #region Earnings Distribution
-
 
         [When(@"the actual duration of learning is (.*) months")]
         public void WhenTheActualDurationOfLearningIsMonths(int actualCensusMonths)
         {
             ScenarioContext.Current.Add("actualCensusMonths", actualCensusMonths);
         }
-
-      
        
         [When(@"the planned course duration covers (.*) months")]
         public void WhenThePlannedCourseDurationCoversMonths(int months)

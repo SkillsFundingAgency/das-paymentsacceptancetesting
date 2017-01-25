@@ -123,6 +123,7 @@
     <Compile Include="ExecutionEnvironment\EnvironmentVariablesFactory.cs" />
     <Compile Include="ExecutionEnvironment\TestStatusWatcher.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Features\change_in_circumstances.feature.cs" />
     <Compile Include="Features\datalock_errors.feature.cs" />
     <Compile Include="Features\earnings_calc.feature.cs" />
     <Compile Include="Features\employer_stops_payments.feature.cs" />
@@ -154,6 +155,10 @@
     <Compile Include="Translators\IlrTranslator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\features\change_in_circumstances.feature">
+      <Link>Features\change_in_circumstances.feature</Link>
+      <LastGenOutput>change_in_circumstances.feature.cs</LastGenOutput>
+    </None>
     <None Include="..\..\features\datalock_errors.feature">
       <Link>Features\datalock_errors.feature</Link>
     </None>
