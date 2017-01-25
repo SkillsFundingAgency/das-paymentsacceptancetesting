@@ -163,7 +163,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
             table3.AddRow(new string[] {
                         "Matching commitment",
                         "1",
-                        "2"});
+                        "1"});
 #line 17
         testRunner.Then("the data lock status of the ILR in 03/12/2017 is:", ((string)(null)), table3, "Then ");
 #line hidden

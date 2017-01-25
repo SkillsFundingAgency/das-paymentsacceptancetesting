@@ -26,7 +26,7 @@ Feature: Employer stops payments on a commitment
         And the following commitments exist:
             | ULN       | agreed price | status | stopped on |
             | learner a | 15000        | Paused | 11/17      |
-        When an ILR file is submitted for the first time in 12/17 with the following data:
+        When an ILR file is submitted for the first time on 28/12/17 with the following data:
             | ULN       | agreed price | learner type       | start date | planned end date | completion status |
             | learner a | 15000        | programme only DAS | 01/09/2017 | 08/09/2018       | continuing        |
         Then the provider earnings and payments break down as follows:
