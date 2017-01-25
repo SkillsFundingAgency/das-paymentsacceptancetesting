@@ -51,7 +51,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
         [When(@"the providers submit the following ILR files:")]
         public void WhenTheProvidersSubmitTheFollowingIlrFiles(Table table)
         {
-            ProcessIlrFileSubmissions(table);
+             ProcessIlrFileSubmissions(table);
         }
 
         [When(@"an ILR file is submitted on (.*) with the following data:")]

@@ -115,9 +115,9 @@ Feature: Provider earnings and payments where learner completes on time and is f
         Given the employer 1 has a levy balance > agreed price for all months
         And the employer 2 has a levy balance > agreed price for all months
         And the following commitments exist:
-            | Employer   | Provider   | ULN       | priority | agreed price |
-            | employer 1 | provider A | learner a | 1        | 7500         |
-            | employer 2 | provider A | learner b | 1        | 15000        |
+            | Employer   | ULN       | priority | agreed price |
+            | employer 1 | learner a | 1        | 7500         |
+            | employer 2 | learner b | 1        | 15000        |
         When an ILR file is submitted with the following data:
             | ULN       | agreed price | learner type       | start date | planned end date | actual end date | completion status |
             | learner a | 7500         | programme only DAS | 01/09/2017 | 08/09/2018       | 08/09/2018      | completed         |
@@ -146,9 +146,9 @@ Feature: Provider earnings and payments where learner completes on time and is f
             | 09/17 | 10/17 | 11/17 | ... | 08/18 | 09/18 |
             | 500   | 500   | 500   | 500 | 500   | 1500  |
         And the following commitments exist:
-            | Employer   | Provider   | ULN       | priority | agreed price |
-            | employer 1 | provider A | learner a | 1        | 7500         |
-            | employer 2 | provider A | learner b | 1        | 15000        |
+            | Employer   | ULN       | priority | agreed price |
+            | employer 1 | learner a | 1        | 7500         |
+            | employer 2 | learner b | 1        | 15000        |
         When an ILR file is submitted with the following data:
             | ULN       | agreed price | learner type       | start date | planned end date | actual end date | completion status |
             | learner a | 7500         | programme only DAS | 01/09/2017 | 08/09/2018       | 08/09/2018      | completed         |
