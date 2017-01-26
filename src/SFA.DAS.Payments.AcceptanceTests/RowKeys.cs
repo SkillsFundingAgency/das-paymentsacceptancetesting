@@ -21,5 +21,6 @@
         public const string ProviderIncentive = "Provider 16-18 incentive";
 
         public const string DataLockMatchingCommitment = "Matching commitment";
+        public const string DataLockMatchingPrice = "Matching price";
     }
 }
