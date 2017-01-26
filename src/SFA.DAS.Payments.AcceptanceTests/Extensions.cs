@@ -110,5 +110,16 @@ namespace SFA.DAS.Payments.AcceptanceTests
 
             return new DateTime(year, month, 1).NextCensusDate();
         }
+
+        internal static decimal GetDecimalValue(this string value)
+        {
+            decimal result = 0m;
+
+            if (!string.IsNullOrEmpty(value))
+            {
+                decimal.TryParse(value, out result);
+            }
+            return result;
+        }
     }
 }

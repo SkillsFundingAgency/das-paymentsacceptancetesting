@@ -499,25 +499,27 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             var priceEpisodes = new List<PriceEpisode>();
             var startDate = DateTime.MinValue;
 
-            if (table.Header.Contains("Total training price"))
+            if (table.Header.Contains("Total training price") || table.Header.Contains("Residual training price"))
             {
-                startDate = DateTime.Parse(table.Rows[rowIndex]["Total training price effective date"]);
-
-                priceEpisodes.Add(new PriceEpisode
+                if (!string.IsNullOrEmpty(table.Rows[rowIndex]["Total training price effective date"]))
                 {
-                    Id = GetPriceEpisodeIdentifier(startDate, standardCode),
-                    StartDate = startDate,
-                    EndDate = table.Header.Contains("Residual training price effective date")
-                        ? DateTime.Parse(table.Rows[rowIndex]["Residual training price effective date"]).AddDays(-1)
-                        : string.IsNullOrEmpty(table.Rows[rowIndex]["actual end date"])
-                            ? (DateTime?)null
-                            : DateTime.Parse(table.Rows[rowIndex]["actual end date"]),
-                    TotalPrice = decimal.Parse(table.Rows[rowIndex]["Total training price"]) + decimal.Parse(table.Rows[rowIndex]["Total assessment price"]),
-                    Tnp1 = decimal.Parse(table.Rows[rowIndex]["Total training price"]),
-                    Tnp2 = decimal.Parse(table.Rows[rowIndex]["Total assessment price"])
-                });
-                
-                if (table.Header.Contains("Residual training price"))
+                    startDate = DateTime.Parse(table.Rows[rowIndex]["Total training price effective date"]);
+
+                    priceEpisodes.Add(new PriceEpisode
+                    {
+                        Id = GetPriceEpisodeIdentifier(startDate, standardCode),
+                        StartDate = startDate,
+                        EndDate = table.Header.Contains("Residual training price effective date") && !string.IsNullOrEmpty(table.Rows[rowIndex]["Residual training price effective date"])
+                          ? DateTime.Parse(table.Rows[rowIndex]["Residual training price effective date"]).AddDays(-1)
+                          : string.IsNullOrEmpty(table.Rows[rowIndex]["actual end date"])
+                              ? (DateTime?)null
+                              : DateTime.Parse(table.Rows[rowIndex]["actual end date"]),
+                        TotalPrice = table.Rows[rowIndex]["Total training price"].GetDecimalValue() + table.Rows[rowIndex]["Total assessment price"].GetDecimalValue(),
+                        Tnp1 = table.Rows[rowIndex]["Total training price"].GetDecimalValue(),
+                        Tnp2 = table.Rows[rowIndex]["Total assessment price"].GetDecimalValue()
+                    });
+                }
+                if (table.Header.Contains("Residual training price effective date") && !string.IsNullOrEmpty(table.Rows[rowIndex]["Residual training price effective date"]))
                 {
                     startDate = DateTime.Parse(table.Rows[rowIndex]["Residual training price effective date"]);
 
@@ -546,14 +548,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                     {
                         Id = GetPriceEpisodeIdentifier(startDate, standardCode),
                         StartDate = startDate,
-                        EndDate = table.Header.Contains($"Total training price {index + 1} effective date")
+                        EndDate = table.Header.Contains($"Total training price {index + 1} effective date") && !string.IsNullOrEmpty(table.Rows[rowIndex][$"Total training price {index + 1} effective date"])
                             ? DateTime.Parse(table.Rows[rowIndex][$"Total training price {index + 1} effective date"]).AddDays(-1)
                             : string.IsNullOrEmpty(table.Rows[rowIndex]["actual end date"])
                                 ? (DateTime?)null
                                 : DateTime.Parse(table.Rows[rowIndex]["actual end date"]),
-                        TotalPrice = decimal.Parse(table.Rows[rowIndex][$"Total training price {index}"]) + decimal.Parse(table.Rows[rowIndex][$"Total assessment price {index}"]),
-                        Tnp1 = decimal.Parse(table.Rows[rowIndex][$"Total training price {index}"]),
-                        Tnp2 = decimal.Parse(table.Rows[rowIndex][$"Total assessment price {index}"])
+                        TotalPrice = table.Rows[rowIndex][$"Total training price {index}"].GetDecimalValue() + table.Rows[rowIndex][$"Total assessment price {index}"].GetDecimalValue(),
+                        Tnp1 = table.Rows[rowIndex][$"Total training price {index}"].GetDecimalValue(),
+                        Tnp2 = table.Rows[rowIndex][$"Total assessment price {index}"].GetDecimalValue()
                     });
 
                     index++;
@@ -561,18 +563,19 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 
                 return priceEpisodes;
             }
-
-            startDate = DateTime.Parse(table.Rows[rowIndex]["start date"]);
-
-            priceEpisodes.Add(new PriceEpisode
+            if (table.Header.Contains("start date") && table.Header.Contains("agreed price"))
             {
-                Id = GetPriceEpisodeIdentifier(startDate, standardCode),
-                StartDate = startDate,
-                TotalPrice = decimal.Parse(table.Rows[rowIndex]["agreed price"]),
-                Tnp1 = decimal.Parse(table.Rows[rowIndex]["agreed price"]) * 0.8m,
-                Tnp2 = decimal.Parse(table.Rows[rowIndex]["agreed price"]) - decimal.Parse(table.Rows[rowIndex]["agreed price"]) * 0.8m
-            });
+                startDate = DateTime.Parse(table.Rows[rowIndex]["start date"]);
 
+                priceEpisodes.Add(new PriceEpisode
+                {
+                    Id = GetPriceEpisodeIdentifier(startDate, standardCode),
+                    StartDate = startDate,
+                    TotalPrice = table.Rows[rowIndex]["agreed price"].GetDecimalValue(),
+                    Tnp1 = table.Rows[rowIndex]["agreed price"].GetDecimalValue() * 0.8m,
+                    Tnp2 = table.Rows[rowIndex]["agreed price"].GetDecimalValue() - table.Rows[rowIndex]["agreed price"].GetDecimalValue() * 0.8m
+                });
+            }
             return priceEpisodes;
         }
 

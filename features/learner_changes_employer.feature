@@ -308,3 +308,116 @@ Feature: Provider earnings and payments where a learner changes employers
             | XYZ Levy account debited   | 0     | 0     | 0     | 0     | 500   |
             | SFA Levy employer budget   | 1000  | 1000  | 1000  | 500   | 500   |
             | SFA Levy co-funding budget | 0     | 0     | 0     | 0     | 0     |
+
+
+			
+    Scenario: Earnings and payments for a DAS learner, levy available, and they have a break in learning at the end of a month and return at the start of a later month with a different employer
+	
+        Given the apprenticeship funding band maximum is 17000
+        Given The learner is programme only DAS
+        And the ABC has a levy balance > agreed price for all months
+        And the XYZ has a levy balance > agreed price for all months
+        And the learner changes employers
+            | Employer | Type | ILR employment start date |
+            | ABC      | DAS  | 01/08/2017                |
+            | XYZ      | DAS  | 01/01/2018                |
+        And the following commitments exist on 03/12/2017:
+            | Employer | commitment Id | version Id | ULN       | price effective date | planned end date | agreed price | status    | effective from | effective to |
+            | ABC      | 1             | 1          | learner a | 01/08/2017           | 31/08/2018       | 15000        | active    | 01/08/2017     | 31/10/2017   |
+            | ABC      | 1             | 2          | learner a | 01/08/2017           | 31/08/2018       | 15000        | cancelled | 01/11/2017     |              |
+            | XYZ      | 2             | 1          | learner a | 01/01/2018           | 31/10/2018       | 5625         | active    | 01/01/2018     |              |
+        When an ILR file is submitted with the following data:
+            | ULN       | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date | Residual training price | Residual training price effective date | Residual assessment price | Residual assessment price effective date |
+            | learner a | 01/08/2017 | 04/08/2018       | 31/10/2017      | withdrawn         | 12000                | 01/08/2017                          | 3000                   | 01/08/2017                            |                         |                                        |                           |                                          |
+            | learner a | 01/01/2018 | 04/10/2018       |                 | continuing        |                      |                                     |                        |                                       | 5000                    | 01/01/2018                             | 625                       | 01/01/2018                               |
+           
+        Then the data lock status of the ILR in 03/12/2017 is:
+            | Type                | 08/17 - 10/17 | 01/18 onwards |
+            | Matching commitment | ABC           | XYZ           |
+        And the provider earnings and payments break down as follows:
+            | Type                       | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 | 02/18 | 03/18 |
+            | Provider Earned Total      | 1000  | 1000  | 1000  | 0     | 0     | 500   | 500   | 500   |
+            | Provider Earned from SFA   | 1000  | 1000  | 1000  | 0     | 0     | 500   | 500   | 500   |
+            | Provider Earned from ABC   | 0     | 0     | 0     | 0     | 0     | 0     | 0     | 0     |
+            | Provider Earned from XYZ   | 0     | 0     | 0     | 0     | 0     | 0     | 0     | 0     |
+            | Provider Paid by SFA       |       | 1000  | 1000  | 1000  | 0     | 0     | 500   | 500   |    
+            | Payment due from ABC       | 0     | 0     | 0     | 0     | 0     | 0     | 0     | 0     | 
+            | Payment due from XYZ       | 0     | 0     | 0     | 0     | 0     | 0     | 0     | 0     |
+            | ABC Levy account debited   | 0     | 1000  | 1000  | 1000  | 0     | 0     | 0     | 0     |
+            | XYZ Levy account debited   | 0     | 0     | 0     | 0     | 0     | 0     | 500   | 500   |
+            | SFA Levy employer budget   | 1000  | 1000  | 1000  | 0     | 0     | 500   | 500   | 500   |
+            | SFA Levy co-funding budget | 0     | 0     | 0     | 0     | 0     | 0     | 0     | 0     |
+
+			
+    Scenario: Earnings and payments for a DAS learner, levy available, and they have a break in learning in the middle of a month and return in the middle of a later month with a different employer
+
+        Given The learner is programme only DAS
+        And the ABC has a levy balance > agreed price for all months
+        And the XYZ has a levy balance > agreed price for all months
+        And the learner changes employers
+            | Employer | Type | ILR employment start date |
+            | ABC      | DAS  | 01/08/2017                |
+            | XYZ      | DAS  | 01/01/2018                |
+        And the following commitments exist on 03/12/2017:
+            | Employer | commitment Id | version Id | ULN       | price effective date | planned end date | agreed price | status    | effective from | effective to |
+            | ABC      | 1             | 1          | learner a | 01/08/2017           | 31/08/2018       | 15000        | active    | 01/08/2017     | 31/10/2017   |
+            | ABC      | 1             | 2          | learner a | 01/08/2017           | 31/08/2018       | 15000        | cancelled | 01/11/2017     |              |
+            | XYZ      | 2             | 1          | learner a | 01/01/2018           | 31/10/2018       | 5625         | active    | 01/01/2018     |              |
+        When an ILR file is submitted with the following data:
+            | ULN       | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date | Residual training price | Residual training price effective date | Residual assessment price | Residual assessment price effective date |
+            | learner a | 03/08/2017 | 04/08/2018       | 18/11/2017      | withdrawn         | 12000                | 03/08/2017                          | 3000                   | 03/08/2017                            |                         |                                        |                           |                                          |
+            | learner a | 11/01/2018 | 04/10/2018       |                 | continuing        |                      |                                     |                        |                                       | 5000                    | 11/01/2018                             | 625                       | 11/01/2018                               |
+         
+        Then the data lock status of the ILR in 03/12/2017 is:
+            | Type                | 08/17 - 10/17 | 01/18 onwards |
+            | Matching commitment | ABC           | XYZ           |
+        And the provider earnings and payments break down as follows:
+            | Type                       | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 | 02/18 | 03/18 |
+            | Provider Earned Total      | 1000  | 1000  | 1000  | 0     | 0     | 500   | 500   | 500   |
+            | Provider Earned from SFA   | 1000  | 1000  | 1000  | 0     | 0     | 500   | 500   | 500   |
+            | Provider Earned from ABC   | 0     | 0     | 0     | 0     | 0     | 0     | 0     | 0     |
+            | Provider Earned from XYZ   | 0     | 0     | 0     | 0     | 0     | 0     | 0     | 0     |
+            | Provider Paid by SFA       | 0      | 1000  | 1000  | 1000  | 0     | 0     | 500   | 500   |    
+            | Payment due from ABC       | 0     | 0     | 0     | 0     | 0     | 0     | 0     | 0     | 
+            | Payment due from XYZ       | 0     | 0     | 0     | 0     | 0     | 0     | 0     | 0     |
+            | ABC Levy account debited   | 0     | 1000  | 1000  | 1000  | 0     | 0     | 0     | 0     |
+            | XYZ Levy account debited   | 0     | 0     | 0     | 0     | 0     | 0     | 500   | 500   |
+            | SFA Levy employer budget   | 1000  | 1000  | 1000  | 0     | 0     | 500   | 500   | 500   |
+            | SFA Levy co-funding budget | 0     | 0     | 0     | 0     | 0     | 0     | 0     | 0     |
+
+			
+Scenario: Earnings and payments for a DAS learner, levy available, and they have a break in learning in the middle of a month and return in the middle of a later month with a different employer - before the second commitment is in place
+
+        Given The learner is programme only DAS
+        And the ABC has a levy balance > agreed price for all months
+        And the XYZ has a levy balance > agreed price for all months
+        And the learner changes employers
+            | Employer | Type | ILR employment start date |
+            | ABC      | DAS  | 01/08/2017                |
+            | XYZ      | DAS  | 01/01/2018                |
+        And the following commitments exist on 03/12/2017:
+            | Employer | commitment Id | version Id | ULN       | price effective date | planned end date | agreed price | status    | effective from | effective to |
+            | ABC      | 1             | 1          | learner a | 01/08/2017           | 31/08/2018       | 15000        | active    | 01/08/2017     | 31/10/2017   |
+            | ABC      | 1             | 2          | learner a | 01/08/2017           | 31/08/2018       | 15000        | cancelled | 01/11/2017     |              |
+            | XYZ      | 2             | 1          | learner a | 01/01/2018           | 31/10/2018       | 5625         | active    | 01/01/2018     |              |
+        When an ILR file is submitted with the following data:
+            | ULN       | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date | Residual training price | Residual training price effective date | Residual assessment price | Residual assessment price effective date |
+            | learner a | 03/08/2017 | 04/08/2018       | 18/11/2017      | withdrawn         | 12000                | 03/08/2017                          | 3000                   | 03/08/2017                            |                         |                                        |                           |                                          |
+            | learner a | 21/12/2017 | 04/09/2018       |                 | continuing        |                      |                                     |                        |                                       | 5000                    | 21/12/2017                             | 625                       | 21/12/2017                               |
+           
+        Then the data lock status of the ILR in 03/12/2017 is:
+            | Type                | 08/17 - 10/17 | 12/17 onwards |
+            | Matching commitment | ABC           |               |
+        And the provider earnings and payments break down as follows:
+            | Type                       | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 | 02/18 |
+            | Provider Earned Total      | 1000  | 1000  | 1000  | 0     | 500   | 500   | 500   |
+            | Provider Earned from SFA   | 1000  | 1000  | 1000  | 0     | 0     | 0     | 0     |
+            | Provider Earned from ABC   | 0     | 0     | 0     | 0     | 0     | 0     | 0     |
+            | Provider Earned from XYZ   | 0     | 0     | 0     | 0     | 0     | 0     | 0     |
+            | Provider Paid by SFA       |       | 1000  | 1000  | 1000  | 0     | 0     | 0     |    
+            | Payment due from ABC       | 0     | 0     | 0     | 0     | 0     | 0     | 0     | 
+            | Payment due from XYZ       | 0     | 0     | 0     | 0     | 0     | 0     | 0     |
+            | ABC Levy account debited   | 0     | 1000  | 1000  | 1000  | 0     | 0     | 0     |
+            | XYZ Levy account debited   | 0     | 0     | 0     | 0     | 0     | 0     | 0     |
+            | SFA Levy employer budget   | 1000  | 1000  | 1000  | 0     | 0     | 0     | 0     |
+            | SFA Levy co-funding budget | 0     | 0     | 0     | 0     | 0     | 0     | 0     |
