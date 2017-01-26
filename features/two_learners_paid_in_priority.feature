@@ -13,9 +13,9 @@ Feature: 2 learners, paid in priority order
                 | 1        | 123 | 01/08/2017           | 28/08/2018       | 15000        |
                 | 2        | 456 | 01/08/2017           | 28/08/2018       | 15000        |
         When an ILR file is submitted on 03/12/2017 with the following data:
-                | ULN   | start date | planned end date | actual end date | completion status | Total training price | Total assessment price |
-                | 123   | 01/08/2017 | 28/08/2018       |                 | continuing        | 12000                | 3000                   |
-                | 456   | 01/08/2017 | 28/08/2018       |                 | continuing        | 12000                | 3000                   |
+                | ULN | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date |
+                | 123 | 01/08/2017 | 28/08/2018       |                 | continuing        | 12000                | 01/08/2017                          | 3000                   | 01/08/2017                            |
+                | 456 | 01/08/2017 | 28/08/2018       |                 | continuing        | 12000                | 01/08/2017                          | 3000                   | 01/08/2017                            |
         Then the provider earnings and payments break down for ULN 123 as follows:
                 | Type                           | 08/17 | 09/17 | 10/17 | 11/17 | ... | 07/18 | 08/18 |
                 | Provider Earned Total          | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     |
@@ -60,9 +60,9 @@ Feature: 2 learners, paid in priority order
                 | 1        | 123 | 01/08/2017           | 28/08/2018       | 15000        |
                 | 2        | 456 | 01/08/2017           | 28/08/2018       | 15000        |
         When an ILR file is submitted on 03/12/2017 with the following data:
-                | ULN   | start date | planned end date | actual end date | completion status | Total training price | Total assessment price |
-                | 123   | 01/08/2017 | 28/08/2018       |                 | continuing        | 12000                | 3000                   |
-                | 456   | 01/08/2017 | 28/08/2018       |                 | continuing        | 12000                | 3000                   |
+                | ULN | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date |
+                | 123 | 01/08/2017 | 28/08/2018       |                 | continuing        | 12000                | 01/08/2017                          | 3000                   | 01/08/2017                            |
+                | 456 | 01/08/2017 | 28/08/2018       |                 | continuing        | 12000                | 01/08/2017                          | 3000                   | 01/08/2017                            |
         Then the provider earnings and payments break down for ULN 123 as follows:
                 | Type                           | 08/17 | 09/17 | 10/17 | 11/17 | ... | 07/18 | 08/18 |
                 | Provider Earned Total          | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     |
@@ -107,9 +107,9 @@ Feature: 2 learners, paid in priority order
                 | 1        | 123 | 01/08/2017           | 28/08/2018       | 15000        |
                 | 2        | 456 | 01/08/2017           | 28/08/2018       | 15000        |
         When an ILR file is submitted on 03/12/2017 with the following data:
-                | ULN   | start date | planned end date | actual end date | completion status | Total training price | Total assessment price |
-                | 123   | 01/08/2017 | 28/08/2018       |                 | continuing        | 12000                | 3000                   |
-                | 456   | 01/08/2017 | 28/08/2018       |                 | continuing        | 12000                | 3000                   |
+                | ULN | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date |
+                | 123 | 01/08/2017 | 28/08/2018       |                 | continuing        | 12000                | 01/08/2017                          | 3000                   | 01/08/2017                            |
+                | 456 | 01/08/2017 | 28/08/2018       |                 | continuing        | 12000                | 01/08/2017                          | 3000                   | 01/08/2017                            |
         Then the provider earnings and payments break down for ULN 123 as follows:
                 | Type                           | 08/17 | 09/17 | 10/17 | 11/17 | ... | 07/18 | 08/18 |
                 | Provider Earned Total          | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     |

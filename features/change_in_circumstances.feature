@@ -1,4 +1,4 @@
-Feature: Provider earnings and payments where learner changes apprenticeship standard
+Feature: Provider earnings and payments where learner changes apprenticeship standard or there is a change to the negotiated price at the end of a month, remaining with the same employer and provider
 
     Background:
         Given The learner is programme only DAS
@@ -83,3 +83,103 @@ Feature: Provider earnings and payments where learner changes apprenticeship sta
             | Provider Paid by SFA          | 0     | 1000  | 1000  | 0     | 0     | 1000  | ... | 1000  | 1000  |
             | Employer Levy account debited | 0     | 1000  | 1000  | 0     | 0     | 1000  | ... | 1000  | 1000  |
             | SFA Levy employer budget      | 1000  | 1000  | 0     | 0     | 1000  | 1000  | ... | 1000  | 0     |
+
+
+    Scenario: Earnings and payments for a DAS learner, levy available, and there is a change to the Negotiated Cost which happens at the end of the month
+        Given The learner is programme only DAS
+        And levy balance > agreed price for all months
+        And the following commitments exist:
+            | commitment Id | version Id | ULN       | start date | end date   | status | agreed price | effective from | effective to |
+            | 1             | 1          | learner a | 01/08/2017 | 31/08/2018 | active | 15000        | 01/08/2017     | 31/10/2017   |
+            | 1             | 2          | learner a | 01/08/2017 | 31/08/2018 | active | 9375         | 01/11/2017     |              |
+        When an ILR file is submitted with the following data:
+            | ULN       | start date | planned end date | actual end date | completion status | Total training price 1 | Total training price 1 effective date | Total assessment price 1 | Total assessment price 1 effective date | Total training price 2 | Total training price 2 effective date | Total assessment price 2 | Total assessment price 2 effective date |
+            | learner a | 01/08/2017 | 04/08/2018       |                 | continuing        | 12000                  | 01/08/2017                            | 3000                     | 01/08/2017                              | 7500                   | 01/11/2017                            | 1875                     | 01/11/2017                              |
+        Then the data lock status will be as follows:
+            | Type           | 08/17 - 10/17 | 11/17 onwards |
+            | Matching price | 15000         | 9375          |
+        And the provider earnings and payments break down as follows:
+            | Type                          | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 |
+            | Provider Earned Total         | 1000  | 1000  | 1000  | 500   | 500   | ... | 500   | 0     |
+            | Provider Earned from SFA      | 1000  | 1000  | 1000  | 500   | 500   | ... | 500   | 0     |
+            | Provider Earned from Employer | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+            | Provider Paid by SFA          | 0     | 1000  | 1000  | 1000  | 500   | ... | 500   | 500   |
+            | Payment due from Employer     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+            | Levy account debited          | 0     | 1000  | 1000  | 1000  | 500   | ... | 500   | 500   |
+            | SFA Levy employer budget      | 1000  | 1000  | 1000  | 500   | 500   | ... | 500   | 0     |
+            | SFA Levy co-funding budget    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+
+
+    Scenario: Earnings and payments for a DAS learner, levy available, and there is a change to the Negotiated Cost which happens in the middle of the month
+        Given The learner is programme only DAS
+        And levy balance > agreed price for all months
+        And the following commitments exist:
+            | commitment Id | version Id | ULN       | start date | end date   | status | agreed price | effective from | effective to |
+            | 1             | 1          | learner a | 01/08/2017 | 31/08/2018 | active | 15000        | 01/08/2017     | 31/10/2017   |
+            | 1             | 2          | learner a | 01/08/2017 | 31/08/2018 | active | 9375         | 01/11/2017     |              |
+        When an ILR file is submitted with the following data:
+            | ULN       | start date | planned end date | actual end date | completion status | Total training price 1 | Total training price 1 effective date | Total assessment price 1 | Total assessment price 1 effective date | Total training price 2 | Total training price 2 effective date | Total assessment price 2 | Total assessment price 2 effective date |
+            | learner a | 01/08/2017 | 04/08/2018       |                 | continuing        | 12000                  | 01/08/2017                            | 3000                     | 01/08/2017                              | 7500                   | 10/11/2017                            | 1875                     | 10/11/2017                              |
+        Then the data lock status will be as follows:
+            | Type           | 08/17 - 10/17 | 11/17 onwards |
+            | Matching price | 15000         | 9375          |
+        And the provider earnings and payments break down as follows:
+            | Type                          | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 |
+            | Provider Earned Total         | 1000  | 1000  | 1000  | 500   | 500   | ... | 500   | 0     |
+            | Provider Earned from SFA      | 1000  | 1000  | 1000  | 500   | 500   | ... | 500   | 0     |
+            | Provider Earned from Employer | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+            | Provider Paid by SFA          | 0     | 1000  | 1000  | 1000  | 500   | ... | 500   | 500   |
+            | Payment due from Employer     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+            | Levy account debited          | 0     | 1000  | 1000  | 1000  | 500   | ... | 500   | 500   |
+            | SFA Levy employer budget      | 1000  | 1000  | 1000  | 500   | 500   | ... | 500   | 0     |
+            | SFA Levy co-funding budget    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+
+
+    Scenario: Earnings and payments for a DAS learner, levy available, and there is a change to the Negotiated Cost which happens in the middle of the month and the ILR starts earlier
+        Given The learner is programme only DAS
+        And levy balance > agreed price for all months
+        And the following commitments exist:
+            | commitment Id | version Id | ULN       | start date | end date   | status | agreed price | effective from | effective to |
+            | 1             | 1          | learner a | 01/08/2017 | 31/08/2018 | active | 15000        | 01/08/2017     | 31/10/2017   |
+            | 1             | 2          | learner a | 01/08/2017 | 31/08/2018 | active | 9375         | 01/11/2017     |              |
+        When an ILR file is submitted with the following data:
+            | ULN       | start date | planned end date | actual end date | completion status | Total training price 1 | Total training price 1 effective date | Total assessment price 1 | Total assessment price 1 effective date | Total training price 2 | Total training price 2 effective date | Total assessment price 2 | Total assessment price 2 effective date |
+            | learner a | 01/08/2017 | 04/08/2018       |                 | continuing        | 12000                  | 01/08/2017                            | 3000                     | 01/08/2017                              | 7500                   | 24/10/2017                            | 1875                     | 24/10/2017                              |
+        Then the data lock status will be as follows:
+            | Type           | 08/17 - 09/17 | 10/17 onwards |
+            | Matching price | 15000         |               |
+        And the provider earnings and payments break down as follows:
+            | Type                          | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 |
+            | Provider Earned Total         | 1000  | 1000  | 550   | 550   | 550   | ... | 550   | 0     |
+            | Provider Earned from SFA      | 1000  | 1000  | 0     | 0     | 0     | ... | 0     | 0     |
+            | Provider Earned from Employer | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+            | Provider Paid by SFA          | 0     | 1000  | 1000  | 0     | 0     | ... | 0     | 0     |
+            | Payment due from Employer     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+            | Levy account debited          | 0     | 1000  | 1000  | 0     | 0     | ... | 0     | 0     |
+            | SFA Levy employer budget      | 1000  | 1000  | 0     | 0     | 0     | ... | 0     | 0     |
+            | SFA Levy co-funding budget    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+
+
+    Scenario: Earnings and payments for a DAS learner, levy available, and there is a change to the Negotiated Cost and the ILR is not updated
+        Given The learner is programme only DAS
+        And levy balance > agreed price for all months
+        And the following commitments exist:
+            | commitment Id | version Id | ULN       | start date | end date   | status | agreed price | effective from | effective to |
+            | 1             | 1          | learner a | 01/08/2017 | 31/08/2018 | active | 15000        | 01/08/2017     | 31/10/2017   |
+            | 1             | 2          | learner a | 01/08/2017 | 31/08/2018 | active | 9375         | 01/11/2017     |              |
+        When an ILR file is submitted with the following data:
+            | ULN       | start date | planned end date | actual end date | completion status | Total training price 1 | Total training price 1 effective date | Total assessment price 1 | Total assessment price 1 effective date | 
+            | learner a | 01/08/2017 | 04/08/2018       |                 | continuing        | 12000                  | 01/08/2017                            | 3000                     | 01/08/2017                        | 
+        Then the data lock status will be as follows:
+            | Type                | 08/17 onwards |
+            | Matching price      | 15000         |
+        And the provider earnings and payments break down as follows:
+            | Type                          | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 |
+            | Provider Earned Total         | 1000  | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     |
+            | Provider Earned from SFA      | 1000  | 1000  | 1000  | 0     | 0     | ... | 0     | 0     |
+            | Provider Earned from Employer | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+            | Provider Paid by SFA          | 0     | 1000  | 1000  | 1000  | 0     | ... | 0     | 0     |
+            | Payment due from Employer     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+            | Employer Levy account debited | 0     | 1000  | 1000  | 1000  | 0     | ... | 0     | 0     |
+            | SFA Levy employer budget      | 1000  | 1000  | 1000  | 0     | 0     | ... | 0     | 0     |
+            | SFA Levy co-funding budget    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     |

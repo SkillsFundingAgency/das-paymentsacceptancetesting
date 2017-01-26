@@ -167,6 +167,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
         {
             CommitmentPaymentStatus paymentStatus;
 
+            if (status.Equals("withdrawn",StringComparison.InvariantCultureIgnoreCase))
+            {
+                return CommitmentPaymentStatus.Cancelled;
+            }
+
             if (Enum.TryParse(status, true, out paymentStatus))
             {
                 return paymentStatus;
@@ -207,7 +212,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                         : string.Empty,
                     StartDate = table.Rows[rowIndex].ContainsKey("price effective date")
                         ? DateTime.Parse(table.Rows[rowIndex]["price effective date"])
-                        : (DateTime?)null,
+                        : table.Rows[rowIndex].ContainsKey("start date")
+                            ? DateTime.Parse(table.Rows[rowIndex]["start date"])
+                            : (DateTime?)null,
                     EndDate = table.Rows[rowIndex].ContainsKey("planned end date")
                         ? DateTime.Parse(table.Rows[rowIndex]["planned end date"])
                         : (DateTime?)null,

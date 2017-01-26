@@ -456,7 +456,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                                                         learningDelivery.PathwayCode > 0 &&
                                                         learningDelivery.ProgrammeType > 0 ? 0 : standardCode;
 
-                var priceEpisodes = SetupPriceEpisodes(table, rowIndex,learningDelivery.StandardCode);
+                var priceEpisodes = SetupPriceEpisodes(table, rowIndex, learningDelivery.StandardCode);
                 learningDelivery.PriceEpisodes = priceEpisodes.ToArray();
 
                 Learner learner = null;
@@ -494,83 +494,85 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             }
         }
 
-        private List<PriceEpisode> SetupPriceEpisodes(Table table, int rowIndex,long? standardCode)
+        private List<PriceEpisode> SetupPriceEpisodes(Table table, int rowIndex, long? standardCode)
         {
             var priceEpisodes = new List<PriceEpisode>();
+            var startDate = DateTime.MinValue;
 
-           
-            if (table.Header.Contains("Total training price") &&
-                table.Header.Contains("Total training price effective date") && 
-                !table.Header.Contains("Residual training price"))
+            if (table.Header.Contains("Total training price"))
             {
-                var startDate = DateTime.Parse(table.Rows[rowIndex]["Total training price effective date"]);
-
-                priceEpisodes.Add(new PriceEpisode
-                {
-                    Id = GetPriceEpisodeIdentifier(startDate,standardCode),
-                    StartDate = startDate,
-                    EndDate = string.IsNullOrEmpty(table.Rows[rowIndex]["actual end date"]) ? (DateTime?)null :  DateTime.Parse(table.Rows[rowIndex]["actual end date"]),
-                    TotalPrice = decimal.Parse(table.Rows[rowIndex]["Total training price"]) + decimal.Parse(table.Rows[rowIndex]["Total assessment price"]),
-                    Tnp1 = decimal.Parse(table.Rows[rowIndex]["Total training price"]),
-                    Tnp2 = decimal.Parse(table.Rows[rowIndex]["Total assessment price"])
-                });
-
-            }
-            else  if (table.Header.Contains("Total training price") && 
-                        table.Header.Contains("Residual training price") &&
-                        table.Header.Contains("Total training price effective date"))
-            {
-                var startDate = DateTime.Parse(table.Rows[rowIndex]["Total training price effective date"]);
-
-                priceEpisodes.Add(new PriceEpisode
-                {
-                    Id = GetPriceEpisodeIdentifier(startDate,standardCode),
-                    StartDate = startDate,
-                    EndDate = DateTime.Parse(table.Rows[rowIndex]["Residual training price effective date"]).AddDays(-1),
-                    TotalPrice = decimal.Parse(table.Rows[rowIndex]["Total training price"]) + decimal.Parse(table.Rows[rowIndex]["Total assessment price"]),
-                    Tnp1 = decimal.Parse(table.Rows[rowIndex]["Total training price"]),
-                    Tnp2 = decimal.Parse(table.Rows[rowIndex]["Total assessment price"])
-                });
-
-                startDate = DateTime.Parse(table.Rows[rowIndex]["Residual training price effective date"]);
-
-                priceEpisodes.Add(new PriceEpisode
-                {
-                    Id = GetPriceEpisodeIdentifier(startDate,standardCode),
-                    StartDate = startDate,
-                    TotalPrice = decimal.Parse(table.Rows[rowIndex]["Residual training price"]) + decimal.Parse(table.Rows[rowIndex]["Residual assessment price"]),
-                    Tnp3 = decimal.Parse(table.Rows[rowIndex]["Residual training price"]),
-                    Tnp4 = decimal.Parse(table.Rows[rowIndex]["Residual assessment price"])
-                });
-            }
-            else if (table.Header.Contains("Total training price") &&
-                      table.Header.Contains("Total assessment price") &&
-                      !table.Header.Contains("Residual training price"))
-            {
-                var startDate = DateTime.Parse(table.Rows[rowIndex]["start date"]);
+                startDate = DateTime.Parse(table.Rows[rowIndex]["Total training price effective date"]);
 
                 priceEpisodes.Add(new PriceEpisode
                 {
                     Id = GetPriceEpisodeIdentifier(startDate, standardCode),
                     StartDate = startDate,
+                    EndDate = table.Header.Contains("Residual training price effective date")
+                        ? DateTime.Parse(table.Rows[rowIndex]["Residual training price effective date"]).AddDays(-1)
+                        : string.IsNullOrEmpty(table.Rows[rowIndex]["actual end date"])
+                            ? (DateTime?)null
+                            : DateTime.Parse(table.Rows[rowIndex]["actual end date"]),
                     TotalPrice = decimal.Parse(table.Rows[rowIndex]["Total training price"]) + decimal.Parse(table.Rows[rowIndex]["Total assessment price"]),
                     Tnp1 = decimal.Parse(table.Rows[rowIndex]["Total training price"]),
                     Tnp2 = decimal.Parse(table.Rows[rowIndex]["Total assessment price"])
                 });
-            }
-            else
-            {
-                var startDate = DateTime.Parse(table.Rows[rowIndex]["start date"]);
-
-                priceEpisodes.Add(new PriceEpisode
+                
+                if (table.Header.Contains("Residual training price"))
                 {
-                    Id = GetPriceEpisodeIdentifier(startDate,standardCode),
-                    StartDate = startDate,
-                    TotalPrice = decimal.Parse(table.Rows[rowIndex]["agreed price"]),
-                    Tnp1 = decimal.Parse(table.Rows[rowIndex]["agreed price"]) * 0.8m,
-                    Tnp2 = decimal.Parse(table.Rows[rowIndex]["agreed price"]) - decimal.Parse(table.Rows[rowIndex]["agreed price"]) * 0.8m
-                });
+                    startDate = DateTime.Parse(table.Rows[rowIndex]["Residual training price effective date"]);
+
+                    priceEpisodes.Add(new PriceEpisode
+                    {
+                        Id = GetPriceEpisodeIdentifier(startDate, standardCode),
+                        StartDate = startDate,
+                        TotalPrice = decimal.Parse(table.Rows[rowIndex]["Residual training price"]) + decimal.Parse(table.Rows[rowIndex]["Residual assessment price"]),
+                        Tnp3 = decimal.Parse(table.Rows[rowIndex]["Residual training price"]),
+                        Tnp4 = decimal.Parse(table.Rows[rowIndex]["Residual assessment price"])
+                    });
+                }
+
+                return priceEpisodes;
             }
+
+            if (table.Header.Contains("Total training price 1"))
+            {
+                var index = 1;
+
+                while (table.Header.Contains($"Total training price {index}"))
+                {
+                    startDate = DateTime.Parse(table.Rows[rowIndex][$"Total training price {index} effective date"]);
+
+                    priceEpisodes.Add(new PriceEpisode
+                    {
+                        Id = GetPriceEpisodeIdentifier(startDate, standardCode),
+                        StartDate = startDate,
+                        EndDate = table.Header.Contains($"Total training price {index + 1} effective date")
+                            ? DateTime.Parse(table.Rows[rowIndex][$"Total training price {index + 1} effective date"]).AddDays(-1)
+                            : string.IsNullOrEmpty(table.Rows[rowIndex]["actual end date"])
+                                ? (DateTime?)null
+                                : DateTime.Parse(table.Rows[rowIndex]["actual end date"]),
+                        TotalPrice = decimal.Parse(table.Rows[rowIndex][$"Total training price {index}"]) + decimal.Parse(table.Rows[rowIndex][$"Total assessment price {index}"]),
+                        Tnp1 = decimal.Parse(table.Rows[rowIndex][$"Total training price {index}"]),
+                        Tnp2 = decimal.Parse(table.Rows[rowIndex][$"Total assessment price {index}"])
+                    });
+
+                    index++;
+                }
+
+                return priceEpisodes;
+            }
+
+            startDate = DateTime.Parse(table.Rows[rowIndex]["start date"]);
+
+            priceEpisodes.Add(new PriceEpisode
+            {
+                Id = GetPriceEpisodeIdentifier(startDate, standardCode),
+                StartDate = startDate,
+                TotalPrice = decimal.Parse(table.Rows[rowIndex]["agreed price"]),
+                Tnp1 = decimal.Parse(table.Rows[rowIndex]["agreed price"]) * 0.8m,
+                Tnp2 = decimal.Parse(table.Rows[rowIndex]["agreed price"]) - decimal.Parse(table.Rows[rowIndex]["agreed price"]) * 0.8m
+            });
+
             return priceEpisodes;
         }
 

@@ -12,9 +12,10 @@ Feature: Provider earnings and payments where a learner changes employers
             | ABC      | DAS  | 01/08/2017                |
             | XYZ      | DAS  | 01/11/2017                |
         And the following commitments exist on 03/12/2017:
-            | Employer | ULN       | price effective date | planned end date | actual end date | agreed price |
-            | ABC      | learner a | 01/08/2017           | 31/08/2018       | 31/10/2017      | 15000        |
-            | XYZ      | learner a | 01/11/2017           | 31/08/2018       |                 | 5625         |
+            | Employer | commitment Id | version Id | ULN       | price effective date | planned end date | agreed price | status    | effective from | effective to |
+            | ABC      | 1             | 1          | learner a | 01/08/2017           | 31/08/2018       | 15000        | active    | 01/08/2017     | 31/10/2017   |
+            | ABC      | 1             | 2          | learner a | 01/08/2017           | 31/08/2018       | 15000        | cancelled | 01/11/2017     |              |
+            | XYZ      | 2             | 1          | learner a | 01/11/2017           | 31/08/2018       | 5625         | active    | 01/11/2017     |              |
         When an ILR file is submitted on 03/12/2017 with the following data:
             | ULN       | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date | Residual training price | Residual training price effective date | Residual assessment price | Residual assessment price effective date |
             | learner a | 01/08/2017 | 04/08/2018       |                 | continuing        | 12000                | 01/08/2017                          | 3000                   | 01/08/2017                            | 5000                    | 01/11/2017                             | 625                       | 01/11/2017                               |
@@ -45,9 +46,11 @@ Feature: Provider earnings and payments where a learner changes employers
             | ABC      | DAS  | 04/08/2017                |
             | XYZ      | DAS  | 10/11/2017                |
         And the following commitments exist on 03/12/2017:
-            | Employer | ULN       | price effective date | planned end date | actual end date | agreed price |
-            | ABC      | learner a | 01/08/2017           | 31/08/2018       | 31/10/2017      | 15000        |
-            | XYZ      | learner a | 01/11/2017           | 31/08/2018       |                 | 5625         |
+            | Employer | commitment Id | version Id | ULN       | price effective date | planned end date | agreed price | status    | effective from | effective to |
+            | ABC      | 1             | 1          | learner a | 01/08/2017           | 31/08/2018       | 15000        | active    | 01/08/2017     | 31/10/2017   |
+            | ABC      | 1             | 2          | learner a | 01/08/2017           | 31/08/2018       | 15000        | cancelled | 01/11/2017     |              |
+            | XYZ      | 2             | 1          | learner a | 01/11/2017           | 31/08/2018       | 5625         | active    | 01/11/2017     |              |
+        
         When an ILR file is submitted on 03/12/2017 with the following data:
             | ULN       | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date | Residual training price | Residual training price effective date | Residual assessment price | Residual assessment price effective date |
             | learner a | 04/08/2017 | 04/08/2018       |                 | continuing        | 12000                | 04/08/2017                          | 3000                   | 04/08/2017                            | 5000                    | 10/11/2017                             | 625                       | 10/11/2017                               |
@@ -78,9 +81,10 @@ Feature: Provider earnings and payments where a learner changes employers
             | ABC      | DAS  | 04/08/2017                |
             | XYZ      | DAS  | 10/11/2017                |
         And the following commitments exist on 03/12/2017:
-            | Employer | ULN       | price effective date | planned end date | actual end date | agreed price |
-            | ABC      | learner a | 01/08/2017           | 31/08/2018       | 31/10/2017      | 15000        |
-            | XYZ      | learner a | 01/11/2017           | 31/08/2018       |                 | 5625         |
+            | Employer | commitment Id | version Id | ULN       | price effective date | planned end date | agreed price | status    | effective from | effective to |
+            | ABC      | 1             | 1          | learner a | 01/08/2017           | 31/08/2018       | 15000        | active    | 01/08/2017     | 31/10/2017   |
+            | ABC      | 1             | 2          | learner a | 01/08/2017           | 31/08/2018       | 15000        | cancelled | 01/11/2017     |              |
+            | XYZ      | 2             | 1          | learner a | 01/11/2017           | 31/08/2018       | 5625         | active    | 01/11/2017     |              |
         When an ILR file is submitted on 03/12/2017 with the following data:
             | ULN       | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date | Residual training price | Residual training price effective date | Residual assessment price | Residual assessment price effective date |
             | learner a | 04/08/2017 | 04/08/2018       |                 | continuing        | 12000                | 04/08/2017                          | 3000                   | 04/08/2017                            | 5000                    | 25/10/2017                             | 625                       | 25/10/2017                               |
