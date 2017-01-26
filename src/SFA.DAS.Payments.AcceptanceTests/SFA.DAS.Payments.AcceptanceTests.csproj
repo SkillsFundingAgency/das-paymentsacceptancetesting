@@ -130,6 +130,7 @@
     <Compile Include="Features\ILR_is_submitted_late.feature.cs" />
     <Compile Include="Features\incentive_payments.feature.cs" />
     <Compile Include="Features\learner_changes_employer.feature.cs" />
+    <Compile Include="Features\learner_changes_provider.feature.cs" />
     <Compile Include="Features\learner_finishes_early.feature.cs" />
     <Compile Include="Features\learner_finishes_late.feature.cs" />
     <Compile Include="Features\learner_finishes_on_time.feature.cs" />
@@ -176,6 +177,9 @@
     </None>
     <None Include="..\..\features\learner_changes_employer.feature">
       <Link>Features\learner_changes_employer.feature</Link>
+    </None>
+    <None Include="..\..\features\learner_changes_provider.feature">
+      <Link>Features\learner_changes_provider.feature</Link>
     </None>
     <None Include="..\..\features\learner_finishes_early.feature">
       <Link>Features\learner_finishes_early.feature</Link>

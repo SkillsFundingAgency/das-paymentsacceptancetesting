@@ -167,6 +167,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
         {
             CommitmentPaymentStatus paymentStatus;
 
+            if (status.Equals("withdrawn",StringComparison.InvariantCultureIgnoreCase))
+            {
+                return CommitmentPaymentStatus.Cancelled;
+            }
+
             if (Enum.TryParse(status, true, out paymentStatus))
             {
                 return paymentStatus;

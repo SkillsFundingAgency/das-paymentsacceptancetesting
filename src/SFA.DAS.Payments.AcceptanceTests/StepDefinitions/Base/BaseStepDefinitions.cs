@@ -50,7 +50,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             {
                 foreach (var learner in provider.Learners)
                 {
-                    AddLearnerCommitment(provider.Ukprn, learner);
+                    AddLearnerCommitment(provider.Ukprn, learner,provider.Name);
                 }
             }
 
@@ -87,20 +87,20 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                         continue;
                     }
 
-                    AddLearnerCommitmentsForPeriod(date, provider.Ukprn, learner);
+                    AddLearnerCommitmentsForPeriod(date, provider.Ukprn, learner,provider.Name);
                 }
             }
 
             CommitmentDataHelper.UpdateEventStreamPointer(EnvironmentVariables);
         }
 
-        protected void AddLearnerCommitment(long ukprn, Learner learner)
+        protected void AddLearnerCommitment(long ukprn, Learner learner, string provider)
         {
             var commitmentId = long.Parse(IdentifierGenerator.GenerateIdentifier(6, false));
             var commitmentPriority = 1;
             var accountId = long.Parse(IdentifierGenerator.GenerateIdentifier(8, false));
 
-            var commitment = StepDefinitionsContext.ReferenceDataContext.Commitments?.SingleOrDefault(c => c.Learner == learner.Name);
+            var commitment = StepDefinitionsContext.ReferenceDataContext.Commitments?.SingleOrDefault(c => c.Learner == learner.Name && c.Provider == provider);
 
             if (commitment != null)
             {
@@ -138,9 +138,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                 EnvironmentVariables);
         }
 
-        protected void AddLearnerCommitmentsForPeriod(DateTime date, long ukprn, Learner learner)
+        protected void AddLearnerCommitmentsForPeriod(DateTime date, long ukprn, Learner learner, string provider)
         {
-            var learnerCommitments = StepDefinitionsContext.ReferenceDataContext.Commitments.Where(c => c.Learner == learner.Name);
+            var learnerCommitments = StepDefinitionsContext.ReferenceDataContext.Commitments.Where(c => c.Learner == learner.Name && c.Provider == provider );
 
             foreach (var commitment in learnerCommitments)
             {

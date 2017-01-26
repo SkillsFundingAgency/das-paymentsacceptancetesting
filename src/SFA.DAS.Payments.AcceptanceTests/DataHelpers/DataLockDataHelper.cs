@@ -15,13 +15,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                 var query = "SELECT DISTINCT " +
                                 "pem.CommitmentId, " +
                                 "pem.PriceEpisodeIdentifier AS PriceEpisodeId, " +
-                                "c.AgreedCost AS Price " +
+                                "ISNULL(c.AgreedCost, 0) AS Price " +
                             "FROM DataLock.PriceEpisodeMatch pem " +
-                                "JOIN DataLock.PriceEpisodePeriodMatch pepm ON pem.Ukprn = pepm.Ukprn " +
+                                "LEFT JOIN DataLock.PriceEpisodePeriodMatch pepm ON pem.Ukprn = pepm.Ukprn " +
                                     "AND pem.PriceEpisodeIdentifier = pepm.PriceEpisodeIdentifier " +
                                     "AND pem.LearnRefNumber = pepm.LearnRefNumber " +
                                     "AND pem.AimSeqNumber = pepm.AimSeqNumber " +
-                                "JOIN dbo.DasCommitments c ON pepm.CommitmentId = c.CommitmentId " +
+                                "LEFT JOIN dbo.DasCommitments c ON pepm.CommitmentId = c.CommitmentId " +
                                     "AND pepm.VersionId = c.VersionId " +
                             "WHERE pem.Ukprn = @ukprn";
                 return connection.Query<DataLockMatch>(query, new { ukprn }).ToArray();
