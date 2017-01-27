@@ -96,9 +96,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                     var periodAmount = periods[period];
 
                     connection.Execute("INSERT INTO [Rulebase].[AEC_ApprenticeshipPriceEpisode_Period] " +
-                                       "(Ukprn,LearnRefNumber,PriceEpisodeIdentifier,Period,PriceEpisodeOnProgPayment) " +
+                                       "(Ukprn,LearnRefNumber,PriceEpisodeIdentifier,Period,PriceEpisodeOnProgPayment,PriceEpisodeSFAContribPct) " +
                                        "VALUES " +
-                                       "(@ukprn,@learnRefNumber,@PriceEpisodeIdentifier,@Period, @periodAmount)",
+                                       "(@ukprn,@learnRefNumber,@PriceEpisodeIdentifier,@Period, @periodAmount, 0.9)",
                         new { ukprn, learnRefNumber, priceEpisodeIdentifier, period, periodAmount });
                 }
 
@@ -204,7 +204,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                                        "StandardCode," +
                                        "ProgrammeType," +
                                        "FrameworkCode," +
-                                       "PathwayCode" +
+                                       "PathwayCode," +
+                                       "SfaContributionPercentage" +
                                    ") VALUES (" +
                                        "@commitmentId," +
                                        "@commitmentVersionId," +
@@ -224,7 +225,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                                        "@standardCode," +
                                        "@programmeType," +
                                        "@frameworkCode," +
-                                       "@pathwayCode" +
+                                       "@pathwayCode," +
+                                       "0.9" +
                                    ")",
                     new
                     {
