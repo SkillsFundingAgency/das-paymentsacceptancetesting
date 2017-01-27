@@ -390,7 +390,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "1",
                         "provider b",
                         "learner a",
-                        "01/03/2018",
+                        "05/03/2018",
                         "01/08/2018",
                         "4500",
                         "active",
