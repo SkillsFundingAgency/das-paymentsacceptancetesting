@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"[]>
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>Provider earnings and payments where learner changes apprenticeship standard</title>
+    <title>Provider earnings and payments where learner changes apprenticeship standard or there is a change to the negotiated price at the end of a month, remaining with the same employer and provider</title>
     <link rel="stylesheet" href="css/master.css" type="text/css" />
     <link rel="stylesheet" href="css/print.css" type="text/css" media="print" />
     <script src="js/jquery.js" type="text/javascript"></script>
@@ -26,7 +26,7 @@ $(document).ready(function() {
           <li class="file">
             <a href="incentive_payments.html">1 learner aged 16-18, levy available, earns incentives</a>
             <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
+              <i class="icon-ok passed" title="Successful"> </i>
             </span>
           </li>
           <li class="file">
@@ -37,6 +37,12 @@ $(document).ready(function() {
           </li>
           <li class="file">
             <a href="earnings_calc.html">Amount due is calculated based on previously earned amount</a>
+            <span class="float-right">
+              <i class="icon-ok passed" title="Successful"> </i>
+            </span>
+          </li>
+          <li class="file">
+            <a href="learner_changes_provider.html">Apprentice changes provider and there is a gap between commitments</a>
             <span class="float-right">
               <i class="icon-ok passed" title="Successful"> </i>
             </span>
@@ -68,11 +74,11 @@ $(document).ready(function() {
           <li class="file">
             <a href="learner_changes_employer.html">Provider earnings and payments where a learner changes employers</a>
             <span class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
+              <i class="icon-minus-sign failed" title="Failed"> </i>
             </span>
           </li>
           <li class="file">
-            <span class="current">Provider earnings and payments where learner changes apprenticeship standard</span>
+            <span class="current">Provider earnings and payments where learner changes apprenticeship standard or there is a change to the negotiated price at the end of a month, remaining with the same employer and provider</span>
             <span class="float-right">
               <i class="icon-ok passed" title="Successful"> </i>
             </span>
@@ -98,7 +104,7 @@ $(document).ready(function() {
           <li class="file">
             <a href="ILR_is_submitted_late.html">The ILR is submitted late</a>
             <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
+              <i class="icon-ok passed" title="Successful"> </i>
             </span>
           </li>
         </ul>
@@ -107,7 +113,7 @@ $(document).ready(function() {
         <div class="float-right">
           <i class="icon-ok passed" title="Successful"> </i>
         </div>
-        <h1>Provider earnings and payments where learner changes apprenticeship standard</h1>
+        <h1>Provider earnings and payments where learner changes apprenticeship standard or there is a change to the negotiated price at the end of a month, remaining with the same employer and provider</h1>
         <ul id="scenarios">
           <li class="scenario">
             <div class="float-right">
@@ -217,10 +223,118 @@ $(document).ready(function() {
               <i class="icon-link"> </i>
             </a>
           </li>
+          <li class="scenario">
+            <div class="float-right">
+              <i class="icon-ok passed" title="Successful"> </i>
+            </div>
+            <div class="scenario-heading" id="earnings-and-payments-for-a-das-learner-levy-available-and-there-is-a-change-to-the-negotiated-cost-which-happens-at-the-end-of-the-month">
+              <h2>Earnings and payments for a DAS learner, levy available, and there is a change to the Negotiated Cost which happens at the end of the month</h2>
+            </div>
+            <div class="steps">
+              <ul>
+                <li class="step">
+                  <span class="keyword">Given </span>The learner is programme only DAS</li>
+                <li class="step">
+                  <span class="keyword">And </span>levy balance &gt; agreed price for all months</li>
+                <li class="step">
+                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>version Id</th><th>ULN</th><th>start date</th><th>end date</th><th>status</th><th>agreed price</th><th>effective from</th><th>effective to</th><th> </th></tr></thead><tbody><tr><td>1</td><td>1</td><td>learner a</td><td>01/08/2017</td><td>31/08/2018</td><td>active</td><td>15000</td><td>01/08/2017</td><td>31/10/2017</td></tr><tr><td>1</td><td>2</td><td>learner a</td><td>01/08/2017</td><td>31/08/2018</td><td>active</td><td>9375</td><td>01/11/2017</td><td></td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>Total training price 1</th><th>Total training price 1 effective date</th><th>Total assessment price 1</th><th>Total assessment price 1 effective date</th><th>Total training price 2</th><th>Total training price 2 effective date</th><th>Total assessment price 2</th><th>Total assessment price 2 effective date</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>01/08/2017</td><td>04/08/2018</td><td></td><td>continuing</td><td>12000</td><td>01/08/2017</td><td>3000</td><td>01/08/2017</td><td>7500</td><td>01/11/2017</td><td>1875</td><td>01/11/2017</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">Then </span>the data lock status will be as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17 - 10/17</th><th>11/17 onwards</th><th> </th></tr></thead><tbody><tr><td>Matching price</td><td>15000</td><td>9375</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>...</th><th>07/18</th><th>08/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>1000</td><td>1000</td><td>1000</td><td>500</td><td>500</td><td>...</td><td>500</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>1000</td><td>1000</td><td>1000</td><td>500</td><td>500</td><td>...</td><td>500</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>1000</td><td>1000</td><td>1000</td><td>500</td><td>...</td><td>500</td><td>500</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Levy account debited</td><td>0</td><td>1000</td><td>1000</td><td>1000</td><td>500</td><td>...</td><td>500</td><td>500</td></tr><tr><td>SFA Levy employer budget</td><td>1000</td><td>1000</td><td>1000</td><td>500</td><td>500</td><td>...</td><td>500</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr></tbody></table></div></li>
+              </ul>
+            </div>
+            <a class="scenario-link" href="javascript:showImageLink('earnings-and-payments-for-a-das-learner-levy-available-and-there-is-a-change-to-the-negotiated-cost-which-happens-at-the-end-of-the-month')" title="Copy scenario link to clipboard.">
+              <i class="icon-link"> </i>
+            </a>
+          </li>
+          <li class="scenario">
+            <div class="float-right">
+              <i class="icon-ok passed" title="Successful"> </i>
+            </div>
+            <div class="scenario-heading" id="earnings-and-payments-for-a-das-learner-levy-available-and-there-is-a-change-to-the-negotiated-cost-which-happens-in-the-middle-of-the-month">
+              <h2>Earnings and payments for a DAS learner, levy available, and there is a change to the Negotiated Cost which happens in the middle of the month</h2>
+            </div>
+            <div class="steps">
+              <ul>
+                <li class="step">
+                  <span class="keyword">Given </span>The learner is programme only DAS</li>
+                <li class="step">
+                  <span class="keyword">And </span>levy balance &gt; agreed price for all months</li>
+                <li class="step">
+                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>version Id</th><th>ULN</th><th>start date</th><th>end date</th><th>status</th><th>agreed price</th><th>effective from</th><th>effective to</th><th> </th></tr></thead><tbody><tr><td>1</td><td>1</td><td>learner a</td><td>01/08/2017</td><td>31/08/2018</td><td>active</td><td>15000</td><td>01/08/2017</td><td>31/10/2017</td></tr><tr><td>1</td><td>2</td><td>learner a</td><td>01/08/2017</td><td>31/08/2018</td><td>active</td><td>9375</td><td>01/11/2017</td><td></td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>Total training price 1</th><th>Total training price 1 effective date</th><th>Total assessment price 1</th><th>Total assessment price 1 effective date</th><th>Total training price 2</th><th>Total training price 2 effective date</th><th>Total assessment price 2</th><th>Total assessment price 2 effective date</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>01/08/2017</td><td>04/08/2018</td><td></td><td>continuing</td><td>12000</td><td>01/08/2017</td><td>3000</td><td>01/08/2017</td><td>7500</td><td>10/11/2017</td><td>1875</td><td>10/11/2017</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">Then </span>the data lock status will be as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17 - 10/17</th><th>11/17 onwards</th><th> </th></tr></thead><tbody><tr><td>Matching price</td><td>15000</td><td>9375</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>...</th><th>07/18</th><th>08/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>1000</td><td>1000</td><td>1000</td><td>500</td><td>500</td><td>...</td><td>500</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>1000</td><td>1000</td><td>1000</td><td>500</td><td>500</td><td>...</td><td>500</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>1000</td><td>1000</td><td>1000</td><td>500</td><td>...</td><td>500</td><td>500</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Levy account debited</td><td>0</td><td>1000</td><td>1000</td><td>1000</td><td>500</td><td>...</td><td>500</td><td>500</td></tr><tr><td>SFA Levy employer budget</td><td>1000</td><td>1000</td><td>1000</td><td>500</td><td>500</td><td>...</td><td>500</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr></tbody></table></div></li>
+              </ul>
+            </div>
+            <a class="scenario-link" href="javascript:showImageLink('earnings-and-payments-for-a-das-learner-levy-available-and-there-is-a-change-to-the-negotiated-cost-which-happens-in-the-middle-of-the-month')" title="Copy scenario link to clipboard.">
+              <i class="icon-link"> </i>
+            </a>
+          </li>
+          <li class="scenario">
+            <div class="float-right">
+              <i class="icon-ok passed" title="Successful"> </i>
+            </div>
+            <div class="scenario-heading" id="earnings-and-payments-for-a-das-learner-levy-available-and-there-is-a-change-to-the-negotiated-cost-which-happens-in-the-middle-of-the-month-and-the-ilr-starts-earlier">
+              <h2>Earnings and payments for a DAS learner, levy available, and there is a change to the Negotiated Cost which happens in the middle of the month and the ILR starts earlier</h2>
+            </div>
+            <div class="steps">
+              <ul>
+                <li class="step">
+                  <span class="keyword">Given </span>The learner is programme only DAS</li>
+                <li class="step">
+                  <span class="keyword">And </span>levy balance &gt; agreed price for all months</li>
+                <li class="step">
+                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>version Id</th><th>ULN</th><th>start date</th><th>end date</th><th>status</th><th>agreed price</th><th>effective from</th><th>effective to</th><th> </th></tr></thead><tbody><tr><td>1</td><td>1</td><td>learner a</td><td>01/08/2017</td><td>31/08/2018</td><td>active</td><td>15000</td><td>01/08/2017</td><td>31/10/2017</td></tr><tr><td>1</td><td>2</td><td>learner a</td><td>01/08/2017</td><td>31/08/2018</td><td>active</td><td>9375</td><td>01/11/2017</td><td></td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>Total training price 1</th><th>Total training price 1 effective date</th><th>Total assessment price 1</th><th>Total assessment price 1 effective date</th><th>Total training price 2</th><th>Total training price 2 effective date</th><th>Total assessment price 2</th><th>Total assessment price 2 effective date</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>01/08/2017</td><td>04/08/2018</td><td></td><td>continuing</td><td>12000</td><td>01/08/2017</td><td>3000</td><td>01/08/2017</td><td>7500</td><td>24/10/2017</td><td>1875</td><td>24/10/2017</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">Then </span>the data lock status will be as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17 - 09/17</th><th>10/17 onwards</th><th> </th></tr></thead><tbody><tr><td>Matching price</td><td>15000</td><td></td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>...</th><th>07/18</th><th>08/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>1000</td><td>1000</td><td>550</td><td>550</td><td>550</td><td>...</td><td>550</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>1000</td><td>1000</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>1000</td><td>1000</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Levy account debited</td><td>0</td><td>1000</td><td>1000</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>SFA Levy employer budget</td><td>1000</td><td>1000</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr></tbody></table></div></li>
+              </ul>
+            </div>
+            <a class="scenario-link" href="javascript:showImageLink('earnings-and-payments-for-a-das-learner-levy-available-and-there-is-a-change-to-the-negotiated-cost-which-happens-in-the-middle-of-the-month-and-the-ilr-starts-earlier')" title="Copy scenario link to clipboard.">
+              <i class="icon-link"> </i>
+            </a>
+          </li>
+          <li class="scenario">
+            <div class="float-right">
+              <i class="icon-ok passed" title="Successful"> </i>
+            </div>
+            <div class="scenario-heading" id="earnings-and-payments-for-a-das-learner-levy-available-and-there-is-a-change-to-the-negotiated-cost-and-the-ilr-is-not-updated">
+              <h2>Earnings and payments for a DAS learner, levy available, and there is a change to the Negotiated Cost and the ILR is not updated</h2>
+            </div>
+            <div class="steps">
+              <ul>
+                <li class="step">
+                  <span class="keyword">Given </span>The learner is programme only DAS</li>
+                <li class="step">
+                  <span class="keyword">And </span>levy balance &gt; agreed price for all months</li>
+                <li class="step">
+                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>version Id</th><th>ULN</th><th>start date</th><th>end date</th><th>status</th><th>agreed price</th><th>effective from</th><th>effective to</th><th> </th></tr></thead><tbody><tr><td>1</td><td>1</td><td>learner a</td><td>01/08/2017</td><td>31/08/2018</td><td>active</td><td>15000</td><td>01/08/2017</td><td>31/10/2017</td></tr><tr><td>1</td><td>2</td><td>learner a</td><td>01/08/2017</td><td>31/08/2018</td><td>active</td><td>9375</td><td>01/11/2017</td><td></td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>Total training price 1</th><th>Total training price 1 effective date</th><th>Total assessment price 1</th><th>Total assessment price 1 effective date</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>01/08/2017</td><td>04/08/2018</td><td></td><td>continuing</td><td>12000</td><td>01/08/2017</td><td>3000</td><td>01/08/2017</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">Then </span>the data lock status will be as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17 onwards</th><th> </th></tr></thead><tbody><tr><td>Matching price</td><td>15000</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>...</th><th>07/18</th><th>08/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>1000</td><td>1000</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>1000</td><td>1000</td><td>1000</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>1000</td><td>1000</td><td>1000</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Employer Levy account debited</td><td>0</td><td>1000</td><td>1000</td><td>1000</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>SFA Levy employer budget</td><td>1000</td><td>1000</td><td>1000</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr></tbody></table></div></li>
+              </ul>
+            </div>
+            <a class="scenario-link" href="javascript:showImageLink('earnings-and-payments-for-a-das-learner-levy-available-and-there-is-a-change-to-the-negotiated-cost-and-the-ilr-is-not-updated')" title="Copy scenario link to clipboard.">
+              <i class="icon-link"> </i>
+            </a>
+          </li>
         </ul>
       </div>
       <div id="footer">
-        <p>Generated on: 26 January 2017 17:00:28</p>
+        <p>Generated on: 27 January 2017 07:03:48</p>
         <p>Produced by Pickles, version 2.8.2.0</p>
       </div>
     </div>
