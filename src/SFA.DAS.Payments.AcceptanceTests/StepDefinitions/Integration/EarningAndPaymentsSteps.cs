@@ -108,9 +108,21 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
         [Then(@"the transaction types for the payments are:")]
         public void ThenTheTransactionsForThePaymentsAre(Table table)
         {
-            
             var ukprn = StepDefinitionsContext.Providers[0].Ukprn;
+            VerifyTransactionsForThePayments(table,ukprn);
+        }
 
+        [Then(@"the transaction types for the payments for (.*) are:")]
+        public void ThenTheTransactionTypesForThePaymentsForProviderBAre(string providerName,Table table)
+        {
+            var provider = StepDefinitionsContext.Providers.Single(x=> x.Name.Equals(providerName,StringComparison.CurrentCultureIgnoreCase));
+            VerifyTransactionsForThePayments(table, provider.Ukprn);
+        }
+
+
+        public void VerifyTransactionsForThePayments(Table table,long ukprn)
+        {
+            
             var onProgramRow = table.Rows.RowWithKey(RowKeys.OnProgramPayment);
             var completionRow = table.Rows.RowWithKey(RowKeys.CompletionPayment);
             var balancingRow = table.Rows.RowWithKey(RowKeys.BalancingPayment);
