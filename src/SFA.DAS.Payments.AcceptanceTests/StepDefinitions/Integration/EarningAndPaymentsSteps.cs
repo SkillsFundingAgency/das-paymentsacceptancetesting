@@ -65,7 +65,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
         public void WhenAnIlrFileIsSubmittedWithTheFollowingDataNoSubmission(Table table)
         {
             ScenarioContext.Current.Add("learners", table);
-
         }
 
         [When(@"the Contract type in the ILR is:")]
@@ -83,8 +82,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                     StartDate = DateTime.Parse(table.Rows[rowIndex]["date from"]),
                     EndDate = DateTime.Parse(table.Rows[rowIndex]["date to"])
                 };
+
                 StepDefinitionsContext.ReferenceDataContext.AddLearningDeliveryFam(famCode);
             }
+
             ProcessIlrFileSubmissions(learnerTable);
         }
 
@@ -209,10 +210,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
 
                 foreach (var provider in StepDefinitionsContext.Providers)
                 {
-                    SubmitIlr(provider, 
-                                academicYear, 
-                                date, 
-                                processService);
+                    //if (date >= provider.IlrStartDate.NextCensusDate() )
+                    //{
+                        SubmitIlr(provider,
+                                    academicYear,
+                                    date,
+                                    processService);
+                    //}
                 }
 
                 SubmitMonthEnd(date, processService);

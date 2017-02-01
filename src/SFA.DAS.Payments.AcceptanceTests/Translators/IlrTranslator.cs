@@ -13,7 +13,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Translators
                 return CompletionStatus.Completed;
             }
 
-            else if (completionStatus.Equals("Transferred", StringComparison.OrdinalIgnoreCase))
+            else if (completionStatus.Equals("Transferred", StringComparison.OrdinalIgnoreCase) ||
+                completionStatus.Equals("withdrawn", StringComparison.OrdinalIgnoreCase))
             {
                 return CompletionStatus.Transferred;
             }
