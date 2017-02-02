@@ -127,7 +127,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             var onProgramRow = table.Rows.RowWithKey(RowKeys.OnProgramPayment);
             var completionRow = table.Rows.RowWithKey(RowKeys.CompletionPayment);
             var balancingRow = table.Rows.RowWithKey(RowKeys.BalancingPayment);
-            var employerIncentiveRow = table.Rows.RowWithKey(RowKeys.EmployerIncentive);
+            var employerIncentiveRow = table.Rows.RowWithKey(RowKeys.DefaultEmployerIncentive);
             var providerIncentiveRow = table.Rows.RowWithKey(RowKeys.ProviderIncentive);
 
             for (var colIndex = 1; colIndex < table.Header.Count; colIndex++)
@@ -146,12 +146,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                 VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, TransactionType.Completion, completionRow);
                 VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, TransactionType.Balancing, balancingRow);
 
-                VerifyPaymentsDueByTransactionType(ukprn, periodName, 
-                                                    periodDate, colIndex, 
-                                                    new TransactionType[] {
-                                                            TransactionType.First16To18EmployerIncentive,
-                                                            TransactionType.Second16To18EmployerIncentive  }, 
-                                                    employerIncentiveRow);
+                VerifyEmployerPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex,table);
+
                 VerifyPaymentsDueByTransactionType(ukprn, periodName, 
                                                     periodDate, colIndex, 
                                                     new TransactionType[] {
@@ -400,13 +396,44 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, new TransactionType[] { paymentType }, paymentsRow);
         }
 
+        private void VerifyEmployerPaymentsDueByTransactionType(long ukprn,
+                                                       string periodName,
+                                                       DateTime periodDate,
+                                                       int colIndex,
+                                                       Table table)
+        {
+
+            if (StepDefinitionsContext.ReferenceDataContext.Employers != null)
+            {
+                foreach (var employer in StepDefinitionsContext.ReferenceDataContext.Employers)
+                {
+                    long? accountId = null;
+                    TableRow employerIncentiveRow = table.Rows.RowWithKey(string.Format(RowKeys.DefaultEmployerIncentive, string.Empty)); 
+                    if (table.Rows.RowWithKey(string.Format(RowKeys.DefaultEmployerIncentive, string.Empty)) == null)
+                    {
+                        accountId = employer.AccountId;
+                        employerIncentiveRow = table.Rows.RowWithKey(string.Format(RowKeys.DefaultEmployerIncentive, employer.Name));
+                    }
+
+                    VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, new TransactionType[] {
+                                                            TransactionType.First16To18EmployerIncentive,
+                                                            TransactionType.Second16To18EmployerIncentive  }, 
+                                                            employerIncentiveRow,
+                                                            accountId);
+                   
+                }
+            }
+        }
+
         private void VerifyPaymentsDueByTransactionType(long ukprn, 
                                                         string periodName, 
                                                         DateTime periodDate, 
                                                         int colIndex, 
                                                         TransactionType[] paymentTypes,
-                                                        TableRow paymentsRow)
+                                                        TableRow paymentsRow,
+                                                        long? accountId = null )
         {
+
             if (paymentsRow == null)
             {
                 return;
@@ -416,11 +443,17 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             
             var paymentsDueDate = periodDate.AddMonths(-1);
 
-            var paymentsDue = PaymentsDueDataHelper.GetPaymentsDueForPeriod(ukprn,
-                paymentsDueDate.Year, paymentsDueDate.Month, EnvironmentVariables)
-                              ?? new RequiredPaymentEntity[0];
-
-            var actualPaymentDue = paymentsDue.Length == 0 ? 0m : paymentsDue.Where(p => paymentTypesFilter.Contains(p.TransactionType)).Sum(p => p.AmountDue);
+            var paymentsDue = PaymentsDataHelper.GetAccountPaymentsForPeriod(ukprn, 
+                                                                            accountId, 
+                                                                            null, 
+                                                                            paymentsDueDate.Year, 
+                                                                            paymentsDueDate.Month, 
+                                                                            FundingSource.FullyFundedSfa, 
+                                                                            ContractType.ContractWithEmployer, 
+                                                                            EnvironmentVariables);
+           
+          
+            var actualPaymentDue = paymentsDue.Length == 0 ? 0m : paymentsDue.Where(p => paymentTypesFilter.Contains(p.TransactionType)).Sum(p => p.Amount);
             var expectedPaymentDue = decimal.Parse(paymentsRow[colIndex]);
             
             Assert.AreEqual(expectedPaymentDue, actualPaymentDue, $"Expected {string.Join(" and ",paymentTypes)} payment due of {expectedPaymentDue} but made a payment of {actualPaymentDue} for {periodName}");
