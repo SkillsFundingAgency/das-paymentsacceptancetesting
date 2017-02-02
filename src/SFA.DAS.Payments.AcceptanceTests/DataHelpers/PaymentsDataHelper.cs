@@ -9,7 +9,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 {
     internal static class PaymentsDataHelper
     {
-        internal static PaymentEntity[] GetAccountPaymentsForPeriod(long ukprn, long? accountId, long? uln, int year, int month, FundingSource fundingSource, ContractType contractType, EnvironmentVariables environmentVariables)
+        internal static PaymentEntity[] GetAccountPaymentsForPeriod(long ukprn, long? accountId, long? uln, int year, int month, FundingSource? fundingSource, ContractType contractType, EnvironmentVariables environmentVariables)
         {
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
             {
@@ -19,9 +19,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                                 WHERE rp.UKPRN = @ukprn 
                                     AND p.CollectionPeriodMonth = @month 
                                     AND p.CollectionPeriodYear = @year 
-                                    AND p.FundingSource = @fundingSource
                                     AND rp.ApprenticeshipContractType = @contractType";
 
+                query = fundingSource.HasValue ? query + " AND p.FundingSource = @fundingSource " : query;
                 query = accountId.HasValue ? query + " AND rp.AccountId = @accountId " : query; 
                 query = uln.HasValue ? query + " AND rp.Uln = @uln" : query;
                 return connection.Query<PaymentEntity>(query, new { ukprn, month, year, accountId, fundingSource, uln, contractType }).ToArray();

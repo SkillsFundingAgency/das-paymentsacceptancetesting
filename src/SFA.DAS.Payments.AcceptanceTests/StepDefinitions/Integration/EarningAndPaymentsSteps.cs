@@ -448,7 +448,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                                                                             null, 
                                                                             paymentsDueDate.Year, 
                                                                             paymentsDueDate.Month, 
-                                                                            FundingSource.FullyFundedSfa, 
+                                                                            null, 
                                                                             ContractType.ContractWithEmployer, 
                                                                             EnvironmentVariables);
            

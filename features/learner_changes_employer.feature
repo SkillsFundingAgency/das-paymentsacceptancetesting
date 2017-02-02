@@ -426,7 +426,13 @@ Scenario: Earnings and payments for a DAS learner, levy available, and they have
 #Learner changes employer - incentives earned
 Scenario: 1 learner aged 16-18, levy available, changes employer, earns incentive payment in the transfer month - and the date at which the incentive is earned is before the transfer date 
     
-		Given levy balance > agreed price for all months
+		Given The learner is programme only DAS
+        And the ABC has a levy balance > agreed price for all months
+        And the XYZ has a levy balance > agreed price for all months
+        And the learner changes employers
+            | Employer | Type | ILR employment start date |
+            | ABC      | DAS  | 06/08/2017                |
+            | XYZ      | DAS  | 15/11/2017                |
 		And the following commitments exist:
 			| Employer | commitment Id | version Id | Provider   | ULN       | price effective date | planned end date | agreed price | status    | effective from | effective to |
 			| ABC      | 1             | 1          | provider a | learner a | 01/08/2017           | 01/08/2018       | 7500         | active    | 01/08/2017     | 14/11/2017   |
@@ -434,12 +440,12 @@ Scenario: 1 learner aged 16-18, levy available, changes employer, earns incentiv
 			| XYZ      | 2             | 1          | provider a | learner a | 15/11/2017           | 01/08/2018       | 5625         | active    | 15/11/2017     |              |
             
 		When an ILR file is submitted with the following data:
-			| ULN       | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date | Residual training price | Residual training price effective date | Residual assessment price | Residual assessment price effective date |
-			| learner a | 06/08/2017 | 08/08/2018       |                 | continuing        | 6000                 | 06/08/2017                          | 1500                   | 06/08/2017                            | 4000                    | 15/11/2017                             | 1625                      | 15/11/2017                               |
+			| Provider   | learner type             | ULN       | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date | Residual training price | Residual training price effective date | Residual assessment price | Residual assessment price effective date |
+			| provider a | 16-18 programme only DAS | learner a | 06/08/2017 | 08/08/2018       |                 | continuing        | 6000                 | 06/08/2017                          | 1500                   | 06/08/2017                            | 4000                    | 15/11/2017                             | 1625                      | 15/11/2017                               |
 			
  	    Then the data lock status will be as follows:
-            | type                | 08/17 - 10/17 | 11/17 onwards |  
-            | matching commitment | 1             | 2             |
+			| type                | 08/17 - 10/17 | 11/17 onwards |  
+			| matching commitment | 1             | 2             |
         
         And the earnings and payments break down for provider a is as follows:
             | Type                                | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 |
@@ -460,6 +466,104 @@ Scenario: 1 learner aged 16-18, levy available, changes employer, earns incentiv
         And the transaction types for the payments for provider a are:
 			| Payment type                 | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 |
 			| On-program                   | 500   | 500   | 500   | 500   | 500   |
+			| Completion                   | 0     | 0     | 0     | 0     | 0     |
+			| Balancing                    | 0     | 0     | 0     | 0     | 0     |
+			| Employer ABC 16-18 incentive | 0     | 0     | 0     | 500   | 0     |
+			| Employer XYZ 16-18 incentive | 0     | 0     | 0     | 0     | 0     |
+			| Provider 16-18 incentive     | 0     | 0     | 0     | 500   | 0     |
+
+
+Scenario: 1 learner aged 16-18, levy available, changes employer, earns incentive payment in the commitment transfer month - and the employer transfer is recorded on the ILR in a later month
+    
+		Given The learner is programme only DAS
+        And the ABC has a levy balance > agreed price for all months
+        And the XYZ has a levy balance > agreed price for all months
+        And the learner changes employers
+            | Employer | Type | ILR employment start date |
+            | ABC      | DAS  | 06/08/2017                |
+            | XYZ      | DAS  | 15/12/2017                |
+		And the following commitments exist:
+			| Employer | commitment Id | version Id | Provider   | ULN       | price effective date | planned end date | agreed price | status    | effective from | effective to |
+			| ABC      | 1             | 1          | provider a | learner a | 01/08/2017           | 01/08/2018       | 7500         | active    | 01/08/2017     | 14/11/2017   |
+			| ABC      | 1             | 2          | provider a | learner a | 01/08/2017           | 01/08/2018       | 7500         | withdrawn | 15/11/2017     |              |
+			| XYZ      | 2             | 1          | provider a | learner a | 15/11/2017           | 01/08/2018       | 5625         | active    | 15/11/2017     |              |
+            
+		When an ILR file is submitted with the following data:
+			| Provider   | learner type             | ULN       | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date | Residual training price | Residual training price effective date | Residual assessment price | Residual assessment price effective date |
+			| provider a | 16-18 programme only DAS | learner a | 06/08/2017 | 08/08/2018       |                 | continuing        | 6000                 | 06/08/2017                          | 1500                   | 06/08/2017                            | 4000                    | 15/12/2017                             | 1625                      | 15/12/2017                               |
+
+        Then the data lock status will be as follows:
+            | type                | 08/17 - 10/17 | 12/17 onwards |  
+            | matching commitment | 1             | 2             |
+        
+        And the earnings and payments break down for provider a is as follows:
+            | Type                                | 08/17 | 09/17 | 10/17 | 11/17 | 12/17  | 01/18  |
+            | Provider Earned Total               | 500   | 500   | 500   | 1500  | 562.50 | 562.50 |
+            | Provider Earned from SFA            | 500   | 500   | 500   | 1000  | 562.50 | 562.50 |
+            | Provider Earned from Employer ABC   | 0     | 0     | 0     | 0     | 0      | 0      |
+            | Provider Earned from Employer XYZ   | 0     | 0     | 0     | 0     | 0      | 0      |
+            | Provider Paid by SFA                | 0     | 500   | 500   | 500   | 1000   | 562.50 |
+            | Payment due from Employer ABC       | 0     | 0     | 0     | 0     | 0      | 0      |
+            | Payment due from Employer XYZ       | 0     | 0     | 0     | 0     | 0      | 0      |
+            | Levy account ABC debited            | 0     | 500   | 500   | 500   | 0      | 0      |
+            | Levy account XYZ debited            | 0     | 0     | 0     | 0     | 0      | 500    |
+            | SFA Levy employer budget            | 500   | 500   | 500   | 0     | 562.50 | 562.50 |
+            | SFA Levy co-funding budget          | 0     | 0     | 0     | 0     | 0      | 0      |
+            | SFA non-Levy co-funding budget      | 0     | 0     | 0     | 0     | 0      | 0      |
+            | SFA Levy additional payments budget | 0     | 0     | 0     | 1000  | 0      | 0      |
+            
+         And the transaction types for the payments for provider a are:
+			| Payment type                 | 09/17 | 10/17 | 11/17 | 12/17 | 01/18  |
+			| On-program                   | 500   | 500   | 500   | 0     | 562.50 |
+			| Completion                   | 0     | 0     | 0     | 0     | 0      |
+			| Balancing                    | 0     | 0     | 0     | 0     | 0      |
+			| Employer ABC 16-18 incentive | 0     | 0     | 0     | 500   | 0      |
+			| Employer XYZ 16-18 incentive | 0     | 0     | 0     | 0     | 0      |
+			| Provider 16-18 incentive     | 0     | 0     | 0     | 500   | 0      |
+          
+
+Scenario: 1 learner aged 16-18, levy available, changes employer, earns incentive payment in the commitment transfer month - and the ILR transfer happens at an earlier point than the commitment  changes 
+ 
+		Given The learner is programme only DAS
+        And the ABC has a levy balance > agreed price for all months
+        And the XYZ has a levy balance > agreed price for all months
+        And the learner changes employers
+            | Employer | Type | ILR employment start date |
+            | ABC      | DAS  | 06/08/2017                |
+            | XYZ      | DAS  | 09/11/2017                |
+		And the following commitments exist:
+			| Employer | commitment Id | version Id | Provider   | ULN       | price effective date | planned end date | agreed price | status    | effective from | effective to |
+			| ABC      | 1             | 1          | provider a | learner a | 01/08/2017           | 01/08/2018       | 7500         | active    | 01/08/2017     | 14/11/2017   |
+			| ABC      | 1             | 2          | provider a | learner a | 01/08/2017           | 01/08/2018       | 7500         | withdrawn | 15/11/2017     |              |
+			| XYZ      | 2             | 1          | provider a | learner a | 15/11/2017           | 01/08/2018       | 5625         | active    | 15/11/2017     |              |
+       
+		When an ILR file is submitted with the following data:
+			| Provider   | learner type             | ULN       | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date | Residual training price | Residual training price effective date | Residual assessment price | Residual assessment price effective date |
+			| provider a | 16-18 programme only DAS | learner a | 06/08/2017 | 08/08/2018       |                 | continuing        | 6000                 | 06/08/2017                          | 1500                   | 06/08/2017                            | 4000                    | 09/11/2017                             | 1625                      | 09/11/2017                               |
+	
+	    Then the data lock status will be as follows:
+            | type                | 08/17 - 10/17 | 11/17 onwards |
+            | matching commitment | 1             |               |
+        
+        And the earnings and payments break down for provider a is as follows:
+            | Type                                | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 |
+            | Provider Earned Total               | 500   | 500   | 500   | 1500  | 500   | 500   |
+            | Provider Earned from SFA            | 500   | 500   | 500   | 1000  | 0     | 0     |
+            | Provider Earned from Employer ABC   | 0     | 0     | 0     | 0     | 0     | 0     |
+            | Provider Earned from Employer XYZ   | 0     | 0     | 0     | 0     | 0     | 0     |
+            | Provider Paid by SFA                | 0     | 500   | 500   | 500   | 1000  | 0     |
+            | Payment due from Employer ABC       | 0     | 0     | 0     | 0     | 0     | 0     |
+            | Payment due from Employer XYZ       | 0     | 0     | 0     | 0     | 0     | 0     |
+            | Levy account ABC debited            | 0     | 500   | 500   | 500   | 0     | 0     |
+            | Levy account XYZ debited            | 0     | 0     | 0     | 0     | 0     | 0     |
+            | SFA Levy employer budget            | 500   | 500   | 500   | 0     | 0     | 0     |
+            | SFA Levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | 0     |
+            | SFA non-Levy co-funding budget      | 0     | 0     | 0     | 0     | 0     | 0     |
+            | SFA Levy additional payments budget | 0     | 0     | 0     | 1000  | 0     | 0     |
+            
+         And the transaction types for the payments for provider a are:
+			| Payment type                 | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 |
+			| On-program                   | 500   | 500   | 500   | 0     | 0     |
 			| Completion                   | 0     | 0     | 0     | 0     | 0     |
 			| Balancing                    | 0     | 0     | 0     | 0     | 0     |
 			| Employer ABC 16-18 incentive | 0     | 0     | 0     | 500   | 0     |
