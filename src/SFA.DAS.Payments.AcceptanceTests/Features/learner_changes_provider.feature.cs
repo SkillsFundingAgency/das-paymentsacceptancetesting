@@ -1618,7 +1618,7 @@ this.ScenarioSetup(scenarioInfo);
             TechTalk.SpecFlow.Table table174 = new TechTalk.SpecFlow.Table(new string[] {
                         "type",
                         "08/17 - 10/17",
-                        "11/17",
+                        "11/17 -11/17",
                         "12/17 onwards"});
             table174.AddRow(new string[] {
                         "matching commitment",

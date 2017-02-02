@@ -503,7 +503,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                 if (provider.Learners != null)
                 {
                     var learner = provider.Learners.SingleOrDefault(x => x.Name.Equals(learnerName, StringComparison.CurrentCultureIgnoreCase));
-                    if (learnerName != null)
+                    if (learner != null)
                     {
                         uln = learner.Uln;
                         break;

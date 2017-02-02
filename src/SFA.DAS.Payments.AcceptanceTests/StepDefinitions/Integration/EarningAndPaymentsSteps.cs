@@ -210,13 +210,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
 
                 foreach (var provider in StepDefinitionsContext.Providers)
                 {
-                    //if (date >= provider.IlrStartDate.NextCensusDate() )
-                    //{
-                        SubmitIlr(provider,
-                                    academicYear,
-                                    date,
-                                    processService);
-                    //}
+                    SubmitIlr(provider,
+                                academicYear,
+                                date,
+                                processService);
+                    
                 }
 
                 SubmitMonthEnd(date, processService);
