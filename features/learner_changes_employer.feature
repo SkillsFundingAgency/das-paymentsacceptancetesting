@@ -451,13 +451,13 @@ Scenario: 1 learner aged 16-18, levy available, changes employer, earns incentiv
             | Type                                | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 |
             | Provider Earned Total               | 500   | 500   | 500   | 1500  | 500   | 500   |
             | Provider Earned from SFA            | 500   | 500   | 500   | 1500  | 500   | 500   |
-            | Provider Earned from Employer ABC   | 0     | 0     | 0     | 0     | 0     | 0     |
-            | Provider Earned from Employer XYZ   | 0     | 0     | 0     | 0     | 0     | 0     |
+            | Provider Earned from ABC            | 0     | 0     | 0     | 0     | 0     | 0     |
+            | Provider Earned from XYZ            | 0     | 0     | 0     | 0     | 0     | 0     |
             | Provider Paid by SFA                | 0     | 500   | 500   | 500   | 1500  | 500   |
-            | Payment due from Employer ABC       | 0     | 0     | 0     | 0     | 0     | 0     |
-            | Payment due from Employer XYZ       | 0     | 0     | 0     | 0     | 0     | 0     |
-            | Levy account ABC debited            | 0     | 500   | 500   | 500   | 0     | 0     |
-            | Levy account XYZ debited            | 0     | 0     | 0     | 0     | 500   | 500   |
+            | Payment due from ABC                | 0     | 0     | 0     | 0     | 0     | 0     |
+            | Payment due from XYZ                | 0     | 0     | 0     | 0     | 0     | 0     |
+            | ABC Levy account debited            | 0     | 500   | 500   | 500   | 0     | 0     |
+            | XYZ Levy account debited            | 0     | 0     | 0     | 0     | 500   | 500   |
             | SFA Levy employer budget            | 500   | 500   | 500   | 500   | 500   | 500   |
             | SFA Levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | 0     |
             | SFA non-Levy co-funding budget      | 0     | 0     | 0     | 0     | 0     | 0     |
@@ -500,13 +500,13 @@ Scenario: 1 learner aged 16-18, levy available, changes employer, earns incentiv
             | Type                                | 08/17 | 09/17 | 10/17 | 11/17 | 12/17  | 01/18  |
             | Provider Earned Total               | 500   | 500   | 500   | 1500  | 562.50 | 562.50 |
             | Provider Earned from SFA            | 500   | 500   | 500   | 1000  | 562.50 | 562.50 |
-            | Provider Earned from Employer ABC   | 0     | 0     | 0     | 0     | 0      | 0      |
-            | Provider Earned from Employer XYZ   | 0     | 0     | 0     | 0     | 0      | 0      |
+            | Provider Earned from ABC            | 0     | 0     | 0     | 0     | 0      | 0      |
+            | Provider Earned from XYZ            | 0     | 0     | 0     | 0     | 0      | 0      |
             | Provider Paid by SFA                | 0     | 500   | 500   | 500   | 1000   | 562.50 |
-            | Payment due from Employer ABC       | 0     | 0     | 0     | 0     | 0      | 0      |
-            | Payment due from Employer XYZ       | 0     | 0     | 0     | 0     | 0      | 0      |
-            | Levy account ABC debited            | 0     | 500   | 500   | 500   | 0      | 0      |
-            | Levy account XYZ debited            | 0     | 0     | 0     | 0     | 0      | 500    |
+            | Payment due from ABC                | 0     | 0     | 0     | 0     | 0      | 0      |
+            | Payment due from XYZ                | 0     | 0     | 0     | 0     | 0      | 0      |
+            | ABC Levy account debited            | 0     | 500   | 500   | 500   | 0      | 0      |
+            | XYZ Levy account debited            | 0     | 0     | 0     | 0     | 0      | 562.50 |
             | SFA Levy employer budget            | 500   | 500   | 500   | 0     | 562.50 | 562.50 |
             | SFA Levy co-funding budget          | 0     | 0     | 0     | 0     | 0      | 0      |
             | SFA non-Levy co-funding budget      | 0     | 0     | 0     | 0     | 0      | 0      |
@@ -549,13 +549,13 @@ Scenario: 1 learner aged 16-18, levy available, changes employer, earns incentiv
             | Type                                | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 |
             | Provider Earned Total               | 500   | 500   | 500   | 1500  | 500   | 500   |
             | Provider Earned from SFA            | 500   | 500   | 500   | 1000  | 0     | 0     |
-            | Provider Earned from Employer ABC   | 0     | 0     | 0     | 0     | 0     | 0     |
-            | Provider Earned from Employer XYZ   | 0     | 0     | 0     | 0     | 0     | 0     |
+            | Provider Earned from ABC            | 0     | 0     | 0     | 0     | 0     | 0     |
+            | Provider Earned from XYZ            | 0     | 0     | 0     | 0     | 0     | 0     |
             | Provider Paid by SFA                | 0     | 500   | 500   | 500   | 1000  | 0     |
-            | Payment due from Employer ABC       | 0     | 0     | 0     | 0     | 0     | 0     |
-            | Payment due from Employer XYZ       | 0     | 0     | 0     | 0     | 0     | 0     |
-            | Levy account ABC debited            | 0     | 500   | 500   | 500   | 0     | 0     |
-            | Levy account XYZ debited            | 0     | 0     | 0     | 0     | 0     | 0     |
+            | Payment due from ABC                | 0     | 0     | 0     | 0     | 0     | 0     |
+            | Payment due from XYZ                | 0     | 0     | 0     | 0     | 0     | 0     |
+            | ABC Levy account debited            | 0     | 500   | 500   | 500   | 0     | 0     |
+            | XYZ Levy account debited            | 0     | 0     | 0     | 0     | 0     | 0     |
             | SFA Levy employer budget            | 500   | 500   | 500   | 0     | 0     | 0     |
             | SFA Levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | 0     |
             | SFA non-Levy co-funding budget      | 0     | 0     | 0     | 0     | 0     | 0     |

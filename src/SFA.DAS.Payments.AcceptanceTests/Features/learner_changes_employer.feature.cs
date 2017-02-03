@@ -2868,7 +2868,7 @@ this.ScenarioSetup(scenarioInfo);
                         "500",
                         "500"});
             table149.AddRow(new string[] {
-                        "Provider Earned from Employer ABC",
+                        "Provider Earned from ABC",
                         "0",
                         "0",
                         "0",
@@ -2876,7 +2876,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table149.AddRow(new string[] {
-                        "Provider Earned from Employer XYZ",
+                        "Provider Earned from XYZ",
                         "0",
                         "0",
                         "0",
@@ -2892,7 +2892,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1500",
                         "500"});
             table149.AddRow(new string[] {
-                        "Payment due from Employer ABC",
+                        "Payment due from ABC",
                         "0",
                         "0",
                         "0",
@@ -2900,7 +2900,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table149.AddRow(new string[] {
-                        "Payment due from Employer XYZ",
+                        "Payment due from XYZ",
                         "0",
                         "0",
                         "0",
@@ -2908,7 +2908,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table149.AddRow(new string[] {
-                        "Levy account ABC debited",
+                        "ABC Levy account debited",
                         "0",
                         "500",
                         "500",
@@ -2916,7 +2916,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table149.AddRow(new string[] {
-                        "Levy account XYZ debited",
+                        "XYZ Levy account debited",
                         "0",
                         "0",
                         "0",
@@ -3170,7 +3170,7 @@ this.ScenarioSetup(scenarioInfo);
                         "562.50",
                         "562.50"});
             table155.AddRow(new string[] {
-                        "Provider Earned from Employer ABC",
+                        "Provider Earned from ABC",
                         "0",
                         "0",
                         "0",
@@ -3178,7 +3178,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table155.AddRow(new string[] {
-                        "Provider Earned from Employer XYZ",
+                        "Provider Earned from XYZ",
                         "0",
                         "0",
                         "0",
@@ -3194,7 +3194,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1000",
                         "562.50"});
             table155.AddRow(new string[] {
-                        "Payment due from Employer ABC",
+                        "Payment due from ABC",
                         "0",
                         "0",
                         "0",
@@ -3202,7 +3202,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table155.AddRow(new string[] {
-                        "Payment due from Employer XYZ",
+                        "Payment due from XYZ",
                         "0",
                         "0",
                         "0",
@@ -3210,7 +3210,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table155.AddRow(new string[] {
-                        "Levy account ABC debited",
+                        "ABC Levy account debited",
                         "0",
                         "500",
                         "500",
@@ -3218,13 +3218,13 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table155.AddRow(new string[] {
-                        "Levy account XYZ debited",
+                        "XYZ Levy account debited",
                         "0",
                         "0",
                         "0",
                         "0",
                         "0",
-                        "500"});
+                        "562.50"});
             table155.AddRow(new string[] {
                         "SFA Levy employer budget",
                         "500",
@@ -3472,7 +3472,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table161.AddRow(new string[] {
-                        "Provider Earned from Employer ABC",
+                        "Provider Earned from ABC",
                         "0",
                         "0",
                         "0",
@@ -3480,7 +3480,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table161.AddRow(new string[] {
-                        "Provider Earned from Employer XYZ",
+                        "Provider Earned from XYZ",
                         "0",
                         "0",
                         "0",
@@ -3496,7 +3496,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1000",
                         "0"});
             table161.AddRow(new string[] {
-                        "Payment due from Employer ABC",
+                        "Payment due from ABC",
                         "0",
                         "0",
                         "0",
@@ -3504,7 +3504,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table161.AddRow(new string[] {
-                        "Payment due from Employer XYZ",
+                        "Payment due from XYZ",
                         "0",
                         "0",
                         "0",
@@ -3512,7 +3512,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table161.AddRow(new string[] {
-                        "Levy account ABC debited",
+                        "ABC Levy account debited",
                         "0",
                         "500",
                         "500",
@@ -3520,7 +3520,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table161.AddRow(new string[] {
-                        "Levy account XYZ debited",
+                        "XYZ Levy account debited",
                         "0",
                         "0",
                         "0",
