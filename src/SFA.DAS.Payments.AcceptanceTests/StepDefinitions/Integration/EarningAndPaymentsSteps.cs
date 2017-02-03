@@ -449,34 +449,20 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             
             var paymentsDueDate = periodDate.AddMonths(-1);
 
-            PaymentEntity[] paymentsDue;
+            var paymentsDue = PaymentsDataHelper.GetAccountPaymentsForPeriod(
+                ukprn,
+                accountId,
+                null,
+                paymentsDueDate.Year,
+                paymentsDueDate.Month,
+                StepDefinitionsContext.ReferenceDataContext.Employers != null
+                    ? (FundingSource?)null
+                    : FundingSource.CoInvestedSfa,
+                StepDefinitionsContext.ReferenceDataContext.Employers != null
+                    ? ContractType.ContractWithEmployer
+                    : ContractType.ContractWithSfa,
+                EnvironmentVariables);
 
-            if (StepDefinitionsContext.ReferenceDataContext.Employers != null)
-            {
-                paymentsDue = PaymentsDataHelper.GetAccountPaymentsForPeriod(
-                    ukprn,
-                    accountId,
-                    null,
-                    paymentsDueDate.Year,
-                    paymentsDueDate.Month,
-                    null,
-                    ContractType.ContractWithEmployer,
-                    EnvironmentVariables);
-            }
-            else
-            {
-                paymentsDue = PaymentsDataHelper.GetAccountPaymentsForPeriod(
-                    ukprn,
-                    null,
-                    null,
-                    paymentsDueDate.Year,
-                    paymentsDueDate.Month,
-                    FundingSource.CoInvestedSfa,
-                    ContractType.ContractWithSfa,
-                    EnvironmentVariables);
-            }
-           
-          
             var actualPaymentDue = paymentsDue.Length == 0 ? 0m : paymentsDue.Where(p => paymentTypesFilter.Contains(p.TransactionType)).Sum(p => p.Amount);
             var expectedPaymentDue = decimal.Parse(paymentsRow[colIndex]);
             
