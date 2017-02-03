@@ -249,7 +249,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                     foreach (var employer in StepDefinitionsContext.ReferenceDataContext.Employers)
                     {
                         var levyPaidRow = table.Rows.RowWithKey(RowKeys.DefaultLevyPayment)
-                            ?? table.Rows.RowWithKey($"{employer.Name}{RowKeys.LevyPayment}");
+                                          ?? table.Rows.RowWithKey($"{employer.Name}{RowKeys.LevyPayment}");
 
                         var employerCofundRow = table.Rows.RowWithKey(RowKeys.DefaultCoFinanceEmployerPayment)
                                                 ?? table.Rows.RowWithKey($"{RowKeys.CoFinanceEmployerPayment}{employer.Name}");
@@ -257,6 +257,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                         VerifyLevyPayments(ukprn, uln, periodName, periodDate, employer.AccountId, colIndex, levyPaidRow);
                         VerifyEmployerCofinancePayments(ukprn, uln, periodName, periodDate, employer.AccountId, colIndex, employerCofundRow, employer.LearnersType);
                     }
+                }
+                else // pure non das scenarios don't have employers
+                {
+                    var employerCofundRow = table.Rows.RowWithKey(RowKeys.DefaultCoFinanceEmployerPayment);
+
+                    VerifyEmployerCofinancePayments(ukprn, uln, periodName, periodDate, 0, colIndex, employerCofundRow, LearnerType.ProgrammeOnlyNonDas);
                 }
             }
         }
@@ -443,14 +449,32 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             
             var paymentsDueDate = periodDate.AddMonths(-1);
 
-            var paymentsDue = PaymentsDataHelper.GetAccountPaymentsForPeriod(ukprn, 
-                                                                            accountId, 
-                                                                            null, 
-                                                                            paymentsDueDate.Year, 
-                                                                            paymentsDueDate.Month, 
-                                                                            null, 
-                                                                            ContractType.ContractWithEmployer, 
-                                                                            EnvironmentVariables);
+            PaymentEntity[] paymentsDue;
+
+            if (StepDefinitionsContext.ReferenceDataContext.Employers != null)
+            {
+                paymentsDue = PaymentsDataHelper.GetAccountPaymentsForPeriod(
+                    ukprn,
+                    accountId,
+                    null,
+                    paymentsDueDate.Year,
+                    paymentsDueDate.Month,
+                    null,
+                    ContractType.ContractWithEmployer,
+                    EnvironmentVariables);
+            }
+            else
+            {
+                paymentsDue = PaymentsDataHelper.GetAccountPaymentsForPeriod(
+                    ukprn,
+                    null,
+                    null,
+                    paymentsDueDate.Year,
+                    paymentsDueDate.Month,
+                    FundingSource.CoInvestedSfa,
+                    ContractType.ContractWithSfa,
+                    EnvironmentVariables);
+            }
            
           
             var actualPaymentDue = paymentsDue.Length == 0 ? 0m : paymentsDue.Where(p => paymentTypesFilter.Contains(p.TransactionType)).Sum(p => p.Amount);
