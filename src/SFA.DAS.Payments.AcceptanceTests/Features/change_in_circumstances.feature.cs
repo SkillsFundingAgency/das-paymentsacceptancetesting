@@ -1451,7 +1451,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
 #line hidden
             TechTalk.SpecFlow.Table table34 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
-                        "08/17  - 10/17",
+                        "08/17 - 10/17",
                         "11/17 onwards"});
             table34.AddRow(new string[] {
                         "Matching price",
@@ -1587,7 +1587,7 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table38 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
-                        "08/17  - 10/17",
+                        "08/17 - 10/17",
                         "11/17 onwards"});
             table38.AddRow(new string[] {
                         "Matching price",
@@ -1731,7 +1731,7 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table42 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
-                        "08/17  - 10/17",
+                        "08/17 - 10/17",
                         "11/17 onwards"});
             table42.AddRow(new string[] {
                         "Matching price",
@@ -1886,7 +1886,7 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table46 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
-                        "08/17  - 10/17",
+                        "08/17 - 10/17",
                         "11/17 onwards"});
             table46.AddRow(new string[] {
                         "Matching price",
@@ -2035,7 +2035,7 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table50 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
-                        "08/17  - 11/17",
+                        "08/17 - 11/17",
                         "12/17 onwards"});
             table50.AddRow(new string[] {
                         "Matching price",
@@ -2190,7 +2190,7 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table54 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
-                        "08/17  - 10/17",
+                        "08/17 - 10/17",
                         "11/17 onwards"});
             table54.AddRow(new string[] {
                         "Matching price",

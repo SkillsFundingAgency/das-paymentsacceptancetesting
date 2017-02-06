@@ -199,8 +199,8 @@ Feature: Provider earnings and payments where learner changes apprenticeship sta
 			| learner a | 52            | 11/11/2017 | 04/08/2018       |                 | continuing        | 4500                   | 11/11/2017                            | 1125                     | 11/11/2017                              | 
         
         Then the data lock status will be as follows:
-            | Type           | 08/17  - 10/17 | 11/17 onwards |
-            | Matching price | 15000          | 5625          |
+            | Type           | 08/17 - 10/17 | 11/17 onwards |
+            | Matching price | 15000         | 5625          |
    
         And the provider earnings and payments break down as follows:         
             | Type                       | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 |
@@ -222,8 +222,8 @@ Scenario: ILR changes standard in the middle of the month, but no corresponding 
 			| learner a | 52            | 11/11/2017 | 04/08/2018       |                 | continuing        | 4500                   | 11/11/2017                            | 1125                     | 11/11/2017                              | 
         
         Then the data lock status will be as follows:
-            | Type           | 08/17  - 10/17 | 11/17 onwards |
-            | Matching price | 15000          |               |
+            | Type           | 08/17 - 10/17 | 11/17 onwards |
+            | Matching price | 15000         |               |
    
 		And the provider earnings and payments break down as follows: 
 			| Type                       | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 |
@@ -245,8 +245,8 @@ Scenario: Earnings and payments for a DAS learner, levy available, where the app
 			| learner a | 51            | 03/08/2017 | 04/08/2018       |                 | continuing        | 12000                  | 03/08/2017                            | 3000                     | 03/08/2017                              |
         
         Then the data lock status will be as follows:
-            | Type           | 08/17  - 10/17 | 11/17 onwards |
-            | Matching price | 15000          |               |
+            | Type           | 08/17 - 10/17 | 11/17 onwards |
+            | Matching price | 15000         |               |
    
         And the provider earnings and payments break down as follows:         
 			| Type                       | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 |
@@ -269,8 +269,8 @@ Scenario: Earnings and payments for a DAS learner, levy available, where the app
 			| learner a | 52            | 19/11/2017 | 04/08/2018       |                 | continuing        | 4500                   | 19/11/2017                            | 1125                     | 19/11/2017                              | 
         
         Then the data lock status will be as follows:
-            | Type           | 08/17  - 10/17 | 11/17 onwards |
-            | Matching price | 15000          | 5625          |
+            | Type           | 08/17 - 10/17 | 11/17 onwards |
+            | Matching price | 15000         | 5625          |
    
         And the provider earnings and payments break down as follows:         
             | Type                       | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 |
@@ -293,8 +293,8 @@ Scenario: Earnings and payments for a DAS learner, levy available, where the app
 			| learner a | 52            | 05/12/2017 | 04/08/2018       |                 | continuing        | 4500                   | 05/12/2017                            | 1125                     | 05/12/2017                              | 
         
         Then the data lock status will be as follows:
-            | Type           | 08/17  - 11/17 | 12/17 onwards |
-            | Matching price | 15000          | 5625          |
+            | Type           | 08/17 - 11/17 | 12/17 onwards |
+            | Matching price | 15000         | 5625          |
    
         And the provider earnings and payments break down as follows:         
             | Type                       | 08/17 | 09/17 | 10/17 | 11/17 | 12/17  | 01/18  |
@@ -317,8 +317,8 @@ Scenario: Earnings and payments for a DAS learner, levy available, where the app
 			| learner a | 52            | 06/11/2017 | 04/08/2018       |                 | continuing        | 4500                   | 06/11/2017                            | 1125                     | 06/11/2017                              | 
         
         Then the data lock status will be as follows:
-            | Type           | 08/17  - 10/17 | 11/17 onwards |
-            | Matching price | 15000          |               |
+            | Type           | 08/17 - 10/17 | 11/17 onwards |
+            | Matching price | 15000         |               |
    
         And the provider earnings and payments break down as follows:         
             | Type                       | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 |
