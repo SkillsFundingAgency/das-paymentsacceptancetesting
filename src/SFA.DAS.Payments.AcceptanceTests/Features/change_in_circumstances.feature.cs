@@ -1634,8 +1634,8 @@ this.ScenarioSetup(scenarioInfo);
                         "1000",
                         "1000",
                         "1000",
-                        "500",
-                        "500"});
+                        "0",
+                        "0"});
             table39.AddRow(new string[] {
                         "SFA Levy co-funding budget",
                         "0",
@@ -1720,8 +1720,8 @@ this.ScenarioSetup(scenarioInfo);
                         "51",
                         "03/08/2017",
                         "04/08/2018",
-                        "10/11/2017",
-                        "transferred",
+                        "",
+                        "continuing",
                         "12000",
                         "03/08/2017",
                         "3000",
@@ -1753,9 +1753,9 @@ this.ScenarioSetup(scenarioInfo);
                         "1000",
                         "1000",
                         "1000",
-                        "0",
-                        "0",
-                        "0"});
+                        "1000",
+                        "1000",
+                        "1000"});
             table43.AddRow(new string[] {
                         "Provider Paid by SFA",
                         "0",
@@ -2013,7 +2013,7 @@ this.ScenarioSetup(scenarioInfo);
                         "51",
                         "03/08/2017",
                         "04/08/2018",
-                        "18/11/2017",
+                        "04/12/2017",
                         "transferred",
                         "12000",
                         "03/08/2017",
@@ -2059,7 +2059,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1000",
                         "1000",
                         "1000",
-                        "0",
+                        "1000",
                         "562.50",
                         "562.50"});
             table51.AddRow(new string[] {
@@ -2170,7 +2170,7 @@ this.ScenarioSetup(scenarioInfo);
                         "51",
                         "03/08/2017",
                         "04/08/2018",
-                        "18/11/2017",
+                        "05/11/2017",
                         "transferred",
                         "12000",
                         "03/08/2017",
@@ -2234,8 +2234,8 @@ this.ScenarioSetup(scenarioInfo);
                         "1000",
                         "1000",
                         "1000",
-                        "500",
-                        "500"});
+                        "0",
+                        "0"});
             table55.AddRow(new string[] {
                         "SFA Levy co-funding budget",
                         "0",
