@@ -64,7 +64,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 
             var period = date.GetPeriod();
 
-            if (StepDefinitionsContext.ReferenceDataContext.Employers != null)
+            if (StepDefinitionsContext.DasScenario)
             {
                 foreach (var employer in StepDefinitionsContext.ReferenceDataContext.Employers)
                 {
@@ -199,7 +199,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 
         protected void UpdateAccountsBalances(string month)
         {
-            if (StepDefinitionsContext.ReferenceDataContext.Employers != null)
+            if (StepDefinitionsContext.DasScenario)
             {
                 foreach (var employer in StepDefinitionsContext.ReferenceDataContext.Employers)
                 {
