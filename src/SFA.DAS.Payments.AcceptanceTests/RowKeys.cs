@@ -17,7 +17,7 @@
         public const string OnProgramPayment = "On-program";
         public const string CompletionPayment = "Completion";
         public const string BalancingPayment = "Balancing";
-        public const string EmployerIncentive = "Employer 16-18 incentive";
+        public const string DefaultEmployerIncentive = "Employer {0} 16-18 incentive";
         public const string ProviderIncentive = "Provider 16-18 incentive";
 
         public const string DataLockMatchingCommitment = "Matching commitment";
