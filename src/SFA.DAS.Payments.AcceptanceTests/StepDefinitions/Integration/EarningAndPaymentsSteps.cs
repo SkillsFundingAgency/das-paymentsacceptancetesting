@@ -244,12 +244,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                 VerifyGovtCofinanceNonLevyContractPayments(ukprn, uln, periodName, periodDate, colIndex, govtCofundNonLevyContractRow);
                 VerifyAdditionalGovtFundedEarnings(ukprn, uln, periodName, periodDate, colIndex, govtAdditionalPaymentsRow);
 
-                if (StepDefinitionsContext.ReferenceDataContext.Employers != null)
+                if (StepDefinitionsContext.DasScenario)
                 {
                     foreach (var employer in StepDefinitionsContext.ReferenceDataContext.Employers)
                     {
                         var levyPaidRow = table.Rows.RowWithKey(RowKeys.DefaultLevyPayment)
-                            ?? table.Rows.RowWithKey($"{employer.Name}{RowKeys.LevyPayment}");
+                                          ?? table.Rows.RowWithKey($"{employer.Name}{RowKeys.LevyPayment}");
 
                         var employerCofundRow = table.Rows.RowWithKey(RowKeys.DefaultCoFinanceEmployerPayment)
                                                 ?? table.Rows.RowWithKey($"{RowKeys.CoFinanceEmployerPayment}{employer.Name}");
@@ -257,6 +257,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                         VerifyLevyPayments(ukprn, uln, periodName, periodDate, employer.AccountId, colIndex, levyPaidRow);
                         VerifyEmployerCofinancePayments(ukprn, uln, periodName, periodDate, employer.AccountId, colIndex, employerCofundRow, employer.LearnersType);
                     }
+                }
+                else
+                {
+                    var employerCofundRow = table.Rows.RowWithKey(RowKeys.DefaultCoFinanceEmployerPayment);
+
+                    VerifyEmployerCofinancePayments(ukprn, uln, periodName, periodDate, 0, colIndex, employerCofundRow, LearnerType.ProgrammeOnlyNonDas);
                 }
             }
         }
@@ -403,7 +409,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                                                        Table table)
         {
 
-            if (StepDefinitionsContext.ReferenceDataContext.Employers != null)
+            if (StepDefinitionsContext.DasScenario)
             {
                 foreach (var employer in StepDefinitionsContext.ReferenceDataContext.Employers)
                 {
@@ -443,16 +449,20 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             
             var paymentsDueDate = periodDate.AddMonths(-1);
 
-            var paymentsDue = PaymentsDataHelper.GetAccountPaymentsForPeriod(ukprn, 
-                                                                            accountId, 
-                                                                            null, 
-                                                                            paymentsDueDate.Year, 
-                                                                            paymentsDueDate.Month, 
-                                                                            null, 
-                                                                            ContractType.ContractWithEmployer, 
-                                                                            EnvironmentVariables);
-           
-          
+            var paymentsDue = PaymentsDataHelper.GetAccountPaymentsForPeriod(
+                ukprn,
+                accountId,
+                null,
+                paymentsDueDate.Year,
+                paymentsDueDate.Month,
+                StepDefinitionsContext.DasScenario
+                    ? (FundingSource?)null
+                    : FundingSource.CoInvestedSfa,
+                StepDefinitionsContext.DasScenario
+                    ? ContractType.ContractWithEmployer
+                    : ContractType.ContractWithSfa,
+                EnvironmentVariables);
+
             var actualPaymentDue = paymentsDue.Length == 0 ? 0m : paymentsDue.Where(p => paymentTypesFilter.Contains(p.TransactionType)).Sum(p => p.Amount);
             var expectedPaymentDue = decimal.Parse(paymentsRow[colIndex]);
             
