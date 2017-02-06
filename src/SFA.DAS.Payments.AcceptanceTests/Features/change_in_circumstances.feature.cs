@@ -2035,13 +2035,11 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table50 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
-                        "08/17  - 10/17",
-                        "11/17-11/17",
+                        "08/17  - 11/17",
                         "12/17 onwards"});
             table50.AddRow(new string[] {
                         "Matching price",
                         "15000",
-                        "",
                         "5625"});
 #line 295
         testRunner.Then("the data lock status will be as follows:", ((string)(null)), table50, "Then ");
