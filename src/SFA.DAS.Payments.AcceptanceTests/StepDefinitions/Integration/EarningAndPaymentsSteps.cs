@@ -244,7 +244,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                 VerifyGovtCofinanceNonLevyContractPayments(ukprn, uln, periodName, periodDate, colIndex, govtCofundNonLevyContractRow);
                 VerifyAdditionalGovtFundedEarnings(ukprn, uln, periodName, periodDate, colIndex, govtAdditionalPaymentsRow);
 
-                if (StepDefinitionsContext.ReferenceDataContext.Employers != null)
+                if (StepDefinitionsContext.DasScenario)
                 {
                     foreach (var employer in StepDefinitionsContext.ReferenceDataContext.Employers)
                     {
@@ -258,7 +258,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                         VerifyEmployerCofinancePayments(ukprn, uln, periodName, periodDate, employer.AccountId, colIndex, employerCofundRow, employer.LearnersType);
                     }
                 }
-                else // pure non das scenarios don't have employers
+                else
                 {
                     var employerCofundRow = table.Rows.RowWithKey(RowKeys.DefaultCoFinanceEmployerPayment);
 
@@ -409,7 +409,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                                                        Table table)
         {
 
-            if (StepDefinitionsContext.ReferenceDataContext.Employers != null)
+            if (StepDefinitionsContext.DasScenario)
             {
                 foreach (var employer in StepDefinitionsContext.ReferenceDataContext.Employers)
                 {
@@ -455,10 +455,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                 null,
                 paymentsDueDate.Year,
                 paymentsDueDate.Month,
-                StepDefinitionsContext.ReferenceDataContext.Employers != null
+                StepDefinitionsContext.DasScenario
                     ? (FundingSource?)null
                     : FundingSource.CoInvestedSfa,
-                StepDefinitionsContext.ReferenceDataContext.Employers != null
+                StepDefinitionsContext.DasScenario
                     ? ContractType.ContractWithEmployer
                     : ContractType.ContractWithSfa,
                 EnvironmentVariables);
