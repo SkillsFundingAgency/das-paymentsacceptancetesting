@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"[]>
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>Provider earnings and payments where learner completes later than planned and is funded by levy</title>
+    <title>Provider earnings and payments where learner completes later than planned</title>
     <link rel="stylesheet" href="css/master.css" type="text/css" />
     <link rel="stylesheet" href="css/print.css" type="text/css" media="print" />
     <script src="js/jquery.js" type="text/javascript"></script>
@@ -80,17 +80,17 @@ $(document).ready(function() {
           <li class="file">
             <a href="change_in_circumstances.html">Provider earnings and payments where learner changes apprenticeship standard or there is a change to the negotiated price at the end of a month, remaining with the same employer and provider</a>
             <span class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
+              <i class="icon-minus-sign failed" title="Failed"> </i>
             </span>
           </li>
           <li class="file">
-            <a href="learner_finishes_early.html">Provider earnings and payments where learner completes earlier than planned and is funded by levy</a>
+            <a href="learner_finishes_early.html">Provider earnings and payments where learner completes earlier than planned</a>
             <span class="float-right">
               <i class="icon-ok passed" title="Successful"> </i>
             </span>
           </li>
           <li class="file">
-            <span class="current">Provider earnings and payments where learner completes later than planned and is funded by levy</span>
+            <span class="current">Provider earnings and payments where learner completes later than planned</span>
             <span class="float-right">
               <i class="icon-ok passed" title="Successful"> </i>
             </span>
@@ -113,7 +113,7 @@ $(document).ready(function() {
         <div class="float-right">
           <i class="icon-ok passed" title="Successful"> </i>
         </div>
-        <h1>Provider earnings and payments where learner completes later than planned and is funded by levy</h1>
+        <h1>Provider earnings and payments where learner completes later than planned</h1>
         <div class="description">
           <pre>
             <code>The earnings and payment rules for late completions are the same as for learners finishing on time, except that the completion payment is held back until completion.
@@ -132,8 +132,6 @@ $(document).ready(function() {
               <ul>
                 <li class="step">
                   <span class="keyword">Given </span>the apprenticeship funding band maximum for each learner is 17000</li>
-                <li class="step">
-                  <span class="keyword">And </span>levy balance &gt; agreed price for all months</li>
               </ul>
             </div>
           </li>
@@ -147,6 +145,8 @@ $(document).ready(function() {
             <div class="steps">
               <ul>
                 <li class="step">
+                  <span class="keyword">Given </span>levy balance &gt; agreed price for all months</li>
+                <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>learner type</th><th>agreed price</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th> </th></tr></thead><tbody><tr><td>programme only DAS</td><td>15000</td><td>01/09/2017</td><td>08/09/2018</td><td>08/10/2018</td><td>completed</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>09/17</th><th>10/17</th><th>11/17</th><th>...</th><th>08/18</th><th>09/18</th><th>10/18</th><th>11/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>0</td><td>3000</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>0</td><td>3000</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>1000</td><td>0</td><td>3000</td></tr><tr><td>Levy account debited</td><td>0</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>1000</td><td>0</td><td>3000</td></tr><tr><td>SFA Levy employer budget</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>0</td><td>3000</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody></table></div></li>
@@ -156,10 +156,52 @@ $(document).ready(function() {
               <i class="icon-link"> </i>
             </a>
           </li>
+          <li class="scenario">
+            <div class="float-right">
+              <i class="icon-ok passed" title="Successful"> </i>
+            </div>
+            <div class="scenario-heading" id="a-non-das-learner-learner-finishes-late">
+              <h2>A non-DAS learner, learner finishes late</h2>
+            </div>
+            <div class="steps">
+              <ul>
+                <li class="step">
+                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>learner type</th><th>agreed price</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th> </th></tr></thead><tbody><tr><td>programme only non-DAS</td><td>15000</td><td>01/09/2017</td><td>08/09/2018</td><td>08/12/2018</td><td>completed</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>09/17</th><th>10/17</th><th>11/17</th><th>...</th><th>08/18</th><th>09/18</th><th>10/18</th><th>11/18</th><th>12/18</th><th>01/19</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>0</td><td>0</td><td>0</td><td>3000</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>900</td><td>900</td><td>900</td><td>...</td><td>900</td><td>0</td><td>0</td><td>0</td><td>2700</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>100</td><td>100</td><td>100</td><td>...</td><td>100</td><td>0</td><td>0</td><td>0</td><td>300</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>900</td><td>900</td><td>...</td><td>900</td><td>900</td><td>0</td><td>0</td><td>0</td><td>2700</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>100</td><td>100</td><td>...</td><td>100</td><td>100</td><td>0</td><td>0</td><td>0</td><td>300</td></tr><tr><td>Levy account debited</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA Levy employer budget</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA non-Levy co-funding budget</td><td>900</td><td>900</td><td>900</td><td>...</td><td>900</td><td>0</td><td>0</td><td>0</td><td>2700</td><td>0</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the transaction types for the payments are:<div class="table_container"><table class="datatable"><thead><tr><th>Payment type</th><th>10/17</th><th>11/17</th><th>12/17</th><th>01/18</th><th>...</th><th>09/18</th><th>10/18</th><th>11/18</th><th>12/18</th><th>01/19</th><th> </th></tr></thead><tbody><tr><td>On-program</td><td>900</td><td>900</td><td>900</td><td>900</td><td>...</td><td>900</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Completion</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2700</td></tr><tr><td>Balancing</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Employer 16-18 incentive</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Provider 16-18 incentive</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody></table></div></li>
+              </ul>
+            </div>
+            <a class="scenario-link" href="javascript:showImageLink('a-non-das-learner-learner-finishes-late')" title="Copy scenario link to clipboard.">
+              <i class="icon-link"> </i>
+            </a>
+          </li>
+          <li class="scenario">
+            <div class="float-right">
+              <i class="icon-ok passed" title="Successful"> </i>
+            </div>
+            <div class="scenario-heading" id="a-non-das-learner-learner-withdraws-after-planned-end-date">
+              <h2>A non-DAS learner, learner withdraws after planned end date</h2>
+            </div>
+            <div class="steps">
+              <ul>
+                <li class="step">
+                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>agreed price</th><th>learner type</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th> </th></tr></thead><tbody><tr><td>15000</td><td>programme only non-DAS</td><td>01/09/2017</td><td>08/09/2018</td><td>08/12/2018</td><td>withdrawn</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>09/17</th><th>10/17</th><th>11/17</th><th>...</th><th>08/18</th><th>09/18</th><th>10/18</th><th>11/18</th><th>12/18</th><th>01/19</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>1000</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>900</td><td>900</td><td>900</td><td>...</td><td>900</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>100</td><td>100</td><td>100</td><td>...</td><td>100</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>900</td><td>900</td><td>...</td><td>900</td><td>900</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>100</td><td>100</td><td>...</td><td>100</td><td>100</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Levy account debited</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA Levy employer budget</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA non-Levy co-funding budget</td><td>900</td><td>900</td><td>900</td><td>...</td><td>900</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the transaction types for the payments are:<div class="table_container"><table class="datatable"><thead><tr><th>Payment type</th><th>10/17</th><th>11/17</th><th>12/17</th><th>01/18</th><th>...</th><th>09/18</th><th>10/18</th><th>11/18</th><th>12/18</th><th>01/19</th><th> </th></tr></thead><tbody><tr><td>On-program</td><td>900</td><td>900</td><td>900</td><td>900</td><td>...</td><td>900</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Completion</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Balancing</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Employer 16-18 incentive</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Provider 16-18 incentive</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody></table></div></li>
+              </ul>
+            </div>
+            <a class="scenario-link" href="javascript:showImageLink('a-non-das-learner-learner-withdraws-after-planned-end-date')" title="Copy scenario link to clipboard.">
+              <i class="icon-link"> </i>
+            </a>
+          </li>
         </ul>
       </div>
       <div id="footer">
-        <p>Generated on: 7 February 2017 01:14:01</p>
+        <p>Generated on: 7 February 2017 17:30:36</p>
         <p>Produced by Pickles, version 2.8.2.0</p>
       </div>
     </div>
