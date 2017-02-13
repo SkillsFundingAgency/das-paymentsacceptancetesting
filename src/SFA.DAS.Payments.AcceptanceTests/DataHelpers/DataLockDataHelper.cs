@@ -23,7 +23,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                                     "AND pem.AimSeqNumber = pepm.AimSeqNumber " +
                                 "LEFT JOIN dbo.DasCommitments c ON pepm.CommitmentId = c.CommitmentId " +
                                     "AND pepm.VersionId = c.VersionId " +
-                            "WHERE pem.Ukprn = @ukprn";
+                            "WHERE pem.Ukprn = @ukprn And IsSuccess = 1";
                 return connection.Query<DataLockMatch>(query, new { ukprn }).ToArray();
             }
         }
