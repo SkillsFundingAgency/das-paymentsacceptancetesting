@@ -228,7 +228,6 @@ Feature: Provider earnings and payments where a learner changes employers
         Then the data lock status of the ILR in 03/12/2017 is:
             | Type                | 08/17 - 10/17 | 11/17 onwards |
             | Matching commitment | ABC           |               |
-        And a DLOCK_09 error message will be produced
         And the provider earnings and payments break down as follows:
             | Type                       | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 |
             | Provider Earned Total      | 1000  | 1000  | 1000  | 500   | 500   |
