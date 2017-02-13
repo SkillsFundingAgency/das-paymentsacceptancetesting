@@ -66,7 +66,7 @@ Feature: Provider earnings and payments where learner completes on time and is f
             | Provider Earned Total         | 1500  | 1500  | 1500  | ... | 1500  | 4500  | 0     |
             | Provider Earned from SFA      | 1350  | 1400  | 1400  | ... | 1400  | 4200  | 0     |
             | Provider Earned from Employer | 150   | 100   | 100   | ... | 100   | 300   | 0     |
-            | Provider Paid by SFA          | 0     | 1400  | 1400  | ... | 1400  | 1400  | 4200  |
+            | Provider Paid by SFA          | 0     | 1350  | 1400  | ... | 1400  | 1400  | 4200  |
             | Payment due from Employer     | 0     | 150   | 100   | ... | 100   | 100   | 300   |
             | Levy account debited          | 0     | 0     | 500   | ... | 500   | 500   | 1500  |
             | SFA Levy employer budget      | 0     | 500   | 500   | ... | 500   | 1500  | 0     |
@@ -159,7 +159,7 @@ Feature: Provider earnings and payments where learner completes on time and is f
             | Provider Earned from SFA        | 1400  | 1410  | 1410  | ... | 1425  | 4250  | 0     |
             | Provider Earned from Employer 1 | 50    | 40    | 40    | ... | 25    | 100   | 0     |
             | Provider Earned from Employer 2 | 50    | 50    | 50    | ... | 50    | 150   | 0     |
-            | Provider Paid by SFA            | 0     | 1400  | 1410  | ... | 1410  | 1410  | 4250  |
+            | Provider Paid by SFA            | 0     | 1400  | 1410  | ... | 1410  | 1425  | 4250  |
             | Payment due from Employer 1     | 0     | 50    | 40    | ... | 40    | 25    | 100   |
             | Payment due from Employer 2     | 0     | 50    | 50    | ... | 50    | 50    | 150   |
             | employer 1 Levy account debited | 0     | 0     | 100   | ... | 100   | 250   | 500   |
@@ -187,7 +187,7 @@ Feature: Provider earnings and payments where learner completes on time and is f
             | Provider Paid by SFA            | 0     | 500   | 500   | ... | 500   | 500   | 1500  |
             | Payment due from Employer       | 0     | 0     | 0     | ... | 0     | 0     | 0     |
             | employer 1 Levy account debited | 0     | 500   | 500   | ... | 500   | 500   | 1500  |
-            | SFA Levy employer budget        | 0     | 500   | 500   | ... | 500   | 1500  | 0     |
+            | SFA Levy employer budget        | 500   | 500   | 500   | ... | 500   | 1500  | 0     |
             | SFA Levy co-funding budget      | 0     | 0     | 0     | ... | 0     | 0     | 0     |
             | SFA non-Levy co-funding budget  | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         And the earnings and payments break down for provider B is as follows:
@@ -223,7 +223,7 @@ Feature: Provider earnings and payments where learner completes on time and is f
             | Provider Paid by SFA            | 0     | 500   | 500   | ... | 500   | 500   | 1450  |
             | Payment due from Employer 1     | 0     | 0     | 0     | ... | 0     | 0     | 50    |
             | employer 1 Levy account debited | 0     | 500   | 500   | ... | 500   | 500   | 1000  |
-            | SFA Levy employer budget        | 0     | 500   | 500   | ... | 500   | 1000  | 0     |
+            | SFA Levy employer budget        | 500   | 500   | 500   | ... | 500   | 1000  | 0     |
             | SFA Levy co-funding budget      | 0     | 0     | 0     | ... | 0     | 450   | 0     |
             | SFA non-Levy co-funding budget  | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         And the earnings and payments break down for provider B is as follows:
