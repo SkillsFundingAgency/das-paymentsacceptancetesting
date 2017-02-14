@@ -37,7 +37,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
                 {
                     Uln = l.Uln,
                     LearnRefNumber = l.LearnRefNumber,
-                    DateOfBirth = l.DateOfBirth
+                    DateOfBirth = l.DateOfBirth,
+                    EmployerId=l.EmployerId,
+                    EmploymentStatus=l.EmploymentStatus,
+                    EmploymentStatusDate = l.EmploymentStatusDate,
+                    EmploymentStatusMonitoring = l.EmploymentStatusMonitoring == null ? null : 
+                            new EmploymentStatusMonitoring {
+                                    Type = l.EmploymentStatusMonitoring.Type.ToString(),
+                                    Code = l.EmploymentStatusMonitoring.Code
+                    } 
                 };
 
                 var learningDeliveries = new List<LearningDelivery>();
@@ -101,17 +109,18 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
 
             return result;
         }
-        private LearningDeliveryActFamRecord[] TransformFamRecords(Entities.LearningDeliveryFam[] learningDeliveryFams)
+        private LearningDeliveryFamRecord[] TransformFamRecords(Entities.LearningDeliveryFam[] learningDeliveryFams)
         {
             if (learningDeliveryFams == null)
                 return null;
 
-            var result = new List<LearningDeliveryActFamRecord>();
+            var result = new List<LearningDeliveryFamRecord>();
             learningDeliveryFams.ToList().ForEach(
-                x => result.Add(new LearningDeliveryActFamRecord() {
+                x => result.Add(new LearningDeliveryFamRecord() {
                     Code = x.FamCode,
                     From = x.StartDate,
-                    To = x.EndDate
+                    To = x.EndDate,
+                    FamType = x.FamType
                 }));
 
             return result.ToArray();

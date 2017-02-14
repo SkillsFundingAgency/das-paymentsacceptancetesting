@@ -24,5 +24,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.Entities
                 return LearningDeliveries[0];
             }
         }
+        public int? EmploymentStatus { get; set; }
+        public DateTime? EmploymentStatusDate { get; set; }
+        public string EmployerId { get; set; }
+
+        public EmploymentStatusMonitoring EmploymentStatusMonitoring { get; set; }
     }
 }

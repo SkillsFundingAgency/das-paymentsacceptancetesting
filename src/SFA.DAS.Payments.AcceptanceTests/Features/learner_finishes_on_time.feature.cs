@@ -412,7 +412,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
             table255.AddRow(new string[] {
                         "Provider Paid by SFA",
                         "0",
-                        "1400",
+                        "1350",
                         "1400",
                         "...",
                         "1400",
@@ -1055,7 +1055,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "1410",
                         "...",
                         "1410",
-                        "1410",
+                        "1425",
                         "4250"});
             table268.AddRow(new string[] {
                         "Payment due from Employer 1",
@@ -1254,7 +1254,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "1500"});
             table271.AddRow(new string[] {
                         "SFA Levy employer budget",
-                        "0",
+                        "500",
                         "500",
                         "500",
                         "...",
@@ -1521,7 +1521,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "1000"});
             table276.AddRow(new string[] {
                         "SFA Levy employer budget",
-                        "0",
+                        "500",
                         "500",
                         "500",
                         "...",

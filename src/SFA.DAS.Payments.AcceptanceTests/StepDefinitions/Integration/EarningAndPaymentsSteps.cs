@@ -80,7 +80,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                 {
                     FamCode = table.Rows[rowIndex]["contract type"] == "DAS" ? 1 : 2,
                     StartDate = DateTime.Parse(table.Rows[rowIndex]["date from"]),
-                    EndDate = DateTime.Parse(table.Rows[rowIndex]["date to"])
+                    EndDate = DateTime.Parse(table.Rows[rowIndex]["date to"]),
+                    FamType = "ACT"
                 };
 
                 StepDefinitionsContext.ReferenceDataContext.AddLearningDeliveryFam(famCode);
@@ -153,7 +154,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                                                     new TransactionType[] {
                                                             TransactionType.First16To18ProviderIncentive,
                                                             TransactionType.Second16To18ProviderIncentive},
-                                                    providerIncentiveRow);
+                                                    providerIncentiveRow,null,FundingSource.FullyFundedSfa);
 
             }
         }
@@ -399,7 +400,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                                                         TransactionType paymentType, 
                                                         TableRow paymentsRow)
         {
-            VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, new TransactionType[] { paymentType }, paymentsRow);
+            VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, 
+                                        new TransactionType[] { paymentType }, paymentsRow,null, 
+                                        StepDefinitionsContext.DasScenario
+                                        ? (FundingSource?)null
+                                        : FundingSource.CoInvestedSfa);
         }
 
         private void VerifyEmployerPaymentsDueByTransactionType(long ukprn,
@@ -425,7 +430,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                                                             TransactionType.First16To18EmployerIncentive,
                                                             TransactionType.Second16To18EmployerIncentive  }, 
                                                             employerIncentiveRow,
-                                                            accountId);
+                                                            accountId,FundingSource.FullyFundedSfa);
                    
                 }
             }
@@ -437,7 +442,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                                                         int colIndex, 
                                                         TransactionType[] paymentTypes,
                                                         TableRow paymentsRow,
-                                                        long? accountId = null )
+                                                        long? accountId = null,
+                                                        FundingSource? fundingSource = null)
         {
 
             if (paymentsRow == null)
@@ -455,9 +461,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                 null,
                 paymentsDueDate.Year,
                 paymentsDueDate.Month,
-                StepDefinitionsContext.DasScenario
-                    ? (FundingSource?)null
-                    : FundingSource.CoInvestedSfa,
+                fundingSource,
                 StepDefinitionsContext.DasScenario
                     ? ContractType.ContractWithEmployer
                     : ContractType.ContractWithSfa,
