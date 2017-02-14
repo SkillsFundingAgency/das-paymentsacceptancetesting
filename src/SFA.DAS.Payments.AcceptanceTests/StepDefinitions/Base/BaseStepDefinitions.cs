@@ -125,10 +125,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                     StartDate = learner.LearningDelivery.StartDate,
                     EndDate = learner.LearningDelivery.PlannedEndDate,
                     AgreedCost = learner.LearningDelivery.PriceEpisodes[0].TotalPrice,
-                    StandardCode = commitment.StandardCode.HasValue ? commitment.StandardCode.Value : IlrBuilder.Defaults.StandardCode,
-                    FrameworkCode = IlrBuilder.Defaults.FrameworkCode,
-                    ProgrammeType = IlrBuilder.Defaults.ProgrammeType,
-                    PathwayCode = IlrBuilder.Defaults.PathwayCode,
+                    StandardCode = commitment.StandardCode,
+                    FrameworkCode = commitment.FrameworkCode,
+                    ProgrammeType = commitment.ProgrammeType,
+                    PathwayCode = commitment.PathwayCode,
                     Priority = commitmentPriority,
                     VersionId = commitment.VersionId,
                     PaymentStatus = (int)commitment.Status,
@@ -172,10 +172,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                         StartDate = commitmentStartDate,
                         EndDate = commitment.ActualEndDate ?? commitment.EndDate ?? learner.LearningDelivery.PlannedEndDate,
                         AgreedCost = commitment.AgreedPrice ?? priceEpisode.TotalPrice,
-                        StandardCode = commitment.StandardCode.HasValue ? commitment.StandardCode.Value : IlrBuilder.Defaults.StandardCode,
-                        FrameworkCode = IlrBuilder.Defaults.FrameworkCode,
-                        ProgrammeType = IlrBuilder.Defaults.ProgrammeType,
-                        PathwayCode = IlrBuilder.Defaults.PathwayCode,
+                        StandardCode = commitment.StandardCode,
+                        FrameworkCode = commitment.FrameworkCode,
+                        ProgrammeType = commitment.ProgrammeType,
+                        PathwayCode = commitment.PathwayCode,
                         Priority = commitment.Priority,
                         VersionId = commitment.VersionId,
                         PaymentStatus = commitment.StopPeriodCensusDate.HasValue
@@ -502,7 +502,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                     learner.LearnRefNumber =$"{StepDefinitionsContext.GetProvider(provider).Ukprn}-{rowIndex+1}";
                     learner.DateOfBirth = GetDateOfBirth(learningDelivery.LearnerType, learningDelivery.StartDate);
                     learner.EmploymentStatus = table.Rows[rowIndex].ContainsKey("Employment Status") && 
-                                                table.Rows[rowIndex]["Employment Status"] == "Employed" ? 10 : (int?)null ;
+                                                table.Rows[rowIndex]["Employment Status"] == "In paid employment" ? 10 : (int?)null ;
                     learner.EmploymentStatusDate = table.Rows[rowIndex].ContainsKey("Employment Status Applies") ?
                                                DateTime.Parse(table.Rows[rowIndex]["Employment Status Applies"]) : (DateTime?)null;
                     learner.EmployerId = table.Rows[rowIndex].ContainsKey("Employer Id") ?
