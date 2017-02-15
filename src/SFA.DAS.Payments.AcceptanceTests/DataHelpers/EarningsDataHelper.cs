@@ -96,9 +96,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                     var periodAmount = periods[period];
 
                     connection.Execute("INSERT INTO [Rulebase].[AEC_ApprenticeshipPriceEpisode_Period] " +
-                                       "(Ukprn,LearnRefNumber,PriceEpisodeIdentifier,Period,PriceEpisodeOnProgPayment,PriceEpisodeSFAContribPct) " +
+                                       "(Ukprn,LearnRefNumber,PriceEpisodeIdentifier,Period,PriceEpisodeOnProgPayment,PriceEpisodeSFAContribPct,PriceEpisodeLevyNonPayInd) " +
                                        "VALUES " +
-                                       "(@ukprn,@learnRefNumber,@PriceEpisodeIdentifier,@Period, @periodAmount, 0.9)",
+                                       "(@ukprn,@learnRefNumber,@PriceEpisodeIdentifier,@Period, @periodAmount, 0.9,0)",
                         new { ukprn, learnRefNumber, priceEpisodeIdentifier, period, periodAmount });
                 }
 
@@ -205,7 +205,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                                        "ProgrammeType," +
                                        "FrameworkCode," +
                                        "PathwayCode," +
-                                       "SfaContributionPercentage" +
+                                       "SfaContributionPercentage," +
+                                       "UseLevyBalance" +
                                    ") VALUES (" +
                                        "@commitmentId," +
                                        "@commitmentVersionId," +
@@ -226,7 +227,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                                        "@programmeType," +
                                        "@frameworkCode," +
                                        "@pathwayCode," +
-                                       "0.9" +
+                                       "0.9," +
+                                        "1" +
                                    ")",
                     new
                     {
