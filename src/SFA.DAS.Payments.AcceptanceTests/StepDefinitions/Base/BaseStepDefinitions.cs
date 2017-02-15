@@ -321,6 +321,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                     Uln = l.Uln,
                     LearnRefNumber = l.LearnRefNumber,
                     DateOfBirth = l.DateOfBirth,
+                    EmployerId = l.EmployerId,
+                    EmploymentStatus = l.EmploymentStatus,
+                    EmploymentStatusDate = l.EmploymentStatusDate,
+                    EmploymentStatusMonitoring = l.EmploymentStatusMonitoring 
+
                 };
 
                 foreach (var ld in l.LearningDeliveries)
@@ -427,6 +432,18 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                     ? table.Rows[rowIndex]["Provider"]
                     : "provider";
 
+                if(table.Header.Contains("LearnDelFAM") && !string.IsNullOrEmpty(table.Rows[rowIndex]["LearnDelFAM"]))
+                {
+                    var famValue = table.Rows[rowIndex]["LearnDelFAM"];
+                    var famCode = new LearningDeliveryFam
+                    {
+                        FamType = famValue.Substring(0, 3),
+                        FamCode =int.Parse(famValue.Substring(3))
+                    };
+
+                    StepDefinitionsContext.ReferenceDataContext.AddLearningDeliveryFam(famCode);
+                }
+
                 var learningDelivery = new LearningDelivery
                 {
                     LearningDeliveryFams = StepDefinitionsContext.ReferenceDataContext.LearningDeliveryFams,
@@ -483,16 +500,47 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                     }
 
                     learner.LearnRefNumber =$"{StepDefinitionsContext.GetProvider(provider).Ukprn}-{rowIndex+1}";
-
-                    learner.DateOfBirth = learningDelivery.LearnerType == LearnerType.ProgrammeOnlyDas16To18
-                        ? learningDelivery.StartDate.AddYears(-17)
-                        : new DateTime(1985, 10, 10);
+                    learner.DateOfBirth = GetDateOfBirth(learningDelivery.LearnerType, learningDelivery.StartDate);
+                    learner.EmploymentStatus = table.Rows[rowIndex].ContainsKey("Employment Status") && 
+                                                table.Rows[rowIndex]["Employment Status"] == "Employed" ? 10 : (int?)null ;
+                    learner.EmploymentStatusDate = table.Rows[rowIndex].ContainsKey("Employment Status Applies") ?
+                                               DateTime.Parse(table.Rows[rowIndex]["Employment Status Applies"]) : (DateTime?)null;
+                    learner.EmployerId = table.Rows[rowIndex].ContainsKey("Employer Id") ?
+                                              table.Rows[rowIndex]["Employer Id"] : string.Empty;
+                    if (table.Rows[rowIndex].ContainsKey("Small Employer") && !string.IsNullOrEmpty(table.Rows[rowIndex]["Small Employer"]))
+                    {
+                        var employerFlag = table.Rows[rowIndex]["Small Employer"];
+                        learner.EmploymentStatusMonitoring = new Entities.EmploymentStatusMonitoring
+                        {
+                            Type = GetEmploymentStatusMonitringType(employerFlag.Substring(0, 3)),
+                            Code = int.Parse(employerFlag.Substring(3))
+                        };
+                    }
 
                     StepDefinitionsContext.AddProviderLearner(provider, learner);
                 }
 
                 learner.LearningDeliveries.Add(learningDelivery);
             }
+        }
+
+        private DateTime GetDateOfBirth(LearnerType learnerType, DateTime startDate)
+        {
+            return learnerType == LearnerType.ProgrammeOnlyDas16To18 || learnerType == LearnerType.ProgrammeOnlyNonDas16To18
+                       ? startDate.AddYears(-17)
+                       : new DateTime(1985, 10, 10);
+
+        }
+
+        private EmploymentStatusMonitoringType GetEmploymentStatusMonitringType(string value)
+        {
+            EmploymentStatusMonitoringType type ;
+
+            if (Enum.TryParse(value, true, out type))
+            {
+                return type;
+            }
+            throw new Exception($"Failed to parse the employment status monitoring type {value}");
         }
 
         private long GetUln(string learnerName, string inputUln)
@@ -646,6 +694,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                     break;
                 case "16-18programmeonlydas":
                     result = LearnerType.ProgrammeOnlyDas16To18;
+                    break;
+                case "16-18programmeonlynon-das":
+                    result = LearnerType.ProgrammeOnlyNonDas16To18;
+                    break;
+                case "19-24programmeonlynon-das":
+                    result = LearnerType.ProgrammeOnlyNonDas19To24;
+                    break;
+                case "19-24programmeonlydas":
+                    result = LearnerType.ProgrammeOnlyDas19To24;
                     break;
 
             }

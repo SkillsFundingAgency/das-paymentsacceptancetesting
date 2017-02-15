@@ -94,6 +94,7 @@
     <Compile Include="Entities\Commitment.cs" />
     <Compile Include="Entities\DataLockMatch.cs" />
     <Compile Include="Entities\Employer.cs" />
+    <Compile Include="Entities\EmploymentStatusMonitoring.cs" />
     <Compile Include="Entities\Learner.cs" />
     <Compile Include="Entities\LearningDelivery.cs" />
     <Compile Include="DataHelpers\Entities\PaymentEntity.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Enums\CompletionStatus.cs" />
     <Compile Include="Contexts\StepDefinitionsContext.cs" />
     <Compile Include="Enums\ContractType.cs" />
+    <Compile Include="Enums\EmploymentStatusMonitoringType.cs" />
     <Compile Include="Enums\FundingSource.cs" />
     <Compile Include="Enums\LearnerType.cs" />
     <Compile Include="Contexts\ReferenceDataContext.cs" />
@@ -135,6 +137,7 @@
     <Compile Include="Features\learner_finishes_late.feature.cs" />
     <Compile Include="Features\learner_finishes_on_time.feature.cs" />
     <Compile Include="Features\payments_calc.feature.cs" />
+    <Compile Include="Features\small_employers.feature.cs" />
     <Compile Include="Features\two_learners_paid_in_priority.feature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -192,6 +195,10 @@
     </None>
     <None Include="..\..\features\payments_calc.feature">
       <Link>Features\payments_calc.feature</Link>
+    </None>
+    <None Include="..\..\features\small_employers.feature">
+      <Link>Features\small_employers.feature</Link>
+      <LastGenOutput>small_employers.feature.cs</LastGenOutput>
     </None>
     <None Include="..\..\features\two_learners_paid_in_priority.feature">
       <Link>Features\two_learners_paid_in_priority.feature</Link>
