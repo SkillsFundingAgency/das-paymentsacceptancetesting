@@ -22,7 +22,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
         {
             get
             {
-                return Providers.Any(p => p.Learners.Any(l => l.LearningDeliveries.Any(ld => ld.LearnerType == LearnerType.ProgrammeOnlyDas || ld.LearnerType == LearnerType.ProgrammeOnlyDas16To18)));
+                return Providers.Any(
+                    p => p.Learners.Any(
+                        l => l.LearningDeliveries.Any(
+                            ld => ld.LearnerType == LearnerType.ProgrammeOnlyDas || 
+                                ld.LearnerType == LearnerType.ProgrammeOnlyDas16To18 ||
+                                ld.LearnerType == LearnerType.ProgrammeOnlyDas19To24)));
             }
         }
 

@@ -100,6 +100,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
             {
                 case LearnerType.ProgrammeOnlyDas:
                 case LearnerType.ProgrammeOnlyDas16To18:
+                case LearnerType.ProgrammeOnlyDas19To24:
                     result = 1;
                     break;
                 default:
