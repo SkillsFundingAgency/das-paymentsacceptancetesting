@@ -491,7 +491,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                                                        periodDate.Year,
                                                        periodDate.Month,
                                                        FundingSource.FullyFundedSfa,
-                                                       ContractType.ContractWithEmployer,
+                                                       StepDefinitionsContext.DasScenario ? 
+                                                        ContractType.ContractWithEmployer : 
+                                                        ContractType.ContractWithSfa,
                                                        EnvironmentVariables)
                                    ?? new PaymentEntity[0];
 
