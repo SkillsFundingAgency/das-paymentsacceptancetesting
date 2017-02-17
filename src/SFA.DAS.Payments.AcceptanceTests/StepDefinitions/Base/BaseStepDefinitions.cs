@@ -321,10 +321,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                     Uln = l.Uln,
                     LearnRefNumber = l.LearnRefNumber,
                     DateOfBirth = l.DateOfBirth,
-                    EmployerId = l.EmployerId,
-                    EmploymentStatus = l.EmploymentStatus,
-                    EmploymentStatusDate = l.EmploymentStatusDate,
-                    EmploymentStatusMonitoring = l.EmploymentStatusMonitoring 
+                    EmploymentStatuses = l.EmploymentStatuses
 
                 };
 
@@ -426,6 +423,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 
         protected void SetupContexLearners(Table table)
         {
+            if (table.Header.Contains("Employment Status") && !StepDefinitionsContext.ReferenceDataContext.EmploymentStatuses.Any())
+            {
+                PopulateEmploymentStatuses(table);
+            }
+
             for (var rowIndex = 0; rowIndex < table.RowCount; rowIndex++)
             {
                 var provider = table.ContainsColumn("Provider")
@@ -501,22 +503,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 
                     learner.LearnRefNumber =$"{StepDefinitionsContext.GetProvider(provider).Ukprn}-{rowIndex+1}";
                     learner.DateOfBirth = GetDateOfBirth(learningDelivery.LearnerType, learningDelivery.StartDate);
-                    learner.EmploymentStatus = table.Rows[rowIndex].ContainsKey("Employment Status") && 
-                                                table.Rows[rowIndex]["Employment Status"] == "In paid employment" ? 10 : (int?)null ;
-                    learner.EmploymentStatusDate = table.Rows[rowIndex].ContainsKey("Employment Status Applies") ?
-                                               DateTime.Parse(table.Rows[rowIndex]["Employment Status Applies"]) : (DateTime?)null;
-                    learner.EmployerId = table.Rows[rowIndex].ContainsKey("Employer Id") ?
-                                              table.Rows[rowIndex]["Employer Id"] : string.Empty;
-                    if (table.Rows[rowIndex].ContainsKey("Small Employer") && !string.IsNullOrEmpty(table.Rows[rowIndex]["Small Employer"]))
-                    {
-                        var employerFlag = table.Rows[rowIndex]["Small Employer"];
-                        learner.EmploymentStatusMonitoring = new Entities.EmploymentStatusMonitoring
-                        {
-                            Type = GetEmploymentStatusMonitringType(employerFlag.Substring(0, 3)),
-                            Code = int.Parse(employerFlag.Substring(3))
-                        };
-                    }
-
+                    
+                    learner.EmploymentStatuses = StepDefinitionsContext.ReferenceDataContext.EmploymentStatuses;
+                    
                     StepDefinitionsContext.AddProviderLearner(provider, learner);
                 }
 
@@ -530,6 +519,36 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                        ? startDate.AddYears(-17)
                        : new DateTime(1985, 10, 10);
 
+        }
+
+        protected void PopulateEmploymentStatuses(Table table)
+        {
+            for (var rowIndex = 0; rowIndex < table.RowCount; rowIndex++)
+            {
+                AddEmploymentStatus(table.Rows[rowIndex]);
+            }
+          
+        }
+
+        private void AddEmploymentStatus(TableRow row)
+        {
+           
+            var status = new Entities.EmploymentStatus();
+
+            status.StatusCode = row.ContainsKey("Employment Status") && row["Employment Status"] == "In paid employment" ? 10 : 11;
+            status.DateFrom = row.ContainsKey("Employment Status Applies") ? DateTime.Parse(row["Employment Status Applies"]) : DateTime.MinValue;
+            status.EmployerId = row.ContainsKey("Employer Id") ? row["Employer Id"] : string.Empty;
+
+            if (row.ContainsKey("Small Employer") && !string.IsNullOrEmpty(row["Small Employer"]))
+            {
+                var employerFlag = row["Small Employer"];
+                status.EmploymentStatusMonitoring = new Entities.EmploymentStatusMonitoring
+                {
+                    Type = GetEmploymentStatusMonitringType(employerFlag.Substring(0, 3)),
+                    Code = int.Parse(employerFlag.Substring(3))
+                };
+            }
+            StepDefinitionsContext.ReferenceDataContext.AddEmploymentStatus(status);
         }
 
         private EmploymentStatusMonitoringType GetEmploymentStatusMonitringType(string value)

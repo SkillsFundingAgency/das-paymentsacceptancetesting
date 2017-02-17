@@ -94,6 +94,7 @@
     <Compile Include="Entities\Commitment.cs" />
     <Compile Include="Entities\DataLockMatch.cs" />
     <Compile Include="Entities\Employer.cs" />
+    <Compile Include="Entities\EmploymentStatus.cs" />
     <Compile Include="Entities\EmploymentStatusMonitoring.cs" />
     <Compile Include="Entities\Learner.cs" />
     <Compile Include="Entities\LearningDelivery.cs" />

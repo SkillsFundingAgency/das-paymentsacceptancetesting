@@ -61,32 +61,47 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             
         }
 
-        [When(@"an ILR file is submitted with the following data:"), Scope(Scenario = "Apprentice changes from a non-DAS to DAS employer, levy is available for the DAS employer")]
+        [When(@"an ILR file is submitted with the following data:"), 
+            Scope(Scenario = "Apprentice changes from a non-DAS to DAS employer, levy is available for the DAS employer")]
         public void WhenAnIlrFileIsSubmittedWithTheFollowingDataNoSubmission(Table table)
         {
             ScenarioContext.Current.Add("learners", table);
         }
 
+        [When(@"an ILR file is submitted on (.*) with the following data:"),
+            Scope(Tag = "LearnerChangesEmployerGapInCommitments")]
+        public void WhenAnIlrFileIsSubmittedWithTheFollowingDataNoSubmissionGapInCommitments(Table table,DateTime submissionDateTime)
+        {
+            ScenarioContext.Current.Add("learners", table);
+        }
+
+        [When(@"the Contract type in the ILR is:"), Scope(Tag = "LearnerChangesEmployerGapInCommitments")]
+        public void WhenTheContractTypeInTheIlrIsNoSubmission(Table table)
+        {
+            BuildContractTypes(table);
+        }
+
+        [When(@"the employment status in the ILR is:")]
+        public void WhenTheEmploymentStatusInTheILRIs(Table table)
+        {
+            Table learnerTable = null;
+
+            PopulateEmploymentStatuses(table);
+            
+            ScenarioContext.Current.TryGetValue("learners", out learnerTable);
+            
+            ProcessIlrFileSubmissions(learnerTable);
+        }
+
+
         [When(@"the Contract type in the ILR is:")]
         public void WhenTheContractTypeInTheIlrIs(Table table)
         {
-            Table learnerTable;
+            Table learnerTable = null ;
 
-            ScenarioContext.Current.TryGetValue("learners",out learnerTable);
-
-            for (var rowIndex = 0; rowIndex < table.RowCount; rowIndex++)
-            {
-                var famCode = new LearningDeliveryFam
-                {
-                    FamCode = table.Rows[rowIndex]["contract type"] == "DAS" ? 1 : 2,
-                    StartDate = DateTime.Parse(table.Rows[rowIndex]["date from"]),
-                    EndDate = DateTime.Parse(table.Rows[rowIndex]["date to"]),
-                    FamType = "ACT"
-                };
-
-                StepDefinitionsContext.ReferenceDataContext.AddLearningDeliveryFam(famCode);
-            }
-
+            BuildContractTypes(table);
+            
+            ScenarioContext.Current.TryGetValue("learners", out learnerTable);
             ProcessIlrFileSubmissions(learnerTable);
         }
 
@@ -121,6 +136,23 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             VerifyTransactionsForThePayments(table, provider.Ukprn);
         }
 
+        private void BuildContractTypes(Table table)
+        {
+            
+
+            for (var rowIndex = 0; rowIndex < table.RowCount; rowIndex++)
+            {
+                var famCode = new LearningDeliveryFam
+                {
+                    FamCode = table.Rows[rowIndex]["contract type"] == "DAS" ? 1 : 2,
+                    StartDate = DateTime.Parse(table.Rows[rowIndex]["date from"]),
+                    EndDate = DateTime.Parse(table.Rows[rowIndex]["date to"]),
+                    FamType = "ACT"
+                };
+
+                StepDefinitionsContext.ReferenceDataContext.AddLearningDeliveryFam(famCode);
+            }
+        }
 
         public void VerifyTransactionsForThePayments(Table table,long ukprn)
         {

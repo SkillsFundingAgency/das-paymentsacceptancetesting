@@ -568,3 +568,46 @@ Scenario: 1 learner aged 16-18, levy available, changes employer, earns incentiv
 			| Employer ABC 16-18 incentive | 0     | 0     | 0     | 500   | 0     |
 			| Employer XYZ 16-18 incentive | 0     | 0     | 0     | 0     | 0     |
 			| Provider 16-18 incentive     | 0     | 0     | 0     | 500   | 0     |
+
+
+@LearnerChangesEmployerGapInCommitments
+Scenario: Provider earnings and payments where learner changes employer and there is a gap between commitments - provider receives payment during the gap as they amend the ACT code and employment status code correctly.
+		Given The learner is programme only DAS
+        And the apprenticeship funding band maximum is 17000
+		And the ABC has a levy balance > agreed price for all months
+        And the XYZ has a levy balance > agreed price for all months
+        And the learner changes employers
+            | Employer    | Type    | ILR employment start date |
+            | ABC         | DAS     | 03/08/2017                |
+            | No employer | Non-DAS | 03/10/2017                |
+            | XYZ         | DAS     | 03/11/2017                |
+        And the following commitments exist:
+			| commitment Id | version Id | Employer | ULN       | price effective date | planned end date | agreed price | status    | effective from | effective to |
+			| 1             | 1          | ABC      | learner a | 01/08/2017           | 04/08/2018       | 15000        | Active    | 01/08/2017     | 02/10/2017   |
+			| 1             | 2          | ABC      | learner a | 01/08/2017           | 04/08/2018       | 15000        | Withdrawn | 03/10/2017     |              |
+			| 2             | 1          | XYZ      | learner a | 01/11/2017           | 04/08/2018       | 5625         | Active    | 01/11/2017     |              |
+        When an ILR file is submitted on 03/12/2017 with the following data:
+           | ULN       | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date | Residual training price | Residual training price effective date | Residual assessment price | Residual assessment price effective date |
+           | learner a | 03/08/2017 | 04/08/2018       |                 | continuing        | 12000                | 03/08/2017                          | 3000                   | 03/08/2017                            | 4500                    | 03/11/2017                             | 1125                      | 03/11/2017                               |
+        And the Contract type in the ILR is:
+            | contract type | date from  | date to    |
+            | DAS           | 03/08/2017 | 02/10/2017 |
+            | Non DAS       | 03/10/2017 | 02/11/2017 |
+            | DAS           | 03/11/2017 | 04/08/2018 |
+        And the employment status in the ILR is:
+            | Employment Status      | Employment Status Applies |
+            | in paid employment     | 03/08/2017                |
+            | not in paid employment | 03/10/2017                |
+            | in paid employment     | 03/11/2017                |           
+     
+        Then the data lock status will be as follows:
+			| type                | 08/17 - 09/17 | 10/17 | 11/17 onwards |
+			| matching commitment | 1             | N/A   | 2             |
+        And the provider earnings and payments break down as follows:
+            | Type                       | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 |
+            | Provider Earned Total      | 1000  | 1000  | 1000  | 500   | 500   |
+            | Provider Paid by SFA       | 0     | 1000  | 1000  | 1000  | 500   |
+            | ABC Levy account debited   | 0     | 1000  | 1000  | 0     | 0     |
+            | XYZ Levy account debited   | 0     | 0     | 0     | 0     | 500   |
+            | SFA Levy employer budget   | 1000  | 1000  | 0     | 500   | 500   |
+            | SFA Levy co-funding budget | 0     | 0     | 1000  | 0     | 0     |

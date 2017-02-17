@@ -38,14 +38,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
                     Uln = l.Uln,
                     LearnRefNumber = l.LearnRefNumber,
                     DateOfBirth = l.DateOfBirth,
-                    EmployerId=l.EmployerId,
-                    EmploymentStatus=l.EmploymentStatus,
-                    EmploymentStatusDate = l.EmploymentStatusDate,
-                    EmploymentStatusMonitoring = l.EmploymentStatusMonitoring == null ? null : 
-                            new EmploymentStatusMonitoring {
-                                    Type = l.EmploymentStatusMonitoring.Type.ToString(),
-                                    Code = l.EmploymentStatusMonitoring.Code
-                    } 
+                    EmploymentStatuses = TransformEmploymentStatuses(l.EmploymentStatuses)
                 };
 
                 var learningDeliveries = new List<LearningDelivery>();
@@ -80,6 +73,30 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
             return this;
         }
 
+        private EmploymentStatus[] TransformEmploymentStatuses(List<Entities.EmploymentStatus> employmentStatuses)
+        {
+            if (employmentStatuses == null || employmentStatuses.Count == 0)
+                return null;
+
+            var statues = new List<EmploymentStatus>();
+
+            foreach (var empStatus in employmentStatuses)
+            {
+                statues.Add( new EmploymentStatus
+                {
+                    EmployerId = empStatus.EmployerId,
+                    StatusCode = empStatus.StatusCode,
+                    EmploymentStatusDate = empStatus.DateFrom,
+                    EmploymentStatusMonitoring = empStatus.EmploymentStatusMonitoring == null ? null :
+                            new EmploymentStatusMonitoring
+                            {
+                                Type = empStatus.EmploymentStatusMonitoring.Type.ToString(),
+                                Code = empStatus.EmploymentStatusMonitoring.Code
+                            }
+                });
+            }
+            return statues.ToArray();
+        }
         private CompletionStatus TransformCompletionStatus(Enums.CompletionStatus status)
         {
             if (status == Enums.CompletionStatus.Completed)
