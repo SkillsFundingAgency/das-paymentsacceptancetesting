@@ -40,7 +40,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
                 VersionId = 1,
                 Learner = string.Empty,
                 Priority = 1,
-                Provider = "provider"
+                Provider = "provider",
+                StandardCode=IlrBuilder.Defaults.StandardCode
             };
 
             Commitments = new[] { commitment };

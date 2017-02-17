@@ -25,7 +25,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Entities
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public DateTime? ActualEndDate { get; set; }
-        public long? StandardCode { get; set; }
+        public long StandardCode { get; set; }
 
         public DateTime? StopPeriodCensusDate
         {
@@ -49,5 +49,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Entities
 
         public DateTime? EffectiveFrom { get; set; }
         public DateTime? EffectiveTo { get; set; }
+        public int FrameworkCode { get; set; }
+        public int ProgrammeType { get; set; }
+        public int PathwayCode { get; set; }
     }
 }
