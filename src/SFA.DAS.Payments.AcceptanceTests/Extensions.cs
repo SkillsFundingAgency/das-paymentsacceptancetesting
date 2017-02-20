@@ -121,5 +121,16 @@ namespace SFA.DAS.Payments.AcceptanceTests
             }
             return result;
         }
+
+        internal static bool Contains(this TableRow row,string columnName)
+        {
+            return string.IsNullOrEmpty(row.Value<string>(columnName)) ? false : true;
+        }
+        internal static T Value<T>(this TableRow row, string columnName)
+        {
+            var data = row.Where(x => x.Key.Equals(columnName, StringComparison.InvariantCultureIgnoreCase));
+            return data.Any() ? (T)Convert.ChangeType(data.FirstOrDefault().Value, typeof(T)) : default(T);
+        }
+       
     }
 }

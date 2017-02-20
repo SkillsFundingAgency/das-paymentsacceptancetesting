@@ -535,14 +535,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
            
             var status = new Entities.EmploymentStatus();
 
-            status.StatusCode = row.ContainsKey("Employment Status") && 
-                        row["Employment Status"].Equals("In paid employment",StringComparison.InvariantCultureIgnoreCase) ? EmploymentType.InPaidEmpoyment : EmploymentType.NotInPaidEmpoyment;
-            status.DateFrom = row.ContainsKey("Employment Status Applies") ? DateTime.Parse(row["Employment Status Applies"]) : DateTime.MinValue;
+            status.StatusCode = row.Contains("Employment Status") && 
+                        row.Value<string>("Employment Status").Equals("In paid employment",StringComparison.InvariantCultureIgnoreCase) ? EmploymentType.InPaidEmpoyment : EmploymentType.NotInPaidEmpoyment;
+            status.DateFrom = row.Value<DateTime>("Employment Status Applies") ;
             status.EmployerId = GetEmployerId(row);
 
-            if (row.ContainsKey("Small Employer") && !string.IsNullOrEmpty(row["Small Employer"]))
+            if (row.Contains("Small Employer") )
             {
-                var employerFlag = row["Small Employer"];
+                var employerFlag = row.Value<string>("Small Employer");
                 status.EmploymentStatusMonitoring = new Entities.EmploymentStatusMonitoring
                 {
                     Type = GetEmploymentStatusMonitringType(employerFlag.Substring(0, 3)),
@@ -554,13 +554,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 
         private long GetEmployerId(TableRow row)
         {
-            if (row.ContainsKey("Employer Id"))
+            if (row.Contains("Employer Id"))
             {
-                return long.Parse(row["Employer Id"]);
+                return row.Value<long>("Employer Id");
             }
-            else if (row.ContainsKey("Employer"))
+            else if (row.Contains("Employer"))
             {
-                var empName = row["Employer"];
+                var empName = row.Value<string>("Employer");
                 var employer = StepDefinitionsContext.ReferenceDataContext.Employers.Where(
                                 x => x.Name.Equals(empName, StringComparison.InvariantCultureIgnoreCase));
                 return employer.Any() ? employer.First().AccountId : 0;
