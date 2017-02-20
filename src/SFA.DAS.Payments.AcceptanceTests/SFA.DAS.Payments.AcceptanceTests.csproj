@@ -109,6 +109,7 @@
     <Compile Include="Contexts\StepDefinitionsContext.cs" />
     <Compile Include="Enums\ContractType.cs" />
     <Compile Include="Enums\EmploymentStatusMonitoringType.cs" />
+    <Compile Include="Enums\EmploymentType.cs" />
     <Compile Include="Enums\FundingSource.cs" />
     <Compile Include="Enums\LearnerType.cs" />
     <Compile Include="Contexts\ReferenceDataContext.cs" />

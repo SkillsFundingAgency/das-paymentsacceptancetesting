@@ -68,14 +68,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             ScenarioContext.Current.Add("learners", table);
         }
 
-        [When(@"an ILR file is submitted on (.*) with the following data:"),
-            Scope(Tag = "LearnerChangesEmployerGapInCommitments")]
-        public void WhenAnIlrFileIsSubmittedWithTheFollowingDataNoSubmissionGapInCommitments(Table table,DateTime submissionDateTime)
+        [When(@"an ILR file is submitted with the following data:"), Scope(Tag = "LearnerChangesEmployerGapInCommitments")]
+        public void WhenAnIlrFileIsSubmittedWithTheFollowingDataNoSubmissionGapInCommitments(Table table)
         {
             ScenarioContext.Current.Add("learners", table);
         }
 
-        [When(@"the Contract type in the ILR is:"), Scope(Tag = "LearnerChangesEmployerGapInCommitments")]
+        [When(@"the Contract type in the ILR is:"), Scope(Tag = @"LearnerChangesEmployerGapInCommitments")]
         public void WhenTheContractTypeInTheIlrIsNoSubmission(Table table)
         {
             BuildContractTypes(table);
@@ -84,14 +83,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
         [When(@"the employment status in the ILR is:")]
         public void WhenTheEmploymentStatusInTheILRIs(Table table)
         {
-            Table learnerTable = null;
+             Table learnerTable = null;
 
             PopulateEmploymentStatuses(table);
             
             ScenarioContext.Current.TryGetValue("learners", out learnerTable);
             
             ProcessIlrFileSubmissions(learnerTable);
-        }
+        }   
 
 
         [When(@"the Contract type in the ILR is:")]

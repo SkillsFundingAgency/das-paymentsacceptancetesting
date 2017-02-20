@@ -535,9 +535,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
            
             var status = new Entities.EmploymentStatus();
 
-            status.StatusCode = row.ContainsKey("Employment Status") && row["Employment Status"] == "In paid employment" ? 10 : 11;
+            status.StatusCode = row.ContainsKey("Employment Status") && 
+                        row["Employment Status"].Equals("In paid employment",StringComparison.InvariantCultureIgnoreCase) ? EmploymentType.InPaidEmpoyment : EmploymentType.NotInPaidEmpoyment;
             status.DateFrom = row.ContainsKey("Employment Status Applies") ? DateTime.Parse(row["Employment Status Applies"]) : DateTime.MinValue;
-            status.EmployerId = row.ContainsKey("Employer Id") ? row["Employer Id"] : string.Empty;
+            status.EmployerId = GetEmployerId(row);
 
             if (row.ContainsKey("Small Employer") && !string.IsNullOrEmpty(row["Small Employer"]))
             {
@@ -549,6 +550,26 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                 };
             }
             StepDefinitionsContext.ReferenceDataContext.AddEmploymentStatus(status);
+        }
+
+        private long GetEmployerId(TableRow row)
+        {
+            if (row.ContainsKey("Employer Id"))
+            {
+                return long.Parse(row["Employer Id"]);
+            }
+            else if (row.ContainsKey("Employer"))
+            {
+                var empName = row["Employer"];
+                var employer = StepDefinitionsContext.ReferenceDataContext.Employers.Where(
+                                x => x.Name.Equals(empName, StringComparison.InvariantCultureIgnoreCase));
+                return employer.Any() ? employer.First().AccountId : 0;
+            }
+            else
+            {
+                return 0;
+            }     
+            
         }
 
         private EmploymentStatusMonitoringType GetEmploymentStatusMonitringType(string value)

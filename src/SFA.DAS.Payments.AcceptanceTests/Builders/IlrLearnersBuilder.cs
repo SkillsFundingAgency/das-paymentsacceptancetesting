@@ -85,8 +85,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
                 statues.Add( new EmploymentStatus
                 {
                     EmployerId = empStatus.EmployerId,
-                    StatusCode = empStatus.StatusCode,
-                    EmploymentStatusDate = empStatus.DateFrom,
+                    StatusCode = (int) empStatus.StatusCode,
+                    DateFrom = empStatus.DateFrom,
                     EmploymentStatusMonitoring = empStatus.EmploymentStatusMonitoring == null ? null :
                             new EmploymentStatusMonitoring
                             {
