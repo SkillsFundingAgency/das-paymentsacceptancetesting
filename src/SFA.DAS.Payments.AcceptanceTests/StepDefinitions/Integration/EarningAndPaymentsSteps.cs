@@ -199,7 +199,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                 SetupPeriodReferenceData(date);
 
                 UpdateAccountsBalances(period);
-                UpdateCommitmentsPaymentStatuses(date);
 
                 var academicYear = date.GetAcademicYear();
 
