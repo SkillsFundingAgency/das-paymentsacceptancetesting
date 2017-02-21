@@ -552,18 +552,18 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             StepDefinitionsContext.ReferenceDataContext.AddEmploymentStatus(status);
         }
 
-        private long GetEmployerId(TableRow row)
+        private int GetEmployerId(TableRow row)
         {
             if (row.ContainsKey("Employer Id"))
             {
-                return long.Parse(row["Employer Id"]);
+                return int.Parse(row["Employer Id"]);
             }
             else if (row.ContainsKey("Employer"))
             {
                 var empName = row["Employer"];
                 var employer = StepDefinitionsContext.ReferenceDataContext.Employers.Where(
                                 x => x.Name.Equals(empName, StringComparison.InvariantCultureIgnoreCase));
-                return employer.Any() ? employer.First().AccountId : 0;
+                return employer.Any() ? int.Parse(employer.First().AccountId.ToString().Substring(0,4)) : 0;
             }
             else
             {

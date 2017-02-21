@@ -3,8 +3,8 @@ Feature: 1 learner aged 16-18, non-DAS, employed with a small employer at start,
 @SmallEmployerNonDas
 Scenario: Payment for a 16-18 non-DAS learner, small employer at start
 	When an ILR file is submitted with the following data:
-		| ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status | Employment Status Applies | Employer Id | Small Employer |
-		| learner a | 16-18 programme only non-DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment          | 05/08/2017                | 12345678    | SEM1           |
+		| ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status  | Employment Status Applies | Employer Id | Small Employer |
+		| learner a | 16-18 programme only non-DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment | 05/08/2017                | 123456      | SEM1           |
     Then the provider earnings and payments break down as follows:
 	    | Type                                | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
 	    | Provider Earned Total               | 500   | 500   | 500   | 1500  | 500   | ... | 500   | 2500  | 0     |
@@ -28,8 +28,8 @@ Scenario: Payment for a 16-18 non-DAS learner, small employer at start
 Scenario: 1 learner aged 19-24, non-DAS, with an Education Health Care (EHC) plan, In paid employment with a small employer at start, is fully funded for on programme and completion payments
 #Note: EHC plans are flagged on the ILR through Eligibility for Enhanced Funding (EEF) code = 2*
 	When an ILR file is submitted with the following data:
-		| ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status | Employment Status Applies | Employer Id | Small Employer | LearnDelFAM |
-		| learner a | 19-24 programme only non-DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment          | 05/08/2017                | 12345678    | SEM1           | EEF2        |
+		| ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status  | Employment Status Applies | Employer Id | Small Employer | LearnDelFAM |
+		| learner a | 19-24 programme only non-DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment | 05/08/2017                | 123456      | SEM1           | EEF2        |
    Then the provider earnings and payments break down as follows:
 	    | Type                                | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
 	    | Provider Earned Total               | 500   | 500   | 500   | 1500  | 500   | ... | 500   | 2500  | 0     |
@@ -55,8 +55,8 @@ Scenario: 1 learner aged 19-24, non-DAS, is a care leaver, In paid employment wi
 #Note: care leavers are flagged on the ILR through EEF code = 4*
 
 	When an ILR file is submitted with the following data:
-		| ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status | Employment Status Applies | Employer Id | Small Employer | LearnDelFAM |
-		| learner a | 19-24 programme only non-DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment          | 05/08/2017                | 12345678    | SEM1           | EEF4        |
+		| ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status  | Employment Status Applies | Employer Id | Small Employer | LearnDelFAM |
+		| learner a | 19-24 programme only non-DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment | 05/08/2017                | 123456      | SEM1           | EEF4        |
 
 	Then the provider earnings and payments break down as follows:
 	    | Type                                | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
@@ -81,8 +81,8 @@ Scenario: 1 learner aged 19-24, non-DAS, is a care leaver, In paid employment wi
 Scenario: 1 learner aged 19-24, non-DAS, employed with a small employer at start, is co-funded for on programme and completion payments (this apprentice does not have a Education Health Care plan and is not a care leaver)
 
 	When an ILR file is submitted with the following data:
-		| ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status | Employment Status Applies | Employer Id | Small Employer | LearnDelFAM |
-		| learner a | 19-24 programme only non-DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment          | 05/08/2017                | 12345678    | SEM1           |             |
+		| ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status  | Employment Status Applies | Employer Id | Small Employer | LearnDelFAM |
+		| learner a | 19-24 programme only non-DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment | 05/08/2017                | 123456      | SEM1           |             |
 
 	Then the provider earnings and payments break down as follows:
 		| Type                           | 08/17 | 09/17 | 10/17 | ... | 08/18 | 09/18 |
@@ -106,7 +106,7 @@ Scenario: 1 learner aged 19-24, non-DAS, employed with a small employer at start
     
 	When an ILR file is submitted with the following data:
 		| ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status  | Employment Status Applies | Employer Id | Small Employer |
-		| learner a | 16-18 programme only non-DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment | 05/08/2017                | 12345678    |                |
+		| learner a | 16-18 programme only non-DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment | 05/08/2017                | 123456      |                |
     Then the provider earnings and payments break down as follows:
 	    | Type                                | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
 	    | Provider Earned Total               | 500   | 500   | 500   | 1500  | 500   | ... | 500   | 2500  | 0     |
@@ -136,7 +136,7 @@ Scenario: 1 learner aged 19-24, non-DAS, employed with a small employer at start
 	    | learner a | 403            | 2              | 1            | 7500         | 06/08/2017 |
 	When an ILR file is submitted with the following data:
 		| ULN       | learner type             | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status  | Employment Status Applies | Employer Id | Small Employer |
-		| learner a | 16-18 programme only DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment | 05/08/2017                | 12345678    | SEM1           |
+		| learner a | 16-18 programme only DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment | 05/08/2017                | 123456      | SEM1           |
 	Then the provider earnings and payments break down as follows:
 	    | Type                                | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
 	    | Provider Earned Total               | 500   | 500   | 500   | 1500  | 500   | ... | 500   | 2500  | 0     |
@@ -165,7 +165,7 @@ Scenario: 1 learner aged 19-24, non-DAS, employed with a small employer at start
 	    | learner a | 403            | 2              | 1            | 7500         | 06/08/2017 |
 	When an ILR file is submitted with the following data:
 		| ULN       | learner type             | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status  | Employment Status Applies | Employer Id | Small Employer | LearnDelFAM |
-		| learner a | 19-24 programme only DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment | 05/08/2017                | 12345678    | SEM1           | EEF2        |
+		| learner a | 19-24 programme only DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment | 05/08/2017                | 123456      | SEM1           | EEF2        |
    Then the provider earnings and payments break down as follows:
 	    | Type                                | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
 	    | Provider Earned Total               | 500   | 500   | 500   | 1500  | 500   | ... | 500   | 2500  | 0     |
@@ -194,7 +194,7 @@ Scenario: 1 learner aged 19-24, DAS, is a care leaver, employed with a small emp
 	    | learner a | 403            | 2              | 1            | 7500         | 06/08/2017 |
 	When an ILR file is submitted with the following data:
 		| ULN       | learner type             | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status  | Employment Status Applies | Employer Id | Small Employer | LearnDelFAM |
-		| learner a | 19-24 programme only DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment | 05/08/2017                | 12345678    | SEM1           | EEF4        |
+		| learner a | 19-24 programme only DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment | 05/08/2017                | 123456      | SEM1           | EEF4        |
    Then the provider earnings and payments break down as follows:
 	    | Type                                | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
 	    | Provider Earned Total               | 500   | 500   | 500   | 1500  | 500   | ... | 500   | 2500  | 0     |
@@ -225,7 +225,7 @@ Scenario: 1 learner aged 19-24, DAS, employed with a small employer at start, is
 	    | learner a | 403            | 2              | 1            | 7500         | 06/08/2017 |
 	When an ILR file is submitted with the following data:
 		| ULN       | learner type             | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status  | Employment Status Applies | Employer Id | Small Employer | LearnDelFAM |
-		| learner a | 19-24 programme only DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment | 05/08/2017                | 12345678    | SEM1           |             |
+		| learner a | 19-24 programme only DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment | 05/08/2017                | 123456      | SEM1           |             |
 	Then the provider earnings and payments break down as follows:
 	    | Type                           | 08/17 | 09/17 | 10/17 | ... | 07/18 | 08/18 | 09/18 |
 	    | Provider Earned Total          | 500   | 500   | 500   | ... | 500   | 1500  | 0     |
@@ -254,7 +254,7 @@ Scenario: Payment for a 16-18 DAS learner, employer is not small
 	    | learner a | 403            | 2              | 1            | 7500         | 06/08/2017 |
 	When an ILR file is submitted with the following data:
 		| ULN       | learner type             | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status  | Employment Status Applies | Employer Id | Small Employer | LearnDelFAM |
-		| learner a | 16-18 programme only DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment | 05/08/2017                | 12345678    |                |             |
+		| learner a | 16-18 programme only DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment | 05/08/2017                | 123456      |                |             |
  
 	Then the provider earnings and payments break down as follows:
 	    | Type                                | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |

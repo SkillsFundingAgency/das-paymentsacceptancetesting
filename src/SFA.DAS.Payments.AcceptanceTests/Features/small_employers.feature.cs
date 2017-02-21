@@ -103,7 +103,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "In paid employment",
                         "05/08/2017",
-                        "12345678",
+                        "123456",
                         "SEM1"});
 #line 5
  testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table313, "When ");
@@ -335,7 +335,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "In paid employment",
                         "05/08/2017",
-                        "12345678",
+                        "123456",
                         "SEM1",
                         "EEF2"});
 #line 30
@@ -566,7 +566,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "In paid employment",
                         "05/08/2017",
-                        "12345678",
+                        "123456",
                         "SEM1",
                         "EEF4"});
 #line 57
@@ -799,7 +799,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "In paid employment",
                         "05/08/2017",
-                        "12345678",
+                        "123456",
                         "SEM1",
                         ""});
 #line 83
@@ -964,7 +964,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "In paid employment",
                         "05/08/2017",
-                        "12345678",
+                        "123456",
                         ""});
 #line 107
  testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table325, "When ");
@@ -1210,7 +1210,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "In paid employment",
                         "05/08/2017",
-                        "12345678",
+                        "123456",
                         "SEM1"});
 #line 137
  testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table329, "When ");
@@ -1461,7 +1461,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "In paid employment",
                         "05/08/2017",
-                        "12345678",
+                        "123456",
                         "SEM1",
                         "EEF2"});
 #line 166
@@ -1711,7 +1711,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "In paid employment",
                         "05/08/2017",
-                        "12345678",
+                        "123456",
                         "SEM1",
                         "EEF4"});
 #line 195
@@ -1963,7 +1963,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "In paid employment",
                         "05/08/2017",
-                        "12345678",
+                        "123456",
                         "SEM1",
                         ""});
 #line 226
@@ -2174,7 +2174,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "In paid employment",
                         "05/08/2017",
-                        "12345678",
+                        "123456",
                         "",
                         ""});
 #line 255

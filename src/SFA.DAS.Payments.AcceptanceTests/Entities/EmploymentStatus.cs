@@ -11,7 +11,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Entities
     {
         public EmploymentType StatusCode { get; set; }
         public DateTime DateFrom { get; set; }
-        public long EmployerId { get; set; }
+        public int EmployerId { get; set; }
         public EmploymentStatusMonitoring EmploymentStatusMonitoring { get; set; }
     }
 }
