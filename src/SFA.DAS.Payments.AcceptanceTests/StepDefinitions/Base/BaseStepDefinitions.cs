@@ -423,7 +423,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 
         protected void SetupContexLearners(Table table)
         {
-            if (table.Header.Contains("Employment Status") && !StepDefinitionsContext.ReferenceDataContext.EmploymentStatuses.Any())
+            if (table.Header.Contains("Employment Status") && StepDefinitionsContext.ReferenceDataContext.EmploymentStatuses == null)
             {
                 PopulateEmploymentStatuses(table);
             }
