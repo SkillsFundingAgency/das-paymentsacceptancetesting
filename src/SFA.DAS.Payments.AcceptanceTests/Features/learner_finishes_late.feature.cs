@@ -412,7 +412,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("A non-DAS learner, learner withdraws after planned end date", ((string[])(null)));
 #line 47
- this.ScenarioSetup(scenarioInfo);
+    this.ScenarioSetup(scenarioInfo);
 #line 5
     this.FeatureBackground();
 #line hidden
@@ -629,7 +629,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "0"});
 #line 65
-  testRunner.And("the transaction types for the payments are:", ((string)(null)), table247, "And ");
+        testRunner.And("the transaction types for the payments are:", ((string)(null)), table247, "And ");
 #line hidden
             this.ScenarioCleanup();
         }

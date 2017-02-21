@@ -3,8 +3,9 @@ Feature: Employer stops payments on a commitment
     Scenario: Commitment payments are stopped midway through the learning episode
         Given levy balance > agreed price for all months
         And the following commitments exist:
-            | ULN       | agreed price | status | stopped on |
-            | learner a | 15000        | Paused | 11/17      |
+            | commitment Id | version Id | ULN       | start date | end date   | status | agreed price | effective from | effective to |
+            | 1             | 1          | learner a | 01/09/2017 | 08/09/2018 | active | 15000        | 01/09/2017     | 31/10/2017   |
+            | 1             | 2          | learner a | 01/09/2017 | 08/09/2018 | paused | 15000        | 01/11/2017     |              |
         When an ILR file is submitted every month with the following data:
             | ULN       | agreed price | learner type       | start date | planned end date | completion status |
             | learner a | 15000        | programme only DAS | 01/09/2017 | 08/09/2018       | continuing        |
@@ -24,8 +25,9 @@ Feature: Employer stops payments on a commitment
     Scenario: The provider submits the first ILR file after the commitment payments have been stopped
         Given levy balance > agreed price for all months
         And the following commitments exist:
-            | ULN       | agreed price | status | stopped on |
-            | learner a | 15000        | Paused | 11/17      |
+            | commitment Id | version Id | ULN       | start date | end date   | status | agreed price | effective from | effective to |
+            | 1             | 1          | learner a | 01/09/2017 | 08/09/2018 | active | 15000        | 01/09/2017     | 31/08/2017   |
+            | 1             | 2          | learner a | 01/09/2017 | 08/09/2018 | paused | 15000        | 01/09/2017     |              |
         When an ILR file is submitted for the first time on 28/12/17 with the following data:
             | ULN       | agreed price | learner type       | start date | planned end date | completion status |
             | learner a | 15000        | programme only DAS | 01/09/2017 | 08/09/2018       | continuing        |
