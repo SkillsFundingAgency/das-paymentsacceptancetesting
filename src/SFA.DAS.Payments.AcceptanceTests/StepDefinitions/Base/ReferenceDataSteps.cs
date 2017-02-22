@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using SFA.DAS.Payments.AcceptanceTests.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.DataHelpers;
+using SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities;
 using SFA.DAS.Payments.AcceptanceTests.Entities;
 using SFA.DAS.Payments.AcceptanceTests.Enums;
+using SFA.DAS.Payments.AcceptanceTests.ExecutionEnvironment;
 using TechTalk.SpecFlow;
 using IlrBuilder = SFA.DAS.Payments.AcceptanceTests.Builders.IlrBuilder;
 
@@ -140,28 +142,23 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
         [Given(@"the learner changes employers")]
         public void WhenALearnerChangesFromOneDasEmployerToAnotherDasEmployer(Table table)
         {
-            for (var rowIndex = 0; rowIndex < table.RowCount; rowIndex++)
-            {
-                var employerName = table.Rows[rowIndex]["Employer"];
-                var type = table.Rows[rowIndex]["Type"] == "DAS" ? LearnerType.ProgrammeOnlyDas : LearnerType.ProgrammeOnlyNonDas;
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
-                if (!ReferenceDataContext.Employers.Any(x => x.Name.Equals(employerName, StringComparison.CurrentCultureIgnoreCase)))
+            foreach (var row in table.Rows)
+            {
+                foreach (var key in row.Keys)
                 {
-                    var employer = new Employer
+                    var entity = new SpecFlowEntity
                     {
-                        Name = employerName,
-                        AccountId = long.Parse(IdentifierGenerator.GenerateIdentifier(8, false)),
-                        LearnersType = type,
-                        MonthlyAccountBalance = new Dictionary<string, decimal>()
+                        Name = "employer",
+                        Field = key,
+                        Type = "column"
                     };
 
-                    ReferenceDataContext.AddEmployer(employer);
-                }
-                else
-                {
-                    ReferenceDataContext.SetEmployerLearnersType(employerName, type);
+                    SpecFlowEntitiesDataHelper.AddEntityRow(entity, environmentVariables);
                 }
             }
+
         }
 
         private CommitmentPaymentStatus GetStatus(string status)
@@ -183,87 +180,22 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 
         private void BuildContextCommitments(Table table)
         {
-            var commitments = new List<Commitment>();
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
-            for (var rowIndex = 0; rowIndex < table.RowCount; rowIndex++)
+            foreach (var row in table.Rows)
             {
-                var row = table.Rows[rowIndex];
-
-                var frameworkCode = table.Header.Contains("framework code")
-                    ? int.Parse(row["framework code"])
-                    : IlrBuilder.Defaults.FrameworkCode;
-                var programmeType = table.Header.Contains("programme type")
-                    ? int.Parse(row["programme type"])
-                    : IlrBuilder.Defaults.ProgrammeType;
-                var pathwayCode = table.Header.Contains("pathway code")
-                    ? int.Parse(row["pathway code"])
-                    : IlrBuilder.Defaults.PathwayCode;
-
-                var standardCode = table.Header.Contains("standard code")
-                    ? int.Parse(row["standard code"])
-                    : IlrBuilder.Defaults.StandardCode;
-
-                if (frameworkCode > 0 && programmeType > 0 && pathwayCode > 0)
+                foreach (var key in row.Keys)
                 {
-                    standardCode = 0;
+                    var entity = new SpecFlowEntity
+                    {
+                        Name = "commitment",
+                        Field = key,
+                        Type = "column"
+                    };
+
+                    SpecFlowEntitiesDataHelper.AddEntityRow(entity, environmentVariables);
                 }
-
-                var commitment = new Commitment
-                {
-                    Id = row.ContainsKey("commitment Id")
-                        ? long.Parse(row["commitment Id"])
-                        : long.Parse(IdentifierGenerator.GenerateIdentifier(6, false)),
-                    VersionId = row.ContainsKey("version Id")
-                        ? long.Parse(row["version Id"])
-                        : 1,
-                    Priority = row.ContainsKey("priority")
-                        ? int.Parse(row["priority"])
-                        : 1,
-                    Learner = row["ULN"],
-                    Employer = row.ContainsKey("Employer")
-                        ? row["Employer"]
-                        : "employer",
-                    Provider = row.ContainsKey("Provider")
-                        ? row["Provider"]
-                        : "provider",
-                    Status = row.ContainsKey("status")
-                        ? GetStatus(row["status"])
-                        : CommitmentPaymentStatus.Active,
-                    StopPeriod = row.ContainsKey("stopped on")
-                        ? row["stopped on"]
-                        : string.Empty,
-                    StartDate = row.ContainsKey("price effective date")
-                        ? DateTime.Parse(row["price effective date"])
-                        : row.ContainsKey("start date")
-                            ? DateTime.Parse(row["start date"])
-                            : (DateTime?)null,
-                    EndDate = row.ContainsKey("planned end date")
-                        ? DateTime.Parse(row["planned end date"])
-                        : (DateTime?)null,
-                    ActualEndDate = row.ContainsKey("actual end date") && !string.IsNullOrWhiteSpace(row["actual end date"])
-                        ? DateTime.Parse(row["actual end date"])
-                        : (DateTime?)null,
-                    AgreedPrice = row.ContainsKey("agreed price")
-                        ? decimal.Parse(row["agreed price"])
-                        : (decimal?)null,
-
-                    EffectiveFrom = row.ContainsKey("effective from")
-                        ? DateTime.Parse(row["effective from"])
-                        : (DateTime?)null,
-                    EffectiveTo = row.ContainsKey("effective to") && !string.IsNullOrWhiteSpace(row["effective to"])
-                        ? DateTime.Parse(row["effective to"])
-                        : (DateTime?)null,
-                    StandardCode = standardCode ,
-                    FrameworkCode = frameworkCode,
-                    PathwayCode = pathwayCode,
-                    ProgrammeType = programmeType
-
-            };
-
-                commitments.Add(commitment);
             }
-
-            ReferenceDataContext.Commitments = commitments.ToArray();
         }
     }
 }

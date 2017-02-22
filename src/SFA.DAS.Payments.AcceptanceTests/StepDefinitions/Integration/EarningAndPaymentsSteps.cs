@@ -70,117 +70,202 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
         [When(@"the Contract type in the ILR is:")]
         public void WhenTheContractTypeInTheIlrIs(Table table)
         {
-            Table learnerTable;
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
-            ScenarioContext.Current.TryGetValue("learners",out learnerTable);
+            //foreach (var column in table.Header)
+            //{
+            //    var entity = new SpecFlowEntity
+            //    {
+            //        Name = "act",
+            //        Field = column.Trim(),
+            //        Type = "column"
+            //    };
 
-            for (var rowIndex = 0; rowIndex < table.RowCount; rowIndex++)
+            //    SpecFlowEntitiesDataHelper.AddEntityRow(entity, environmentVariables);
+            //}
+
+            foreach (var row in table.Rows)
             {
-                var famCode = new LearningDeliveryFam
+                foreach (var key in row.Keys)
                 {
-                    FamCode = table.Rows[rowIndex]["contract type"] == "DAS" ? 1 : 2,
-                    StartDate = DateTime.Parse(table.Rows[rowIndex]["date from"]),
-                    EndDate = DateTime.Parse(table.Rows[rowIndex]["date to"]),
-                    FamType = "ACT"
-                };
+                    var entity = new SpecFlowEntity
+                    {
+                        Name = "apprenticeship contract type",
+                        Field = key,
+                        Type = "column"
+                    };
 
-                StepDefinitionsContext.ReferenceDataContext.AddLearningDeliveryFam(famCode);
+                    SpecFlowEntitiesDataHelper.AddEntityRow(entity, environmentVariables);
+                }
             }
 
-            ProcessIlrFileSubmissions(learnerTable);
+            //Table learnerTable;
+
+            //ScenarioContext.Current.TryGetValue("learners",out learnerTable);
+
+            //for (var rowIndex = 0; rowIndex < table.RowCount; rowIndex++)
+            //{
+            //    var famCode = new LearningDeliveryFam
+            //    {
+            //        FamCode = table.Rows[rowIndex]["contract type"] == "DAS" ? 1 : 2,
+            //        StartDate = DateTime.Parse(table.Rows[rowIndex]["date from"]),
+            //        EndDate = DateTime.Parse(table.Rows[rowIndex]["date to"]),
+            //        FamType = "ACT"
+            //    };
+
+            //    StepDefinitionsContext.ReferenceDataContext.AddLearningDeliveryFam(famCode);
+            //}
+
+            //ProcessIlrFileSubmissions(learnerTable);
         }
 
 
         [Then(@"the provider earnings and payments break down as follows:")]
         public void ThenTheProviderEarningsBreakDownAsFollows(Table table)
         {
-            var provider = StepDefinitionsContext.Providers[0];
+            //var provider = StepDefinitionsContext.Providers[0];
 
-            VerifyProviderEarningsAndPayments(provider.Ukprn,null, table);
+            VerifyProviderEarningsAndPayments(1,null, table);
         }
 
         [Then(@"the earnings and payments break down for (.*) is as follows:")]
         public void ThenAProviderEarningsBreakDownAsFollows(string providerName, Table table)
         {
-            var provider = StepDefinitionsContext.Providers.Single(p => p.Name == providerName);
+            //var provider = StepDefinitionsContext.Providers.Single(p => p.Name == providerName);
 
-            VerifyProviderEarningsAndPayments(provider.Ukprn,null, table);
+            VerifyProviderEarningsAndPayments(1,null, table);
         }
 
         [Then(@"the transaction types for the payments are:")]
         public void ThenTheTransactionsForThePaymentsAre(Table table)
         {
-            var ukprn = StepDefinitionsContext.Providers[0].Ukprn;
-            VerifyTransactionsForThePayments(table,ukprn);
+            //var ukprn = StepDefinitionsContext.Providers[0].Ukprn;
+            VerifyTransactionsForThePayments(table,1);
         }
 
         [Then(@"the transaction types for the payments for (.*) are:")]
         public void ThenTheTransactionTypesForThePaymentsForProviderBAre(string providerName,Table table)
         {
-            var provider = StepDefinitionsContext.Providers.Single(x=> x.Name.Equals(providerName,StringComparison.CurrentCultureIgnoreCase));
-            VerifyTransactionsForThePayments(table, provider.Ukprn);
+            //var provider = StepDefinitionsContext.Providers.Single(x=> x.Name.Equals(providerName,StringComparison.CurrentCultureIgnoreCase));
+            VerifyTransactionsForThePayments(table, 1);
         }
 
 
         public void VerifyTransactionsForThePayments(Table table,long ukprn)
         {
-            
-            var onProgramRow = table.Rows.RowWithKey(RowKeys.OnProgramPayment);
-            var completionRow = table.Rows.RowWithKey(RowKeys.CompletionPayment);
-            var balancingRow = table.Rows.RowWithKey(RowKeys.BalancingPayment);
-            var employerIncentiveRow = table.Rows.RowWithKey(RowKeys.DefaultEmployerIncentive);
-            var providerIncentiveRow = table.Rows.RowWithKey(RowKeys.ProviderIncentive);
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
-            for (var colIndex = 1; colIndex < table.Header.Count; colIndex++)
+            //foreach (var column in table.Header)
+            //{
+            //    var entity = new SpecFlowEntity
+            //    {
+            //        Name = "transactions",
+            //        Field = column.Trim(),
+            //        Type = "column"
+            //    };
+
+            //    SpecFlowEntitiesDataHelper.AddEntityRow(entity, environmentVariables);
+            //}
+
+            foreach (var row in table.Rows)
             {
-                var periodName = table.Header.ElementAt(colIndex);
-                if (periodName == "...")
+                foreach (var key in row.Keys)
                 {
-                    continue;
+                    var entity = new SpecFlowEntity
+                    {
+                        Name = "payment transaction type",
+                        Field = key,
+                        Type = "column"
+                    };
+
+                    SpecFlowEntitiesDataHelper.AddEntityRow(entity, environmentVariables);
                 }
 
-                var periodMonth = int.Parse(periodName.Substring(0, 2));
-                var periodYear = int.Parse(periodName.Substring(3)) + 2000;
-                var periodDate = new DateTime(periodYear, periodMonth, 1).NextCensusDate();
+                var keyEntity = new SpecFlowEntity
+                {
+                    Name = "payment transaction type",
+                    Field = row[0],
+                    Type = "key"
+                };
 
-                VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, TransactionType.OnProgram, onProgramRow);
-                VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, TransactionType.Completion, completionRow);
-                VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, TransactionType.Balancing, balancingRow);
-
-                VerifyEmployerPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex,table);
-
-                VerifyPaymentsDueByTransactionType(ukprn, periodName, 
-                                                    periodDate, colIndex, 
-                                                    new TransactionType[] {
-                                                            TransactionType.First16To18ProviderIncentive,
-                                                            TransactionType.Second16To18ProviderIncentive},
-                                                    providerIncentiveRow,null,FundingSource.FullyFundedSfa);
-
+                SpecFlowEntitiesDataHelper.AddEntityRow(keyEntity, environmentVariables);
             }
+
+            //var onProgramRow = table.Rows.RowWithKey(RowKeys.OnProgramPayment);
+            //var completionRow = table.Rows.RowWithKey(RowKeys.CompletionPayment);
+            //var balancingRow = table.Rows.RowWithKey(RowKeys.BalancingPayment);
+            //var employerIncentiveRow = table.Rows.RowWithKey(RowKeys.DefaultEmployerIncentive);
+            //var providerIncentiveRow = table.Rows.RowWithKey(RowKeys.ProviderIncentive);
+
+            //for (var colIndex = 1; colIndex < table.Header.Count; colIndex++)
+            //{
+            //    var periodName = table.Header.ElementAt(colIndex);
+            //    if (periodName == "...")
+            //    {
+            //        continue;
+            //    }
+
+            //    var periodMonth = int.Parse(periodName.Substring(0, 2));
+            //    var periodYear = int.Parse(periodName.Substring(3)) + 2000;
+            //    var periodDate = new DateTime(periodYear, periodMonth, 1).NextCensusDate();
+
+            //    VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, TransactionType.OnProgram, onProgramRow);
+            //    VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, TransactionType.Completion, completionRow);
+            //    VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, TransactionType.Balancing, balancingRow);
+
+            //    VerifyEmployerPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex,table);
+
+            //    VerifyPaymentsDueByTransactionType(ukprn, periodName, 
+            //                                        periodDate, colIndex, 
+            //                                        new TransactionType[] {
+            //                                                TransactionType.First16To18ProviderIncentive,
+            //                                                TransactionType.Second16To18ProviderIncentive},
+            //                                        providerIncentiveRow,null,FundingSource.FullyFundedSfa);
+
+            //}
         }
 
         [Then(@"the provider earnings and payments break down for ULN (.*) as follows:")]
         public void ThenTheProviderEarningsAndPaymentsBreakDownForAUlnAsFollows(long uln, Table table)
         {
-            var provider = StepDefinitionsContext.Providers.Single();
+            //var provider = StepDefinitionsContext.Providers.Single();
 
-            Assert.IsTrue(provider.EarnedByPeriodByUln.ContainsKey(uln));
+            //Assert.IsTrue(provider.EarnedByPeriodByUln.ContainsKey(uln));
 
-            VerifyProviderEarningsAndPayments(provider.Ukprn,uln, table);
+            VerifyProviderEarningsAndPayments(1,uln, table);
         }
 
 
         private void ProcessIlrFileSubmissions(Table table, DateTime? firstSubmissionDate = null)
         {
-            SetupContextProviders(table);
-            SetupContexLearners(table);
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
-            var startDate = firstSubmissionDate ?? StepDefinitionsContext.GetIlrStartDate().NextCensusDate();
+            //foreach (var column in table.Header)
+            //{
+            //    var entity = new SpecFlowEntity
+            //    {
+            //        Name = "ilr",
+            //        Field = column.Trim(),
+            //        Type = "column"
+            //    };
 
-            if (firstSubmissionDate != null)
-                ScenarioContext.Current.Add("firstSubmissionDate", firstSubmissionDate);
+            //    SpecFlowEntitiesDataHelper.AddEntityRow(entity, environmentVariables);
+            //}
 
-            ProcessMonths(startDate);
+            foreach (var row in table.Rows)
+            {
+                foreach (var key in row.Keys)
+                {
+                    var entity = new SpecFlowEntity
+                    {
+                        Name = "ilr data",
+                        Field = key,
+                        Type = "column"
+                    };
+
+                    SpecFlowEntitiesDataHelper.AddEntityRow(entity, environmentVariables);
+                }
+            }
         }
 
         private void ProcessMonths(DateTime start)
@@ -222,50 +307,88 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
        
         private void VerifyProviderEarningsAndPayments(long ukprn, long? uln, Table table)
         {
-            var earnedRow = table.Rows.RowWithKey(RowKeys.Earnings);
-            var govtCofundLevyContractRow = table.Rows.RowWithKey(RowKeys.CoFinanceGovernmentPaymentForLevyContracts);
-            var govtCofundNonLevyContractRow = table.Rows.RowWithKey(RowKeys.CoFinanceGovernmentPaymentForNonLevyContracts);
-            var govtAdditionalPaymentsRow = table.Rows.RowWithKey(RowKeys.SfaAdditionalPaymentsBudget);
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
-            for (var colIndex = 1; colIndex < table.Header.Count; colIndex++)
+            //foreach (var column in table.Header)
+            //{
+            //    var entity = new SpecFlowEntity
+            //    {
+            //        Name = "payments",
+            //        Field = column.Trim(),
+            //        Type = "column"
+            //    };
+
+            //    SpecFlowEntitiesDataHelper.AddEntityRow(entity, environmentVariables);
+            //}
+
+            foreach (var row in table.Rows)
             {
-                var periodName = table.Header.ElementAt(colIndex);
-                if (periodName == "...")
+                foreach (var key in row.Keys)
                 {
-                    continue;
-                }
-
-                var periodMonth = int.Parse(periodName.Substring(0, 2));
-                var periodYear = int.Parse(periodName.Substring(3)) + 2000;
-                var periodDate = new DateTime(periodYear, periodMonth, 1).NextCensusDate();
-
-
-                VerifyEarningsForPeriod(ukprn,uln, periodName, colIndex, earnedRow);
-                VerifyGovtCofinanceLevyContractPayments(ukprn,uln, periodName, periodDate, colIndex, govtCofundLevyContractRow);
-                VerifyGovtCofinanceNonLevyContractPayments(ukprn, uln, periodName, periodDate, colIndex, govtCofundNonLevyContractRow);
-                VerifyAdditionalGovtFundedEarnings(ukprn, uln, periodName, periodDate, colIndex, govtAdditionalPaymentsRow);
-
-                if (StepDefinitionsContext.DasScenario)
-                {
-                    foreach (var employer in StepDefinitionsContext.ReferenceDataContext.Employers)
+                    var entity = new SpecFlowEntity
                     {
-                        var levyPaidRow = table.Rows.RowWithKey(RowKeys.DefaultLevyPayment)
-                                          ?? table.Rows.RowWithKey($"{employer.Name}{RowKeys.LevyPayment}");
+                        Name = "provider earnings and payments",
+                        Field = key,
+                        Type = "column"
+                    };
 
-                        var employerCofundRow = table.Rows.RowWithKey(RowKeys.DefaultCoFinanceEmployerPayment)
-                                                ?? table.Rows.RowWithKey($"{RowKeys.CoFinanceEmployerPayment}{employer.Name}");
-
-                        VerifyLevyPayments(ukprn, uln, periodName, periodDate, employer.AccountId, colIndex, levyPaidRow);
-                        VerifyEmployerCofinancePayments(ukprn, uln, periodName, periodDate, employer.AccountId, colIndex, employerCofundRow, employer.LearnersType);
-                    }
+                    SpecFlowEntitiesDataHelper.AddEntityRow(entity, environmentVariables);
                 }
-                else
+
+                var keyEntity = new SpecFlowEntity
                 {
-                    var employerCofundRow = table.Rows.RowWithKey(RowKeys.DefaultCoFinanceEmployerPayment);
+                    Name = "provider earnings and payments",
+                    Field = row[0],
+                    Type = "key"
+                };
 
-                    VerifyEmployerCofinancePayments(ukprn, uln, periodName, periodDate, 0, colIndex, employerCofundRow, LearnerType.ProgrammeOnlyNonDas);
-                }
+                SpecFlowEntitiesDataHelper.AddEntityRow(keyEntity, environmentVariables);
             }
+
+            //var earnedRow = table.Rows.RowWithKey(RowKeys.Earnings);
+            //var govtCofundLevyContractRow = table.Rows.RowWithKey(RowKeys.CoFinanceGovernmentPaymentForLevyContracts);
+            //var govtCofundNonLevyContractRow = table.Rows.RowWithKey(RowKeys.CoFinanceGovernmentPaymentForNonLevyContracts);
+            //var govtAdditionalPaymentsRow = table.Rows.RowWithKey(RowKeys.SfaAdditionalPaymentsBudget);
+
+            //for (var colIndex = 1; colIndex < table.Header.Count; colIndex++)
+            //{
+            //    var periodName = table.Header.ElementAt(colIndex);
+            //    if (periodName == "...")
+            //    {
+            //        continue;
+            //    }
+
+            //    var periodMonth = int.Parse(periodName.Substring(0, 2));
+            //    var periodYear = int.Parse(periodName.Substring(3)) + 2000;
+            //    var periodDate = new DateTime(periodYear, periodMonth, 1).NextCensusDate();
+
+
+            //    VerifyEarningsForPeriod(ukprn,uln, periodName, colIndex, earnedRow);
+            //    VerifyGovtCofinanceLevyContractPayments(ukprn,uln, periodName, periodDate, colIndex, govtCofundLevyContractRow);
+            //    VerifyGovtCofinanceNonLevyContractPayments(ukprn, uln, periodName, periodDate, colIndex, govtCofundNonLevyContractRow);
+            //    VerifyAdditionalGovtFundedEarnings(ukprn, uln, periodName, periodDate, colIndex, govtAdditionalPaymentsRow);
+
+            //    if (StepDefinitionsContext.DasScenario)
+            //    {
+            //        foreach (var employer in StepDefinitionsContext.ReferenceDataContext.Employers)
+            //        {
+            //            var levyPaidRow = table.Rows.RowWithKey(RowKeys.DefaultLevyPayment)
+            //                              ?? table.Rows.RowWithKey($"{employer.Name}{RowKeys.LevyPayment}");
+
+            //            var employerCofundRow = table.Rows.RowWithKey(RowKeys.DefaultCoFinanceEmployerPayment)
+            //                                    ?? table.Rows.RowWithKey($"{RowKeys.CoFinanceEmployerPayment}{employer.Name}");
+
+            //            VerifyLevyPayments(ukprn, uln, periodName, periodDate, employer.AccountId, colIndex, levyPaidRow);
+            //            VerifyEmployerCofinancePayments(ukprn, uln, periodName, periodDate, employer.AccountId, colIndex, employerCofundRow, employer.LearnersType);
+            //        }
+            //    }
+            //    else
+            //    {
+            //        var employerCofundRow = table.Rows.RowWithKey(RowKeys.DefaultCoFinanceEmployerPayment);
+
+            //        VerifyEmployerCofinancePayments(ukprn, uln, periodName, periodDate, 0, colIndex, employerCofundRow, LearnerType.ProgrammeOnlyNonDas);
+            //    }
+            //}
         }
 
         private void VerifyEarningsForPeriod(long ukprn, long? uln , string periodName, int colIndex, TableRow earnedRow)

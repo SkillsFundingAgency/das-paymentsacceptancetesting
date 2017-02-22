@@ -3,7 +3,9 @@ using System.Linq;
 using NUnit.Framework;
 using SFA.DAS.Payments.AcceptanceTests.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.DataHelpers;
+using SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities;
 using SFA.DAS.Payments.AcceptanceTests.Entities;
+using SFA.DAS.Payments.AcceptanceTests.ExecutionEnvironment;
 using SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base;
 using TechTalk.SpecFlow;
 
@@ -20,30 +22,84 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
         [Then(@"the data lock status of the ILR in (.*) is:")]
         public void ThenTheDataLockStatusOfTheIlrPriceEpisodesIs(string date, Table table)
         {
-            var period = DateTime.Parse(date).AddMonths(-1).GetPeriod();
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
-            foreach (var provider in StepDefinitionsContext.Providers)
+            //foreach (var column in table.Header)
+            //{
+            //    var entity = new SpecFlowEntity
+            //    {
+            //        Name = "datalock",
+            //        Field = column.Trim(),
+            //        Type = "column"
+            //    };
+
+            //    SpecFlowEntitiesDataHelper.AddEntityRow(entity, environmentVariables);
+            //}
+
+            foreach (var row in table.Rows)
             {
-                VerifyProviderDataLockMatchesForPeriod(period, table, provider);
+                foreach (var key in row.Keys)
+                {
+                    var entity = new SpecFlowEntity
+                    {
+                        Name = "datalock status",
+                        Field = key,
+                        Type = "column"
+                    };
+
+                    SpecFlowEntitiesDataHelper.AddEntityRow(entity, environmentVariables);
+                }
+
+                var keyEntity = new SpecFlowEntity
+                {
+                    Name = "datalock status",
+                    Field = row[0],
+                    Type = "key"
+                };
+
+                SpecFlowEntitiesDataHelper.AddEntityRow(keyEntity, environmentVariables);
             }
         }
 
         [Then(@"the data lock status will be as follows:")]
         public void ThenTheDataLockStatusWillBeAsFollows(Table table)
         {
-            var date = StepDefinitionsContext.GetIlrStartDate().NextCensusDate();
-            var endDate = StepDefinitionsContext.GetIlrEndDate();
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
-            while (date <= endDate)
+            //foreach (var column in table.Header)
+            //{
+            //    var entity = new SpecFlowEntity
+            //    {
+            //        Name = "datalock",
+            //        Field = column.Trim(),
+            //        Type = "column"
+            //    };
+
+            //    SpecFlowEntitiesDataHelper.AddEntityRow(entity, environmentVariables);
+            //}
+
+            foreach (var row in table.Rows)
             {
-                var period = date.GetPeriod();
-
-                foreach (var provider in StepDefinitionsContext.Providers)
+                foreach (var key in row.Keys)
                 {
-                    VerifyProviderDataLockMatchesForPeriod(period, table, provider);
+                    var entity = new SpecFlowEntity
+                    {
+                        Name = "datalock status",
+                        Field = key,
+                        Type = "column"
+                    };
+
+                    SpecFlowEntitiesDataHelper.AddEntityRow(entity, environmentVariables);
                 }
 
-                date = date.AddDays(15).NextCensusDate();
+                var keyEntity = new SpecFlowEntity
+                {
+                    Name = "datalock status",
+                    Field = row[0],
+                    Type = "key"
+                };
+
+                SpecFlowEntitiesDataHelper.AddEntityRow(keyEntity, environmentVariables);
             }
         }
 
