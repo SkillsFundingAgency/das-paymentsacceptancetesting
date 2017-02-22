@@ -82,8 +82,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "version Id",
                         "Provider",
                         "ULN",
-                        "price effective date",
-                        "planned end date",
+                        "start date",
+                        "end date",
                         "agreed price",
                         "status",
                         "effective from",
@@ -357,8 +357,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "version Id",
                         "Provider",
                         "ULN",
-                        "price effective date",
-                        "planned end date",
+                        "start date",
+                        "end date",
                         "agreed price",
                         "status",
                         "effective from",
@@ -634,8 +634,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "version Id",
                         "Provider",
                         "ULN",
-                        "price effective date",
-                        "planned end date",
+                        "start date",
+                        "end date",
                         "agreed price",
                         "status",
                         "effective from",
@@ -911,8 +911,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "version Id",
                         "Provider",
                         "ULN",
-                        "price effective date",
-                        "planned end date",
+                        "start date",
+                        "end date",
                         "agreed price",
                         "status",
                         "effective from",
@@ -1181,15 +1181,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
 #line 163
 this.ScenarioSetup(scenarioInfo);
 #line 165
-  testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+        testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table242 = new TechTalk.SpecFlow.Table(new string[] {
                         "commitment Id",
                         "version Id",
                         "Provider",
                         "ULN",
-                        "price effective date",
-                        "planned end date",
+                        "start date",
+                        "end date",
                         "agreed price",
                         "status",
                         "effective from",
@@ -1228,7 +1228,7 @@ this.ScenarioSetup(scenarioInfo);
                         "15/11/2017",
                         ""});
 #line 166
-  testRunner.And("the following commitments exist:", ((string)(null)), table242, "And ");
+        testRunner.And("the following commitments exist:", ((string)(null)), table242, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table243 = new TechTalk.SpecFlow.Table(new string[] {
                         "Provider",
@@ -1279,7 +1279,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1625",
                         "15/11/2017"});
 #line 172
-  testRunner.When("the providers submit the following ILR files:", ((string)(null)), table243, "When ");
+        testRunner.When("the providers submit the following ILR files:", ((string)(null)), table243, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table244 = new TechTalk.SpecFlow.Table(new string[] {
                         "type",
@@ -1515,15 +1515,15 @@ this.ScenarioSetup(scenarioInfo);
 #line 221
 this.ScenarioSetup(scenarioInfo);
 #line 223
-  testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+        testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table249 = new TechTalk.SpecFlow.Table(new string[] {
                         "commitment Id",
                         "version Id",
                         "Provider",
                         "ULN",
-                        "price effective date",
-                        "planned end date",
+                        "start date",
+                        "end date",
                         "agreed price",
                         "status",
                         "effective from",
@@ -1562,7 +1562,7 @@ this.ScenarioSetup(scenarioInfo);
                         "15/11/2017",
                         ""});
 #line 224
-  testRunner.And("the following commitments exist:", ((string)(null)), table249, "And ");
+        testRunner.And("the following commitments exist:", ((string)(null)), table249, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table250 = new TechTalk.SpecFlow.Table(new string[] {
                         "Provider",
@@ -1613,7 +1613,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1625",
                         "15/12/2017"});
 #line 230
-  testRunner.When("the providers submit the following ILR files:", ((string)(null)), table250, "When ");
+        testRunner.When("the providers submit the following ILR files:", ((string)(null)), table250, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table251 = new TechTalk.SpecFlow.Table(new string[] {
                         "type",
@@ -1647,7 +1647,7 @@ this.ScenarioSetup(scenarioInfo);
                         "500",
                         "500",
                         "500",
-                        "1500",
+                        "1000",
                         "0"});
             table252.AddRow(new string[] {
                         "Provider Earned from Employer",
@@ -1870,15 +1870,15 @@ this.ScenarioSetup(scenarioInfo);
 #line 282
  this.ScenarioSetup(scenarioInfo);
 #line 284
- testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+    testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table256 = new TechTalk.SpecFlow.Table(new string[] {
                         "commitment Id",
                         "version Id",
                         "Provider",
                         "ULN",
-                        "price effective date",
-                        "planned end date",
+                        "start date",
+                        "end date",
                         "agreed price",
                         "status",
                         "effective from",

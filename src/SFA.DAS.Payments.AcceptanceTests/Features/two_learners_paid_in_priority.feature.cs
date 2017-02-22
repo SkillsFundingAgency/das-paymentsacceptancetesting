@@ -107,8 +107,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
             TechTalk.SpecFlow.Table table349 = new TechTalk.SpecFlow.Table(new string[] {
                         "priority",
                         "ULN",
-                        "Price effective date",
-                        "planned end date",
+                        "start date",
+                        "end date",
                         "Agreed Price"});
             table349.AddRow(new string[] {
                         "1",
@@ -474,8 +474,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
             TechTalk.SpecFlow.Table table355 = new TechTalk.SpecFlow.Table(new string[] {
                         "priority",
                         "ULN",
-                        "Price effective date",
-                        "planned end date",
+                        "start date",
+                        "end date",
                         "Agreed Price"});
             table355.AddRow(new string[] {
                         "1",
@@ -841,8 +841,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
             TechTalk.SpecFlow.Table table361 = new TechTalk.SpecFlow.Table(new string[] {
                         "priority",
                         "ULN",
-                        "Price effective date",
-                        "planned end date",
+                        "start date",
+                        "end date",
                         "Agreed Price"});
             table361.AddRow(new string[] {
                         "1",
