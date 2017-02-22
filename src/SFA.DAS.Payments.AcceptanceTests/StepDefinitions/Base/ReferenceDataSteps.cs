@@ -35,7 +35,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
         }
 
         [Given(@"Two learners are programme only DAS")]
-        public void GivenTwoLearnersAreProgrammeOnlyDAS()
+        public void GivenTwoLearnersAreProgrammeOnlyDas()
         {
             ReferenceDataContext.LearnerType = LearnerType.ProgrammeOnlyDas;
         }

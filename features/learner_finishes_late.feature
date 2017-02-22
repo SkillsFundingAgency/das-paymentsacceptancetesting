@@ -44,7 +44,7 @@ Feature: Provider earnings and payments where learner completes later than plann
             | Provider 16-18 incentive | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     | 0     |
 
 
-	Scenario: A non-DAS learner, learner withdraws after planned end date 
+    Scenario: A non-DAS learner, learner withdraws after planned end date 
     
         When an ILR file is submitted with the following data:
             | agreed price | learner type           | start date | planned end date | actual end date | completion status |
@@ -62,10 +62,10 @@ Feature: Provider earnings and payments where learner completes later than plann
             | SFA Levy co-funding budget    | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     | 0     | 0     |
             | SFA non-Levy co-funding budget| 900   | 900   | 900   | ... | 900   | 0     | 0     | 0     | 0     | 0     |
    
-		And the transaction types for the payments are:
-		    | Payment type             | 10/17 | 11/17 | 12/17 | 01/18 | ... | 09/18 | 10/18 | 11/18 | 12/18 | 01/19 |
-		    | On-program               | 900   | 900   | 900   | 900   | ... | 900   | 0     | 0     | 0     | 0     |
-		    | Completion               | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     | 0     |
-		    | Balancing                | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     | 0     |
-		    | Employer 16-18 incentive | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     | 0     |
-		    | Provider 16-18 incentive | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     | 0     |
+        And the transaction types for the payments are:
+            | Payment type             | 10/17 | 11/17 | 12/17 | 01/18 | ... | 09/18 | 10/18 | 11/18 | 12/18 | 01/19 |
+            | On-program               | 900   | 900   | 900   | 900   | ... | 900   | 0     | 0     | 0     | 0     |
+            | Completion               | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     | 0     |
+            | Balancing                | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     | 0     |
+            | Employer 16-18 incentive | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     | 0     |
+            | Provider 16-18 incentive | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     | 0     |

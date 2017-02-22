@@ -71,12 +71,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
 #line 3
    this.ScenarioSetup(scenarioInfo);
 #line 5
- testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+    testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table100 = new TechTalk.SpecFlow.Table(new string[] {
                         "ULN",
-                        "price effective date",
-                        "planned end date",
+                        "start date",
+                        "end date",
                         "agreed price",
                         "status"});
             table100.AddRow(new string[] {
@@ -105,7 +105,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "",
                         "continuing"});
 #line 10
- testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table101, "When ");
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table101, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table102 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -255,8 +255,8 @@ this.ScenarioSetup(scenarioInfo);
             TechTalk.SpecFlow.Table table104 = new TechTalk.SpecFlow.Table(new string[] {
                         "commitment number",
                         "ULN",
-                        "price effective date",
-                        "planned end date",
+                        "start date",
+                        "end date",
                         "agreed price",
                         "status"});
             table104.AddRow(new string[] {
@@ -368,7 +368,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
 #line 47
- testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table107, "And ");
+    testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table107, "And ");
 #line hidden
             this.ScenarioCleanup();
         }

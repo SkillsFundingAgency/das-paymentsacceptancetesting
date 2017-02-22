@@ -17,7 +17,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
 
         public LearningDeliveryFam[] LearningDeliveryFams { get; set; }
 
+        public List<EmploymentStatus> EmploymentStatuses { get; set; }
 
+        
         public ReferenceDataContext()
         {
             SetDefaultCommitment();
@@ -41,7 +43,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
                 Learner = string.Empty,
                 Priority = 1,
                 Provider = "provider",
-                StandardCode=IlrBuilder.Defaults.StandardCode
+                StandardCode=IlrBuilder.Defaults.StandardCode,
+                Status = CommitmentPaymentStatus.Active
             };
 
             Commitments = new[] { commitment };
@@ -73,6 +76,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
             fams.Add(learningDeliveryFam);
 
             LearningDeliveryFams = fams.ToArray();
+
+        }
+
+        public void AddEmploymentStatus(EmploymentStatus status)
+        {
+            var statuses = EmploymentStatuses?.ToList() ?? new List<EmploymentStatus>();
+            statuses.Add(status);
+
+            EmploymentStatuses = statuses;
 
         }
     }

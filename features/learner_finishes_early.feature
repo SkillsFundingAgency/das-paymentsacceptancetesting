@@ -6,7 +6,7 @@ Feature: Provider earnings and payments where learner completes earlier than pla
         Given the apprenticeship funding band maximum for each learner is 17000
 
     Scenario: A DAS learner, levy available, learner finishes one month early
-		Given levy balance > agreed price for all months
+        Given levy balance > agreed price for all months
         When an ILR file is submitted with the following data:
             | learner type       | agreed price | start date | planned end date | actual end date | completion status |
             | programme only DAS | 15000        | 01/09/2017 | 08/09/2018       | 08/08/2018      | completed         |
@@ -25,7 +25,7 @@ Feature: Provider earnings and payments where learner completes earlier than pla
             | Balancing        | 0     | 0     | ... | 0     | 1000  |
 
     Scenario: A DAS learner, levy available, learner finishes two months early
-		Given levy balance > agreed price for all months
+        Given levy balance > agreed price for all months
         When an ILR file is submitted with the following data:
             | learner type       | agreed price | start date | planned end date | actual end date | completion status |
             | programme only DAS | 15000        | 01/09/2017 | 08/09/2018       | 08/07/2018      | completed         |
@@ -68,7 +68,7 @@ Feature: Provider earnings and payments where learner completes earlier than pla
             | Provider 16-18 incentive | 0     | 0     | 0     | 0     | ... | 0     | 0     |
 
 
-	Scenario: A non-DAS learner, learner withdraws after qualifying period
+    Scenario: A non-DAS learner, learner withdraws after qualifying period
     
         When an ILR file is submitted with the following data:
             | agreed price | learner type           | start date | planned end date | actual end date | completion status |
@@ -84,10 +84,10 @@ Feature: Provider earnings and payments where learner completes earlier than pla
             | SFA Levy employer budget      | 0     | 0     | 0     | 0     | 0     |
             | SFA Levy co-funding budget    | 0     | 0     | 0     | 0     | 0     |
             | SFA non-Levy co-funding budget| 900   | 900   | 900   | 900   | 0     |
-		And the transaction types for the payments are:
-		    | Payment type             | 10/17 | 11/17 | 12/17 | 01/18 | 
-		    | On-program               | 900   | 900   | 900   | 900   | 
-		    | Completion               | 0     | 0     | 0     | 0     | 
-		    | Balancing                | 0     | 0     | 0     | 0     | 
-		    | Employer 16-18 incentive | 0     | 0     | 0     | 0     | 
-		    | Provider 16-18 incentive | 0     | 0     | 0     | 0     | 
+        And the transaction types for the payments are:
+            | Payment type             | 10/17 | 11/17 | 12/17 | 01/18 | 
+            | On-program               | 900   | 900   | 900   | 900   | 
+            | Completion               | 0     | 0     | 0     | 0     | 
+            | Balancing                | 0     | 0     | 0     | 0     | 
+            | Employer 16-18 incentive | 0     | 0     | 0     | 0     | 
+            | Provider 16-18 incentive | 0     | 0     | 0     | 0     | 

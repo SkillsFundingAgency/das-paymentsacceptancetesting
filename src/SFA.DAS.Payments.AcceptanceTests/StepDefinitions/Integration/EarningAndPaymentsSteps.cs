@@ -61,11 +61,37 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             
         }
 
-        [When(@"an ILR file is submitted with the following data:"), Scope(Scenario = "Apprentice changes from a non-DAS to DAS employer, levy is available for the DAS employer")]
+        [When(@"an ILR file is submitted with the following data:"), 
+            Scope(Scenario = "Apprentice changes from a non-DAS to DAS employer, levy is available for the DAS employer")]
         public void WhenAnIlrFileIsSubmittedWithTheFollowingDataNoSubmission(Table table)
         {
             ScenarioContext.Current.Add("learners", table);
         }
+
+        [When(@"an ILR file is submitted with the following data:"), Scope(Tag = "LearnerChangesEmployerGapInCommitments")]
+        public void WhenAnIlrFileIsSubmittedWithTheFollowingDataNoSubmissionGapInCommitments(Table table)
+        {
+            ScenarioContext.Current.Add("learners", table);
+        }
+
+        [When(@"the Contract type in the ILR is:"), Scope(Tag = @"LearnerChangesEmployerGapInCommitments")]
+        public void WhenTheContractTypeInTheIlrIsNoSubmission(Table table)
+        {
+            BuildContractTypes(table);
+        }
+
+        [When(@"the employment status in the ILR is:")]
+        public void WhenTheEmploymentStatusInTheILRIs(Table table)
+        {
+             Table learnerTable = null;
+
+            PopulateEmploymentStatuses(table);
+            
+            ScenarioContext.Current.TryGetValue("learners", out learnerTable);
+            
+            ProcessIlrFileSubmissions(learnerTable);
+        }   
+
 
         [When(@"the Contract type in the ILR is:")]
         public void WhenTheContractTypeInTheIlrIs(Table table)
@@ -80,7 +106,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             //        Field = column.Trim(),
             //        Type = "column"
             //    };
-
             //    SpecFlowEntitiesDataHelper.AddEntityRow(entity, environmentVariables);
             //}
 
@@ -150,6 +175,38 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             VerifyTransactionsForThePayments(table, 1);
         }
 
+        private void BuildContractTypes(Table table)
+        {
+            var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
+
+            foreach (var row in table.Rows)
+            {
+                foreach (var key in row.Keys)
+                {
+                    var entity = new SpecFlowEntity
+                    {
+                        Name = "apprenticeship contract type",
+                        Field = key,
+                        Type = "column"
+                    };
+
+                    SpecFlowEntitiesDataHelper.AddEntityRow(entity, environmentVariables);
+                }
+            }
+
+            //for (var rowIndex = 0; rowIndex < table.RowCount; rowIndex++)
+            //{
+            //    var famCode = new LearningDeliveryFam
+            //    {
+            //        FamCode = table.Rows[rowIndex]["contract type"] == "DAS" ? 1 : 2,
+            //        StartDate = DateTime.Parse(table.Rows[rowIndex]["date from"]),
+            //        EndDate = DateTime.Parse(table.Rows[rowIndex]["date to"]),
+            //        FamType = "ACT"
+            //    };
+
+            //    StepDefinitionsContext.ReferenceDataContext.AddLearningDeliveryFam(famCode);
+            //}
+        }
 
         public void VerifyTransactionsForThePayments(Table table,long ukprn)
         {
@@ -284,7 +341,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                 SetupPeriodReferenceData(date);
 
                 UpdateAccountsBalances(period);
-                UpdateCommitmentsPaymentStatuses(date);
 
                 var academicYear = date.GetAcademicYear();
 
