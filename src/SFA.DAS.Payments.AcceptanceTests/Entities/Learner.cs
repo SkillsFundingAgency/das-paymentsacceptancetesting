@@ -8,6 +8,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Entities
         public Learner()
         {
             LearningDeliveries = new List<LearningDelivery>();
+            EmploymentStatuses = new List<EmploymentStatus>();
         }
         public string Name { get; set; }
         public long Uln { get; set; }
@@ -24,10 +25,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Entities
                 return LearningDeliveries[0];
             }
         }
-        public int? EmploymentStatus { get; set; }
-        public DateTime? EmploymentStatusDate { get; set; }
-        public string EmployerId { get; set; }
-
-        public EmploymentStatusMonitoring EmploymentStatusMonitoring { get; set; }
+     
+        public List<EmploymentStatus> EmploymentStatuses { get; set; }
     }
 }
