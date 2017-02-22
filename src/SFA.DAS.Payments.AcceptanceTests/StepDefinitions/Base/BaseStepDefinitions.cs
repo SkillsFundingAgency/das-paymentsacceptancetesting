@@ -159,7 +159,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 
                 var commitmentStartDate = commitment.StartDate ?? learner.LearningDelivery.StartDate;
                 var commitmentEffectiveFromDate = commitment.EffectiveFrom ?? commitmentStartDate;
-                var commitmentEndDate = commitment.ActualEndDate ?? commitment.EndDate ?? learner.LearningDelivery.PlannedEndDate;
+                var commitmentEndDate = commitment.EndDate ?? learner.LearningDelivery.PlannedEndDate;
                 var priceEpisode = learner.LearningDelivery.PriceEpisodes.Where(pe => pe.StartDate >= commitmentStartDate && pe.StartDate <= commitmentEndDate).OrderBy(pe => pe.StartDate).FirstOrDefault();
 
                 CommitmentDataHelper.CreateCommitment(
@@ -170,7 +170,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                         Uln = learner.Uln,
                         AccountId = accountId.ToString(),
                         StartDate = commitmentStartDate,
-                        EndDate = commitment.ActualEndDate ?? commitment.EndDate ?? learner.LearningDelivery.PlannedEndDate,
+                        EndDate = commitment.EndDate ?? learner.LearningDelivery.PlannedEndDate,
                         AgreedCost = commitment.AgreedPrice ?? priceEpisode.TotalPrice,
                         StandardCode = commitment.StandardCode,
                         FrameworkCode = commitment.FrameworkCode,
@@ -178,12 +178,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                         PathwayCode = commitment.PathwayCode,
                         Priority = commitment.Priority,
                         VersionId = commitment.VersionId,
-                        PaymentStatus = commitment.StopPeriodCensusDate.HasValue
-                                            ? (int)CommitmentPaymentStatus.Active
-                                            : (int)commitment.Status,
-                        PaymentStatusDescription = commitment.StopPeriodCensusDate.HasValue
-                                            ? CommitmentPaymentStatus.Active.ToString()
-                                            : commitment.Status.ToString(),
+                        PaymentStatus = (int)commitment.Status,
+                        PaymentStatusDescription = commitment.Status.ToString(),
                         EffectiveFrom = commitmentEffectiveFromDate,
                         EffectiveTo = commitment.EffectiveTo
                     },
@@ -423,7 +419,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 
         protected void SetupContexLearners(Table table)
         {
-            if (table.Header.Contains("Employment Status") && !StepDefinitionsContext.ReferenceDataContext.EmploymentStatuses.Any())
+            if (table.Header.Contains("Employment Status") && StepDefinitionsContext.ReferenceDataContext.EmploymentStatuses == null)
             {
                 PopulateEmploymentStatuses(table);
             }
@@ -552,18 +548,18 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             StepDefinitionsContext.ReferenceDataContext.AddEmploymentStatus(status);
         }
 
-        private long GetEmployerId(TableRow row)
+        private int GetEmployerId(TableRow row)
         {
             if (row.Contains("Employer Id"))
             {
-                return row.Value<long>("Employer Id");
+                return row.Value<int>("Employer Id");
             }
             else if (row.Contains("Employer"))
             {
                 var empName = row.Value<string>("Employer");
                 var employer = StepDefinitionsContext.ReferenceDataContext.Employers.Where(
                                 x => x.Name.Equals(empName, StringComparison.InvariantCultureIgnoreCase));
-                return employer.Any() ? employer.First().AccountId : 0;
+                return employer.Any() ? int.Parse(employer.First().AccountId.ToString().Substring(0,4)) : 0;
             }
             else
             {
@@ -690,18 +686,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                 });
             }
             return priceEpisodes;
-        }
-
-        protected void UpdateCommitmentsPaymentStatuses(DateTime censusDate)
-        {
-            foreach (var commitment in StepDefinitionsContext.ReferenceDataContext.Commitments)
-            {
-                if (commitment.StopPeriodCensusDate.HasValue && commitment.StopPeriodCensusDate <= censusDate)
-                {
-                    CommitmentDataHelper.UpdateCommitmentEffectiveTo(commitment.Id, commitment.VersionId, commitment.StopPeriodCensusDate.Value.AddDays(-1), EnvironmentVariables);
-                    CommitmentDataHelper.CreateNewCommmitmentVersion(commitment.Id, commitment.VersionId, commitment.Status, commitment.StopPeriodCensusDate.Value, EnvironmentVariables);
-                }
-            }
         }
 
         protected CommitmentPaymentStatus GetCommitmentStatusOrThrow(string status)

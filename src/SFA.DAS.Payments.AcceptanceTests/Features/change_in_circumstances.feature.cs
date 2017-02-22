@@ -96,8 +96,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "version Id",
                         "ULN",
                         "standard code",
-                        "price effective date",
-                        "planned end date",
+                        "start date",
+                        "end date",
                         "agreed price",
                         "effective from",
                         "effective to"});
@@ -242,8 +242,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "commitment Id",
                         "ULN",
                         "standard code",
-                        "price effective date",
-                        "planned end date",
+                        "start date",
+                        "end date",
                         "agreed price"});
             table5.AddRow(new string[] {
                         "1",
@@ -374,8 +374,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "version Id",
                         "ULN",
                         "standard code",
-                        "price effective date",
-                        "planned end date",
+                        "start date",
+                        "end date",
                         "agreed price",
                         "effective from",
                         "effective to"});
@@ -512,18 +512,44 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
 #line hidden
             TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                         "commitment Id",
+                        "version Id",
                         "ULN",
-                        "price effective date",
-                        "planned end date",
-                        "actual end date",
-                        "agreed price"});
+                        "start date",
+                        "end date",
+                        "status",
+                        "agreed price",
+                        "effective from",
+                        "effective to"});
             table13.AddRow(new string[] {
+                        "1",
                         "1",
                         "learner a",
                         "01/09/2017",
                         "08/09/2018",
-                        "31/10/2018",
-                        "15000"});
+                        "active",
+                        "15000",
+                        "01/09/2017",
+                        "31/10/2017"});
+            table13.AddRow(new string[] {
+                        "1",
+                        "2",
+                        "learner a",
+                        "01/09/2017",
+                        "08/09/2018",
+                        "paused",
+                        "15000",
+                        "01/11/2017",
+                        "02/01/2018"});
+            table13.AddRow(new string[] {
+                        "1",
+                        "3",
+                        "learner a",
+                        "01/09/2017",
+                        "08/09/2018",
+                        "active",
+                        "15000",
+                        "03/01/2018",
+                        ""});
 #line 73
         testRunner.Given("the following commitments exist on 03/12/2017:", ((string)(null)), table13, "Given ");
 #line hidden
@@ -557,7 +583,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "03/01/2018",
                         "3000",
                         "03/01/2018"});
-#line 76
+#line 78
         testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table14, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
@@ -615,7 +641,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "...",
                         "1000",
                         "0"});
-#line 80
+#line 82
         testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table15, "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -628,13 +654,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Earnings and payments for a DAS learner, levy available, and there is a change to" +
                     " the Negotiated Cost which happens at the end of the month", ((string[])(null)));
-#line 88
+#line 90
     this.ScenarioSetup(scenarioInfo);
 #line 3
     this.FeatureBackground();
-#line 89
+#line 91
         testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 90
+#line 92
         testRunner.And("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
@@ -667,7 +693,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "9375",
                         "01/11/2017",
                         ""});
-#line 91
+#line 93
         testRunner.And("the following commitments exist:", ((string)(null)), table16, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
@@ -698,7 +724,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "01/11/2017",
                         "1875",
                         "01/11/2017"});
-#line 95
+#line 97
         testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table17, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
@@ -709,7 +735,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "Matching price",
                         "15000",
                         "9375"});
-#line 98
+#line 100
         testRunner.Then("the data lock status will be as follows:", ((string)(null)), table18, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
@@ -802,7 +828,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "...",
                         "0",
                         "0"});
-#line 101
+#line 103
         testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table19, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -815,13 +841,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Earnings and payments for a DAS learner, levy available, and there is a change to" +
                     " the Negotiated Cost which happens in the middle of the month", ((string[])(null)));
-#line 113
+#line 115
     this.ScenarioSetup(scenarioInfo);
 #line 3
     this.FeatureBackground();
-#line 114
+#line 116
         testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 115
+#line 117
         testRunner.And("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
@@ -854,7 +880,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "9375",
                         "01/11/2017",
                         ""});
-#line 116
+#line 118
         testRunner.And("the following commitments exist:", ((string)(null)), table20, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
@@ -885,7 +911,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "10/11/2017",
                         "1875",
                         "10/11/2017"});
-#line 120
+#line 122
         testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table21, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
@@ -896,7 +922,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "Matching price",
                         "15000",
                         "9375"});
-#line 123
+#line 125
         testRunner.Then("the data lock status will be as follows:", ((string)(null)), table22, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
@@ -989,7 +1015,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "...",
                         "0",
                         "0"});
-#line 126
+#line 128
         testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table23, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1004,13 +1030,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Earnings and payments for a DAS learner, levy available, and there is a change to" +
                     " the Negotiated Cost which happens in the middle of the month and the ILR starts" +
                     " earlier", ((string[])(null)));
-#line 138
+#line 140
     this.ScenarioSetup(scenarioInfo);
 #line 3
     this.FeatureBackground();
-#line 139
+#line 141
         testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 140
+#line 142
         testRunner.And("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1043,7 +1069,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "9375",
                         "01/11/2017",
                         ""});
-#line 141
+#line 143
         testRunner.And("the following commitments exist:", ((string)(null)), table24, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1074,7 +1100,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "24/10/2017",
                         "1875",
                         "24/10/2017"});
-#line 145
+#line 147
         testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table25, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table26 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1085,7 +1111,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "Matching price",
                         "15000",
                         ""});
-#line 148
+#line 150
         testRunner.Then("the data lock status will be as follows:", ((string)(null)), table26, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table27 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1178,7 +1204,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "...",
                         "0",
                         "0"});
-#line 151
+#line 153
         testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table27, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1191,13 +1217,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Earnings and payments for a DAS learner, levy available, and there is a change to" +
                     " the Negotiated Cost and the ILR is not updated", ((string[])(null)));
-#line 163
+#line 165
     this.ScenarioSetup(scenarioInfo);
 #line 3
     this.FeatureBackground();
-#line 164
+#line 166
         testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 165
+#line 167
         testRunner.And("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table28 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1230,7 +1256,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "9375",
                         "01/11/2017",
                         ""});
-#line 166
+#line 168
         testRunner.And("the following commitments exist:", ((string)(null)), table28, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table29 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1253,7 +1279,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "01/08/2017",
                         "3000",
                         "01/08/2017"});
-#line 170
+#line 172
         testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table29, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table30 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1262,7 +1288,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
             table30.AddRow(new string[] {
                         "Matching price",
                         "15000"});
-#line 173
+#line 175
         testRunner.Then("the data lock status will be as follows:", ((string)(null)), table30, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table31 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1355,7 +1381,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "...",
                         "0",
                         "0"});
-#line 176
+#line 178
         testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table31, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1368,13 +1394,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Earnings and payments for a DAS learner, levy available, where the apprenticeship" +
                     " standard changes middle of month and data lock is passed in both instances", ((string[])(null)));
-#line 189
- this.ScenarioSetup(scenarioInfo);
+#line 191
+    this.ScenarioSetup(scenarioInfo);
 #line 3
     this.FeatureBackground();
-#line 190
+#line 192
         testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 191
+#line 193
         testRunner.And("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table32 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1383,7 +1409,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "ULN",
                         "standard code",
                         "start date",
-                        "planned end date",
+                        "end date",
                         "agreed price",
                         "status",
                         "effective from",
@@ -1410,8 +1436,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "active",
                         "11/11/2017",
                         ""});
-#line 192
-  testRunner.And("the following commitments exist:", ((string)(null)), table32, "And ");
+#line 194
+        testRunner.And("the following commitments exist:", ((string)(null)), table32, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table33 = new TechTalk.SpecFlow.Table(new string[] {
                         "ULN",
@@ -1446,7 +1472,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "11/11/2017",
                         "1125",
                         "11/11/2017"});
-#line 196
+#line 198
         testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table33, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table34 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1457,7 +1483,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "Matching price",
                         "15000",
                         "5625"});
-#line 201
+#line 203
         testRunner.Then("the data lock status will be as follows:", ((string)(null)), table34, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table35 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1502,7 +1528,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "0",
                         "0"});
-#line 205
+#line 207
         testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table35, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1515,13 +1541,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ILR changes standard in the middle of the month, but no corresponding change to t" +
                     "he commitment is confirmed", ((string[])(null)));
-#line 213
+#line 215
 this.ScenarioSetup(scenarioInfo);
 #line 3
     this.FeatureBackground();
-#line 214
+#line 216
         testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 215
+#line 217
         testRunner.And("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table36 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1530,7 +1556,7 @@ this.ScenarioSetup(scenarioInfo);
                         "ULN",
                         "standard code",
                         "start date",
-                        "planned end date",
+                        "end date",
                         "agreed price",
                         "status",
                         "effective from",
@@ -1546,8 +1572,8 @@ this.ScenarioSetup(scenarioInfo);
                         "active",
                         "01/08/2017",
                         ""});
-#line 216
-  testRunner.And("the following commitments exist:", ((string)(null)), table36, "And ");
+#line 218
+        testRunner.And("the following commitments exist:", ((string)(null)), table36, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table37 = new TechTalk.SpecFlow.Table(new string[] {
                         "ULN",
@@ -1582,7 +1608,7 @@ this.ScenarioSetup(scenarioInfo);
                         "11/11/2017",
                         "1125",
                         "11/11/2017"});
-#line 219
+#line 221
         testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table37, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table38 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1593,7 +1619,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Matching price",
                         "15000",
                         ""});
-#line 224
+#line 226
         testRunner.Then("the data lock status will be as follows:", ((string)(null)), table38, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table39 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1644,8 +1670,8 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 228
-  testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table39, "And ");
+#line 230
+        testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table39, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -1659,13 +1685,13 @@ this.ScenarioSetup(scenarioInfo);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Earnings and payments for a DAS learner, levy available, where the apprenticeship" +
                     " standard changes middle of month A commitment is updated to show a change in st" +
                     "andard, mid-month, but the ILR does not reflect this", ((string[])(null)));
-#line 236
+#line 238
 this.ScenarioSetup(scenarioInfo);
 #line 3
     this.FeatureBackground();
-#line 237
+#line 239
         testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 238
+#line 240
         testRunner.And("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table40 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1674,7 +1700,7 @@ this.ScenarioSetup(scenarioInfo);
                         "ULN",
                         "standard code",
                         "start date",
-                        "planned end date",
+                        "end date",
                         "agreed price",
                         "status",
                         "effective from",
@@ -1701,8 +1727,8 @@ this.ScenarioSetup(scenarioInfo);
                         "active",
                         "11/11/2017",
                         ""});
-#line 239
-  testRunner.And("the following commitments exist:", ((string)(null)), table40, "And ");
+#line 241
+        testRunner.And("the following commitments exist:", ((string)(null)), table40, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table41 = new TechTalk.SpecFlow.Table(new string[] {
                         "ULN",
@@ -1726,7 +1752,7 @@ this.ScenarioSetup(scenarioInfo);
                         "03/08/2017",
                         "3000",
                         "03/08/2017"});
-#line 243
+#line 245
         testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table41, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table42 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1737,7 +1763,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Matching price",
                         "15000",
                         ""});
-#line 247
+#line 249
         testRunner.Then("the data lock status will be as follows:", ((string)(null)), table42, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table43 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1788,7 +1814,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 251
+#line 253
         testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table43, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1803,13 +1829,13 @@ this.ScenarioSetup(scenarioInfo);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Earnings and payments for a DAS learner, levy available, where the apprenticeship" +
                     " standard changes in the middle of the month and the ILR change happens later wi" +
                     "thin the same month", ((string[])(null)));
-#line 259
+#line 261
 this.ScenarioSetup(scenarioInfo);
 #line 3
     this.FeatureBackground();
-#line 260
+#line 262
         testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 261
+#line 263
         testRunner.And("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table44 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1818,7 +1844,7 @@ this.ScenarioSetup(scenarioInfo);
                         "ULN",
                         "standard code",
                         "start date",
-                        "planned end date",
+                        "end date",
                         "agreed price",
                         "status",
                         "effective from",
@@ -1845,8 +1871,8 @@ this.ScenarioSetup(scenarioInfo);
                         "active",
                         "11/11/2017",
                         ""});
-#line 262
-  testRunner.And("the following commitments exist:", ((string)(null)), table44, "And ");
+#line 264
+        testRunner.And("the following commitments exist:", ((string)(null)), table44, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table45 = new TechTalk.SpecFlow.Table(new string[] {
                         "ULN",
@@ -1881,7 +1907,7 @@ this.ScenarioSetup(scenarioInfo);
                         "19/11/2017",
                         "1125",
                         "19/11/2017"});
-#line 266
+#line 268
         testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table45, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table46 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1892,7 +1918,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Matching price",
                         "15000",
                         "5625"});
-#line 271
+#line 273
         testRunner.Then("the data lock status will be as follows:", ((string)(null)), table46, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table47 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1937,7 +1963,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 275
+#line 277
         testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table47, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1952,13 +1978,13 @@ this.ScenarioSetup(scenarioInfo);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Earnings and payments for a DAS learner, levy available, where the apprenticeship" +
                     " standard changes in the middle of the month and the ILR change happens later in" +
                     " the next month", ((string[])(null)));
-#line 283
+#line 285
 this.ScenarioSetup(scenarioInfo);
 #line 3
     this.FeatureBackground();
-#line 284
+#line 286
         testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 285
+#line 287
         testRunner.And("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table48 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1967,7 +1993,7 @@ this.ScenarioSetup(scenarioInfo);
                         "ULN",
                         "standard code",
                         "start date",
-                        "planned end date",
+                        "end date",
                         "agreed price",
                         "status",
                         "effective from",
@@ -1994,8 +2020,8 @@ this.ScenarioSetup(scenarioInfo);
                         "active",
                         "11/11/2017",
                         ""});
-#line 286
-  testRunner.And("the following commitments exist:", ((string)(null)), table48, "And ");
+#line 288
+        testRunner.And("the following commitments exist:", ((string)(null)), table48, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table49 = new TechTalk.SpecFlow.Table(new string[] {
                         "ULN",
@@ -2030,7 +2056,7 @@ this.ScenarioSetup(scenarioInfo);
                         "05/12/2017",
                         "1125",
                         "05/12/2017"});
-#line 290
+#line 292
         testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table49, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table50 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2041,7 +2067,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Matching price",
                         "15000",
                         "5625"});
-#line 295
+#line 297
         testRunner.Then("the data lock status will be as follows:", ((string)(null)), table50, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table51 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2092,7 +2118,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 299
+#line 301
         testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table51, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -2107,13 +2133,13 @@ this.ScenarioSetup(scenarioInfo);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Earnings and payments for a DAS learner, levy available, where the apprenticeship" +
                     " standard changes in the middle of the month and the ILR change happens later wi" +
                     "thin the same month before commitment starts", ((string[])(null)));
-#line 307
+#line 309
 this.ScenarioSetup(scenarioInfo);
 #line 3
     this.FeatureBackground();
-#line 308
+#line 310
         testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 309
+#line 311
         testRunner.And("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table52 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2122,7 +2148,7 @@ this.ScenarioSetup(scenarioInfo);
                         "ULN",
                         "standard code",
                         "start date",
-                        "planned end date",
+                        "end date",
                         "agreed price",
                         "status",
                         "effective from",
@@ -2149,8 +2175,8 @@ this.ScenarioSetup(scenarioInfo);
                         "active",
                         "11/11/2017",
                         ""});
-#line 310
-  testRunner.And("the following commitments exist:", ((string)(null)), table52, "And ");
+#line 312
+        testRunner.And("the following commitments exist:", ((string)(null)), table52, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table53 = new TechTalk.SpecFlow.Table(new string[] {
                         "ULN",
@@ -2185,7 +2211,7 @@ this.ScenarioSetup(scenarioInfo);
                         "06/11/2017",
                         "1125",
                         "06/11/2017"});
-#line 314
+#line 316
         testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table53, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table54 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2196,7 +2222,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Matching price",
                         "15000",
                         ""});
-#line 319
+#line 321
         testRunner.Then("the data lock status will be as follows:", ((string)(null)), table54, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table55 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2241,7 +2267,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 323
+#line 325
         testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table55, "And ");
 #line hidden
             this.ScenarioCleanup();

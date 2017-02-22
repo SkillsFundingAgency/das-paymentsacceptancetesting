@@ -33,7 +33,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
         }
 
         [Given(@"Two learners are programme only DAS")]
-        public void GivenTwoLearnersAreProgrammeOnlyDAS()
+        public void GivenTwoLearnersAreProgrammeOnlyDas()
         {
             ReferenceDataContext.LearnerType = LearnerType.ProgrammeOnlyDas;
         }
@@ -229,19 +229,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                     Status = row.ContainsKey("status")
                         ? GetStatus(row["status"])
                         : CommitmentPaymentStatus.Active,
-                    StopPeriod = row.ContainsKey("stopped on")
-                        ? row["stopped on"]
-                        : string.Empty,
-                    StartDate = row.ContainsKey("price effective date")
-                        ? DateTime.Parse(row["price effective date"])
-                        : row.ContainsKey("start date")
-                            ? DateTime.Parse(row["start date"])
-                            : (DateTime?)null,
-                    EndDate = row.ContainsKey("planned end date")
-                        ? DateTime.Parse(row["planned end date"])
+                    StartDate = row.ContainsKey("start date")
+                        ? DateTime.Parse(row["start date"])
                         : (DateTime?)null,
-                    ActualEndDate = row.ContainsKey("actual end date") && !string.IsNullOrWhiteSpace(row["actual end date"])
-                        ? DateTime.Parse(row["actual end date"])
+                    EndDate = row.ContainsKey("end date")
+                        ? DateTime.Parse(row["end date"])
                         : (DateTime?)null,
                     AgreedPrice = row.ContainsKey("agreed price")
                         ? decimal.Parse(row["agreed price"])
