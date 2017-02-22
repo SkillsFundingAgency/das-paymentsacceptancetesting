@@ -572,7 +572,7 @@ Scenario: 1 learner aged 16-18, levy available, changes employer, earns incentiv
 
 @LearnerChangesEmployerGapInCommitments
 #AC1
-Scenario: Provider earnings and payments where learner changes employer and there is a gap between commitments - provider receives payment during the gap as they amend the ACT code and employment status code correctly.
+Scenario:AC1- Provider earnings and payments where learner changes employer and there is a gap between commitments - provider receives payment during the gap as they amend the ACT code and employment status code correctly.
 		Given The learner is programme only DAS
         And the apprenticeship funding band maximum is 17000
 		And the ABC has a levy balance > agreed price for all months
@@ -605,19 +605,20 @@ Scenario: Provider earnings and payments where learner changes employer and ther
 			| type                | 08/17 - 09/17 | 10/17 | 11/17 onwards |
 			| matching commitment | 1             | N/A   | 2             |
         And the provider earnings and payments break down as follows:
-            | Type                       | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 |
-            | Provider Earned Total      | 1000  | 1000  | 1000  | 500   | 500   |
-            | Provider Paid by SFA       | 0     | 1000  | 1000  | 1000  | 500   |
-            | ABC Levy account debited   | 0     | 1000  | 1000  | 0     | 0     |
-            | XYZ Levy account debited   | 0     | 0     | 0     | 0     | 500   |
-            | SFA Levy employer budget   | 1000  | 1000  | 0     | 500   | 500   |
-            | SFA Levy co-funding budget | 0     | 0     | 1000  | 0     | 0     |
+            | Type                           | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 |
+            | Provider Earned Total          | 1000  | 1000  | 1000  | 500   | 500   |
+            | Provider Paid by SFA           | 0     | 1000  | 1000  | 1000  | 500   |
+            | ABC Levy account debited       | 0     | 1000  | 1000  | 0     | 0     |
+            | XYZ Levy account debited       | 0     | 0     | 0     | 0     | 500   |
+            | SFA Levy employer budget       | 1000  | 1000  | 0     | 500   | 500   |
+            | SFA Levy co-funding budget     | 0     | 0     | 0     | 0     | 0     |
+            | SFA non-Levy co-funding budget | 0     | 0     | 1000  | 0     | 0     |
 
 
 			
 @LearnerChangesEmployerGapInCommitments
 #AC2
-Scenario: Provider earnings and payments where learner changes employer and there is a gap between commitments - provider receives no payment during the gap as they do not change the ACT code or employment status on the ILR
+Scenario:AC2- Provider earnings and payments where learner changes employer and there is a gap between commitments - provider receives no payment during the gap as they do not change the ACT code or employment status on the ILR
 		Given The learner is programme only DAS
         And the apprenticeship funding band maximum is 17000
 		And the ABC has a levy balance > agreed price for all months
@@ -657,7 +658,7 @@ Scenario: Provider earnings and payments where learner changes employer and ther
 						
 @LearnerChangesEmployerGapInCommitments
 #AC3
-Scenario: Provider earnings and payments where learner changes employer and there is a gap between commitments - provider does not receive payment during the gap as they amend the ACT code but do not amend the employment status code correctly.
+Scenario:AC3- Provider earnings and payments where learner changes employer and there is a gap between commitments - provider does not receive payment during the gap as they amend the ACT code but do not amend the employment status code correctly.
 		Given The learner is programme only DAS
         And the apprenticeship funding band maximum is 17000
 		And the ABC has a levy balance > agreed price for all months
@@ -698,7 +699,7 @@ Scenario: Provider earnings and payments where learner changes employer and ther
 			
 @LearnerChangesEmployerGapInCommitments
 #AC4
-Scenario: Provider earnings and payments where learner changes employer and there is a gap between commitments - provider does not receive payment during the gap as they amend the employment status code correctly but do not amend the ACT code.
+Scenario: AC4-Provider earnings and payments where learner changes employer and there is a gap between commitments - provider does not receive payment during the gap as they amend the employment status code correctly but do not amend the ACT code.
 
 		Given The learner is programme only DAS
         And the apprenticeship funding band maximum is 17000
@@ -743,7 +744,7 @@ Scenario: Provider earnings and payments where learner changes employer and ther
 
 @LearnerChangesEmployerGapInCommitments
 #AC5
-Scenario: Provider earnings and payments where learner changes employer and there is a gap of more than 12 weeks between commitments - provider does not receive more than 12 weeks of payments during the gap.
+Scenario:AC5-Provider earnings and payments where learner changes employer and there is a gap of more than 12 weeks between commitments - provider does not receive more than 12 weeks of payments during the gap.
 		Given The learner is programme only DAS
         And the apprenticeship funding band maximum is 17000
 		And the ABC has a levy balance > agreed price for all months
@@ -776,10 +777,12 @@ Scenario: Provider earnings and payments where learner changes employer and ther
 			| type                | 08/17 - 09/17 | 10/17 | 11/17 onwards |
 			| matching commitment | 1             | N/A   | 2             |
         And the provider earnings and payments break down as follows:
-            | Type                       | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 | 02/18 | 03/18 | 04/18 |
-            | Provider Earned Total      | 1000  | 1000  | 1000  | 1000  | 1000  | 0     | 0     | 500   | 500   |
-            | Provider Paid by SFA       | 0     | 1000  | 1000  | 1000  | 1000  | 1000  | 0     | 0     | 500   |
-            | ABC Levy account debited   | 0     | 1000  | 1000  | 0     | 0     | 0     | 0     | 0     | 0     |
-            | XYZ Levy account debited   | 0     | 0     | 0     | 0     | 500   | 0     | 0     | 0     | 500   |
-            | SFA Levy employer budget   | 1000  | 1000  | 0     | 0     | 0     | 0     | 0     | 500   | 500   |
-            | SFA Levy co-funding budget | 0     | 0     | 1000  | 1000  | 1000  | 0     | 0     | 0     | 0     |
+            | Type                           | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 | 02/18 | 03/18 | 04/18 |
+            | Provider Earned Total          | 1000  | 1000  | 1000  | 1000  | 1000  | 0     | 0     | 500   | 500   |
+            | Provider Paid by SFA           | 0     | 1000  | 1000  | 1000  | 1000  | 1000  | 0     | 0     | 500   |
+            | ABC Levy account debited       | 0     | 1000  | 1000  | 0     | 0     | 0     | 0     | 0     | 0     |
+            | XYZ Levy account debited       | 0     | 0     | 0     | 0     | 500   | 0     | 0     | 0     | 500   |
+            | SFA Levy employer budget       | 1000  | 1000  | 0     | 0     | 0     | 0     | 0     | 500   | 500   |
+            | SFA Levy co-funding budget     | 0     | 0     | 0     | 0     | 0     | 0     | 0     | 0     | 0     |
+            | SFA non-Levy co-funding budget | 0     | 0     | 1000  | 1000  | 1000  | 0     | 0     | 0     | 0     |
+

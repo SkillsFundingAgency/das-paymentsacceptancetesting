@@ -3616,15 +3616,15 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Provider earnings and payments where learner changes employer and there is a gap " +
-            "between commitments - provider receives payment during the gap as they amend the" +
-            " ACT code and employment status code correctly.")]
+        [NUnit.Framework.DescriptionAttribute("AC1- Provider earnings and payments where learner changes employer and there is a" +
+            " gap between commitments - provider receives payment during the gap as they amen" +
+            "d the ACT code and employment status code correctly.")]
         [NUnit.Framework.CategoryAttribute("LearnerChangesEmployerGapInCommitments")]
-        public virtual void ProviderEarningsAndPaymentsWhereLearnerChangesEmployerAndThereIsAGapBetweenCommitments_ProviderReceivesPaymentDuringTheGapAsTheyAmendTheACTCodeAndEmploymentStatusCodeCorrectly_()
+        public virtual void AC1_ProviderEarningsAndPaymentsWhereLearnerChangesEmployerAndThereIsAGapBetweenCommitments_ProviderReceivesPaymentDuringTheGapAsTheyAmendTheACTCodeAndEmploymentStatusCodeCorrectly_()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Provider earnings and payments where learner changes employer and there is a gap " +
-                    "between commitments - provider receives payment during the gap as they amend the" +
-                    " ACT code and employment status code correctly.", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("AC1- Provider earnings and payments where learner changes employer and there is a" +
+                    " gap between commitments - provider receives payment during the gap as they amen" +
+                    "d the ACT code and employment status code correctly.", new string[] {
                         "LearnerChangesEmployerGapInCommitments"});
 #line 575
 this.ScenarioSetup(scenarioInfo);
@@ -3839,6 +3839,13 @@ this.ScenarioSetup(scenarioInfo);
                         "SFA Levy co-funding budget",
                         "0",
                         "0",
+                        "0",
+                        "0",
+                        "0"});
+            table193.AddRow(new string[] {
+                        "SFA non-Levy co-funding budget",
+                        "0",
+                        "0",
                         "1000",
                         "0",
                         "0"});
@@ -3849,27 +3856,27 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Provider earnings and payments where learner changes employer and there is a gap " +
-            "between commitments - provider receives no payment during the gap as they do not" +
-            " change the ACT code or employment status on the ILR")]
+        [NUnit.Framework.DescriptionAttribute("AC2- Provider earnings and payments where learner changes employer and there is a" +
+            " gap between commitments - provider receives no payment during the gap as they d" +
+            "o not change the ACT code or employment status on the ILR")]
         [NUnit.Framework.CategoryAttribute("LearnerChangesEmployerGapInCommitments")]
-        public virtual void ProviderEarningsAndPaymentsWhereLearnerChangesEmployerAndThereIsAGapBetweenCommitments_ProviderReceivesNoPaymentDuringTheGapAsTheyDoNotChangeTheACTCodeOrEmploymentStatusOnTheILR()
+        public virtual void AC2_ProviderEarningsAndPaymentsWhereLearnerChangesEmployerAndThereIsAGapBetweenCommitments_ProviderReceivesNoPaymentDuringTheGapAsTheyDoNotChangeTheACTCodeOrEmploymentStatusOnTheILR()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Provider earnings and payments where learner changes employer and there is a gap " +
-                    "between commitments - provider receives no payment during the gap as they do not" +
-                    " change the ACT code or employment status on the ILR", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("AC2- Provider earnings and payments where learner changes employer and there is a" +
+                    " gap between commitments - provider receives no payment during the gap as they d" +
+                    "o not change the ACT code or employment status on the ILR", new string[] {
                         "LearnerChangesEmployerGapInCommitments"});
-#line 620
+#line 621
 this.ScenarioSetup(scenarioInfo);
 #line 3
     this.FeatureBackground();
-#line 621
-  testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 622
-        testRunner.And("the apprenticeship funding band maximum is 17000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 623
-  testRunner.And("the ABC has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the apprenticeship funding band maximum is 17000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 624
+  testRunner.And("the ABC has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 625
         testRunner.And("the XYZ has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table194 = new TechTalk.SpecFlow.Table(new string[] {
@@ -3888,7 +3895,7 @@ this.ScenarioSetup(scenarioInfo);
                         "XYZ",
                         "DAS",
                         "03/11/2017"});
-#line 625
+#line 626
         testRunner.And("the learner changes employers", ((string)(null)), table194, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table195 = new TechTalk.SpecFlow.Table(new string[] {
@@ -3939,7 +3946,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Active",
                         "01/11/2017",
                         ""});
-#line 630
+#line 631
         testRunner.And("the following commitments exist:", ((string)(null)), table195, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table196 = new TechTalk.SpecFlow.Table(new string[] {
@@ -3972,7 +3979,7 @@ this.ScenarioSetup(scenarioInfo);
                         "03/11/2017",
                         "1125",
                         "03/11/2017"});
-#line 635
+#line 636
         testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table196, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table197 = new TechTalk.SpecFlow.Table(new string[] {
@@ -3983,7 +3990,7 @@ this.ScenarioSetup(scenarioInfo);
                         "DAS",
                         "03/08/2017",
                         "04/08/2018"});
-#line 638
+#line 639
   testRunner.And("the Contract type in the ILR is:", ((string)(null)), table197, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table198 = new TechTalk.SpecFlow.Table(new string[] {
@@ -3994,7 +4001,7 @@ this.ScenarioSetup(scenarioInfo);
                         "ABC",
                         "in paid employment",
                         "02/08/2017"});
-#line 642
+#line 643
         testRunner.And("the employment status in the ILR is:", ((string)(null)), table198, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table199 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4005,7 +4012,7 @@ this.ScenarioSetup(scenarioInfo);
                         "matching commitment",
                         "1",
                         "2"});
-#line 645
+#line 646
      testRunner.Then("the data lock status will be as follows:", ((string)(null)), table199, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table200 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4057,34 +4064,34 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 648
+#line 649
   testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table200, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Provider earnings and payments where learner changes employer and there is a gap " +
-            "between commitments - provider does not receive payment during the gap as they a" +
-            "mend the ACT code but do not amend the employment status code correctly.")]
+        [NUnit.Framework.DescriptionAttribute("AC3- Provider earnings and payments where learner changes employer and there is a" +
+            " gap between commitments - provider does not receive payment during the gap as t" +
+            "hey amend the ACT code but do not amend the employment status code correctly.")]
         [NUnit.Framework.CategoryAttribute("LearnerChangesEmployerGapInCommitments")]
-        public virtual void ProviderEarningsAndPaymentsWhereLearnerChangesEmployerAndThereIsAGapBetweenCommitments_ProviderDoesNotReceivePaymentDuringTheGapAsTheyAmendTheACTCodeButDoNotAmendTheEmploymentStatusCodeCorrectly_()
+        public virtual void AC3_ProviderEarningsAndPaymentsWhereLearnerChangesEmployerAndThereIsAGapBetweenCommitments_ProviderDoesNotReceivePaymentDuringTheGapAsTheyAmendTheACTCodeButDoNotAmendTheEmploymentStatusCodeCorrectly_()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Provider earnings and payments where learner changes employer and there is a gap " +
-                    "between commitments - provider does not receive payment during the gap as they a" +
-                    "mend the ACT code but do not amend the employment status code correctly.", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("AC3- Provider earnings and payments where learner changes employer and there is a" +
+                    " gap between commitments - provider does not receive payment during the gap as t" +
+                    "hey amend the ACT code but do not amend the employment status code correctly.", new string[] {
                         "LearnerChangesEmployerGapInCommitments"});
-#line 660
+#line 661
 this.ScenarioSetup(scenarioInfo);
 #line 3
     this.FeatureBackground();
-#line 661
-  testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 662
-        testRunner.And("the apprenticeship funding band maximum is 17000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 663
-  testRunner.And("the ABC has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the apprenticeship funding band maximum is 17000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 664
+  testRunner.And("the ABC has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 665
         testRunner.And("the XYZ has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table201 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4103,7 +4110,7 @@ this.ScenarioSetup(scenarioInfo);
                         "XYZ",
                         "DAS",
                         "03/11/2017"});
-#line 665
+#line 666
         testRunner.And("the learner changes employers", ((string)(null)), table201, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table202 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4154,7 +4161,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Active",
                         "01/11/2017",
                         ""});
-#line 670
+#line 671
         testRunner.And("the following commitments exist:", ((string)(null)), table202, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table203 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4187,7 +4194,7 @@ this.ScenarioSetup(scenarioInfo);
                         "03/11/2017",
                         "1125",
                         "03/11/2017"});
-#line 675
+#line 676
         testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table203, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table204 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4206,7 +4213,7 @@ this.ScenarioSetup(scenarioInfo);
                         "DAS",
                         "03/11/2017",
                         "04/08/2018"});
-#line 678
+#line 679
   testRunner.And("the Contract type in the ILR is:", ((string)(null)), table204, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table205 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4217,7 +4224,7 @@ this.ScenarioSetup(scenarioInfo);
                         "ABC",
                         "in paid employment",
                         "02/08/2017"});
-#line 683
+#line 684
         testRunner.And("the employment status in the ILR is:", ((string)(null)), table205, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table206 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4230,7 +4237,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "N/A",
                         "2"});
-#line 686
+#line 687
       testRunner.Then("the data lock status will be as follows:", ((string)(null)), table206, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table207 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4282,34 +4289,34 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 689
+#line 690
      testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table207, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Provider earnings and payments where learner changes employer and there is a gap " +
-            "between commitments - provider does not receive payment during the gap as they a" +
-            "mend the employment status code correctly but do not amend the ACT code.")]
+        [NUnit.Framework.DescriptionAttribute("AC4-Provider earnings and payments where learner changes employer and there is a " +
+            "gap between commitments - provider does not receive payment during the gap as th" +
+            "ey amend the employment status code correctly but do not amend the ACT code.")]
         [NUnit.Framework.CategoryAttribute("LearnerChangesEmployerGapInCommitments")]
-        public virtual void ProviderEarningsAndPaymentsWhereLearnerChangesEmployerAndThereIsAGapBetweenCommitments_ProviderDoesNotReceivePaymentDuringTheGapAsTheyAmendTheEmploymentStatusCodeCorrectlyButDoNotAmendTheACTCode_()
+        public virtual void AC4_ProviderEarningsAndPaymentsWhereLearnerChangesEmployerAndThereIsAGapBetweenCommitments_ProviderDoesNotReceivePaymentDuringTheGapAsTheyAmendTheEmploymentStatusCodeCorrectlyButDoNotAmendTheACTCode_()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Provider earnings and payments where learner changes employer and there is a gap " +
-                    "between commitments - provider does not receive payment during the gap as they a" +
-                    "mend the employment status code correctly but do not amend the ACT code.", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("AC4-Provider earnings and payments where learner changes employer and there is a " +
+                    "gap between commitments - provider does not receive payment during the gap as th" +
+                    "ey amend the employment status code correctly but do not amend the ACT code.", new string[] {
                         "LearnerChangesEmployerGapInCommitments"});
-#line 701
+#line 702
 this.ScenarioSetup(scenarioInfo);
 #line 3
     this.FeatureBackground();
-#line 703
-  testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 704
-        testRunner.And("the apprenticeship funding band maximum is 17000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 705
-  testRunner.And("the ABC has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the apprenticeship funding band maximum is 17000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 706
+  testRunner.And("the ABC has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 707
         testRunner.And("the XYZ has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table208 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4328,7 +4335,7 @@ this.ScenarioSetup(scenarioInfo);
                         "XYZ",
                         "DAS",
                         "03/11/2017"});
-#line 707
+#line 708
         testRunner.And("the learner changes employers", ((string)(null)), table208, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table209 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4379,7 +4386,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Active",
                         "01/11/2017",
                         ""});
-#line 712
+#line 713
         testRunner.And("the following commitments exist:", ((string)(null)), table209, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table210 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4412,7 +4419,7 @@ this.ScenarioSetup(scenarioInfo);
                         "03/11/2017",
                         "1125",
                         "03/11/2017"});
-#line 717
+#line 718
         testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table210, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table211 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4423,7 +4430,7 @@ this.ScenarioSetup(scenarioInfo);
                         "DAS",
                         "03/08/2017",
                         "04/08/2018"});
-#line 720
+#line 721
   testRunner.And("the Contract type in the ILR is:", ((string)(null)), table211, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table212 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4442,7 +4449,7 @@ this.ScenarioSetup(scenarioInfo);
                         "XYZ",
                         "in paid employment",
                         "03/11/2017"});
-#line 724
+#line 725
          testRunner.And("the employment status in the ILR is:", ((string)(null)), table212, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table213 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4453,7 +4460,7 @@ this.ScenarioSetup(scenarioInfo);
                         "matching commitment",
                         "1",
                         "2"});
-#line 729
+#line 730
       testRunner.Then("the data lock status will be as follows:", ((string)(null)), table213, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table214 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4505,34 +4512,34 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 732
+#line 733
   testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table214, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Provider earnings and payments where learner changes employer and there is a gap " +
-            "of more than 12 weeks between commitments - provider does not receive more than " +
-            "12 weeks of payments during the gap.")]
+        [NUnit.Framework.DescriptionAttribute("AC5-Provider earnings and payments where learner changes employer and there is a " +
+            "gap of more than 12 weeks between commitments - provider does not receive more t" +
+            "han 12 weeks of payments during the gap.")]
         [NUnit.Framework.CategoryAttribute("LearnerChangesEmployerGapInCommitments")]
-        public virtual void ProviderEarningsAndPaymentsWhereLearnerChangesEmployerAndThereIsAGapOfMoreThan12WeeksBetweenCommitments_ProviderDoesNotReceiveMoreThan12WeeksOfPaymentsDuringTheGap_()
+        public virtual void AC5_ProviderEarningsAndPaymentsWhereLearnerChangesEmployerAndThereIsAGapOfMoreThan12WeeksBetweenCommitments_ProviderDoesNotReceiveMoreThan12WeeksOfPaymentsDuringTheGap_()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Provider earnings and payments where learner changes employer and there is a gap " +
-                    "of more than 12 weeks between commitments - provider does not receive more than " +
-                    "12 weeks of payments during the gap.", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("AC5-Provider earnings and payments where learner changes employer and there is a " +
+                    "gap of more than 12 weeks between commitments - provider does not receive more t" +
+                    "han 12 weeks of payments during the gap.", new string[] {
                         "LearnerChangesEmployerGapInCommitments"});
-#line 746
+#line 747
 this.ScenarioSetup(scenarioInfo);
 #line 3
     this.FeatureBackground();
-#line 747
-  testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 748
-        testRunner.And("the apprenticeship funding band maximum is 17000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 749
-  testRunner.And("the ABC has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the apprenticeship funding band maximum is 17000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 750
+  testRunner.And("the ABC has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 751
         testRunner.And("the XYZ has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table215 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4551,7 +4558,7 @@ this.ScenarioSetup(scenarioInfo);
                         "XYZ",
                         "DAS",
                         "03/03/2018"});
-#line 751
+#line 752
         testRunner.And("the learner changes employers", ((string)(null)), table215, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table216 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4602,7 +4609,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Active",
                         "01/03/2018",
                         ""});
-#line 756
+#line 757
         testRunner.And("the following commitments exist:", ((string)(null)), table216, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table217 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4635,7 +4642,7 @@ this.ScenarioSetup(scenarioInfo);
                         "03/03/2018",
                         "1125",
                         "03/03/2018"});
-#line 761
+#line 762
         testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table217, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table218 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4654,7 +4661,7 @@ this.ScenarioSetup(scenarioInfo);
                         "DAS",
                         "03/03/2018",
                         "04/08/2018"});
-#line 764
+#line 765
   testRunner.And("the Contract type in the ILR is:", ((string)(null)), table218, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table219 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4673,7 +4680,7 @@ this.ScenarioSetup(scenarioInfo);
                         "XYZ",
                         "in paid employment",
                         "03/03/2018"});
-#line 769
+#line 770
         testRunner.And("the employment status in the ILR is:", ((string)(null)), table219, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table220 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4686,7 +4693,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "N/A",
                         "2"});
-#line 775
+#line 776
         testRunner.Then("the data lock status will be as follows:", ((string)(null)), table220, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table221 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4759,6 +4766,17 @@ this.ScenarioSetup(scenarioInfo);
                         "SFA Levy co-funding budget",
                         "0",
                         "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"});
+            table221.AddRow(new string[] {
+                        "SFA non-Levy co-funding budget",
+                        "0",
+                        "0",
                         "1000",
                         "1000",
                         "1000",
@@ -4766,7 +4784,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 778
+#line 779
         testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table221, "And ");
 #line hidden
             this.ScenarioCleanup();
