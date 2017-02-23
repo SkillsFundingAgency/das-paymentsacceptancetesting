@@ -71,6 +71,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
         [When(@"an ILR file is submitted with the following data:")]
         [Scope(Tag = "LearnerChangesEmployerGapInCommitments")]
         [Scope(Tag = "SmallEmployerNonDasMultipleEmploymentStatuses")]
+        [Scope(Tag = "SmallEmployerMultipleEmploymentStatus")]
         public void WhenAnIlrFileIsSubmittedWithTheFollowingDataNoSubmissionGapInCommitments(Table table)
         {
             ScenarioContext.Current.Add("learners", table);
