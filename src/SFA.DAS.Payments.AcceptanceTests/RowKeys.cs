@@ -20,6 +20,13 @@
         public const string DefaultEmployerIncentive = "Employer {0} 16-18 incentive";
         public const string ProviderIncentive = "Provider 16-18 incentive";
 
+
+        public const string FrameworkUpliftOnProgramme = "Framework uplift on-program";
+        public const string FrameworkUpliftCompletion = "Framework uplift completion";
+        public const string FrameworkUpliftBalancing = "Framework uplift balancing";
+        public const string ProviderDisadvantageUplift = " Provider disadvantage uplift";
+
+
         public const string DataLockMatchingCommitment = "Matching commitment";
         public const string DataLockMatchingPrice = "Matching price";
     }
