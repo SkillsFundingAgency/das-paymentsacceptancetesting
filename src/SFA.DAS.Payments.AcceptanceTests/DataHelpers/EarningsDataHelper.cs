@@ -135,7 +135,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                                            "(Ukprn,LearnRefNumber,PriceEpisodeAimSeqNumber,PriceEpisodeIdentifier,PriceEpisodeTotalTNPPrice," +
                                            " EpisodeEffectiveTNPStartDate,PriceEpisodePlannedEndDate," +
                                            "PriceEpisodeInstalmentValue,PriceEpisodeCompletionElement," +
-                                           "TNP1,TNP2,TNP3,TNP4) " +
+                                           "TNP1,TNP2,TNP3,TNP4,PriceEpisodeContractType) " +
                                            "VALUES " +
                                            "(@ukprn,@learnRefNumber, 1, " +
                                            " @priceEpisodeIdentifier," +
@@ -147,7 +147,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                                            " @tnp1," +
                                            " @tnp2," +
                                            " @tnp3," +
-                                           " @tnp4)",
+                                           " @tnp4," +
+                                           "'Levy Contract')",
                             new
                             {
                                 ukprn = ukprn,

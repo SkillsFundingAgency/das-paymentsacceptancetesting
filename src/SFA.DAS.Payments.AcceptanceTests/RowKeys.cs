@@ -12,7 +12,9 @@
 
         public const string CoFinanceGovernmentPaymentForLevyContracts = "SFA Levy co-funding budget";
         public const string CoFinanceGovernmentPaymentForNonLevyContracts = "SFA non-Levy co-funding budget";
-        public const string SfaAdditionalPaymentsBudget = "SFA Levy additional payments budget";
+        public const string SfaLevyAdditionalPaymentsBudget = "SFA Levy additional payments budget";
+        public const string SfaNonLevyAdditionalPaymentsBudget = "SFA non-Levy additional payments budget";
+
 
         public const string OnProgramPayment = "On-program";
         public const string CompletionPayment = "Completion";

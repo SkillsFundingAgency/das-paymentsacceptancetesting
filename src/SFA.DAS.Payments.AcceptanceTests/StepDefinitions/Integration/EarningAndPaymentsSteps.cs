@@ -70,6 +70,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
 
         [When(@"an ILR file is submitted with the following data:")]
         [Scope(Tag = "LearnerChangesEmployerGapInCommitments")]
+        [Scope(Tag = "SmallEmployerNonDasMultipleEmploymentStatuses")]
         [Scope(Tag = "SmallEmployerMultipleEmploymentStatus")]
         public void WhenAnIlrFileIsSubmittedWithTheFollowingDataNoSubmissionGapInCommitments(Table table)
         {
@@ -257,8 +258,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             var earnedRow = table.Rows.RowWithKey(RowKeys.Earnings);
             var govtCofundLevyContractRow = table.Rows.RowWithKey(RowKeys.CoFinanceGovernmentPaymentForLevyContracts);
             var govtCofundNonLevyContractRow = table.Rows.RowWithKey(RowKeys.CoFinanceGovernmentPaymentForNonLevyContracts);
-            var govtAdditionalPaymentsRow = table.Rows.RowWithKey(RowKeys.SfaAdditionalPaymentsBudget);
 
+            var govtAdditionalPaymentsRow = StepDefinitionsContext.DasScenario ? 
+                                            table.Rows.RowWithKey(RowKeys.SfaLevyAdditionalPaymentsBudget) :
+                                            table.Rows.RowWithKey(RowKeys.SfaNonLevyAdditionalPaymentsBudget);
+            
             for (var colIndex = 1; colIndex < table.Header.Count; colIndex++)
             {
                 var periodName = table.Header.ElementAt(colIndex);
