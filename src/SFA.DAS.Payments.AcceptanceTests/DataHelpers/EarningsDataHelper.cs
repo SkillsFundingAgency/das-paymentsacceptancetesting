@@ -37,30 +37,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                             " GROUP BY UKPRN";
                 var priceEpisodeEarnings = connection.Query<PeriodisedValuesEntity>(query, new { ukprn }).ToArray();
 
-                query = "SELECT " +
-                            "ldpv.Ukprn, " +
-                            "SUM(Period_1) AS Period_1, " +
-                            "SUM(Period_2)AS Period_2, " +
-                            "SUM(Period_3) AS Period_3, " +
-                            "SUM(Period_4) AS Period_4, " +
-                            "SUM(Period_5) AS Period_5, " +
-                            "SUM(Period_6) AS Period_6, " +
-                            "SUM(Period_7) AS Period_7, " +
-                            "SUM(Period_8) AS Period_8, " +
-                            "SUM(Period_9) AS Period_9, " +
-                            "SUM(Period_10) AS Period_10, " +
-                            "SUM(Period_11) AS Period_11, " +
-                            "SUM(Period_12) AS Period_12 " +
-                        "FROM Rulebase.AEC_LearningDelivery_PeriodisedValues ldpv " +
-                            "JOIN Rulebase.AEC_LearningDelivery ld ON ld.Ukprn = ldpv.Ukprn " +
-                                "AND ld.LearnRefNumber = ldpv.LearnRefNumber " +
-                                "AND ld.AimSeqNumber = ldpv.AimSeqNumber " +
-                                "AND ld.LearnAimRef != 'ZPROG001' " +
-                        "WHERE ldpv.UKPRN = @ukprn " +
-                            "AND ldpv.AttributeName IN('MathEngOnProgPayment', 'MathEngBalPayment') " +
-                        "GROUP BY ldpv.UKPRN";
-
-                var learningDeliveryEarnings = connection.Query<PeriodisedValuesEntity>(query, new { ukprn }).ToArray();
+                var learningDeliveryEarnings = GetDeliveryPeriodisedValuesForUkprnSummary(ukprn, environmentVariables);
 
                 return priceEpisodeEarnings
                     .Zip(learningDeliveryEarnings, (episodeEarning, deliveryEarning) =>
@@ -299,6 +276,41 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                         frameworkCode = learner.LearningDelivery.FrameworkCode == 0 ? (int?)null : learner.LearningDelivery.FrameworkCode,
                         pathwayCode = learner.LearningDelivery.PathwayCode == 0 ? (int?)null : learner.LearningDelivery.PathwayCode
                     });
+            }
+        }
+
+        internal static PeriodisedValuesEntity[] GetDeliveryPeriodisedValuesForUkprnSummary(long ukprn, EnvironmentVariables environmentVariables)
+        {
+            using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
+            {
+                var query = "SELECT " +
+                                "ldpv.Ukprn, " +
+                                "SUM(Period_1) AS Period_1, " +
+                                "SUM(Period_2)AS Period_2, " +
+                                "SUM(Period_3) AS Period_3, " +
+                                "SUM(Period_4) AS Period_4, " +
+                                "SUM(Period_5) AS Period_5, " +
+                                "SUM(Period_6) AS Period_6, " +
+                                "SUM(Period_7) AS Period_7, " +
+                                "SUM(Period_8) AS Period_8, " +
+                                "SUM(Period_9) AS Period_9, " +
+                                "SUM(Period_10) AS Period_10, " +
+                                "SUM(Period_11) AS Period_11, " +
+                                "SUM(Period_12) AS Period_12 " +
+                            "FROM Rulebase.AEC_LearningDelivery_PeriodisedValues ldpv " +
+                                "JOIN Rulebase.AEC_LearningDelivery ld ON ld.Ukprn = ldpv.Ukprn " +
+                                    "AND ld.LearnRefNumber = ldpv.LearnRefNumber " +
+                                    "AND ld.AimSeqNumber = ldpv.AimSeqNumber " +
+                                    "AND ld.LearnAimRef != 'ZPROG001' " +
+                            "WHERE ldpv.UKPRN = @ukprn " +
+                                "AND ldpv.AttributeName IN('MathEngOnProgPayment', 'MathEngBalPayment') " +
+                            "GROUP BY ldpv.UKPRN";
+
+                var learningDeliveryEarnings = connection.Query<PeriodisedValuesEntity>(query, new { ukprn }).ToArray();
+
+                return learningDeliveryEarnings.Length == 0
+                    ? new[] { new PeriodisedValuesEntity() }
+                    : learningDeliveryEarnings;
             }
         }
     }
