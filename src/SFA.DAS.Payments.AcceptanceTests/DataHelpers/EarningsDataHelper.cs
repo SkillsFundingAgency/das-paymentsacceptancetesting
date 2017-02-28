@@ -33,7 +33,52 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                             "AND AttributeName IN ('PriceEpisodeOnProgPayment', 'PriceEpisodeCompletionPayment', 'PriceEpisodeBalancePayment', " +
                             "'PriceEpisodeFirstEmp1618Pay','PriceEpisodeFirstProv1618Pay','PriceEpisodeSecondEmp1618Pay','PriceEpisodeSecondProv1618Pay') " +
                             " GROUP BY UKPRN";
-                return connection.Query<PeriodisedValuesEntity>(query, new { ukprn }).ToArray();
+                var priceEpisodeEarnings = connection.Query<PeriodisedValuesEntity>(query, new { ukprn }).ToArray();
+
+                query = "SELECT " +
+                            "ldpv.Ukprn, " +
+                            "SUM(Period_1) AS Period_1, " +
+                            "SUM(Period_2)AS Period_2, " +
+                            "SUM(Period_3) AS Period_3, " +
+                            "SUM(Period_4) AS Period_4, " +
+                            "SUM(Period_5) AS Period_5, " +
+                            "SUM(Period_6) AS Period_6, " +
+                            "SUM(Period_7) AS Period_7, " +
+                            "SUM(Period_8) AS Period_8, " +
+                            "SUM(Period_9) AS Period_9, " +
+                            "SUM(Period_10) AS Period_10, " +
+                            "SUM(Period_11) AS Period_11, " +
+                            "SUM(Period_12) AS Period_12 " +
+                        "FROM Rulebase.AEC_LearningDelivery_PeriodisedValues ldpv " +
+                            "JOIN Rulebase.AEC_LearningDelivery ld ON ld.Ukprn = ldpv.Ukprn " +
+                                "AND ld.LearnRefNumber = ldpv.LearnRefNumber " +
+                                "AND ld.AimSeqNumber = ldpv.AimSeqNumber " +
+                                "AND ld.LearnAimRef != 'ZPROG001' " +
+                        "WHERE ldpv.UKPRN = @ukprn " +
+                            "AND ldpv.AttributeName IN('MathEngOnProgPayment', 'MathEngBalPayment') " +
+                        "GROUP BY ldpv.UKPRN";
+
+                var learningDeliveryEarnings = connection.Query<PeriodisedValuesEntity>(query, new { ukprn }).ToArray();
+
+                return priceEpisodeEarnings
+                    .Zip(learningDeliveryEarnings, (episodeEarning, deliveryEarning) =>
+                        new PeriodisedValuesEntity
+                        {
+                            Ukprn = episodeEarning.Ukprn,
+                            Period_1 = episodeEarning.Period_1 + deliveryEarning.Period_1,
+                            Period_2 = episodeEarning.Period_2 + deliveryEarning.Period_2,
+                            Period_3 = episodeEarning.Period_3 + deliveryEarning.Period_3,
+                            Period_4 = episodeEarning.Period_4 + deliveryEarning.Period_4,
+                            Period_5 = episodeEarning.Period_5 + deliveryEarning.Period_5,
+                            Period_6 = episodeEarning.Period_6 + deliveryEarning.Period_6,
+                            Period_7 = episodeEarning.Period_7 + deliveryEarning.Period_7,
+                            Period_8 = episodeEarning.Period_8 + deliveryEarning.Period_8,
+                            Period_9 = episodeEarning.Period_9 + deliveryEarning.Period_9,
+                            Period_10 = episodeEarning.Period_10 + deliveryEarning.Period_10,
+                            Period_11 = episodeEarning.Period_11 + deliveryEarning.Period_11,
+                            Period_12 = episodeEarning.Period_12 + deliveryEarning.Period_12
+                        })
+                    .ToArray();
             }
         }
 

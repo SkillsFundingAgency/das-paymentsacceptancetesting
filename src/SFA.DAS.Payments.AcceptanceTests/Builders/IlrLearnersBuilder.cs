@@ -59,7 +59,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
                             PathwayCode = ld.PathwayCode,
                             CompletionStatus= TransformCompletionStatus(ld.CompletionStatus),
                             FinancialRecords = GetLearningDeliveryFinancialRecords(ld),
-                            FamRecords = TransformFamRecords(ld.LearningDeliveryFams)
+                            FamRecords = TransformFamRecords(ld.LearningDeliveryFams),
+                            Type = (IlrGenerator.AimType)(int)ld.Type
                         }
                     );
                 }
