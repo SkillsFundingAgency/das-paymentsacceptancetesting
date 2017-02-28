@@ -31,7 +31,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
 
                 if (!string.IsNullOrEmpty(disadvatnageUplift))
                 {
-                    LearnerDataHelper.SavePostCodeDisadvantageUplift(disadvatnageUplift, EnvironmentVariables);
+                    ReferenceDataHelper.SavePostCodeDisadvantageUplift(disadvatnageUplift, EnvironmentVariables);
                 }
             }
             ProcessIlrFileSubmissions(table);
