@@ -79,7 +79,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
 #line 4
 this.ScenarioSetup(scenarioInfo);
 #line hidden
-            TechTalk.SpecFlow.Table table319 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table322 = new TechTalk.SpecFlow.Table(new string[] {
                         "ULN",
                         "learner type",
                         "agreed price",
@@ -92,7 +92,7 @@ this.ScenarioSetup(scenarioInfo);
                         "framework code",
                         "programme type",
                         "pathway code"});
-            table319.AddRow(new string[] {
+            table322.AddRow(new string[] {
                         "learner a",
                         "16-18 programme only non-DAS",
                         "15000",
@@ -105,7 +105,7 @@ this.ScenarioSetup(scenarioInfo);
                         "403",
                         "2",
                         "1"});
-            table319.AddRow(new string[] {
+            table322.AddRow(new string[] {
                         "learner a",
                         "16-18 programme only non-DAS",
                         "",
@@ -119,9 +119,9 @@ this.ScenarioSetup(scenarioInfo);
                         "2",
                         "1"});
 #line 5
-    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table319, "When ");
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table322, "When ");
 #line hidden
-            TechTalk.SpecFlow.Table table320 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table323 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
                         "08/17",
                         "09/17",
@@ -132,7 +132,7 @@ this.ScenarioSetup(scenarioInfo);
                         "07/18",
                         "08/18",
                         "09/18"});
-            table320.AddRow(new string[] {
+            table323.AddRow(new string[] {
                         "Provider Earned Total",
                         "1039.25",
                         "1039.25",
@@ -143,7 +143,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1039.25",
                         "1000",
                         "0"});
-            table320.AddRow(new string[] {
+            table323.AddRow(new string[] {
                         "Provider Earned from SFA",
                         "939.25",
                         "939.25",
@@ -154,7 +154,7 @@ this.ScenarioSetup(scenarioInfo);
                         "939.25",
                         "1000",
                         "0"});
-            table320.AddRow(new string[] {
+            table323.AddRow(new string[] {
                         "Provider Earned from Employer",
                         "100",
                         "100",
@@ -165,7 +165,7 @@ this.ScenarioSetup(scenarioInfo);
                         "100",
                         "100",
                         "0"});
-            table320.AddRow(new string[] {
+            table323.AddRow(new string[] {
                         "Provider Paid by SFA",
                         "0",
                         "939.25",
@@ -176,7 +176,7 @@ this.ScenarioSetup(scenarioInfo);
                         "939.25",
                         "939.25",
                         "1000"});
-            table320.AddRow(new string[] {
+            table323.AddRow(new string[] {
                         "Payment due from Employer",
                         "0",
                         "100",
@@ -187,7 +187,7 @@ this.ScenarioSetup(scenarioInfo);
                         "100",
                         "100",
                         "0"});
-            table320.AddRow(new string[] {
+            table323.AddRow(new string[] {
                         "Levy account debited",
                         "0",
                         "0",
@@ -198,7 +198,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-            table320.AddRow(new string[] {
+            table323.AddRow(new string[] {
                         "SFA Levy employer budget",
                         "0",
                         "0",
@@ -209,7 +209,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-            table320.AddRow(new string[] {
+            table323.AddRow(new string[] {
                         "SFA Levy co-funding budget",
                         "0",
                         "0",
@@ -220,7 +220,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-            table320.AddRow(new string[] {
+            table323.AddRow(new string[] {
                         "SFA non-Levy co-funding budget",
                         "900",
                         "900",
@@ -231,7 +231,7 @@ this.ScenarioSetup(scenarioInfo);
                         "900",
                         "0",
                         "0"});
-            table320.AddRow(new string[] {
+            table323.AddRow(new string[] {
                         "SFA non-Levy additional payments budget",
                         "39.25",
                         "39.25",
@@ -243,9 +243,9 @@ this.ScenarioSetup(scenarioInfo);
                         "1000",
                         "0"});
 #line 9
-    testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table320, "Then ");
+    testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table323, "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table321 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table324 = new TechTalk.SpecFlow.Table(new string[] {
                         "Payment type",
                         "09/17",
                         "10/17",
@@ -254,7 +254,7 @@ this.ScenarioSetup(scenarioInfo);
                         "...",
                         "08/18",
                         "09/18"});
-            table321.AddRow(new string[] {
+            table324.AddRow(new string[] {
                         "On-program",
                         "900",
                         "900",
@@ -263,7 +263,7 @@ this.ScenarioSetup(scenarioInfo);
                         "...",
                         "900",
                         "0"});
-            table321.AddRow(new string[] {
+            table324.AddRow(new string[] {
                         "Completion",
                         "0",
                         "0",
@@ -272,7 +272,7 @@ this.ScenarioSetup(scenarioInfo);
                         "...",
                         "0",
                         "0"});
-            table321.AddRow(new string[] {
+            table324.AddRow(new string[] {
                         "Balancing",
                         "0",
                         "0",
@@ -281,7 +281,7 @@ this.ScenarioSetup(scenarioInfo);
                         "...",
                         "0",
                         "0"});
-            table321.AddRow(new string[] {
+            table324.AddRow(new string[] {
                         "Employer 16-18 incentive",
                         "0",
                         "0",
@@ -290,7 +290,7 @@ this.ScenarioSetup(scenarioInfo);
                         "...",
                         "0",
                         "500"});
-            table321.AddRow(new string[] {
+            table324.AddRow(new string[] {
                         "Provider 16-18 incentive",
                         "0",
                         "0",
@@ -299,7 +299,7 @@ this.ScenarioSetup(scenarioInfo);
                         "...",
                         "0",
                         "500"});
-            table321.AddRow(new string[] {
+            table324.AddRow(new string[] {
                         "English and maths on programme",
                         "39.25",
                         "39.25",
@@ -308,7 +308,7 @@ this.ScenarioSetup(scenarioInfo);
                         "...",
                         "39.25",
                         "0"});
-            table321.AddRow(new string[] {
+            table324.AddRow(new string[] {
                         "English and maths Balancing",
                         "0",
                         "0",
@@ -318,7 +318,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
 #line 21
-    testRunner.And("the transaction types for the payments are:", ((string)(null)), table321, "And ");
+    testRunner.And("the transaction types for the payments are:", ((string)(null)), table324, "And ");
 #line hidden
             this.ScenarioCleanup();
         }

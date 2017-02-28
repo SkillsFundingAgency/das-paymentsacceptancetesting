@@ -139,7 +139,6 @@
     <Compile Include="Features\learner_finishes_early.feature.cs" />
     <Compile Include="Features\learner_finishes_late.feature.cs" />
     <Compile Include="Features\learner_finishes_on_time.feature.cs" />
-    <Compile Include="Features\maths_and_english_aims.feature.cs" />
     <Compile Include="Features\payments_calc.feature.cs" />
     <Compile Include="Features\small_employers.feature.cs" />
     <Compile Include="Features\two_learners_paid_in_priority.feature.cs" />
@@ -196,11 +195,6 @@
     </None>
     <None Include="..\..\features\learner_finishes_on_time.feature">
       <Link>Features\learner_finishes_on_time.feature</Link>
-    </None>
-    <None Include="..\..\features\maths_and_english_aims.feature">
-      <Link>Features\maths_and_english_aims.feature</Link>
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>maths_and_english_aims1.feature.cs</LastGenOutput>
     </None>
     <None Include="..\..\features\payments_calc.feature">
       <Link>Features\payments_calc.feature</Link>
