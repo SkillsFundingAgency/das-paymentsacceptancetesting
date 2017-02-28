@@ -128,12 +128,12 @@
     <Compile Include="ExecutionEnvironment\EnvironmentVariablesFactory.cs" />
     <Compile Include="ExecutionEnvironment\TestStatusWatcher.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Features\additional_payments.feature.cs" />
     <Compile Include="Features\change_in_circumstances.feature.cs" />
     <Compile Include="Features\datalock_errors.feature.cs" />
     <Compile Include="Features\earnings_calc.feature.cs" />
     <Compile Include="Features\employer_stops_payments.feature.cs" />
     <Compile Include="Features\ILR_is_submitted_late.feature.cs" />
-    <Compile Include="Features\incentive_payments.feature.cs" />
     <Compile Include="Features\learner_changes_employer.feature.cs" />
     <Compile Include="Features\learner_changes_provider.feature.cs" />
     <Compile Include="Features\learner_finishes_early.feature.cs" />
@@ -162,6 +162,10 @@
     <Compile Include="Translators\IlrTranslator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\features\additional_payments.feature">
+      <Link>Features\additional_payments.feature</Link>
+      <LastGenOutput>additional_payments.feature.cs</LastGenOutput>
+    </None>
     <None Include="..\..\features\change_in_circumstances.feature">
       <Link>Features\change_in_circumstances.feature</Link>
       <LastGenOutput>change_in_circumstances.feature.cs</LastGenOutput>
@@ -177,10 +181,6 @@
     </None>
     <None Include="..\..\features\ILR_is_submitted_late.feature">
       <Link>Features\ILR_is_submitted_late.feature</Link>
-    </None>
-    <None Include="..\..\features\incentive_payments.feature">
-      <Link>Features\incentive_payments.feature</Link>
-      <LastGenOutput>incentive_payments.feature.cs</LastGenOutput>
     </None>
     <None Include="..\..\features\learner_changes_employer.feature">
       <Link>Features\learner_changes_employer.feature</Link>

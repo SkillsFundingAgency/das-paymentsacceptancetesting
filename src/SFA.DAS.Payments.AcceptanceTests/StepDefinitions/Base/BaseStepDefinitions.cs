@@ -461,16 +461,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                     CompletionStatus = table.Header.Contains("completion status") ?
                            IlrTranslator.TranslateCompletionStatus(table.Rows[rowIndex]["completion status"]) :
                            CompletionStatus.Continuing,
-
-                    FrameworkCode = table.Header.Contains("framework code") ? int.Parse(table.Rows[rowIndex]["framework code"]) : IlrBuilder.Defaults.FrameworkCode,
-                    ProgrammeType = table.Header.Contains("programme type") ? int.Parse(table.Rows[rowIndex]["programme type"]) : IlrBuilder.Defaults.ProgrammeType,
-                    PathwayCode = table.Header.Contains("pathway code") ? int.Parse(table.Rows[rowIndex]["pathway code"]) : IlrBuilder.Defaults.PathwayCode,
+                    FrameworkCode = table.Rows[rowIndex].Value<int>("framework code") > 0 ? table.Rows[rowIndex].Value<int>("framework code") : IlrBuilder.Defaults.FrameworkCode,
+                    ProgrammeType = table.Rows[rowIndex].Value<int>("programme type") > 0 ? table.Rows[rowIndex].Value<int>("programme type") : IlrBuilder.Defaults.ProgrammeType,
+                    PathwayCode = table.Rows[rowIndex].Value<int>("pathway code") > 0 ? table.Rows[rowIndex].Value<int>("pathway code") : IlrBuilder.Defaults.PathwayCode,
                     Type = table.Rows[rowIndex].Contains("aim type")
                         ? GetAimType(table.Rows[rowIndex].Value<string>("aim type"))
                         : Enums.AimType.Programme
                 };
 
-                var standardCode = table.Header.Contains("standard code") ? int.Parse(table.Rows[rowIndex]["standard code"]) : IlrBuilder.Defaults.StandardCode;
+                var standardCode = table.Rows[rowIndex].Value<int>("standard code") > 0 ? table.Rows[rowIndex].Value<int>("standard code")  : IlrBuilder.Defaults.StandardCode;
                 learningDelivery.StandardCode = learningDelivery.FrameworkCode > 0 &&
                                                         learningDelivery.PathwayCode > 0 &&
                                                         learningDelivery.ProgrammeType > 0 ? 0 : standardCode;
