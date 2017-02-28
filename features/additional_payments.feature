@@ -140,4 +140,74 @@ Scenario:AC5- Payment for a non-DAS learner, lives in a disadvantaged postocde a
 		  | Completion                   | 0     | 0     | 0     | 0     | ... | 0     | 0     |
 		  | Balancing                    | 0     | 0     | 0     | 0     | ... | 0     | 0     |
 		  | Provider disadvantage uplift | 0     | 0     | 0     | 300   | ... | 0     | 300   |
+		  
+Scenario:AC6- Payment for a non-DAS learner, lives in a disadvantaged postocde area - 11-20% most deprived, funding agreed within band maximum, UNDERTAKING APPRENTICESHIP FRAMEWORK
+    #The provider incentive for this postcode group is £300 split equally into 2 payments at 90 and 365 days. INELIGIBLE FOR APPRENTICESHIP STANDARDS
+	When an ILR file is submitted with the following data:
+		  | ULN       | learner type           | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | home postcode deprivation |
+		  | learner a | programme only non-DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | 403            | 2              | 1            | 11-20%                    |
+      
+	Then the provider earnings and payments break down as follows:
+		  | Type                                     | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
+		  | Provider Earned Total                    | 1000  | 1000  | 1000  | 1150  | 1000  | ... | 1000  | 150   | 0     |
+		  | Provider Paid by SFA                     | 0     | 900   | 900   | 900   | 1050  | ... | 900   | 900   | 150   |
+		  | Payment due from Employer                | 0     | 100   | 100   | 100   | 100   | ... | 100   | 100   | 0     |
+		  | Levy account debited                     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA Levy employer budget                 | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA levy co-funding budget               | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA non-levy co-funding budget           | 900   | 900   | 900   | 900   | 900   | ... | 900   | 0     | 0     |
+		  | SFA non-levy  additional payments budget | 0     | 0     | 0     | 150   | 0     | ... | 0     | 150   | 0     |
+		  | SFA levy additional payments budget      | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+	  And the transaction types for the payments are:
+		  | Payment type                 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
+		  | On-program                   | 900   | 900   | 900   | 900   | ... | 900   | 0     |
+		  | Completion                   | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+		  | Balancing                    | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+		  | Provider disadvantage uplift | 0     | 0     | 0     | 150   | ... | 0     | 150   |
+
+Scenario:AC7- Payment for a non-DAS learner, lives in a disadvantaged postocde area - 21-27% most deprived, funding agreed within band maximum, UNDERTAKING APPRENTICESHIP FRAMEWORK
+    #The provider incentive for this postcode group is £200 split equally into 2 payments at 90 and 365 days. INELIGIBLE FOR APPRENITCESHIP STANDARDS
+	When an ILR file is submitted with the following data:
+		  | ULN       | learner type                  | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | home postcode deprivation |
+		  | learner a | programme only non- DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | 403            | 2              | 1            | 20-27%                    |
+    Then the provider earnings and payments break down as follows:
+		  | Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
+		  | Provider Earned Total                   | 1000  | 1000  | 1000  | 1100  | 1000  | ... | 1000  | 100   | 0     |
+		  | Provider Paid by SFA                    | 0     | 900   | 900   | 900   | 1000  | ... | 900   | 900   | 100   |
+		  | Payment due from Employer               | 0     | 100   | 100   | 100   | 100   | ... | 100   | 100   | 0     |
+		  | Levy account debited                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA Levy employer budget                | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA non-levy co-funding budget          | 900   | 900   | 900   | 900   | 900   | ... | 900   | 0     | 0     |
+		  | SFA non-levy additional payments budget | 0     | 0     | 0     | 100   | 0     | ... | 0     | 100   | 0     |
+		  | SFA levy additional payments budget     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+    And the transaction types for the payments are:
+		  | Payment type                 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
+		  | On-program                   | 900   | 900   | 900   | 900   | ... | 900   | 0     |
+		  | Completion                   | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+		  | Balancing                    | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+		  | Provider disadvantage uplift | 0     | 0     | 0     | 100   | ... | 0     | 100   |
+
+ Scenario:AC8- Payment for a non-DAS learner, does not live in a disadvantaged postcode area - no uplift earned, despite them doing a framework
+  
+	When an ILR file is submitted with the following data:
+		  | ULN       | learner type            | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | home postcode deprivation |
+		  | learner a | programme only non- DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | 403            | 2              | 1            | not deprived              |
+    Then the provider earnings and payments break down as follows:
+		  | Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
+		  | Provider Earned Total                   | 1000  | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     | 0     |
+		  | Provider Paid by SFA                    | 0     | 900   | 900   | 900   | 900   | ... | 900   | 900   | 0     |
+		  | Payment due from Employer               | 0     | 100   | 100   | 100   | 100   | ... | 100   | 100   | 0     |
+		  | Levy account debited                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA Levy employer budget                | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA non-levy co-funding budget          | 900   | 900   | 900   | 900   | 900   | ... | 900   | 0     | 0     |
+		  | SFA non-levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA levy additional payments budget     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+    And the transaction types for the payments are:
+		  | Payment type                 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
+		  | On-program                   | 900   | 900   | 900   | 900   | ... | 900   | 0     |
+		  | Completion                   | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+		  | Balancing                    | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+		  | Provider disadvantage uplift | 0     | 0     | 0     | 0     | ... | 0     | 0     |
 
