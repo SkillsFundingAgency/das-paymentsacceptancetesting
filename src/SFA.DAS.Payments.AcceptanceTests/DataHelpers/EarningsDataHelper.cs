@@ -31,7 +31,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                             "FROM Rulebase.AEC_ApprenticeshipPriceEpisode_PeriodisedValues " +
                             "WHERE UKPRN = @ukprn " +
                             "AND AttributeName IN ('PriceEpisodeOnProgPayment', 'PriceEpisodeCompletionPayment', 'PriceEpisodeBalancePayment', " +
-                            "'PriceEpisodeFirstEmp1618Pay','PriceEpisodeFirstProv1618Pay','PriceEpisodeSecondEmp1618Pay','PriceEpisodeSecondProv1618Pay') " +
+                            "'PriceEpisodeFirstEmp1618Pay','PriceEpisodeFirstProv1618Pay','PriceEpisodeSecondEmp1618Pay','PriceEpisodeSecondProv1618Pay', " +
+                            "'PriceEpisodeApplic1618FrameworkUpliftBalancing','PriceEpisodeApplic1618FrameworkUpliftCompletionPayment','PriceEpisodeApplic1618FrameworkUpliftOnProgPayment', " +
+                            "'PriceEpisodeFirstDisadvantagePayment','PriceEpisodeSecondDisadvantagePayment') " +
                             " GROUP BY UKPRN";
                 return connection.Query<PeriodisedValuesEntity>(query, new { ukprn }).ToArray();
             }
@@ -61,7 +63,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                             " ON l.UKPRN = pv.UKPRN AND pv.LearnRefNumber = l.LearnRefNumber " +
                             " WHERE pv.UKPRN = @ukprn " +
                             " AND AttributeName IN ('PriceEpisodeOnProgPayment', 'PriceEpisodeCompletionPayment', 'PriceEpisodeBalancePayment'," +
-                            " 'PriceEpisodeFirstEmp1618Pay','PriceEpisodeFirstProv1618Pay','PriceEpisodeSecondEmp1618Pay','PriceEpisodeSecondProv1618Pay') " +
+                            " 'PriceEpisodeFirstEmp1618Pay','PriceEpisodeFirstProv1618Pay','PriceEpisodeSecondEmp1618Pay','PriceEpisodeSecondProv1618Pay', " +
+                            "  'PriceEpisodeApplic1618FrameworkUpliftBalancing','PriceEpisodeApplic1618FrameworkUpliftCompletionPayment','PriceEpisodeApplic1618FrameworkUpliftOnProgPayment', " +
+                            "'PriceEpisodeFirstDisadvantagePayment','PriceEpisodeSecondDisadvantagePayment') " +
                             " Group By pv.UKPRN, l.ULN";
                            
                 return connection.Query<PeriodisedValuesEntity>(query, new { ukprn }).ToArray();

@@ -165,6 +165,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             var employerIncentiveRow = table.Rows.RowWithKey(RowKeys.DefaultEmployerIncentive);
             var providerIncentiveRow = table.Rows.RowWithKey(RowKeys.ProviderIncentive);
 
+            var frameworkUpliftOnProgRow = table.Rows.RowWithKey(RowKeys.FrameworkUpliftOnProgramme);
+            var frameworkUpliftBalancingRow = table.Rows.RowWithKey(RowKeys.FrameworkUpliftBalancing);
+            var frameworkUpliftCompletionRow = table.Rows.RowWithKey(RowKeys.FrameworkUpliftCompletion);
+            var disadvatngePaymentRow = table.Rows.RowWithKey(RowKeys.ProviderDisadvantageUplift);
+
             for (var colIndex = 1; colIndex < table.Header.Count; colIndex++)
             {
                 var periodName = table.Header.ElementAt(colIndex);
@@ -189,6 +194,17 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                                                             TransactionType.First16To18ProviderIncentive,
                                                             TransactionType.Second16To18ProviderIncentive},
                                                     providerIncentiveRow,null,FundingSource.FullyFundedSfa);
+
+                VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, new TransactionType[] { TransactionType.OnProgramme16To18FrameworkUplift }, frameworkUpliftOnProgRow,null,FundingSource.FullyFundedSfa);
+                VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, new TransactionType[] { TransactionType.Completion16To18FrameworkUplift }, frameworkUpliftCompletionRow,null, FundingSource.FullyFundedSfa);
+                VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, new TransactionType[] { TransactionType.Balancing16To18FrameworkUplift }, frameworkUpliftBalancingRow,null, FundingSource.FullyFundedSfa);
+
+                VerifyPaymentsDueByTransactionType(ukprn, periodName,
+                                                               periodDate, colIndex,
+                                                               new TransactionType[] {
+                                                            TransactionType.FirstDisadvantagePayment,
+                                                            TransactionType.SecondDisadvantagePayment},
+                                                               disadvatngePaymentRow, null, FundingSource.FullyFundedSfa);
 
             }
         }
