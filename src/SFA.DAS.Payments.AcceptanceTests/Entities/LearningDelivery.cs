@@ -31,6 +31,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Entities
 
         public LearningDeliveryFam[] LearningDeliveryFams { get; set; }
 
+        public AimType Type { get; set; }
+
         public void AddPriceEpisode(PriceEpisode priceEpisode)
         {
             var priceEpisodes = PriceEpisodes?.ToList() ?? new List<PriceEpisode>();

@@ -106,6 +106,7 @@
     <Compile Include="Entities\Provider.cs" />
     <Compile Include="DataHelpers\Entities\RequiredPaymentEntity.cs" />
     <Compile Include="DataHelpers\Entities\VlidationErrorEntity.cs" />
+    <Compile Include="Enums\AimType.cs" />
     <Compile Include="Enums\CompletionStatus.cs" />
     <Compile Include="Contexts\StepDefinitionsContext.cs" />
     <Compile Include="Enums\ContractType.cs" />
