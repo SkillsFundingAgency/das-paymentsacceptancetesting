@@ -338,7 +338,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                             FrameworkCode = ld.FrameworkCode,
                             PathwayCode = ld.PathwayCode,
                             ProgrammeType = ld.ProgrammeType,
-                            PriceEpisodes = ld.PriceEpisodes
+                            PriceEpisodes = ld.PriceEpisodes,
+                            Type = ld.Type
                         });
                 }
 
@@ -460,10 +461,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                     CompletionStatus = table.Header.Contains("completion status") ?
                            IlrTranslator.TranslateCompletionStatus(table.Rows[rowIndex]["completion status"]) :
                            CompletionStatus.Continuing,
-
                     FrameworkCode = table.Rows[rowIndex].Value<int>("framework code") > 0 ? table.Rows[rowIndex].Value<int>("framework code") : IlrBuilder.Defaults.FrameworkCode,
                     ProgrammeType = table.Rows[rowIndex].Value<int>("programme type") > 0 ? table.Rows[rowIndex].Value<int>("programme type") : IlrBuilder.Defaults.ProgrammeType,
                     PathwayCode = table.Rows[rowIndex].Value<int>("pathway code") > 0 ? table.Rows[rowIndex].Value<int>("pathway code") : IlrBuilder.Defaults.PathwayCode,
+                    Type = table.Rows[rowIndex].Contains("aim type")
+                        ? GetAimType(table.Rows[rowIndex].Value<string>("aim type"))
+                        : Enums.AimType.Programme
                 };
 
                 var standardCode = table.Rows[rowIndex].Value<int>("standard code") > 0 ? table.Rows[rowIndex].Value<int>("standard code")  : IlrBuilder.Defaults.StandardCode;
@@ -731,6 +734,19 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 
             }
             return result;
+        }
+
+        private Enums.AimType GetAimType(string aimType)
+        {
+            switch (aimType.Replace(" ", string.Empty).ToLowerInvariant())
+            {
+                case "programme":
+                    return Enums.AimType.Programme;
+                case "mathsorenglish":
+                    return Enums.AimType.MathsOrEnglish;
+                default:
+                    throw new ArgumentException($"Invalid aim type {aimType} found.");
+            }
         }
     }
 }

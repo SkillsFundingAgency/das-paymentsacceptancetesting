@@ -10,7 +10,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Builders
 
             FirstUln = 120001;
 
-            StandardCode = 98765;
+            StandardCode = 28;
             PathwayCode = 0;
             FrameworkCode = 0;
             ProgrammeType = 0;

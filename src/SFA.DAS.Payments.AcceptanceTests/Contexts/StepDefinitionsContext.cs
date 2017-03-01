@@ -127,18 +127,19 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
                 ActualEndDate = actualEndDate,
                 CompletionStatus = completionStatus,
                 PriceEpisodes = new[]
-                 {
-                        new PriceEpisode
-                        {
-                            Id = IdentifierGenerator.GenerateIdentifier(25),
-                            StartDate = startDate,
-                            EndDate = actualEndDate.HasValue ? actualEndDate : endDate,
-                            TotalPrice = agreedPrice,
-                            Tnp1 = agreedPrice * 0.8m,
-                            Tnp2 = agreedPrice * 0.2m
-                        }
+                {
+                    new PriceEpisode
+                    {
+                        Id = IdentifierGenerator.GenerateIdentifier(25),
+                        StartDate = startDate,
+                        EndDate = actualEndDate.HasValue ? actualEndDate : endDate,
+                        TotalPrice = agreedPrice,
+                        Tnp1 = agreedPrice*0.8m,
+                        Tnp2 = agreedPrice*0.2m
                     }
-                });
+                },
+                Type = AimType.Programme
+            });
             
 
             return learner;
