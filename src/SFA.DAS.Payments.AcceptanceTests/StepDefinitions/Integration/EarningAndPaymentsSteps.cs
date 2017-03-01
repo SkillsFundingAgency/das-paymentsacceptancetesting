@@ -25,6 +25,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
         [When(@"an ILR file is submitted with the following data:")]
         public void WhenAnIlrFileIsSubmittedWithTheFollowingData(Table table)
         {
+            if (table.Header.Contains("home postcode deprivation"))
+            {
+                var disadvatnageUplift = table.Rows[0].Value<string>("home postcode deprivation");
+
+                if (!string.IsNullOrEmpty(disadvatnageUplift))
+                {
+                    ReferenceDataHelper.SavePostCodeDisadvantageUplift(disadvatnageUplift, EnvironmentVariables);
+                }
+            }
             ProcessIlrFileSubmissions(table);
         }
 

@@ -89,6 +89,7 @@
     <Compile Include="Builders\IlrSubmissionDefaults.cs" />
     <Compile Include="DataHelpers\DataLockDataHelper.cs" />
     <Compile Include="DataHelpers\Entities\CommitmentEntity.cs" />
+    <Compile Include="DataHelpers\ReferenceDataHelper.cs" />
     <Compile Include="DataHelpers\ValidationErrorsDataHelper.cs" />
     <Compile Include="DataHelpers\Entities\AEC_ApprenticeshipPriceEpisode.cs" />
     <Compile Include="Entities\Commitment.cs" />
@@ -226,6 +227,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ilr.deds.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ddl.AT.deds.tables.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

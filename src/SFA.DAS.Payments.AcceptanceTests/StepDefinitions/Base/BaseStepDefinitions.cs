@@ -500,11 +500,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                         learner.Uln = GetUln(learner.Name, string.Empty);
                     }
 
-                    learner.LearnRefNumber =$"{StepDefinitionsContext.GetProvider(provider).Ukprn}-{rowIndex+1}";
+                    learner.LearnRefNumber = $"{StepDefinitionsContext.GetProvider(provider).Ukprn}-{rowIndex+1}";
                     learner.DateOfBirth = GetDateOfBirth(learningDelivery.LearnerType, learningDelivery.StartDate);
                     
                     learner.EmploymentStatuses = StepDefinitionsContext.ReferenceDataContext.EmploymentStatuses;
-                    
+
+                 
                     StepDefinitionsContext.AddProviderLearner(provider, learner);
                 }
 

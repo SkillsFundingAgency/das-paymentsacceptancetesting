@@ -26,6 +26,7 @@ namespace SFA.DAS.Payments.AcceptanceTests
 
             var databaseHelper = new DatabaseHelper(environmentVariables);
             databaseHelper.RunDedsScrips();
+            databaseHelper.RunAtScrips();
 
             var processService = new ProcessService(new TestLogger());
             processService.RebuildDedsDatabase(ComponentType.DataLockSubmission, environmentVariables);

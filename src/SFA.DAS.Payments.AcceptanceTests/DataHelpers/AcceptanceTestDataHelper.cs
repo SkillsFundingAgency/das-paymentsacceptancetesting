@@ -58,6 +58,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                 connection.Execute("DELETE FROM DataLock.ValidationError");
 
                 connection.Execute("DELETE FROM Valid.Learner");
+                connection.Execute("DELETE FROM [AT].ReferenceData");
             }
         }
 
