@@ -57,3 +57,23 @@ SET NOCOUNT ON
 
 	SELECT * FROM AT.Logs WHERE RunId = @LastRunId ORDER BY LogDtTm DESC
 GO
+
+----------------------------------------------------------------------------------------------------------------------------
+-- ReferenceData
+----------------------------------------------------------------------------------------------------------------------------
+IF NOT EXISTS (SELECT [object_id] FROM sys.tables WHERE [name]='ReferenceData' AND [schema_id]=SCHEMA_ID('AT'))
+	BEGIN
+		CREATE TABLE [AT].[ReferenceData](
+			[ID] [int] IDENTITY(1,1) NOT NULL,
+			[Key] [nvarchar] (100) NOT NULL,
+			[Value] [nvarchar](500) NULL,
+			[Type] [nvarchar](100) NULL,
+			
+			CONSTRAINT [PK_dbo.FileDetails] UNIQUE NONCLUSTERED 
+			(
+				[Key],
+				[Type]
+			)
+		)
+	END
+GO
