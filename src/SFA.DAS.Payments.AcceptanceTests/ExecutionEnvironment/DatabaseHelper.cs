@@ -30,6 +30,22 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionEnvironment
             }
         }
 
+        internal void RunAtScrips()
+        {
+            using (var connection = new SqlConnection(_environment.DedsDatabaseConnectionString))
+            {
+                connection.Open();
+                try
+                {
+                    RunScript(connection, Properties.Resources.ddl_AT_deds_tables);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+
 
         private void RunScript(SqlConnection connection, string script)
         {
