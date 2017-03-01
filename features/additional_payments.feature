@@ -274,6 +274,102 @@ Scenario:AC10- Maths and English payments for a das learner finishing on time, f
         | English and maths Balancing    | 0     | 0     | 0     | 0     | ... | 0     | 0     |
 
 
+@DisadvantageUpliftsNonDasForStandard
+Scenario: 624-AC01-Payment for a non-DAS learner, lives in a disadvantaged postocde area - 1-10% most deprived, funding agreed within band maximum, undertaking apprenticeship standard
+	When an ILR file is submitted with the following data:
+        | ULN       | learner type             | agreed price | start date | planned end date | actual end date | completion status | standard code | home postcode deprivation |
+        | learner a | programme only non - DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | 50            | 1-10%                     |
+    Then the provider earnings and payments break down as follows:
+        | Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
+        | Provider Earned Total                   | 1000  | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     | 0     |
+        | Provider Paid by SFA                    | 0     | 900   | 900   | 900   | 900   | ... | 900   | 900   | 0     |
+        | Payment due from Employer               | 0     | 100   | 100   | 100   | 100   | ... | 100   | 100   | 0     |
+        | Levy account debited                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+        | SFA Levy employer budget                | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+        | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+        | SFA non-Levy co-funding budget          | 900   | 900   | 900   | 900   | 900   | ... | 900   | 0     | 0     |
+        | SFA non-Levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+        | SFA Levy additional payments budget     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+    And the transaction types for the payments are:
+        | Payment type                 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
+        | On-program                   | 900   | 900   | 900   | 900   | ... | 900   | 0     |
+        | Completion                   | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+        | Balancing                    | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+        | Provider disadvantage uplift | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+
+
+@DisadvantageUpliftsNonDasForStandard
+Scenario: 624-AC02-Payment for a non-DAS learner, lives in a disadvantaged postocde area - 11-20% most deprived, funding agreed within band maximum, undertaking apprenticeship standard
+	When an ILR file is submitted with the following data:
+        | ULN       | learner type             | agreed price | start date | planned end date | actual end date | completion status | standard code | home postcode deprivation |
+        | learner a | programme only non - DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | 50            | 11-20%                    |
+    Then the provider earnings and payments break down as follows:
+        | Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
+        | Provider Earned Total                   | 1000  | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     | 0     |
+        | Provider Paid by SFA                    | 0     | 900   | 900   | 900   | 900   | ... | 900   | 900   | 0     |
+        | Payment due from Employer               | 0     | 100   | 100   | 100   | 100   | ... | 100   | 100   | 0     |
+        | Levy account debited                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+        | SFA Levy employer budget                | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+        | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+        | SFA non-Levy co-funding budget          | 900   | 900   | 900   | 900   | 900   | ... | 900   | 0     | 0     |
+        | SFA non-Levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+        | SFA Levy additional payments budget     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+    And the transaction types for the payments are:
+        | Payment type                 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
+        | On-program                   | 900   | 900   | 900   | 900   | ... | 900   | 0     |
+        | Completion                   | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+        | Balancing                    | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+        | Provider disadvantage uplift | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+
+
+@DisadvantageUpliftsNonDasForStandard
+Scenario: 624-AC03-Payment for a non-DAS learner, lives in a disadvantaged postocde area - 21-27% most deprived, funding agreed within band maximum, undertaking apprenticeship standard
+	When an ILR file is submitted with the following data:
+        | ULN       | learner type             | agreed price | start date | planned end date | actual end date | completion status | standard code | home postcode deprivation |
+        | learner a | programme only non - DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | 50            | 21-27%                    |
+    Then the provider earnings and payments break down as follows:
+        | Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
+        | Provider Earned Total                   | 1000  | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     | 0     |
+        | Provider Paid by SFA                    | 0     | 900   | 900   | 900   | 900   | ... | 900   | 900   | 0     |
+        | Payment due from Employer               | 0     | 100   | 100   | 100   | 100   | ... | 100   | 100   | 0     |
+        | Levy account debited                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+        | SFA Levy employer budget                | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+        | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+        | SFA non-Levy co-funding budget          | 900   | 900   | 900   | 900   | 900   | ... | 900   | 0     | 0     |
+        | SFA non-Levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+        | SFA Levy additional payments budget     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+    And the transaction types for the payments are:
+        | Payment type                 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
+        | On-program                   | 900   | 900   | 900   | 900   | ... | 900   | 0     |
+        | Completion                   | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+        | Balancing                    | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+        | Provider disadvantage uplift | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+
+
+@DisadvantageUpliftsNonDasForStandard
+Scenario: 624-AC04-Payment for a non-DAS learner, does not live in a disadvantaged postocde area, funding agreed within band maximum, undertaking apprenticeship standard
+	When an ILR file is submitted with the following data:
+        | ULN       | learner type             | agreed price | start date | planned end date | actual end date | completion status | standard code | home postcode deprivation |
+        | learner a | programme only non - DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | 50            | not deprived              |
+    Then the provider earnings and payments break down as follows:
+        | Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
+        | Provider Earned Total                   | 1000  | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     | 0     |
+        | Provider Paid by SFA                    | 0     | 900   | 900   | 900   | 900   | ... | 900   | 900   | 0     |
+        | Payment due from Employer               | 0     | 100   | 100   | 100   | 100   | ... | 100   | 100   | 0     |
+        | Levy account debited                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+        | SFA Levy employer budget                | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+        | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+        | SFA non-Levy co-funding budget          | 900   | 900   | 900   | 900   | 900   | ... | 900   | 0     | 0     |
+        | SFA non-Levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+        | SFA Levy additional payments budget     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+    And the transaction types for the payments are:
+        | Payment type                 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
+        | On-program                   | 900   | 900   | 900   | 900   | ... | 900   | 0     |
+        | Completion                   | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+        | Balancing                    | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+        | Provider disadvantage uplift | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+
+
 @DisadvantageUpliftsDasForStandard
 Scenario: 625-AC01-Payment for a DAS learner, lives in a disadvantaged postocde area - 1-10% most deprived, funding agreed within band maximum, undertaking apprenticeship standard
 	Given levy balance > agreed price for all months
