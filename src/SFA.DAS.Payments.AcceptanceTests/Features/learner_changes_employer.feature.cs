@@ -3760,8 +3760,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Employer",
                         "Provider",
                         "ULN",
-                        "price effective date",
-                        "planned end date",
+                        "start date",
+                        "end date",
                         "agreed price",
                         "status",
                         "effective from",
@@ -4000,8 +4000,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Employer",
                         "Provider",
                         "ULN",
-                        "price effective date",
-                        "planned end date",
+                        "start date",
+                        "end date",
                         "agreed price",
                         "status",
                         "effective from",
@@ -4215,8 +4215,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Employer",
                         "Provider",
                         "ULN",
-                        "price effective date",
-                        "planned end date",
+                        "start date",
+                        "end date",
                         "agreed price",
                         "status",
                         "effective from",
@@ -4440,8 +4440,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Employer",
                         "Provider",
                         "ULN",
-                        "price effective date",
-                        "planned end date",
+                        "start date",
+                        "end date",
                         "agreed price",
                         "status",
                         "effective from",
@@ -4649,7 +4649,7 @@ this.ScenarioSetup(scenarioInfo);
             table233.AddRow(new string[] {
                         "No employer",
                         "Non-DAS",
-                        "03/10/2017"});
+                        "09/10/2017"});
             table233.AddRow(new string[] {
                         "XYZ",
                         "DAS",
@@ -4663,8 +4663,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Employer",
                         "Provider",
                         "ULN",
-                        "price effective date",
-                        "planned end date",
+                        "start date",
+                        "end date",
                         "agreed price",
                         "status",
                         "effective from",
@@ -4680,7 +4680,7 @@ this.ScenarioSetup(scenarioInfo);
                         "15000",
                         "Active",
                         "01/08/2017",
-                        "02/10/2017"});
+                        "08/10/2017"});
             table234.AddRow(new string[] {
                         "1",
                         "2",
@@ -4691,7 +4691,7 @@ this.ScenarioSetup(scenarioInfo);
                         "04/08/2018",
                         "15000",
                         "Withdrawn",
-                        "03/10/2017",
+                        "09/10/2017",
                         ""});
             table234.AddRow(new string[] {
                         "2",
@@ -4748,10 +4748,10 @@ this.ScenarioSetup(scenarioInfo);
             table236.AddRow(new string[] {
                         "DAS",
                         "03/08/2017",
-                        "02/10/2017"});
+                        "08/10/2017"});
             table236.AddRow(new string[] {
                         "Non DAS",
-                        "03/10/2017",
+                        "09/10/2017",
                         "02/03/2018"});
             table236.AddRow(new string[] {
                         "DAS",
@@ -4771,11 +4771,11 @@ this.ScenarioSetup(scenarioInfo);
             table237.AddRow(new string[] {
                         "",
                         "not in paid employment",
-                        "03/10/2017"});
+                        "09/10/2017"});
             table237.AddRow(new string[] {
                         "XYZ",
                         "in paid employment",
-                        "03/03/2018"});
+                        "02/03/2018"});
 #line 774
         testRunner.And("the employment status in the ILR is:", ((string)(null)), table237, "And ");
 #line hidden
@@ -4812,8 +4812,8 @@ this.ScenarioSetup(scenarioInfo);
                         "1000",
                         "0",
                         "0",
-                        "500",
-                        "500"});
+                        "0",
+                        "0"});
             table239.AddRow(new string[] {
                         "Provider Paid by SFA",
                         "0",
@@ -4824,7 +4824,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1000",
                         "0",
                         "0",
-                        "500"});
+                        "0"});
             table239.AddRow(new string[] {
                         "ABC Levy account debited",
                         "0",
@@ -4842,11 +4842,11 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0",
-                        "500",
                         "0",
                         "0",
                         "0",
-                        "500"});
+                        "0",
+                        "0"});
             table239.AddRow(new string[] {
                         "SFA Levy employer budget",
                         "1000",
@@ -4856,8 +4856,8 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0",
-                        "500",
-                        "500"});
+                        "0",
+                        "0"});
             table239.AddRow(new string[] {
                         "SFA Levy co-funding budget",
                         "0",
