@@ -281,7 +281,7 @@ Scenario:AC11- Payment for a DAS learner, lives in a disadvantaged postocde area
 		  | commitment ID | version ID | ULN       | start date  | end date   | framework code | programme type | pathway code | agreed price | status   |
 		  | 1             | 1          | learner a | 01/08/2017  | 01/08/2018 | 403            | 2              | 1            | 15000        | active   |
 	When an ILR file is submitted with the following data:
-		  | ULN       | learner type             | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | home postcode deprivation |
+		  | ULN       | learner type       | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | home postcode deprivation |
 		  | learner a | programme only DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | 403            | 2              | 1            | 1-10%                     |
     Then the provider earnings and payments break down as follows:
 		  | Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
@@ -295,11 +295,11 @@ Scenario:AC11- Payment for a DAS learner, lives in a disadvantaged postocde area
 		  | SFA non-levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
 		  | SFA levy additional payments budget     | 0     | 0     | 0     | 300   | 0     | ... | 0     | 300   | 0     |
 	And the transaction types for the payments are:
-		  | Payment type                | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
-		  | On-program                  | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     |
-		  | Completion                  | 0     | 0     | 0     | 0     | ... | 0     | 0     |
-		  | Balancing                   | 0     | 0     | 0     | 0     | ... | 0     | 0     |
-          | Provider disadvantage uplift| 0     | 0     | 0     | 300   | ... | 0     | 300   |  
+		  | Payment type                 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
+		  | On-program                   | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     |
+		  | Completion                   | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+		  | Balancing                    | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+		  | Provider disadvantage uplift | 0     | 0     | 0     | 300   | ... | 0     | 300   |
 
 Scenario:AC12- Payment for a DAS learner, lives in a disadvantaged postocde area - 11-20% most deprived, employer has sufficient levy funds in account, funding agreed within band maximum, UNDERTAKING APPRENTICESHIP FRAMEWORK
     #The provider incentive for this postcode group is £300 split equally into 2 payments at 90 and 365 days. INELIGIBLE FOR APPRENITCESHIP STANDARDS
@@ -308,8 +308,8 @@ Scenario:AC12- Payment for a DAS learner, lives in a disadvantaged postocde area
 		  | commitment ID | version ID | ULN       | start date  | end date   | framework code | programme type | pathway code | agreed price | status   |
 		  | 1             | 1          | learner a | 01/08/2017  | 01/08/2018 | 403            | 2              | 1            | 15000        | active   |
 	When an ILR file is submitted with the following data:
-		  | ULN       | learner type             | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | home postcode deprivation |
-		  | learner a | programme only DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | 403            | 2              | 1            | 11-20%                     |
+		  | ULN       | learner type       | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | home postcode deprivation |
+		  | learner a | programme only DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | 403            | 2              | 1            | 11-20%                    |
     Then the provider earnings and payments break down as follows:
 		  | Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
 		  | Provider Earned Total                   | 1000  | 1000  | 1000  | 1150  | 1000  | ... | 1000  | 150   | 0     |
@@ -322,11 +322,11 @@ Scenario:AC12- Payment for a DAS learner, lives in a disadvantaged postocde area
 		  | SFA non-levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
 		  | SFA levy additional payments budget     | 0     | 0     | 0     | 150   | 0     | ... | 0     | 150   | 0     |
 	And the transaction types for the payments are:
-		  | Payment type                | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
-		  | On-program                  | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     |
-		  | Completion                  | 0     | 0     | 0     | 0     | ... | 0     | 0     |
-		  | Balancing                   | 0     | 0     | 0     | 0     | ... | 0     | 0     |
-          | Provider disadvantage uplift| 0     | 0     | 0     | 150   | ... | 0     | 150   |
+		  | Payment type                 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
+		  | On-program                   | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     |
+		  | Completion                   | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+		  | Balancing                    | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+		  | Provider disadvantage uplift | 0     | 0     | 0     | 150   | ... | 0     | 150   |
 
 		  	  
 Scenario:AC13- Payment for a DAS learner, lives in a disadvantaged postocde area - 21-27% most deprived, employer has sufficient levy funds in account, funding agreed within band maximum, UNDERTAKING APPRENTICESHIP FRAMEWORK
@@ -337,8 +337,8 @@ Scenario:AC13- Payment for a DAS learner, lives in a disadvantaged postocde area
 		  | 1             | 1          | learner a | 01/08/2017  | 01/08/2018 | 403            | 2              | 1            | 15000        | active   | 
 
 	When an ILR file is submitted with the following data:
-		  | ULN       | learner type             | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | home postcode deprivation |
-		  | learner a | programme only DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | 403            | 2              | 1            | 20-27%                     |
+		  | ULN       | learner type       | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | home postcode deprivation |
+		  | learner a | programme only DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | 403            | 2              | 1            | 20-27%                    |
       
     Then the provider earnings and payments break down as follows:
 		  | Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
@@ -365,7 +365,7 @@ Scenario:AC14- Payment for a DAS learner, does not live in a disadvantaged posto
 		  | commitment ID | version ID | ULN       | start date  | end date   | framework code | programme type | pathway code | agreed price | status   | 
 		  | 1             | 1          | learner a | 01/08/2017  | 01/08/2018 | 403            | 2              | 1            | 15000        | active   | 
 	When an ILR file is submitted with the following data:
-		  | ULN       | learner type             | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | home postcode deprivation |
+		  | ULN       | learner type       | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | home postcode deprivation |
 		  | learner a | programme only DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | 403            | 2              | 1            | not deprived              |
     Then the provider earnings and payments break down as follows:
 		  | Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
