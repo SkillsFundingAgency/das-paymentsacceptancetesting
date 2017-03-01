@@ -215,7 +215,7 @@ Scenario:AC7- Payment for a non-DAS learner, lives in a disadvantaged postocde a
 @MathsAndEnglishNonDas
 Scenario:AC9- Maths and English payments for a non-das learner finishing on time, funding agreed within band maximum, planned duration is same as programme (assumes both start and finish at same time)
     When an ILR file is submitted with the following data:
-        | ULN       | learner type           | agreed price | start date | planned end date | actual end date | completion status | aim type         | aim cost | framework code | programme type | pathway code |
+        | ULN       | learner type           | agreed price | start date | planned end date | actual end date | completion status | aim type         | aim rate | framework code | programme type | pathway code |
         | learner a | programme only non-DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | programme        |          | 403            | 2              | 1            |
         | learner a | programme only non-DAS |              | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | maths or english | 471      | 403            | 2              | 1            |
     Then the provider earnings and payments break down as follows:
@@ -246,23 +246,23 @@ Scenario:AC10- Maths and English payments for a das learner finishing on time, f
     Given levy balance > agreed price for all months
     And the following commitments exist:
         | commitment Id | ULN       | start date | end date   | agreed price | framework code | programme type | pathway code | status | effective from | effective to |
-        | 1             | learner a | 01/08/2017 | 08/08/2018 | 15000        | 403            | 2              | 1            | active | 01/08/2017     |              |
+        | 1             | learner a | 01/08/2017 | 01/08/2018 | 15000        | 403            | 2              | 1            | active | 01/08/2017     |              |
     When an ILR file is submitted with the following data:
-        | ULN       | learner type       | agreed price | start date | planned end date | actual end date | completion status | aim type         | aim cost | framework code | programme type | pathway code |
+        | ULN       | learner type       | agreed price | start date | planned end date | actual end date | completion status | aim type         | aim rate | framework code | programme type | pathway code |
         | learner a | programme only DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | programme        |          | 403            | 2              | 1            |
         | learner a | programme only DAS |              | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | maths or english | 471      | 403            | 2              | 1            |
     Then the provider earnings and payments break down as follows:
-        | Type                                    | 08/17   | 09/17   | 10/17   | 11/17   | 12/17   | ... | 07/18   | 08/18   | 09/18 |
-        | Provider Earned Total                   | 1039.25 | 1039.25 | 1039.25 | 1039.25 | 1039.25 | ... | 1039.25 | 0       | 0     |
-        | Provider Earned from SFA                | 1039.25 | 1039.25 | 1039.25 | 1039.25 | 1039.25 | ... | 1039.25 | 0       | 0     |
-        | Provider Earned from Employer           | 0       | 0       | 0       | 0       | 0       | ... | 0       | 0       | 0     |
-        | Provider Paid by SFA                    | 0       | 1039.25 | 1039.25 | 1039.25 | 1039.25 | ... | 1039.25 | 1039.25 | 0     |
-        | Payment due from Employer               | 0       | 0       | 0       | 0       | 0       | ... | 0       | 0       | 0     |
-        | Levy account debited                    | 0       | 1000    | 1000    | 1000    | 1000    | ... | 1000    | 1000    | 0     |
-        | SFA Levy employer budget                | 1000    | 1000    | 1000    | 1000    | 1000    | ... | 1000    | 1000    | 0     |
-        | SFA Levy co-funding budget              | 0       | 0       | 0       | 0       | 0       | ... | 0       | 0       | 0     |
-        | SFA non-Levy co-funding budget          | 0       | 0       | 0       | 0       | 0       | ... | 0       | 0       | 0     |
-        | SFA non-Levy additional payments budget | 39.25   | 39.25   | 39.25   | 1039.25 | 39.25   | ... | 39.25   | 0       | 0     |
+        | Type                                | 08/17   | 09/17   | 10/17   | 11/17   | 12/17   | ... | 07/18   | 08/18   | 09/18 |
+        | Provider Earned Total               | 1039.25 | 1039.25 | 1039.25 | 1039.25 | 1039.25 | ... | 1039.25 | 0       | 0     |
+        | Provider Earned from SFA            | 1039.25 | 1039.25 | 1039.25 | 1039.25 | 1039.25 | ... | 1039.25 | 0       | 0     |
+        | Provider Earned from Employer       | 0       | 0       | 0       | 0       | 0       | ... | 0       | 0       | 0     |
+        | Provider Paid by SFA                | 0       | 1039.25 | 1039.25 | 1039.25 | 1039.25 | ... | 1039.25 | 1039.25 | 0     |
+        | Payment due from Employer           | 0       | 0       | 0       | 0       | 0       | ... | 0       | 0       | 0     |
+        | Levy account debited                | 0       | 1000    | 1000    | 1000    | 1000    | ... | 1000    | 1000    | 0     |
+        | SFA Levy employer budget            | 1000    | 1000    | 1000    | 1000    | 1000    | ... | 1000    | 0       | 0     |
+        | SFA Levy co-funding budget          | 0       | 0       | 0       | 0       | 0       | ... | 0       | 0       | 0     |
+        | SFA Levy additional payments budget | 39.25   | 39.25   | 39.25   | 39.25   | 39.25   | ... | 39.25   | 0       | 0     |
+        | SFA non-Levy co-funding budget      | 0       | 0       | 0       | 0       | 0       | ... | 0       | 0       | 0     |
     And the transaction types for the payments are:
         | Payment type                   | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
         | On-program                     | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     |

@@ -1796,7 +1796,7 @@ this.ScenarioSetup(scenarioInfo);
                         "actual end date",
                         "completion status",
                         "aim type",
-                        "aim cost",
+                        "aim rate",
                         "framework code",
                         "programme type",
                         "pathway code"});
@@ -2063,7 +2063,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "learner a",
                         "01/08/2017",
-                        "08/08/2018",
+                        "01/08/2018",
                         "15000",
                         "403",
                         "2",
@@ -2083,7 +2083,7 @@ this.ScenarioSetup(scenarioInfo);
                         "actual end date",
                         "completion status",
                         "aim type",
-                        "aim cost",
+                        "aim rate",
                         "framework code",
                         "programme type",
                         "pathway code"});
@@ -2202,7 +2202,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1000",
                         "...",
                         "1000",
-                        "1000",
+                        "0",
                         "0"});
             table32.AddRow(new string[] {
                         "SFA Levy co-funding budget",
@@ -2216,6 +2216,17 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table32.AddRow(new string[] {
+                        "SFA Levy additional payments budget",
+                        "39.25",
+                        "39.25",
+                        "39.25",
+                        "39.25",
+                        "39.25",
+                        "...",
+                        "39.25",
+                        "0",
+                        "0"});
+            table32.AddRow(new string[] {
                         "SFA non-Levy co-funding budget",
                         "0",
                         "0",
@@ -2224,17 +2235,6 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "...",
                         "0",
-                        "0",
-                        "0"});
-            table32.AddRow(new string[] {
-                        "SFA non-Levy additional payments budget",
-                        "39.25",
-                        "39.25",
-                        "39.25",
-                        "1039.25",
-                        "39.25",
-                        "...",
-                        "39.25",
                         "0",
                         "0"});
 #line 254
