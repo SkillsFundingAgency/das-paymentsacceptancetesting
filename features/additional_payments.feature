@@ -595,6 +595,7 @@ Scenario: 625-AC04-Payment for a non-DAS learner, does not live in a disadvantag
         | Provider disadvantage uplift | 0     | 0     | 0     | 0     | ... | 0     | 0     |
 
 
+@FrameworkUpliftsForNonDasFinishingEarly
 Scenario: 581-AC01-Non DAS learner finishes early, price equals the funding band maximum, earns balancing and completion framework uplift payments. Assumes 15 month apprenticeship and learner completes after 12 months.
 	When an ILR file is submitted with the following data:
 		| ULN    | learner type                 | agreed price | start date | planned end date | actual end date | completion status | Framework Code | Programme Type | Pathway Code |
@@ -624,6 +625,7 @@ Scenario: 581-AC01-Non DAS learner finishes early, price equals the funding band
 		| Provider disadvantage uplift | 0     | 0     | 0     | 0     | 0     | ..  | 0     | 0     | 0     | 0     |
 
 
+@FrameworkUpliftsForNonDasFinishingEarly
 Scenario: 581-AC02-Non DAS learner finishes early, price lower than the funding band maximum, earns balancing and completion framework uplift payments. Assumes 15 month apprenticeship and learner completes after 12 months.
 	When an ILR file is submitted with the following data:
 		| ULN    | learner type                 | agreed price | start date | planned end date | actual end date | completion status | Framework Code | Programme Type | Pathway Code |
