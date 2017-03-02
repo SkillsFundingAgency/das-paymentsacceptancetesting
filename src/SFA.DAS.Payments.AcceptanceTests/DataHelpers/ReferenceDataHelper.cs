@@ -22,5 +22,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
 
             }
         }
+        internal static void SaveFundingBandCap(decimal value, EnvironmentVariables environmentVariables)
+        {
+            using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
+            {
+                connection.Execute("INSERT INTO [AT].[ReferenceData] ([Key],[Value],[Type])" +
+                            " VALUES ('Cap',@value,'FundingBandCap')",
+                             new { value });
+
+            }
+        }
     }
 }

@@ -234,6 +234,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             SetupContextProviders(table);
             SetupContexLearners(table);
 
+            AddScenarioReferenceData();
+
             var startDate = firstSubmissionDate ?? StepDefinitionsContext.GetIlrStartDate().NextCensusDate();
 
             if (firstSubmissionDate != null)
