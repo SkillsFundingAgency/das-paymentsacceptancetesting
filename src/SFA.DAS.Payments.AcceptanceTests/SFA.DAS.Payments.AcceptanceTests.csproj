@@ -91,7 +91,7 @@
     <Compile Include="DataHelpers\Entities\CommitmentEntity.cs" />
     <Compile Include="DataHelpers\ReferenceDataHelper.cs" />
     <Compile Include="DataHelpers\ValidationErrorsDataHelper.cs" />
-    <Compile Include="DataHelpers\Entities\AEC_ApprenticeshipPriceEpisode.cs" />
+    <Compile Include="DataHelpers\Entities\OpaApprenticeshipPriceEpisode.cs" />
     <Compile Include="Entities\Commitment.cs" />
     <Compile Include="Entities\DataLockMatch.cs" />
     <Compile Include="Entities\Employer.cs" />
@@ -169,7 +169,6 @@
     </None>
     <None Include="..\..\features\capping.feature">
       <Link>Features\capping.feature</Link>
-      <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>capping.feature.cs</LastGenOutput>
     </None>
     <None Include="..\..\features\change_in_circumstances.feature">

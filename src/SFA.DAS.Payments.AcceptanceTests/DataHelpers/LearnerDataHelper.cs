@@ -115,18 +115,26 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
             }
         }
 
-        internal static AEC_ApprenticeshipPriceEpisode GetAELearningDelivery(long ukprn,
+        internal static OpaApprenticeshipPriceEpisode GetOpaApprenticeshipPriceEpisode(long ukprn,
                                                                 string learnRefNumber,
-                                                                 DateTime learnStartDate,
+                                                                DateTime learnStartDate,
                                                                 DateTime learnPlanEndDate,
                                                                 EnvironmentVariables environmentVariables)
         {
             using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
             {
                 var query = "SELECT * FROM [Rulebase].[AEC_ApprenticeshipPriceEpisode] WHERE UKPRN = @ukprn AND LearnRefNumber = @learnRefNumber AND EpisodeStartDate= @learnStartDate AND PriceEpisodePlannedEndDate=@learnPlanEndDate ";
-                return connection.QuerySingleOrDefault<AEC_ApprenticeshipPriceEpisode>(query, new { ukprn, learnRefNumber, learnStartDate,learnPlanEndDate});
+                return connection.QuerySingleOrDefault<OpaApprenticeshipPriceEpisode>(query, new { ukprn, learnRefNumber, learnStartDate,learnPlanEndDate});
             }
         }
 
+        internal static OpaApprenticeshipPriceEpisode GetOpaApprenticeshipPriceEpisode(long ukprn, string priceEpisodeIdentifier, EnvironmentVariables environmentVariables)
+        {
+            using (var connection = new SqlConnection(environmentVariables.DedsDatabaseConnectionString))
+            {
+                var query = "SELECT * FROM [Rulebase].[AEC_ApprenticeshipPriceEpisode] WHERE UKPRN = @ukprn AND PriceEpisodeIdentifier = @priceEpisodeIdentifier ";
+                return connection.QuerySingleOrDefault<OpaApprenticeshipPriceEpisode>(query, new { ukprn, priceEpisodeIdentifier });
+            }
+        }
     }
 }

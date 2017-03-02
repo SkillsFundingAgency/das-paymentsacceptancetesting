@@ -170,7 +170,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
             var learner = StepDefinitionsContext.GetDefaultProvider().Learners.First();
-            var output = LearnerDataHelper.GetAELearningDelivery(StepDefinitionsContext.GetDefaultProvider().Ukprn,
+            var output = LearnerDataHelper.GetOpaApprenticeshipPriceEpisode(StepDefinitionsContext.GetDefaultProvider().Ukprn,
                                                                 learner.LearnRefNumber,
                                                                 learner.LearningDelivery.StartDate,
                                                                 learner.LearningDelivery.PlannedEndDate,
@@ -189,7 +189,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
             var environmentVariables = EnvironmentVariablesFactory.GetEnvironmentVariables();
 
             var learner = StepDefinitionsContext.GetDefaultProvider().Learners.First();
-            var output = LearnerDataHelper.GetAELearningDelivery(StepDefinitionsContext.GetDefaultProvider().Ukprn,
+            var output = LearnerDataHelper.GetOpaApprenticeshipPriceEpisode(StepDefinitionsContext.GetDefaultProvider().Ukprn,
                                                                 learner.LearnRefNumber,
                                                                 learner.LearningDelivery.StartDate,
                                                                 learner.LearningDelivery.PlannedEndDate,

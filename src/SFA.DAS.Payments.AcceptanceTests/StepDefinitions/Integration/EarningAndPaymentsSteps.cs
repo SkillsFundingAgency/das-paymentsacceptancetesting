@@ -10,7 +10,6 @@ using SFA.DAS.Payments.AcceptanceTests.ExecutionEnvironment;
 using SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base;
 using TechTalk.SpecFlow;
 using SFA.DAS.Payments.AcceptanceTests.Entities;
-using System.Collections.Generic;
 
 namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
 {
@@ -150,7 +149,25 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
         [Then(@"the following capping will apply to the price episodes:")]
         public void ThenTheFollowingCappingWillApplyToThePriceEpisodes(Table table)
         {
-            
+            for (var rowIndex = 0; rowIndex < table.RowCount; rowIndex++)
+            {
+                var provider = table.Rows[rowIndex].Contains("provider")
+                    ? StepDefinitionsContext.GetProvider(table.Rows[rowIndex].Value<string>("provider"))
+                    : StepDefinitionsContext.GetDefaultProvider();
+
+                var priceEpisode = provider.GetPriceEpisode(table.Rows[rowIndex].Value<string>("price episode"));
+                var expectedNegotiatedPrice = table.Rows[rowIndex].Value<decimal>("negotiated price");
+                var expectedPreviousFunding = table.Rows[rowIndex].Value<decimal>("previous funding paid");
+                var expectedPriceAboveCap = table.Rows[rowIndex].Value<decimal>("price above cap");
+                var expectedPriceForSfaPayments = table.Rows[rowIndex].Value<decimal>("effective price for SFA payments");
+
+                var actualPriceEpisode = LearnerDataHelper.GetOpaApprenticeshipPriceEpisode(provider.Ukprn, priceEpisode.Id, EnvironmentVariables);
+
+                Assert.AreEqual(expectedNegotiatedPrice, actualPriceEpisode.PriceEpisodeTotalTNPPrice, $"Expecting a total negotiated price of {expectedNegotiatedPrice} for pride episode {priceEpisode.DataLockMatchKey} but found {actualPriceEpisode.PriceEpisodeTotalTNPPrice}.");
+                Assert.AreEqual(expectedPreviousFunding, actualPriceEpisode.PriceEpisodePreviousEarnings, $"Expecting previous funding of {expectedPreviousFunding} for pride episode {priceEpisode.DataLockMatchKey} but found {actualPriceEpisode.PriceEpisodePreviousEarnings}.");
+                Assert.AreEqual(expectedPriceAboveCap, actualPriceEpisode.PriceEpisodeUpperLimitAdjustment, $"Expecting a price above cap of {expectedPriceAboveCap} for pride episode {priceEpisode.DataLockMatchKey} but found {actualPriceEpisode.PriceEpisodeUpperLimitAdjustment}.");
+                Assert.AreEqual(expectedPriceForSfaPayments, actualPriceEpisode.PriceEpisodeUpperBandLimit, $"Expecting an effective price for SFA payments of {expectedPriceForSfaPayments} for pride episode {priceEpisode.DataLockMatchKey} but found {actualPriceEpisode.PriceEpisodeUpperBandLimit}.");
+            }
         }
 
         private void BuildContractTypes(Table table)
