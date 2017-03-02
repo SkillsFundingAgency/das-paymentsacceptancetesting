@@ -9,7 +9,7 @@ using TechTalk.SpecFlow;
 
 namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
 {
-    [Binding]
+    //[Binding]
     public class DataLockSteps : BaseStepDefinitions
     {
         public DataLockSteps(StepDefinitionsContext stepDefinitionsContext)

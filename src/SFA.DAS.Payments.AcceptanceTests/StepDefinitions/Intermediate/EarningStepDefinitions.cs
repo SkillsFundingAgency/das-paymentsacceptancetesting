@@ -12,7 +12,7 @@ using TechTalk.SpecFlow;
 
 namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
 {
-    [Binding]
+    //[Binding]
     public class EarningStepDefinitions : BaseStepDefinitions
     {
         public EarningStepDefinitions(StepDefinitionsContext earningAndPaymentsContext)

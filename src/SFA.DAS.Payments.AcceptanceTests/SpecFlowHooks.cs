@@ -6,7 +6,7 @@ using TechTalk.SpecFlow;
 
 namespace SFA.DAS.Payments.AcceptanceTests
 {
-    [Binding]
+    //[Binding]
     public static class SpecFlowHooks
     {
         internal static string RunId { get; private set; }

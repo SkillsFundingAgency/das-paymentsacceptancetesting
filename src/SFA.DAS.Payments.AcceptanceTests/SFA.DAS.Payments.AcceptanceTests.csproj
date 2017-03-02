@@ -149,6 +149,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Refactoring\Contexts\CommitmentsContext.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\CommitmentReferenceData.cs" />
+    <Compile Include="Refactoring\Contexts\EmployerAccountContext.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\EmployerAccountReferenceData.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\PeriodValue.cs" />
+    <Compile Include="Refactoring\StepDefinitions\CommitmentSteps.cs" />
+    <Compile Include="Refactoring\StepDefinitions\EarningAndPaymentSteps.cs" />
+    <Compile Include="Refactoring\StepDefinitions\SubmissionSteps.cs" />
+    <Compile Include="Refactoring\StepDefinitions\UntestedSteps.cs" />
+    <Compile Include="Refactoring\Validations.cs" />
     <Compile Include="RowKeys.cs" />
     <Compile Include="SpecFlowHooks.cs" />
     <Compile Include="StepDefinitions\Base\BaseStepDefinitions.cs" />
@@ -159,6 +169,7 @@
     <Compile Include="StepDefinitions\Intermediate\PaymentStepDefinitions.cs" />
     <Compile Include="StepDefinitions\Base\ReferenceDataSteps.cs" />
     <Compile Include="ExecutionEnvironment\TestLogger.cs" />
+    <Compile Include="Refactoring\StepDefinitions\EmployerAccountSteps.cs" />
     <Compile Include="Translators\IlrTranslator.cs" />
   </ItemGroup>
   <ItemGroup>

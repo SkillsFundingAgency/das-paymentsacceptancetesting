@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
 {
-    [Binding]
+    //[Binding]
     public class EarningAndPaymentsSteps : BaseStepDefinitions
     {
         public EarningAndPaymentsSteps(StepDefinitionsContext earningAndPaymentsContext)

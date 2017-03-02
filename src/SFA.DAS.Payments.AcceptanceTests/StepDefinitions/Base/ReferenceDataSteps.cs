@@ -10,7 +10,7 @@ using IlrBuilder = SFA.DAS.Payments.AcceptanceTests.Builders.IlrBuilder;
 
 namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 {
-    [Binding]
+    //[Binding]
     public class ReferenceDataSteps
     {
         public ReferenceDataSteps(ReferenceDataContext referenceDataContext)
