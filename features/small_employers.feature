@@ -2,6 +2,7 @@
 Feature: 1 learner aged 16-18, non-DAS, employed with a small employer at start, is fully funded for on programme and completion payments
 @SmallEmployerNonDas
 Scenario:AC1-Payment for a 16-18 non-DAS learner, small employer at start
+	Given the apprenticeship funding band maximum is 9000
     When an ILR file is submitted with the following data:
         | ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status | Employment Status Applies | Employer Id | Small Employer |
         | learner a | 16-18 programme only non-DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment          | 05/08/2017                | 12345678    | SEM1           |
@@ -33,6 +34,7 @@ Scenario:AC1-Payment for a 16-18 non-DAS learner, small employer at start
 @SmallEmployerNonDas
 Scenario:AC2- 1 learner aged 19-24, non-DAS, with an Education Health Care (EHC) plan, In paid employment with a small employer at start, is fully funded for on programme and completion payments
 #Note: EHC plans are flagged on the ILR through Eligibility for Enhanced Funding (EEF) code = 2*
+	Given the apprenticeship funding band maximum is 9000
     When an ILR file is submitted with the following data:
         | ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status | Employment Status Applies | Employer Id | Small Employer | LearnDelFAM |
         | learner a | 19-24 programme only non-DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment          | 05/08/2017                | 12345678    | SEM1           | EEF2        |
@@ -64,7 +66,7 @@ Scenario:AC2- 1 learner aged 19-24, non-DAS, with an Education Health Care (EHC)
 Scenario:AC3- 1 learner aged 19-24, non-DAS, is a care leaver, In paid employment with a small employer at start, is fully funded for on programme and completion payments
 
 #Note: care leavers are flagged on the ILR through EEF code = 4*
-
+	Given the apprenticeship funding band maximum is 9000
     When an ILR file is submitted with the following data:
         | ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status | Employment Status Applies | Employer Id | Small Employer | LearnDelFAM |
         | learner a | 19-24 programme only non-DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment          | 05/08/2017                | 12345678    | SEM1           | EEF4        |
@@ -119,7 +121,7 @@ Scenario:AC4- 1 learner aged 19-24, non-DAS, employed with a small employer at s
         | Balancing    | 0     | 0     | 0     | ... | 0     | 0     |
 @SmallEmployerNonDas
  Scenario:AC5- Payment for a 16-18 non-DAS learner, employer is not small
-    
+    Given the apprenticeship funding band maximum is 9000
     When an ILR file is submitted with the following data:
         | ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status  | Employment Status Applies | Employer Id | Small Employer |
         | learner a | 16-18 programme only non-DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment | 05/08/2017                | 12345678    |                |
@@ -149,7 +151,7 @@ Scenario:AC4- 1 learner aged 19-24, non-DAS, employed with a small employer at s
 
 @SmallEmployerNonDasMultipleEmploymentStatuses
 Scenario:AC6- 1 learner aged 16-18, non-DAS. Second employment status record added with same employer id but small employer flag removed. Learner retains small employer funding.
-	
+	Given the apprenticeship funding band maximum is 9000
 	When an ILR file is submitted with the following data:
 		| ULN        | learner type                 | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | agreed price |
 		| 1234567891 | 16-18 programme only non-DAS | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | 7500         |
@@ -186,6 +188,7 @@ Scenario:AC6- 1 learner aged 16-18, non-DAS. Second employment status record add
 @SmallEmployerDas
  Scenario:AC7- Payment for a 16-18 DAS learner, small employer at start
     Given levy balance > agreed price for all months
+	And the apprenticeship funding band maximum is 9000
     And the following commitments exist:
         | ULN       | framework code | programme type | pathway code | agreed price | start date |
         | learner a | 403            | 2              | 1            | 7500         | 06/08/2017 |
@@ -219,6 +222,7 @@ Scenario:AC6- 1 learner aged 16-18, non-DAS. Second employment status record add
 @SmallEmployerDas   
  Scenario:AC8- Scenario: 1 learner aged 19-24, DAS, with an Education Health Care (EHC) plan, employed with a small employer at start, is fully funded for on programme and completion payments
     Given levy balance > agreed price for all months
+	And the apprenticeship funding band maximum is 9000
     And the following commitments exist:
         | ULN       | framework code | programme type | pathway code | agreed price | start date |
         | learner a | 403            | 2              | 1            | 7500         | 06/08/2017 |
@@ -252,6 +256,7 @@ Scenario:AC6- 1 learner aged 16-18, non-DAS. Second employment status record add
 @SmallEmployerDas   
 Scenario:AC9- 1 learner aged 19-24, DAS, is a care leaver, employed with a small employer at start, is fully funded for on programme and completion payments
     Given levy balance > agreed price for all months
+	And the apprenticeship funding band maximum is 9000
     And the following commitments exist:
         | ULN       | framework code | programme type | pathway code | agreed price | start date |
         | learner a | 403            | 2              | 1            | 7500         | 06/08/2017 |
@@ -316,8 +321,9 @@ Scenario:AC10- 1 learner aged 19-24, DAS, employed with a small employer at star
    
   @SmallEmployerDas   
 Scenario:AC11- Payment for a 16-18 DAS learner, employer is not small
-  
+ 
     Given levy balance > agreed price for all months
+	And the apprenticeship funding band maximum is 9000
     And the following commitments exist:
         | ULN       | framework code | programme type | pathway code | agreed price | start date |
         | learner a | 403            | 2              | 1            | 7500         | 06/08/2017 |
@@ -352,6 +358,7 @@ Scenario:AC11- Payment for a 16-18 DAS learner, employer is not small
 
 @SmallEmployerMultipleEmploymentStatus
 Scenario:AC12- Payment for a 16-18 non-DAS learner, small employer at start, change to large employer
+	Given the apprenticeship funding band maximum is 9000
 	When an ILR file is submitted with the following data:
 		| ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | 
 		| learner a | 16-18 programme only non-DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | 
@@ -388,6 +395,7 @@ Scenario:AC12- Payment for a 16-18 non-DAS learner, small employer at start, cha
 
 @SmallEmployerMultipleEmploymentStatus
 Scenario:AC13- Payment for a 16-18 non-DAS learner, large employer at start, change to small employer
+	Given the apprenticeship funding band maximum is 9000
 	When an ILR file is submitted with the following data:
 		| ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | 
 		| learner a | 16-18 programme only non-DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | 

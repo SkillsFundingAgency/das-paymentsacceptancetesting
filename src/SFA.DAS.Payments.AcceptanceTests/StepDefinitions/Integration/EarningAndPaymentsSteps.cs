@@ -147,6 +147,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             VerifyTransactionsForThePayments(table, provider.Ukprn);
         }
 
+        [Then(@"the following capping will apply to the price episodes:")]
+        public void ThenTheFollowingCappingWillApplyToThePriceEpisodes(Table table)
+        {
+            
+        }
+
         private void BuildContractTypes(Table table)
         {
             
