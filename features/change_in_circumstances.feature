@@ -22,7 +22,7 @@ Feature: Provider earnings and payments where learner changes apprenticeship sta
             | Provider Earned Total         | 1000  | 1000  | 1000  | 500   | 500   |
             | Provider Earned from SFA      | 1000  | 1000  | 1000  | 500   | 500   |
             | Provider Paid by SFA          | 0     | 1000  | 1000  | 1000  | 500   |
-            | Employer Levy account debited | 0     | 1000  | 1000  | 1000  | 500   |
+            | Levy account debited | 0     | 1000  | 1000  | 1000  | 500   |
             | SFA Levy employer budget      | 1000  | 1000  | 1000  | 500   | 0     |
             | SFA Levy co-funding budget    | 0     | 0     | 0     | 0     | 0     |
 
@@ -43,7 +43,7 @@ Feature: Provider earnings and payments where learner changes apprenticeship sta
             | Provider Earned Total         | 1000  | 1000  | 1000  | 500   | 500   |
             | Provider Earned from SFA      | 1000  | 1000  | 1000  | 500   | 500   |
             | Provider Paid by SFA          | 0     | 1000  | 1000  | 1000  | 0     |
-            | Employer Levy account debited | 0     | 1000  | 1000  | 1000  | 0     |
+            | Levy account debited | 0     | 1000  | 1000  | 1000  | 0     |
             | SFA Levy employer budget      | 1000  | 1000  | 1000  | 0     | 0     |
             | SFA Levy co-funding budget    | 0     | 0     | 0     | 0     | 0     |
 
@@ -64,7 +64,7 @@ Feature: Provider earnings and payments where learner changes apprenticeship sta
             | Provider Earned Total         | 1000  | 1000  | 1000  | 1000  | 1000  | 1000  |
             | Provider Earned from SFA      | 1000  | 1000  | 1000  | 1000  | 1000  | 1000  |
             | Provider Paid by SFA          | 0     | 1000  | 1000  | 1000  | 0     | 0     |
-            | Employer Levy account debited | 0     | 1000  | 1000  | 1000  | 0     | 0     |
+            | Levy account debited | 0     | 1000  | 1000  | 1000  | 0     | 0     |
             | SFA Levy employer budget      | 1000  | 1000  | 1000  | 1000  | 1000  | 1000  |
             | SFA Levy co-funding budget    | 0     | 0     | 0     | 0     | 0     | 0     |
 
@@ -83,7 +83,7 @@ Feature: Provider earnings and payments where learner changes apprenticeship sta
             | Type                          | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 | 02/18 | ... | 10/18 | 11/18 |
             | Provider Earned from SFA      | 1000  | 1000  | 0     | 0     | 1000  | 1000  | ... | 1000  | 0     |
             | Provider Paid by SFA          | 0     | 1000  | 1000  | 0     | 0     | 1000  | ... | 1000  | 1000  |
-            | Employer Levy account debited | 0     | 1000  | 1000  | 0     | 0     | 1000  | ... | 1000  | 1000  |
+            | Levy account debited | 0     | 1000  | 1000  | 0     | 0     | 1000  | ... | 1000  | 1000  |
             | SFA Levy employer budget      | 1000  | 1000  | 0     | 0     | 1000  | 1000  | ... | 1000  | 0     |
 
 
@@ -182,7 +182,7 @@ Feature: Provider earnings and payments where learner changes apprenticeship sta
             | Provider Earned from Employer | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
             | Provider Paid by SFA          | 0     | 1000  | 1000  | 1000  | 0     | ... | 0     | 0     |
             | Payment due from Employer     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
-            | Employer Levy account debited | 0     | 1000  | 1000  | 1000  | 0     | ... | 0     | 0     |
+            | Levy account debited | 0     | 1000  | 1000  | 1000  | 0     | ... | 0     | 0     |
             | SFA Levy employer budget      | 1000  | 1000  | 1000  | 0     | 0     | ... | 0     | 0     |
             | SFA Levy co-funding budget    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
 
