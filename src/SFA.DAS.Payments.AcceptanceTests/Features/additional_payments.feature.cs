@@ -386,6 +386,8 @@ this.ScenarioSetup(scenarioInfo);
                     " 12 month apprenticeship and learner completes after 10 months.", ((string[])(null)));
 #line 58
 this.ScenarioSetup(scenarioInfo);
+#line 59
+ testRunner.Given("the apprenticeship funding band maximum is 9000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                         "ULN",
@@ -680,6 +682,8 @@ this.ScenarioSetup(scenarioInfo);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("AC4-Learner finishes on time, Price is less than Funding Band Maximum of �9,000", ((string[])(null)));
 #line 90
 this.ScenarioSetup(scenarioInfo);
+#line 91
+ testRunner.Given("the apprenticeship funding band maximum is 9000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                         "ULN",
@@ -4956,6 +4960,8 @@ this.ScenarioSetup(scenarioInfo);
                         "FrameworkUpliftsForNonDasFinishingEarly"});
 #line 599
 this.ScenarioSetup(scenarioInfo);
+#line 600
+ testRunner.Given("the apprenticeship funding band maximum is 9000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table78 = new TechTalk.SpecFlow.Table(new string[] {
                         "ULN",
@@ -4979,7 +4985,7 @@ this.ScenarioSetup(scenarioInfo);
                         "403",
                         "2",
                         "1"});
-#line 600
+#line 601
  testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table78, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table79 = new TechTalk.SpecFlow.Table(new string[] {
@@ -5114,7 +5120,7 @@ this.ScenarioSetup(scenarioInfo);
                         "96",
                         "1648",
                         "0"});
-#line 603
+#line 604
  testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table79, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table80 = new TechTalk.SpecFlow.Table(new string[] {
@@ -5237,7 +5243,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 615
+#line 616
     testRunner.And("the transaction types for the payments are:", ((string)(null)), table80, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -5254,8 +5260,10 @@ this.ScenarioSetup(scenarioInfo);
                     "m, earns balancing and completion framework uplift payments. Assumes 15 month ap" +
                     "prenticeship and learner completes after 12 months.", new string[] {
                         "FrameworkUpliftsForNonDasFinishingEarly"});
-#line 629
+#line 630
 this.ScenarioSetup(scenarioInfo);
+#line 631
+ testRunner.Given("the apprenticeship funding band maximum is 9000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table81 = new TechTalk.SpecFlow.Table(new string[] {
                         "ULN",
@@ -5279,7 +5287,7 @@ this.ScenarioSetup(scenarioInfo);
                         "403",
                         "2",
                         "1"});
-#line 630
+#line 632
  testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table81, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table82 = new TechTalk.SpecFlow.Table(new string[] {
@@ -5414,7 +5422,7 @@ this.ScenarioSetup(scenarioInfo);
                         "96",
                         "1648",
                         "0"});
-#line 633
+#line 635
  testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table82, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table83 = new TechTalk.SpecFlow.Table(new string[] {
@@ -5537,7 +5545,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 645
+#line 647
     testRunner.And("the transaction types for the payments are:", ((string)(null)), table83, "And ");
 #line hidden
             this.ScenarioCleanup();

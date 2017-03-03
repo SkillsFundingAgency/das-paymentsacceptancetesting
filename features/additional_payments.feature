@@ -56,7 +56,7 @@ Scenario:AC2- Payment for a 16-18 DAS learner, levy available, incentives not pa
       
 
 Scenario:AC3-Learner finishes on time, earns on-programme and completion payments. Assumes 12 month apprenticeship and learner completes after 10 months.
-
+	Given the apprenticeship funding band maximum is 9000
 	When an ILR file is submitted with the following data:
 		| ULN    | learner type                 | agreed price | start date | planned end date | actual end date | completion status | Framework Code | Programme Type | Pathway Code |
 		| 123456 | 16-18 programme only non-DAS | 9000         | 06/08/2017 | 09/08/2018       | 10/08/2018      | Completed         | 403            | 2              | 1            |
@@ -88,7 +88,7 @@ Scenario:AC3-Learner finishes on time, earns on-programme and completion payment
 
 		
 Scenario:AC4-Learner finishes on time, Price is less than Funding Band Maximum of £9,000
-		
+	Given the apprenticeship funding band maximum is 9000
 	When an ILR file is submitted with the following data:
 		| ULN    | learner type                 | agreed price | start date | planned end date | actual end date | completion status | Framework Code | Programme Type | Pathway Code |
 		| 123455 | 16-18 programme only non-DAS | 8250         | 06/08/2017 | 09/08/2018       | 10/08/2018      | Completed         | 403            | 2              | 1            |
@@ -597,6 +597,7 @@ Scenario: 625-AC04-Payment for a non-DAS learner, does not live in a disadvantag
 
 @FrameworkUpliftsForNonDasFinishingEarly
 Scenario: 581-AC01-Non DAS learner finishes early, price equals the funding band maximum, earns balancing and completion framework uplift payments. Assumes 15 month apprenticeship and learner completes after 12 months.
+	Given the apprenticeship funding band maximum is 9000
 	When an ILR file is submitted with the following data:
 		| ULN    | learner type                 | agreed price | start date | planned end date | actual end date | completion status | Framework Code | Programme Type | Pathway Code |
 		| 123456 | 16-18 programme only non-DAS | 9000         | 06/08/2017 | 09/11/2018       | 09/08/2018      | Completed         | 403            | 2              | 1            |
@@ -627,6 +628,7 @@ Scenario: 581-AC01-Non DAS learner finishes early, price equals the funding band
 
 @FrameworkUpliftsForNonDasFinishingEarly
 Scenario: 581-AC02-Non DAS learner finishes early, price lower than the funding band maximum, earns balancing and completion framework uplift payments. Assumes 15 month apprenticeship and learner completes after 12 months.
+	Given the apprenticeship funding band maximum is 9000
 	When an ILR file is submitted with the following data:
 		| ULN    | learner type                 | agreed price | start date | planned end date | actual end date | completion status | Framework Code | Programme Type | Pathway Code |
 		| 123456 | 16-18 programme only non-DAS | 7500         | 06/08/2017 | 09/11/2018       | 09/08/2018      | Completed         | 403            | 2              | 1            |

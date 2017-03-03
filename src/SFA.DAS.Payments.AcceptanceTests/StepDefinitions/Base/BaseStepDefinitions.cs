@@ -704,6 +704,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             throw new ArgumentException($"Invalid commitment status value: {status}");
         }
 
+        protected void AddScenarioReferenceData()
+        {
+            if (StepDefinitionsContext.ReferenceDataContext.FundingMaximum > 0)
+            {
+                ReferenceDataHelper.SaveFundingBandCap(StepDefinitionsContext.ReferenceDataContext.FundingMaximum, EnvironmentVariables);
+            }
+        }
+
         private string GetPriceEpisodeIdentifier(DateTime date, long? standardCode)
         {
             return $"25-{(standardCode.HasValue ? standardCode.Value : IlrBuilder.Defaults.StandardCode)}-{date.ToString("dd/MM/yyyy")}";

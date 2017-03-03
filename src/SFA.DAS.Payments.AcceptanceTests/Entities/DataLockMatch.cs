@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SFA.DAS.Payments.AcceptanceTests.Entities
+﻿namespace SFA.DAS.Payments.AcceptanceTests.Entities
 {
     public class DataLockMatch
     {
