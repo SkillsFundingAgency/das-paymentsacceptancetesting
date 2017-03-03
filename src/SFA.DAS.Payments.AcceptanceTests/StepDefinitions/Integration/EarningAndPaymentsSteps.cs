@@ -179,6 +179,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             var frameworkUpliftCompletionRow = table.Rows.RowWithKey(RowKeys.FrameworkUpliftCompletion);
             var disadvatngePaymentRow = table.Rows.RowWithKey(RowKeys.ProviderDisadvantageUplift);
 
+            var englishAndMathsOnProgRow = table.Rows.RowWithKey(RowKeys.EnglishAndMathsOnProgramme);
+            var englishAndMathsBalancingRow = table.Rows.RowWithKey(RowKeys.EnglishAndMathsBlancing);
+
             for (var colIndex = 1; colIndex < table.Header.Count; colIndex++)
             {
                 var periodName = table.Header.ElementAt(colIndex);
@@ -207,6 +210,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                 VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, new TransactionType[] { TransactionType.OnProgramme16To18FrameworkUplift }, frameworkUpliftOnProgRow,null,FundingSource.FullyFundedSfa);
                 VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, new TransactionType[] { TransactionType.Completion16To18FrameworkUplift }, frameworkUpliftCompletionRow,null, FundingSource.FullyFundedSfa);
                 VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, new TransactionType[] { TransactionType.Balancing16To18FrameworkUplift }, frameworkUpliftBalancingRow,null, FundingSource.FullyFundedSfa);
+
+                VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, new TransactionType[] { TransactionType.OnProgrammeMathsAndEnglish }, englishAndMathsOnProgRow, null, FundingSource.FullyFundedSfa);
+                VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, new TransactionType[] { TransactionType.BalancingMathsAndEnglish}, englishAndMathsBalancingRow, null, FundingSource.FullyFundedSfa);
 
                 VerifyPaymentsDueByTransactionType(ukprn, periodName,
                                                                periodDate, colIndex,
