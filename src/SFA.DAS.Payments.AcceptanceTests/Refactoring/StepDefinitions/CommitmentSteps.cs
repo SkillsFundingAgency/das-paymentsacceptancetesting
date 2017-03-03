@@ -26,10 +26,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
             var structure = ParseCommitmentsTableStructure(commitments);
             foreach (var row in commitments.Rows)
             {
-                CommitmentsContext.Commitments.Add(ParseCommitmentsTableRow(row, structure));
+                CommitmentsContext.Commitments.Add(ParseCommitmentsTableRow(row, structure, CommitmentsContext.Commitments.Count));
             }
         }
 
+        [Given("the following commitments exist on (.*):")]
+        public void GievenCommitmentsExistForLearnersAtSpecificDate(string specDate, Table commitments)
+        {
+            //TODO
+        }
 
         private CommitmentsTableColumnStructure ParseCommitmentsTableStructure(Table commitments)
         {
@@ -55,6 +60,39 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
                     case "agreed price":
                         structure.PriceIndex = c;
                         break;
+                    case "commitment Id":
+                        structure.CommitmentIdIndex = c;
+                        break;
+                    case "version Id":
+                        structure.VersionIdIndex = c;
+                        break;
+                    case "start date":
+                        structure.StartDateIndex = c;
+                        break;
+                    case "end date":
+                        structure.EndDateIndex = c;
+                        break;
+                    case "status":
+                        structure.StatusIndex = c;
+                        break;
+                    case "effective from":
+                        structure.EffectiveFromIndex = c;
+                        break;
+                    case "effective to":
+                        structure.EffectiveToIndex = c;
+                        break;
+                    case "standard code":
+                        // TODO
+                        break;
+                    case "framework code":
+                        // TODO
+                        break;
+                    case "programme type":
+                        // TODO
+                        break;
+                    case "pathway code":
+                        // TODO
+                        break;
                     default:
                         throw new ArgumentException($"Unexpected column in commitments table: {header}");
                 }
@@ -63,23 +101,23 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
             {
                 throw new ArgumentException("Commitments table is missing ULN column");
             }
-            if (structure.PriorityIndex == -1)
-            {
-                throw new ArgumentException("Commitments table is missing priority column");
-            }
 
             return structure;
         }
 
-        private CommitmentReferenceData ParseCommitmentsTableRow(TableRow row, CommitmentsTableColumnStructure structure)
+        private CommitmentReferenceData ParseCommitmentsTableRow(TableRow row, CommitmentsTableColumnStructure structure, int rowIndex)
         {
-            int priority;
-            if (!int.TryParse(row[structure.PriorityIndex], out priority))
+            var uln = row[structure.UlnIndex];
+            var providerId = structure.ProviderIndex > -1 ? row[structure.ProviderIndex] : Defaults.ProviderId;
+            var status = structure.StatusIndex > -1 ? row[structure.StatusIndex] : Defaults.CommitmentStatus;
+
+            int priority = Defaults.CommitmentPriority;
+            if (structure.PriorityIndex > -1 && !int.TryParse(row[structure.PriorityIndex], out priority))
             {
                 throw new ArgumentException($"'{row[structure.PriorityIndex]}' is not a valid priority");
             }
 
-            var employerAccountId = 1;
+            var employerAccountId = Defaults.EmployerAccountId;
             if (structure.EmployerIndex > -1 && (row[structure.EmployerIndex].Length < 10 || !int.TryParse(row[structure.EmployerIndex].Substring(9), out employerAccountId)))
             {
                 throw new ArgumentException($"'{row[structure.EmployerIndex]}' is not a valid employer reference");
@@ -91,23 +129,90 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
                 throw new ArgumentException($"'{row[structure.PriceIndex]}' is not a valid agreed price");
             }
 
+            var commitmentId = rowIndex + 1;
+            if (structure.CommitmentIdIndex > -1 && !int.TryParse(row[structure.CommitmentIdIndex], out commitmentId))
+            {
+                throw new ArgumentException($"'{row[structure.CommitmentIdIndex]}' is not a valid commitment id");
+            }
+
+            var versionId = Defaults.CommitmentVersionId;
+            if (structure.VersionIdIndex > -1 && !int.TryParse(row[structure.VersionIdIndex], out versionId))
+            {
+                throw new ArgumentException($"'{row[structure.VersionIdIndex]}' is not a valid version id");
+            }
+
+            DateTime? startDate = null;
+            if (structure.StartDateIndex > -1 && !TryParseNullableDateTime(row[structure.StartDateIndex], out startDate))
+            {
+                throw new ArgumentException($"'{row[structure.StartDateIndex]}' is not a valid start date");
+            }
+
+            DateTime? endDate = null;
+            if (structure.EndDateIndex > -1 && !TryParseNullableDateTime(row[structure.EndDateIndex], out endDate))
+            {
+                throw new ArgumentException($"'{row[structure.EndDateIndex]}' is not a valid end date");
+            }
+
+            DateTime? effectiveFrom = null;
+            if (structure.EffectiveFromIndex > -1 && !TryParseNullableDateTime(row[structure.EffectiveFromIndex], out effectiveFrom))
+            {
+                throw new ArgumentException($"'{row[structure.EffectiveFromIndex]}' is not a valid effective from");
+            }
+
+            DateTime? effectiveTo = null;
+            if (structure.EffectiveToIndex > -1 && string.IsNullOrEmpty(row[structure.EffectiveToIndex]))
+            {
+                effectiveTo = DateTime.MaxValue;
+            }
+            else if (structure.EffectiveToIndex > -1 && !TryParseNullableDateTime(row[structure.EffectiveToIndex], out effectiveTo))
+            {
+                throw new ArgumentException($"'{row[structure.EffectiveToIndex]}' is not a valid effective to");
+            }
+
             return new CommitmentReferenceData
             {
                 EmployerAccountId = employerAccountId,
-                Uln = row[structure.UlnIndex],
+                Uln = uln,
                 Priority = priority,
-                ProviderId = structure.ProviderIndex > -1 ? row[structure.ProviderIndex] : Defaults.ProviderId,
-                AgreedPrice = price
+                ProviderId = providerId,
+                AgreedPrice = price,
+                CommitmentId = commitmentId,
+                VersionId = versionId,
+                StartDate = startDate,
+                EndDate = endDate,
+                EffectiveFrom = effectiveFrom,
+                EffectiveTo = effectiveTo,
+                Status = status
             };
+        }
+
+        private bool TryParseNullableDateTime(string value, out DateTime? dateTime)
+        {
+            DateTime temp;
+            if (DateTime.TryParse(value, out temp))
+            {
+                dateTime = temp;
+                return true;
+            }
+
+            dateTime = null;
+            return false;
         }
 
         private class CommitmentsTableColumnStructure
         {
+            public int CommitmentIdIndex { get; set; } = -1;
+            public int VersionIdIndex { get; set; } = -1;
             public int UlnIndex { get; set; } = -1;
             public int PriorityIndex { get; set; } = -1;
             public int EmployerIndex { get; set; } = -1;
             public int ProviderIndex { get; set; } = -1;
             public int PriceIndex { get; set; } = -1;
+            public int StartDateIndex { get; set; } = -1;
+            public int EndDateIndex { get; set; } = -1;
+            public int StatusIndex { get; set; } = -1;
+            public int EffectiveFromIndex { get; set; } = -1;
+            public int EffectiveToIndex { get; set; } = -1;
         }
     }
 }

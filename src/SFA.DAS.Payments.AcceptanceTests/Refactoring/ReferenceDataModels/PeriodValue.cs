@@ -3,6 +3,6 @@
     public class PeriodValue
     {
         public string PeriodName { get; set; }
-        public long Value { get; set; }
+        public decimal Value { get; set; }
     }
 }

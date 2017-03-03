@@ -200,7 +200,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "1000",
                         "500"});
             table87.AddRow(new string[] {
-                        "Employer Levy account debited",
+                        "Levy account debited",
                         "0",
                         "1000",
                         "1000",
@@ -331,7 +331,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "1000",
                         "0"});
             table91.AddRow(new string[] {
-                        "Employer Levy account debited",
+                        "Levy account debited",
                         "0",
                         "1000",
                         "1000",
@@ -469,7 +469,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "0"});
             table95.AddRow(new string[] {
-                        "Employer Levy account debited",
+                        "Levy account debited",
                         "0",
                         "1000",
                         "1000",
@@ -620,7 +620,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "1000",
                         "1000"});
             table98.AddRow(new string[] {
-                        "Employer Levy account debited",
+                        "Levy account debited",
                         "0",
                         "1000",
                         "1000",
@@ -1352,7 +1352,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "0"});
             table114.AddRow(new string[] {
-                        "Employer Levy account debited",
+                        "Levy account debited",
                         "0",
                         "1000",
                         "1000",

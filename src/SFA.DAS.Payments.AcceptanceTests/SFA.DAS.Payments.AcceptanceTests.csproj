@@ -150,10 +150,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Refactoring\Contexts\CommitmentsContext.cs" />
+    <Compile Include="Refactoring\Contexts\EarningsAndPaymentsContext.cs" />
     <Compile Include="Refactoring\Defaults.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\CommitmentReferenceData.cs" />
     <Compile Include="Refactoring\Contexts\EmployerAccountContext.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\EmployerAccountReferenceData.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\EmployerAccountPeriodValue.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\PeriodValue.cs" />
     <Compile Include="Refactoring\StepDefinitions\CommitmentSteps.cs" />
     <Compile Include="Refactoring\StepDefinitions\EarningAndPaymentSteps.cs" />

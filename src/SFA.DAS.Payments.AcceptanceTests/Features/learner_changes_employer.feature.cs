@@ -85,20 +85,20 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
 #line 7
         testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 8
-        testRunner.And("the ABC has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.Given("the employer 1 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 9
-        testRunner.And("the XYZ has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 2 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table183 = new TechTalk.SpecFlow.Table(new string[] {
                         "Employer",
                         "Type",
                         "ILR employment start date"});
             table183.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "DAS",
                         "01/08/2017"});
             table183.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "DAS",
                         "01/11/2017"});
 #line 10
@@ -116,7 +116,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "effective from",
                         "effective to"});
             table184.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "1",
                         "1",
                         "learner a",
@@ -127,7 +127,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "01/08/2017",
                         "31/10/2017"});
             table184.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "1",
                         "2",
                         "learner a",
@@ -138,7 +138,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "01/11/2017",
                         ""});
             table184.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "2",
                         "1",
                         "learner a",
@@ -215,14 +215,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "500",
                         "500"});
             table187.AddRow(new string[] {
-                        "Provider Earned from ABC",
+                        "Provider Earned from Employer 1",
                         "0",
                         "0",
                         "0",
                         "0",
                         "0"});
             table187.AddRow(new string[] {
-                        "Provider Earned from XYZ",
+                        "Provider Earned from Employer 2",
                         "0",
                         "0",
                         "0",
@@ -230,34 +230,34 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0"});
             table187.AddRow(new string[] {
                         "Provider Paid by SFA",
-                        "",
+                        "0",
                         "1000",
                         "1000",
                         "1000",
                         "500"});
             table187.AddRow(new string[] {
-                        "Payment due from ABC",
+                        "Payment due from employer 1",
                         "0",
                         "0",
                         "0",
                         "0",
                         "0"});
             table187.AddRow(new string[] {
-                        "Payment due from XYZ",
+                        "Payment due from employer 2",
                         "0",
                         "0",
                         "0",
                         "0",
                         "0"});
             table187.AddRow(new string[] {
-                        "ABC Levy account debited",
+                        "Employer 1 Levy account debited",
                         "0",
                         "1000",
                         "1000",
                         "1000",
                         "0"});
             table187.AddRow(new string[] {
-                        "XYZ Levy account debited",
+                        "Employer 2 Levy account debited",
                         "0",
                         "0",
                         "0",
@@ -297,20 +297,20 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
 #line 41
         testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 42
-        testRunner.And("the ABC has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 1 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 43
-        testRunner.And("the XYZ has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 2 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table188 = new TechTalk.SpecFlow.Table(new string[] {
                         "Employer",
                         "Type",
                         "ILR employment start date"});
             table188.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "DAS",
                         "04/08/2017"});
             table188.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "DAS",
                         "10/11/2017"});
 #line 44
@@ -328,7 +328,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "effective from",
                         "effective to"});
             table189.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "1",
                         "1",
                         "learner a",
@@ -339,7 +339,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "01/08/2017",
                         "31/10/2017"});
             table189.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "1",
                         "2",
                         "learner a",
@@ -350,7 +350,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "01/11/2017",
                         ""});
             table189.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "2",
                         "1",
                         "learner a",
@@ -427,14 +427,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "500",
                         "500"});
             table192.AddRow(new string[] {
-                        "Provider Earned from ABC",
+                        "Provider Earned from Employer 1",
                         "0",
                         "0",
                         "0",
                         "0",
                         "0"});
             table192.AddRow(new string[] {
-                        "Provider Earned from XYZ",
+                        "Provider Earned from Employer 2",
                         "0",
                         "0",
                         "0",
@@ -442,34 +442,34 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0"});
             table192.AddRow(new string[] {
                         "Provider Paid by SFA",
-                        "",
+                        "0",
                         "1000",
                         "1000",
                         "1000",
                         "500"});
             table192.AddRow(new string[] {
-                        "Payment due from ABC",
+                        "Payment due from employer 1",
                         "0",
                         "0",
                         "0",
                         "0",
                         "0"});
             table192.AddRow(new string[] {
-                        "Payment due from XYZ",
+                        "Payment due from employer 2",
                         "0",
                         "0",
                         "0",
                         "0",
                         "0"});
             table192.AddRow(new string[] {
-                        "ABC Levy account debited",
+                        "Employer 1 Levy account debited",
                         "0",
                         "1000",
                         "1000",
                         "1000",
                         "0"});
             table192.AddRow(new string[] {
-                        "XYZ Levy account debited",
+                        "Employer 2 Levy account debited",
                         "0",
                         "0",
                         "0",
@@ -509,20 +509,20 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
 #line 76
         testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 77
-        testRunner.And("the ABC has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 1 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 78
-        testRunner.And("the XYZ has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 2 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table193 = new TechTalk.SpecFlow.Table(new string[] {
                         "Employer",
                         "Type",
                         "ILR employment start date"});
             table193.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "DAS",
                         "04/08/2017"});
             table193.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "DAS",
                         "10/11/2017"});
 #line 79
@@ -540,7 +540,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "effective from",
                         "effective to"});
             table194.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "1",
                         "1",
                         "learner a",
@@ -551,7 +551,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "01/08/2017",
                         "31/10/2017"});
             table194.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "1",
                         "2",
                         "learner a",
@@ -562,7 +562,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "01/11/2017",
                         ""});
             table194.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "2",
                         "1",
                         "learner a",
@@ -639,14 +639,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "450",
                         "450"});
             table197.AddRow(new string[] {
-                        "Provider Earned from ABC",
+                        "Provider Earned from Employer 1",
                         "0",
                         "0",
                         "0",
                         "0",
                         "0"});
             table197.AddRow(new string[] {
-                        "Provider Earned from XYZ",
+                        "Provider Earned from Employer 2",
                         "0",
                         "0",
                         "0",
@@ -654,34 +654,34 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0"});
             table197.AddRow(new string[] {
                         "Provider Paid by SFA",
-                        "",
-                        "1000",
-                        "1000",
-                        "0",
-                        "0"});
-            table197.AddRow(new string[] {
-                        "Payment due from ABC",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table197.AddRow(new string[] {
-                        "Payment due from XYZ",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table197.AddRow(new string[] {
-                        "ABC Levy account debited",
                         "0",
                         "1000",
                         "1000",
                         "0",
                         "0"});
             table197.AddRow(new string[] {
-                        "XYZ Levy account debited",
+                        "Payment due from employer 1",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"});
+            table197.AddRow(new string[] {
+                        "Payment due from employer 2",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"});
+            table197.AddRow(new string[] {
+                        "Employer 1 Levy account debited",
+                        "0",
+                        "1000",
+                        "1000",
+                        "0",
+                        "0"});
+            table197.AddRow(new string[] {
+                        "Employer 2 Levy account debited",
                         "0",
                         "0",
                         "0",
@@ -721,18 +721,18 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
 #line 110
         testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 111
-        testRunner.And("the ABC has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 1 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table198 = new TechTalk.SpecFlow.Table(new string[] {
                         "Employer",
                         "Type",
                         "ILR employment start date"});
             table198.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "DAS",
                         "03/08/2017"});
             table198.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "Non DAS",
                         "03/11/2017"});
 #line 112
@@ -750,7 +750,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "effective from",
                         "effective to"});
             table199.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "1",
                         "1",
                         "learner a",
@@ -761,7 +761,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "03/08/2017",
                         "02/11/2017"});
             table199.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "1",
                         "2",
                         "learner a",
@@ -853,14 +853,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "450",
                         "450"});
             table203.AddRow(new string[] {
-                        "Provider Earned from ABC",
+                        "Provider Earned from Employer 1",
                         "0",
                         "0",
                         "0",
                         "0",
                         "0"});
             table203.AddRow(new string[] {
-                        "Provider Earned from XYZ",
+                        "Provider Earned from Employer 2",
                         "0",
                         "0",
                         "0",
@@ -874,21 +874,21 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "1000",
                         "450"});
             table203.AddRow(new string[] {
-                        "Payment due from ABC",
+                        "Payment due from employer 1",
                         "0",
                         "0",
                         "0",
                         "0",
                         "0"});
             table203.AddRow(new string[] {
-                        "Payment due from XYZ",
+                        "Payment due from employer 2",
                         "0",
                         "0",
                         "0",
                         "0",
                         "50"});
             table203.AddRow(new string[] {
-                        "ABC Levy account debited",
+                        "Employer 1 Levy account debited",
                         "0",
                         "1000",
                         "1000",
@@ -937,20 +937,20 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
 #line 149
         testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 150
-        testRunner.And("the ABC has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 1 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 151
-        testRunner.And("the XYZ has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 2 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table204 = new TechTalk.SpecFlow.Table(new string[] {
                         "Employer",
                         "Type",
                         "ILR employment start date"});
             table204.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "DAS",
                         "01/08/2017"});
             table204.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "DAS",
                         "15/11/2017"});
 #line 152
@@ -968,7 +968,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "effective from",
                         "effective to"});
             table205.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "1",
                         "1",
                         "learner a",
@@ -979,7 +979,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "01/08/2017",
                         "14/11/2017"});
             table205.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "1",
                         "2",
                         "learner a",
@@ -990,7 +990,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "15/11/2017",
                         ""});
             table205.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "2",
                         "1",
                         "learner a",
@@ -1067,14 +1067,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "500",
                         "500"});
             table208.AddRow(new string[] {
-                        "Provider Earned from ABC",
+                        "Provider Earned from Employer 1",
                         "0",
                         "0",
                         "0",
                         "0",
                         "0"});
             table208.AddRow(new string[] {
-                        "Provider Earned from XYZ",
+                        "Provider Earned from Employer 2",
                         "0",
                         "0",
                         "0",
@@ -1082,34 +1082,34 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0"});
             table208.AddRow(new string[] {
                         "Provider Paid by SFA",
-                        "",
+                        "0",
                         "1000",
                         "1000",
                         "1000",
                         "500"});
             table208.AddRow(new string[] {
-                        "Payment due from ABC",
+                        "Payment due from employer 1",
                         "0",
                         "0",
                         "0",
                         "0",
                         "0"});
             table208.AddRow(new string[] {
-                        "Payment due from XYZ",
+                        "Payment due from employer 2",
                         "0",
                         "0",
                         "0",
                         "0",
                         "0"});
             table208.AddRow(new string[] {
-                        "ABC Levy account debited",
+                        "Employer 1 Levy account debited",
                         "0",
                         "1000",
                         "1000",
                         "1000",
                         "0"});
             table208.AddRow(new string[] {
-                        "XYZ Levy account debited",
+                        "Employer 2 Levy account debited",
                         "0",
                         "0",
                         "0",
@@ -1151,20 +1151,20 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
 #line 183
         testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 184
-        testRunner.And("the ABC has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 1 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 185
-        testRunner.And("the XYZ has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 2 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table209 = new TechTalk.SpecFlow.Table(new string[] {
                         "Employer",
                         "Type",
                         "ILR employment start date"});
             table209.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "DAS",
                         "01/08/2017"});
             table209.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "DAS",
                         "15/11/2017"});
 #line 186
@@ -1182,7 +1182,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "effective from",
                         "effective to"});
             table210.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "1",
                         "1",
                         "learner a",
@@ -1193,7 +1193,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "01/08/2017",
                         "14/11/2017"});
             table210.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "1",
                         "2",
                         "learner a",
@@ -1204,7 +1204,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "15/11/2017",
                         ""});
             table210.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "2",
                         "1",
                         "learner a",
@@ -1281,14 +1281,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "500",
                         "500"});
             table213.AddRow(new string[] {
-                        "Provider Earned from ABC",
+                        "Provider Earned from Employer 1",
                         "0",
                         "0",
                         "0",
                         "0",
                         "0"});
             table213.AddRow(new string[] {
-                        "Provider Earned from XYZ",
+                        "Provider Earned from Employer 2",
                         "0",
                         "0",
                         "0",
@@ -1296,34 +1296,34 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0"});
             table213.AddRow(new string[] {
                         "Provider Paid by SFA",
-                        "",
+                        "0",
                         "1000",
                         "1000",
                         "1000",
                         "500"});
             table213.AddRow(new string[] {
-                        "Payment due from ABC",
+                        "Payment due from employer 1",
                         "0",
                         "0",
                         "0",
                         "0",
                         "0"});
             table213.AddRow(new string[] {
-                        "Payment due from XYZ",
+                        "Payment due from employer 2",
                         "0",
                         "0",
                         "0",
                         "0",
                         "0"});
             table213.AddRow(new string[] {
-                        "ABC Levy account debited",
+                        "Employer 1 Levy account debited",
                         "0",
                         "1000",
                         "1000",
                         "1000",
                         "0"});
             table213.AddRow(new string[] {
-                        "XYZ Levy account debited",
+                        "Employer 2 Levy account debited",
                         "0",
                         "0",
                         "0",
@@ -1361,20 +1361,20 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
 #line 217
         testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 218
-        testRunner.And("the ABC has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 1 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 219
-        testRunner.And("the XYZ has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 2 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table214 = new TechTalk.SpecFlow.Table(new string[] {
                         "Employer",
                         "Type",
                         "ILR employment start date"});
             table214.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "DAS",
                         "01/08/2017"});
             table214.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "DAS",
                         "15/11/2017"});
 #line 220
@@ -1392,7 +1392,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "effective from",
                         "effective to"});
             table215.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "1",
                         "1",
                         "learner a",
@@ -1403,7 +1403,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "01/08/2017",
                         "14/11/2017"});
             table215.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "1",
                         "2",
                         "learner a",
@@ -1414,7 +1414,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "15/11/2017",
                         ""});
             table215.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "2",
                         "1",
                         "learner a",
@@ -1491,14 +1491,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "500",
                         "500"});
             table218.AddRow(new string[] {
-                        "Provider Earned from ABC",
+                        "Provider Earned from Employer 1",
                         "0",
                         "0",
                         "0",
                         "0",
                         "0"});
             table218.AddRow(new string[] {
-                        "Provider Earned from XYZ",
+                        "Provider Earned from Employer 2",
                         "0",
                         "0",
                         "0",
@@ -1512,28 +1512,28 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "1000",
                         "0"});
             table218.AddRow(new string[] {
-                        "Payment due from ABC",
+                        "Payment due from employer 1",
                         "0",
                         "0",
                         "0",
                         "0",
                         "0"});
             table218.AddRow(new string[] {
-                        "Payment due from XYZ",
+                        "Payment due from employer 2",
                         "0",
                         "0",
                         "0",
                         "0",
                         "0"});
             table218.AddRow(new string[] {
-                        "ABC Levy account debited",
+                        "Employer 1 Levy account debited",
                         "0",
                         "1000",
                         "1000",
                         "1000",
                         "0"});
             table218.AddRow(new string[] {
-                        "XYZ Levy account debited",
+                        "Employer 2 Levy account debited",
                         "0",
                         "0",
                         "0",
@@ -1573,18 +1573,18 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
 #line 251
         testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 252
-        testRunner.And("the XYZ has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 2 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table219 = new TechTalk.SpecFlow.Table(new string[] {
                         "Employer",
                         "Type",
                         "ILR employment start date"});
             table219.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "Non DAS",
                         "06/08/2017"});
             table219.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "DAS",
                         "01/04/2018"});
 #line 253
@@ -1602,7 +1602,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "effective from",
                         "effective to"});
             table220.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "1",
                         "1",
                         "learner a",
@@ -1709,7 +1709,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "700",
                         "0"});
             table224.AddRow(new string[] {
-                        "Provider Earned from ABC",
+                        "Provider Earned from Employer 1",
                         "40",
                         "40",
                         "40",
@@ -1721,7 +1721,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "0"});
             table224.AddRow(new string[] {
-                        "Provider Earned from XYZ",
+                        "Provider Earned from Employer 2",
                         "0",
                         "0",
                         "0",
@@ -1745,7 +1745,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "700",
                         "700"});
             table224.AddRow(new string[] {
-                        "Payment due from ABC",
+                        "Payment due from employer 1",
                         "0",
                         "40",
                         "40",
@@ -1757,7 +1757,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "0"});
             table224.AddRow(new string[] {
-                        "Payment due from XYZ",
+                        "Payment due from employer 2",
                         "0",
                         "0",
                         "0",
@@ -1769,7 +1769,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "0"});
             table224.AddRow(new string[] {
-                        "XYZ Levy account debited",
+                        "Employer 2 Levy account debited",
                         "0",
                         "0",
                         "0",
@@ -1836,20 +1836,20 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
 #line 286
         testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 287
-        testRunner.And("the ABC has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 1 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 288
-        testRunner.And("the XYZ has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 2 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table225 = new TechTalk.SpecFlow.Table(new string[] {
                         "Employer",
                         "Type",
                         "ILR employment start date"});
             table225.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "DAS",
                         "03/08/2017"});
             table225.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "DAS",
                         "03/11/2017"});
 #line 289
@@ -1867,7 +1867,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "effective from",
                         "effective to"});
             table226.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "1",
                         "1",
                         "learner a",
@@ -1878,7 +1878,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "01/08/2017",
                         "31/10/2017"});
             table226.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "1",
                         "2",
                         "learner a",
@@ -1889,7 +1889,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "01/11/2017",
                         ""});
             table226.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "2",
                         "1",
                         "learner a",
@@ -1955,14 +1955,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "500",
                         "500"});
             table228.AddRow(new string[] {
-                        "Provider Earned from ABC",
+                        "Provider Earned from Employer 1",
                         "0",
                         "0",
                         "0",
                         "0",
                         "0"});
             table228.AddRow(new string[] {
-                        "Provider Earned from XYZ",
+                        "Provider Earned from Employer 2",
                         "0",
                         "0",
                         "0",
@@ -1976,28 +1976,28 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "3500"});
             table228.AddRow(new string[] {
-                        "Payment due from ABC",
+                        "Payment due from employer 1",
                         "0",
                         "0",
                         "0",
                         "0",
                         "0"});
             table228.AddRow(new string[] {
-                        "Payment due from XYZ",
+                        "Payment due from employer 2",
                         "0",
                         "0",
                         "0",
                         "0",
                         "0"});
             table228.AddRow(new string[] {
-                        "ABC Levy account debited",
+                        "Employer 1 Levy account debited",
                         "0",
                         "0",
                         "0",
                         "0",
                         "3000"});
             table228.AddRow(new string[] {
-                        "XYZ Levy account debited",
+                        "Employer 2 Levy account debited",
                         "0",
                         "0",
                         "0",
@@ -2041,20 +2041,20 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
 #line 320
         testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 321
-        testRunner.And("the ABC has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 1 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 322
-        testRunner.And("the XYZ has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 2 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table229 = new TechTalk.SpecFlow.Table(new string[] {
                         "Employer",
                         "Type",
                         "ILR employment start date"});
             table229.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "DAS",
                         "01/08/2017"});
             table229.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "DAS",
                         "01/01/2018"});
 #line 323
@@ -2072,7 +2072,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "effective from",
                         "effective to"});
             table230.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "1",
                         "1",
                         "learner a",
@@ -2083,7 +2083,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "01/08/2017",
                         "31/10/2017"});
             table230.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "1",
                         "2",
                         "learner a",
@@ -2094,7 +2094,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "01/11/2017",
                         ""});
             table230.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "2",
                         "1",
                         "learner a",
@@ -2194,7 +2194,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "500",
                         "500"});
             table233.AddRow(new string[] {
-                        "Provider Earned from ABC",
+                        "Provider Earned from Employer 1",
                         "0",
                         "0",
                         "0",
@@ -2204,7 +2204,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "0"});
             table233.AddRow(new string[] {
-                        "Provider Earned from XYZ",
+                        "Provider Earned from Employer 2",
                         "0",
                         "0",
                         "0",
@@ -2215,7 +2215,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0"});
             table233.AddRow(new string[] {
                         "Provider Paid by SFA",
-                        "",
+                        "0",
                         "1000",
                         "1000",
                         "1000",
@@ -2224,7 +2224,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "500",
                         "500"});
             table233.AddRow(new string[] {
-                        "Payment due from ABC",
+                        "Payment due from employer 1",
                         "0",
                         "0",
                         "0",
@@ -2234,7 +2234,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "0"});
             table233.AddRow(new string[] {
-                        "Payment due from XYZ",
+                        "Payment due from employer 2",
                         "0",
                         "0",
                         "0",
@@ -2244,7 +2244,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "0"});
             table233.AddRow(new string[] {
-                        "ABC Levy account debited",
+                        "Employer 1 Levy account debited",
                         "0",
                         "1000",
                         "1000",
@@ -2254,7 +2254,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "0"});
             table233.AddRow(new string[] {
-                        "XYZ Levy account debited",
+                        "Employer 2 Levy account debited",
                         "0",
                         "0",
                         "0",
@@ -2305,20 +2305,20 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
 #line 357
         testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 358
-        testRunner.And("the ABC has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 1 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 359
-        testRunner.And("the XYZ has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 2 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table234 = new TechTalk.SpecFlow.Table(new string[] {
                         "Employer",
                         "Type",
                         "ILR employment start date"});
             table234.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "DAS",
                         "01/08/2017"});
             table234.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "DAS",
                         "01/01/2018"});
 #line 360
@@ -2336,7 +2336,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "effective from",
                         "effective to"});
             table235.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "1",
                         "1",
                         "learner a",
@@ -2347,7 +2347,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "01/08/2017",
                         "31/10/2017"});
             table235.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "1",
                         "2",
                         "learner a",
@@ -2358,7 +2358,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "01/11/2017",
                         ""});
             table235.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "2",
                         "1",
                         "learner a",
@@ -2458,7 +2458,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "500",
                         "500"});
             table238.AddRow(new string[] {
-                        "Provider Earned from ABC",
+                        "Provider Earned from Employer 1",
                         "0",
                         "0",
                         "0",
@@ -2468,7 +2468,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "0"});
             table238.AddRow(new string[] {
-                        "Provider Earned from XYZ",
+                        "Provider Earned from Employer 2",
                         "0",
                         "0",
                         "0",
@@ -2488,7 +2488,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "500",
                         "500"});
             table238.AddRow(new string[] {
-                        "Payment due from ABC",
+                        "Payment due from employer 1",
                         "0",
                         "0",
                         "0",
@@ -2498,7 +2498,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "0"});
             table238.AddRow(new string[] {
-                        "Payment due from XYZ",
+                        "Payment due from employer 2",
                         "0",
                         "0",
                         "0",
@@ -2508,7 +2508,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "0"});
             table238.AddRow(new string[] {
-                        "ABC Levy account debited",
+                        "Employer 1 Levy account debited",
                         "0",
                         "1000",
                         "1000",
@@ -2518,7 +2518,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "0"});
             table238.AddRow(new string[] {
-                        "XYZ Levy account debited",
+                        "Employer 2 Levy account debited",
                         "0",
                         "0",
                         "0",
@@ -2569,20 +2569,20 @@ this.ScenarioSetup(scenarioInfo);
 #line 393
         testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 394
-        testRunner.And("the ABC has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 1 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 395
-        testRunner.And("the XYZ has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 2 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table239 = new TechTalk.SpecFlow.Table(new string[] {
                         "Employer",
                         "Type",
                         "ILR employment start date"});
             table239.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "DAS",
                         "01/08/2017"});
             table239.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "DAS",
                         "01/01/2018"});
 #line 396
@@ -2600,7 +2600,7 @@ this.ScenarioSetup(scenarioInfo);
                         "effective from",
                         "effective to"});
             table240.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "1",
                         "1",
                         "learner a",
@@ -2611,7 +2611,7 @@ this.ScenarioSetup(scenarioInfo);
                         "01/08/2017",
                         "31/10/2017"});
             table240.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "1",
                         "2",
                         "learner a",
@@ -2622,7 +2622,7 @@ this.ScenarioSetup(scenarioInfo);
                         "01/11/2017",
                         ""});
             table240.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "2",
                         "1",
                         "learner a",
@@ -2719,7 +2719,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table243.AddRow(new string[] {
-                        "Provider Earned from ABC",
+                        "Provider Earned from Employer 1",
                         "0",
                         "0",
                         "0",
@@ -2728,7 +2728,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table243.AddRow(new string[] {
-                        "Provider Earned from XYZ",
+                        "Provider Earned from Employer 2",
                         "0",
                         "0",
                         "0",
@@ -2746,7 +2746,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table243.AddRow(new string[] {
-                        "Payment due from ABC",
+                        "Payment due from employer 1",
                         "0",
                         "0",
                         "0",
@@ -2755,7 +2755,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table243.AddRow(new string[] {
-                        "Payment due from XYZ",
+                        "Payment due from employer 2",
                         "0",
                         "0",
                         "0",
@@ -2764,7 +2764,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table243.AddRow(new string[] {
-                        "ABC Levy account debited",
+                        "Employer 1 Levy account debited",
                         "0",
                         "1000",
                         "1000",
@@ -2773,7 +2773,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table243.AddRow(new string[] {
-                        "XYZ Levy account debited",
+                        "Employer 2 Levy account debited",
                         "0",
                         "0",
                         "0",
@@ -2821,20 +2821,20 @@ this.ScenarioSetup(scenarioInfo);
 #line 432
         testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 433
-        testRunner.And("the ABC has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 1 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 434
-        testRunner.And("the XYZ has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 2 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table244 = new TechTalk.SpecFlow.Table(new string[] {
                         "Employer",
                         "Type",
                         "ILR employment start date"});
             table244.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "DAS",
                         "06/08/2017"});
             table244.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "DAS",
                         "15/11/2017"});
 #line 435
@@ -2853,7 +2853,7 @@ this.ScenarioSetup(scenarioInfo);
                         "effective from",
                         "effective to"});
             table245.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "1",
                         "1",
                         "provider a",
@@ -2865,7 +2865,7 @@ this.ScenarioSetup(scenarioInfo);
                         "01/08/2017",
                         "14/11/2017"});
             table245.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "1",
                         "2",
                         "provider a",
@@ -2877,7 +2877,7 @@ this.ScenarioSetup(scenarioInfo);
                         "15/11/2017",
                         ""});
             table245.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "2",
                         "1",
                         "provider a",
@@ -2962,7 +2962,7 @@ this.ScenarioSetup(scenarioInfo);
                         "500",
                         "500"});
             table248.AddRow(new string[] {
-                        "Provider Earned from ABC",
+                        "Provider Earned from Employer 1",
                         "0",
                         "0",
                         "0",
@@ -2970,7 +2970,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table248.AddRow(new string[] {
-                        "Provider Earned from XYZ",
+                        "Provider Earned from Employer 2",
                         "0",
                         "0",
                         "0",
@@ -2986,7 +2986,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1500",
                         "500"});
             table248.AddRow(new string[] {
-                        "Payment due from ABC",
+                        "Payment due from employer 1",
                         "0",
                         "0",
                         "0",
@@ -2994,7 +2994,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table248.AddRow(new string[] {
-                        "Payment due from XYZ",
+                        "Payment due from employer 2",
                         "0",
                         "0",
                         "0",
@@ -3002,7 +3002,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table248.AddRow(new string[] {
-                        "ABC Levy account debited",
+                        "Employer 1 Levy account debited",
                         "0",
                         "500",
                         "500",
@@ -3010,7 +3010,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table248.AddRow(new string[] {
-                        "XYZ Levy account debited",
+                        "Employer 2 Levy account debited",
                         "0",
                         "0",
                         "0",
@@ -3081,14 +3081,14 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table249.AddRow(new string[] {
-                        "Employer ABC 16-18 incentive",
+                        "Employer 1 16-18 incentive",
                         "0",
                         "0",
                         "0",
                         "500",
                         "0"});
             table249.AddRow(new string[] {
-                        "Employer XYZ 16-18 incentive",
+                        "Employer employer 2 16-18 incentive",
                         "0",
                         "0",
                         "0",
@@ -3123,20 +3123,20 @@ this.ScenarioSetup(scenarioInfo);
 #line 481
         testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 482
-        testRunner.And("the ABC has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 1 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 483
-        testRunner.And("the XYZ has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 2 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table250 = new TechTalk.SpecFlow.Table(new string[] {
                         "Employer",
                         "Type",
                         "ILR employment start date"});
             table250.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "DAS",
                         "06/08/2017"});
             table250.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "DAS",
                         "15/12/2017"});
 #line 484
@@ -3155,7 +3155,7 @@ this.ScenarioSetup(scenarioInfo);
                         "effective from",
                         "effective to"});
             table251.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "1",
                         "1",
                         "provider a",
@@ -3167,7 +3167,7 @@ this.ScenarioSetup(scenarioInfo);
                         "01/08/2017",
                         "14/11/2017"});
             table251.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "1",
                         "2",
                         "provider a",
@@ -3179,7 +3179,7 @@ this.ScenarioSetup(scenarioInfo);
                         "15/11/2017",
                         ""});
             table251.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "2",
                         "1",
                         "provider a",
@@ -3264,7 +3264,7 @@ this.ScenarioSetup(scenarioInfo);
                         "562.50",
                         "562.50"});
             table254.AddRow(new string[] {
-                        "Provider Earned from ABC",
+                        "Provider Earned from Employer 1",
                         "0",
                         "0",
                         "0",
@@ -3272,7 +3272,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table254.AddRow(new string[] {
-                        "Provider Earned from XYZ",
+                        "Provider Earned from Employer 2",
                         "0",
                         "0",
                         "0",
@@ -3288,7 +3288,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1000",
                         "562.50"});
             table254.AddRow(new string[] {
-                        "Payment due from ABC",
+                        "Payment due from employer 1",
                         "0",
                         "0",
                         "0",
@@ -3296,7 +3296,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table254.AddRow(new string[] {
-                        "Payment due from XYZ",
+                        "Payment due from employer 2",
                         "0",
                         "0",
                         "0",
@@ -3304,7 +3304,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table254.AddRow(new string[] {
-                        "ABC Levy account debited",
+                        "Employer 1 Levy account debited",
                         "0",
                         "500",
                         "500",
@@ -3312,7 +3312,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table254.AddRow(new string[] {
-                        "XYZ Levy account debited",
+                        "Employer 2 Levy account debited",
                         "0",
                         "0",
                         "0",
@@ -3383,14 +3383,14 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table255.AddRow(new string[] {
-                        "Employer ABC 16-18 incentive",
+                        "Employer 1 16-18 incentive",
                         "0",
                         "0",
                         "0",
                         "500",
                         "0"});
             table255.AddRow(new string[] {
-                        "Employer XYZ 16-18 incentive",
+                        "Employer 2 16-18 incentive",
                         "0",
                         "0",
                         "0",
@@ -3425,20 +3425,20 @@ this.ScenarioSetup(scenarioInfo);
 #line 530
         testRunner.Given("The learner is programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 531
-        testRunner.And("the ABC has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 1 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 532
-        testRunner.And("the XYZ has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 2 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table256 = new TechTalk.SpecFlow.Table(new string[] {
                         "Employer",
                         "Type",
                         "ILR employment start date"});
             table256.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "DAS",
                         "06/08/2017"});
             table256.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "DAS",
                         "09/11/2017"});
 #line 533
@@ -3457,7 +3457,7 @@ this.ScenarioSetup(scenarioInfo);
                         "effective from",
                         "effective to"});
             table257.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "1",
                         "1",
                         "provider a",
@@ -3469,7 +3469,7 @@ this.ScenarioSetup(scenarioInfo);
                         "01/08/2017",
                         "14/11/2017"});
             table257.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "1",
                         "2",
                         "provider a",
@@ -3481,7 +3481,7 @@ this.ScenarioSetup(scenarioInfo);
                         "15/11/2017",
                         ""});
             table257.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "2",
                         "1",
                         "provider a",
@@ -3566,7 +3566,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table260.AddRow(new string[] {
-                        "Provider Earned from ABC",
+                        "Provider Earned from Employer 1",
                         "0",
                         "0",
                         "0",
@@ -3574,7 +3574,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table260.AddRow(new string[] {
-                        "Provider Earned from XYZ",
+                        "Provider Earned from Employer 2",
                         "0",
                         "0",
                         "0",
@@ -3590,7 +3590,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1000",
                         "0"});
             table260.AddRow(new string[] {
-                        "Payment due from ABC",
+                        "Payment due from employer 1",
                         "0",
                         "0",
                         "0",
@@ -3598,7 +3598,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table260.AddRow(new string[] {
-                        "Payment due from XYZ",
+                        "Payment due from employer 2",
                         "0",
                         "0",
                         "0",
@@ -3606,7 +3606,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table260.AddRow(new string[] {
-                        "ABC Levy account debited",
+                        "Employer 1 Levy account debited",
                         "0",
                         "500",
                         "500",
@@ -3614,7 +3614,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table260.AddRow(new string[] {
-                        "XYZ Levy account debited",
+                        "Employer 2 Levy account debited",
                         "0",
                         "0",
                         "0",
@@ -3685,14 +3685,14 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table261.AddRow(new string[] {
-                        "Employer ABC 16-18 incentive",
+                        "Employer 1 16-18 incentive",
                         "0",
                         "0",
                         "0",
                         "500",
                         "0"});
             table261.AddRow(new string[] {
-                        "Employer XYZ 16-18 incentive",
+                        "Employer 2 16-18 incentive",
                         "0",
                         "0",
                         "0",
@@ -3731,16 +3731,16 @@ this.ScenarioSetup(scenarioInfo);
 #line 581
         testRunner.And("the apprenticeship funding band maximum is 17000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 582
-        testRunner.And("the ABC has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 1 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 583
-        testRunner.And("the XYZ has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 2 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table262 = new TechTalk.SpecFlow.Table(new string[] {
                         "Employer",
                         "Type",
                         "ILR employment start date"});
             table262.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "DAS",
                         "03/08/2017"});
             table262.AddRow(new string[] {
@@ -3748,7 +3748,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Non-DAS",
                         "03/10/2017"});
             table262.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "DAS",
                         "03/11/2017"});
 #line 584
@@ -3769,7 +3769,7 @@ this.ScenarioSetup(scenarioInfo);
             table263.AddRow(new string[] {
                         "1",
                         "1",
-                        "ABC",
+                        "employer 1",
                         "provider a",
                         "learner a",
                         "01/08/2017",
@@ -3781,7 +3781,7 @@ this.ScenarioSetup(scenarioInfo);
             table263.AddRow(new string[] {
                         "1",
                         "2",
-                        "ABC",
+                        "employer 1",
                         "provider a",
                         "learner a",
                         "01/08/2017",
@@ -3793,7 +3793,7 @@ this.ScenarioSetup(scenarioInfo);
             table263.AddRow(new string[] {
                         "2",
                         "1",
-                        "XYZ",
+                        "employer 2",
                         "provider a",
                         "learner a",
                         "01/11/2017",
@@ -3862,7 +3862,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Employment Status",
                         "Employment Status Applies"});
             table266.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "in paid employment",
                         "02/08/2017"});
             table266.AddRow(new string[] {
@@ -3870,7 +3870,7 @@ this.ScenarioSetup(scenarioInfo);
                         "not in paid employment",
                         "03/10/2017"});
             table266.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "in paid employment",
                         "03/11/2017"});
 #line 602
@@ -3911,14 +3911,14 @@ this.ScenarioSetup(scenarioInfo);
                         "1000",
                         "500"});
             table268.AddRow(new string[] {
-                        "ABC Levy account debited",
+                        "employer 1 Levy account debited",
                         "0",
                         "1000",
                         "1000",
                         "0",
                         "0"});
             table268.AddRow(new string[] {
-                        "XYZ Levy account debited",
+                        "employer 2 Levy account debited",
                         "0",
                         "0",
                         "0",
@@ -3971,16 +3971,16 @@ this.ScenarioSetup(scenarioInfo);
 #line 627
         testRunner.And("the apprenticeship funding band maximum is 17000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 628
-        testRunner.And("the ABC has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 1 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 629
-        testRunner.And("the XYZ has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 2 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table269 = new TechTalk.SpecFlow.Table(new string[] {
                         "Employer",
                         "Type",
                         "ILR employment start date"});
             table269.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "DAS",
                         "03/08/2017"});
             table269.AddRow(new string[] {
@@ -3988,7 +3988,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Non-DAS",
                         "03/10/2017"});
             table269.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "DAS",
                         "03/11/2017"});
 #line 630
@@ -4009,7 +4009,7 @@ this.ScenarioSetup(scenarioInfo);
             table270.AddRow(new string[] {
                         "1",
                         "1",
-                        "ABC",
+                        "employer 1",
                         "provider a",
                         "learner a",
                         "01/08/2017",
@@ -4021,7 +4021,7 @@ this.ScenarioSetup(scenarioInfo);
             table270.AddRow(new string[] {
                         "1",
                         "2",
-                        "ABC",
+                        "employer 1",
                         "provider a",
                         "learner a",
                         "01/08/2017",
@@ -4033,7 +4033,7 @@ this.ScenarioSetup(scenarioInfo);
             table270.AddRow(new string[] {
                         "2",
                         "1",
-                        "XYZ",
+                        "employer 2",
                         "provider a",
                         "learner a",
                         "01/11/2017",
@@ -4094,7 +4094,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Employment Status",
                         "Employment Status Applies"});
             table273.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "in paid employment",
                         "02/08/2017"});
 #line 647
@@ -4133,14 +4133,14 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "500"});
             table275.AddRow(new string[] {
-                        "ABC Levy account debited",
+                        "Employer 1 Levy account debited",
                         "0",
                         "1000",
                         "1000",
                         "0",
                         "0"});
             table275.AddRow(new string[] {
-                        "XYZ Levy account debited",
+                        "Employer 2 Levy account debited",
                         "0",
                         "0",
                         "0",
@@ -4186,16 +4186,16 @@ this.ScenarioSetup(scenarioInfo);
 #line 667
         testRunner.And("the apprenticeship funding band maximum is 17000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 668
-        testRunner.And("the ABC has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 1 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 669
-        testRunner.And("the XYZ has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 2 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table276 = new TechTalk.SpecFlow.Table(new string[] {
                         "Employer",
                         "Type",
                         "ILR employment start date"});
             table276.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "DAS",
                         "03/08/2017"});
             table276.AddRow(new string[] {
@@ -4203,7 +4203,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Non-DAS",
                         "03/10/2017"});
             table276.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "DAS",
                         "03/11/2017"});
 #line 670
@@ -4224,7 +4224,7 @@ this.ScenarioSetup(scenarioInfo);
             table277.AddRow(new string[] {
                         "1",
                         "1",
-                        "ABC",
+                        "employer 1",
                         "provider a",
                         "learner a",
                         "01/08/2017",
@@ -4236,7 +4236,7 @@ this.ScenarioSetup(scenarioInfo);
             table277.AddRow(new string[] {
                         "1",
                         "2",
-                        "ABC",
+                        "employer 1",
                         "provider a",
                         "learner a",
                         "01/08/2017",
@@ -4248,7 +4248,7 @@ this.ScenarioSetup(scenarioInfo);
             table277.AddRow(new string[] {
                         "2",
                         "1",
-                        "XYZ",
+                        "employer 2",
                         "provider a",
                         "learner a",
                         "01/11/2017",
@@ -4317,7 +4317,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Employment Status",
                         "Employment Status Applies"});
             table280.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "in paid employment",
                         "02/08/2017"});
 #line 688
@@ -4358,14 +4358,14 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "500"});
             table282.AddRow(new string[] {
-                        "ABC Levy account debited",
+                        "Employer 1 Levy account debited",
                         "0",
                         "1000",
                         "1000",
                         "0",
                         "0"});
             table282.AddRow(new string[] {
-                        "XYZ Levy account debited",
+                        "Employer 2 Levy account debited",
                         "0",
                         "0",
                         "0",
@@ -4411,16 +4411,16 @@ this.ScenarioSetup(scenarioInfo);
 #line 709
         testRunner.And("the apprenticeship funding band maximum is 17000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 710
-        testRunner.And("the ABC has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 1 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 711
-        testRunner.And("the XYZ has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 2 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table283 = new TechTalk.SpecFlow.Table(new string[] {
                         "Employer",
                         "Type",
                         "ILR employment start date"});
             table283.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "DAS",
                         "03/08/2017"});
             table283.AddRow(new string[] {
@@ -4428,7 +4428,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Non-DAS",
                         "03/10/2017"});
             table283.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "DAS",
                         "03/11/2017"});
 #line 712
@@ -4449,7 +4449,7 @@ this.ScenarioSetup(scenarioInfo);
             table284.AddRow(new string[] {
                         "1",
                         "1",
-                        "ABC",
+                        "employer 1",
                         "provider a",
                         "learner a",
                         "01/08/2017",
@@ -4461,7 +4461,7 @@ this.ScenarioSetup(scenarioInfo);
             table284.AddRow(new string[] {
                         "1",
                         "2",
-                        "ABC",
+                        "employer 1",
                         "provider a",
                         "learner a",
                         "01/08/2017",
@@ -4473,7 +4473,7 @@ this.ScenarioSetup(scenarioInfo);
             table284.AddRow(new string[] {
                         "2",
                         "1",
-                        "XYZ",
+                        "employer 2",
                         "provider a",
                         "learner a",
                         "01/11/2017",
@@ -4534,7 +4534,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Employment Status",
                         "Employment Status Applies"});
             table287.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "in paid employment",
                         "02/08/2017"});
             table287.AddRow(new string[] {
@@ -4542,7 +4542,7 @@ this.ScenarioSetup(scenarioInfo);
                         "not in paid employment",
                         "03/10/2017"});
             table287.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "in paid employment",
                         "03/11/2017"});
 #line 729
@@ -4581,14 +4581,14 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "500"});
             table289.AddRow(new string[] {
-                        "ABC Levy account debited",
+                        "Employer 1 Levy account debited",
                         "0",
                         "1000",
                         "1000",
                         "0",
                         "0"});
             table289.AddRow(new string[] {
-                        "XYZ Levy account debited",
+                        "Employer 2 Levy account debited",
                         "0",
                         "0",
                         "0",
@@ -4634,16 +4634,16 @@ this.ScenarioSetup(scenarioInfo);
 #line 753
         testRunner.And("the apprenticeship funding band maximum is 17000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 754
-        testRunner.And("the ABC has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 1 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 755
-        testRunner.And("the XYZ has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("the employer 2 has a levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table290 = new TechTalk.SpecFlow.Table(new string[] {
                         "Employer",
                         "Type",
                         "ILR employment start date"});
             table290.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "DAS",
                         "03/08/2017"});
             table290.AddRow(new string[] {
@@ -4651,7 +4651,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Non-DAS",
                         "09/10/2017"});
             table290.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "DAS",
                         "03/03/2018"});
 #line 756
@@ -4672,7 +4672,7 @@ this.ScenarioSetup(scenarioInfo);
             table291.AddRow(new string[] {
                         "1",
                         "1",
-                        "ABC",
+                        "employer 1",
                         "provider a",
                         "learner a",
                         "01/08/2017",
@@ -4684,7 +4684,7 @@ this.ScenarioSetup(scenarioInfo);
             table291.AddRow(new string[] {
                         "1",
                         "2",
-                        "ABC",
+                        "employer 1",
                         "provider a",
                         "learner a",
                         "01/08/2017",
@@ -4696,7 +4696,7 @@ this.ScenarioSetup(scenarioInfo);
             table291.AddRow(new string[] {
                         "2",
                         "1",
-                        "XYZ",
+                        "employer 2",
                         "provider a",
                         "learner a",
                         "01/11/2017",
@@ -4765,7 +4765,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Employment Status",
                         "Employment Status Applies"});
             table294.AddRow(new string[] {
-                        "ABC",
+                        "employer 1",
                         "in paid employment",
                         "02/08/2017"});
             table294.AddRow(new string[] {
@@ -4773,7 +4773,7 @@ this.ScenarioSetup(scenarioInfo);
                         "not in paid employment",
                         "09/10/2017"});
             table294.AddRow(new string[] {
-                        "XYZ",
+                        "employer 2",
                         "in paid employment",
                         "02/03/2018"});
 #line 774
@@ -4826,7 +4826,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table296.AddRow(new string[] {
-                        "ABC Levy account debited",
+                        "Employer 1 Levy account debited",
                         "0",
                         "1000",
                         "1000",
@@ -4837,7 +4837,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table296.AddRow(new string[] {
-                        "XYZ Levy account debited",
+                        "Employer 2 Levy account debited",
                         "0",
                         "0",
                         "0",
