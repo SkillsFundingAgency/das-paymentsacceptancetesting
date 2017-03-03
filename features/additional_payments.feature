@@ -34,8 +34,8 @@ Scenario:AC2- Payment for a 16-18 DAS learner, levy available, incentives not pa
     
     Given levy balance > agreed price for all months
     And the following commitments exist:
-        | commitment number | ULN       | start date | end date   | agreed price | status |
-        | 1                 | learner a | 01/09/2017 | 01/09/2018 | 15000        | active |
+        | commitment Id | ULN       | start date | end date   | agreed price | status |
+        | 1             | learner a | 01/09/2017 | 01/09/2018 | 15000        | active |
     
      When an ILR file is submitted with the following data:
         | ULN       | learner type             | agreed price | start date | planned end date | actual end date | completion status |
@@ -71,7 +71,7 @@ Scenario:AC3-Learner finishes on time, earns on-programme and completion payment
 		| Levy account debited                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     |
 		| SFA Levy employer budget                | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     |
 		| SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     |
-		| SFA non Levy co-funding budget          | 540   | 540   | 540   | 540   | 540   | ... | 540   | 540   | 1620  | 0     |
+		| SFA non-Levy co-funding budget          | 540   | 540   | 540   | 540   | 540   | ... | 540   | 540   | 1620  | 0     |
 		| SFA non-Levy additional payments budget | 120   | 120   | 120   | 1120  | 120   | ... | 120   | 120   | 1360  | 0     |
 
     And the transaction types for the payments are:
@@ -103,7 +103,7 @@ Scenario:AC4-Learner finishes on time, Price is less than Funding Band Maximum o
 		| Levy account debited                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     |
 		| SFA Levy employer budget                | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     |
 		| SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     |
-		| SFA non Levy co-funding budget          | 495   | 495   | 495   | 495   | 495   | ... | 495   | 495   | 1485  | 0     |
+		| SFA non-Levy co-funding budget          | 495   | 495   | 495   | 495   | 495   | ... | 495   | 495   | 1485  | 0     |
 		| SFA non-Levy additional payments budget | 120   | 120   | 120   | 1120  | 120   | ... | 120   | 120   | 1360  | 0     |
 
 	  And the transaction types for the payments are:
@@ -130,10 +130,10 @@ Scenario:AC5- Payment for a non-DAS learner, lives in a disadvantaged postocde a
 		  | Payment due from Employer               | 0     | 100   | 100   | 100   | 100   | ... | 100   | 100   | 0     |
 		  | Levy account debited                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
 		  | SFA Levy employer budget                | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-		  | SFA levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-		  | SFA non-levy co-funding budget          | 900   | 900   | 900   | 900   | 900   | ... | 900   | 0     | 0     |
-		  | SFA non-levy additional payments budget | 0     | 0     | 0     | 300   | 0     | ... | 0     | 300   | 0     |
-		  | SFA levy additional payments budget     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA non-Levy co-funding budget          | 900   | 900   | 900   | 900   | 900   | ... | 900   | 0     | 0     |
+		  | SFA non-Levy additional payments budget | 0     | 0     | 0     | 300   | 0     | ... | 0     | 300   | 0     |
+		  | SFA Levy additional payments budget     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
     And the transaction types for the payments are:
 		  | Payment type                 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
 		  | On-program                   | 900   | 900   | 900   | 900   | ... | 900   | 0     |
@@ -154,10 +154,10 @@ Scenario:AC6- Payment for a non-DAS learner, lives in a disadvantaged postocde a
 		  | Payment due from Employer                | 0     | 100   | 100   | 100   | 100   | ... | 100   | 100   | 0     |
 		  | Levy account debited                     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
 		  | SFA Levy employer budget                 | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-		  | SFA levy co-funding budget               | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-		  | SFA non-levy co-funding budget           | 900   | 900   | 900   | 900   | 900   | ... | 900   | 0     | 0     |
-		  | SFA non-levy  additional payments budget | 0     | 0     | 0     | 150   | 0     | ... | 0     | 150   | 0     |
-		  | SFA levy additional payments budget      | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA Levy co-funding budget               | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA non-Levy co-funding budget           | 900   | 900   | 900   | 900   | 900   | ... | 900   | 0     | 0     |
+		  | SFA non-Levy additional payments budget | 0     | 0     | 0     | 150   | 0     | ... | 0     | 150   | 0     |
+		  | SFA Levy additional payments budget      | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
 	  And the transaction types for the payments are:
 		  | Payment type                 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
 		  | On-program                   | 900   | 900   | 900   | 900   | ... | 900   | 0     |
@@ -177,10 +177,10 @@ Scenario:AC7- Payment for a non-DAS learner, lives in a disadvantaged postocde a
 		  | Payment due from Employer               | 0     | 100   | 100   | 100   | 100   | ... | 100   | 100   | 0     |
 		  | Levy account debited                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
 		  | SFA Levy employer budget                | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-		  | SFA levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-		  | SFA non-levy co-funding budget          | 900   | 900   | 900   | 900   | 900   | ... | 900   | 0     | 0     |
-		  | SFA non-levy additional payments budget | 0     | 0     | 0     | 100   | 0     | ... | 0     | 100   | 0     |
-		  | SFA levy additional payments budget     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA non-Levy co-funding budget          | 900   | 900   | 900   | 900   | 900   | ... | 900   | 0     | 0     |
+		  | SFA non-Levy additional payments budget | 0     | 0     | 0     | 100   | 0     | ... | 0     | 100   | 0     |
+		  | SFA Levy additional payments budget     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
     And the transaction types for the payments are:
 		  | Payment type                 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
 		  | On-program                   | 900   | 900   | 900   | 900   | ... | 900   | 0     |
@@ -200,10 +200,10 @@ Scenario:AC7- Payment for a non-DAS learner, lives in a disadvantaged postocde a
 		  | Payment due from Employer               | 0     | 100   | 100   | 100   | 100   | ... | 100   | 100   | 0     |
 		  | Levy account debited                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
 		  | SFA Levy employer budget                | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-		  | SFA levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-		  | SFA non-levy co-funding budget          | 900   | 900   | 900   | 900   | 900   | ... | 900   | 0     | 0     |
-		  | SFA non-levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-		  | SFA levy additional payments budget     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA non-Levy co-funding budget          | 900   | 900   | 900   | 900   | 900   | ... | 900   | 0     | 0     |
+		  | SFA non-Levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA Levy additional payments budget     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
     And the transaction types for the payments are:
 		  | Payment type                 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
 		  | On-program                   | 900   | 900   | 900   | 900   | ... | 900   | 0     |
@@ -278,7 +278,7 @@ Scenario:AC11- Payment for a DAS learner, lives in a disadvantaged postocde area
     #The provider incentive for this postcode group is £600 split equally into 2 payments at 90 and 365 days.INELIGIBLE FOR APPRENTICESHIP STANDARDS
 	Given levy balance > agreed price for all months
     And the following commitments exist:
-		  | commitment ID | version ID | ULN       | start date  | end date   | framework code | programme type | pathway code | agreed price | status   |
+		  | commitment Id | version Id | ULN       | start date  | end date   | framework code | programme type | pathway code | agreed price | status   |
 		  | 1             | 1          | learner a | 01/08/2017  | 01/08/2018 | 403            | 2              | 1            | 15000        | active   |
 	When an ILR file is submitted with the following data:
 		  | ULN       | learner type       | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | home postcode deprivation |
@@ -290,10 +290,10 @@ Scenario:AC11- Payment for a DAS learner, lives in a disadvantaged postocde area
 		  | Payment due from Employer               | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
 		  | Levy account debited                    | 0     | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 1000  | 0     |
 		  | SFA Levy employer budget                | 1000  | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     | 0     |
-		  | SFA levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-		  | SFA non-levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-		  | SFA non-levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-		  | SFA levy additional payments budget     | 0     | 0     | 0     | 300   | 0     | ... | 0     | 300   | 0     |
+		  | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA non-Levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA non-Levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA Levy additional payments budget     | 0     | 0     | 0     | 300   | 0     | ... | 0     | 300   | 0     |
 	And the transaction types for the payments are:
 		  | Payment type                 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
 		  | On-program                   | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     |
@@ -305,7 +305,7 @@ Scenario:AC12- Payment for a DAS learner, lives in a disadvantaged postocde area
     #The provider incentive for this postcode group is £300 split equally into 2 payments at 90 and 365 days. INELIGIBLE FOR APPRENITCESHIP STANDARDS
 	Given levy balance > agreed price for all months
     And the following commitments exist:
-		  | commitment ID | version ID | ULN       | start date  | end date   | framework code | programme type | pathway code | agreed price | status   |
+		  | commitment Id | version Id | ULN       | start date  | end date   | framework code | programme type | pathway code | agreed price | status   |
 		  | 1             | 1          | learner a | 01/08/2017  | 01/08/2018 | 403            | 2              | 1            | 15000        | active   |
 	When an ILR file is submitted with the following data:
 		  | ULN       | learner type       | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | home postcode deprivation |
@@ -317,10 +317,10 @@ Scenario:AC12- Payment for a DAS learner, lives in a disadvantaged postocde area
 		  | Payment due from Employer               | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
 		  | Levy account debited                    | 0     | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 1000  | 0     |
 		  | SFA Levy employer budget                | 1000  | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     | 0     |
-		  | SFA levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-		  | SFA non-levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-		  | SFA non-levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-		  | SFA levy additional payments budget     | 0     | 0     | 0     | 150   | 0     | ... | 0     | 150   | 0     |
+		  | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA non-Levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA non-Levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA Levy additional payments budget     | 0     | 0     | 0     | 150   | 0     | ... | 0     | 150   | 0     |
 	And the transaction types for the payments are:
 		  | Payment type                 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
 		  | On-program                   | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     |
@@ -333,7 +333,7 @@ Scenario:AC13- Payment for a DAS learner, lives in a disadvantaged postocde area
     #The provider incentive for this postcode group is £200 split equally into 2 payments at 90 and 365 days. INELIGIBLE FOR APPRENITCESHIP STANDARDS
   	Given levy balance > agreed price for all months
     And the following commitments exist:
-		  | commitment ID | version ID | ULN       | start date  | end date   | framework code | programme type | pathway code | agreed price | status   | 
+		  | commitment Id | version Id | ULN       | start date  | end date   | framework code | programme type | pathway code | agreed price | status   | 
 		  | 1             | 1          | learner a | 01/08/2017  | 01/08/2018 | 403            | 2              | 1            | 15000        | active   | 
 
 	When an ILR file is submitted with the following data:
@@ -347,10 +347,10 @@ Scenario:AC13- Payment for a DAS learner, lives in a disadvantaged postocde area
 		  | Payment due from Employer               | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
 		  | Levy account debited                    | 0     | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 1000  | 0     |
 		  | SFA Levy employer budget                | 1000  | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     | 0     |
-		  | SFA levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-		  | SFA non-levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-		  | SFA non-levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-		  | SFA levy  additional payments budget    | 0     | 0     | 0     | 100   | 0     | ... | 0     | 100   | 0     |
+		  | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA non-Levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA non-Levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA Levy additional payments budget    | 0     | 0     | 0     | 100   | 0     | ... | 0     | 100   | 0     |
   And the transaction types for the payments are:
 		  | Payment type                 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
 		  | On-program                   | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     |
@@ -362,7 +362,7 @@ Scenario:AC14- Payment for a DAS learner, does not live in a disadvantaged posto
    
 	Given levy balance > agreed price for all months
     And the following commitments exist:
-		  | commitment ID | version ID | ULN       | start date  | end date   | framework code | programme type | pathway code | agreed price | status   | 
+		  | commitment Id | version Id | ULN       | start date  | end date   | framework code | programme type | pathway code | agreed price | status   | 
 		  | 1             | 1          | learner a | 01/08/2017  | 01/08/2018 | 403            | 2              | 1            | 15000        | active   | 
 	When an ILR file is submitted with the following data:
 		  | ULN       | learner type       | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | home postcode deprivation |
@@ -374,10 +374,10 @@ Scenario:AC14- Payment for a DAS learner, does not live in a disadvantaged posto
 		  | Payment due from Employer               | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
 		  | Levy account debited                    | 0     | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 1000  | 0     |
 		  | SFA Levy employer budget                | 1000  | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     | 0     |
-		  | SFA levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-		  | SFA non-levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-		  | SFA non-levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-		  | SFA levy additional payments budget     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA non-Levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA non-Levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA Levy additional payments budget     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
     And the transaction types for the payments are:
 		  | Payment type                 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
 		  | On-program                   | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     |
@@ -610,7 +610,7 @@ Scenario: 581-AC01-Non DAS learner finishes early, price equals the funding band
 		| Levy account debited                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     |
 		| SFA Levy employer budget                | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     |
 		| SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     |
-		| SFA non Levy co-funding budget          | 432   | 432   | 432   | 432   | 432   | ... | 432   | 432   | 2916  | 0     |
+		| SFA non-Levy co-funding budget          | 432   | 432   | 432   | 432   | 432   | ... | 432   | 432   | 2916  | 0     |
 		| SFA non-Levy additional payments budget | 96    | 96    | 96    | 1096  | 96    | ... | 96    | 96    | 1648  | 0     |
     And the transaction types for the payments are:
 		| Payment type                 | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 06/18 | 07/18 | 08/18 | 09/18 |
@@ -640,7 +640,7 @@ Scenario: 581-AC02-Non DAS learner finishes early, price lower than the funding 
 		| Levy account debited                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     |
 		| SFA Levy employer budget                | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     |
 		| SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     |
-		| SFA non Levy co-funding budget          | 360   | 360   | 360   | 360   | 360   | ... | 360   | 360   | 2430  | 0     |
+		| SFA non-Levy co-funding budget          | 360   | 360   | 360   | 360   | 360   | ... | 360   | 360   | 2430  | 0     |
 		| SFA non-Levy additional payments budget | 96    | 96    | 96    | 1096  | 96    | ... | 96    | 96    | 1648  | 0     |
     And the transaction types for the payments are:
 		| Payment type                 | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 06/18 | 07/18 | 08/18 | 09/18 |
