@@ -30,10 +30,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
             }
         }
 
-        [Given("the following commitments exist on (.*):")]
+        [Given("the following commitments exist on (.*):")] // do we really care about the date?
         public void GievenCommitmentsExistForLearnersAtSpecificDate(string specDate, Table commitments)
         {
-            //TODO
+            GivenCommitmentsExistForLearners(commitments);
         }
 
         private CommitmentsTableColumnStructure ParseCommitmentsTableStructure(Table commitments)
