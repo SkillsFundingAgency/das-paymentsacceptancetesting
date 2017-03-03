@@ -7,25 +7,35 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts
     {
         public EarningsAndPaymentsContext()
         {
-            ProviderEarnedTotal = new List<PeriodValue>();
-            ProviderEarnedFromSfa = new List<PeriodValue>();
-            ProviderEarnedFromEmployers = new List<EmployerAccountPeriodValue>();
-            ProviderPaidBySfa = new List<PeriodValue>();
-            PaymentDueFromEmployers = new List<EmployerAccountPeriodValue>();
-            EmployersLevyAccountDebited = new List<EmployerAccountPeriodValue>();
-            SfaLevyBudget = new List<PeriodValue>();
-            SfaLevyCoFundBudget = new List<PeriodValue>();
-            SfaNonLevyCoFundBudget = new List<PeriodValue>();
+            OverallEarningsAndPayments = new EarningsAndPaymentsBreakdown();
+            LearnerOverallEarningsAndPayments = new List<LearnerEarningsAndPaymentsBreakdown>();
+
+            EmployerEarnedFor16To18Incentive = new List<EmployerAccountPeriodValue>();
+            ProviderEarnedForOnProgramme = new List<ProviderEarnedPeriodValue>();
+            ProviderEarnedForCompletion = new List<ProviderEarnedPeriodValue>();
+            ProviderEarnedForBalancing = new List<ProviderEarnedPeriodValue>();
+            ProviderEarnedFor16To18Incentive = new List<ProviderEarnedPeriodValue>();
+            ProviderEarnedForEnglishAndMathOnProgramme = new List<ProviderEarnedPeriodValue>();
+            ProviderEarnedForEnglishAndMathBalancing = new List<ProviderEarnedPeriodValue>();
+            ProviderEarnedForDisadvantageUplift = new List<ProviderEarnedPeriodValue>();
+            ProviderEarnedForFrameworkUpliftOnProgramme = new List<ProviderEarnedPeriodValue>();
+            ProviderEarnedForFrameworkUpliftOnCompletion = new List<ProviderEarnedPeriodValue>();
+            ProviderEarnedForFrameworkUpliftOnBalancing = new List<ProviderEarnedPeriodValue>();
         }
 
-        public List<PeriodValue> ProviderEarnedTotal { get; set; }
-        public List<PeriodValue> ProviderEarnedFromSfa { get; set; }
-        public List<EmployerAccountPeriodValue> ProviderEarnedFromEmployers { get; set; }
-        public List<PeriodValue> ProviderPaidBySfa { get; set; }
-        public List<EmployerAccountPeriodValue> PaymentDueFromEmployers { get; set; }
-        public List<EmployerAccountPeriodValue> EmployersLevyAccountDebited { get; set; }
-        public List<PeriodValue> SfaLevyBudget { get; set; }
-        public List<PeriodValue> SfaLevyCoFundBudget { get; set; }
-        public List<PeriodValue> SfaNonLevyCoFundBudget { get; set; }
+        public EarningsAndPaymentsBreakdown OverallEarningsAndPayments { get; set; }
+        public List<LearnerEarningsAndPaymentsBreakdown> LearnerOverallEarningsAndPayments { get; set; }
+
+        public List<EmployerAccountPeriodValue> EmployerEarnedFor16To18Incentive { get; set; }
+        public List<ProviderEarnedPeriodValue> ProviderEarnedForOnProgramme { get; set; }
+        public List<ProviderEarnedPeriodValue> ProviderEarnedForCompletion { get; set; }
+        public List<ProviderEarnedPeriodValue> ProviderEarnedForBalancing { get; set; }
+        public List<ProviderEarnedPeriodValue> ProviderEarnedFor16To18Incentive { get; set; }
+        public List<ProviderEarnedPeriodValue> ProviderEarnedForEnglishAndMathOnProgramme { get; set; }
+        public List<ProviderEarnedPeriodValue> ProviderEarnedForEnglishAndMathBalancing { get; set; }
+        public List<ProviderEarnedPeriodValue> ProviderEarnedForDisadvantageUplift { get; set; }
+        public List<ProviderEarnedPeriodValue> ProviderEarnedForFrameworkUpliftOnProgramme { get; set; }
+        public List<ProviderEarnedPeriodValue> ProviderEarnedForFrameworkUpliftOnCompletion { get; set; }
+        public List<ProviderEarnedPeriodValue> ProviderEarnedForFrameworkUpliftOnBalancing { get; set; }
     }
 }

@@ -467,13 +467,13 @@ Scenario: 1 learner aged 16-18, levy available, changes employer, earns incentiv
             | SFA Levy additional payments budget | 0     | 0     | 0     | 1000  | 0     | 0     |
             
         And the transaction types for the payments for provider a are:
-            | Payment type                        | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 |
-            | On-program                          | 500   | 500   | 500   | 500   | 500   |
-            | Completion                          | 0     | 0     | 0     | 0     | 0     |
-            | Balancing                           | 0     | 0     | 0     | 0     | 0     |
-            | Employer 1 16-18 incentive          | 0     | 0     | 0     | 500   | 0     |
-            | Employer employer 2 16-18 incentive | 0     | 0     | 0     | 0     | 0     |
-            | Provider 16-18 incentive            | 0     | 0     | 0     | 500   | 0     |
+            | Payment type               | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 |
+            | On-program                 | 500   | 500   | 500   | 500   | 500   |
+            | Completion                 | 0     | 0     | 0     | 0     | 0     |
+            | Balancing                  | 0     | 0     | 0     | 0     | 0     |
+            | Employer 1 16-18 incentive | 0     | 0     | 0     | 500   | 0     |
+            | Employer 2 16-18 incentive | 0     | 0     | 0     | 0     | 0     |
+            | Provider 16-18 incentive   | 0     | 0     | 0     | 500   | 0     |
 
 
 Scenario: 1 learner aged 16-18, levy available, changes employer, earns incentive payment in the commitment transfer month - and the employer transfer is recorded on the ILR in a later month

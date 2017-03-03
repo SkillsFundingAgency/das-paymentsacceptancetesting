@@ -3088,7 +3088,7 @@ this.ScenarioSetup(scenarioInfo);
                         "500",
                         "0"});
             table249.AddRow(new string[] {
-                        "Employer employer 2 16-18 incentive",
+                        "Employer 2 16-18 incentive",
                         "0",
                         "0",
                         "0",
