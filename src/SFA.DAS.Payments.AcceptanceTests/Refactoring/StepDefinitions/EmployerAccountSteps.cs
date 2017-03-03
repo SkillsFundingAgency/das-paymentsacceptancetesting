@@ -19,7 +19,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
         [Given("levy balance > agreed price for all months")]
         public void GivenUnnamedEmployersLevyBalanceIsMoreThanPrice()
         {
-            GivenNamedEmployersLevyBalanceIsMoreThanPrice("1");
+            GivenNamedEmployersLevyBalanceIsMoreThanPrice(Defaults.EmployerAccountId.ToString());
         }
 
         [Given("the employer (.*) has a levy balance > agreed price for all months")]
@@ -43,7 +43,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
         {
             EmployerAccountContext.EmployerAccounts.Add(new EmployerAccountReferenceData
             {
-                Id = 1,
+                Id = Defaults.EmployerAccountId,
                 Balance = 0L
             });
         }
@@ -51,7 +51,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
         [Given("the employer's levy balance is:")]
         public void GivenUnnamedEmployersLevyBalanceIsDifferentPerMonth(Table employerBalancesTable)
         {
-            GivenNamedEmployersLevyBalanceIsDifferentPerMonth("1", employerBalancesTable);
+            GivenNamedEmployersLevyBalanceIsDifferentPerMonth(Defaults.EmployerAccountId.ToString(), employerBalancesTable);
         }
 
         [Given("the employer (.*) has a levy balance of:")]

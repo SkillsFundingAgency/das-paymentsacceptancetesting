@@ -85,7 +85,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
                 throw new ArgumentException($"'{row[structure.EmployerIndex]}' is not a valid employer reference");
             }
 
-            var price = 15000;
+            var price = Defaults.AgreePrice;
             if (structure.PriceIndex > -1 && !int.TryParse(row[structure.PriceIndex], out price))
             {
                 throw new ArgumentException($"'{row[structure.PriceIndex]}' is not a valid agreed price");
@@ -96,7 +96,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
                 EmployerAccountId = employerAccountId,
                 Uln = row[structure.UlnIndex],
                 Priority = priority,
-                ProviderId = structure.ProviderIndex > -1 ? row[structure.ProviderIndex] : "provider A",
+                ProviderId = structure.ProviderIndex > -1 ? row[structure.ProviderIndex] : Defaults.ProviderId,
                 AgreedPrice = price
             };
         }
