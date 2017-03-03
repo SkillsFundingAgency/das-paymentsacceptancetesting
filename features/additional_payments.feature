@@ -56,7 +56,7 @@ Scenario:AC2- Payment for a 16-18 DAS learner, levy available, incentives not pa
       
 
 Scenario:AC3-Learner finishes on time, earns on-programme and completion payments. Assumes 12 month apprenticeship and learner completes after 10 months.
-
+	Given the apprenticeship funding band maximum is 9000
 	When an ILR file is submitted with the following data:
 		| ULN    | learner type                 | agreed price | start date | planned end date | actual end date | completion status | Framework Code | Programme Type | Pathway Code |
 		| 123456 | 16-18 programme only non-DAS | 9000         | 06/08/2017 | 09/08/2018       | 10/08/2018      | Completed         | 403            | 2              | 1            |
@@ -88,7 +88,7 @@ Scenario:AC3-Learner finishes on time, earns on-programme and completion payment
 
 		
 Scenario:AC4-Learner finishes on time, Price is less than Funding Band Maximum of £9,000
-		
+	Given the apprenticeship funding band maximum is 9000
 	When an ILR file is submitted with the following data:
 		| ULN    | learner type                 | agreed price | start date | planned end date | actual end date | completion status | Framework Code | Programme Type | Pathway Code |
 		| 123455 | 16-18 programme only non-DAS | 8250         | 06/08/2017 | 09/08/2018       | 10/08/2018      | Completed         | 403            | 2              | 1            |
@@ -643,5 +643,67 @@ Scenario:590-AC02- Payment for a* DAS learner*, funding agreed within band, with
 		| Completion                     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
 		| Balancing                      | 0     | 0     | 0     | 0     | ... | 0     | 0     |
 		| English and maths on programme | 31.40 | 31.40 | 31.40 | 31.40 | ... | 31.40 | 0     |
-		| English and maths Balancing    | 0     | 0     | 0     | 0     | ... | 0     | 94.20 |		
-		  
+		| English and maths Balancing    | 0     | 0     | 0     | 0     | ... | 0     | 94.20 |
+		| Provider disadvantage uplift   | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+
+
+@FrameworkUpliftsForNonDasFinishingEarly
+Scenario: 581-AC01-Non DAS learner finishes early, price equals the funding band maximum, earns balancing and completion framework uplift payments. Assumes 15 month apprenticeship and learner completes after 12 months.
+	Given the apprenticeship funding band maximum is 9000
+	When an ILR file is submitted with the following data:
+		| ULN    | learner type                 | agreed price | start date | planned end date | actual end date | completion status | Framework Code | Programme Type | Pathway Code |
+		| 123456 | 16-18 programme only non-DAS | 9000         | 06/08/2017 | 09/11/2018       | 09/08/2018      | Completed         | 403            | 2              | 1            |
+	Then the provider earnings and payments break down as follows:
+		| Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 06/18 | 07/18 | 08/18 | 09/18 |
+		| Provider Earned Total                   | 576   | 576   | 576   | 1576  | 576   | ... | 576   | 576   | 4888  | 0     |
+		| Provider Earned from SFA                | 528   | 528   | 528   | 1528  | 528   | ... | 528   | 528   | 4564  | 0     |
+		| Provider Earned from Employer           | 48    | 48    | 48    | 48    | 48    | ... | 48    | 48    | 324   | 0     |
+		| Provider Paid by SFA                    | 0     | 528   | 528   | 528   | 1528  | ... | 528   | 528   | 528   | 4564  |
+		| Payment due from Employer               | 0     | 48    | 48    | 48    | 48    | ... | 48    | 48    | 48    | 324   |
+		| Levy account debited                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     |
+		| SFA Levy employer budget                | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     |
+		| SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     |
+		| SFA non Levy co-funding budget          | 432   | 432   | 432   | 432   | 432   | ... | 432   | 432   | 2916  | 0     |
+		| SFA non-Levy additional payments budget | 96    | 96    | 96    | 1096  | 96    | ... | 96    | 96    | 1648  | 0     |
+    And the transaction types for the payments are:
+		| Payment type                 | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 06/18 | 07/18 | 08/18 | 09/18 |
+		| On-program                   | 0     | 432   | 432   | 432   | 432   | ... | 432   | 432   | 432   | 0     |
+		| Completion                   | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 1620  |
+		| Balancing                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 1296  |
+		| Employer 16-18 incentive     | 0     | 0     | 0     | 0     | 500   | ... | 0     | 0     | 0     | 500   |
+		| Provider 16-18 incentive     | 0     | 0     | 0     | 0     | 500   | ... | 0     | 0     | 0     | 500   |
+		| Framework uplift on-program  | 0     | 96    | 96    | 96    | 96    | ... | 96    | 96    | 96    | 0     |
+		| Framework uplift completion  | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 360   |
+		| Framework uplift balancing   | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 288   |
+		| Provider disadvantage uplift | 0     | 0     | 0     | 0     | 0     | ..  | 0     | 0     | 0     | 0     |
+
+
+@FrameworkUpliftsForNonDasFinishingEarly
+Scenario: 581-AC02-Non DAS learner finishes early, price lower than the funding band maximum, earns balancing and completion framework uplift payments. Assumes 15 month apprenticeship and learner completes after 12 months.
+	Given the apprenticeship funding band maximum is 9000
+	When an ILR file is submitted with the following data:
+		| ULN    | learner type                 | agreed price | start date | planned end date | actual end date | completion status | Framework Code | Programme Type | Pathway Code |
+		| 123456 | 16-18 programme only non-DAS | 7500         | 06/08/2017 | 09/11/2018       | 09/08/2018      | Completed         | 403            | 2              | 1            |
+	Then the provider earnings and payments break down as follows:
+		| Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 06/18 | 07/18 | 08/18 | 09/18 |
+		| Provider Earned Total                   | 496   | 496   | 496   | 1496  | 496   | ... | 496   | 496   | 4348  | 0     |
+		| Provider Earned from SFA                | 456   | 456   | 456   | 1456  | 456   | ... | 456   | 456   | 4078  | 0     |
+		| Provider Earned from Employer           | 40    | 40    | 40    | 40    | 40    | ... | 40    | 40    | 270   | 0     |
+		| Provider Paid by SFA                    | 0     | 456   | 456   | 456   | 1456  | ... | 456   | 456   | 456   | 4078  |
+		| Payment due from Employer               | 0     | 40    | 40    | 40    | 40    | ... | 40    | 40    | 40    | 270   |
+		| Levy account debited                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     |
+		| SFA Levy employer budget                | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     |
+		| SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     |
+		| SFA non Levy co-funding budget          | 360   | 360   | 360   | 360   | 360   | ... | 360   | 360   | 2430  | 0     |
+		| SFA non-Levy additional payments budget | 96    | 96    | 96    | 1096  | 96    | ... | 96    | 96    | 1648  | 0     |
+    And the transaction types for the payments are:
+		| Payment type                 | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 06/18 | 07/18 | 08/18 | 09/18 |
+		| On-program                   | 0     | 360   | 360   | 360   | 360   | ... | 360   | 360   | 360   | 0     |
+		| Completion                   | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 1350  |
+		| Balancing                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 1080  |
+		| Employer 16-18 incentive     | 0     | 0     | 0     | 0     | 500   | ... | 0     | 0     | 0     | 500   |
+		| Provider 16-18 incentive     | 0     | 0     | 0     | 0     | 500   | ... | 0     | 0     | 0     | 500   |
+		| Framework uplift on-program  | 0     | 96    | 96    | 96    | 96    | ... | 96    | 96    | 96    | 0     |
+		| Framework uplift completion  | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 360   |
+		| Framework uplift balancing   | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 288   |
+		| Provider disadvantage uplift | 0     | 0     | 0     | 0     | 0     | ..  | 0     | 0     | 0     | 0     |
