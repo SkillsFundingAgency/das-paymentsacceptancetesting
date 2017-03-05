@@ -653,3 +653,137 @@ Scenario: 581-AC02-Non DAS learner finishes early, price lower than the funding 
 		| Framework uplift completion  | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 360   |
 		| Framework uplift balancing   | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 288   |
 		| Provider disadvantage uplift | 0     | 0     | 0     | 0     | 0     | ..  | 0     | 0     | 0     | 0     |
+
+
+@LearningSupport
+Scenario: 637-AC01-Payment for a non-DAS learner, requires learning support, doing an apprenticeship framework
+    When an ILR file is submitted with the following data:
+		| ULN       | learner type           | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code |
+		| learner a | programme only non-DAS | 15000        | 06/08/2017 | 08/08/2018       | 10/08/2018      | completed         | 403            | 2              | 1            |
+    And the learning support status of the ILR is:
+        | LSF code | date from  | date to    |
+        | 1        | 06/08/2017 | 10/08/2018 |
+	Then the provider earnings and payments break down as follows:
+		| Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
+		| Provider Earned Total                   | 1150  | 1150  | 1150  | 1150  | 1150  | ... | 1150  | 3000  | 0     |
+		| Provider Earned from SFA                | 1050  | 1050  | 1050  | 1050  | 1050  | ... | 1050  | 2700  | 0     |
+		| Provider Earned from Employer           | 100   | 100   | 100   | 100   | 100   | ... | 100   | 300   | 0     |
+		| Provider Paid by SFA                    | 0     | 1050  | 1050  | 1050  | 1050  | ... | 1050  | 1050  | 2700  |
+		| Payment due from Employer               | 0     | 100   | 100   | 100   | 100   | ... | 100   | 100   | 300   |
+		| Levy account debited                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| SFA Levy employer budget                | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| SFA non Levy co-funding budget          | 900   | 900   | 900   | 900   | 900   | ... | 900   | 2700  | 0     |
+		| SFA non-Levy additional payments budget | 150   | 150   | 150   | 150   | 150   | ... | 150   | 0     | 0     |
+    And the transaction types for the payments are:
+		| Payment type                 | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
+		| On-program                   | 0     | 900   | 900   | 900   | 900   | ... | 900   | 900   | 0     |
+		| Completion                   | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 2700  |
+		| Balancing                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| Employer 16-18 incentive     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| Provider 16-18 incentive     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| Provider disadvantage uplift | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+        | Provider learning support    | 150   | 150   | 150   | 150   | 150   | ... | 150   | 150   | 0     |
+
+
+@LearningSupport
+Scenario: 637-AC02-Payment for a non-DAS learner, requires learning support, doing an apprenticeship standard
+    When an ILR file is submitted with the following data:
+		| ULN       | learner type           | agreed price | start date | planned end date | actual end date | completion status | standard code |
+		| learner a | programme only non-DAS | 15000        | 06/08/2017 | 08/08/2018       | 10/08/2018      | completed         | 50            |
+    And the learning support status of the ILR is:
+        | LSF code | date from  | date to    |
+        | 1        | 06/08/2017 | 10/08/2018 |
+	Then the provider earnings and payments break down as follows:
+		| Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
+		| Provider Earned Total                   | 1150  | 1150  | 1150  | 1150  | 1150  | ... | 1150  | 3000  | 0     |
+		| Provider Earned from SFA                | 1050  | 1050  | 1050  | 1050  | 1050  | ... | 1050  | 2700  | 0     |
+		| Provider Earned from Employer           | 100   | 100   | 100   | 100   | 100   | ... | 100   | 300   | 0     |
+		| Provider Paid by SFA                    | 0     | 1050  | 1050  | 1050  | 1050  | ... | 1050  | 1050  | 2700  |
+		| Payment due from Employer               | 0     | 100   | 100   | 100   | 100   | ... | 100   | 100   | 300   |
+		| Levy account debited                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| SFA Levy employer budget                | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| SFA non Levy co-funding budget          | 900   | 900   | 900   | 900   | 900   | ... | 900   | 2700  | 0     |
+		| SFA non-Levy additional payments budget | 150   | 150   | 150   | 150   | 150   | ... | 150   | 0     | 0     |
+    And the transaction types for the payments are:
+		| Payment type                 | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
+		| On-program                   | 0     | 900   | 900   | 900   | 900   | ... | 900   | 900   | 0     |
+		| Completion                   | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 2700  |
+		| Balancing                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| Employer 16-18 incentive     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| Provider 16-18 incentive     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| Provider disadvantage uplift | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+        | Provider learning support    | 150   | 150   | 150   | 150   | 150   | ... | 150   | 150   | 0     |
+
+
+@LearningSupport
+Scenario: 637-AC03-Payment for a DAS learner, requires learning support, doing an apprenticeship framework
+	Given levy balance > agreed price for all months
+    And the following commitments exist:
+        | commitment Id | version Id | ULN       | start date | end date   | framework code | programme type | pathway code | agreed price | status |
+        | 1             | 1          | learner a | 01/08/2017 | 01/08/2018 | 403            | 2              | 1            | 15000        | active |
+    When an ILR file is submitted with the following data:
+		| ULN       | learner type       | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code |
+		| learner a | programme only DAS | 15000        | 06/08/2017 | 08/08/2018       | 10/08/2018      | completed         | 403            | 2              | 1            |
+    And the learning support status of the ILR is:
+        | LSF code | date from  | date to    |
+        | 1        | 06/08/2017 | 10/08/2018 |
+	Then the provider earnings and payments break down as follows:
+		| Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
+		| Provider Earned Total                   | 1150  | 1150  | 1150  | 1150  | 1150  | ... | 1150  | 3000  | 0     |
+		| Provider Earned from SFA                | 1150  | 1150  | 1150  | 1150  | 1150  | ... | 1150  | 3000  | 0     |
+		| Provider Earned from Employer           | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| Provider Paid by SFA                    | 0     | 1150  | 1150  | 1150  | 1150  | ... | 1150  | 1150  | 3000  |
+		| Payment due from Employer               | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| Levy account debited                    | 0     | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 1000  | 3000  |
+		| SFA Levy employer budget                | 1000  | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 3000  | 0     |
+		| SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| SFA non Levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| SFA Levy additional payments budget     | 150   | 150   | 150   | 150   | 150   | ... | 150   | 0     | 0     |
+		| SFA non-Levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+    And the transaction types for the payments are:
+		| Payment type                 | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
+		| On-program                   | 0     | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 1000  | 0     |
+		| Completion                   | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 3000  |
+		| Balancing                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| Employer 16-18 incentive     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| Provider 16-18 incentive     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| Provider disadvantage uplift | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| Provider learning support    | 150   | 150   | 150   | 150   | 150   | ... | 150   | 150   | 0     |
+
+
+@LearningSupport
+Scenario: 637-AC04-Payment for a DAS learner, requires learning support, doing an apprenticeship framework
+	Given levy balance > agreed price for all months
+    And the following commitments exist:
+        | commitment Id | version Id | ULN       | start date | end date   | standard code | agreed price | status |
+        | 1             | 1          | learner a | 01/08/2017 | 01/08/2018 | 50            | 15000        | active |
+    When an ILR file is submitted with the following data:
+		| ULN       | learner type       | agreed price | start date | planned end date | actual end date | completion status | standard code |
+		| learner a | programme only DAS | 15000        | 06/08/2017 | 08/08/2018       | 10/08/2018      | completed         | 50            |
+    And the learning support status of the ILR is:
+        | LSF code | date from  | date to    |
+        | 1        | 06/08/2017 | 10/08/2018 |
+	Then the provider earnings and payments break down as follows:
+		| Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
+		| Provider Earned Total                   | 1150  | 1150  | 1150  | 1150  | 1150  | ... | 1150  | 3000  | 0     |
+		| Provider Earned from SFA                | 1150  | 1150  | 1150  | 1150  | 1150  | ... | 1150  | 3000  | 0     |
+		| Provider Earned from Employer           | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| Provider Paid by SFA                    | 0     | 1150  | 1150  | 1150  | 1150  | ... | 1150  | 1150  | 3000  |
+		| Payment due from Employer               | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| Levy account debited                    | 0     | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 1000  | 3000  |
+		| SFA Levy employer budget                | 1000  | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 3000  | 0     |
+		| SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| SFA non Levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| SFA Levy additional payments budget     | 150   | 150   | 150   | 150   | 150   | ... | 150   | 0     | 0     |
+		| SFA non-Levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+    And the transaction types for the payments are:
+		| Payment type                 | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
+		| On-program                   | 0     | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 1000  | 0     |
+		| Completion                   | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 3000  |
+		| Balancing                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| Employer 16-18 incentive     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| Provider 16-18 incentive     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| Provider disadvantage uplift | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| Provider learning support    | 150   | 150   | 150   | 150   | 150   | ... | 150   | 150   | 0     |
