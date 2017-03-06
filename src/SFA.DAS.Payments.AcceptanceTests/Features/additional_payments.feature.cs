@@ -387,7 +387,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 58
 this.ScenarioSetup(scenarioInfo);
 #line 59
- testRunner.Given("the apprenticeship funding band maximum is 9000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+    testRunner.Given("the apprenticeship funding band maximum is 9000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                         "ULN",
@@ -412,7 +412,7 @@ this.ScenarioSetup(scenarioInfo);
                         "2",
                         "1"});
 #line 60
- testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table9, "When ");
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table9, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -547,7 +547,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1360",
                         "0"});
 #line 64
- testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table10, "Then ");
+    testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table10, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                         "Payment type",
@@ -683,7 +683,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 90
 this.ScenarioSetup(scenarioInfo);
 #line 91
- testRunner.Given("the apprenticeship funding band maximum is 9000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+    testRunner.Given("the apprenticeship funding band maximum is 9000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                         "ULN",
@@ -708,7 +708,7 @@ this.ScenarioSetup(scenarioInfo);
                         "2",
                         "1"});
 #line 92
- testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table12, "When ");
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table12, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -843,7 +843,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1360",
                         "0"});
 #line 96
- testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table13, "Then ");
+    testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table13, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
                         "Payment type",
@@ -966,7 +966,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
 #line 109
-   testRunner.And("the transaction types for the payments are:", ((string)(null)), table14, "And ");
+      testRunner.And("the transaction types for the payments are:", ((string)(null)), table14, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -1004,7 +1004,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "1-10%"});
 #line 123
- testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table15, "When ");
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table15, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -1207,7 +1207,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "11-20%"});
 #line 146
- testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table18, "When ");
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table18, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -1320,7 +1320,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
 #line 150
- testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table19, "Then ");
+    testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table19, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
                         "Payment type",
@@ -1368,7 +1368,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "150"});
 #line 161
-   testRunner.And("the transaction types for the payments are:", ((string)(null)), table20, "And ");
+      testRunner.And("the transaction types for the payments are:", ((string)(null)), table20, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -1410,7 +1410,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "20-27%"});
 #line 170
- testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table21, "When ");
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table21, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -1611,7 +1611,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "not deprived"});
 #line 193
- testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table24, "When ");
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table24, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -2334,7 +2334,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 277
 this.ScenarioSetup(scenarioInfo);
 #line 279
- testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+    testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table34 = new TechTalk.SpecFlow.Table(new string[] {
                         "commitment ID",
@@ -2386,7 +2386,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "1-10%"});
 #line 283
- testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table35, "When ");
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table35, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table36 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -2547,7 +2547,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "300"});
 #line 297
- testRunner.And("the transaction types for the payments are:", ((string)(null)), table37, "And ");
+    testRunner.And("the transaction types for the payments are:", ((string)(null)), table37, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -2564,7 +2564,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 304
 this.ScenarioSetup(scenarioInfo);
 #line 306
- testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+    testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table38 = new TechTalk.SpecFlow.Table(new string[] {
                         "commitment ID",
@@ -2616,7 +2616,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "11-20%"});
 #line 310
- testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table39, "When ");
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table39, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table40 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -2777,7 +2777,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "150"});
 #line 324
- testRunner.And("the transaction types for the payments are:", ((string)(null)), table41, "And ");
+    testRunner.And("the transaction types for the payments are:", ((string)(null)), table41, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -2794,7 +2794,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 332
 this.ScenarioSetup(scenarioInfo);
 #line 334
-   testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+    testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table42 = new TechTalk.SpecFlow.Table(new string[] {
                         "commitment ID",
@@ -2846,7 +2846,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "20-27%"});
 #line 339
- testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table43, "When ");
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table43, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table44 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -3024,7 +3024,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 361
 this.ScenarioSetup(scenarioInfo);
 #line 363
- testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+    testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table46 = new TechTalk.SpecFlow.Table(new string[] {
                         "commitment ID",
@@ -3076,7 +3076,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "not deprived"});
 #line 367
- testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table47, "When ");
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table47, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table48 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -3277,7 +3277,7 @@ this.ScenarioSetup(scenarioInfo);
                         "50",
                         "1-10%"});
 #line 391
- testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table50, "When ");
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table50, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table51 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -3478,7 +3478,7 @@ this.ScenarioSetup(scenarioInfo);
                         "50",
                         "11-20%"});
 #line 415
- testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table53, "When ");
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table53, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table54 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -3679,7 +3679,7 @@ this.ScenarioSetup(scenarioInfo);
                         "50",
                         "21-27%"});
 #line 439
- testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table56, "When ");
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table56, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table57 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -3878,7 +3878,7 @@ this.ScenarioSetup(scenarioInfo);
                         "50",
                         "not deprived"});
 #line 463
- testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table59, "When ");
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table59, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table60 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -4058,7 +4058,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 486
 this.ScenarioSetup(scenarioInfo);
 #line 487
- testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+    testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table62 = new TechTalk.SpecFlow.Table(new string[] {
                         "commitment Id",
@@ -4282,7 +4282,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 514
 this.ScenarioSetup(scenarioInfo);
 #line 515
- testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+    testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table66 = new TechTalk.SpecFlow.Table(new string[] {
                         "commitment Id",
@@ -4506,7 +4506,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 542
 this.ScenarioSetup(scenarioInfo);
 #line 543
- testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+    testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table70 = new TechTalk.SpecFlow.Table(new string[] {
                         "commitment Id",
@@ -4728,7 +4728,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 570
 this.ScenarioSetup(scenarioInfo);
 #line 571
- testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+    testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table74 = new TechTalk.SpecFlow.Table(new string[] {
                         "commitment Id",
@@ -4986,7 +4986,7 @@ this.ScenarioSetup(scenarioInfo);
                         "2",
                         "1"});
 #line 599
- testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table78, "When ");
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table78, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table79 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -5134,7 +5134,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "94.20"});
 #line 612
- testRunner.And("the transaction types for the payments are:", ((string)(null)), table80, "And ");
+    testRunner.And("the transaction types for the payments are:", ((string)(null)), table80, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -5151,7 +5151,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 621
 this.ScenarioSetup(scenarioInfo);
 #line 623
- testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+    testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table81 = new TechTalk.SpecFlow.Table(new string[] {
                         "commitment Id",
@@ -5220,7 +5220,7 @@ this.ScenarioSetup(scenarioInfo);
                         "2",
                         "1"});
 #line 627
- testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table82, "When ");
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table82, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table83 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -5311,7 +5311,7 @@ this.ScenarioSetup(scenarioInfo);
                         "94.20",
                         "0"});
 #line 631
- testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table83, "Then ");
+    testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table83, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table84 = new TechTalk.SpecFlow.Table(new string[] {
                         "Payment type",
@@ -5396,7 +5396,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 651
 this.ScenarioSetup(scenarioInfo);
 #line 652
- testRunner.Given("the apprenticeship funding band maximum is 9000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+    testRunner.Given("the apprenticeship funding band maximum is 9000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table85 = new TechTalk.SpecFlow.Table(new string[] {
                         "ULN",
@@ -5421,7 +5421,7 @@ this.ScenarioSetup(scenarioInfo);
                         "2",
                         "1"});
 #line 653
- testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table85, "When ");
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table85, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table86 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -5556,7 +5556,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1648",
                         "0"});
 #line 656
- testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table86, "Then ");
+    testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table86, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table87 = new TechTalk.SpecFlow.Table(new string[] {
                         "Payment type",
@@ -5698,7 +5698,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 682
 this.ScenarioSetup(scenarioInfo);
 #line 683
- testRunner.Given("the apprenticeship funding band maximum is 9000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+    testRunner.Given("the apprenticeship funding band maximum is 9000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table88 = new TechTalk.SpecFlow.Table(new string[] {
                         "ULN",
@@ -5723,7 +5723,7 @@ this.ScenarioSetup(scenarioInfo);
                         "2",
                         "1"});
 #line 684
- testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table88, "When ");
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table88, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table89 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -5858,7 +5858,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1648",
                         "0"});
 #line 687
- testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table89, "Then ");
+    testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table89, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table90 = new TechTalk.SpecFlow.Table(new string[] {
                         "Payment type",
@@ -6033,7 +6033,7 @@ this.ScenarioSetup(scenarioInfo);
                         "2",
                         "1"});
 #line 714
- testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table91, "When ");
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table91, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table92 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -6238,7 +6238,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 736
 this.ScenarioSetup(scenarioInfo);
 #line 739
- testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+    testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table94 = new TechTalk.SpecFlow.Table(new string[] {
                         "commitment Id",
@@ -6304,7 +6304,7 @@ this.ScenarioSetup(scenarioInfo);
                         "2",
                         "1"});
 #line 743
-  testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table95, "When ");
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table95, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table96 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -6688,7 +6688,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
 #line 774
- testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table100, "Then ");
+    testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table100, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table101 = new TechTalk.SpecFlow.Table(new string[] {
                         "Payment type",
@@ -6950,7 +6950,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
 #line 805
- testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table104, "Then ");
+    testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table104, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table105 = new TechTalk.SpecFlow.Table(new string[] {
                         "Payment type",
@@ -7058,7 +7058,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 829
 this.ScenarioSetup(scenarioInfo);
 #line 830
- testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+    testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table106 = new TechTalk.SpecFlow.Table(new string[] {
                         "commitment Id",
@@ -7254,7 +7254,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
 #line 840
- testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table109, "Then ");
+    testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table109, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table110 = new TechTalk.SpecFlow.Table(new string[] {
                         "Payment type",
@@ -7362,7 +7362,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 865
 this.ScenarioSetup(scenarioInfo);
 #line 866
- testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+    testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table111 = new TechTalk.SpecFlow.Table(new string[] {
                         "commitment Id",
@@ -7550,7 +7550,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
 #line 876
- testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table114, "Then ");
+    testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table114, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table115 = new TechTalk.SpecFlow.Table(new string[] {
                         "Payment type",
