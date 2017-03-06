@@ -1,3 +1,4 @@
+@capping
 Feature: Provider earnings and payments for a learner with a negotiated price above the funding band cap
 
 Scenario: 640-AC01-Payment for a DAS learner with a negotiated price above the funding band cap

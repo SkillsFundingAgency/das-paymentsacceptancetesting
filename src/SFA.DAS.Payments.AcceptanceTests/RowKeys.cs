@@ -28,6 +28,9 @@
         public const string FrameworkUpliftBalancing = "Framework uplift balancing";
         public const string ProviderDisadvantageUplift = " Provider disadvantage uplift";
 
+        public const string EnglishAndMathsOnProgramme = "English and maths on programme";
+        public const string EnglishAndMathsBlancing = "English and maths Balancing";
+
 
         public const string DataLockMatchingCommitment = "Matching commitment";
         public const string DataLockMatchingPrice = "Matching price";
