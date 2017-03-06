@@ -56,7 +56,7 @@ Scenario:AC2- Payment for a 16-18 DAS learner, levy available, incentives not pa
       
 
 Scenario:AC3-Learner finishes on time, earns on-programme and completion payments. Assumes 12 month apprenticeship and learner completes after 10 months.
-
+	Given the apprenticeship funding band maximum is 9000
 	When an ILR file is submitted with the following data:
 		| ULN    | learner type                 | agreed price | start date | planned end date | actual end date | completion status | Framework Code | Programme Type | Pathway Code |
 		| 123456 | 16-18 programme only non-DAS | 9000         | 06/08/2017 | 09/08/2018       | 10/08/2018      | Completed         | 403            | 2              | 1            |
@@ -88,7 +88,7 @@ Scenario:AC3-Learner finishes on time, earns on-programme and completion payment
 
 		
 Scenario:AC4-Learner finishes on time, Price is less than Funding Band Maximum of £9,000
-		
+	Given the apprenticeship funding band maximum is 9000
 	When an ILR file is submitted with the following data:
 		| ULN    | learner type                 | agreed price | start date | planned end date | actual end date | completion status | Framework Code | Programme Type | Pathway Code |
 		| 123455 | 16-18 programme only non-DAS | 8250         | 06/08/2017 | 09/08/2018       | 10/08/2018      | Completed         | 403            | 2              | 1            |
@@ -592,11 +592,64 @@ Scenario: 625-AC04-Payment for a non-DAS learner, does not live in a disadvantag
         | Completion                   | 0     | 0     | 0     | 0     | ... | 0     | 0     |
         | Balancing                    | 0     | 0     | 0     | 0     | ... | 0     | 0     |
         | Provider disadvantage uplift | 0     | 0     | 0     | 0     | ... | 0     | 0     |
-        | Provider disadvantage uplift | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+
+
+Scenario:590-AC01- 1 non-DAS Payment for a non-DAS learner, funding agreed within funding band maximum, with the planned duration the same as the programme duration (assumes both start at the same time), AND the learner completes the aim 1 month earlier than planned.
+	#The English or maths aim is submitted with the same start and planned end date
+	When an ILR file is submitted with the following data:
+		| ULN       | learner type           | aim type         | agreed price | aim rate | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code |
+		| learner a | programme only non-DAS | programme        | 15000        |          | 01/08/2017 | 08/08/2018       |                 | continuing        | 403            | 2              | 1            |
+		| learner a | programme only non-DAS | maths or english |              | 471      | 01/08/2017 | 08/11/2018       | 08/08/2018      | completed         | 403            | 2              | 1            |
+    Then the provider earnings and payments break down as follows:
+		| Type                                    | 08/17   | 09/17   | 10/17   | 11/17   | 12/17   | ... | 07/18   | 08/18  | 09/18 |
+		| Provider Earned Total                   | 1031.40 | 1031.40 | 1031.40 | 1031.40 | 1031.40 | ... | 1031.40 | 94.20  | 0     |
+		| Provider Paid by SFA                    | 0       | 931.40  | 931.40  | 931.40  | 931.40  | ... | 931.40  | 931.40 | 94.20 |
+		| Payment due from Employer               | 0       | 100     | 100     | 100     | 100     | ... | 100     | 100    | 0     |
+		| Levy account debited                    | 0       | 0       | 0       | 0       | 0       | ... | 0       | 0      | 0     |
+		| SFA non-Levy co-funding budget          | 900     | 900     | 900     | 900     | 900     | ... | 900     | 0      | 0     |
+		| SFA Levy employer budget                | 0       | 0       | 0       | 0       | 0       | ... | 0       | 0      | 0     |
+		| SFA non-Levy additional payments budget | 31.40   | 31.40   | 31.40   | 31.40   | 31.40   | ... | 31.40   | 94.20  | 0     |
+	And the transaction types for the payments are:
+		| Payment type                   | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
+		| On-program                     | 900   | 900   | 900   | 900   | ... | 900   | 0     |
+		| Completion                     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+		| Balancing                      | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+		| English and maths on programme | 31.40 | 31.40 | 31.40 | 31.40 | ... | 31.40 | 0     |
+		| English and maths Balancing    | 0     | 0     | 0     | 0     | ... | 0     | 94.20 |
+
+
+Scenario:590-AC02- Payment for a* DAS learner*, funding agreed within band, with the planned duration the same as the programme duration (assumes both start at same time), but learner completes aim 1 month early.
+	
+	Given levy balance > agreed price for all months
+    And the following commitments exist:
+	    | commitment Id | ULN       | start date | end date   | agreed price | framework code | programme type | pathway code | status | effective from | effective to |
+	    | 1             | learner a | 01/08/2017 | 01/08/2018 | 15000        | 403            | 2              | 1            | active | 01/08/2017     |              |
+	When an ILR file is submitted with the following data:
+		| ULN       | learner type       | aim type         | agreed price | aim rate | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code |
+		| learner a | programme only DAS | programme        | 15000        |          | 01/08/2017 | 08/08/2018       |                 | continuing        | 403            | 2              | 1            |
+		| learner a | programme only DAS | maths or english |              | 471      | 01/08/2017 | 08/11/2018       | 08/08/2018      | completed         | 403            | 2              | 1            |
+	Then the provider earnings and payments break down as follows:
+		| Type                                | 08/17   | 09/17   | 10/17   | 11/17   | 12/17   | ... | 07/18   | 08/18   | 09/18 |
+		| Provider Earned Total               | 1031.40 | 1031.40 | 1031.40 | 1031.40 | 1031.40 | ... | 1031.40 | 94.20   | 0     |
+		| Provider Paid by SFA                | 0       | 1031.40 | 1031.40 | 1031.40 | 1031.40 | ... | 1031.40 | 1031.40 | 94.20 |
+		| Payment due from Employer           | 0       | 0       | 0       | 0       | 0       | ... | 0       | 0       | 0     |
+		| Levy account debited                | 0       | 1000    | 1000    | 1000    | 1000    | ... | 1000    | 1000    | 0     |
+		| SFA Levy employer budget            | 1000    | 1000    | 1000    | 1000    | 1000    | ... | 1000    | 0       | 0     |
+		| SFA Levy co-funding budget          | 0       | 0       | 0       | 0       | 0       | ... | 0       | 0       | 0     |
+		| SFA Levy additional payments budget | 31.40   | 31.40   | 31.40   | 31.40   | 31.40   | ... | 31.40   | 94.20   | 0     |
+    And the transaction types for the payments are:
+		| Payment type                   | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
+		| On-program                     | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     |
+		| Completion                     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+		| Balancing                      | 0     | 0     | 0     | 0     | ... | 0     | 0     |
+		| English and maths on programme | 31.40 | 31.40 | 31.40 | 31.40 | ... | 31.40 | 0     |
+		| English and maths Balancing    | 0     | 0     | 0     | 0     | ... | 0     | 94.20 |
+		| Provider disadvantage uplift   | 0     | 0     | 0     | 0     | ... | 0     | 0     |
 
 
 @FrameworkUpliftsForNonDasFinishingEarly
 Scenario: 581-AC01-Non DAS learner finishes early, price equals the funding band maximum, earns balancing and completion framework uplift payments. Assumes 15 month apprenticeship and learner completes after 12 months.
+	Given the apprenticeship funding band maximum is 9000
 	When an ILR file is submitted with the following data:
 		| ULN    | learner type                 | agreed price | start date | planned end date | actual end date | completion status | Framework Code | Programme Type | Pathway Code |
 		| 123456 | 16-18 programme only non-DAS | 9000         | 06/08/2017 | 09/11/2018       | 09/08/2018      | Completed         | 403            | 2              | 1            |
@@ -627,6 +680,7 @@ Scenario: 581-AC01-Non DAS learner finishes early, price equals the funding band
 
 @FrameworkUpliftsForNonDasFinishingEarly
 Scenario: 581-AC02-Non DAS learner finishes early, price lower than the funding band maximum, earns balancing and completion framework uplift payments. Assumes 15 month apprenticeship and learner completes after 12 months.
+	Given the apprenticeship funding band maximum is 9000
 	When an ILR file is submitted with the following data:
 		| ULN    | learner type                 | agreed price | start date | planned end date | actual end date | completion status | Framework Code | Programme Type | Pathway Code |
 		| 123456 | 16-18 programme only non-DAS | 7500         | 06/08/2017 | 09/11/2018       | 09/08/2018      | Completed         | 403            | 2              | 1            |
@@ -653,6 +707,60 @@ Scenario: 581-AC02-Non DAS learner finishes early, price lower than the funding 
 		| Framework uplift completion  | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 360   |
 		| Framework uplift balancing   | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 288   |
 		| Provider disadvantage uplift | 0     | 0     | 0     | 0     | 0     | ..  | 0     | 0     | 0     | 0     |
+
+
+Scenario:591-AC01 Payment for a non -DAS learner, funding agreed within band maximum, planned duration is same as programme (assumes both start and finish at same time).
+#This scenario will continue to apply when the English & Maths aim goes beyond its planned end date 
+	When an ILR file is submitted with the following data:
+		  | ULN       | learner type           | aim type         | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code |
+		  | learner a | programme only non-DAS | programme        | 15000        | 01/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            |
+		  | learner a | programme only non-DAS | maths or english |              | 01/08/2017 | 08/08/2018       | 08/11/2018      | completed         | 403            | 2              | 1            |
+    Then the provider earnings and payments break down as follows:
+		  | Type                                    | 08/17   | 09/17   | 10/17   | 11/17   | 12/17   | ... | 07/18   | 08/18  | 09/18 | 10/18 | 11/18 | 12/18 |
+		  | Provider Earned Total                   | 1039.25 | 1039.25 | 1039.25 | 1039.25 | 1039.25 | ... | 1039.25 | 3000   | 0     | 0     | 0     | 0     |
+		  | Provider Paid by SFA                    | 0       | 939.25  | 939.25  | 939.25  | 939.25  | ... | 939.25  | 939.25 | 2700  | 0     | 0     | 0     |
+		  | Payment due from Employer               | 0       | 100     | 100     | 100     | 100     | ... | 100     | 100    | 300   | 0     | 0     | 0     |
+		  | Levy account debited                    | 0       | 0       | 0       | 0       | 0       | ... | 0       | 0      | 0     | 0     | 0     | 0     |
+		  | SFA Levy employer budget                | 0       | 0       | 0       | 0       | 0       | ... | 0       | 0      | 0     | 0     | 0     | 0     |
+		  | SFA non-Levy co-funding budget          | 900     | 900     | 900     | 900     | 900     | ... | 900     | 2700   | 0     | 0     | 0     | 0     |
+		  | SFA non-Levy additional payments budget | 39.25   | 39.25   | 39.25   | 39.25   | 39.25   | ... | 39.25   | 0      | 0     | 0     | 0     | 0     |
+    And the transaction types for the payments are:
+		  | Payment type                   | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 | 10/18 | 11/18 |
+		  | On-program                     | 900   | 900   | 900   | 900   | ... | 900   | 900   | 0     | 0     | 0     |
+		  | Completion                     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 2700  | 0     | 0     |
+		  | Balancing                      | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     | 0     |
+		  | English and maths on programme | 39.25 | 39.25 | 39.25 | 39.25 | ... | 39.25 | 39.25 | 0     | 0     | 0     |
+		  | English and maths Balancing    | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     | 0     |		  
+
+
+Scenario:591_AC02- Payment for a DAS learner, funding agreed within band maximum, planned duration is same as programme (assumes both start and finish at same time).
+#This scenario will continue to apply when the E+M aim goes beyond its planned end date. 	
+		  
+	Given levy balance > agreed price for all months
+    And the following commitments exist:
+        | commitment Id | ULN       | start date | end date   | agreed price | framework code | programme type | pathway code | status | effective from | effective to |
+        | 1             | learner a | 01/08/2017 | 01/08/2018 | 15000        | 403            | 2              | 1            | active | 01/08/2017     |              |
+ 	When an ILR file is submitted with the following data:
+		| ULN       | learner type       | aim type         | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code |
+		| learner a | programme only DAS | programme        | 15000        | 01/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            |
+		| learner a | programme only DAS | maths or english |              | 01/08/2017 | 08/08/2018       | 08/11/2018      | completed         | 403            | 2              | 1            |
+    Then the provider earnings and payments break down as follows:
+		| Type                                | 08/17   | 09/17   | 10/17   | 11/17   | 12/17   | ... | 07/18   | 08/18   | 09/18 | 10/18 | 11/18 | 12/18 |
+		| Provider Earned Total               | 1039.25 | 1039.25 | 1039.25 | 1039.25 | 1039.25 | ... | 1039.25 | 3000    | 0     | 0     | 0     | 0     |
+		| Provider Paid by SFA                | 0       | 1039.25 | 1039.25 | 1039.25 | 1039.25 | ... | 1039.25 | 1039.25 | 3000  | 0     | 0     | 0     |
+		| Payment due from Employer           | 0       | 0       | 0       | 0       | 0       | ... | 0       | 0       | 0     | 0     | 0     | 0     |
+		| Levy account debited                | 0       | 1000    | 1000    | 1000    | 1000    | ... | 1000    | 1000    | 3000  | 0     | 0     | 0     |
+		| SFA Levy employer budget            | 1000    | 1000    | 1000    | 1000    | 1000    | ... | 1000    | 3000    | 0     | 0     | 0     | 0     |
+		| SFA Levy co-funding budget          | 0       | 0       | 0       | 0       | 0       | ... | 0       | 0       | 0     | 0     | 0     | 0     |
+		| SFA Levy additional payments budget | 39.25   | 39.25   | 39.25   | 39.25   | 39.25   | ... | 39.25   | 0       | 0     | 0     | 0     | 0     |
+    And the transaction types for the payments are:
+		| Payment type                   | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 | 10/18 | 11/18 | 12/18 |
+		| On-program                     | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 1000  | 0     | 0     | 0     | 0     |
+		| Completion                     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 3000  | 0     | 0     | 0     |
+		| Balancing                      | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     | 0     | 0     |
+		| English and maths on programme | 39.25 | 39.25 | 39.25 | 39.25 | ... | 39.25 | 39.25 | 0     | 0     | 0     | 0     |
+		| English and maths Balancing    | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     | 0     | 0     |
+		| Provider disadvantage uplift   | 0     | 0     | 0     | 0     | 0   | ..    | 0     | 0     | 0     | 0     | 0     |
 
 
 @LearningSupport

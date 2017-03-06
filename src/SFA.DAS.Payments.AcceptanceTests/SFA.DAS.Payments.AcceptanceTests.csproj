@@ -91,7 +91,7 @@
     <Compile Include="DataHelpers\Entities\CommitmentEntity.cs" />
     <Compile Include="DataHelpers\ReferenceDataHelper.cs" />
     <Compile Include="DataHelpers\ValidationErrorsDataHelper.cs" />
-    <Compile Include="DataHelpers\Entities\AEC_ApprenticeshipPriceEpisode.cs" />
+    <Compile Include="DataHelpers\Entities\OpaApprenticeshipPriceEpisode.cs" />
     <Compile Include="Entities\Commitment.cs" />
     <Compile Include="Entities\DataLockMatch.cs" />
     <Compile Include="Entities\Employer.cs" />
@@ -130,6 +130,7 @@
     <Compile Include="ExecutionEnvironment\TestStatusWatcher.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Features\additional_payments.feature.cs" />
+    <Compile Include="Features\capping.feature.cs" />
     <Compile Include="Features\change_in_circumstances.feature.cs" />
     <Compile Include="Features\datalock_errors.feature.cs" />
     <Compile Include="Features\earnings_calc.feature.cs" />
@@ -165,6 +166,10 @@
     <None Include="..\..\features\additional_payments.feature">
       <Link>Features\additional_payments.feature</Link>
       <LastGenOutput>additional_payments.feature.cs</LastGenOutput>
+    </None>
+    <None Include="..\..\features\capping.feature">
+      <Link>Features\capping.feature</Link>
+      <LastGenOutput>capping.feature.cs</LastGenOutput>
     </None>
     <None Include="..\..\features\change_in_circumstances.feature">
       <Link>Features\change_in_circumstances.feature</Link>
