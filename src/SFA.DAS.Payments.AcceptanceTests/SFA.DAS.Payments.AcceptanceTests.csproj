@@ -164,6 +164,7 @@
     <Compile Include="Refactoring\StepDefinitions\EarningAndPaymentSteps.cs" />
     <Compile Include="Refactoring\StepDefinitions\SubmissionSteps.cs" />
     <Compile Include="Refactoring\StepDefinitions\UntestedSteps.cs" />
+    <Compile Include="Refactoring\TableParsers\CommitmentsTableParser.cs" />
     <Compile Include="Refactoring\TableParsers\EarningAndPaymentTableParser.cs" />
     <Compile Include="Refactoring\TableParsers\TransactionTypeTableParser.cs" />
     <Compile Include="Refactoring\Validations.cs" />

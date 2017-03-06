@@ -12,14 +12,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
             //TODO
         }
 
-        [When("the providers submit the following ILR files:")]
+        [When("the providers submit the following ILR files:")] //Duplicate?
         public void WhenMultipleIlrFilesAreSubmitted(Table ilrDetails)
         {
             //TODO
         }
 
         [When("an ILR file is submitted for the first time on (.*) with the following data:")]
-        [When(@"an ILR file is submitted on (.*) with the following data:")]
+        [When(@"an ILR file is submitted on (.*) with the following data:")] // what is the purpuse of the dates?
         public void WhenIlrSubmittedOnSpecificDate(string specSumissionDate, Table ilrDetails)
         {
             //TODO
