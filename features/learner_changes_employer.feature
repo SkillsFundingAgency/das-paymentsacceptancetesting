@@ -587,7 +587,7 @@ Scenario:AC1- Provider earnings and payments where learner changes employer and 
             | No employer | Non-DAS | 03/10/2017                |
             | employer 2  | DAS     | 03/11/2017                |
         And the following commitments exist:
-            | commitment Id | version Id | Employer | Provider   | ULN       | start date | end date   | agreed price | status    | effective from | effective to |
+            | commitment Id | version Id | Employer        | Provider   | ULN       | start date | end date   | agreed price | status    | effective from | effective to |
             | 1             | 1          | employer 1      | provider a | learner a | 01/08/2017 | 04/08/2018 | 15000        | Active    | 01/08/2017     | 02/10/2017   |
             | 1             | 2          | employer 1      | provider a | learner a | 01/08/2017 | 04/08/2018 | 15000        | Withdrawn | 03/10/2017     |              |
             | 2             | 1          | employer 2      | provider a | learner a | 01/11/2017 | 04/08/2018 | 5625         | Active    | 01/11/2017     |              |

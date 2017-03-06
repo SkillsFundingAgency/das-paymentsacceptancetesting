@@ -109,7 +109,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "ULN",
                         "start date",
                         "end date",
-                        "Agreed Price"});
+                        "agreed price"});
             table436.AddRow(new string[] {
                         "1",
                         "123",
@@ -476,7 +476,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "ULN",
                         "start date",
                         "end date",
-                        "Agreed Price"});
+                        "agreed price"});
             table442.AddRow(new string[] {
                         "1",
                         "123",
@@ -843,7 +843,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "ULN",
                         "start date",
                         "end date",
-                        "Agreed Price"});
+                        "agreed price"});
             table448.AddRow(new string[] {
                         "1",
                         "123",

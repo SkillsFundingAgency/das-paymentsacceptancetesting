@@ -1,15 +1,26 @@
-﻿using TechTalk.SpecFlow;
+﻿using SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts;
+using SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers;
+using TechTalk.SpecFlow;
 
 namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
 {
     [Binding]
     public class SubmissionSteps
     {
+        public SubmissionSteps(CommitmentsContext commitmentsContext, SubmissionContext submissionsContext)
+        {
+            CommitmentsContext = commitmentsContext;
+            SubmissionsContext = submissionsContext;
+        }
+        public SubmissionContext SubmissionsContext { get; }
+        public CommitmentsContext CommitmentsContext { get; }
+
+
         [When("an ILR file is submitted with the following data:")]
         [When(@"an ILR file is submitted every month with the following data:")] //Duplicate?
         public void WhenAnIlrFileIsSubmitted(Table ilrDetails)
         {
-            //TODO
+            IlrTableParser.ParseIlrTableIntoContext(SubmissionsContext, ilrDetails);
         }
 
         [When("the providers submit the following ILR files:")] //Duplicate?

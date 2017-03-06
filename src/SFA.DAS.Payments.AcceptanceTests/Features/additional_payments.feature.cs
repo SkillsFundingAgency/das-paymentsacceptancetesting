@@ -395,9 +395,9 @@ this.ScenarioSetup(scenarioInfo);
                         "planned end date",
                         "actual end date",
                         "completion status",
-                        "Framework Code",
-                        "Programme Type",
-                        "Pathway Code"});
+                        "framework code",
+                        "programme type",
+                        "pathway code"});
             table9.AddRow(new string[] {
                         "123456",
                         "16-18 programme only non-DAS",
@@ -689,9 +689,9 @@ this.ScenarioSetup(scenarioInfo);
                         "planned end date",
                         "actual end date",
                         "completion status",
-                        "Framework Code",
-                        "Programme Type",
-                        "Pathway Code"});
+                        "framework code",
+                        "programme type",
+                        "pathway code"});
             table12.AddRow(new string[] {
                         "123455",
                         "16-18 programme only non-DAS",
@@ -4965,9 +4965,9 @@ this.ScenarioSetup(scenarioInfo);
                         "planned end date",
                         "actual end date",
                         "completion status",
-                        "Framework Code",
-                        "Programme Type",
-                        "Pathway Code"});
+                        "framework code",
+                        "programme type",
+                        "pathway code"});
             table78.AddRow(new string[] {
                         "123456",
                         "16-18 programme only non-DAS",
@@ -5265,9 +5265,9 @@ this.ScenarioSetup(scenarioInfo);
                         "planned end date",
                         "actual end date",
                         "completion status",
-                        "Framework Code",
-                        "Programme Type",
-                        "Pathway Code"});
+                        "framework code",
+                        "programme type",
+                        "pathway code"});
             table81.AddRow(new string[] {
                         "123456",
                         "16-18 programme only non-DAS",
