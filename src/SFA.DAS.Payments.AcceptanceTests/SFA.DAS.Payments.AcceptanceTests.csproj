@@ -158,6 +158,7 @@
     <Compile Include="Refactoring\ExecutionManagers\CommitmentManager.cs" />
     <Compile Include="Refactoring\ExecutionManagers\EmployerAccountManager.cs" />
     <Compile Include="Refactoring\ExecutionManagers\PreperationManager.cs" />
+    <Compile Include="Refactoring\ExecutionManagers\SubmissionManager.cs" />
     <Compile Include="Refactoring\Extensions.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\CommitmentReferenceData.cs" />
     <Compile Include="Refactoring\Contexts\EmployerAccountContext.cs" />
@@ -168,6 +169,9 @@
     <Compile Include="Refactoring\ReferenceDataModels\LearnerEarningsAndPaymentsBreakdown.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\PeriodValue.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\ProviderEarnedPeriodValue.cs" />
+    <Compile Include="Refactoring\ResultsDataModels\EarningsResult.cs" />
+    <Compile Include="Refactoring\ResultsDataModels\LearnerResults.cs" />
+    <Compile Include="Refactoring\ResultsDataModels\PaymentResult.cs" />
     <Compile Include="Refactoring\SpecFlowHooks.cs" />
     <Compile Include="Refactoring\StepDefinitions\CommitmentSteps.cs" />
     <Compile Include="Refactoring\StepDefinitions\EarningAndPaymentSteps.cs" />

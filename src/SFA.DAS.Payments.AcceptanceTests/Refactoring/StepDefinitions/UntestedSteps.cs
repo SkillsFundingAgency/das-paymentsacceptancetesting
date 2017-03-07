@@ -21,5 +21,22 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
         public void GivenTheLearnerChangesEmployers(Table employmentDates)
         {
         }
+
+
+
+
+        [Then(@"the data lock status will be as follows:")]
+        public void ThenTheDataLockStatusWillBeAsFollows(Table table)
+        {
+            //TODO
+            // To be refactored
+        }
+
+        [Then(@"the data lock status of the ILR in (.*) is:")] //what is the point of this date?
+        public void ThenTheDataLockStatusWillBeAsFollowsOnSpecificDate(string specDate, Table table)
+        {
+            //TODO
+            // To be refactored
+        }
     }
 }

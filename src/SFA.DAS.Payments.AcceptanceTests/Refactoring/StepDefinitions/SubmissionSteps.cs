@@ -20,20 +20,20 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
         [When(@"an ILR file is submitted every month with the following data:")] //Duplicate?
         public void WhenAnIlrFileIsSubmitted(Table ilrDetails)
         {
-            IlrTableParser.ParseIlrTableIntoContext(SubmissionsContext, ilrDetails);
+            ParseIlrTableAndSubmit(ilrDetails);
         }
 
         [When("the providers submit the following ILR files:")] //Duplicate?
         public void WhenMultipleIlrFilesAreSubmitted(Table ilrDetails)
         {
-            //TODO
+            ParseIlrTableAndSubmit(ilrDetails);
         }
 
         [When("an ILR file is submitted for the first time on (.*) with the following data:")]
-        [When(@"an ILR file is submitted on (.*) with the following data:")] // what is the purpuse of the dates?
+        [When(@"an ILR file is submitted on (.*) with the following data:")] // what is the purpose of the dates?
         public void WhenIlrSubmittedOnSpecificDate(string specSumissionDate, Table ilrDetails)
         {
-            //TODO
+            ParseIlrTableAndSubmit(ilrDetails);
         }
 
         [When("the Contract type in the ILR is:")]
@@ -48,16 +48,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
             //TODO
         }
 
-        [Then(@"the data lock status will be as follows:")]
-        public void ThenTheDataLockStatusWillBeAsFollows(Table table)
-        {
-            //TODO
-        }
 
-        [Then(@"the data lock status of the ILR in (.*) is:")] //what is the point of this date?
-        public void ThenTheDataLockStatusWillBeAsFollowsOnSpecificDate(string specDate, Table table)
+
+        private void ParseIlrTableAndSubmit(Table ilrDetails)
         {
-            //TODO
+            IlrTableParser.ParseIlrTableIntoContext(SubmissionsContext, ilrDetails);
         }
     }
 }
