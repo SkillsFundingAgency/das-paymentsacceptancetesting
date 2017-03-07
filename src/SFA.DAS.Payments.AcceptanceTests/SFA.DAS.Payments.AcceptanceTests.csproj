@@ -87,6 +87,7 @@
     <Compile Include="Builders\IlrLearnersBuilder.cs" />
     <Compile Include="Builders\IlrLearningDeliveryBuilder.cs" />
     <Compile Include="Builders\IlrSubmissionDefaults.cs" />
+    <Compile Include="DataExtensions.cs" />
     <Compile Include="DataHelpers\DataLockDataHelper.cs" />
     <Compile Include="DataHelpers\Entities\CommitmentEntity.cs" />
     <Compile Include="DataHelpers\ReferenceDataHelper.cs" />
@@ -153,6 +154,10 @@
     <Compile Include="Refactoring\Contexts\EarningsAndPaymentsContext.cs" />
     <Compile Include="Refactoring\Contexts\SubmissionContext.cs" />
     <Compile Include="Refactoring\Defaults.cs" />
+    <Compile Include="Refactoring\AcceptanceTestsLogger.cs" />
+    <Compile Include="Refactoring\ExecutionManagers\CommitmentManager.cs" />
+    <Compile Include="Refactoring\ExecutionManagers\EmployerAccountManager.cs" />
+    <Compile Include="Refactoring\ExecutionManagers\PreperationManager.cs" />
     <Compile Include="Refactoring\Extensions.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\CommitmentReferenceData.cs" />
     <Compile Include="Refactoring\Contexts\EmployerAccountContext.cs" />
@@ -163,6 +168,7 @@
     <Compile Include="Refactoring\ReferenceDataModels\LearnerEarningsAndPaymentsBreakdown.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\PeriodValue.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\ProviderEarnedPeriodValue.cs" />
+    <Compile Include="Refactoring\SpecFlowHooks.cs" />
     <Compile Include="Refactoring\StepDefinitions\CommitmentSteps.cs" />
     <Compile Include="Refactoring\StepDefinitions\EarningAndPaymentSteps.cs" />
     <Compile Include="Refactoring\StepDefinitions\SubmissionSteps.cs" />
@@ -171,6 +177,7 @@
     <Compile Include="Refactoring\TableParsers\EarningAndPaymentTableParser.cs" />
     <Compile Include="Refactoring\TableParsers\IlrTableParser.cs" />
     <Compile Include="Refactoring\TableParsers\TransactionTypeTableParser.cs" />
+    <Compile Include="Refactoring\TestEnvironment.cs" />
     <Compile Include="Refactoring\Validations.cs" />
     <Compile Include="RowKeys.cs" />
     <Compile Include="SpecFlowHooks.cs" />

@@ -93,15 +93,26 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
             {
                 throw new ArgumentException("Commitments table is missing ULN column");
             }
+            if (structure.StartDateIndex == -1)
+            {
+                throw new ArgumentException("Commitments table is missing start date column");
+            }
+            if (structure.EndDateIndex == -1)
+            {
+                throw new ArgumentException("Commitments table is missing end date column");
+            }
 
             return structure;
         }
 
         private static CommitmentReferenceData ParseCommitmentsTableRow(TableRow row, CommitmentsTableColumnStructure structure, int rowIndex)
         {
-            var uln = row[structure.UlnIndex];
+            var learnerId = row[structure.UlnIndex];
+            var uln = 20000L + rowIndex;
             var providerId = structure.ProviderIndex > -1 ? row[structure.ProviderIndex] : Defaults.ProviderId;
+            var ukprn = 10000L + rowIndex;
             var status = structure.StatusIndex > -1 ? row[structure.StatusIndex] : Defaults.CommitmentStatus;
+            var standardCode = Defaults.StandardCode;
 
             int priority = Defaults.CommitmentPriority;
             if (structure.PriorityIndex > -1 && !int.TryParse(row[structure.PriorityIndex], out priority))
@@ -133,14 +144,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
                 throw new ArgumentException($"'{row[structure.VersionIdIndex]}' is not a valid version id");
             }
 
-            DateTime? startDate = null;
-            if (structure.StartDateIndex > -1 && !TryParseNullableDateTime(row[structure.StartDateIndex], out startDate))
+            DateTime startDate;
+            if (!DateTime.TryParse(row[structure.StartDateIndex], out startDate))
             {
                 throw new ArgumentException($"'{row[structure.StartDateIndex]}' is not a valid start date");
             }
 
-            DateTime? endDate = null;
-            if (structure.EndDateIndex > -1 && !TryParseNullableDateTime(row[structure.EndDateIndex], out endDate))
+            DateTime endDate;
+            if (!DateTime.TryParse(row[structure.EndDateIndex], out endDate))
             {
                 throw new ArgumentException($"'{row[structure.EndDateIndex]}' is not a valid end date");
             }
@@ -161,20 +172,32 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
                 throw new ArgumentException($"'{row[structure.EffectiveToIndex]}' is not a valid effective to");
             }
 
+            if (effectiveFrom == null)
+            {
+                effectiveFrom = startDate;
+            }
+            if (effectiveTo == null)
+            {
+                effectiveTo = endDate;
+            }
+
             return new CommitmentReferenceData
             {
                 EmployerAccountId = employerAccountId,
+                LearnerId = learnerId,
                 Uln = uln,
                 Priority = priority,
                 ProviderId = providerId,
+                Ukprn = ukprn,
                 AgreedPrice = price,
                 CommitmentId = commitmentId,
                 VersionId = versionId,
                 StartDate = startDate,
                 EndDate = endDate,
-                EffectiveFrom = effectiveFrom,
-                EffectiveTo = effectiveTo,
-                Status = status
+                EffectiveFrom = effectiveFrom.Value,
+                EffectiveTo = effectiveTo.Value,
+                Status = status,
+                StandardCode = standardCode
             };
         }
 

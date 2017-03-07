@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts;
+using SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.ReferenceDataModels;
 using TechTalk.SpecFlow;
 
@@ -31,21 +32,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
                 throw new ArgumentException($"Employer number '{employerNumber}' is not a valid number");
             }
 
-            EmployerAccountContext.EmployerAccounts.Add(new EmployerAccountReferenceData
-            {
-                Id = id,
-                Balance = long.MaxValue
-            });
+            AddEmployerAccount(id, int.MaxValue);
         }
 
         [Given("levy balance = 0 for all months")]
         public void GivenLevyBalanceIsZero()
         {
-            EmployerAccountContext.EmployerAccounts.Add(new EmployerAccountReferenceData
-            {
-                Id = Defaults.EmployerAccountId,
-                Balance = 0L
-            });
+            AddEmployerAccount(Defaults.EmployerAccountId, 0m);
         }
 
         [Given("the employer's levy balance is:")]
@@ -93,11 +86,22 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
                 });
             }
 
-            EmployerAccountContext.EmployerAccounts.Add(new EmployerAccountReferenceData
+            AddEmployerAccount(id, 0m, periodBalances);
+        }
+
+
+        private void AddEmployerAccount(int id, decimal balance, List<PeriodValue> periodBalances = null)
+        {
+            var account = new EmployerAccountReferenceData
             {
                 Id = id,
-                PeriodBalances = periodBalances
-            });
+                Balance = balance,
+                PeriodBalances = periodBalances ?? new List<PeriodValue>()
+            };
+
+            EmployerAccountManager.AddAccount(account);
+
+            EmployerAccountContext.EmployerAccounts.Add(account);
         }
     }
 }

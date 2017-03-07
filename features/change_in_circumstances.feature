@@ -43,7 +43,7 @@ Feature: Provider earnings and payments where learner changes apprenticeship sta
             | Provider Earned Total         | 1000  | 1000  | 1000  | 500   | 500   |
             | Provider Earned from SFA      | 1000  | 1000  | 1000  | 500   | 500   |
             | Provider Paid by SFA          | 0     | 1000  | 1000  | 1000  | 0     |
-            | Levy account debited | 0     | 1000  | 1000  | 1000  | 0     |
+            | Levy account debited          | 0     | 1000  | 1000  | 1000  | 0     |
             | SFA Levy employer budget      | 1000  | 1000  | 1000  | 0     | 0     |
             | SFA Levy co-funding budget    | 0     | 0     | 0     | 0     | 0     |
 
@@ -88,9 +88,7 @@ Feature: Provider earnings and payments where learner changes apprenticeship sta
 
 
     Scenario: Earnings and payments for a DAS learner, levy available, and there is a change to the Negotiated Cost which happens at the end of the month
-        Given The learner is programme only DAS
-        And levy balance > agreed price for all months
-        And the following commitments exist:
+        Given the following commitments exist:
             | commitment Id | version Id | ULN       | start date | end date   | status | agreed price | effective from | effective to |
             | 1             | 1          | learner a | 01/08/2017 | 31/08/2018 | active | 15000        | 01/08/2017     | 31/10/2017   |
             | 1             | 2          | learner a | 01/08/2017 | 31/08/2018 | active | 9375         | 01/11/2017     |              |
@@ -113,9 +111,7 @@ Feature: Provider earnings and payments where learner changes apprenticeship sta
 
 
     Scenario: Earnings and payments for a DAS learner, levy available, and there is a change to the Negotiated Cost which happens in the middle of the month
-        Given The learner is programme only DAS
-        And levy balance > agreed price for all months
-        And the following commitments exist:
+        Given the following commitments exist:
             | commitment Id | version Id | ULN       | start date | end date   | status | agreed price | effective from | effective to |
             | 1             | 1          | learner a | 01/08/2017 | 31/08/2018 | active | 15000        | 01/08/2017     | 31/10/2017   |
             | 1             | 2          | learner a | 01/08/2017 | 31/08/2018 | active | 9375         | 01/11/2017     |              |
@@ -138,9 +134,7 @@ Feature: Provider earnings and payments where learner changes apprenticeship sta
 
 
     Scenario: Earnings and payments for a DAS learner, levy available, and there is a change to the Negotiated Cost which happens in the middle of the month and the ILR starts earlier
-        Given The learner is programme only DAS
-        And levy balance > agreed price for all months
-        And the following commitments exist:
+        Given the following commitments exist:
             | commitment Id | version Id | ULN       | start date | end date   | status | agreed price | effective from | effective to |
             | 1             | 1          | learner a | 01/08/2017 | 31/08/2018 | active | 15000        | 01/08/2017     | 31/10/2017   |
             | 1             | 2          | learner a | 01/08/2017 | 31/08/2018 | active | 9375         | 01/11/2017     |              |
@@ -163,9 +157,7 @@ Feature: Provider earnings and payments where learner changes apprenticeship sta
 
 
     Scenario: Earnings and payments for a DAS learner, levy available, and there is a change to the Negotiated Cost and the ILR is not updated
-        Given The learner is programme only DAS
-        And levy balance > agreed price for all months
-        And the following commitments exist:
+        Given the following commitments exist:
             | commitment Id | version Id | ULN       | start date | end date   | status | agreed price | effective from | effective to |
             | 1             | 1          | learner a | 01/08/2017 | 31/08/2018 | active | 15000        | 01/08/2017     | 31/10/2017   |
             | 1             | 2          | learner a | 01/08/2017 | 31/08/2018 | active | 9375         | 01/11/2017     |              |
@@ -189,9 +181,7 @@ Feature: Provider earnings and payments where learner changes apprenticeship sta
 #changes in the middle of month
 
     Scenario: Earnings and payments for a DAS learner, levy available, where the apprenticeship standard changes middle of month and data lock is passed in both instances
-        Given The learner is programme only DAS
-        And levy balance > agreed price for all months
-        And the following commitments exist:
+        Given the following commitments exist:
             | commitment Id | version Id | ULN       | standard code | start date | end date   | agreed price | status | effective from | effective to |
             | 1             | 1          | learner a | 51            | 01/08/2017 | 01/08/2018 | 15000        | active | 01/08/2017     | 10/11/2017   |
             | 1             | 2          | learner a | 52            | 01/08/2017 | 01/08/2018 | 5625         | active | 11/11/2017     |              |
@@ -213,9 +203,7 @@ Feature: Provider earnings and payments where learner changes apprenticeship sta
             | SFA Levy co-funding budget | 0     | 0     | 0     | 0     | 0     |
 
 Scenario: ILR changes standard in the middle of the month, but no corresponding change to the commitment is confirmed
-        Given The learner is programme only DAS
-        And levy balance > agreed price for all months
-        And the following commitments exist:
+        Given the following commitments exist:
             | commitment Id | version Id | ULN       | standard code | start date | end date   | agreed price | status | effective from | effective to |
             | 1             | 1          | learner a | 51            | 01/08/2017 | 01/08/2018 | 15000        | active | 01/08/2017     |              |
         When an ILR file is submitted on 03/12/2017 with the following data:
@@ -236,9 +224,7 @@ Scenario: ILR changes standard in the middle of the month, but no corresponding 
             | SFA Levy co-funding budget | 0     | 0     | 0     | 0     | 0     | 0     |
             
 Scenario: Earnings and payments for a DAS learner, levy available, where the apprenticeship standard changes middle of month A commitment is updated to show a change in standard, mid-month, but the ILR does not reflect this
-        Given The learner is programme only DAS
-        And levy balance > agreed price for all months
-        And the following commitments exist:
+        Given the following commitments exist:
             | commitment Id | version Id | ULN       | standard code | start date | end date   | agreed price | status | effective from | effective to |
             | 1             | 1          | learner a | 51            | 01/08/2017 | 01/08/2018 | 15000        | active | 01/08/2017     | 10/11/2017   |
             | 1             | 2          | learner a | 52            | 01/08/2017 | 01/08/2018 | 5625         | active | 11/11/2017     |              |
@@ -259,9 +245,7 @@ Scenario: Earnings and payments for a DAS learner, levy available, where the app
             | SFA Levy co-funding budget | 0     | 0     | 0     | 0     | 0     | 0     |
 
 Scenario: Earnings and payments for a DAS learner, levy available, where the apprenticeship standard changes in the middle of the month and the ILR change happens later within the same month
-        Given The learner is programme only DAS
-        And levy balance > agreed price for all months
-        And the following commitments exist:
+        Given the following commitments exist:
             | commitment Id | version Id | ULN       | standard code | start date | end date   | agreed price | status | effective from | effective to |
             | 1             | 1          | learner a | 51            | 01/08/2017 | 01/08/2018 | 15000        | active | 01/08/2017     | 10/11/2017   |
             | 1             | 2          | learner a | 52            | 01/08/2017 | 01/08/2018 | 5625         | active | 11/11/2017     |              |
@@ -283,9 +267,7 @@ Scenario: Earnings and payments for a DAS learner, levy available, where the app
             | SFA Levy co-funding budget | 0     | 0     | 0     | 0     | 0     |
 
 Scenario: Earnings and payments for a DAS learner, levy available, where the apprenticeship standard changes in the middle of the month and the ILR change happens later in the next month
-        Given The learner is programme only DAS
-        And levy balance > agreed price for all months
-        And the following commitments exist:
+        Given the following commitments exist:
             | commitment Id | version Id | ULN       | standard code | start date | end date   | agreed price | status | effective from | effective to |
             | 1             | 1          | learner a | 51            | 01/08/2017 | 01/08/2018 | 15000        | active | 01/08/2017     | 10/11/2017   |
             | 1             | 2          | learner a | 52            | 01/08/2017 | 01/08/2018 | 5625         | active | 11/11/2017     |              |
@@ -307,9 +289,7 @@ Scenario: Earnings and payments for a DAS learner, levy available, where the app
             | SFA Levy co-funding budget | 0     | 0     | 0     | 0     | 0      | 0      |
 
 Scenario: Earnings and payments for a DAS learner, levy available, where the apprenticeship standard changes in the middle of the month and the ILR change happens later within the same month before commitment starts
-        Given The learner is programme only DAS
-        And levy balance > agreed price for all months
-        And the following commitments exist:
+        Given the following commitments exist:
             | commitment Id | version Id | ULN       | standard code | start date | end date   | agreed price | status | effective from | effective to |
             | 1             | 1          | learner a | 51            | 01/08/2017 | 01/08/2018 | 15000        | active | 01/08/2017     | 10/11/2017   |
             | 1             | 2          | learner a | 52            | 01/08/2017 | 01/08/2018 | 5625         | active | 11/11/2017     |              |

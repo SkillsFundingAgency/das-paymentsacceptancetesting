@@ -1583,14 +1583,16 @@ this.ScenarioSetup(scenarioInfo);
                         "programme type",
                         "pathway code",
                         "agreed price",
-                        "start date"});
+                        "start date",
+                        "end date"});
             table407.AddRow(new string[] {
                         "learner a",
                         "403",
                         "2",
                         "1",
                         "7500",
-                        "06/08/2017"});
+                        "06/08/2017",
+                        "08/08/2018"});
 #line 189
     testRunner.And("the following commitments exist:", ((string)(null)), table407, "And ");
 #line hidden
@@ -1858,14 +1860,16 @@ this.ScenarioSetup(scenarioInfo);
                         "programme type",
                         "pathway code",
                         "agreed price",
-                        "start date"});
+                        "start date",
+                        "end date"});
             table411.AddRow(new string[] {
                         "learner a",
                         "403",
                         "2",
                         "1",
                         "7500",
-                        "06/08/2017"});
+                        "06/08/2017",
+                        "08/08/2018"});
 #line 222
     testRunner.And("the following commitments exist:", ((string)(null)), table411, "And ");
 #line hidden
@@ -2133,14 +2137,16 @@ this.ScenarioSetup(scenarioInfo);
                         "programme type",
                         "pathway code",
                         "agreed price",
-                        "start date"});
+                        "start date",
+                        "end date"});
             table415.AddRow(new string[] {
                         "learner a",
                         "403",
                         "2",
                         "1",
                         "7500",
-                        "06/08/2017"});
+                        "06/08/2017",
+                        "08/08/2018"});
 #line 255
     testRunner.And("the following commitments exist:", ((string)(null)), table415, "And ");
 #line hidden
@@ -2410,14 +2416,16 @@ this.ScenarioSetup(scenarioInfo);
                         "programme type",
                         "pathway code",
                         "agreed price",
-                        "start date"});
+                        "start date",
+                        "end date"});
             table419.AddRow(new string[] {
                         "learner a",
                         "403",
                         "2",
                         "1",
                         "7500",
-                        "06/08/2017"});
+                        "06/08/2017",
+                        "08/08/2018"});
 #line 290
     testRunner.And("the following commitments exist:", ((string)(null)), table419, "And ");
 #line hidden
@@ -2627,14 +2635,16 @@ this.ScenarioSetup(scenarioInfo);
                         "programme type",
                         "pathway code",
                         "agreed price",
-                        "start date"});
+                        "start date",
+                        "end date"});
             table423.AddRow(new string[] {
                         "learner a",
                         "403",
                         "2",
                         "1",
                         "7500",
-                        "06/08/2017"});
+                        "06/08/2017",
+                        "08/08/2018"});
 #line 321
     testRunner.And("the following commitments exist:", ((string)(null)), table423, "And ");
 #line hidden

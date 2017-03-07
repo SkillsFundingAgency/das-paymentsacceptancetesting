@@ -187,8 +187,8 @@ Scenario:AC6- 1 learner aged 16-18, non-DAS. Second employment status record add
  Scenario:AC7- Payment for a 16-18 DAS learner, small employer at start
     Given levy balance > agreed price for all months
     And the following commitments exist:
-        | ULN       | framework code | programme type | pathway code | agreed price | start date |
-        | learner a | 403            | 2              | 1            | 7500         | 06/08/2017 |
+        | ULN       | framework code | programme type | pathway code | agreed price | start date | end date   |
+        | learner a | 403            | 2              | 1            | 7500         | 06/08/2017 | 08/08/2018 |
     When an ILR file is submitted with the following data:
         | ULN       | learner type             | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status  | Employment Status Applies | Employer Id | Small Employer |
         | learner a | 16-18 programme only DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment | 05/08/2017                | 12345678    | SEM1           |
@@ -220,8 +220,8 @@ Scenario:AC6- 1 learner aged 16-18, non-DAS. Second employment status record add
  Scenario:AC8- Scenario: 1 learner aged 19-24, DAS, with an Education Health Care (EHC) plan, employed with a small employer at start, is fully funded for on programme and completion payments
     Given levy balance > agreed price for all months
     And the following commitments exist:
-        | ULN       | framework code | programme type | pathway code | agreed price | start date |
-        | learner a | 403            | 2              | 1            | 7500         | 06/08/2017 |
+        | ULN       | framework code | programme type | pathway code | agreed price | start date | end date   |
+        | learner a | 403            | 2              | 1            | 7500         | 06/08/2017 | 08/08/2018 |
     When an ILR file is submitted with the following data:
         | ULN       | learner type             | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status  | Employment Status Applies | Employer Id | Small Employer | LearnDelFAM |
         | learner a | 19-24 programme only DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment | 05/08/2017                | 12345678    | SEM1           | EEF2        |
@@ -253,8 +253,8 @@ Scenario:AC6- 1 learner aged 16-18, non-DAS. Second employment status record add
 Scenario:AC9- 1 learner aged 19-24, DAS, is a care leaver, employed with a small employer at start, is fully funded for on programme and completion payments
     Given levy balance > agreed price for all months
     And the following commitments exist:
-        | ULN       | framework code | programme type | pathway code | agreed price | start date |
-        | learner a | 403            | 2              | 1            | 7500         | 06/08/2017 |
+        | ULN       | framework code | programme type | pathway code | agreed price | start date | end date   |
+        | learner a | 403            | 2              | 1            | 7500         | 06/08/2017 | 08/08/2018 |
     When an ILR file is submitted with the following data:
         | ULN       | learner type             | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status  | Employment Status Applies | Employer Id | Small Employer | LearnDelFAM |
         | learner a | 19-24 programme only DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment | 05/08/2017                | 12345678    | SEM1           | EEF4        |
@@ -288,8 +288,8 @@ Scenario:AC10- 1 learner aged 19-24, DAS, employed with a small employer at star
 
     Given levy balance > agreed price for all months
     And the following commitments exist:
-        | ULN       | framework code | programme type | pathway code | agreed price | start date |
-        | learner a | 403            | 2              | 1            | 7500         | 06/08/2017 |
+        | ULN       | framework code | programme type | pathway code | agreed price | start date | end date   |
+        | learner a | 403            | 2              | 1            | 7500         | 06/08/2017 | 08/08/2018 |
     When an ILR file is submitted with the following data:
         | ULN       | learner type             | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status  | Employment Status Applies | Employer Id | Small Employer | LearnDelFAM |
         | learner a | 19-24 programme only DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment | 05/08/2017                | 12345678    | SEM1           |             |
@@ -319,8 +319,8 @@ Scenario:AC11- Payment for a 16-18 DAS learner, employer is not small
   
     Given levy balance > agreed price for all months
     And the following commitments exist:
-        | ULN       | framework code | programme type | pathway code | agreed price | start date |
-        | learner a | 403            | 2              | 1            | 7500         | 06/08/2017 |
+        | ULN       | framework code | programme type | pathway code | agreed price | start date | end date   |
+        | learner a | 403            | 2              | 1            | 7500         | 06/08/2017 | 08/08/2018 |
     When an ILR file is submitted with the following data:
         | ULN       | learner type             | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status  | Employment Status Applies | Employer Id | Small Employer | LearnDelFAM |
         | learner a | 16-18 programme only DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment | 05/08/2017                | 12345678    |                |             |
