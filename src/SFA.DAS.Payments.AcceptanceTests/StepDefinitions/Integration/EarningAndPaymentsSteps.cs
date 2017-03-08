@@ -80,7 +80,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
         [Scope(Tag = "LearnerChangesEmployerGapInCommitments")]
         [Scope(Tag = "SmallEmployerNonDasMultipleEmploymentStatuses")]
         [Scope(Tag = "SmallEmployerMultipleEmploymentStatus")]
-        public void WhenAnIlrFileIsSubmittedWithTheFollowingDataNoSubmissionGapInCommitments(Table table)
+
+        [Scope(Tag = "LearningSupport")]
+        public void WhenAnIlrFileIsSubmittedWithTheFollowingDataAndThereIsAnotherWhenStepInTheScenario(Table table)
         {
             ScenarioContext.Current.Add("learners", table);
         }
@@ -115,6 +117,16 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             ProcessIlrFileSubmissions(learnerTable);
         }
 
+        [When(@"the learning support status of the ILR is:")]
+        public void WhenTheLearningSupportStatusOfTheIlrIs(Table table)
+        {
+            Table learnerTable = null;
+
+            BuildLearningSupportRecords(table);
+
+            ScenarioContext.Current.TryGetValue("learners", out learnerTable);
+            ProcessIlrFileSubmissions(learnerTable);
+        }
 
         [Then(@"the provider earnings and payments break down as follows:")]
         public void ThenTheProviderEarningsBreakDownAsFollows(Table table)
@@ -594,6 +606,22 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             var expectedPaymentDue = decimal.Parse(additionalEarningsRow[colIndex]);
             Assert.AreEqual(expectedPaymentDue, actualEarningsDue, $"Expected additional earnings of {expectedPaymentDue} but earned a payment of {actualEarningsDue} for {periodName}");
 
+        }
+
+        private void BuildLearningSupportRecords(Table table)
+        {
+            for (var rowIndex = 0; rowIndex < table.RowCount; rowIndex++)
+            {
+                var famCode = new LearningDeliveryFam
+                {
+                    FamCode = table.Rows[rowIndex].Value<int>("LSF code"),
+                    StartDate = DateTime.Parse(table.Rows[rowIndex].Value<string>("date from")),
+                    EndDate = DateTime.Parse(table.Rows[rowIndex].Value<string>("date to")),
+                    FamType = "LSF"
+                };
+
+                StepDefinitionsContext.ReferenceDataContext.AddLearningDeliveryFam(famCode);
+            }
         }
     }
 }

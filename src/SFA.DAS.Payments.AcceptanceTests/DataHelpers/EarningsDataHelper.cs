@@ -33,7 +33,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                             "AND AttributeName IN ('PriceEpisodeOnProgPayment', 'PriceEpisodeCompletionPayment', 'PriceEpisodeBalancePayment', " +
                             "'PriceEpisodeFirstEmp1618Pay','PriceEpisodeFirstProv1618Pay','PriceEpisodeSecondEmp1618Pay','PriceEpisodeSecondProv1618Pay', " +
                             "'PriceEpisodeApplic1618FrameworkUpliftBalancing','PriceEpisodeApplic1618FrameworkUpliftCompletionPayment','PriceEpisodeApplic1618FrameworkUpliftOnProgPayment', " +
-                            "'PriceEpisodeFirstDisadvantagePayment','PriceEpisodeSecondDisadvantagePayment') " +
+                            "'PriceEpisodeFirstDisadvantagePayment','PriceEpisodeSecondDisadvantagePayment', 'PriceEpisodeLSFCash') " +
                             " GROUP BY UKPRN";
                 var priceEpisodeEarnings = connection.Query<PeriodisedValuesEntity>(query, new { ukprn }).ToArray();
 
@@ -87,7 +87,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                             " AND AttributeName IN ('PriceEpisodeOnProgPayment', 'PriceEpisodeCompletionPayment', 'PriceEpisodeBalancePayment'," +
                             " 'PriceEpisodeFirstEmp1618Pay','PriceEpisodeFirstProv1618Pay','PriceEpisodeSecondEmp1618Pay','PriceEpisodeSecondProv1618Pay', " +
                             "  'PriceEpisodeApplic1618FrameworkUpliftBalancing','PriceEpisodeApplic1618FrameworkUpliftCompletionPayment','PriceEpisodeApplic1618FrameworkUpliftOnProgPayment', " +
-                            "'PriceEpisodeFirstDisadvantagePayment','PriceEpisodeSecondDisadvantagePayment') " +
+                            "'PriceEpisodeFirstDisadvantagePayment','PriceEpisodeSecondDisadvantagePayment', 'PriceEpisodeLSFCash') " +
                             " Group By pv.UKPRN, l.ULN";
                            
                 return connection.Query<PeriodisedValuesEntity>(query, new { ukprn }).ToArray();
@@ -303,7 +303,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataHelpers
                                     "AND ld.AimSeqNumber = ldpv.AimSeqNumber " +
                                     "AND ld.LearnAimRef != 'ZPROG001' " +
                             "WHERE ldpv.UKPRN = @ukprn " +
-                                "AND ldpv.AttributeName IN('MathEngOnProgPayment', 'MathEngBalPayment') " +
+                                "AND ldpv.AttributeName IN('MathEngOnProgPayment', 'MathEngBalPayment', 'LearnSuppFundCash') " +
                             "GROUP BY ldpv.UKPRN";
 
                 var learningDeliveryEarnings = connection.Query<PeriodisedValuesEntity>(query, new { ukprn }).ToArray();
