@@ -68,7 +68,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         {
 #line 5
     #line 6
-        testRunner.Given("the apprenticeship funding band maximum for each learner is 17000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+        testRunner.Given("the apprenticeship funding band maximum for each learner is 20000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
         }
         
