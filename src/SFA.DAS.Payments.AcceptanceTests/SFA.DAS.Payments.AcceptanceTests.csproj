@@ -167,6 +167,7 @@
     <Compile Include="Refactoring\ReferenceDataModels\EmployerAccountPeriodValue.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\IlrLearnerReferenceData.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\LearnerEarningsAndPaymentsBreakdown.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\LearnerType.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\PeriodValue.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\ProviderEarnedPeriodValue.cs" />
     <Compile Include="Refactoring\ResultsDataModels\EarningsResult.cs" />

@@ -989,7 +989,7 @@ this.ScenarioSetup(scenarioInfo);
                         "home postcode deprivation"});
             table15.AddRow(new string[] {
                         "learner a",
-                        "programme only non - DAS",
+                        "programme only non-DAS",
                         "15000",
                         "06/08/2017",
                         "08/08/2018",
@@ -1395,7 +1395,7 @@ this.ScenarioSetup(scenarioInfo);
                         "home postcode deprivation"});
             table21.AddRow(new string[] {
                         "learner a",
-                        "programme only non- DAS",
+                        "programme only non-DAS",
                         "15000",
                         "06/08/2017",
                         "08/08/2018",
@@ -1596,7 +1596,7 @@ this.ScenarioSetup(scenarioInfo);
                         "home postcode deprivation"});
             table24.AddRow(new string[] {
                         "learner a",
-                        "programme only non- DAS",
+                        "programme only non-DAS",
                         "15000",
                         "06/08/2017",
                         "08/08/2018",
@@ -3264,7 +3264,7 @@ this.ScenarioSetup(scenarioInfo);
                         "home postcode deprivation"});
             table50.AddRow(new string[] {
                         "learner a",
-                        "programme only non - DAS",
+                        "programme only non-DAS",
                         "15000",
                         "06/08/2017",
                         "08/08/2018",
@@ -3465,7 +3465,7 @@ this.ScenarioSetup(scenarioInfo);
                         "home postcode deprivation"});
             table53.AddRow(new string[] {
                         "learner a",
-                        "programme only non - DAS",
+                        "programme only non-DAS",
                         "15000",
                         "06/08/2017",
                         "08/08/2018",
@@ -3666,7 +3666,7 @@ this.ScenarioSetup(scenarioInfo);
                         "home postcode deprivation"});
             table56.AddRow(new string[] {
                         "learner a",
-                        "programme only non - DAS",
+                        "programme only non-DAS",
                         "15000",
                         "06/08/2017",
                         "08/08/2018",
@@ -3865,7 +3865,7 @@ this.ScenarioSetup(scenarioInfo);
                         "home postcode deprivation"});
             table59.AddRow(new string[] {
                         "learner a",
-                        "programme only non - DAS",
+                        "programme only non-DAS",
                         "15000",
                         "06/08/2017",
                         "08/08/2018",

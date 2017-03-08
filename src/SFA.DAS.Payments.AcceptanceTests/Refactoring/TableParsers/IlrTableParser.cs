@@ -148,7 +148,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
             {
                 Uln = row.ReadRowColumnValue<string>(structure.UlnIndex, "ULN"),
                 AgreedPrice = row.ReadRowColumnValue<decimal>(structure.AgreedPriceIndex, "agreed price"),
-                LearnerType = row.ReadRowColumnValue<string>(structure.LearnerTypeIndex, "learner type"),
+                LearnerType = (LearnerType)row.ReadRowColumnValue<string>(structure.LearnerTypeIndex, "learner type", "Undefined").ToEnumByDescription(typeof(LearnerType)),
                 StartDate = row.ReadRowColumnValue<DateTime>(structure.StartDateIndex, "start date"),
                 PlannedEndDate = row.ReadRowColumnValue<DateTime>(structure.PlannedEndDateIndex, "planned end date"),
                 ActualEndDate = row.ReadRowColumnValue<DateTime>(structure.ActualEndDateIndex, "actual end date"),
@@ -179,22 +179,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
                 SmallEmployer = row.ReadRowColumnValue<string>(structure.SmallEmployerIndex, "small employer"),
                 LearnDelFam = row.ReadRowColumnValue<string>(structure.LearnDelFamIndex, "LearnDelFam")
             };
-        }
-
-        private static T ReadRowColumnValue<T>(TableRow row, int columnIndex, string columnName, T defaultValue = default(T))
-        {
-            if (columnIndex > -1 && !string.IsNullOrWhiteSpace(row[columnIndex]))
-            {
-                try
-                {
-                    return (T)Convert.ChangeType(row[columnIndex], typeof(T));
-                }
-                catch (Exception ex)
-                {
-                    throw new ArgumentException($"'{row[columnIndex]}' is not a valid {columnName}", ex);
-                }
-            }
-            return defaultValue;
         }
 
 

@@ -6,7 +6,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ReferenceDataModels
     {
         public string Uln { get; set; }
         public decimal AgreedPrice { get; set; }
-        public string LearnerType { get; set; }
+        public LearnerType LearnerType { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime PlannedEndDate { get; set; }
         public DateTime ActualEndDate { get; set; }
