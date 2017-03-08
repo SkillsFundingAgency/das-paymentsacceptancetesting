@@ -107,7 +107,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "01/08/2017",
                         "01/08/2018",
                         "7500",
-                        "withdrawn",
+                        "cancelled",
                         "05/03/2018",
                         ""});
             table297.AddRow(new string[] {
@@ -382,7 +382,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "01/08/2017",
                         "01/08/2018",
                         "7500",
-                        "withdrawn",
+                        "cancelled",
                         "05/03/2018",
                         ""});
             table302.AddRow(new string[] {
@@ -659,7 +659,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "01/08/2017",
                         "01/08/2018",
                         "7500",
-                        "withdrawn",
+                        "cancelled",
                         "05/03/2018",
                         ""});
             table307.AddRow(new string[] {
@@ -936,7 +936,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "01/08/2017",
                         "01/08/2018",
                         "7500",
-                        "withdrawn",
+                        "cancelled",
                         "05/03/2018",
                         ""});
             table312.AddRow(new string[] {
@@ -1213,7 +1213,7 @@ this.ScenarioSetup(scenarioInfo);
                         "01/08/2017",
                         "01/08/2018",
                         "7500",
-                        "withdrawn",
+                        "cancelled",
                         "15/11/2017",
                         ""});
             table317.AddRow(new string[] {
@@ -1547,7 +1547,7 @@ this.ScenarioSetup(scenarioInfo);
                         "01/08/2017",
                         "01/08/2018",
                         "7500",
-                        "withdrawn",
+                        "cancelled",
                         "15/11/2017",
                         ""});
             table324.AddRow(new string[] {
@@ -1902,7 +1902,7 @@ this.ScenarioSetup(scenarioInfo);
                         "01/08/2017",
                         "01/08/2018",
                         "7500",
-                        "withdrawn",
+                        "cancelled",
                         "15/11/2017",
                         ""});
             table331.AddRow(new string[] {

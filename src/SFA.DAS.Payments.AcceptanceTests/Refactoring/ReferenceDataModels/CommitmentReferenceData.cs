@@ -17,7 +17,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ReferenceDataModels
         public DateTime EndDate { get; set; }
         public DateTime EffectiveFrom { get; set; }
         public DateTime EffectiveTo { get; set; }
-        public string Status { get; set; }
+        public CommitmentPaymentStatus Status { get; set; }
         public long? StandardCode { get; set; }
         public int? ProgrammeType { get; set; }
         public int? FrameworkCode { get; set; }

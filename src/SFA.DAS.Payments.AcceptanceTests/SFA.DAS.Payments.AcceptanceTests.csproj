@@ -162,6 +162,7 @@
     <Compile Include="Refactoring\ExecutionManagers\SubmissionManager.cs" />
     <Compile Include="Refactoring\Extensions.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\AimType.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\CommitmentPaymentStatus.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\CommitmentReferenceData.cs" />
     <Compile Include="Refactoring\Contexts\EmployerAccountContext.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\CompletionStatus.cs" />

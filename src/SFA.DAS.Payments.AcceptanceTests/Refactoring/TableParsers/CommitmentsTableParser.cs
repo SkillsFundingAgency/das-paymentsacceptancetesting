@@ -108,10 +108,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
         private static CommitmentReferenceData ParseCommitmentsTableRow(TableRow row, CommitmentsTableColumnStructure structure, int rowIndex, LookupContext lookupContext)
         {
             var learnerId = row[structure.UlnIndex];
-            var uln = 20000L + rowIndex;
+            var uln = lookupContext.AddOrGetUln(learnerId);
             var providerId = structure.ProviderIndex > -1 ? row[structure.ProviderIndex] : Defaults.ProviderId;
             var ukprn = lookupContext.AddOrGetUkprn(providerId);
-            var status = structure.StatusIndex > -1 ? row[structure.StatusIndex] : Defaults.CommitmentStatus;
+            var status = (CommitmentPaymentStatus) row.ReadRowColumnValue<string>(structure.StatusIndex, "status", Defaults.CommitmentStatus).ToEnumByDescription(typeof(CommitmentPaymentStatus));
             var standardCode = Defaults.StandardCode;
 
             int priority = Defaults.CommitmentPriority;

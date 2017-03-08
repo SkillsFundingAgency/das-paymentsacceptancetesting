@@ -18,6 +18,9 @@ Feature: Provider earnings and payments where learner completes on time and is f
 
     Scenario: A DAS learner, levy available, learner finishes on time
         Given levy balance > agreed price for all months
+		And the following commitments exist:
+            | ULN       | priority | start date | end date   |
+            | learner a | 1        | 01/09/2017 | 08/09/2018 |
         When an ILR file is submitted with the following data:
             | learner type       | agreed price | start date | planned end date | actual end date | completion status |
             | programme only DAS | 15000        | 01/09/2017 | 08/09/2018       | 08/09/2018      | completed         |
