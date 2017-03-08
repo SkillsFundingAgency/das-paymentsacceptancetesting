@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using IlrGenerator;
 using ProviderPayments.TestStack.Core.ExecutionStatus;
+using SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.ReferenceDataModels;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.ResultsDataModels;
 
@@ -10,25 +11,20 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
 {
     internal static class SubmissionManager
     {
-        internal static List<LearnerResults> SubmitIlrAndRunMonthEndAndCollateResults(List<IlrLearnerReferenceData> ilrLearnerDetails)
+        internal static List<LearnerResults> SubmitIlrAndRunMonthEndAndCollateResults(List<IlrLearnerReferenceData> ilrLearnerDetails, LookupContext lookupContext)
         {
-            // get periods
-            // collate details by provider
-            // submit ILR for each provider for each period
-            // run month end for period as a whole
-            // Collect earns results
-            // Collect payments results
-
             var periods = ExtractPeriods(ilrLearnerDetails);
-            var providerLearners = GroupLearnersByProvider(ilrLearnerDetails);
+            var providerLearners = GroupLearnersByProvider(ilrLearnerDetails, lookupContext);
             foreach (var period in periods)
             {
                 SetEnvironmentToPeriod(period);
                 foreach (var providerDetails in providerLearners)
                 {
-                    BuildAndSubmitIlr(providerDetails, period);
+                    BuildAndSubmitIlr(providerDetails, period, lookupContext);
                 }
                 RunMonthEnd(period);
+
+                //TODO: Collect results
             }
 
             return new List<LearnerResults>();
@@ -52,14 +48,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
 
             return periods.ToArray();
         }
-        private static ProviderSubmissionDetails[] GroupLearnersByProvider(List<IlrLearnerReferenceData> ilrLearnerDetails)
+        private static ProviderSubmissionDetails[] GroupLearnersByProvider(List<IlrLearnerReferenceData> ilrLearnerDetails, LookupContext lookupContext)
         {
             return (from x in ilrLearnerDetails
                     group x by x.Provider into g
                     select new ProviderSubmissionDetails
                     {
                         ProviderId = g.Key,
-                        Ukprn = 0l, //TODO
+                        Ukprn = lookupContext.AddOrGetUkprn(g.Key),
                         LearnerDetails = g.ToArray()
                     }).ToArray();
         }
@@ -81,9 +77,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                 CollectionOpen = 1
             };
         }
-        private static void BuildAndSubmitIlr(ProviderSubmissionDetails providerDetails, string period)
+        private static void BuildAndSubmitIlr(ProviderSubmissionDetails providerDetails, string period, LookupContext lookupContext)
         {
-            IlrSubmission submission = BuildIlrSubmission(providerDetails);
+            IlrSubmission submission = BuildIlrSubmission(providerDetails, lookupContext);
             TestEnvironment.ProcessService.RunIlrSubmission(submission, TestEnvironment.Variables, new LoggingStatusWatcher($"ILR submission for provider {providerDetails.ProviderId} in {period}"));
         }
         private static void RunMonthEnd(string period)
@@ -92,51 +88,59 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
         }
 
 
-        private static IlrSubmission BuildIlrSubmission(ProviderSubmissionDetails providerDetails)
+        private static IlrSubmission BuildIlrSubmission(ProviderSubmissionDetails providerDetails, LookupContext lookupContext)
         {
             var learners = (from x in providerDetails.LearnerDetails
-                            group x by x.Uln into g
-                            select BuildLearner(g.ToArray())).ToArray();
-            return new IlrSubmission
+                            group x by x.LearnerId into g
+                            select BuildLearner(g.ToArray(), lookupContext)).ToArray();
+            var submission = new IlrSubmission
             {
                 Ukprn = providerDetails.Ukprn,
                 Learners = learners
             };
+            for (var i = 0; i < submission.Learners.Length; i++)
+            {
+                submission.Learners[i].LearnRefNumber = (i + 1).ToString();
+            }
+            return submission;
         }
-        private static Learner BuildLearner(IlrLearnerReferenceData[] learnerDetails)
+        private static Learner BuildLearner(IlrLearnerReferenceData[] learnerDetails, LookupContext lookupContext)
         {
             var deliveries = learnerDetails.Select(x =>
             {
+                var agreedTrainingPrice = (int)Math.Floor(x.AgreedPrice * 0.8m);
+                var agreedAssesmentPrice = x.AgreedPrice - agreedTrainingPrice;
+
                 var financialRecords = new List<FinancialRecord>();
                 financialRecords.Add(new FinancialRecord
                 {
                     Code = 1,
                     Type = "TNP",
-                    Amount = x.TotalTrainingPrice1,
-                    Date = x.TotalTrainingPrice1EffectiveDate
+                    Amount = x.TotalTrainingPrice1 == 0 ? agreedTrainingPrice : x.TotalTrainingPrice1,
+                    Date = x.TotalTrainingPrice1EffectiveDate == DateTime.MinValue ? x.StartDate : x.TotalTrainingPrice1EffectiveDate
                 });
                 financialRecords.Add(new FinancialRecord
                 {
                     Code = 2,
                     Type = "TNP",
-                    Amount = x.TotalAssessmentPrice1,
-                    Date = x.TotalAssessmentPrice1EffectiveDate
+                    Amount = x.TotalAssessmentPrice1 == 0 ? agreedAssesmentPrice : x.TotalAssessmentPrice1,
+                    Date = x.TotalAssessmentPrice1EffectiveDate == DateTime.MinValue ? x.StartDate : x.TotalAssessmentPrice1EffectiveDate
                 });
-                if(x.TotalTrainingPrice2 > 0 || x.TotalAssessmentPrice2 > 0)
+                if (x.TotalTrainingPrice2 > 0 || x.TotalAssessmentPrice2 > 0)
                 {
                     financialRecords.Add(new FinancialRecord
                     {
                         Code = 1,
                         Type = "TNP",
                         Amount = x.TotalTrainingPrice2,
-                        Date = x.TotalTrainingPrice2EffectiveDate
+                        Date = x.TotalTrainingPrice2EffectiveDate == DateTime.MinValue ? x.StartDate : x.TotalTrainingPrice2EffectiveDate
                     });
                     financialRecords.Add(new FinancialRecord
                     {
                         Code = 2,
                         Type = "TNP",
                         Amount = x.TotalAssessmentPrice2,
-                        Date = x.TotalAssessmentPrice2EffectiveDate
+                        Date = x.TotalAssessmentPrice2EffectiveDate == DateTime.MinValue ? x.StartDate : x.TotalAssessmentPrice2EffectiveDate
                     });
                 }
                 if (x.ResidualTrainingPrice > 0 || x.ResidualAssessmentPrice > 0)
@@ -146,14 +150,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                         Code = 3,
                         Type = "TNP",
                         Amount = x.ResidualTrainingPrice,
-                        Date = x.ResidualTrainingPriceEffectiveDate
+                        Date = x.ResidualTrainingPriceEffectiveDate == DateTime.MinValue ? x.StartDate : x.ResidualTrainingPriceEffectiveDate
                     });
                     financialRecords.Add(new FinancialRecord
                     {
                         Code = 4,
                         Type = "TNP",
                         Amount = x.ResidualAssessmentPrice,
-                        Date = x.ResidualAssessmentPriceEffectiveDate
+                        Date = x.ResidualAssessmentPriceEffectiveDate == DateTime.MinValue ? x.StartDate : x.ResidualAssessmentPriceEffectiveDate
                     });
                 }
 
@@ -172,9 +176,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                     FinancialRecords = financialRecords.ToArray()
                 };
             }).ToArray();
+
             return new Learner
             {
-                Uln = learnerDetails[0].Uln,
+                Uln = lookupContext.AddOrGetUln(learnerDetails[0].LearnerId),
+                DateOfBirth = GetDateOfBirthBasedOnLearnerType(learnerDetails[0].LearnerType),
                 LearningDeliveries = deliveries
             };
         }
@@ -187,6 +193,18 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                 return true;
             }
             return false;
+        }
+        private static DateTime GetDateOfBirthBasedOnLearnerType(LearnerType learnerType)
+        {
+            if (learnerType == LearnerType.ProgrammeOnlyDas1618 || learnerType == LearnerType.ProgrammeOnlyNonDas1618)
+            {
+                return DateTime.Today.AddYears(-17);
+            }
+            if (learnerType == LearnerType.ProgrammeOnlyNonDas1924 || learnerType == LearnerType.ProgrammeOnlyNonDas1924)
+            {
+                return DateTime.Today.AddYears(-20);
+            }
+            return DateTime.Today.AddYears(-25);
         }
 
 

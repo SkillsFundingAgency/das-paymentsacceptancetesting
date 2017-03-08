@@ -12,7 +12,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
     public static class CommitmentsTableParser
     {
 
-        public static void ParseCommitmentsIntoContext(CommitmentsContext context, Table commitments)
+        public static void ParseCommitmentsIntoContext(CommitmentsContext context, Table commitments, LookupContext lookupContext)
         {
             if (commitments.Rows.Count < 1)
             {
@@ -22,7 +22,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
             var structure = ParseCommitmentsTableStructure(commitments);
             foreach (var row in commitments.Rows)
             {
-                context.Commitments.Add(ParseCommitmentsTableRow(row, structure, context.Commitments.Count));
+                context.Commitments.Add(ParseCommitmentsTableRow(row, structure, context.Commitments.Count, lookupContext));
             }
         }
 
@@ -105,12 +105,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
             return structure;
         }
 
-        private static CommitmentReferenceData ParseCommitmentsTableRow(TableRow row, CommitmentsTableColumnStructure structure, int rowIndex)
+        private static CommitmentReferenceData ParseCommitmentsTableRow(TableRow row, CommitmentsTableColumnStructure structure, int rowIndex, LookupContext lookupContext)
         {
             var learnerId = row[structure.UlnIndex];
             var uln = 20000L + rowIndex;
             var providerId = structure.ProviderIndex > -1 ? row[structure.ProviderIndex] : Defaults.ProviderId;
-            var ukprn = 10000L + rowIndex;
+            var ukprn = lookupContext.AddOrGetUkprn(providerId);
             var status = structure.StatusIndex > -1 ? row[structure.StatusIndex] : Defaults.CommitmentStatus;
             var standardCode = Defaults.StandardCode;
 

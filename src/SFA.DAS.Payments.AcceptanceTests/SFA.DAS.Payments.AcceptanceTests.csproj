@@ -152,6 +152,7 @@
     </Compile>
     <Compile Include="Refactoring\Contexts\CommitmentsContext.cs" />
     <Compile Include="Refactoring\Contexts\EarningsAndPaymentsContext.cs" />
+    <Compile Include="Refactoring\Contexts\LookupContext.cs" />
     <Compile Include="Refactoring\Contexts\SubmissionContext.cs" />
     <Compile Include="Refactoring\Defaults.cs" />
     <Compile Include="Refactoring\AcceptanceTestsLogger.cs" />

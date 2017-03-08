@@ -5,8 +5,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ReferenceDataModels
     public class IlrLearnerReferenceData
     {
         public string LearnerId { get; set; }
-        public long Uln { get; set; }
-        public decimal AgreedPrice { get; set; }
+        public int AgreedPrice { get; set; }
         public LearnerType LearnerType { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime PlannedEndDate { get; set; }

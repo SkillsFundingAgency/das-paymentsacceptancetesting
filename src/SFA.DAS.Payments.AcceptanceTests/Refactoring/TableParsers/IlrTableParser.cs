@@ -144,16 +144,16 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
         }
         private static IlrLearnerReferenceData ParseCommitmentsTableRow(TableRow row, IlrTableStructure structure)
         {
-            return new IlrLearnerReferenceData
+            var rowData = new IlrLearnerReferenceData
             {
-                LearnerId = row.ReadRowColumnValue<string>(structure.UlnIndex, "ULN"),
-                AgreedPrice = row.ReadRowColumnValue<decimal>(structure.AgreedPriceIndex, "agreed price"),
+                LearnerId = row.ReadRowColumnValue<string>(structure.UlnIndex, "ULN", Defaults.LearnerId),
+                AgreedPrice = row.ReadRowColumnValue<int>(structure.AgreedPriceIndex, "agreed price"),
                 LearnerType = (LearnerType)row.ReadRowColumnValue<string>(structure.LearnerTypeIndex, "learner type", "Undefined").ToEnumByDescription(typeof(LearnerType)),
                 StartDate = row.ReadRowColumnValue<DateTime>(structure.StartDateIndex, "start date"),
                 PlannedEndDate = row.ReadRowColumnValue<DateTime>(structure.PlannedEndDateIndex, "planned end date"),
                 ActualEndDate = row.ReadRowColumnValue<DateTime>(structure.ActualEndDateIndex, "actual end date"),
                 CompletionStatus = (CompletionStatus)row.ReadRowColumnValue<string>(structure.CompletionStatusIndex, "completion status").ToEnumByDescription(typeof(CompletionStatus)),
-                Provider = row.ReadRowColumnValue<string>(structure.ProviderIndex, "provider"),
+                Provider = row.ReadRowColumnValue<string>(structure.ProviderIndex, "provider", Defaults.ProviderId),
                 TotalTrainingPrice1 = row.ReadRowColumnValue<int>(structure.TotalTrainingPrice1Index, "total training price 1"),
                 TotalTrainingPrice1EffectiveDate = row.ReadRowColumnValue<DateTime>(structure.TotalTrainingPrice1EffectiveDateIndex, "total training price 1 effective date"),
                 TotalAssessmentPrice1 = row.ReadRowColumnValue<int>(structure.TotalAssessmentPrice1Index, "total assessment price 1"),
@@ -179,6 +179,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
                 SmallEmployer = row.ReadRowColumnValue<string>(structure.SmallEmployerIndex, "small employer"),
                 LearnDelFam = row.ReadRowColumnValue<string>(structure.LearnDelFamIndex, "LearnDelFam")
             };
+
+            if (rowData.StandardCode == 0 && rowData.FrameworkCode == 0)
+            {
+                rowData.StandardCode = Defaults.StandardCode;
+            }
+
+            return rowData;
         }
 
 
