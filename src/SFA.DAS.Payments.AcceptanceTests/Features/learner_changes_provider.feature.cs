@@ -141,7 +141,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "06/08/2017",
                         "08/08/2018",
                         "04/03/2018",
-                        "Cancelled",
+                        "withdrawn",
                         "6000",
                         "06/08/2017",
                         "1500",

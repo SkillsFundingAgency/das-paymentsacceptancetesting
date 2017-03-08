@@ -11,7 +11,7 @@ Feature: Apprentice changes provider scenarios
         
         When the providers submit the following ILR files:
             | Provider   | ULN       | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date |
-            | provider a | learner a | 06/08/2017 | 08/08/2018       | 04/03/2018      | Cancelled         | 6000                 | 06/08/2017                          | 1500                   | 06/08/2017                            |
+            | provider a | learner a | 06/08/2017 | 08/08/2018       | 04/03/2018      | withdrawn         | 6000                 | 06/08/2017                          | 1500                   | 06/08/2017                            |
             | provider b | learner a | 06/06/2018 | 20/11/2018       |                 | continuing        | 3000                 | 06/06/2018                          | 1500                   | 06/06/2018                            |
         
         Then the data lock status will be as follows:

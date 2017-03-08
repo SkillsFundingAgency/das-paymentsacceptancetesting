@@ -1,4 +1,5 @@
 ﻿using SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts;
+using SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers;
 using TechTalk.SpecFlow;
 
@@ -53,6 +54,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
         private void ParseIlrTableAndSubmit(Table ilrDetails)
         {
             IlrTableParser.ParseIlrTableIntoContext(SubmissionsContext, ilrDetails);
+            SubmissionManager.SubmitIlrAndRunMonthEndAndCollateResults(SubmissionsContext.IlrLearnerDetails);
         }
     }
 }
