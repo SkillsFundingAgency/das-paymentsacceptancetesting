@@ -24,15 +24,15 @@ $(document).ready(function() {
             <a href="index.html">Home</a>
           </li>
           <li class="file">
-            <a href="incentive_payments.html">1 learner aged 16-18, levy available, earns incentives</a>
+            <a href="small_employers.html">1 learner aged 16-18, non-DAS, employed with a small employer at start, is fully funded for on programme and completion payments</a>
             <span class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
+              <i class="icon-minus-sign failed" title="Failed"> </i>
             </span>
           </li>
           <li class="file">
-            <a href="small_employers.html">1 learner aged 16-18, non-DAS, employed with a small employer at start, is fully funded for on programme and completion payments</a>
+            <a href="additional_payments.html">16 to 18 learner incentives, framework uplifts, level 2 english or maths payments</a>
             <span class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
+              <i class="icon-minus-sign failed" title="Failed"> </i>
             </span>
           </li>
           <li class="file">
@@ -50,7 +50,7 @@ $(document).ready(function() {
           <li class="file">
             <a href="learner_changes_provider.html">Apprentice changes provider scenarios</a>
             <span class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
+              <i class="icon-minus-sign failed" title="Failed"> </i>
             </span>
           </li>
           <li class="file">
@@ -78,6 +78,12 @@ $(document).ready(function() {
             </span>
           </li>
           <li class="file">
+            <a href="capping.html">Provider earnings and payments for a learner with a negotiated price above the funding band cap</a>
+            <span class="float-right">
+              <i class="icon-ok passed" title="Successful"> </i>
+            </span>
+          </li>
+          <li class="file">
             <a href="learner_changes_employer.html">Provider earnings and payments where a learner changes employers</a>
             <span class="float-right">
               <i class="icon-ok passed" title="Successful"> </i>
@@ -92,7 +98,7 @@ $(document).ready(function() {
           <li class="file">
             <a href="learner_finishes_early.html">Provider earnings and payments where learner completes earlier than planned</a>
             <span class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
+              <i class="icon-minus-sign failed" title="Failed"> </i>
             </span>
           </li>
           <li class="file">
@@ -104,7 +110,7 @@ $(document).ready(function() {
           <li class="file">
             <a href="learner_finishes_on_time.html">Provider earnings and payments where learner completes on time and is funded by levy</a>
             <span class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
+              <i class="icon-minus-sign failed" title="Failed"> </i>
             </span>
           </li>
           <li class="file">
@@ -149,7 +155,7 @@ $(document).ready(function() {
             <div class="steps">
               <ul>
                 <li class="step">
-                  <span class="keyword">Given </span>the following commitments exist on 03/12/2017:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>version Id</th><th>ULN</th><th>standard code</th><th>price effective date</th><th>planned end date</th><th>agreed price</th><th>effective from</th><th>effective to</th><th> </th></tr></thead><tbody><tr><td>1</td><td>1</td><td>learner a</td><td>51</td><td>01/08/2017</td><td>01/08/2018</td><td>15000</td><td>01/08/2017</td><td>31/10/2017</td></tr><tr><td>1</td><td>2</td><td>learner a</td><td>52</td><td>01/08/2017</td><td>01/08/2018</td><td>5625</td><td>03/11/2017</td><td></td></tr></tbody></table></div></li>
+                  <span class="keyword">Given </span>the following commitments exist on 03/12/2017:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>version Id</th><th>ULN</th><th>standard code</th><th>start date</th><th>end date</th><th>agreed price</th><th>effective from</th><th>effective to</th><th> </th></tr></thead><tbody><tr><td>1</td><td>1</td><td>learner a</td><td>51</td><td>01/08/2017</td><td>01/08/2018</td><td>15000</td><td>01/08/2017</td><td>31/10/2017</td></tr><tr><td>1</td><td>2</td><td>learner a</td><td>52</td><td>01/08/2017</td><td>01/08/2018</td><td>5625</td><td>03/11/2017</td><td></td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted on 03/12/2017 with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>standard code</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>Total training price</th><th>Total training price effective date</th><th>Total assessment price</th><th>Total assessment price effective date</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>51</td><td>03/08/2017</td><td>01/08/2018</td><td>31/10/2017</td><td>transferred</td><td>12000</td><td>03/08/2017</td><td>3000</td><td>03/08/2017</td></tr><tr><td>learner a</td><td>52</td><td>03/11/2017</td><td>01/08/2018</td><td></td><td>continuing</td><td>4500</td><td>03/11/2017</td><td>1125</td><td>03/11/2017</td></tr></tbody></table></div></li>
                 <li class="step">
@@ -172,7 +178,7 @@ $(document).ready(function() {
             <div class="steps">
               <ul>
                 <li class="step">
-                  <span class="keyword">Given </span>the following commitments exist on 03/12/2017:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>ULN</th><th>standard code</th><th>price effective date</th><th>planned end date</th><th>agreed price</th><th> </th></tr></thead><tbody><tr><td>1</td><td>learner a</td><td>51</td><td>03/08/2017</td><td>04/08/2018</td><td>15000</td></tr></tbody></table></div></li>
+                  <span class="keyword">Given </span>the following commitments exist on 03/12/2017:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>ULN</th><th>standard code</th><th>start date</th><th>end date</th><th>agreed price</th><th> </th></tr></thead><tbody><tr><td>1</td><td>learner a</td><td>51</td><td>03/08/2017</td><td>04/08/2018</td><td>15000</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted on 03/12/2017 with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>standard code</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>Total training price</th><th>Total training price effective date</th><th>Total assessment price</th><th>Total assessment price effective date</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>51</td><td>03/08/2017</td><td>01/08/2018</td><td>31/10/2017</td><td>transferred</td><td>12000</td><td>03/08/2017</td><td>3000</td><td>03/08/2017</td></tr><tr><td>learner a</td><td>52</td><td>03/11/2017</td><td>01/08/2018</td><td></td><td>continuing</td><td>4500</td><td>03/11/2017</td><td>1125</td><td>03/11/2017</td></tr></tbody></table></div></li>
                 <li class="step">
@@ -195,7 +201,7 @@ $(document).ready(function() {
             <div class="steps">
               <ul>
                 <li class="step">
-                  <span class="keyword">Given </span>the following commitments exist on 03/12/2017:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>version Id</th><th>ULN</th><th>standard code</th><th>price effective date</th><th>planned end date</th><th>agreed price</th><th>effective from</th><th>effective to</th><th> </th></tr></thead><tbody><tr><td>1</td><td>1</td><td>learner a</td><td>51</td><td>03/08/2017</td><td>04/08/2018</td><td>15000</td><td>03/08/2017</td><td>31/10/2017</td></tr><tr><td>1</td><td>2</td><td>learner a</td><td>52</td><td>03/08/2017</td><td>04/08/2018</td><td>5625</td><td>01/11/2017</td><td></td></tr></tbody></table></div></li>
+                  <span class="keyword">Given </span>the following commitments exist on 03/12/2017:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>version Id</th><th>ULN</th><th>standard code</th><th>start date</th><th>end date</th><th>agreed price</th><th>effective from</th><th>effective to</th><th> </th></tr></thead><tbody><tr><td>1</td><td>1</td><td>learner a</td><td>51</td><td>03/08/2017</td><td>04/08/2018</td><td>15000</td><td>03/08/2017</td><td>31/10/2017</td></tr><tr><td>1</td><td>2</td><td>learner a</td><td>52</td><td>03/08/2017</td><td>04/08/2018</td><td>5625</td><td>01/11/2017</td><td></td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted on 03/12/2017 with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>standard code</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>Total training price</th><th>Total training price effective date</th><th>Total assessment price</th><th>Total assessment price effective date</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>51</td><td>03/08/2017</td><td>04/08/2018</td><td></td><td>continuing</td><td>12000</td><td>03/08/2017</td><td>3000</td><td>03/08/2017</td></tr></tbody></table></div></li>
                 <li class="step">
@@ -218,7 +224,7 @@ $(document).ready(function() {
             <div class="steps">
               <ul>
                 <li class="step">
-                  <span class="keyword">Given </span>the following commitments exist on 03/12/2017:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>ULN</th><th>price effective date</th><th>planned end date</th><th>actual end date</th><th>agreed price</th><th> </th></tr></thead><tbody><tr><td>1</td><td>learner a</td><td>01/09/2017</td><td>08/09/2018</td><td>31/10/2018</td><td>15000</td></tr></tbody></table></div></li>
+                  <span class="keyword">Given </span>the following commitments exist on 03/12/2017:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>version Id</th><th>ULN</th><th>start date</th><th>end date</th><th>status</th><th>agreed price</th><th>effective from</th><th>effective to</th><th> </th></tr></thead><tbody><tr><td>1</td><td>1</td><td>learner a</td><td>01/09/2017</td><td>08/09/2018</td><td>active</td><td>15000</td><td>01/09/2017</td><td>31/10/2017</td></tr><tr><td>1</td><td>2</td><td>learner a</td><td>01/09/2017</td><td>08/09/2018</td><td>paused</td><td>15000</td><td>01/11/2017</td><td>02/01/2018</td></tr><tr><td>1</td><td>3</td><td>learner a</td><td>01/09/2017</td><td>08/09/2018</td><td>active</td><td>15000</td><td>03/01/2018</td><td></td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted on 03/12/2017 with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>Total training price</th><th>Total training price effective date</th><th>Total assessment price</th><th>Total assessment price effective date</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>01/09/2017</td><td>08/09/2018</td><td>31/10/2017</td><td>planned break</td><td>12000</td><td>01/09/2017</td><td>3000</td><td>01/09/2017</td></tr><tr><td>learner a</td><td>03/01/2018</td><td>08/11/2018</td><td></td><td>continuing</td><td>12000</td><td>03/01/2018</td><td>3000</td><td>03/01/2018</td></tr></tbody></table></div></li>
                 <li class="step">
@@ -351,7 +357,7 @@ $(document).ready(function() {
                 <li class="step">
                   <span class="keyword">And </span>levy balance &gt; agreed price for all months</li>
                 <li class="step">
-                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>version Id</th><th>ULN</th><th>standard code</th><th>start date</th><th>planned end date</th><th>agreed price</th><th>status</th><th>effective from</th><th>effective to</th><th> </th></tr></thead><tbody><tr><td>1</td><td>1</td><td>learner a</td><td>51</td><td>01/08/2017</td><td>01/08/2018</td><td>15000</td><td>active</td><td>01/08/2017</td><td>10/11/2017</td></tr><tr><td>1</td><td>2</td><td>learner a</td><td>52</td><td>01/08/2017</td><td>01/08/2018</td><td>5625</td><td>active</td><td>11/11/2017</td><td></td></tr></tbody></table></div></li>
+                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>version Id</th><th>ULN</th><th>standard code</th><th>start date</th><th>end date</th><th>agreed price</th><th>status</th><th>effective from</th><th>effective to</th><th> </th></tr></thead><tbody><tr><td>1</td><td>1</td><td>learner a</td><td>51</td><td>01/08/2017</td><td>01/08/2018</td><td>15000</td><td>active</td><td>01/08/2017</td><td>10/11/2017</td></tr><tr><td>1</td><td>2</td><td>learner a</td><td>52</td><td>01/08/2017</td><td>01/08/2018</td><td>5625</td><td>active</td><td>11/11/2017</td><td></td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted on 03/12/2017 with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>standard code</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>Total training price 1</th><th>Total training price 1 effective date</th><th>Total assessment price 1</th><th>Total assessment price 1 effective date</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>51</td><td>03/08/2017</td><td>04/08/2018</td><td>10/11/2017</td><td>transferred</td><td>12000</td><td>03/08/2017</td><td>3000</td><td>03/08/2017</td></tr><tr><td>learner a</td><td>52</td><td>11/11/2017</td><td>04/08/2018</td><td></td><td>continuing</td><td>4500</td><td>11/11/2017</td><td>1125</td><td>11/11/2017</td></tr></tbody></table></div></li>
                 <li class="step">
@@ -378,7 +384,7 @@ $(document).ready(function() {
                 <li class="step">
                   <span class="keyword">And </span>levy balance &gt; agreed price for all months</li>
                 <li class="step">
-                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>version Id</th><th>ULN</th><th>standard code</th><th>start date</th><th>planned end date</th><th>agreed price</th><th>status</th><th>effective from</th><th>effective to</th><th> </th></tr></thead><tbody><tr><td>1</td><td>1</td><td>learner a</td><td>51</td><td>01/08/2017</td><td>01/08/2018</td><td>15000</td><td>active</td><td>01/08/2017</td><td></td></tr></tbody></table></div></li>
+                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>version Id</th><th>ULN</th><th>standard code</th><th>start date</th><th>end date</th><th>agreed price</th><th>status</th><th>effective from</th><th>effective to</th><th> </th></tr></thead><tbody><tr><td>1</td><td>1</td><td>learner a</td><td>51</td><td>01/08/2017</td><td>01/08/2018</td><td>15000</td><td>active</td><td>01/08/2017</td><td></td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted on 03/12/2017 with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>standard code</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>Total training price 1</th><th>Total training price 1 effective date</th><th>Total assessment price 1</th><th>Total assessment price 1 effective date</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>51</td><td>03/08/2017</td><td>04/08/2018</td><td>10/11/2017</td><td>transferred</td><td>12000</td><td>03/08/2017</td><td>3000</td><td>03/08/2017</td></tr><tr><td>learner a</td><td>52</td><td>11/11/2017</td><td>04/08/2018</td><td></td><td>continuing</td><td>4500</td><td>11/11/2017</td><td>1125</td><td>11/11/2017</td></tr></tbody></table></div></li>
                 <li class="step">
@@ -405,7 +411,7 @@ $(document).ready(function() {
                 <li class="step">
                   <span class="keyword">And </span>levy balance &gt; agreed price for all months</li>
                 <li class="step">
-                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>version Id</th><th>ULN</th><th>standard code</th><th>start date</th><th>planned end date</th><th>agreed price</th><th>status</th><th>effective from</th><th>effective to</th><th> </th></tr></thead><tbody><tr><td>1</td><td>1</td><td>learner a</td><td>51</td><td>01/08/2017</td><td>01/08/2018</td><td>15000</td><td>active</td><td>01/08/2017</td><td>10/11/2017</td></tr><tr><td>1</td><td>2</td><td>learner a</td><td>52</td><td>01/08/2017</td><td>01/08/2018</td><td>5625</td><td>active</td><td>11/11/2017</td><td></td></tr></tbody></table></div></li>
+                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>version Id</th><th>ULN</th><th>standard code</th><th>start date</th><th>end date</th><th>agreed price</th><th>status</th><th>effective from</th><th>effective to</th><th> </th></tr></thead><tbody><tr><td>1</td><td>1</td><td>learner a</td><td>51</td><td>01/08/2017</td><td>01/08/2018</td><td>15000</td><td>active</td><td>01/08/2017</td><td>10/11/2017</td></tr><tr><td>1</td><td>2</td><td>learner a</td><td>52</td><td>01/08/2017</td><td>01/08/2018</td><td>5625</td><td>active</td><td>11/11/2017</td><td></td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted on 03/12/2017 with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>standard code</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>Total training price 1</th><th>Total training price 1 effective date</th><th>Total assessment price 1</th><th>Total assessment price 1 effective date</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>51</td><td>03/08/2017</td><td>04/08/2018</td><td></td><td>continuing</td><td>12000</td><td>03/08/2017</td><td>3000</td><td>03/08/2017</td></tr></tbody></table></div></li>
                 <li class="step">
@@ -432,7 +438,7 @@ $(document).ready(function() {
                 <li class="step">
                   <span class="keyword">And </span>levy balance &gt; agreed price for all months</li>
                 <li class="step">
-                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>version Id</th><th>ULN</th><th>standard code</th><th>start date</th><th>planned end date</th><th>agreed price</th><th>status</th><th>effective from</th><th>effective to</th><th> </th></tr></thead><tbody><tr><td>1</td><td>1</td><td>learner a</td><td>51</td><td>01/08/2017</td><td>01/08/2018</td><td>15000</td><td>active</td><td>01/08/2017</td><td>10/11/2017</td></tr><tr><td>1</td><td>2</td><td>learner a</td><td>52</td><td>01/08/2017</td><td>01/08/2018</td><td>5625</td><td>active</td><td>11/11/2017</td><td></td></tr></tbody></table></div></li>
+                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>version Id</th><th>ULN</th><th>standard code</th><th>start date</th><th>end date</th><th>agreed price</th><th>status</th><th>effective from</th><th>effective to</th><th> </th></tr></thead><tbody><tr><td>1</td><td>1</td><td>learner a</td><td>51</td><td>01/08/2017</td><td>01/08/2018</td><td>15000</td><td>active</td><td>01/08/2017</td><td>10/11/2017</td></tr><tr><td>1</td><td>2</td><td>learner a</td><td>52</td><td>01/08/2017</td><td>01/08/2018</td><td>5625</td><td>active</td><td>11/11/2017</td><td></td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted on 03/12/2017 with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>standard code</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>Total training price 1</th><th>Total training price 1 effective date</th><th>Total assessment price 1</th><th>Total assessment price 1 effective date</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>51</td><td>03/08/2017</td><td>04/08/2018</td><td>18/11/2017</td><td>transferred</td><td>12000</td><td>03/08/2017</td><td>3000</td><td>03/08/2017</td></tr><tr><td>learner a</td><td>52</td><td>19/11/2017</td><td>04/08/2018</td><td></td><td>continuing</td><td>4500</td><td>19/11/2017</td><td>1125</td><td>19/11/2017</td></tr></tbody></table></div></li>
                 <li class="step">
@@ -459,7 +465,7 @@ $(document).ready(function() {
                 <li class="step">
                   <span class="keyword">And </span>levy balance &gt; agreed price for all months</li>
                 <li class="step">
-                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>version Id</th><th>ULN</th><th>standard code</th><th>start date</th><th>planned end date</th><th>agreed price</th><th>status</th><th>effective from</th><th>effective to</th><th> </th></tr></thead><tbody><tr><td>1</td><td>1</td><td>learner a</td><td>51</td><td>01/08/2017</td><td>01/08/2018</td><td>15000</td><td>active</td><td>01/08/2017</td><td>10/11/2017</td></tr><tr><td>1</td><td>2</td><td>learner a</td><td>52</td><td>01/08/2017</td><td>01/08/2018</td><td>5625</td><td>active</td><td>11/11/2017</td><td></td></tr></tbody></table></div></li>
+                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>version Id</th><th>ULN</th><th>standard code</th><th>start date</th><th>end date</th><th>agreed price</th><th>status</th><th>effective from</th><th>effective to</th><th> </th></tr></thead><tbody><tr><td>1</td><td>1</td><td>learner a</td><td>51</td><td>01/08/2017</td><td>01/08/2018</td><td>15000</td><td>active</td><td>01/08/2017</td><td>10/11/2017</td></tr><tr><td>1</td><td>2</td><td>learner a</td><td>52</td><td>01/08/2017</td><td>01/08/2018</td><td>5625</td><td>active</td><td>11/11/2017</td><td></td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted on 03/12/2017 with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>standard code</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>Total training price 1</th><th>Total training price 1 effective date</th><th>Total assessment price 1</th><th>Total assessment price 1 effective date</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>51</td><td>03/08/2017</td><td>04/08/2018</td><td>04/12/2017</td><td>transferred</td><td>12000</td><td>03/08/2017</td><td>3000</td><td>03/08/2017</td></tr><tr><td>learner a</td><td>52</td><td>05/12/2017</td><td>04/08/2018</td><td></td><td>continuing</td><td>4500</td><td>05/12/2017</td><td>1125</td><td>05/12/2017</td></tr></tbody></table></div></li>
                 <li class="step">
@@ -486,7 +492,7 @@ $(document).ready(function() {
                 <li class="step">
                   <span class="keyword">And </span>levy balance &gt; agreed price for all months</li>
                 <li class="step">
-                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>version Id</th><th>ULN</th><th>standard code</th><th>start date</th><th>planned end date</th><th>agreed price</th><th>status</th><th>effective from</th><th>effective to</th><th> </th></tr></thead><tbody><tr><td>1</td><td>1</td><td>learner a</td><td>51</td><td>01/08/2017</td><td>01/08/2018</td><td>15000</td><td>active</td><td>01/08/2017</td><td>10/11/2017</td></tr><tr><td>1</td><td>2</td><td>learner a</td><td>52</td><td>01/08/2017</td><td>01/08/2018</td><td>5625</td><td>active</td><td>11/11/2017</td><td></td></tr></tbody></table></div></li>
+                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>version Id</th><th>ULN</th><th>standard code</th><th>start date</th><th>end date</th><th>agreed price</th><th>status</th><th>effective from</th><th>effective to</th><th> </th></tr></thead><tbody><tr><td>1</td><td>1</td><td>learner a</td><td>51</td><td>01/08/2017</td><td>01/08/2018</td><td>15000</td><td>active</td><td>01/08/2017</td><td>10/11/2017</td></tr><tr><td>1</td><td>2</td><td>learner a</td><td>52</td><td>01/08/2017</td><td>01/08/2018</td><td>5625</td><td>active</td><td>11/11/2017</td><td></td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted on 03/12/2017 with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>standard code</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>Total training price 1</th><th>Total training price 1 effective date</th><th>Total assessment price 1</th><th>Total assessment price 1 effective date</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>51</td><td>03/08/2017</td><td>04/08/2018</td><td>05/11/2017</td><td>transferred</td><td>12000</td><td>03/08/2017</td><td>3000</td><td>03/08/2017</td></tr><tr><td>learner a</td><td>52</td><td>06/11/2017</td><td>04/08/2018</td><td></td><td>continuing</td><td>4500</td><td>06/11/2017</td><td>1125</td><td>06/11/2017</td></tr></tbody></table></div></li>
                 <li class="step">
@@ -502,7 +508,7 @@ $(document).ready(function() {
         </ul>
       </div>
       <div id="footer">
-        <p>Generated on: 18 February 2017 00:22:25</p>
+        <p>Generated on: 8 March 2017 22:08:07</p>
         <p>Produced by Pickles, version 2.8.2.0</p>
       </div>
     </div>
