@@ -16,8 +16,21 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.DataCollectors
         public static void CollectForPeriod(string period, List<LearnerResults> results, LookupContext lookupContext)
         {
             var periodisedValues = ReadEarningsFromDeds();
-            foreach(var periodisedValue in periodisedValues)
+            foreach (var periodisedValue in periodisedValues)
             {
+                var learner = GetOrCreateLearner(periodisedValue.Ukprn, periodisedValue.Uln, results, lookupContext);
+                learner.Earnings.Add(CreateEarningResultForPeriod(1, periodisedValue.Period1, period));
+                learner.Earnings.Add(CreateEarningResultForPeriod(2, periodisedValue.Period2, period));
+                learner.Earnings.Add(CreateEarningResultForPeriod(3, periodisedValue.Period3, period));
+                learner.Earnings.Add(CreateEarningResultForPeriod(4, periodisedValue.Period4, period));
+                learner.Earnings.Add(CreateEarningResultForPeriod(5, periodisedValue.Period5, period));
+                learner.Earnings.Add(CreateEarningResultForPeriod(6, periodisedValue.Period6, period));
+                learner.Earnings.Add(CreateEarningResultForPeriod(7, periodisedValue.Period7, period));
+                learner.Earnings.Add(CreateEarningResultForPeriod(8, periodisedValue.Period8, period));
+                learner.Earnings.Add(CreateEarningResultForPeriod(9, periodisedValue.Period9, period));
+                learner.Earnings.Add(CreateEarningResultForPeriod(10, periodisedValue.Period10, period));
+                learner.Earnings.Add(CreateEarningResultForPeriod(11, periodisedValue.Period11, period));
+                learner.Earnings.Add(CreateEarningResultForPeriod(12, periodisedValue.Period12, period));
             }
         }
 
@@ -55,7 +68,32 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.DataCollectors
         }
         private static LearnerResults GetOrCreateLearner(long ukprn, long uln, List<LearnerResults> results, LookupContext lookupContext)
         {
-            throw new NotImplementedException();
+            var providerId = lookupContext.GetProviderId(ukprn);
+            var learnerId = lookupContext.GetLearnerId(uln);
+            var learner = results.SingleOrDefault(l => l.ProviderId == providerId && l.LearnerId == learnerId);
+            if (learner == null)
+            {
+                learner = new LearnerResults
+                {
+                    ProviderId = providerId,
+                    LearnerId = learnerId
+                };
+                results.Add(learner);
+            }
+            return learner;
+        }
+        private static EarningsResult CreateEarningResultForPeriod(int periodNumber, decimal value, string collectionPeriod)
+        {
+            var collectionPeriodDate = new DateTime(int.Parse(collectionPeriod.Substring(3, 2)), int.Parse(collectionPeriod.Substring(0, 2)), 1);
+            var collectionPeriodNumber = collectionPeriodDate.GetPeriodNumber();
+            var deliveryPeriodDate = collectionPeriodDate.AddMonths(periodNumber - collectionPeriodNumber);
+            
+            return new EarningsResult
+            {
+                CalculationPeriod = collectionPeriod,
+                DeliveryPeriod = deliveryPeriodDate.ToString("MM/yy"),
+                Value = value
+            };
         }
     }
 }

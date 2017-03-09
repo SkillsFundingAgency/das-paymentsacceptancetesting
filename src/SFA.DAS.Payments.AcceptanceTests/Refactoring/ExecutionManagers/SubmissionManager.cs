@@ -27,7 +27,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                 }
                 RunMonthEnd(period);
 
-                //TODO: Collect results
                 EarningsCollector.CollectForPeriod(period, results, lookupContext);
                 DataLockResultCollector.CollectForPeriod(period, results);
             }
