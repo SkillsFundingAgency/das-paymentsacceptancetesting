@@ -6556,7 +6556,7 @@ this.ScenarioSetup(scenarioInfo);
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table98, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table99 = new TechTalk.SpecFlow.Table(new string[] {
-                        "LSF code",
+                        "Learning support code",
                         "date from",
                         "date to"});
             table99.AddRow(new string[] {
@@ -6818,7 +6818,7 @@ this.ScenarioSetup(scenarioInfo);
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table102, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table103 = new TechTalk.SpecFlow.Table(new string[] {
-                        "LSF code",
+                        "Learning support code",
                         "date from",
                         "date to"});
             table103.AddRow(new string[] {
@@ -7111,7 +7111,7 @@ this.ScenarioSetup(scenarioInfo);
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table107, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table108 = new TechTalk.SpecFlow.Table(new string[] {
-                        "LSF code",
+                        "Learning support code",
                         "date from",
                         "date to"});
             table108.AddRow(new string[] {
@@ -7407,7 +7407,7 @@ this.ScenarioSetup(scenarioInfo);
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table112, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table113 = new TechTalk.SpecFlow.Table(new string[] {
-                        "LSF code",
+                        "Learning support code",
                         "date from",
                         "date to"});
             table113.AddRow(new string[] {

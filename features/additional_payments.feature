@@ -769,8 +769,8 @@ Scenario: 637-AC01-Payment for a non-DAS learner, requires learning support, doi
         | ULN       | learner type           | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code |
         | learner a | programme only non-DAS | 15000        | 06/08/2017 | 08/08/2018       | 10/08/2018      | completed         | 403            | 2              | 1            |
     And the learning support status of the ILR is:
-        | LSF code | date from  | date to    |
-        | 1        | 06/08/2017 | 10/08/2018 |
+        | Learning support code | date from  | date to    |
+        | 1                     | 06/08/2017 | 10/08/2018 |
     Then the provider earnings and payments break down as follows:
         | Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
         | Provider Earned Total                   | 1150  | 1150  | 1150  | 1150  | 1150  | ... | 1150  | 3000  | 0     |
@@ -800,8 +800,8 @@ Scenario: 637-AC02-Payment for a non-DAS learner, requires learning support, doi
         | ULN       | learner type           | agreed price | start date | planned end date | actual end date | completion status | standard code |
         | learner a | programme only non-DAS | 15000        | 06/08/2017 | 08/08/2018       | 10/08/2018      | completed         | 50            |
     And the learning support status of the ILR is:
-        | LSF code | date from  | date to    |
-        | 1        | 06/08/2017 | 10/08/2018 |
+        | Learning support code | date from  | date to    |
+        | 1                     | 06/08/2017 | 10/08/2018 |
     Then the provider earnings and payments break down as follows:
         | Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
         | Provider Earned Total                   | 1150  | 1150  | 1150  | 1150  | 1150  | ... | 1150  | 3000  | 0     |
@@ -835,8 +835,8 @@ Scenario: 637-AC03-Payment for a DAS learner, requires learning support, doing a
         | ULN       | learner type       | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code |
         | learner a | programme only DAS | 15000        | 06/08/2017 | 08/08/2018       | 10/08/2018      | completed         | 403            | 2              | 1            |
     And the learning support status of the ILR is:
-        | LSF code | date from  | date to    |
-        | 1        | 06/08/2017 | 10/08/2018 |
+        | Learning support code | date from  | date to    |
+        | 1                     | 06/08/2017 | 10/08/2018 |
     Then the provider earnings and payments break down as follows:
         | Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
         | Provider Earned Total                   | 1150  | 1150  | 1150  | 1150  | 1150  | ... | 1150  | 3000  | 0     |
@@ -871,8 +871,8 @@ Scenario: 637-AC04-Payment for a DAS learner, requires learning support, doing a
         | ULN       | learner type       | agreed price | start date | planned end date | actual end date | completion status | standard code |
         | learner a | programme only DAS | 15000        | 06/08/2017 | 08/08/2018       | 10/08/2018      | completed         | 50            |
     And the learning support status of the ILR is:
-        | LSF code | date from  | date to    |
-        | 1        | 06/08/2017 | 10/08/2018 |
+        | Learning support code | date from  | date to    |
+        | 1                     | 06/08/2017 | 10/08/2018 |
     Then the provider earnings and payments break down as follows:
         | Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
         | Provider Earned Total                   | 1150  | 1150  | 1150  | 1150  | 1150  | ... | 1150  | 3000  | 0     |

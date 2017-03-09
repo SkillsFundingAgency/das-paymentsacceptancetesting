@@ -614,7 +614,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             {
                 var famCode = new LearningDeliveryFam
                 {
-                    FamCode = table.Rows[rowIndex].Value<int>("LSF code"),
+                    FamCode = table.Rows[rowIndex].Value<int>("Learning support code"),
                     StartDate = DateTime.Parse(table.Rows[rowIndex].Value<string>("date from")),
                     EndDate = DateTime.Parse(table.Rows[rowIndex].Value<string>("date to")),
                     FamType = "LSF"
