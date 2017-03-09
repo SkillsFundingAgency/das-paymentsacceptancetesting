@@ -116,7 +116,7 @@ Feature: Provider earnings and payments where a learner changes employers
         And the following commitments exist on 03/12/2017:
             | Employer   | commitment Id | version Id | ULN       | start date | end date   | agreed price | status    | effective from | effective to |
             | employer 1 | 1             | 1          | learner a | 03/08/2017 | 04/08/2018 | 15000        | active    | 03/08/2017     | 02/11/2017   |
-            | employer 1 | 1             | 2          | learner a | 03/08/2017 | 04/08/2018 | 15000        | withdrawn | 03/11/2017     |              |
+            | employer 1 | 1             | 2          | learner a | 03/08/2017 | 04/08/2018 | 15000        | cancelled | 03/11/2017     |              |
         When an ILR file is submitted on 03/12/2017 with the following data:
             | ULN       | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date | Residual training price | Residual training price effective date | Residual assessment price | Residual assessment price effective date |
             | learner a | 03/08/2017 | 04/08/2018       |                 | continuing        | 12000                | 03/08/2017                          | 3000                   | 03/08/2017                            | 4500                    | 03/11/2017                             | 1125                      | 03/11/2017                               |
@@ -156,7 +156,7 @@ Feature: Provider earnings and payments where a learner changes employers
         And the following commitments exist on 03/12/2017:
             | Employer   | commitment Id | version Id | ULN       | start date | end date   | agreed price | status    | effective from | effective to |
             | employer 1 | 1             | 1          | learner a | 01/08/2017 | 28/08/2018 | 15000        | active    | 01/08/2017     | 14/11/2017   |
-            | employer 1 | 1             | 2          | learner a | 01/08/2017 | 28/08/2018 | 15000        | withdrawn | 15/11/2017     |              |
+            | employer 1 | 1             | 2          | learner a | 01/08/2017 | 28/08/2018 | 15000        | cancelled | 15/11/2017     |              |
             | employer 2 | 2             | 1          | learner a | 15/11/2017 | 28/08/2018 | 5625         | active    | 15/11/2017     |              |
         When an ILR file is submitted on 03/12/2017 with the following data:
             | ULN       | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date | Residual training price | Residual training price effective date | Residual assessment price | Residual assessment price effective date |
@@ -190,7 +190,7 @@ Feature: Provider earnings and payments where a learner changes employers
         And the following commitments exist on 03/12/2017:
             | Employer   | commitment Id | version Id | ULN       | start date | end date   | agreed price | status    | effective from | effective to |
             | employer 1 | 1             | 1          | learner a | 01/08/2017 | 28/08/2018 | 15000        | active    | 01/08/2017     | 14/11/2017   |
-            | employer 1 | 1             | 2          | learner a | 01/08/2017 | 28/08/2018 | 15000        | withdrawn | 15/11/2017     |              |
+            | employer 1 | 1             | 2          | learner a | 01/08/2017 | 28/08/2018 | 15000        | cancelled | 15/11/2017     |              |
             | employer 2 | 2             | 1          | learner a | 15/11/2017 | 28/08/2018 | 5625         | active    | 15/11/2017     |              |
         When an ILR file is submitted on 03/12/2017 with the following data:
             | ULN       | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date | Residual training price | Residual training price effective date | Residual assessment price | Residual assessment price effective date |
@@ -224,7 +224,7 @@ Feature: Provider earnings and payments where a learner changes employers
         And the following commitments exist on 03/12/2017:
             | Employer   | commitment Id | version Id | ULN       | start date | end date   | agreed price | status    | effective from | effective to |
             | employer 1 | 1             | 1          | learner a | 01/08/2017 | 28/08/2018 | 15000        | active    | 01/08/2017     | 14/11/2017   |
-            | employer 1 | 1             | 2          | learner a | 01/08/2017 | 28/08/2018 | 15000        | withdrawn | 15/11/2017     |              |
+            | employer 1 | 1             | 2          | learner a | 01/08/2017 | 28/08/2018 | 15000        | cancelled | 15/11/2017     |              |
             | employer 2 | 2             | 1          | learner a | 15/11/2017 | 28/08/2018 | 5625         | active    | 15/11/2017     |              |
         When an ILR file is submitted on 03/12/2017 with the following data:
             | ULN       | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date | Residual training price | Residual training price effective date | Residual assessment price | Residual assessment price effective date |
@@ -439,7 +439,7 @@ Scenario: 1 learner aged 16-18, levy available, changes employer, earns incentiv
         And the following commitments exist:
             | Employer   | commitment Id | version Id | Provider   | ULN       | start date | end date   | agreed price | status    | effective from | effective to |
             | employer 1 | 1             | 1          | provider a | learner a | 01/08/2017 | 01/08/2018 | 7500         | active    | 01/08/2017     | 14/11/2017   |
-            | employer 1 | 1             | 2          | provider a | learner a | 01/08/2017 | 01/08/2018 | 7500         | withdrawn | 15/11/2017     |              |
+            | employer 1 | 1             | 2          | provider a | learner a | 01/08/2017 | 01/08/2018 | 7500         | cancelled | 15/11/2017     |              |
             | employer 2 | 2             | 1          | provider a | learner a | 15/11/2017 | 01/08/2018 | 5625         | active    | 15/11/2017     |              |
             
         When an ILR file is submitted with the following data:
@@ -490,7 +490,7 @@ Scenario: 1 learner aged 16-18, levy available, changes employer, earns incentiv
         And the following commitments exist:
             | Employer   | commitment Id | version Id | Provider   | ULN       | start date | end date   | agreed price | status    | effective from | effective to |
             | employer 1 | 1             | 1          | provider a | learner a | 01/08/2017 | 01/08/2018 | 7500         | active    | 01/08/2017     | 14/11/2017   |
-            | employer 1 | 1             | 2          | provider a | learner a | 01/08/2017 | 01/08/2018 | 7500         | withdrawn | 15/11/2017     |              |
+            | employer 1 | 1             | 2          | provider a | learner a | 01/08/2017 | 01/08/2018 | 7500         | cancelled | 15/11/2017     |              |
             | employer 2 | 2             | 1          | provider a | learner a | 15/11/2017 | 01/08/2018 | 5625         | active    | 15/11/2017     |              |
             
         When an ILR file is submitted with the following data:
@@ -541,7 +541,7 @@ Scenario: 1 learner aged 16-18, levy available, changes employer, earns incentiv
         And the following commitments exist:
             | Employer   | commitment Id | version Id | Provider   | ULN       | start date | end date   | agreed price | status    | effective from | effective to |
             | employer 1 | 1             | 1          | provider a | learner a | 01/08/2017 | 01/08/2018 | 7500         | active    | 01/08/2017     | 14/11/2017   |
-            | employer 1 | 1             | 2          | provider a | learner a | 01/08/2017 | 01/08/2018 | 7500         | withdrawn | 15/11/2017     |              |
+            | employer 1 | 1             | 2          | provider a | learner a | 01/08/2017 | 01/08/2018 | 7500         | cancelled | 15/11/2017     |              |
             | employer 2 | 2             | 1          | provider a | learner a | 15/11/2017 | 01/08/2018 | 5625         | active    | 15/11/2017     |              |
        
         When an ILR file is submitted with the following data:
@@ -595,7 +595,7 @@ Scenario:AC1- Provider earnings and payments where learner changes employer and 
         And the following commitments exist:
             | commitment Id | version Id | Employer        | Provider   | ULN       | start date | end date   | agreed price | status    | effective from | effective to |
             | 1             | 1          | employer 1      | provider a | learner a | 01/08/2017 | 04/08/2018 | 15000        | Active    | 01/08/2017     | 02/10/2017   |
-            | 1             | 2          | employer 1      | provider a | learner a | 01/08/2017 | 04/08/2018 | 15000        | Withdrawn | 03/10/2017     |              |
+            | 1             | 2          | employer 1      | provider a | learner a | 01/08/2017 | 04/08/2018 | 15000        | cancelled | 03/10/2017     |              |
             | 2             | 1          | employer 2      | provider a | learner a | 01/11/2017 | 04/08/2018 | 5625         | Active    | 01/11/2017     |              |
         When an ILR file is submitted with the following data:
             | ULN       | Provider   | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date | Residual training price | Residual training price effective date | Residual assessment price | Residual assessment price effective date |
@@ -639,10 +639,10 @@ Scenario:AC2- Provider earnings and payments where learner changes employer and 
             | No employer | Non-DAS | 03/10/2017                |
             | employer 2  | DAS     | 03/11/2017                |
         And the following commitments exist:
-            | commitment Id | version Id | Employer   | Provider   | ULN       | start date | end date   | agreed price | status    | effective from | effective to |
-            | 1             | 1          | employer 1 | provider a | learner a | 01/08/2017 | 04/08/2018 | 15000        | Active    | 01/08/2017     | 02/10/2017   |
-            | 1             | 2          | employer 1 | provider a | learner a | 01/08/2017 | 04/08/2018 | 15000        | Withdrawn | 03/10/2017     |              |
-            | 2             | 1          | employer 2 | provider a | learner a | 01/11/2017 | 04/08/2018 | 5625         | Active    | 01/11/2017     |              |
+            | commitment Id | version Id | Employer | Provider   | ULN       | start date | end date   | agreed price | status    | effective from | effective to |
+            | 1             | 1          | employer 1      | provider a | learner a | 01/08/2017 | 04/08/2018 | 15000        | Active    | 01/08/2017     | 02/10/2017   |
+            | 1             | 2          | employer 1      | provider a | learner a | 01/08/2017 | 04/08/2018 | 15000        | cancelled | 03/10/2017     |              |
+            | 2             | 1          | employer 2      | provider a | learner a | 01/11/2017 | 04/08/2018 | 5625         | Active    | 01/11/2017     |              |
         When an ILR file is submitted with the following data:
             | ULN       | Provider   | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date | Residual training price | Residual training price effective date | Residual assessment price | Residual assessment price effective date |
             | learner a | provider a | 03/08/2017 | 04/08/2018       |                 | continuing        | 12000                | 03/08/2017                          | 3000                   | 03/08/2017                            | 4500                    | 03/11/2017                             | 1125                      | 03/11/2017                               |
@@ -679,10 +679,10 @@ Scenario:AC3- Provider earnings and payments where learner changes employer and 
             | No employer | Non-DAS | 03/10/2017                |
             | employer 2  | DAS     | 03/11/2017                |
         And the following commitments exist:
-            | commitment Id | version Id | Employer   | Provider   | ULN       | start date | end date   | agreed price | status    | effective from | effective to |
-            | 1             | 1          | employer 1 | provider a | learner a | 01/08/2017 | 04/08/2018 | 15000        | Active    | 01/08/2017     | 02/10/2017   |
-            | 1             | 2          | employer 1 | provider a | learner a | 01/08/2017 | 04/08/2018 | 15000        | Withdrawn | 03/10/2017     |              |
-            | 2             | 1          | employer 2 | provider a | learner a | 01/11/2017 | 04/08/2018 | 5625         | Active    | 01/11/2017     |              |
+            | commitment Id | version Id | Employer | Provider   | ULN       | start date | end date   | agreed price | status    | effective from | effective to |
+            | 1             | 1          | employer 1      | provider a | learner a | 01/08/2017 | 04/08/2018 | 15000        | Active    | 01/08/2017     | 02/10/2017   |
+            | 1             | 2          | employer 1      | provider a | learner a | 01/08/2017 | 04/08/2018 | 15000        | cancelled | 03/10/2017     |              |
+            | 2             | 1          | employer 2      | provider a | learner a | 01/11/2017 | 04/08/2018 | 5625         | Active    | 01/11/2017     |              |
         When an ILR file is submitted with the following data:
             | ULN       | Provider   | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date | Residual training price | Residual training price effective date | Residual assessment price | Residual assessment price effective date |
             | learner a | provider a | 03/08/2017 | 04/08/2018       |                 | continuing        | 12000                | 03/08/2017                          | 3000                   | 03/08/2017                            | 4500                    | 03/11/2017                             | 1125                      | 03/11/2017                               |
@@ -721,10 +721,10 @@ Scenario: AC4-Provider earnings and payments where learner changes employer and 
             | No employer | Non-DAS | 03/10/2017                |
             | employer 2  | DAS     | 03/11/2017                |
         And the following commitments exist:
-            | commitment Id | version Id | Employer   | Provider   | ULN       | start date | end date   | agreed price | status    | effective from | effective to |
-            | 1             | 1          | employer 1 | provider a | learner a | 01/08/2017 | 04/08/2018 | 15000        | Active    | 01/08/2017     | 02/10/2017   |
-            | 1             | 2          | employer 1 | provider a | learner a | 01/08/2017 | 04/08/2018 | 15000        | Withdrawn | 03/10/2017     |              |
-            | 2             | 1          | employer 2 | provider a | learner a | 01/11/2017 | 04/08/2018 | 5625         | Active    | 01/11/2017     |              |
+            | commitment Id | version Id | Employer | Provider   | ULN       | start date | end date   | agreed price | status    | effective from | effective to |
+            | 1             | 1          | employer 1      | provider a | learner a | 01/08/2017 | 04/08/2018 | 15000        | Active    | 01/08/2017     | 02/10/2017   |
+            | 1             | 2          | employer 1      | provider a | learner a | 01/08/2017 | 04/08/2018 | 15000        | cancelled | 03/10/2017     |              |
+            | 2             | 1          | employer 2      | provider a | learner a | 01/11/2017 | 04/08/2018 | 5625         | Active    | 01/11/2017     |              |
         When an ILR file is submitted with the following data:
             | ULN       | Provider   | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date | Residual training price | Residual training price effective date | Residual assessment price | Residual assessment price effective date |
             | learner a | provider a | 03/08/2017 | 04/08/2018       |                 | continuing        | 12000                | 03/08/2017                          | 3000                   | 03/08/2017                            | 4500                    | 03/11/2017                             | 1125                      | 03/11/2017                               |
@@ -765,10 +765,10 @@ Scenario:AC5-Provider earnings and payments where learner changes employer and t
             | No employer | Non-DAS | 09/10/2017                |
             | employer 2  | DAS     | 03/03/2018                |
         And the following commitments exist:
-            | commitment Id | version Id | Employer   | Provider   | ULN       | start date | end date   | agreed price | status    | effective from | effective to |
-            | 1             | 1          | employer 1 | provider a | learner a | 01/08/2017 | 04/08/2018 | 15000        | Active    | 01/08/2017     | 08/10/2017   |
-            | 1             | 2          | employer 1 | provider a | learner a | 01/08/2017 | 04/08/2018 | 15000        | Withdrawn | 09/10/2017     |              |
-            | 2             | 1          | employer 2 | provider a | learner a | 01/11/2017 | 04/08/2018 | 5625         | Active    | 01/03/2018     |              |
+            | commitment Id | version Id | Employer | Provider   | ULN       | start date | end date   | agreed price | status    | effective from | effective to |
+            | 1             | 1          | employer 1      | provider a | learner a | 01/08/2017 | 04/08/2018 | 15000        | Active    | 01/08/2017     | 08/10/2017   |
+            | 1             | 2          | employer 1      | provider a | learner a | 01/08/2017 | 04/08/2018 | 15000        | cancelled | 09/10/2017     |              |
+            | 2             | 1          | employer 2      | provider a | learner a | 01/11/2017 | 04/08/2018 | 5625         | Active    | 01/03/2018     |              |
         When an ILR file is submitted with the following data:
             | ULN       | Provider   | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date | Residual training price | Residual training price effective date | Residual assessment price | Residual assessment price effective date |
             | learner a | provider a | 03/08/2017 | 04/08/2018       |                 | continuing        | 12000                | 03/08/2017                          | 3000                   | 03/08/2017                            | 4500                    | 03/03/2018                             | 1125                      | 03/03/2018                               |

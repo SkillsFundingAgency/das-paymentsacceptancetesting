@@ -1,4 +1,5 @@
 ﻿using SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts;
+using SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers;
 using TechTalk.SpecFlow;
 
@@ -7,13 +8,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
     [Binding]
     public class SubmissionSteps
     {
-        public SubmissionSteps(CommitmentsContext commitmentsContext, SubmissionContext submissionsContext)
+        public SubmissionSteps(CommitmentsContext commitmentsContext, SubmissionContext submissionsContext, LookupContext lookupContext)
         {
             CommitmentsContext = commitmentsContext;
             SubmissionsContext = submissionsContext;
+            LookupContext = lookupContext;
         }
         public SubmissionContext SubmissionsContext { get; }
         public CommitmentsContext CommitmentsContext { get; }
+        public LookupContext LookupContext { get; }
 
 
         [When("an ILR file is submitted with the following data:")]
@@ -53,6 +56,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
         private void ParseIlrTableAndSubmit(Table ilrDetails)
         {
             IlrTableParser.ParseIlrTableIntoContext(SubmissionsContext, ilrDetails);
+            SubmissionManager.SubmitIlrAndRunMonthEndAndCollateResults(SubmissionsContext.IlrLearnerDetails, LookupContext);
         }
     }
 }

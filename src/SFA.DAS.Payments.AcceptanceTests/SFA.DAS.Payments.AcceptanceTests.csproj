@@ -153,7 +153,12 @@
     <Compile Include="Refactoring\Contexts\CommitmentsContext.cs" />
     <Compile Include="Refactoring\Contexts\DataLockContext.cs" />
     <Compile Include="Refactoring\Contexts\EarningsAndPaymentsContext.cs" />
+    <Compile Include="Refactoring\Contexts\LookupContext.cs" />
     <Compile Include="Refactoring\Contexts\SubmissionContext.cs" />
+    <Compile Include="Refactoring\DataCollectors\DataLockResultCollector.cs" />
+    <Compile Include="Refactoring\DataCollectors\EarningsCollector.cs" />
+    <Compile Include="Refactoring\DataCollectors\Entities\PeriodisedValuesEntity.cs" />
+    <Compile Include="Refactoring\DataCollectors\PaymentsDataCollector.cs" />
     <Compile Include="Refactoring\Defaults.cs" />
     <Compile Include="Refactoring\AcceptanceTestsLogger.cs" />
     <Compile Include="Refactoring\ExecutionManagers\CommitmentManager.cs" />
@@ -161,9 +166,12 @@
     <Compile Include="Refactoring\ExecutionManagers\PreperationManager.cs" />
     <Compile Include="Refactoring\ExecutionManagers\SubmissionManager.cs" />
     <Compile Include="Refactoring\Extensions.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\AimType.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\CommitmentPaymentStatus.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\CommitmentReferenceData.cs" />
     <Compile Include="Refactoring\Contexts\EmployerAccountContext.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\DataLockPeriodMatch.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\CompletionStatus.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\EarningsAndPaymentsBreakdown.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\EmployerAccountReferenceData.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\EmployerAccountPeriodValue.cs" />

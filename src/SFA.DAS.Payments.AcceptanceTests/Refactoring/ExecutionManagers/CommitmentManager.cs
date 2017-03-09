@@ -28,8 +28,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                                        ProgrammeType = commitment.ProgrammeType,
                                        FrameworkCode = commitment.FrameworkCode,
                                        PathwayCode = commitment.PathwayCode,
-                                       PaymentStatus = 0,
-                                       PaymentStatusDescription = "",
+                                       PaymentStatus = (int)commitment.Status,
+                                       PaymentStatusDescription = commitment.Status.ToString(),
                                        Priority = commitment.Priority,
                                        EffectiveFromDate = commitment.EffectiveFrom,
                                        EffectiveToDate = commitment.EffectiveTo

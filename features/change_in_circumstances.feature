@@ -12,7 +12,7 @@ Feature: Provider earnings and payments where learner changes apprenticeship sta
             | 1             | 2          | learner a | 52            | 01/08/2017 | 01/08/2018 | 5625         | 03/11/2017     |              |
         When an ILR file is submitted on 03/12/2017 with the following data:
             | ULN       | standard code | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date |
-            | learner a | 51            | 03/08/2017 | 01/08/2018       | 31/10/2017      | transferred       | 12000                | 03/08/2017                          | 3000                   | 03/08/2017                            |
+            | learner a | 51            | 03/08/2017 | 01/08/2018       | 31/10/2017      | withdrawn         | 12000                | 03/08/2017                          | 3000                   | 03/08/2017                            |
             | learner a | 52            | 03/11/2017 | 01/08/2018       |                 | continuing        | 4500                 | 03/11/2017                          | 1125                   | 03/11/2017                            |
         Then the data lock status of the ILR in 03/12/2017 is:
             | Payment type | 08/17           | 09/17           | 10/17           | 11/17           | 12/17           |
@@ -33,7 +33,7 @@ Feature: Provider earnings and payments where learner changes apprenticeship sta
             | 1             | 1          | learner a | 51            | 03/08/2017 | 04/08/2018 | 15000        |
         When an ILR file is submitted on 03/12/2017 with the following data:
             | ULN       | standard code | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date |
-            | learner a | 51            | 03/08/2017 | 01/08/2018       | 31/10/2017      | transferred       | 12000                | 03/08/2017                          | 3000                   | 03/08/2017                            |
+            | learner a | 51            | 03/08/2017 | 01/08/2018       | 31/10/2017      | withdrawn         | 12000                | 03/08/2017                          | 3000                   | 03/08/2017                            |
             | learner a | 52            | 03/11/2017 | 01/08/2018       |                 | continuing        | 4500                 | 03/11/2017                          | 1125                   | 03/11/2017                            |
         Then the data lock status of the ILR in 03/12/2017 is:
             | Payment type | 08/17           | 09/17           | 10/17           | 11/17 | 12/17 |
@@ -187,7 +187,7 @@ Feature: Provider earnings and payments where learner changes apprenticeship sta
             | 1             | 2          | learner a | 52            | 01/08/2017 | 01/08/2018 | 5625         | active | 11/11/2017     |              |
         When an ILR file is submitted on 03/12/2017 with the following data:
             | ULN       | standard code | start date | planned end date | actual end date | completion status | Total training price 1 | Total training price 1 effective date | Total assessment price 1 | Total assessment price 1 effective date |
-            | learner a | 51            | 03/08/2017 | 04/08/2018       | 10/11/2017      | transferred       | 12000                  | 03/08/2017                            | 3000                     | 03/08/2017                              |
+            | learner a | 51            | 03/08/2017 | 04/08/2018       | 10/11/2017      | withdrawn         | 12000                  | 03/08/2017                            | 3000                     | 03/08/2017                              |
             | learner a | 52            | 11/11/2017 | 04/08/2018       |                 | continuing        | 4500                   | 11/11/2017                            | 1125                     | 11/11/2017                              | 
         
         Then the data lock status will be as follows:
@@ -208,7 +208,7 @@ Scenario: ILR changes standard in the middle of the month, but no corresponding 
             | 1             | 1          | learner a | 51            | 01/08/2017 | 01/08/2018 | 15000        | active | 01/08/2017     |              |
         When an ILR file is submitted on 03/12/2017 with the following data:
             | ULN       | standard code | start date | planned end date | actual end date | completion status | Total training price 1 | Total training price 1 effective date | Total assessment price 1 | Total assessment price 1 effective date |
-            | learner a | 51            | 03/08/2017 | 04/08/2018       | 10/11/2017      | transferred       | 12000                  | 03/08/2017                            | 3000                     | 03/08/2017                              |
+            | learner a | 51            | 03/08/2017 | 04/08/2018       | 10/11/2017      | withdrawn         | 12000                  | 03/08/2017                            | 3000                     | 03/08/2017                              |
             | learner a | 52            | 11/11/2017 | 04/08/2018       |                 | continuing        | 4500                   | 11/11/2017                            | 1125                     | 11/11/2017                              | 
         
         Then the data lock status will be as follows:
@@ -251,7 +251,7 @@ Scenario: Earnings and payments for a DAS learner, levy available, where the app
             | 1             | 2          | learner a | 52            | 01/08/2017 | 01/08/2018 | 5625         | active | 11/11/2017     |              |
         When an ILR file is submitted on 03/12/2017 with the following data:
             | ULN       | standard code | start date | planned end date | actual end date | completion status | Total training price 1 | Total training price 1 effective date | Total assessment price 1 | Total assessment price 1 effective date |
-            | learner a | 51            | 03/08/2017 | 04/08/2018       | 18/11/2017      | transferred       | 12000                  | 03/08/2017                            | 3000                     | 03/08/2017                              |
+            | learner a | 51            | 03/08/2017 | 04/08/2018       | 18/11/2017      | withdrawn         | 12000                  | 03/08/2017                            | 3000                     | 03/08/2017                              |
             | learner a | 52            | 19/11/2017 | 04/08/2018       |                 | continuing        | 4500                   | 19/11/2017                            | 1125                     | 19/11/2017                              | 
         
         Then the data lock status will be as follows:
@@ -273,7 +273,7 @@ Scenario: Earnings and payments for a DAS learner, levy available, where the app
             | 1             | 2          | learner a | 52            | 01/08/2017 | 01/08/2018 | 5625         | active | 11/11/2017     |              |
         When an ILR file is submitted on 03/12/2017 with the following data:
             | ULN       | standard code | start date | planned end date | actual end date | completion status | Total training price 1 | Total training price 1 effective date | Total assessment price 1 | Total assessment price 1 effective date |
-            | learner a | 51            | 03/08/2017 | 04/08/2018       | 04/12/2017      | transferred       | 12000                  | 03/08/2017                            | 3000                     | 03/08/2017                              |
+            | learner a | 51            | 03/08/2017 | 04/08/2018       | 04/12/2017      | withdrawn         | 12000                  | 03/08/2017                            | 3000                     | 03/08/2017                              |
             | learner a | 52            | 05/12/2017 | 04/08/2018       |                 | continuing        | 4500                   | 05/12/2017                            | 1125                     | 05/12/2017                              | 
         
         Then the data lock status will be as follows:
@@ -295,7 +295,7 @@ Scenario: Earnings and payments for a DAS learner, levy available, where the app
             | 1             | 2          | learner a | 52            | 01/08/2017 | 01/08/2018 | 5625         | active | 11/11/2017     |              |
         When an ILR file is submitted on 03/12/2017 with the following data:
             | ULN       | standard code | start date | planned end date | actual end date | completion status | Total training price 1 | Total training price 1 effective date | Total assessment price 1 | Total assessment price 1 effective date |
-            | learner a | 51            | 03/08/2017 | 04/08/2018       | 05/11/2017      | transferred       | 12000                  | 03/08/2017                            | 3000                     | 03/08/2017                              |
+            | learner a | 51            | 03/08/2017 | 04/08/2018       | 05/11/2017      | withdrawn         | 12000                  | 03/08/2017                            | 3000                     | 03/08/2017                              |
             | learner a | 52            | 06/11/2017 | 04/08/2018       |                 | continuing        | 4500                   | 06/11/2017                            | 1125                     | 06/11/2017                              | 
         
         Then the data lock status will be as follows:
