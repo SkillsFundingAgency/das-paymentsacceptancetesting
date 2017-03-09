@@ -19,6 +19,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
             {
                 connection.Execute("DELETE FROM dbo.DasCommitments");
                 connection.Execute("DELETE FROM dbo.DasAccounts");
+                connection.Execute("DELETE FROM Payments.Payments");
+                connection.Execute("DELETE FROM PaymentsDue.RequiredPayments");
+    
             }
         }
 

@@ -157,6 +157,7 @@
     <Compile Include="Refactoring\Contexts\SubmissionContext.cs" />
     <Compile Include="Refactoring\DataCollectors\DataLockResultCollector.cs" />
     <Compile Include="Refactoring\DataCollectors\EarningsCollector.cs" />
+    <Compile Include="Refactoring\DataCollectors\Entities\PaymentResultEntity.cs" />
     <Compile Include="Refactoring\DataCollectors\Entities\PeriodisedValuesEntity.cs" />
     <Compile Include="Refactoring\DataCollectors\PaymentsDataCollector.cs" />
     <Compile Include="Refactoring\Defaults.cs" />
