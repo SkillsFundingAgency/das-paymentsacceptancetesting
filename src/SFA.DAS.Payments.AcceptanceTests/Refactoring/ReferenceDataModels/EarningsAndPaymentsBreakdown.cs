@@ -17,6 +17,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ReferenceDataModels
             SfaNonLevyCoFundBudget = new List<PeriodValue>();
         }
 
+        public string ProviderId { get; set; }
         public List<PeriodValue> ProviderEarnedTotal { get; set; }
         public List<PeriodValue> ProviderEarnedFromSfa { get; set; }
         public List<EmployerAccountPeriodValue> ProviderEarnedFromEmployers { get; set; }
