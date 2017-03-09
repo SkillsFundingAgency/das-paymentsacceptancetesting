@@ -52,12 +52,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
         }
 
         [Then(@"the provider earnings and payments break down for ULN (.*) as follows:")]
-        public void ThenTheProviderEarningsAndPaymentsBreakDownForUlnAsFollows(string uln, Table earningAndPayments)
+        public void ThenTheProviderEarningsAndPaymentsBreakDownForUlnAsFollows(string learnerId, Table earningAndPayments)
         {
             var breakdown = new LearnerEarningsAndPaymentsBreakdown
             {
                 ProviderId = Defaults.ProviderId, // This may not be true in every case, need to check specs
-                Uln = uln
+                LearnerId = learnerId
             };
             EarningsAndPaymentsContext.LearnerOverallEarningsAndPayments.Add(breakdown);
             EarningAndPaymentTableParser.ParseEarningsAndPaymentsTableIntoContext(breakdown, earningAndPayments);
