@@ -3,6 +3,7 @@ using SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.ResultsDataModels;
 using System.Data.SqlClient;
 using Dapper;
+using System.Linq;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.DataCollectors.Entities;
 
 namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.DataCollectors
