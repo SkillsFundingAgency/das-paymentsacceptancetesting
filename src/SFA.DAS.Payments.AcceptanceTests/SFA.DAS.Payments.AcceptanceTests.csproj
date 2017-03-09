@@ -150,6 +150,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Refactoring\Assertions\PaymentsAndEarningsAssestions.cs" />
     <Compile Include="Refactoring\Contexts\CommitmentsContext.cs" />
     <Compile Include="Refactoring\Contexts\DataLockContext.cs" />
     <Compile Include="Refactoring\Contexts\EarningsAndPaymentsContext.cs" />
@@ -282,6 +283,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ddl.AT.deds.tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Refactoring\Assertions\PaymentsAndEarningsRules\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

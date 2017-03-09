@@ -7,7 +7,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts
     {
         public EarningsAndPaymentsContext()
         {
-            OverallEarningsAndPayments = new EarningsAndPaymentsBreakdown();
+            OverallEarningsAndPayments = new List<EarningsAndPaymentsBreakdown>();
             LearnerOverallEarningsAndPayments = new List<LearnerEarningsAndPaymentsBreakdown>();
 
             EmployerEarnedFor16To18Incentive = new List<EmployerAccountPeriodValue>();
@@ -23,7 +23,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts
             ProviderEarnedForFrameworkUpliftOnBalancing = new List<ProviderEarnedPeriodValue>();
         }
 
-        public EarningsAndPaymentsBreakdown OverallEarningsAndPayments { get; set; }
+        public List<EarningsAndPaymentsBreakdown> OverallEarningsAndPayments { get; set; }
         public List<LearnerEarningsAndPaymentsBreakdown> LearnerOverallEarningsAndPayments { get; set; }
 
         public List<EmployerAccountPeriodValue> EmployerEarnedFor16To18Incentive { get; set; }

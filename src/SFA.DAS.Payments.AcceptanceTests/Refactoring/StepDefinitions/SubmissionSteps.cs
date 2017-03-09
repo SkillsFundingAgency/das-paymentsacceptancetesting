@@ -56,7 +56,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
         private void ParseIlrTableAndSubmit(Table ilrDetails)
         {
             IlrTableParser.ParseIlrTableIntoContext(SubmissionsContext, ilrDetails);
-            SubmissionManager.SubmitIlrAndRunMonthEndAndCollateResults(SubmissionsContext.IlrLearnerDetails, LookupContext);
+            SubmissionsContext.SubmissionResults = SubmissionManager.SubmitIlrAndRunMonthEndAndCollateResults(SubmissionsContext.IlrLearnerDetails, LookupContext);
         }
     }
 }
