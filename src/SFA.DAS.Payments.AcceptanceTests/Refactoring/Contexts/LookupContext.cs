@@ -32,6 +32,17 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts
             }
             return Providers[providerId.ToUpper()];
         }
+        public string GetProviderId(long ukprn)
+        {
+            foreach(var providerId in Providers.Keys)
+            {
+                if(Providers[providerId] == ukprn)
+                {
+                    return providerId;
+                }
+            }
+            return null;
+        }
 
 
         public Dictionary<string, long> Learners { get; }
@@ -52,6 +63,17 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts
                 return 0;
             }
             return Learners[learnerId.ToUpper()];
+        }
+        public string GetLearnerId(long uln)
+        {
+            foreach (var learnerId in Learners.Keys)
+            {
+                if (Learners[learnerId] == uln)
+                {
+                    return learnerId;
+                }
+            }
+            return null;
         }
     }
 }
