@@ -151,6 +151,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Refactoring\Contexts\CommitmentsContext.cs" />
+    <Compile Include="Refactoring\Contexts\DataLockContext.cs" />
     <Compile Include="Refactoring\Contexts\EarningsAndPaymentsContext.cs" />
     <Compile Include="Refactoring\Contexts\SubmissionContext.cs" />
     <Compile Include="Refactoring\Defaults.cs" />
@@ -162,6 +163,7 @@
     <Compile Include="Refactoring\Extensions.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\CommitmentReferenceData.cs" />
     <Compile Include="Refactoring\Contexts\EmployerAccountContext.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\DataLockPeriodMatch.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\EarningsAndPaymentsBreakdown.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\EmployerAccountReferenceData.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\EmployerAccountPeriodValue.cs" />
@@ -175,10 +177,12 @@
     <Compile Include="Refactoring\ResultsDataModels\PaymentResult.cs" />
     <Compile Include="Refactoring\SpecFlowHooks.cs" />
     <Compile Include="Refactoring\StepDefinitions\CommitmentSteps.cs" />
+    <Compile Include="Refactoring\StepDefinitions\DataLockSteps.cs" />
     <Compile Include="Refactoring\StepDefinitions\EarningAndPaymentSteps.cs" />
     <Compile Include="Refactoring\StepDefinitions\SubmissionSteps.cs" />
     <Compile Include="Refactoring\StepDefinitions\UntestedSteps.cs" />
     <Compile Include="Refactoring\TableParsers\CommitmentsTableParser.cs" />
+    <Compile Include="Refactoring\TableParsers\DataLockTableParser.cs" />
     <Compile Include="Refactoring\TableParsers\EarningAndPaymentTableParser.cs" />
     <Compile Include="Refactoring\TableParsers\IlrTableParser.cs" />
     <Compile Include="Refactoring\TableParsers\TransactionTypeTableParser.cs" />
@@ -259,6 +263,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

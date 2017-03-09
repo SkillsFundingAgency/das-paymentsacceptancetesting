@@ -42,8 +42,10 @@ Scenario:AC2- Payment for a 16-18 DAS learner, levy available, incentives not pa
         | learner a | 16-18 programme only DAS | 15000        | 28/08/2017 | 29/08/2018       |                 | continuing        |
       
     Then the data lock status will be as follows:
-        | type                | 08/17 onwards |   
-        | matching commitment |               |   
+        | Payment type             | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
+        | On-program               |       |       |       |       |       | ... |       |       |
+        | Employer 16-18 incentive |       |       |       |       |       | ... |       |       |
+        | Provider 16-18 incentive |       |       |       |       |       | ... |       |       |
       
     And the provider earnings and payments break down as follows:
         | Type                                | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |

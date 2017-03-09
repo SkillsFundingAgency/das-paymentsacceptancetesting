@@ -161,13 +161,19 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table85, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table86 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Type",
-                        "08/17 - 10/17",
-                        "11/17 onwards"});
+                        "Payment type",
+                        "08/17",
+                        "09/17",
+                        "10/17",
+                        "11/17",
+                        "12/17"});
             table86.AddRow(new string[] {
-                        "Matching commitment",
-                        "1",
-                        "1"});
+                        "On-program",
+                        "commitment 1 v1",
+                        "commitment 1 v1",
+                        "commitment 1 v1",
+                        "commitment 1 v2",
+                        "commitment 1 v2"});
 #line 17
         testRunner.Then("the data lock status of the ILR in 03/12/2017 is:", ((string)(null)), table86, "Then ");
 #line hidden
@@ -240,12 +246,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
 #line hidden
             TechTalk.SpecFlow.Table table88 = new TechTalk.SpecFlow.Table(new string[] {
                         "commitment Id",
+                        "version Id",
                         "ULN",
                         "standard code",
                         "start date",
                         "end date",
                         "agreed price"});
             table88.AddRow(new string[] {
+                        "1",
                         "1",
                         "learner a",
                         "51",
@@ -292,12 +300,18 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table89, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table90 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Type",
-                        "08/17 - 10/17",
-                        "11/17 onwards"});
+                        "Payment type",
+                        "08/17",
+                        "09/17",
+                        "10/17",
+                        "11/17",
+                        "12/17"});
             table90.AddRow(new string[] {
-                        "Matching commitment",
-                        "1",
+                        "On-program",
+                        "commitment 1 v1",
+                        "commitment 1 v1",
+                        "commitment 1 v1",
+                        "",
                         ""});
 #line 38
         testRunner.Then("the data lock status of the ILR in 03/12/2017 is:", ((string)(null)), table90, "Then ");
@@ -428,11 +442,21 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table93, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table94 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Type",
-                        "08/17 onwards"});
+                        "Payment type",
+                        "08/17",
+                        "09/17",
+                        "10/17",
+                        "11/17",
+                        "12/17",
+                        "01/18"});
             table94.AddRow(new string[] {
-                        "Matching commitment",
-                        "1"});
+                        "On-program",
+                        "commitment 1 v1",
+                        "commitment 1 v1",
+                        "commitment 1 v1",
+                        "",
+                        "",
+                        ""});
 #line 59
         testRunner.Then("the data lock status of the ILR in 03/12/2017 is:", ((string)(null)), table94, "Then ");
 #line hidden
@@ -724,13 +748,25 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table100, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table101 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Type",
-                        "08/17 - 10/17",
-                        "11/17 onwards"});
+                        "Payment type",
+                        "08/17",
+                        "09/17",
+                        "10/17",
+                        "11/17",
+                        "12/17",
+                        "...",
+                        "07/18",
+                        "08/18"});
             table101.AddRow(new string[] {
-                        "Matching price",
-                        "15000",
-                        "9375"});
+                        "On-program",
+                        "commitment 1 v1",
+                        "commitment 1 v1",
+                        "commitment 1 v1",
+                        "commitment 1 v2",
+                        "commitment 1 v2",
+                        "...",
+                        "commitment 1 v2",
+                        "commitment 1 v2"});
 #line 98
         testRunner.Then("the data lock status will be as follows:", ((string)(null)), table101, "Then ");
 #line hidden
@@ -907,13 +943,25 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table104, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table105 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Type",
-                        "08/17 - 10/17",
-                        "11/17 onwards"});
+                        "Payment type",
+                        "08/17",
+                        "09/17",
+                        "10/17",
+                        "11/17",
+                        "12/17",
+                        "...",
+                        "07/18",
+                        "08/18"});
             table105.AddRow(new string[] {
-                        "Matching price",
-                        "15000",
-                        "9375"});
+                        "On-program",
+                        "commitment 1 v1",
+                        "commitment 1 v1",
+                        "commitment 1 v1",
+                        "commitment 1 v2",
+                        "commitment 1 v2",
+                        "...",
+                        "commitment 1 v2",
+                        "commitment 1 v2"});
 #line 121
         testRunner.Then("the data lock status will be as follows:", ((string)(null)), table105, "Then ");
 #line hidden
@@ -1092,12 +1140,24 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table108, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table109 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Type",
-                        "08/17 - 09/17",
-                        "10/17 onwards"});
+                        "Payment type",
+                        "08/17",
+                        "09/17",
+                        "10/17",
+                        "11/17",
+                        "12/17",
+                        "...",
+                        "07/18",
+                        "08/18"});
             table109.AddRow(new string[] {
-                        "Matching price",
-                        "15000",
+                        "On-program",
+                        "commitment 1 v1",
+                        "commitment 1 v1",
+                        "",
+                        "",
+                        "",
+                        "...",
+                        "",
                         ""});
 #line 144
         testRunner.Then("the data lock status will be as follows:", ((string)(null)), table109, "Then ");
@@ -1267,11 +1327,25 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table112, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table113 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Type",
-                        "08/17 onwards"});
+                        "Payment type",
+                        "08/17",
+                        "09/17",
+                        "10/17",
+                        "11/17",
+                        "12/17",
+                        "...",
+                        "07/18",
+                        "08/18"});
             table113.AddRow(new string[] {
-                        "Matching price",
-                        "15000"});
+                        "On-program",
+                        "commitment 1 v1",
+                        "commitment 1 v1",
+                        "commitment 1 v1",
+                        "",
+                        "",
+                        "...",
+                        "",
+                        ""});
 #line 167
         testRunner.Then("the data lock status will be as follows:", ((string)(null)), table113, "Then ");
 #line hidden
@@ -1456,13 +1530,19 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table116, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table117 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Type",
-                        "08/17 - 10/17",
-                        "11/17 onwards"});
+                        "Payment type",
+                        "08/17",
+                        "09/17",
+                        "10/17",
+                        "11/17",
+                        "12/17"});
             table117.AddRow(new string[] {
-                        "Matching price",
-                        "15000",
-                        "5625"});
+                        "On-program",
+                        "commitment 1 v1",
+                        "commitment 1 v1",
+                        "commitment 1 v1",
+                        "commitment 1 v2",
+                        "commitment 1 v2"});
 #line 193
         testRunner.Then("the data lock status will be as follows:", ((string)(null)), table117, "Then ");
 #line hidden
@@ -1588,12 +1668,20 @@ this.ScenarioSetup(scenarioInfo);
         testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table120, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table121 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Type",
-                        "08/17 - 10/17",
-                        "11/17 onwards"});
+                        "Payment type",
+                        "08/17",
+                        "09/17",
+                        "10/17",
+                        "11/17",
+                        "12/17",
+                        "01/18"});
             table121.AddRow(new string[] {
-                        "Matching price",
-                        "15000",
+                        "On-program",
+                        "commitment 1 v1",
+                        "commitment 1 v1",
+                        "commitment 1 v1",
+                        "",
+                        "",
                         ""});
 #line 214
         testRunner.Then("the data lock status will be as follows:", ((string)(null)), table121, "Then ");
@@ -1728,12 +1816,20 @@ this.ScenarioSetup(scenarioInfo);
         testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table124, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table125 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Type",
-                        "08/17 - 10/17",
-                        "11/17 onwards"});
+                        "Payment type",
+                        "08/17",
+                        "09/17",
+                        "10/17",
+                        "11/17",
+                        "12/17",
+                        "01/18"});
             table125.AddRow(new string[] {
-                        "Matching price",
-                        "15000",
+                        "On-program",
+                        "commitment 1 v1",
+                        "commitment 1 v1",
+                        "commitment 1 v1",
+                        "",
+                        "",
                         ""});
 #line 235
         testRunner.Then("the data lock status will be as follows:", ((string)(null)), table125, "Then ");
@@ -1879,13 +1975,19 @@ this.ScenarioSetup(scenarioInfo);
         testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table128, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table129 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Type",
-                        "08/17 - 10/17",
-                        "11/17 onwards"});
+                        "Payment type",
+                        "08/17",
+                        "09/17",
+                        "10/17",
+                        "11/17",
+                        "12/17"});
             table129.AddRow(new string[] {
-                        "Matching price",
-                        "15000",
-                        "5625"});
+                        "On-program",
+                        "commitment 1 v1",
+                        "commitment 1 v1",
+                        "commitment 1 v1",
+                        "commitment 1 v2",
+                        "commitment 1 v2"});
 #line 257
         testRunner.Then("the data lock status will be as follows:", ((string)(null)), table129, "Then ");
 #line hidden
@@ -2024,13 +2126,21 @@ this.ScenarioSetup(scenarioInfo);
         testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table132, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table133 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Type",
-                        "08/17 - 11/17",
-                        "12/17 onwards"});
+                        "Payment type",
+                        "08/17",
+                        "09/17",
+                        "10/17",
+                        "11/17",
+                        "12/17",
+                        "01/18"});
             table133.AddRow(new string[] {
-                        "Matching price",
-                        "15000",
-                        "5625"});
+                        "On-program",
+                        "commitment 1 v1",
+                        "commitment 1 v1",
+                        "commitment 1 v1",
+                        "",
+                        "commitment 1 v2",
+                        "commitment 1 v2"});
 #line 279
         testRunner.Then("the data lock status will be as follows:", ((string)(null)), table133, "Then ");
 #line hidden
@@ -2175,12 +2285,18 @@ this.ScenarioSetup(scenarioInfo);
         testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table136, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table137 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Type",
-                        "08/17 - 10/17",
-                        "11/17 onwards"});
+                        "Payment type",
+                        "08/17",
+                        "09/17",
+                        "10/17",
+                        "11/17",
+                        "12/17"});
             table137.AddRow(new string[] {
-                        "Matching price",
-                        "15000",
+                        "On-program",
+                        "commitment 1 v1",
+                        "commitment 1 v1",
+                        "commitment 1 v1",
+                        "",
                         ""});
 #line 301
         testRunner.Then("the data lock status will be as follows:", ((string)(null)), table137, "Then ");
