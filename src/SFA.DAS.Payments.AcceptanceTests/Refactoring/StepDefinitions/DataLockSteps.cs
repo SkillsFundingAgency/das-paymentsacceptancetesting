@@ -17,7 +17,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
         [Then(@"the data lock status will be as follows:")]
         public void ThenTheDataLockStatusWillBeAsFollows(Table table)
         {
-            DataLockTableParser.ParseDataLockStatusTableIntoContext(DataLockContext, table);
+            DataLockTableParser.ParseDataLockStatusTableIntoContext(DataLockContext, Defaults.LearnerId, table);
         }
 
         [Then(@"the data lock status of the ILR in (.*) is:")] //what is the point of this date?

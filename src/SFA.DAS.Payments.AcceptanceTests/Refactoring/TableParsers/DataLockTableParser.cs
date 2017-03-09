@@ -10,7 +10,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
 {
     internal class DataLockTableParser
     {
-        internal static void ParseDataLockStatusTableIntoContext(DataLockContext dataLockContext, Table dataLockStatusTable)
+        internal static void ParseDataLockStatusTableIntoContext(DataLockContext dataLockContext, string learnerId, Table dataLockStatusTable)
         {
             if (dataLockStatusTable.Rows.Count < 1)
             {
@@ -18,7 +18,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
             }
 
             var periodNames = ParseDataLockStatusHeaders(dataLockStatusTable);
-            ParseDataLockStatusRows(dataLockContext, dataLockStatusTable, periodNames);
+            ParseDataLockStatusRows(dataLockContext, learnerId, dataLockStatusTable, periodNames);
         }
 
         private static string[] ParseDataLockStatusHeaders(Table dataLockStatusTable)
@@ -47,57 +47,57 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
             return periods;
         }
 
-        private static void ParseDataLockStatusRows(DataLockContext context, Table dataLockStatusTable, string[] periodNames)
+        private static void ParseDataLockStatusRows(DataLockContext context, string learnerId, Table dataLockStatusTable, string[] periodNames)
         {
             foreach (var row in dataLockStatusTable.Rows)
             {
                 if (row[0] == "On-program")
                 {
-                    ParseRow(row, periodNames, context.DataLockStatusForOnProgramme);
+                    ParseRow(learnerId, row, periodNames, context.DataLockStatusForOnProgramme);
                 }
                 else if (row[0] == "Completion")
                 {
-                    ParseRow(row, periodNames, context.DataLockStatusForCompletion);
+                    ParseRow(learnerId, row, periodNames, context.DataLockStatusForCompletion);
                 }
                 else if (row[0] == "Balancing")
                 {
-                    ParseRow(row, periodNames, context.DataLockStatusForBalancing);
+                    ParseRow(learnerId, row, periodNames, context.DataLockStatusForBalancing);
                 }
                 else if (row[0] == "Employer 16-18 incentive")
                 {
-                    ParseRow(row, periodNames, context.DataLockStatusForEmployer16To18Incentive);
+                    ParseRow(learnerId, row, periodNames, context.DataLockStatusForEmployer16To18Incentive);
                 }
                 else if (row[0] == "Provider 16-18 incentive")
                 {
-                    ParseRow(row, periodNames, context.DataLockStatusForProvider16To18Incentive);
+                    ParseRow(learnerId, row, periodNames, context.DataLockStatusForProvider16To18Incentive);
                 }
                 else if (row[0] == "English and maths on programme")
                 {
-                    ParseRow(row, periodNames, context.DataLockStatusForEnglishAndMathOnProgramme);
+                    ParseRow(learnerId, row, periodNames, context.DataLockStatusForEnglishAndMathOnProgramme);
                 }
                 else if (row[0] == "English and maths Balancing")
                 {
-                    ParseRow(row, periodNames, context.DataLockStatusForEnglishAndMathBalancing);
+                    ParseRow(learnerId, row, periodNames, context.DataLockStatusForEnglishAndMathBalancing);
                 }
                 else if (row[0] == "Provider disadvantage uplift")
                 {
-                    ParseRow(row, periodNames, context.DataLockStatusForDisadvantageUplift);
+                    ParseRow(learnerId, row, periodNames, context.DataLockStatusForDisadvantageUplift);
                 }
                 else if (row[0] == "Framework uplift on-program")
                 {
-                    ParseRow(row, periodNames, context.DataLockStatusForFrameworkUpliftOnProgramme);
+                    ParseRow(learnerId, row, periodNames, context.DataLockStatusForFrameworkUpliftOnProgramme);
                 }
                 else if (row[0] == "Framework uplift completion")
                 {
-                    ParseRow(row, periodNames, context.DataLockStatusForFrameworkUpliftCompletion);
+                    ParseRow(learnerId, row, periodNames, context.DataLockStatusForFrameworkUpliftCompletion);
                 }
                 else if (row[0] == "Framework uplift balancing")
                 {
-                    ParseRow(row, periodNames, context.DataLockStatusForFrameworkUpliftBalancing);
+                    ParseRow(learnerId, row, periodNames, context.DataLockStatusForFrameworkUpliftBalancing);
                 }
                 else if (row[0] == "Provider learning support")
                 {
-                    ParseRow(row, periodNames, context.DataLockStatusForLearningSupport);
+                    ParseRow(learnerId, row, periodNames, context.DataLockStatusForLearningSupport);
                 }
                 else
                 {
@@ -106,10 +106,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
             }
         }
 
-        private static void ParseRow(TableRow row, string[] periodNames, List<DataLockPeriodMatch> contextList)
+        private static void ParseRow(string learnerId, TableRow row, string[] periodNames, List<DataLockPeriodMatch> contextList)
         {
             ParseRowValues(row, periodNames, contextList, (periodName, commitmentId, commitmentVersion) => new DataLockPeriodMatch
             {
+                LearnerId = learnerId,
                 PeriodName = periodName,
                 CommitmentId = commitmentId,
                 CommitmentVersion = commitmentVersion

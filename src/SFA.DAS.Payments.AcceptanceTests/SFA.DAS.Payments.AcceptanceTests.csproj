@@ -181,6 +181,8 @@
     <Compile Include="Refactoring\ReferenceDataModels\LearnerType.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\PeriodValue.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\ProviderEarnedPeriodValue.cs" />
+    <Compile Include="Refactoring\ResultsDataModels\DataLockPeriodResults.cs" />
+    <Compile Include="Refactoring\ResultsDataModels\DataLockResult.cs" />
     <Compile Include="Refactoring\ResultsDataModels\EarningsResult.cs" />
     <Compile Include="Refactoring\ResultsDataModels\LearnerResults.cs" />
     <Compile Include="Refactoring\ResultsDataModels\PaymentResult.cs" />
