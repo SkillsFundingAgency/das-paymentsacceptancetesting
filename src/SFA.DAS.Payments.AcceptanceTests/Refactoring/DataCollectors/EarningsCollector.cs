@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+using SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.DataCollectors.Entities;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.ResultsDataModels;
 
@@ -12,9 +13,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.DataCollectors
 {
     public static class EarningsCollector
     {
-        public static void CollectForPeriod(string period, List<LearnerResults> results)
+        public static void CollectForPeriod(string period, List<LearnerResults> results, LookupContext lookupContext)
         {
             var periodisedValues = ReadEarningsFromDeds();
+            foreach(var periodisedValue in periodisedValues)
+            {
+            }
         }
 
         private static PeriodisedValuesEntity[] ReadEarningsFromDeds()
@@ -48,6 +52,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.DataCollectors
                             + "GROUP BY ldpv.UKPRN, l.ULN";
                 return connection.Query<PeriodisedValuesEntity>(command).ToArray();
             }
+        }
+        private static LearnerResults GetOrCreateLearner(long ukprn, long uln, List<LearnerResults> results, LookupContext lookupContext)
+        {
+            throw new NotImplementedException();
         }
     }
 }
