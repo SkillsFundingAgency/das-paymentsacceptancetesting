@@ -154,6 +154,10 @@
     <Compile Include="Refactoring\Contexts\EarningsAndPaymentsContext.cs" />
     <Compile Include="Refactoring\Contexts\LookupContext.cs" />
     <Compile Include="Refactoring\Contexts\SubmissionContext.cs" />
+    <Compile Include="Refactoring\DataCollectors\DataLockResultCollector.cs" />
+    <Compile Include="Refactoring\DataCollectors\EarningsCollector.cs" />
+    <Compile Include="Refactoring\DataCollectors\Entities\PeriodisedValuesEntity.cs" />
+    <Compile Include="Refactoring\DataCollectors\PaymentsDataCollector.cs" />
     <Compile Include="Refactoring\Defaults.cs" />
     <Compile Include="Refactoring\AcceptanceTestsLogger.cs" />
     <Compile Include="Refactoring\ExecutionManagers\CommitmentManager.cs" />

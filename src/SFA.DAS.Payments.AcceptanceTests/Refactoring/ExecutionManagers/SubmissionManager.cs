@@ -4,6 +4,7 @@ using System.Linq;
 using IlrGenerator;
 using ProviderPayments.TestStack.Core.ExecutionStatus;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts;
+using SFA.DAS.Payments.AcceptanceTests.Refactoring.DataCollectors;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.ReferenceDataModels;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.ResultsDataModels;
 
@@ -13,6 +14,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
     {
         internal static List<LearnerResults> SubmitIlrAndRunMonthEndAndCollateResults(List<IlrLearnerReferenceData> ilrLearnerDetails, LookupContext lookupContext)
         {
+            var results = new List<LearnerResults>();
+
             var periods = ExtractPeriods(ilrLearnerDetails);
             var providerLearners = GroupLearnersByProvider(ilrLearnerDetails, lookupContext);
             foreach (var period in periods)
@@ -25,9 +28,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                 RunMonthEnd(period);
 
                 //TODO: Collect results
+                EarningsCollector.CollectForPeriod(period, results);
+                PaymentsDataCollector.CollectForPeriod(period, results);
+                DataLockResultCollector.CollectForPeriod(period, results);
             }
 
-            return new List<LearnerResults>();
+            return results;
         }
 
         private static string[] ExtractPeriods(List<IlrLearnerReferenceData> ilrLearnerDetails)
