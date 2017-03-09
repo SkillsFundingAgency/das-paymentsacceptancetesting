@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using NUnit.Framework;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.ReferenceDataModels;
 
 namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts
