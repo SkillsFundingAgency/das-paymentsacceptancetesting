@@ -11,7 +11,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
 {
     public static class ContractTypeTableParser
     {
-        public static void ParseContractTypesIntoContext(SubmissionContext submissionContext, Table contractTypes, LookupContext lookupContext)
+        public static void ParseContractTypesIntoContext(SubmissionContext submissionContext, Table contractTypes)
         {
             if (contractTypes.Rows.Count < 1)
             {
@@ -53,7 +53,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
             {
                 throw new ArgumentException("Contract types table is missing contract type column");
             }
-            if (structure.ContractTypeIndex == -1)
+            if (structure.DateFromIndex == -1)
             {
                 throw new ArgumentException("Contract types table is missing date from column");
             }

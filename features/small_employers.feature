@@ -154,9 +154,9 @@ Scenario:AC6- 1 learner aged 16-18, non-DAS. Second employment status record add
 		| ULN        | learner type                 | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | agreed price |
 		| 1234567891 | 16-18 programme only non-DAS | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | 7500         |
 	And the employment status in the ILR is:
-        | Employer ID | Employment Status      | Employment Status Applies | Small Employer |
-        | 123456      | in paid employment     | 05/08/2017                | SEM1           |
-        | 123456      | in paid employment     | 05/10/2017                |                |
+        | Employer    | Employment Status      | Employment Status Applies | Small Employer |
+        | employer 1  | in paid employment     | 05/08/2017                | SEM1           |
+        | employer 1  | in paid employment     | 05/10/2017                |                |
     Then the provider earnings and payments break down as follows:
 		| Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
 		| Provider Earned Total                   | 620   | 620   | 620   | 1620  | 620   | ... | 2860  | 0     |
@@ -356,9 +356,9 @@ Scenario:AC12- Payment for a 16-18 non-DAS learner, small employer at start, cha
 		| ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | 
 		| learner a | 16-18 programme only non-DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | 
     And the employment status in the ILR is:
-		| Employer Id | Employment Status  | Employment Status Applies | Small Employer |
-		| 12345678    | in paid employment | 05/08/2017                | SEM1           |
-		| 98765432    | in paid employment | 05/10/2017                |                |
+		| Employer    | Employment Status  | Employment Status Applies | Small Employer |
+		| employer 1  | in paid employment | 05/08/2017                | SEM1           |
+		| employer 2  | in paid employment | 05/10/2017                |                |
 	 Then the provider earnings and payments break down as follows:
 		| Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
 		| Provider Earned Total                   | 620   | 620   | 620   | 1620  | 620   | ... | 2860  | 0     |
@@ -392,9 +392,9 @@ Scenario:AC13- Payment for a 16-18 non-DAS learner, large employer at start, cha
 		| ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | 
 		| learner a | 16-18 programme only non-DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | 
     And the employment status in the ILR is:
-		| Employer Id | Employment Status  | Employment Status Applies | Small Employer |
-		| 12345678    | in paid employment | 05/08/2017                |                |
-		| 98765432    | in paid employment | 05/10/2017                | SEM1           |
+		| Employer    | Employment Status  | Employment Status Applies | Small Employer |
+		| employer 1  | in paid employment | 05/08/2017                |                |
+		| employer 2  | in paid employment | 05/10/2017                | SEM1           |
 	 Then the provider earnings and payments break down as follows:
 	    | Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
 	    | Provider Earned Total                   | 620   | 620   | 620   | 1620  | 620   | ... | 2860  | 0     |

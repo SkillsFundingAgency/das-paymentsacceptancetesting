@@ -11,11 +11,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts
             HaveSubmissionsBeenDone = false;
             IlrLearnerDetails = new List<IlrLearnerReferenceData>();
             ContractTypes = new List<ContractTypeReferenceData>();
+            EmploymentStatus = new List<EmploymentStatusReferenceData>();
         }
 
         public bool HaveSubmissionsBeenDone { get; set; }
         public List<IlrLearnerReferenceData> IlrLearnerDetails { get; set; }
         public List<LearnerResults> SubmissionResults { get; set; }
         public List<ContractTypeReferenceData> ContractTypes { get; set; }
+        public List<EmploymentStatusReferenceData> EmploymentStatus { get; set; }
     }
 }
