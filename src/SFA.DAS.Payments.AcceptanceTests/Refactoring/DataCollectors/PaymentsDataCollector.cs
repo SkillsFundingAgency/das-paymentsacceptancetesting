@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using Dapper;
 using System.Linq;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.DataCollectors.Entities;
+using SFA.DAS.Payments.AcceptanceTests.Refactoring.ReferenceDataModels;
 
 namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.DataCollectors
 {
@@ -23,9 +24,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.DataCollectors
                     Amount = data.Amount,
                     CalculationPeriod = $"{data.CollectionPeriodMonth:00}/{(data.CollectionPeriodYear - 2000):00}",
                     DeliveryPeriod = $"{data.DeliveryMonth:00}/{(data.DeliveryYear - 2000):00}",
-                    FundingSource = (Enums.FundingSource)data.FundingSource,
-                    TransactionType = (Enums.TransactionType)data.TransactionType,
-                    ContractType = (Enums.ContractType)data.ApprenticeshipContractType
+                    FundingSource = (FundingSource)data.FundingSource,
+                    TransactionType = (TransactionType)data.TransactionType,
+                    ContractType = (ContractType)data.ApprenticeshipContractType
                 });
             }
         }

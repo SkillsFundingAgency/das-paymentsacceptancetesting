@@ -9,7 +9,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.PaymentsAndEar
         public override void AssertBreakdown(EarningsAndPaymentsBreakdown breakdown, SubmissionContext submissionContext)
         {
             var allPayments = GetPaymentsForBreakdown(breakdown, submissionContext)
-                .Where(p => p.FundingSource == Enums.FundingSource.CoInvestedEmployer)
+                .Where(p => p.FundingSource == FundingSource.CoInvestedEmployer)
                 .ToArray();
             foreach (var period in breakdown.PaymentDueFromEmployers)
             {
