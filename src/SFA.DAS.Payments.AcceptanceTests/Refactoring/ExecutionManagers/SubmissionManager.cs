@@ -47,7 +47,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
             var earliestDate = ilrLearnerDetails.Select(x => x.StartDate).Min();
             var latestPlannedDate = ilrLearnerDetails.Select(x => x.PlannedEndDate).Max();
             var latestActualDate = ilrLearnerDetails.Select(x => x.ActualEndDate).Max();
-            var latestDate = latestPlannedDate > latestActualDate ? latestPlannedDate : latestActualDate;
+            var latestDate = latestActualDate.HasValue && latestActualDate > latestPlannedDate ? latestActualDate : latestPlannedDate;
 
             var date = earliestDate;
             while (date <= latestDate)

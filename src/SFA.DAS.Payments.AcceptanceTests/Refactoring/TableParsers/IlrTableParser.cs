@@ -148,7 +148,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
                 LearnerType = (LearnerType)row.ReadRowColumnValue<string>(structure.LearnerTypeIndex, "learner type", "Undefined").ToEnumByDescription(typeof(LearnerType)),
                 StartDate = row.ReadRowColumnValue<DateTime>(structure.StartDateIndex, "start date"),
                 PlannedEndDate = row.ReadRowColumnValue<DateTime>(structure.PlannedEndDateIndex, "planned end date"),
-                ActualEndDate = row.ReadRowColumnValue<DateTime>(structure.ActualEndDateIndex, "actual end date"),
+                ActualEndDate = row.ReadRowColumnValue<DateTime?>(structure.ActualEndDateIndex, "actual end date"),
                 CompletionStatus = (CompletionStatus)row.ReadRowColumnValue<string>(structure.CompletionStatusIndex, "completion status").ToEnumByDescription(typeof(CompletionStatus)),
                 Provider = row.ReadRowColumnValue<string>(structure.ProviderIndex, "provider", Defaults.ProviderId),
                 TotalTrainingPrice1 = row.ReadRowColumnValue<int>(structure.TotalTrainingPrice1Index, "total training price 1"),

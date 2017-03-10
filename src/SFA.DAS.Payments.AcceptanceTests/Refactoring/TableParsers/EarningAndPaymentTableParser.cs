@@ -101,11 +101,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
                 }
                 else if (row[0] == "SFA Levy additional payments budget")
                 {
-                    //TODO
+                    ParseNonEmployerRow(row, periodNames, breakdown.SfaLevyAdditionalPayments);
                 }
                 else if (row[0] == "SFA non-Levy additional payments budget")
                 {
-                    //TODO
+                    ParseNonEmployerRow(row, periodNames, breakdown.SfaNonLevyAdditionalPayments);
                 }
                 else
                 {

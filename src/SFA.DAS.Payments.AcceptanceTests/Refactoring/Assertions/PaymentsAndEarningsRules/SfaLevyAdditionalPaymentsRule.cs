@@ -12,12 +12,18 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.PaymentsAndEar
     {
         public override void AssertBreakdown(EarningsAndPaymentsBreakdown breakdown, SubmissionContext submissionContext)
         {
-            //TODO
+            var payments = GetPaymentsForBreakdown(breakdown, submissionContext)
+                .Where(p => p.FundingSource == FundingSource.FullyFundedSfa && p.ContractType == ContractType.ContractWithEmployer)
+                .ToArray();
+            foreach (var period in breakdown.SfaLevyAdditionalPayments)
+            {
+                AssertResultsForPeriod(period, payments);
+            }
         }
 
         protected override string FormatAssertionFailureMessage(PeriodValue period, decimal actualPaymentInPeriod)
         {
-            throw new NotImplementedException();
+            return $"Expected SFA Levy additional payment of {period.Value} in {period.PeriodName} but was actually {actualPaymentInPeriod}";
         }
     }
 }

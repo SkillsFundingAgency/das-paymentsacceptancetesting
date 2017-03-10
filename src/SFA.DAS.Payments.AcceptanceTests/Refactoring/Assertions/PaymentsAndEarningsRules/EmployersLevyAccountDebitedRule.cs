@@ -1,5 +1,6 @@
 ﻿using SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.ReferenceDataModels;
+using System;
 using System.Linq;
 
 namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.PaymentsAndEarningsRules
@@ -14,6 +15,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.PaymentsAndEar
                 .ToArray();
             foreach (var period in breakdown.EmployersLevyAccountDebited)
             {
+                var prevPeriodDate = new DateTime(int.Parse(period.PeriodName.Substring(3, 2)) + 2000, int.Parse(period.PeriodName.Substring(0, 2)), 1).AddMonths(-1);
+                var prevPeriodName = $"{prevPeriodDate.Month:00}/{prevPeriodDate.Year - 2000:00}";
+                period.PeriodName = prevPeriodName;
+
                 AssertResultsForPeriod(period, payments);
             }
         }
