@@ -157,8 +157,10 @@
     <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\PaymentsRuleBase.cs" />
     <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\ProviderEarnedTotalRule.cs" />
     <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\ProviderPaidBySfaRule.cs" />
+    <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\SfaLevyAdditionalPaymentsRule.cs" />
     <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\SfaLevyBudgetRule.cs" />
     <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\SfaLevyCoFundBudgetRule.cs" />
+    <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\SfaNonLevyAdditionalPaymentsRule.cs" />
     <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\SfaNonLevyCoFundBudgetRule.cs" />
     <Compile Include="Refactoring\Contexts\CommitmentsContext.cs" />
     <Compile Include="Refactoring\Contexts\DataLockContext.cs" />

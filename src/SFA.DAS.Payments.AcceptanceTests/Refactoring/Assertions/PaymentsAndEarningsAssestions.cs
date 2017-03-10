@@ -14,6 +14,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions
             new SfaLevyBudgetRule(),
             new SfaLevyCoFundBudgetRule(),
             new SfaNonLevyCoFundBudgetRule(),
+            new SfaLevyAdditionalPaymentsRule(),
+            new SfaNonLevyAdditionalPaymentsRule()
         };
 
         public static void AssertPaymentsAndEarningsResults(EarningsAndPaymentsContext earningsAndPaymentsContext, SubmissionContext submissionContext)
