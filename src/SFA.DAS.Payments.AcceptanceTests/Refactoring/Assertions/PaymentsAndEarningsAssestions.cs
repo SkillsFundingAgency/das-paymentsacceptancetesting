@@ -5,7 +5,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions
 {
     public static class PaymentsAndEarningsAssestions
     {
-        private static readonly EarningsAndPaymentsRuleBase[] Rules = 
+        private static readonly EarningsAndPaymentsRuleBase[] Rules =
         {
             new ProviderEarnedTotalRule(),
             new ProviderPaidBySfaRule(),
@@ -18,6 +18,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions
 
         public static void AssertPaymentsAndEarningsResults(EarningsAndPaymentsContext earningsAndPaymentsContext, SubmissionContext submissionContext)
         {
+            if (TestEnvironment.ValidateSpecsOnly)
+            {
+                return;
+            }
+
             ValidateOverallEarningsAndPayments(earningsAndPaymentsContext, submissionContext);
         }
 

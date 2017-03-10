@@ -9,6 +9,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
     {
         internal static void AddAccount(EmployerAccountReferenceData account)
         {
+            if (TestEnvironment.ValidateSpecsOnly)
+            {
+                return;
+            }
+
             using (var connection = new SqlConnection(TestEnvironment.Variables.DedsDatabaseConnectionString))
             {
                 connection.Execute("INSERT INTO dbo.DasAccounts (AccountId, AccountHashId, AccountName, Balance, VersionId) " +
@@ -26,6 +31,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
 
         internal static void UpdateAccountBalanceForPeriod(EmployerAccountReferenceData account, string period)
         {
+            if (TestEnvironment.ValidateSpecsOnly)
+            {
+                return;
+            }
+
             var periodBalance = account.PeriodBalances?.SingleOrDefault(x => x.PeriodName.Equals(period, System.StringComparison.CurrentCultureIgnoreCase));
             if (periodBalance == null)
             {
