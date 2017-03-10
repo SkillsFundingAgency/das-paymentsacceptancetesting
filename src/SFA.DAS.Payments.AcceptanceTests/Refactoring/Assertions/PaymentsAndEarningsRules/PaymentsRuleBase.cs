@@ -19,11 +19,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.PaymentsAndEar
             }
             return payments.SelectMany(r => r.Payments).ToArray();
         }
+      
         protected void AssertResultsForPeriod(PeriodValue period, PaymentResult[] allPayments)
         {
-            var prevPeriodDate = new DateTime(int.Parse(period.PeriodName.Substring(3, 2)) + 2000, int.Parse(period.PeriodName.Substring(0, 2)), 1).AddMonths(-1);
-            var prevPeriodName = $"{prevPeriodDate.Month:00}/{prevPeriodDate.Year - 2000:00}";
-            var paidInPeriod = allPayments.Where(p => p.CalculationPeriod == prevPeriodName).Sum(p => p.Amount);
+            //var prevPeriodDate = new DateTime(int.Parse(period.PeriodName.Substring(3, 2)) + 2000, int.Parse(period.PeriodName.Substring(0, 2)), 1).AddMonths(-1);
+            //var prevPeriodName = $"{prevPeriodDate.Month:00}/{prevPeriodDate.Year - 2000:00}";
+            var paidInPeriod = allPayments.Where(p => p.CalculationPeriod == period.PeriodName).Sum(p => p.Amount);
             if (period.Value != paidInPeriod)
             {
                 throw new Exception(FormatAssertionFailureMessage(period, paidInPeriod));

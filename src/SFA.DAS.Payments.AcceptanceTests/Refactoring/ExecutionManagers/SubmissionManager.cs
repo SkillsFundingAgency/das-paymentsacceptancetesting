@@ -35,7 +35,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                 EarningsCollector.CollectForPeriod(period, results, lookupContext);
                 DataLockResultCollector.CollectForPeriod(period, results, lookupContext);
             }
-            PaymentsDataCollector.CollectForPeriod(results, lookupContext);
+           PaymentsDataCollector.CollectForPeriod(results, lookupContext);
 
             return results;
         }
