@@ -13,18 +13,18 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.DataCollectors
         public static void CollectForPeriod(List<LearnerResults> results, LookupContext lookupContext)
         {
             var paymentsData = ReadPaymentsFromDeds();
-            foreach(var data in paymentsData )
+            foreach (var data in paymentsData)
             {
                 var learner = GetOrCreateLearner(data.Ukprn, data.Uln, results, lookupContext);
 
                 learner.Payments.Add(new PaymentResult
                 {
                     Amount = data.Amount,
-                    CalculationPeriod=data.CalculationPeriod,
-                    DeliveryPeriod = data.DeliveryPeriod,
-                    FundingSource = (Enums.FundingSource) data.FundingSource,
+                    CalculationPeriod = $"{data.CollectionPeriodMonth:00}/{(data.CollectionPeriodYear - 2000):00}",
+                    DeliveryPeriod = $"{data.DeliveryMonth:00}/{(data.DeliveryYear - 2000):00}",
+                    FundingSource = (Enums.FundingSource)data.FundingSource,
                     TransactionType = (Enums.TransactionType)data.TransactionType,
-                    ContractType = (Enums.ContractType)data.ContractType
+                    //ContractType = (Enums.ContractType)data.ContractType
                 });
             }
         }
@@ -33,13 +33,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.DataCollectors
         {
             using (var connection = new SqlConnection(TestEnvironment.Variables.DedsDatabaseConnectionString))
             {
-                var query = @"SELECT p.*,rp.Ukprn,rp.Uln 
+                var query = @"SELECT rp.Ukprn, rp.Uln, p.DeliveryMonth, p.DeliveryYear, p.CollectionPeriodMonth, p.CollectionPeriodYear, p.FundingSource, p.TransactionType, p.Amount 
                                 FROM Payments.Payments p
                                     JOIN PaymentsDue.RequiredPayments rp ON rp.Id = p.RequiredPaymentId ";
-                            
+
                 return connection.Query<PaymentResultEntity>(query).ToArray();
             }
-        
+
         }
 
         private static LearnerResults GetOrCreateLearner(long ukprn, long uln, List<LearnerResults> results, LookupContext lookupContext)
