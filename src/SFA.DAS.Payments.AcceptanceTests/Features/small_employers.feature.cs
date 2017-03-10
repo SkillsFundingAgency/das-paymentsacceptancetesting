@@ -1339,17 +1339,17 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table407, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table408 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Employer ID",
+                        "Employer",
                         "Employment Status",
                         "Employment Status Applies",
                         "Small Employer"});
             table408.AddRow(new string[] {
-                        "123456",
+                        "employer 1",
                         "in paid employment",
                         "05/08/2017",
                         "SEM1"});
             table408.AddRow(new string[] {
-                        "123456",
+                        "employer 1",
                         "in paid employment",
                         "05/10/2017",
                         ""});
@@ -2930,17 +2930,17 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table431, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table432 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Employer Id",
+                        "Employer",
                         "Employment Status",
                         "Employment Status Applies",
                         "Small Employer"});
             table432.AddRow(new string[] {
-                        "12345678",
+                        "employer 1",
                         "in paid employment",
                         "05/08/2017",
                         "SEM1"});
             table432.AddRow(new string[] {
-                        "98765432",
+                        "employer 2",
                         "in paid employment",
                         "05/10/2017",
                         ""});
@@ -3194,17 +3194,17 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table435, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table436 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Employer Id",
+                        "Employer",
                         "Employment Status",
                         "Employment Status Applies",
                         "Small Employer"});
             table436.AddRow(new string[] {
-                        "12345678",
+                        "employer 1",
                         "in paid employment",
                         "05/08/2017",
                         ""});
             table436.AddRow(new string[] {
-                        "98765432",
+                        "employer 2",
                         "in paid employment",
                         "05/10/2017",
                         "SEM1"});

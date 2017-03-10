@@ -41,13 +41,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
         [When("the Contract type in the ILR is:")]
         public void WhenTheContractTypeInTheIlrIs(Table contractTypes)
         {
-            ContractTypeTableParser.ParseContractTypesIntoContext(SubmissionsContext, contractTypes, LookupContext);
+            ContractTypeTableParser.ParseContractTypesIntoContext(SubmissionsContext, contractTypes);
         }
 
         [When("the employment status in the ILR is:")]
-        public void WhenTheEmploymentStatusInTheIlrIs(Table contractTypes)
+        public void WhenTheEmploymentStatusInTheIlrIs(Table employmentStatus)
         {
-            //TODO
+            EmploymentStatusTableParser.ParseEmploymentStatusIntoContext(SubmissionsContext, employmentStatus);
         }
     }
 }
