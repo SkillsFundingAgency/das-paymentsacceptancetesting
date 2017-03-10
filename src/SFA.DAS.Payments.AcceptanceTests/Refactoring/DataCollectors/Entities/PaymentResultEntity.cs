@@ -14,6 +14,6 @@
 
         public int ContractType { get; set; }
 
-
+        public string AccountId { get; set; }
     }
 }

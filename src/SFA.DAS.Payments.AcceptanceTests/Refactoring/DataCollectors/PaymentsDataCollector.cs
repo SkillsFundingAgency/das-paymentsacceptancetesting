@@ -19,6 +19,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.DataCollectors
 
                 learner.Payments.Add(new PaymentResult
                 {
+                    EmployerAccountId = int.Parse(data.AccountId),
                     Amount = data.Amount,
                     CalculationPeriod = $"{data.CollectionPeriodMonth:00}/{(data.CollectionPeriodYear - 2000):00}",
                     DeliveryPeriod = $"{data.DeliveryMonth:00}/{(data.DeliveryYear - 2000):00}",
@@ -34,11 +35,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.DataCollectors
             using (var connection = new SqlConnection(TestEnvironment.Variables.DedsDatabaseConnectionString))
             {
                 var query = @"SELECT rp.Ukprn, rp.Uln, p.DeliveryMonth, p.DeliveryYear, 
-                             p.CollectionPeriodMonth, p.CollectionPeriodYear, 
-                             p.FundingSource, p.TransactionType, p.Amount ,
-                             rp.ApprenticeshipContractType
-                                FROM Payments.Payments p
-                                    JOIN PaymentsDue.RequiredPayments rp ON rp.Id = p.RequiredPaymentId ";
+                                     p.CollectionPeriodMonth, p.CollectionPeriodYear, 
+                                     p.FundingSource, p.TransactionType, p.Amount ,
+                                     rp.ApprenticeshipContractType, rp.AccountId
+                              FROM Payments.Payments p
+                                  JOIN PaymentsDue.RequiredPayments rp ON rp.Id = p.RequiredPaymentId ";
 
                 return connection.Query<PaymentResultEntity>(query).ToArray();
             }

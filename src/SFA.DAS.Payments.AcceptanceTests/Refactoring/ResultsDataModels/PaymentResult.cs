@@ -4,6 +4,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ResultsDataModels
 {
     public class PaymentResult
     {
+        public int EmployerAccountId { get; set; }
         public string CalculationPeriod { get; set; }
         public string DeliveryPeriod { get; set; }
         public FundingSource FundingSource { get; set; }

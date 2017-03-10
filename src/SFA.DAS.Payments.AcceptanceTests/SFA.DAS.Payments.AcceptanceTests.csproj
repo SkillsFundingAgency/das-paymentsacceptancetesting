@@ -154,8 +154,7 @@
     <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\EarningsAndPaymentsRuleBase.cs" />
     <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\EmployersLevyAccountDebitedRule.cs" />
     <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\PaymentDueFromEmployersRule.cs" />
-    <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\ProviderEarnedFromEmployersRule.cs" />
-    <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\ProviderEarnedFromSfaRule.cs" />
+    <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\PaymentsRuleBase.cs" />
     <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\ProviderEarnedTotalRule.cs" />
     <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\ProviderPaidBySfaRule.cs" />
     <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\SfaLevyBudgetRule.cs" />

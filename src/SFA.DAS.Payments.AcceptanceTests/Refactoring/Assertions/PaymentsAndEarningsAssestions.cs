@@ -8,8 +8,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions
         private static readonly EarningsAndPaymentsRuleBase[] Rules = 
         {
             new ProviderEarnedTotalRule(),
-            new ProviderEarnedFromSfaRule(),
-            new ProviderEarnedFromEmployersRule(),
             new ProviderPaidBySfaRule(),
             new PaymentDueFromEmployersRule(),
             new EmployersLevyAccountDebitedRule(),
