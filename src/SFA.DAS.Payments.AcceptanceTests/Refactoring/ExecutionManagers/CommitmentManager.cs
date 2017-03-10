@@ -8,6 +8,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
     {
         internal static void AddCommitment(CommitmentReferenceData commitment)
         {
+            if(TestEnvironment.ValidateSpecsOnly)
+            {
+                return;
+            }
+
             using (var connection = new SqlConnection(TestEnvironment.Variables.DedsDatabaseConnectionString))
             {
                 connection.Execute("INSERT INTO dbo.DasCommitments " +

@@ -15,6 +15,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
         internal static List<LearnerResults> SubmitIlrAndRunMonthEndAndCollateResults(List<IlrLearnerReferenceData> ilrLearnerDetails, LookupContext lookupContext)
         {
             var results = new List<LearnerResults>();
+            if (TestEnvironment.ValidateSpecsOnly)
+            {
+                return results;
+            }
+
 
             var periods = ExtractPeriods(ilrLearnerDetails);
             var providerLearners = GroupLearnersByProvider(ilrLearnerDetails, lookupContext);
