@@ -832,7 +832,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "03/08/2017",
                         "02/11/2017"});
             table201.AddRow(new string[] {
-                        "Non DAS",
+                        "Non-DAS",
                         "03/11/2017",
                         "04/08/2018"});
 #line 123
@@ -1693,7 +1693,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "date from",
                         "date to"});
             table222.AddRow(new string[] {
-                        "Non DAS",
+                        "Non-DAS",
                         "06/08/2017",
                         "31/03/2018"});
             table222.AddRow(new string[] {
@@ -4011,7 +4011,7 @@ this.ScenarioSetup(scenarioInfo);
                         "03/08/2017",
                         "02/10/2017"});
             table265.AddRow(new string[] {
-                        "Non DAS",
+                        "Non-DAS",
                         "03/10/2017",
                         "02/11/2017"});
             table265.AddRow(new string[] {
@@ -4476,7 +4476,7 @@ this.ScenarioSetup(scenarioInfo);
                         "03/08/2017",
                         "02/10/2017"});
             table279.AddRow(new string[] {
-                        "Non DAS",
+                        "Non-DAS",
                         "03/10/2017",
                         "02/11/2017"});
             table279.AddRow(new string[] {
@@ -4934,7 +4934,7 @@ this.ScenarioSetup(scenarioInfo);
                         "03/08/2017",
                         "08/10/2017"});
             table293.AddRow(new string[] {
-                        "Non DAS",
+                        "Non-DAS",
                         "09/10/2017",
                         "02/03/2018"});
             table293.AddRow(new string[] {

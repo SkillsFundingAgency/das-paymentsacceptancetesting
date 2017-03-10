@@ -1,4 +1,4 @@
-﻿using SFA.DAS.Payments.AcceptanceTests.Enums;
+﻿using SFA.DAS.Payments.AcceptanceTests.Refactoring.ReferenceDataModels;
 
 namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ResultsDataModels
 {

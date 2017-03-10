@@ -123,7 +123,7 @@ Feature: Provider earnings and payments where a learner changes employers
         And the Contract type in the ILR is:
             | contract type | date from  | date to    |
             | DAS           | 03/08/2017 | 02/11/2017 |
-            | Non DAS       | 03/11/2017 | 04/08/2018 |
+            | Non-DAS       | 03/11/2017 | 04/08/2018 |
         Then the data lock status of the ILR in 03/12/2017 is:
             | Payment type | 08/17           | 09/17           | 10/17           | 11/17 | 12/17 |
             | On-program   | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 |       |       |
@@ -262,7 +262,7 @@ Feature: Provider earnings and payments where a learner changes employers
             | learner a | 06/08/2017 | 08/08/2018       |                 | continuing        | 5000                 | 06/08/2017                          | 1000                   | 06/08/2017                            | 2500                    | 01/04/2018                             | 1000                      | 01/04/2018                               |
         And the Contract type in the ILR is:
             | contract type | date from  | date to    |
-            | Non DAS       | 06/08/2017 | 31/03/2018 |
+            | Non-DAS       | 06/08/2017 | 31/03/2018 |
             | DAS           | 01/04/2018 | 08/08/2018 |
         Then the data lock status will be as follows:
             | Payment type | 08/17 | 09/17 | 10/17 | ... | 03/18 | 04/18           | 05/18           | 06/18           | 07/18           | 08/18           |
@@ -603,7 +603,7 @@ Scenario:AC1- Provider earnings and payments where learner changes employer and 
         And the Contract type in the ILR is:
             | contract type | date from  | date to    |
             | DAS           | 03/08/2017 | 02/10/2017 |
-            | Non DAS       | 03/10/2017 | 02/11/2017 |
+            | Non-DAS       | 03/10/2017 | 02/11/2017 |
             | DAS           | 03/11/2017 | 04/08/2018 |
         And the employment status in the ILR is:
             | Employer   | Employment Status      | Employment Status Applies |
@@ -689,7 +689,7 @@ Scenario:AC3- Provider earnings and payments where learner changes employer and 
         And the Contract type in the ILR is:
             | contract type | date from  | date to    |
             | DAS           | 03/08/2017 | 02/10/2017 |
-            | Non DAS       | 03/10/2017 | 02/11/2017 |
+            | Non-DAS       | 03/10/2017 | 02/11/2017 |
             | DAS           | 03/11/2017 | 04/08/2018 |
         And the employment status in the ILR is:
             | Employer   | Employment Status      | Employment Status Applies |
@@ -775,7 +775,7 @@ Scenario:AC5-Provider earnings and payments where learner changes employer and t
         And the Contract type in the ILR is:
             | contract type | date from  | date to    |
             | DAS           | 03/08/2017 | 08/10/2017 |
-            | Non DAS       | 09/10/2017 | 02/03/2018 |
+            | Non-DAS       | 09/10/2017 | 02/03/2018 |
             | DAS           | 03/03/2018 | 04/08/2018 |
         And the employment status in the ILR is:
             | Employer   | Employment Status      | Employment Status Applies |
