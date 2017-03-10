@@ -12,7 +12,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.PaymentsAndEar
             var payments = GetPaymentsForBreakdown(breakdown, submissionContext)
                 .Where(p => p.FundingSource == Enums.FundingSource.CoInvestedSfa && p.ContractType == Enums.ContractType.ContractWithSfa)
                 .ToArray();
-            foreach (var period in breakdown.SfaLevyBudget)
+            foreach (var period in breakdown.SfaNonLevyCoFundBudget)
             {
                 AssertResultsForPeriod(period, payments);
             }
@@ -20,7 +20,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.PaymentsAndEar
 
         protected override string FormatAssertionFailureMessage(PeriodValue period, decimal actualPaymentInPeriod)
         {
-            return $"Expected SFA Levy co funded budget to be debited {period.Value} in {period.PeriodName} but was actually debited {actualPaymentInPeriod}";
+            return $"Expected SFA Non Levy co funded budget to be debited {period.Value} in {period.PeriodName} but was actually debited {actualPaymentInPeriod}";
         }
     }
 }

@@ -11,7 +11,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.PaymentsAndEar
             var payments = GetPaymentsForBreakdown(breakdown, submissionContext)
                 .Where(p => p.FundingSource == Enums.FundingSource.CoInvestedSfa && p.ContractType == Enums.ContractType.ContractWithEmployer)
                 .ToArray();
-            foreach (var period in breakdown.SfaLevyBudget)
+            foreach (var period in breakdown.SfaLevyCoFundBudget)
             {
                 AssertResultsForPeriod(period, payments);
             }
