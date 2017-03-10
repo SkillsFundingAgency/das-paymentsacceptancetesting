@@ -151,6 +151,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Refactoring\Assertions\PaymentsAndEarningsAssestions.cs" />
+    <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\EarningsAndPaymentsRuleBase.cs" />
+    <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\EmployersLevyAccountDebitedRule.cs" />
+    <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\PaymentDueFromEmployersRule.cs" />
+    <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\PaymentsRuleBase.cs" />
+    <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\ProviderEarnedTotalRule.cs" />
+    <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\ProviderPaidBySfaRule.cs" />
+    <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\SfaLevyBudgetRule.cs" />
+    <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\SfaLevyCoFundBudgetRule.cs" />
+    <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\SfaNonLevyCoFundBudgetRule.cs" />
     <Compile Include="Refactoring\Contexts\CommitmentsContext.cs" />
     <Compile Include="Refactoring\Contexts\DataLockContext.cs" />
     <Compile Include="Refactoring\Contexts\EarningsAndPaymentsContext.cs" />
@@ -285,9 +294,7 @@
   <ItemGroup>
     <None Include="Resources\ddl.AT.deds.tables.sql" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Refactoring\Assertions\PaymentsAndEarningsRules\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
