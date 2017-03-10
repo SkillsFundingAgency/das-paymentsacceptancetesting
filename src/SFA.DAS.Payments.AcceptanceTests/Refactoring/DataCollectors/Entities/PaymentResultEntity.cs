@@ -12,7 +12,7 @@
         public int TransactionType { get; set; }
         public decimal Amount { get; set; }
 
-        //public int ContractType { get; set; }
+        public int ContractType { get; set; }
 
 
     }
