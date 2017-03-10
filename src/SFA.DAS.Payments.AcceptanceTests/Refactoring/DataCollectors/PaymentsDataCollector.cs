@@ -20,7 +20,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.DataCollectors
 
                 learner.Payments.Add(new PaymentResult
                 {
-                    EmployerAccountId = int.Parse(data.AccountId),
+                    EmployerAccountId = data.AccountId == null ? 0 : int.Parse(data.AccountId),
                     Amount = data.Amount,
                     CalculationPeriod = $"{data.CollectionPeriodMonth:00}/{(data.CollectionPeriodYear - 2000):00}",
                     DeliveryPeriod = $"{data.DeliveryMonth:00}/{(data.DeliveryYear - 2000):00}",
