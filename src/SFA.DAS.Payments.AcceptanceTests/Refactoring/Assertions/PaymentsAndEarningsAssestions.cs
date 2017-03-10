@@ -7,7 +7,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions
     {
         private static readonly EarningsAndPaymentsRuleBase[] Rules = 
         {
-            new ProviderEarnedTotalRule()
+            new ProviderEarnedTotalRule(),
+            new ProviderEarnedFromSfaRule(),
+            new ProviderEarnedFromEmployersRule(),
+            new ProviderPaidBySfaRule(),
+            new PaymentDueFromEmployersRule(),
+            new EmployersLevyAccountDebitedRule(),
+            new SfaLevyBudgetRule(),
+            new SfaLevyCoFundBudgetRule(),
+            new SfaNonLevyCoFundBudgetRule(),
         };
 
         public static void AssertPaymentsAndEarningsResults(EarningsAndPaymentsContext earningsAndPaymentsContext, SubmissionContext submissionContext)
