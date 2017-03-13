@@ -364,17 +364,20 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "ULN",
                         "priority",
                         "start date",
-                        "end date"});
+                        "end date",
+                        "agreed price"});
             table406.AddRow(new string[] {
                         "learner a",
                         "1",
                         "01/09/2017",
-                        "08/09/2018"});
+                        "08/09/2018",
+                        "7500"});
             table406.AddRow(new string[] {
                         "learner b",
                         "2",
                         "01/09/2017",
-                        "08/09/2018"});
+                        "08/09/2018",
+                        "15000"});
 #line 62
         testRunner.And("the following commitments exist:", ((string)(null)), table406, "And ");
 #line hidden
