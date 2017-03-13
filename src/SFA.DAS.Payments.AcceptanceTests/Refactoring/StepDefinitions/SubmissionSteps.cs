@@ -53,7 +53,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
         [When(@"the learning support status of the ILR is:")]
         public void WhenTheLearningSupportStatusOfTheIlrIs(Table learningSupportStatus)
         {
-            //TODO
+            LearningSupportTableParser.ParseLearningSupportIntoContext(SubmissionsContext, learningSupportStatus);
         }
     }
 }

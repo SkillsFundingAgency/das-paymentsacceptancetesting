@@ -12,6 +12,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts
             IlrLearnerDetails = new List<IlrLearnerReferenceData>();
             ContractTypes = new List<ContractTypeReferenceData>();
             EmploymentStatus = new List<EmploymentStatusReferenceData>();
+            LearningSupportStatus = new List<LearningSupportReferenceData>();
         }
 
         public bool HaveSubmissionsBeenDone { get; set; }
@@ -19,5 +20,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts
         public List<LearnerResults> SubmissionResults { get; set; }
         public List<ContractTypeReferenceData> ContractTypes { get; set; }
         public List<EmploymentStatusReferenceData> EmploymentStatus { get; set; }
+        public List<LearningSupportReferenceData> LearningSupportStatus { get; set; }
     }
 }

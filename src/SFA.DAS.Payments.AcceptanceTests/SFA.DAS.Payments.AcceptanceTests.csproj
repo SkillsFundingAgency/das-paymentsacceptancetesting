@@ -198,6 +198,7 @@
     <Compile Include="Refactoring\ReferenceDataModels\IlrLearnerReferenceData.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\LearnerEarningsAndPaymentsBreakdown.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\LearnerType.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\LearningSupportReferenceData.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\PeriodValue.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\ProviderEarnedPeriodValue.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\TransactionType.cs" />
@@ -221,6 +222,7 @@
     <Compile Include="Refactoring\TableParsers\EarningAndPaymentTableParser.cs" />
     <Compile Include="Refactoring\TableParsers\EmploymentStatusTableParser.cs" />
     <Compile Include="Refactoring\TableParsers\IlrTableParser.cs" />
+    <Compile Include="Refactoring\TableParsers\LearningSupportTableParser.cs" />
     <Compile Include="Refactoring\TableParsers\TransactionTypeTableParser.cs" />
     <Compile Include="Refactoring\TestEnvironment.cs" />
     <Compile Include="Refactoring\Validations.cs" />
