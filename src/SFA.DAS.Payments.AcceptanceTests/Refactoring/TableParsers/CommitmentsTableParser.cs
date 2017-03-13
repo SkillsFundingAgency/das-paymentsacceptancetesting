@@ -71,16 +71,16 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
                         structure.EffectiveToIndex = c;
                         break;
                     case "standard code":
-                        // TODO
+                        structure.StandardCodeIndex = c;
                         break;
                     case "framework code":
-                        // TODO
+                        structure.FrameworkCodeIndex = c;
                         break;
                     case "programme type":
-                        // TODO
+                        structure.ProgrammeTypeIndex = c;
                         break;
                     case "pathway code":
-                        // TODO
+                        structure.PathwayCodeIndex = c;
                         break;
                     default:
                         throw new ArgumentException($"Unexpected column in commitments table: {header}");
@@ -109,7 +109,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
             var providerId = structure.ProviderIndex > -1 ? row[structure.ProviderIndex] : Defaults.ProviderId;
             var ukprn = lookupContext.AddOrGetUkprn(providerId);
             var status = (CommitmentPaymentStatus) row.ReadRowColumnValue<string>(structure.StatusIndex, "status", Defaults.CommitmentStatus).ToEnumByDescription(typeof(CommitmentPaymentStatus));
-            var standardCode = Defaults.StandardCode;
 
             int priority = Defaults.CommitmentPriority;
             if (structure.PriorityIndex > -1 && !int.TryParse(row[structure.PriorityIndex], out priority))
@@ -169,6 +168,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
                 throw new ArgumentException($"'{row[structure.EffectiveToIndex]}' is not a valid effective to");
             }
 
+            var standardCode = row.ReadRowColumnValue<long>(structure.StandardCodeIndex, "standard code", Defaults.StandardCode);
+            var frameworkCode = row.ReadRowColumnValue<int>(structure.FrameworkCodeIndex, "framework code");
+            var programmeType = row.ReadRowColumnValue<int>(structure.ProgrammeTypeIndex, "programme type");
+            var pathwayCode = row.ReadRowColumnValue<int>(structure.PathwayCodeIndex, "pathway code");
+
             if (effectiveFrom == null)
             {
                 effectiveFrom = startDate;
@@ -194,7 +198,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
                 EffectiveFrom = effectiveFrom.Value,
                 EffectiveTo = effectiveTo.Value,
                 Status = status,
-                StandardCode = standardCode
+                StandardCode = standardCode,
+                FrameworkCode = frameworkCode == 0 ? 0 : frameworkCode,
+                ProgrammeType = programmeType == 0 ? 0 : programmeType,
+                PathwayCode = pathwayCode == 0 ? 0 : pathwayCode,
             };
         }
 
@@ -227,6 +234,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
             public int StatusIndex { get; set; } = -1;
             public int EffectiveFromIndex { get; set; } = -1;
             public int EffectiveToIndex { get; set; } = -1;
+            public int StandardCodeIndex { get; set; } = -1;
+            public int FrameworkCodeIndex { get; set; } = -1;
+            public int ProgrammeTypeIndex { get; set; } = -1;
+            public int PathwayCodeIndex { get; set; } = -1;
         }
 
     }
