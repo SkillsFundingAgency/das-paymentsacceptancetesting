@@ -1,4 +1,5 @@
-﻿using SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts;
+﻿using System.Linq;
+using SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.ReferenceDataModels;
 
 namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.PaymentsAndEarningsRules
@@ -7,7 +8,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.PaymentsAndEar
     {
         public override void AssertBreakdown(EarningsAndPaymentsBreakdown breakdown, SubmissionContext submissionContext)
         {
-            //TODO
+            var payments = GetPaymentsForBreakdown(breakdown, submissionContext)
+                .Where(p => p.FundingSource == FundingSource.Levy)
+                .ToArray();
+            foreach (var period in breakdown.SfaLevyBudget)
+            {
+                AssertResultsForPeriod(period, payments);
+            }
         }
 
         protected override string FormatAssertionFailureMessage(PeriodValue period, decimal actualPaymentInPeriod)
