@@ -431,9 +431,9 @@ this.ScenarioSetup(scenarioInfo);
                         "planned end date",
                         "actual end date",
                         "completion status",
-                        "Framework Code",
-                        "Programme Type",
-                        "Pathway Code"});
+                        "framework code",
+                        "programme type",
+                        "pathway code"});
             table9.AddRow(new string[] {
                         "123456",
                         "16-18 programme only non-DAS",
@@ -727,9 +727,9 @@ this.ScenarioSetup(scenarioInfo);
                         "planned end date",
                         "actual end date",
                         "completion status",
-                        "Framework Code",
-                        "Programme Type",
-                        "Pathway Code"});
+                        "framework code",
+                        "programme type",
+                        "pathway code"});
             table12.AddRow(new string[] {
                         "123455",
                         "16-18 programme only non-DAS",
@@ -1027,7 +1027,7 @@ this.ScenarioSetup(scenarioInfo);
                         "home postcode deprivation"});
             table15.AddRow(new string[] {
                         "learner a",
-                        "programme only non - DAS",
+                        "programme only non-DAS",
                         "15000",
                         "06/08/2017",
                         "08/08/2018",
@@ -1107,7 +1107,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table16.AddRow(new string[] {
-                        "SFA levy co-funding budget",
+                        "SFA Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -1118,7 +1118,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table16.AddRow(new string[] {
-                        "SFA non-levy co-funding budget",
+                        "SFA non-Levy co-funding budget",
                         "900",
                         "900",
                         "900",
@@ -1129,7 +1129,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table16.AddRow(new string[] {
-                        "SFA non-levy additional payments budget",
+                        "SFA non-Levy additional payments budget",
                         "0",
                         "0",
                         "0",
@@ -1140,7 +1140,7 @@ this.ScenarioSetup(scenarioInfo);
                         "300",
                         "0"});
             table16.AddRow(new string[] {
-                        "SFA levy additional payments budget",
+                        "SFA Levy additional payments budget",
                         "0",
                         "0",
                         "0",
@@ -1310,7 +1310,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table19.AddRow(new string[] {
-                        "SFA levy co-funding budget",
+                        "SFA Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -1321,7 +1321,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table19.AddRow(new string[] {
-                        "SFA non-levy co-funding budget",
+                        "SFA non-Levy co-funding budget",
                         "900",
                         "900",
                         "900",
@@ -1332,7 +1332,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table19.AddRow(new string[] {
-                        "SFA non-levy  additional payments budget",
+                        "SFA non-Levy additional payments budget",
                         "0",
                         "0",
                         "0",
@@ -1343,7 +1343,7 @@ this.ScenarioSetup(scenarioInfo);
                         "150",
                         "0"});
             table19.AddRow(new string[] {
-                        "SFA levy additional payments budget",
+                        "SFA Levy additional payments budget",
                         "0",
                         "0",
                         "0",
@@ -1433,7 +1433,7 @@ this.ScenarioSetup(scenarioInfo);
                         "home postcode deprivation"});
             table21.AddRow(new string[] {
                         "learner a",
-                        "programme only non- DAS",
+                        "programme only non-DAS",
                         "15000",
                         "06/08/2017",
                         "08/08/2018",
@@ -1513,7 +1513,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table22.AddRow(new string[] {
-                        "SFA levy co-funding budget",
+                        "SFA Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -1524,7 +1524,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table22.AddRow(new string[] {
-                        "SFA non-levy co-funding budget",
+                        "SFA non-Levy co-funding budget",
                         "900",
                         "900",
                         "900",
@@ -1535,7 +1535,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table22.AddRow(new string[] {
-                        "SFA non-levy additional payments budget",
+                        "SFA non-Levy additional payments budget",
                         "0",
                         "0",
                         "0",
@@ -1546,7 +1546,7 @@ this.ScenarioSetup(scenarioInfo);
                         "100",
                         "0"});
             table22.AddRow(new string[] {
-                        "SFA levy additional payments budget",
+                        "SFA Levy additional payments budget",
                         "0",
                         "0",
                         "0",
@@ -1634,7 +1634,7 @@ this.ScenarioSetup(scenarioInfo);
                         "home postcode deprivation"});
             table24.AddRow(new string[] {
                         "learner a",
-                        "programme only non- DAS",
+                        "programme only non-DAS",
                         "15000",
                         "06/08/2017",
                         "08/08/2018",
@@ -1714,7 +1714,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table25.AddRow(new string[] {
-                        "SFA levy co-funding budget",
+                        "SFA Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -1725,7 +1725,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table25.AddRow(new string[] {
-                        "SFA non-levy co-funding budget",
+                        "SFA non-Levy co-funding budget",
                         "900",
                         "900",
                         "900",
@@ -1736,7 +1736,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table25.AddRow(new string[] {
-                        "SFA non-levy additional payments budget",
+                        "SFA non-Levy additional payments budget",
                         "0",
                         "0",
                         "0",
@@ -1747,7 +1747,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table25.AddRow(new string[] {
-                        "SFA levy additional payments budget",
+                        "SFA Levy additional payments budget",
                         "0",
                         "0",
                         "0",
@@ -2371,8 +2371,8 @@ this.ScenarioSetup(scenarioInfo);
     testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table34 = new TechTalk.SpecFlow.Table(new string[] {
-                        "commitment ID",
-                        "version ID",
+                        "commitment Id",
+                        "version Id",
                         "ULN",
                         "start date",
                         "end date",
@@ -2489,7 +2489,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table36.AddRow(new string[] {
-                        "SFA levy co-funding budget",
+                        "SFA Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -2500,7 +2500,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table36.AddRow(new string[] {
-                        "SFA non-levy co-funding budget",
+                        "SFA non-Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -2511,7 +2511,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table36.AddRow(new string[] {
-                        "SFA non-levy additional payments budget",
+                        "SFA non-Levy additional payments budget",
                         "0",
                         "0",
                         "0",
@@ -2522,7 +2522,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table36.AddRow(new string[] {
-                        "SFA levy additional payments budget",
+                        "SFA Levy additional payments budget",
                         "0",
                         "0",
                         "0",
@@ -2601,8 +2601,8 @@ this.ScenarioSetup(scenarioInfo);
     testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table38 = new TechTalk.SpecFlow.Table(new string[] {
-                        "commitment ID",
-                        "version ID",
+                        "commitment Id",
+                        "version Id",
                         "ULN",
                         "start date",
                         "end date",
@@ -2719,7 +2719,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table40.AddRow(new string[] {
-                        "SFA levy co-funding budget",
+                        "SFA Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -2730,7 +2730,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table40.AddRow(new string[] {
-                        "SFA non-levy co-funding budget",
+                        "SFA non-Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -2741,7 +2741,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table40.AddRow(new string[] {
-                        "SFA non-levy additional payments budget",
+                        "SFA non-Levy additional payments budget",
                         "0",
                         "0",
                         "0",
@@ -2752,7 +2752,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table40.AddRow(new string[] {
-                        "SFA levy additional payments budget",
+                        "SFA Levy additional payments budget",
                         "0",
                         "0",
                         "0",
@@ -2831,8 +2831,8 @@ this.ScenarioSetup(scenarioInfo);
     testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table42 = new TechTalk.SpecFlow.Table(new string[] {
-                        "commitment ID",
-                        "version ID",
+                        "commitment Id",
+                        "version Id",
                         "ULN",
                         "start date",
                         "end date",
@@ -2949,7 +2949,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table44.AddRow(new string[] {
-                        "SFA levy co-funding budget",
+                        "SFA Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -2960,7 +2960,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table44.AddRow(new string[] {
-                        "SFA non-levy co-funding budget",
+                        "SFA non-Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -2971,7 +2971,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table44.AddRow(new string[] {
-                        "SFA non-levy additional payments budget",
+                        "SFA non-Levy additional payments budget",
                         "0",
                         "0",
                         "0",
@@ -2982,7 +2982,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table44.AddRow(new string[] {
-                        "SFA levy  additional payments budget",
+                        "SFA Levy additional payments budget",
                         "0",
                         "0",
                         "0",
@@ -3061,8 +3061,8 @@ this.ScenarioSetup(scenarioInfo);
     testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table46 = new TechTalk.SpecFlow.Table(new string[] {
-                        "commitment ID",
-                        "version ID",
+                        "commitment Id",
+                        "version Id",
                         "ULN",
                         "start date",
                         "end date",
@@ -3179,7 +3179,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table48.AddRow(new string[] {
-                        "SFA levy co-funding budget",
+                        "SFA Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -3190,7 +3190,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table48.AddRow(new string[] {
-                        "SFA non-levy co-funding budget",
+                        "SFA non-Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -3201,7 +3201,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table48.AddRow(new string[] {
-                        "SFA non-levy additional payments budget",
+                        "SFA non-Levy additional payments budget",
                         "0",
                         "0",
                         "0",
@@ -3212,7 +3212,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table48.AddRow(new string[] {
-                        "SFA levy additional payments budget",
+                        "SFA Levy additional payments budget",
                         "0",
                         "0",
                         "0",
@@ -5440,9 +5440,9 @@ this.ScenarioSetup(scenarioInfo);
                         "planned end date",
                         "actual end date",
                         "completion status",
-                        "Framework Code",
-                        "Programme Type",
-                        "Pathway Code"});
+                        "framework code",
+                        "programme type",
+                        "pathway code"});
             table85.AddRow(new string[] {
                         "123456",
                         "16-18 programme only non-DAS",
@@ -5742,9 +5742,9 @@ this.ScenarioSetup(scenarioInfo);
                         "planned end date",
                         "actual end date",
                         "completion status",
-                        "Framework Code",
-                        "Programme Type",
-                        "Pathway Code"});
+                        "framework code",
+                        "programme type",
+                        "pathway code"});
             table88.AddRow(new string[] {
                         "123456",
                         "16-18 programme only non-DAS",
@@ -6539,8 +6539,8 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0",
+                        "...",
                         "0",
-                        "..",
                         "0",
                         "0",
                         "0",

@@ -12,6 +12,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring
             {
                 try
                 {
+                    if (typeof(T) == typeof(DateTime?))
+                    {
+                        return (T)Convert.ChangeType(row[columnIndex], typeof(DateTime));
+                    }
+
                     return (T)Convert.ChangeType(row[columnIndex], typeof(T));
                 }
                 catch (Exception ex)
