@@ -80,7 +80,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
         [Scope(Tag = "LearnerChangesEmployerGapInCommitments")]
         [Scope(Tag = "SmallEmployerNonDasMultipleEmploymentStatuses")]
         [Scope(Tag = "SmallEmployerMultipleEmploymentStatus")]
-        public void WhenAnIlrFileIsSubmittedWithTheFollowingDataNoSubmissionGapInCommitments(Table table)
+
+        [Scope(Tag = "LearningSupport")]
+        public void WhenAnIlrFileIsSubmittedWithTheFollowingDataAndThereIsAnotherWhenStepInTheScenario(Table table)
         {
             ScenarioContext.Current.Add("learners", table);
         }
@@ -115,6 +117,16 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             ProcessIlrFileSubmissions(learnerTable);
         }
 
+        [When(@"the learning support status of the ILR is:")]
+        public void WhenTheLearningSupportStatusOfTheIlrIs(Table table)
+        {
+            Table learnerTable = null;
+
+            BuildLearningSupportRecords(table);
+
+            ScenarioContext.Current.TryGetValue("learners", out learnerTable);
+            ProcessIlrFileSubmissions(learnerTable);
+        }
 
         [Then(@"the provider earnings and payments break down as follows:")]
         public void ThenTheProviderEarningsBreakDownAsFollows(Table table)
@@ -144,6 +156,30 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
         {
             var provider = StepDefinitionsContext.Providers.Single(x=> x.Name.Equals(providerName,StringComparison.CurrentCultureIgnoreCase));
             VerifyTransactionsForThePayments(table, provider.Ukprn);
+        }
+
+        [Then(@"the following capping will apply to the price episodes:")]
+        public void ThenTheFollowingCappingWillApplyToThePriceEpisodes(Table table)
+        {
+            for (var rowIndex = 0; rowIndex < table.RowCount; rowIndex++)
+            {
+                var provider = table.Rows[rowIndex].Contains("provider")
+                    ? StepDefinitionsContext.GetProvider(table.Rows[rowIndex].Value<string>("provider"))
+                    : StepDefinitionsContext.GetDefaultProvider();
+
+                var priceEpisode = provider.GetPriceEpisode(table.Rows[rowIndex].Value<string>("price episode"));
+                var expectedNegotiatedPrice = table.Rows[rowIndex].Value<decimal>("negotiated price");
+                var expectedPreviousFunding = table.Rows[rowIndex].Value<decimal>("previous funding paid");
+                var expectedPriceAboveCap = table.Rows[rowIndex].Value<decimal>("price above cap");
+                var expectedPriceForSfaPayments = table.Rows[rowIndex].Value<decimal>("effective price for SFA payments");
+
+                var actualPriceEpisode = LearnerDataHelper.GetOpaApprenticeshipPriceEpisode(provider.Ukprn, priceEpisode.Id, EnvironmentVariables);
+
+                Assert.AreEqual(expectedNegotiatedPrice, actualPriceEpisode.PriceEpisodeTotalTNPPrice, $"Expecting a total negotiated price of {expectedNegotiatedPrice} for pride episode {priceEpisode.DataLockMatchKey} but found {actualPriceEpisode.PriceEpisodeTotalTNPPrice}.");
+                Assert.AreEqual(expectedPreviousFunding, actualPriceEpisode.PriceEpisodePreviousEarnings, $"Expecting previous funding of {expectedPreviousFunding} for pride episode {priceEpisode.DataLockMatchKey} but found {actualPriceEpisode.PriceEpisodePreviousEarnings}.");
+                Assert.AreEqual(expectedPriceAboveCap, actualPriceEpisode.PriceEpisodeUpperLimitAdjustment, $"Expecting a price above cap of {expectedPriceAboveCap} for pride episode {priceEpisode.DataLockMatchKey} but found {actualPriceEpisode.PriceEpisodeUpperLimitAdjustment}.");
+                Assert.AreEqual(expectedPriceForSfaPayments, actualPriceEpisode.PriceEpisodeUpperBandLimit, $"Expecting an effective price for SFA payments of {expectedPriceForSfaPayments} for pride episode {priceEpisode.DataLockMatchKey} but found {actualPriceEpisode.PriceEpisodeUpperBandLimit}.");
+            }
         }
 
         private void BuildContractTypes(Table table)
@@ -178,6 +214,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             var frameworkUpliftCompletionRow = table.Rows.RowWithKey(RowKeys.FrameworkUpliftCompletion);
             var disadvatngePaymentRow = table.Rows.RowWithKey(RowKeys.ProviderDisadvantageUplift);
 
+            var englishAndMathsOnProgRow = table.Rows.RowWithKey(RowKeys.EnglishAndMathsOnProgramme);
+            var englishAndMathsBalancingRow = table.Rows.RowWithKey(RowKeys.EnglishAndMathsBlancing);
+
             for (var colIndex = 1; colIndex < table.Header.Count; colIndex++)
             {
                 var periodName = table.Header.ElementAt(colIndex);
@@ -207,6 +246,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
                 VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, new TransactionType[] { TransactionType.Completion16To18FrameworkUplift }, frameworkUpliftCompletionRow,null, FundingSource.FullyFundedSfa);
                 VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, new TransactionType[] { TransactionType.Balancing16To18FrameworkUplift }, frameworkUpliftBalancingRow,null, FundingSource.FullyFundedSfa);
 
+                VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, new TransactionType[] { TransactionType.OnProgrammeMathsAndEnglish }, englishAndMathsOnProgRow, null, FundingSource.FullyFundedSfa);
+                VerifyPaymentsDueByTransactionType(ukprn, periodName, periodDate, colIndex, new TransactionType[] { TransactionType.BalancingMathsAndEnglish}, englishAndMathsBalancingRow, null, FundingSource.FullyFundedSfa);
+
                 VerifyPaymentsDueByTransactionType(ukprn, periodName,
                                                                periodDate, colIndex,
                                                                new TransactionType[] {
@@ -232,6 +274,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
         {
             SetupContextProviders(table);
             SetupContexLearners(table);
+
+            AddScenarioReferenceData();
 
             var startDate = firstSubmissionDate ?? StepDefinitionsContext.GetIlrStartDate().NextCensusDate();
 
@@ -562,6 +606,22 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             var expectedPaymentDue = decimal.Parse(additionalEarningsRow[colIndex]);
             Assert.AreEqual(expectedPaymentDue, actualEarningsDue, $"Expected additional earnings of {expectedPaymentDue} but earned a payment of {actualEarningsDue} for {periodName}");
 
+        }
+
+        private void BuildLearningSupportRecords(Table table)
+        {
+            for (var rowIndex = 0; rowIndex < table.RowCount; rowIndex++)
+            {
+                var famCode = new LearningDeliveryFam
+                {
+                    FamCode = table.Rows[rowIndex].Value<int>("Learning support code"),
+                    StartDate = DateTime.Parse(table.Rows[rowIndex].Value<string>("date from")),
+                    EndDate = DateTime.Parse(table.Rows[rowIndex].Value<string>("date to")),
+                    FamType = "LSF"
+                };
+
+                StepDefinitionsContext.ReferenceDataContext.AddLearningDeliveryFam(famCode);
+            }
         }
     }
 }

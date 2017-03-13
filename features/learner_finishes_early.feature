@@ -3,7 +3,7 @@ Feature: Provider earnings and payments where learner completes earlier than pla
     The earnings and payment rules for early completions are the same as for learners finishing on time, except that the completion payment is earned earlier.
 
     Background:
-        Given the apprenticeship funding band maximum for each learner is 17000
+        Given the apprenticeship funding band maximum for each learner is 20000
 
     Scenario: A DAS learner, levy available, learner finishes one month early
         Given levy balance > agreed price for all months

@@ -37,5 +37,21 @@ namespace SFA.DAS.Payments.AcceptanceTests.Entities
             DataLockMatchesByPeriod = new Dictionary<string, DataLockMatch[]>();
             EarnedByPeriodByUln = new Dictionary<long, Dictionary<string, decimal>>();
         }
+
+        public PriceEpisode GetPriceEpisode(string key)
+        {
+            foreach (var learner in Learners)
+            {
+                foreach (var learningDelivery in learner.LearningDeliveries)
+                {
+                    if (learningDelivery.PriceEpisodes.Any(pe => pe.DataLockMatchKey == key))
+                    {
+                        return learningDelivery.PriceEpisodes.First(pe => pe.DataLockMatchKey == key);
+                    }
+                }
+            }
+
+            return null;
+        }
     }
 }
