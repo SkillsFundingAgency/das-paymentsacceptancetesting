@@ -36,6 +36,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring
         internal static ILogger Logger { get; }
         internal static EnvironmentVariables Variables { get; }
         internal static ProcessService ProcessService { get; }
-        internal static bool ValidateSpecsOnly { get; } = false;
+        internal static bool ValidateSpecsOnly { get; } = true;
     }
 }

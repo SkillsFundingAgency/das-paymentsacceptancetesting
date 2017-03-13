@@ -210,6 +210,9 @@
     <Compile Include="Refactoring\StepDefinitions\CommitmentSteps.cs" />
     <Compile Include="Refactoring\StepDefinitions\DataLockSteps.cs" />
     <Compile Include="Refactoring\StepDefinitions\EarningAndPaymentSteps.cs" />
+    <Compile Include="Refactoring\StepDefinitions\FeatureSteps\DataLockFeatureSteps.cs" />
+    <Compile Include="Refactoring\StepDefinitions\FeatureSteps\EarningsCalcFeatureSteps.cs" />
+    <Compile Include="Refactoring\StepDefinitions\FeatureSteps\PaymentsCalcFeatureSteps.cs" />
     <Compile Include="Refactoring\StepDefinitions\SubmissionSteps.cs" />
     <Compile Include="Refactoring\StepDefinitions\UntestedSteps.cs" />
     <Compile Include="Refactoring\TableParsers\CommitmentsTableParser.cs" />

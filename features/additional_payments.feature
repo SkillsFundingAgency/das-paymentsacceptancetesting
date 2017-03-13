@@ -783,7 +783,7 @@ Scenario: 637-AC01-Payment for a non-DAS learner, requires learning support, doi
         | Levy account debited                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | SFA Levy employer budget                | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | SFA non Levy co-funding budget          | 900   | 900   | 900   | 900   | 900   | ... | 900   | 2700  | 0     |
+        | SFA non-Levy co-funding budget          | 900   | 900   | 900   | 900   | 900   | ... | 900   | 2700  | 0     |
         | SFA non-Levy additional payments budget | 150   | 150   | 150   | 150   | 150   | ... | 150   | 0     | 0     |
     And the transaction types for the payments are:
         | Payment type                 | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
@@ -814,7 +814,7 @@ Scenario: 637-AC02-Payment for a non-DAS learner, requires learning support, doi
         | Levy account debited                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | SFA Levy employer budget                | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | SFA non Levy co-funding budget          | 900   | 900   | 900   | 900   | 900   | ... | 900   | 2700  | 0     |
+        | SFA non-Levy co-funding budget          | 900   | 900   | 900   | 900   | 900   | ... | 900   | 2700  | 0     |
         | SFA non-Levy additional payments budget | 150   | 150   | 150   | 150   | 150   | ... | 150   | 0     | 0     |
     And the transaction types for the payments are:
         | Payment type                 | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
@@ -849,7 +849,7 @@ Scenario: 637-AC03-Payment for a DAS learner, requires learning support, doing a
         | Levy account debited                    | 0     | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 1000  | 3000  |
         | SFA Levy employer budget                | 1000  | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 3000  | 0     |
         | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | SFA non Levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+        | SFA non-Levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | SFA Levy additional payments budget     | 150   | 150   | 150   | 150   | 150   | ... | 150   | 0     | 0     |
         | SFA non-Levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
     And the transaction types for the payments are:
@@ -885,7 +885,7 @@ Scenario: 637-AC04-Payment for a DAS learner, requires learning support, doing a
         | Levy account debited                    | 0     | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 1000  | 3000  |
         | SFA Levy employer budget                | 1000  | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 3000  | 0     |
         | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | SFA non Levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+        | SFA non-Levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | SFA Levy additional payments budget     | 150   | 150   | 150   | 150   | 150   | ... | 150   | 0     | 0     |
         | SFA non-Levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
     And the transaction types for the payments are:

@@ -49,5 +49,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
         {
             EmploymentStatusTableParser.ParseEmploymentStatusIntoContext(SubmissionsContext, employmentStatus);
         }
+
+        [When(@"the learning support status of the ILR is:")]
+        public void WhenTheLearningSupportStatusOfTheIlrIs(Table learningSupportStatus)
+        {
+            //TODO
+        }
     }
 }

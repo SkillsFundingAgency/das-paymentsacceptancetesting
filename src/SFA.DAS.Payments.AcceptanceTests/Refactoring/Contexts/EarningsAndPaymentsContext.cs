@@ -21,6 +21,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts
             ProviderEarnedForFrameworkUpliftOnProgramme = new List<ProviderEarnedPeriodValue>();
             ProviderEarnedForFrameworkUpliftOnCompletion = new List<ProviderEarnedPeriodValue>();
             ProviderEarnedForFrameworkUpliftOnBalancing = new List<ProviderEarnedPeriodValue>();
+            ProviderEarnedForLearningSupport = new List<ProviderEarnedPeriodValue>();
         }
 
         public List<EarningsAndPaymentsBreakdown> OverallEarningsAndPayments { get; set; }
@@ -37,5 +38,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts
         public List<ProviderEarnedPeriodValue> ProviderEarnedForFrameworkUpliftOnProgramme { get; set; }
         public List<ProviderEarnedPeriodValue> ProviderEarnedForFrameworkUpliftOnCompletion { get; set; }
         public List<ProviderEarnedPeriodValue> ProviderEarnedForFrameworkUpliftOnBalancing { get; set; }
+        public List<ProviderEarnedPeriodValue> ProviderEarnedForLearningSupport { get; set; }
     }
 }

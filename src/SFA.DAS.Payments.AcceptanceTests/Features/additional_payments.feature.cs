@@ -6700,7 +6700,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table100.AddRow(new string[] {
-                        "SFA non Levy co-funding budget",
+                        "SFA non-Levy co-funding budget",
                         "900",
                         "900",
                         "900",
@@ -6962,7 +6962,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table104.AddRow(new string[] {
-                        "SFA non Levy co-funding budget",
+                        "SFA non-Levy co-funding budget",
                         "900",
                         "900",
                         "900",
@@ -7255,7 +7255,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table109.AddRow(new string[] {
-                        "SFA non Levy co-funding budget",
+                        "SFA non-Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -7551,7 +7551,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table114.AddRow(new string[] {
-                        "SFA non Levy co-funding budget",
+                        "SFA non-Levy co-funding budget",
                         "0",
                         "0",
                         "0",

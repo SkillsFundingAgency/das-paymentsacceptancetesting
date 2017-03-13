@@ -100,9 +100,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
                 {
                     ParseProviderRow(providerId, row, periodNames, context.ProviderEarnedForFrameworkUpliftOnBalancing);
                 }
+                else if (row[0] == "Provider learning support")
+                {
+                    ParseProviderRow(providerId, row, periodNames, context.ProviderEarnedForLearningSupport);
+                }
                 else
                 {
-                    throw new ArgumentException($"Unexpected earning and payments row type of '{row[0]}'");
+                    throw new ArgumentException($"Unexpected transation types row type of '{row[0]}'");
                 }
             }
         }

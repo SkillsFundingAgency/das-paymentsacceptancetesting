@@ -21,5 +21,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
         public void GivenTheLearnerChangesEmployers(Table employmentDates)
         {
         }
+
+        [Then(@"the following capping will apply to the price episodes:")]
+        public void ThenTheFollowingCappingWillApplyToThePriceEpisodes(Table table)
+        {
+            //TODO
+        }
     }
 }
