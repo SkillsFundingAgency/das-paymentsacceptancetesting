@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.ReferenceDataModels;
@@ -29,6 +30,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
             }
         }
 
+        internal static void UpdateAccountBalancesForPeriod(IEnumerable<EmployerAccountReferenceData> accounts, string period)
+        {
+            foreach(var account in accounts)
+            {
+                UpdateAccountBalanceForPeriod(account, period);
+            }
+        }
         internal static void UpdateAccountBalanceForPeriod(EmployerAccountReferenceData account, string period)
         {
             if (TestEnvironment.ValidateSpecsOnly)
@@ -45,12 +53,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
             using (var connection = new SqlConnection(TestEnvironment.Variables.DedsDatabaseConnectionString))
             {
                 connection.Execute("UPDATE dbo.DasAccounts " +
-                                   "SET Balance = @Balance" +
-                                   "WHERE AccountId = @AccountId",
+                                   "SET Balance = @Balance " +
+                                   "WHERE AccountId = @AccountId ",
                                    new
                                    {
                                        AccountId = account.Id,
-                                       Balance = account.Balance
+                                       Balance = periodBalance.Value
                                    });
             }
         }

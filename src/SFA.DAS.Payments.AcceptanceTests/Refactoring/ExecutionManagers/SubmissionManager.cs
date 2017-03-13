@@ -12,7 +12,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
 {
     internal static class SubmissionManager
     {
-        internal static List<LearnerResults> SubmitIlrAndRunMonthEndAndCollateResults(List<IlrLearnerReferenceData> ilrLearnerDetails, LookupContext lookupContext)
+        internal static List<LearnerResults> SubmitIlrAndRunMonthEndAndCollateResults(List<IlrLearnerReferenceData> ilrLearnerDetails, LookupContext lookupContext, List<EmployerAccountReferenceData> employers)
         {
             var results = new List<LearnerResults>();
             if (TestEnvironment.ValidateSpecsOnly)
@@ -26,6 +26,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
             foreach (var period in periods)
             {
                 SetEnvironmentToPeriod(period);
+                EmployerAccountManager.UpdateAccountBalancesForPeriod(employers, period);
+
                 foreach (var providerDetails in providerLearners)
                 {
                     BuildAndSubmitIlr(providerDetails, period, lookupContext);
@@ -35,7 +37,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                 EarningsCollector.CollectForPeriod(period, results, lookupContext);
                 DataLockResultCollector.CollectForPeriod(period, results, lookupContext);
             }
-           PaymentsDataCollector.CollectForPeriod(results, lookupContext);
+            PaymentsDataCollector.CollectForPeriod(results, lookupContext);
 
             return results;
         }
