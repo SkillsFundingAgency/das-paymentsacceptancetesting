@@ -18,23 +18,23 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions
             new SfaNonLevyAdditionalPaymentsRule()
         };
 
-        public static void AssertPaymentsAndEarningsResults(EarningsAndPaymentsContext earningsAndPaymentsContext, SubmissionContext submissionContext)
+        public static void AssertPaymentsAndEarningsResults(EarningsAndPaymentsContext earningsAndPaymentsContext, SubmissionContext submissionContext, EmployerAccountContext employerAccountContext)
         {
             if (TestEnvironment.ValidateSpecsOnly)
             {
                 return;
             }
 
-            ValidateOverallEarningsAndPayments(earningsAndPaymentsContext, submissionContext);
+            ValidateOverallEarningsAndPayments(earningsAndPaymentsContext, submissionContext, employerAccountContext);
         }
 
-        private static void ValidateOverallEarningsAndPayments(EarningsAndPaymentsContext earningsAndPaymentsContext, SubmissionContext submissionContext)
+        private static void ValidateOverallEarningsAndPayments(EarningsAndPaymentsContext earningsAndPaymentsContext, SubmissionContext submissionContext, EmployerAccountContext employerAccountContext)
         {
             foreach (var breakdown in earningsAndPaymentsContext.OverallEarningsAndPayments)
             {
                 foreach (var rule in Rules)
                 {
-                    rule.AssertBreakdown(breakdown, submissionContext);
+                    rule.AssertBreakdown(breakdown, submissionContext, employerAccountContext);
                 }
             }
         }

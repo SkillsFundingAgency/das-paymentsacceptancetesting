@@ -32,13 +32,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
                 throw new ArgumentException($"Employer number '{employerNumber}' is not a valid number");
             }
 
-            AddEmployerAccount(id, int.MaxValue);
+            AddOrUpdateEmployerAccount(id, int.MaxValue);
         }
 
         [Given("levy balance = 0 for all months")]
         public void GivenLevyBalanceIsZero()
         {
-            AddEmployerAccount(Defaults.EmployerAccountId, 0m);
+            AddOrUpdateEmployerAccount(Defaults.EmployerAccountId, 0m);
         }
 
         [Given("the employer's levy balance is:")]
@@ -86,22 +86,46 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
                 });
             }
 
-            AddEmployerAccount(id, 0m, periodBalances);
+            AddOrUpdateEmployerAccount(id, 0m, periodBalances);
+        }
+
+        [Given("the learner changes employers")]
+        public void GivenTheLearnerChangesEmployers(Table employmentDates)
+        {
+            foreach (var row in employmentDates.Rows)
+            {
+                var employerAccountId = int.Parse(row[0].Substring("employer ".Length));
+                var isLevyPayer = row[1].Equals("DAS", System.StringComparison.CurrentCultureIgnoreCase);
+
+                var account = EmployerAccountContext.EmployerAccounts.SingleOrDefault(a => a.Id == employerAccountId);
+                if (account == null)
+                {
+                    account = AddOrUpdateEmployerAccount(employerAccountId, 0, null, isLevyPayer);
+                }
+                account.IsLevyPayer = isLevyPayer;
+            }
         }
 
 
-        private void AddEmployerAccount(int id, decimal balance, List<PeriodValue> periodBalances = null)
+        private EmployerAccountReferenceData AddOrUpdateEmployerAccount(int id, decimal balance, List<PeriodValue> periodBalances = null, bool isLevyPayer = true)
         {
-            var account = new EmployerAccountReferenceData
+            var account = EmployerAccountContext.EmployerAccounts.SingleOrDefault(a => a.Id == id);
+            if (account == null)
             {
-                Id = id,
-                Balance = balance,
-                PeriodBalances = periodBalances ?? new List<PeriodValue>()
-            };
+                account = new EmployerAccountReferenceData
+                {
+                    Id = id
+                };
+                EmployerAccountContext.EmployerAccounts.Add(account);
+            }
 
-            EmployerAccountManager.AddAccount(account);
+            account.Balance = balance;
+            account.PeriodBalances = periodBalances ?? new List<PeriodValue>();
+            account.IsLevyPayer = isLevyPayer;
 
-            EmployerAccountContext.EmployerAccounts.Add(account);
+            EmployerAccountManager.AddOrUpdateAccount(account);
+
+            return account;
         }
     }
 }

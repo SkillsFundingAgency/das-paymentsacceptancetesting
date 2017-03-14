@@ -8,7 +8,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.PaymentsAndEar
 {
     public class ProviderEarnedTotalRule : EarningsAndPaymentsRuleBase
     {
-        public override void AssertBreakdown(EarningsAndPaymentsBreakdown breakdown, SubmissionContext submissionContext)
+        public override void AssertBreakdown(EarningsAndPaymentsBreakdown breakdown, SubmissionContext submissionContext, EmployerAccountContext employerAccountContext)
         {
             var allEarnings = GetEarningsForBreakdown(breakdown, submissionContext);
             foreach (var period in breakdown.ProviderEarnedTotal)

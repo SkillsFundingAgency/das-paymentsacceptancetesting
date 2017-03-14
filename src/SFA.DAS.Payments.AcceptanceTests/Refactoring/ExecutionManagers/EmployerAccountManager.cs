@@ -8,7 +8,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
 {
     internal class EmployerAccountManager
     {
-        internal static void AddAccount(EmployerAccountReferenceData account)
+        internal static void AddOrUpdateAccount(EmployerAccountReferenceData account)
         {
             if (TestEnvironment.ValidateSpecsOnly)
             {
@@ -17,16 +17,27 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
 
             using (var connection = new SqlConnection(TestEnvironment.Variables.DedsDatabaseConnectionString))
             {
-                connection.Execute("INSERT INTO dbo.DasAccounts (AccountId, AccountHashId, AccountName, Balance, VersionId) " +
-                                    "VALUES (@AccountId, @AccountHashId, @AccountName, @Balance, @VersionId)",
-                                    new
-                                    {
-                                        AccountId = account.Id,
-                                        AccountHashId = account.Id.ToString(),
-                                        AccountName = $"Employer {account.Id}",
-                                        Balance = account.Balance,
-                                        VersionId = 1
-                                    });
+                var rowsAffected = connection.Execute("UPDATE dbo.DasAccounts " +
+                                                      "SET Balance = @Balance " +
+                                                      "WHERE AccountId = @AccountId",
+                                                      new
+                                                      {
+                                                          AccountId = account.Id,
+                                                          Balance = account.Balance,
+                                                      });
+                if (rowsAffected < 1)
+                {
+                    connection.Execute("INSERT INTO dbo.DasAccounts (AccountId, AccountHashId, AccountName, Balance, VersionId) " +
+                                       "VALUES (@AccountId, @AccountHashId, @AccountName, @Balance, @VersionId)",
+                        new
+                        {
+                            AccountId = account.Id,
+                            AccountHashId = account.Id.ToString(),
+                            AccountName = $"Employer {account.Id}",
+                            Balance = account.Balance,
+                            VersionId = 1
+                        });
+                }
             }
         }
 

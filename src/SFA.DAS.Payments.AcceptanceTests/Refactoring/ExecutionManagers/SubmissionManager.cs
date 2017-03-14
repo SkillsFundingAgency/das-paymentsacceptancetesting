@@ -12,7 +12,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
 {
     internal static class SubmissionManager
     {
-        internal static List<LearnerResults> SubmitIlrAndRunMonthEndAndCollateResults(List<IlrLearnerReferenceData> ilrLearnerDetails, LookupContext lookupContext, List<EmployerAccountReferenceData> employers)
+        private const string FamCodeAct = "ACT";
+        private const short FamCodeActDasValue = 1;
+        private const short FamCodeActNonDasValue = 2;
+
+        internal static List<LearnerResults> SubmitIlrAndRunMonthEndAndCollateResults(List<IlrLearnerReferenceData> ilrLearnerDetails,
+                                                                                      LookupContext lookupContext,
+                                                                                      List<EmployerAccountReferenceData> employers,
+                                                                                      List<ContractTypeReferenceData> contractTypes)
         {
             var results = new List<LearnerResults>();
             if (TestEnvironment.ValidateSpecsOnly)
@@ -30,7 +37,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
 
                 foreach (var providerDetails in providerLearners)
                 {
-                    BuildAndSubmitIlr(providerDetails, period, lookupContext);
+                    BuildAndSubmitIlr(providerDetails, period, lookupContext, contractTypes);
                 }
                 RunMonthEnd(period);
 
@@ -89,9 +96,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                 CollectionOpen = 1
             };
         }
-        private static void BuildAndSubmitIlr(ProviderSubmissionDetails providerDetails, string period, LookupContext lookupContext)
+        private static void BuildAndSubmitIlr(ProviderSubmissionDetails providerDetails, string period, LookupContext lookupContext, List<ContractTypeReferenceData> contractTypes)
         {
-            IlrSubmission submission = BuildIlrSubmission(providerDetails, lookupContext);
+            IlrSubmission submission = BuildIlrSubmission(providerDetails, lookupContext, contractTypes);
             TestEnvironment.ProcessService.RunIlrSubmission(submission, TestEnvironment.Variables, new LoggingStatusWatcher($"ILR submission for provider {providerDetails.ProviderId} in {period}"));
         }
         private static void RunMonthEnd(string period)
@@ -100,11 +107,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
         }
 
 
-        private static IlrSubmission BuildIlrSubmission(ProviderSubmissionDetails providerDetails, LookupContext lookupContext)
+        private static IlrSubmission BuildIlrSubmission(ProviderSubmissionDetails providerDetails, LookupContext lookupContext, List<ContractTypeReferenceData> contractTypes)
         {
             var learners = (from x in providerDetails.LearnerDetails
                             group x by x.LearnerId into g
-                            select BuildLearner(g.ToArray(), lookupContext)).ToArray();
+                            select BuildLearner(g.ToArray(), lookupContext, contractTypes)).ToArray();
             var submission = new IlrSubmission
             {
                 Ukprn = providerDetails.Ukprn,
@@ -116,62 +123,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
             }
             return submission;
         }
-        private static Learner BuildLearner(IlrLearnerReferenceData[] learnerDetails, LookupContext lookupContext)
+        private static Learner BuildLearner(IlrLearnerReferenceData[] learnerDetails, LookupContext lookupContext, List<ContractTypeReferenceData> contractTypes)
         {
             var deliveries = learnerDetails.Select(x =>
             {
-                var agreedTrainingPrice = (int)Math.Floor(x.AgreedPrice * 0.8m);
-                var agreedAssesmentPrice = x.AgreedPrice - agreedTrainingPrice;
-
-                var financialRecords = new List<FinancialRecord>();
-                financialRecords.Add(new FinancialRecord
-                {
-                    Code = 1,
-                    Type = "TNP",
-                    Amount = x.TotalTrainingPrice1 == 0 ? agreedTrainingPrice : x.TotalTrainingPrice1,
-                    Date = x.TotalTrainingPrice1EffectiveDate == DateTime.MinValue ? x.StartDate : x.TotalTrainingPrice1EffectiveDate
-                });
-                financialRecords.Add(new FinancialRecord
-                {
-                    Code = 2,
-                    Type = "TNP",
-                    Amount = x.TotalAssessmentPrice1 == 0 ? agreedAssesmentPrice : x.TotalAssessmentPrice1,
-                    Date = x.TotalAssessmentPrice1EffectiveDate == DateTime.MinValue ? x.StartDate : x.TotalAssessmentPrice1EffectiveDate
-                });
-                if (x.TotalTrainingPrice2 > 0 || x.TotalAssessmentPrice2 > 0)
-                {
-                    financialRecords.Add(new FinancialRecord
-                    {
-                        Code = 1,
-                        Type = "TNP",
-                        Amount = x.TotalTrainingPrice2,
-                        Date = x.TotalTrainingPrice2EffectiveDate == DateTime.MinValue ? x.StartDate : x.TotalTrainingPrice2EffectiveDate
-                    });
-                    financialRecords.Add(new FinancialRecord
-                    {
-                        Code = 2,
-                        Type = "TNP",
-                        Amount = x.TotalAssessmentPrice2,
-                        Date = x.TotalAssessmentPrice2EffectiveDate == DateTime.MinValue ? x.StartDate : x.TotalAssessmentPrice2EffectiveDate
-                    });
-                }
-                if (x.ResidualTrainingPrice > 0 || x.ResidualAssessmentPrice > 0)
-                {
-                    financialRecords.Add(new FinancialRecord
-                    {
-                        Code = 3,
-                        Type = "TNP",
-                        Amount = x.ResidualTrainingPrice,
-                        Date = x.ResidualTrainingPriceEffectiveDate == DateTime.MinValue ? x.StartDate : x.ResidualTrainingPriceEffectiveDate
-                    });
-                    financialRecords.Add(new FinancialRecord
-                    {
-                        Code = 4,
-                        Type = "TNP",
-                        Amount = x.ResidualAssessmentPrice,
-                        Date = x.ResidualAssessmentPriceEffectiveDate == DateTime.MinValue ? x.StartDate : x.ResidualAssessmentPriceEffectiveDate
-                    });
-                }
+                var financialRecords = BuildLearningDeliveryFinancials(x);
+                var learningEndDate = (!x.ActualEndDate.HasValue || x.PlannedEndDate > x.ActualEndDate.Value) ? x.PlannedEndDate : x.ActualEndDate.Value;
 
                 return new LearningDelivery
                 {
@@ -182,10 +139,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                     ActualStartDate = x.StartDate,
                     PlannedEndDate = x.PlannedEndDate,
                     ActualEndDate = x.ActualEndDate,
-                    ActFamCodeValue = IsLearnerTypeLevy(x.LearnerType) ? (short)1 : (short)2,
+                    //ActFamCodeValue = IsLearnerTypeLevy(x.LearnerType) ? (short)1 : (short)2,
+                    FamRecords = BuildActFamCodes(x.LearnerType, x.StartDate, learningEndDate, contractTypes),
                     CompletionStatus = (IlrGenerator.CompletionStatus)(int)x.CompletionStatus,
                     Type = (IlrGenerator.AimType)(int)x.AimType,
-                    FinancialRecords = financialRecords.ToArray()
+                    FinancialRecords = financialRecords
                 };
             }).ToArray();
 
@@ -194,6 +152,86 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                 Uln = lookupContext.AddOrGetUln(learnerDetails[0].LearnerId),
                 DateOfBirth = GetDateOfBirthBasedOnLearnerType(learnerDetails[0].LearnerType),
                 LearningDeliveries = deliveries
+            };
+        }
+        private static FinancialRecord[] BuildLearningDeliveryFinancials(IlrLearnerReferenceData learnerReferenceData)
+        {
+            var agreedTrainingPrice = (int)Math.Floor(learnerReferenceData.AgreedPrice * 0.8m);
+            var agreedAssesmentPrice = learnerReferenceData.AgreedPrice - agreedTrainingPrice;
+
+            var financialRecords = new List<FinancialRecord>();
+            financialRecords.Add(new FinancialRecord
+            {
+                Code = 1,
+                Type = "TNP",
+                Amount = learnerReferenceData.TotalTrainingPrice1 == 0 ? agreedTrainingPrice : learnerReferenceData.TotalTrainingPrice1,
+                Date = learnerReferenceData.TotalTrainingPrice1EffectiveDate == DateTime.MinValue ? learnerReferenceData.StartDate : learnerReferenceData.TotalTrainingPrice1EffectiveDate
+            });
+            financialRecords.Add(new FinancialRecord
+            {
+                Code = 2,
+                Type = "TNP",
+                Amount = learnerReferenceData.TotalAssessmentPrice1 == 0 ? agreedAssesmentPrice : learnerReferenceData.TotalAssessmentPrice1,
+                Date = learnerReferenceData.TotalAssessmentPrice1EffectiveDate == DateTime.MinValue ? learnerReferenceData.StartDate : learnerReferenceData.TotalAssessmentPrice1EffectiveDate
+            });
+            if (learnerReferenceData.TotalTrainingPrice2 > 0 || learnerReferenceData.TotalAssessmentPrice2 > 0)
+            {
+                financialRecords.Add(new FinancialRecord
+                {
+                    Code = 1,
+                    Type = "TNP",
+                    Amount = learnerReferenceData.TotalTrainingPrice2,
+                    Date = learnerReferenceData.TotalTrainingPrice2EffectiveDate == DateTime.MinValue ? learnerReferenceData.StartDate : learnerReferenceData.TotalTrainingPrice2EffectiveDate
+                });
+                financialRecords.Add(new FinancialRecord
+                {
+                    Code = 2,
+                    Type = "TNP",
+                    Amount = learnerReferenceData.TotalAssessmentPrice2,
+                    Date = learnerReferenceData.TotalAssessmentPrice2EffectiveDate == DateTime.MinValue ? learnerReferenceData.StartDate : learnerReferenceData.TotalAssessmentPrice2EffectiveDate
+                });
+            }
+            if (learnerReferenceData.ResidualTrainingPrice > 0 || learnerReferenceData.ResidualAssessmentPrice > 0)
+            {
+                financialRecords.Add(new FinancialRecord
+                {
+                    Code = 3,
+                    Type = "TNP",
+                    Amount = learnerReferenceData.ResidualTrainingPrice,
+                    Date = learnerReferenceData.ResidualTrainingPriceEffectiveDate == DateTime.MinValue ? learnerReferenceData.StartDate : learnerReferenceData.ResidualTrainingPriceEffectiveDate
+                });
+                financialRecords.Add(new FinancialRecord
+                {
+                    Code = 4,
+                    Type = "TNP",
+                    Amount = learnerReferenceData.ResidualAssessmentPrice,
+                    Date = learnerReferenceData.ResidualAssessmentPriceEffectiveDate == DateTime.MinValue ? learnerReferenceData.StartDate : learnerReferenceData.ResidualAssessmentPriceEffectiveDate
+                });
+            }
+
+            return financialRecords.ToArray();
+        }
+        private static LearningDeliveryFamRecord[] BuildActFamCodes(LearnerType learnerType, DateTime learningStart, DateTime learningEnd, List<ContractTypeReferenceData> contractTypes)
+        {
+            if (contractTypes.Any())
+            {
+                return contractTypes.Select(x => new LearningDeliveryFamRecord
+                {
+                    FamType = FamCodeAct,
+                    Code = x.ContractType == ContractType.ContractWithEmployer ? FamCodeActDasValue : FamCodeActNonDasValue,
+                    From = x.DateFrom,
+                    To = x.DateTo
+                }).ToArray();
+            }
+            return new[]
+            {
+                new LearningDeliveryFamRecord
+                {
+                    FamType = FamCodeAct,
+                    Code = IsLearnerTypeLevy(learnerType) ? FamCodeActDasValue : FamCodeActNonDasValue,
+                    From = learningStart,
+                    To = learningEnd
+                }
             };
         }
         private static bool IsLearnerTypeLevy(LearnerType learnerType)

@@ -100,12 +100,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "ULN",
                         "priority",
                         "start date",
-                        "end date"});
+                        "end date",
+                        "agreed price"});
             table399.AddRow(new string[] {
                         "learner a",
                         "1",
                         "01/09/2017",
-                        "08/09/2018"});
+                        "08/09/2018",
+                        "15000"});
 #line 21
   testRunner.And("the following commitments exist:", ((string)(null)), table399, "And ");
 #line hidden
@@ -211,12 +213,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "ULN",
                         "priority",
                         "start date",
-                        "end date"});
+                        "end date",
+                        "agreed price"});
             table402.AddRow(new string[] {
                         "learner a",
                         "1",
                         "01/09/2017",
-                        "08/09/2018"});
+                        "08/09/2018",
+                        "15000"});
 #line 39
   testRunner.And("the following commitments exist:", ((string)(null)), table402, "And ");
 #line hidden
@@ -518,12 +522,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "ULN",
                         "priority",
                         "start date",
-                        "end date"});
+                        "end date",
+                        "agreed price"});
             table409.AddRow(new string[] {
                         "learner a",
                         "1",
                         "01/09/2017",
-                        "08/09/2018"});
+                        "08/09/2018",
+                        "15000"});
 #line 84
   testRunner.Given("the following commitments exist:", ((string)(null)), table409, "Given ");
 #line hidden
@@ -671,12 +677,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "ULN",
                         "priority",
                         "start date",
-                        "end date"});
+                        "end date",
+                        "agreed price"});
             table413.AddRow(new string[] {
                         "learner a",
                         "1",
                         "01/09/2017",
-                        "08/09/2018"});
+                        "08/09/2018",
+                        "15000"});
 #line 107
   testRunner.And("the following commitments exist:", ((string)(null)), table413, "And ");
 #line hidden

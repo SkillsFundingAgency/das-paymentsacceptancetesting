@@ -7,7 +7,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.PaymentsAndEar
 {
     public class ProviderPaidBySfaRule : PaymentsRuleBase
     {
-        public override void AssertBreakdown(EarningsAndPaymentsBreakdown breakdown, SubmissionContext submissionContext)
+        public override void AssertBreakdown(EarningsAndPaymentsBreakdown breakdown, SubmissionContext submissionContext, EmployerAccountContext employerAccountContext)
         {
             var allPayments = GetPaymentsForBreakdown(breakdown, submissionContext)
                 .Where(p => p.FundingSource != FundingSource.CoInvestedEmployer)

@@ -35,7 +35,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
         {
             if (!SubmissionContext.HaveSubmissionsBeenDone)
             {
-                SubmissionContext.SubmissionResults = SubmissionManager.SubmitIlrAndRunMonthEndAndCollateResults(SubmissionContext.IlrLearnerDetails, LookupContext, EmployerAccountContext.EmployerAccounts);
+                SubmissionContext.SubmissionResults = SubmissionManager.SubmitIlrAndRunMonthEndAndCollateResults(SubmissionContext.IlrLearnerDetails, LookupContext, EmployerAccountContext.EmployerAccounts, SubmissionContext.ContractTypes);
             }
 
             var providerBreakdown = EarningsAndPaymentsContext.OverallEarningsAndPayments.SingleOrDefault(x => x.ProviderId == "provider " + providerIdSuffix);
@@ -46,7 +46,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
             }
 
             EarningAndPaymentTableParser.ParseEarningsAndPaymentsTableIntoContext(providerBreakdown, earningAndPayments);
-            PaymentsAndEarningsAssestions.AssertPaymentsAndEarningsResults(EarningsAndPaymentsContext, SubmissionContext);
+            PaymentsAndEarningsAssestions.AssertPaymentsAndEarningsResults(EarningsAndPaymentsContext, SubmissionContext, EmployerAccountContext);
         }
 
         [Then("the transaction types for the payments are:")]
@@ -60,11 +60,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
         {
             if (!SubmissionContext.HaveSubmissionsBeenDone)
             {
-                SubmissionContext.SubmissionResults = SubmissionManager.SubmitIlrAndRunMonthEndAndCollateResults(SubmissionContext.IlrLearnerDetails, LookupContext, EmployerAccountContext.EmployerAccounts);
+                SubmissionContext.SubmissionResults = SubmissionManager.SubmitIlrAndRunMonthEndAndCollateResults(SubmissionContext.IlrLearnerDetails, LookupContext, EmployerAccountContext.EmployerAccounts, SubmissionContext.ContractTypes);
             }
 
             TransactionTypeTableParser.ParseTransactionTypeTableIntoContext(EarningsAndPaymentsContext, $"provider {providerIdSuffix}", transactionTypes);
-            PaymentsAndEarningsAssestions.AssertPaymentsAndEarningsResults(EarningsAndPaymentsContext, SubmissionContext);
+            PaymentsAndEarningsAssestions.AssertPaymentsAndEarningsResults(EarningsAndPaymentsContext, SubmissionContext, EmployerAccountContext);
         }
 
         [Then(@"the provider earnings and payments break down for ULN (.*) as follows:")]
@@ -72,7 +72,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
         {
             if (!SubmissionContext.HaveSubmissionsBeenDone)
             {
-                SubmissionContext.SubmissionResults = SubmissionManager.SubmitIlrAndRunMonthEndAndCollateResults(SubmissionContext.IlrLearnerDetails, LookupContext, EmployerAccountContext.EmployerAccounts);
+                SubmissionContext.SubmissionResults = SubmissionManager.SubmitIlrAndRunMonthEndAndCollateResults(SubmissionContext.IlrLearnerDetails, LookupContext, EmployerAccountContext.EmployerAccounts, SubmissionContext.ContractTypes);
             }
 
             var breakdown = new LearnerEarningsAndPaymentsBreakdown
@@ -82,7 +82,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
             };
             EarningsAndPaymentsContext.LearnerOverallEarningsAndPayments.Add(breakdown);
             EarningAndPaymentTableParser.ParseEarningsAndPaymentsTableIntoContext(breakdown, earningAndPayments);
-            PaymentsAndEarningsAssestions.AssertPaymentsAndEarningsResults(EarningsAndPaymentsContext, SubmissionContext);
+            PaymentsAndEarningsAssestions.AssertPaymentsAndEarningsResults(EarningsAndPaymentsContext, SubmissionContext, EmployerAccountContext);
         }
     }
 }

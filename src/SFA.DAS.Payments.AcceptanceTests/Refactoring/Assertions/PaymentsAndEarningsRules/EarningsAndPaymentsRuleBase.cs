@@ -5,6 +5,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.PaymentsAndEar
 {
     public abstract class EarningsAndPaymentsRuleBase
     {
-        public abstract void AssertBreakdown(EarningsAndPaymentsBreakdown breakdown, SubmissionContext submissionContext);
+        public abstract void AssertBreakdown(EarningsAndPaymentsBreakdown breakdown, SubmissionContext submissionContext, EmployerAccountContext employerAccountContext);
     }
 }

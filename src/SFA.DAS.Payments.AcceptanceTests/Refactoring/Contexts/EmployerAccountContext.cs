@@ -9,6 +9,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts
         {
             EmployerAccounts = new List<EmployerAccountReferenceData>();
         }
+
         public List<EmployerAccountReferenceData> EmployerAccounts { get; set; }
     }
 }

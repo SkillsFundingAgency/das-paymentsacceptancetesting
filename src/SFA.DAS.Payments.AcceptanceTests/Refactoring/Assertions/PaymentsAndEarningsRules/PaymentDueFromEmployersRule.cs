@@ -7,14 +7,17 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.PaymentsAndEar
 {
     public class PaymentDueFromEmployersRule : PaymentsRuleBase
     {
-        public override void AssertBreakdown(EarningsAndPaymentsBreakdown breakdown, SubmissionContext submissionContext)
+        public override void AssertBreakdown(EarningsAndPaymentsBreakdown breakdown, SubmissionContext submissionContext, EmployerAccountContext employerAccountContext)
         {
             var allPayments = GetPaymentsForBreakdown(breakdown, submissionContext)
                 .Where(p => p.FundingSource == FundingSource.CoInvestedEmployer)
                 .ToArray();
             foreach (var period in breakdown.PaymentDueFromEmployers)
             {
-                var paymentsForEmployer = allPayments.Where(p => p.EmployerAccountId == period.EmployerAccountId).ToArray();
+                // Currently have to assume there is only 1 non-levy employer in spec as there is no way to tell employer if there is no commitment.
+                var employerAccount = employerAccountContext.EmployerAccounts.SingleOrDefault(a => a.Id == period.EmployerAccountId);
+                var isLevyPayingEmployer = employerAccount == null ? true : employerAccount.IsLevyPayer;
+                var paymentsForEmployer = allPayments.Where(p => p.EmployerAccountId == period.EmployerAccountId || (!isLevyPayingEmployer && p.EmployerAccountId == 0)).ToArray();
 
                 var prevPeriodDate = new DateTime(int.Parse(period.PeriodName.Substring(3, 2)) + 2000, int.Parse(period.PeriodName.Substring(0, 2)), 1).AddMonths(-1);
                 var prevPeriodName = $"{prevPeriodDate.Month:00}/{prevPeriodDate.Year - 2000:00}";
@@ -26,7 +29,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.PaymentsAndEar
 
         protected override string FormatAssertionFailureMessage(PeriodValue period, decimal actualPaymentInPeriod)
         {
-            return $"Expected provider to be paid {period.Value} by SFA in {period.PeriodName} but actually paid {actualPaymentInPeriod}";
+            var employerPeriod = (EmployerAccountPeriodValue)period;
+            return $"Expected provider to be paid {period.Value} by employer {employerPeriod.EmployerAccountId} in {period.PeriodName} but actually paid {actualPaymentInPeriod}";
         }
     }
 }
