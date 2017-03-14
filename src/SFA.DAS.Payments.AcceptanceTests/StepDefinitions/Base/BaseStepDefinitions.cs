@@ -515,9 +515,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 
         private DateTime GetDateOfBirth(LearnerType learnerType, DateTime startDate)
         {
-            return learnerType == LearnerType.ProgrammeOnlyDas16To18 || learnerType == LearnerType.ProgrammeOnlyNonDas16To18
-                       ? startDate.AddYears(-17)
-                       : new DateTime(1985, 10, 10);
+            if (learnerType == LearnerType.ProgrammeOnlyDas16To18 || learnerType == LearnerType.ProgrammeOnlyNonDas16To18)
+                return startDate.AddYears(-17);
+            else if (learnerType == LearnerType.ProgrammeOnlyDas19To24 || learnerType == LearnerType.ProgrammeOnlyNonDas19To24)
+                return startDate.AddYears(-21);
+            else
+                return new DateTime(1985, 10, 10);
 
         }
 
