@@ -1,30 +1,35 @@
-using System;
+using System.Collections.Generic;
 using System.Linq;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.ReferenceDataModels;
+using SFA.DAS.Payments.AcceptanceTests.Refactoring.ResultsDataModels;
 
 namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.PaymentsAndEarningsRules
 {
     public class ProviderPaidBySfaRule : PaymentsRuleBase
     {
-        public override void AssertBreakdown(EarningsAndPaymentsBreakdown breakdown, SubmissionContext submissionContext, EmployerAccountContext employerAccountContext)
+        public override void AssertBreakdown(EarningsAndPaymentsBreakdown breakdown, IEnumerable<LearnerResults> submissionResults, EmployerAccountContext employerAccountContext)
         {
-            var allPayments = GetPaymentsForBreakdown(breakdown, submissionContext)
+            var allPayments = GetPaymentsForBreakdown(breakdown, submissionResults)
                 .Where(p => p.FundingSource != FundingSource.CoInvestedEmployer)
                 .ToArray();
             foreach (var period in breakdown.ProviderPaidBySfa)
             {
-                var prevPeriodDate = new DateTime(int.Parse(period.PeriodName.Substring(3, 2)) + 2000, int.Parse(period.PeriodName.Substring(0, 2)), 1).AddMonths(-1);
-                var prevPeriodName = $"{prevPeriodDate.Month:00}/{prevPeriodDate.Year - 2000:00}";
-                period.PeriodName = prevPeriodName;
+                var prevPeriod = new PeriodValue
+                {
+                    PeriodName = period.PeriodName.ToPeriodDateTime().AddMonths(-1).ToPeriodName(),
+                    Value = period.Value
+                };
 
-                AssertResultsForPeriod(period, allPayments);
+                AssertResultsForPeriod(prevPeriod, allPayments);
             }
         }
 
         protected override string FormatAssertionFailureMessage(PeriodValue period, decimal actualPaymentInPeriod)
         {
-            return $"Expected provider to be paid {period.Value} by SFA in {period.PeriodName} but actually paid {actualPaymentInPeriod}";
+            var specPeriod = period.PeriodName.ToPeriodDateTime().AddMonths(1).ToPeriodName();
+
+            return $"Expected provider to be paid {period.Value} by SFA in {specPeriod} but actually paid {actualPaymentInPeriod}";
         }
     }
 }

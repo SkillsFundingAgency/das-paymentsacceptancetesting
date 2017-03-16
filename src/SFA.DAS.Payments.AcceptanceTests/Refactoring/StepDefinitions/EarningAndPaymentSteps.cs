@@ -36,6 +36,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
             if (!SubmissionContext.HaveSubmissionsBeenDone)
             {
                 SubmissionContext.SubmissionResults = SubmissionManager.SubmitIlrAndRunMonthEndAndCollateResults(SubmissionContext.IlrLearnerDetails, LookupContext, EmployerAccountContext.EmployerAccounts, SubmissionContext.ContractTypes, SubmissionContext.EmploymentStatus);
+                SubmissionContext.HaveSubmissionsBeenDone = true;
             }
 
             var providerBreakdown = EarningsAndPaymentsContext.OverallEarningsAndPayments.SingleOrDefault(x => x.ProviderId == "provider " + providerIdSuffix);
@@ -61,6 +62,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
             if (!SubmissionContext.HaveSubmissionsBeenDone)
             {
                 SubmissionContext.SubmissionResults = SubmissionManager.SubmitIlrAndRunMonthEndAndCollateResults(SubmissionContext.IlrLearnerDetails, LookupContext, EmployerAccountContext.EmployerAccounts, SubmissionContext.ContractTypes, SubmissionContext.EmploymentStatus);
+                SubmissionContext.HaveSubmissionsBeenDone = true;
             }
 
             TransactionTypeTableParser.ParseTransactionTypeTableIntoContext(EarningsAndPaymentsContext, $"provider {providerIdSuffix}", transactionTypes);
@@ -73,6 +75,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
             if (!SubmissionContext.HaveSubmissionsBeenDone)
             {
                 SubmissionContext.SubmissionResults = SubmissionManager.SubmitIlrAndRunMonthEndAndCollateResults(SubmissionContext.IlrLearnerDetails, LookupContext, EmployerAccountContext.EmployerAccounts, SubmissionContext.ContractTypes, SubmissionContext.EmploymentStatus);
+                SubmissionContext.HaveSubmissionsBeenDone = true;
             }
 
             var breakdown = new LearnerEarningsAndPaymentsBreakdown

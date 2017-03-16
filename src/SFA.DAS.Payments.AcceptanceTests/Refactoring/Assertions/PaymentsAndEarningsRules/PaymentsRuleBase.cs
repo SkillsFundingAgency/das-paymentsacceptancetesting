@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.ReferenceDataModels;
@@ -10,9 +11,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.PaymentsAndEar
     {
         protected abstract string FormatAssertionFailureMessage(PeriodValue period, decimal actualPaymentInPeriod);
 
-        protected PaymentResult[] GetPaymentsForBreakdown(EarningsAndPaymentsBreakdown breakdown, SubmissionContext submissionContext)
+        protected PaymentResult[] GetPaymentsForBreakdown(EarningsAndPaymentsBreakdown breakdown, IEnumerable<LearnerResults> submissionResults)
         {
-            var payments = submissionContext.SubmissionResults.Where(r => r.ProviderId.Equals(breakdown.ProviderId, StringComparison.CurrentCultureIgnoreCase));
+            var payments = submissionResults.Where(r => r.ProviderId.Equals(breakdown.ProviderId, StringComparison.CurrentCultureIgnoreCase));
             if (breakdown is LearnerEarningsAndPaymentsBreakdown)
             {
                 payments = payments.Where(r => r.LearnerId.Equals(((LearnerEarningsAndPaymentsBreakdown)breakdown).LearnerId, StringComparison.CurrentCultureIgnoreCase));

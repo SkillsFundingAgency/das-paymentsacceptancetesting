@@ -7,6 +7,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ReferenceDataModels
         public int Id { get; set; }
         public decimal Balance { get; set; }
         public List<PeriodValue> PeriodBalances { get; set; }
-        public bool IsLevyPayer { get; set; }
+        public bool IsLevyPayer { get; set; } = true;
     }
 }

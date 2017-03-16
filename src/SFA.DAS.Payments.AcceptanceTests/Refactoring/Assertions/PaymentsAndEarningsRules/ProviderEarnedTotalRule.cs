@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.ReferenceDataModels;
@@ -8,18 +9,18 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.PaymentsAndEar
 {
     public class ProviderEarnedTotalRule : EarningsAndPaymentsRuleBase
     {
-        public override void AssertBreakdown(EarningsAndPaymentsBreakdown breakdown, SubmissionContext submissionContext, EmployerAccountContext employerAccountContext)
+        public override void AssertBreakdown(EarningsAndPaymentsBreakdown breakdown, IEnumerable<LearnerResults> submissionResults, EmployerAccountContext employerAccountContext)
         {
-            var allEarnings = GetEarningsForBreakdown(breakdown, submissionContext);
+            var allEarnings = GetEarningsForBreakdown(breakdown, submissionResults);
             foreach (var period in breakdown.ProviderEarnedTotal)
             {
                 AssertResultsForPeriod(period, allEarnings);
             }
         }
 
-        private EarningsResult[] GetEarningsForBreakdown(EarningsAndPaymentsBreakdown breakdown, SubmissionContext submissionContext)
+        private EarningsResult[] GetEarningsForBreakdown(EarningsAndPaymentsBreakdown breakdown, IEnumerable<LearnerResults> submissionResults)
         {
-            var earnings = submissionContext.SubmissionResults.Where(r => r.ProviderId.Equals(breakdown.ProviderId, StringComparison.CurrentCultureIgnoreCase));
+            var earnings = submissionResults.Where(r => r.ProviderId.Equals(breakdown.ProviderId, StringComparison.CurrentCultureIgnoreCase));
             if (breakdown is LearnerEarningsAndPaymentsBreakdown)
             {
                 earnings = earnings.Where(r => r.LearnerId.Equals(((LearnerEarningsAndPaymentsBreakdown)breakdown).LearnerId, StringComparison.CurrentCultureIgnoreCase));

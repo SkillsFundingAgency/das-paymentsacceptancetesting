@@ -1,4 +1,6 @@
-﻿using SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.PaymentsAndEarningsRules;
+﻿using System;
+using System.Linq;
+using SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.PaymentsAndEarningsRules;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts;
 
 namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions
@@ -26,6 +28,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions
             }
 
             ValidateOverallEarningsAndPayments(earningsAndPaymentsContext, submissionContext, employerAccountContext);
+            ValidateLearnerSpecificEarningsAndPayments(earningsAndPaymentsContext, submissionContext, employerAccountContext);
         }
 
         private static void ValidateOverallEarningsAndPayments(EarningsAndPaymentsContext earningsAndPaymentsContext, SubmissionContext submissionContext, EmployerAccountContext employerAccountContext)
@@ -34,7 +37,25 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions
             {
                 foreach (var rule in Rules)
                 {
-                    rule.AssertBreakdown(breakdown, submissionContext, employerAccountContext);
+                    rule.AssertBreakdown(breakdown, submissionContext.SubmissionResults, employerAccountContext);
+                }
+            }
+        }
+        private static void ValidateLearnerSpecificEarningsAndPayments(EarningsAndPaymentsContext earningsAndPaymentsContext, SubmissionContext submissionContext, EmployerAccountContext employerAccountContext)
+        {
+            foreach (var breakdown in earningsAndPaymentsContext.LearnerOverallEarningsAndPayments)
+            {
+                var learnerResults = submissionContext.SubmissionResults.Where(r => r.LearnerId == breakdown.LearnerId).ToArray();
+                try
+                {
+                    foreach (var rule in Rules)
+                    {
+                        rule.AssertBreakdown(breakdown, learnerResults, employerAccountContext);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception($"{ex.Message} (learner {breakdown.LearnerId})", ex);
                 }
             }
         }

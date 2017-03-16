@@ -1,15 +1,17 @@
-﻿using SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts;
+﻿using System.Collections.Generic;
+using SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.ReferenceDataModels;
 using System.Linq;
+using SFA.DAS.Payments.AcceptanceTests.Refactoring.ResultsDataModels;
 
 namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.PaymentsAndEarningsRules
 {
     public class SfaNonLevyCoFundBudgetRule : PaymentsRuleBase
     {
 
-        public override void AssertBreakdown(EarningsAndPaymentsBreakdown breakdown, SubmissionContext submissionContext, EmployerAccountContext employerAccountContext)
+        public override void AssertBreakdown(EarningsAndPaymentsBreakdown breakdown, IEnumerable<LearnerResults> submissionResults, EmployerAccountContext employerAccountContext)
         {
-            var payments = GetPaymentsForBreakdown(breakdown, submissionContext)
+            var payments = GetPaymentsForBreakdown(breakdown, submissionResults)
                 .Where(p => p.FundingSource == FundingSource.CoInvestedSfa && p.ContractType == ContractType.ContractWithSfa)
                 .ToArray();
             foreach (var period in breakdown.SfaNonLevyCoFundBudget)

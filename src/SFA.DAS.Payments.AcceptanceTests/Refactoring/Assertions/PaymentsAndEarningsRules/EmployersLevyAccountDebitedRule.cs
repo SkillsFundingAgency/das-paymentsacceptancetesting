@@ -1,23 +1,29 @@
-﻿using SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts;
+﻿using System.Collections.Generic;
+using SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.ReferenceDataModels;
 using System.Linq;
+using SFA.DAS.Payments.AcceptanceTests.Refactoring.ResultsDataModels;
 
 namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.PaymentsAndEarningsRules
 {
     public class EmployersLevyAccountDebitedRule : PaymentsRuleBase
     {
 
-        public override void AssertBreakdown(EarningsAndPaymentsBreakdown breakdown, SubmissionContext submissionContext, EmployerAccountContext employerAccountContext)
+        public override void AssertBreakdown(EarningsAndPaymentsBreakdown breakdown, IEnumerable<LearnerResults> submissionResults, EmployerAccountContext employerAccountContext)
         {
-            var payments = GetPaymentsForBreakdown(breakdown, submissionContext)
+            var payments = GetPaymentsForBreakdown(breakdown, submissionResults)
                 .Where(p => p.FundingSource == FundingSource.Levy && p.ContractType == ContractType.ContractWithEmployer)
                 .ToArray();
             foreach (var period in breakdown.EmployersLevyAccountDebited)
             {
                 var employerPayments = payments.Where(p => p.EmployerAccountId == period.EmployerAccountId).ToArray();
-                period.PeriodName = period.PeriodName.ToPeriodDateTime().AddMonths(-1).ToPeriodName();
+                var prevPeriod = new PeriodValue
+                {
+                    PeriodName = period.PeriodName.ToPeriodDateTime().AddMonths(-1).ToPeriodName(),
+                    Value = period.Value
+                };
 
-                AssertResultsForPeriod(period, employerPayments);
+                AssertResultsForPeriod(prevPeriod, employerPayments);
             }
         }
 
