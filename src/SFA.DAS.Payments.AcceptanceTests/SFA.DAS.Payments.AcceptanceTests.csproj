@@ -163,6 +163,9 @@
     <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\SfaLevyCoFundBudgetRule.cs" />
     <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\SfaNonLevyAdditionalPaymentsRule.cs" />
     <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\SfaNonLevyCoFundBudgetRule.cs" />
+    <Compile Include="Refactoring\Assertions\TransactionTypeAssertions.cs" />
+    <Compile Include="Refactoring\Assertions\TransactionTypeRules\EmployerEarnedFor16To18IncentiveRule.cs" />
+    <Compile Include="Refactoring\Assertions\TransactionTypeRules\TransactionTypeRuleBase.cs" />
     <Compile Include="Refactoring\Contexts\CommitmentsContext.cs" />
     <Compile Include="Refactoring\Contexts\DataLockContext.cs" />
     <Compile Include="Refactoring\Contexts\EarningsAndPaymentsContext.cs" />
