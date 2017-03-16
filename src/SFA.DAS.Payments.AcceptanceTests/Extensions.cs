@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities;
 using TechTalk.SpecFlow;
 
 namespace SFA.DAS.Payments.AcceptanceTests
