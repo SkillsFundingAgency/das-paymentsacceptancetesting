@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using SFA.DAS.Payments.AcceptanceTests.DataHelpers.Entities;
 using TechTalk.SpecFlow;
@@ -45,37 +46,67 @@ namespace SFA.DAS.Payments.AcceptanceTests
             return date.Month - 7;
         }
 
-        internal static decimal GetValueForPeriod(this PeriodisedValuesEntity entity, int periodNumber)
+        internal static DateTime ToPeriodDateTime(this string name)
         {
-            switch (periodNumber)
+            return new DateTime(int.Parse(name.Substring(3, 2)) + 2000, int.Parse(name.Substring(0, 2)), 1);
+        }
+        internal static string ToPeriodName(this DateTime date)
+        {
+            return $"{date.Month:00}/{date.Year - 2000:00}";
+        }
+
+
+
+        internal static T ReadRowColumnValue<T>(this TableRow row, int columnIndex, string columnName, T defaultValue = default(T))
+        {
+            if (columnIndex > -1 && !string.IsNullOrWhiteSpace(row[columnIndex]))
             {
-                case 1:
-                    return entity.Period_1;
-                case 2:
-                    return entity.Period_2;
-                case 3:
-                    return entity.Period_3;
-                case 4:
-                    return entity.Period_4;
-                case 5:
-                    return entity.Period_5;
-                case 6:
-                    return entity.Period_6;
-                case 7:
-                    return entity.Period_7;
-                case 8:
-                    return entity.Period_8;
-                case 9:
-                    return entity.Period_9;
-                case 10:
-                    return entity.Period_10;
-                case 11:
-                    return entity.Period_11;
-                case 12:
-                    return entity.Period_12;
+                try
+                {
+                    if (typeof(T) == typeof(DateTime?))
+                    {
+                        return (T)Convert.ChangeType(row[columnIndex], typeof(DateTime));
+                    }
+
+                    return (T)Convert.ChangeType(row[columnIndex], typeof(T));
+                }
+                catch (Exception ex)
+                {
+                    throw new ArgumentException($"'{row[columnIndex]}' is not a valid {columnName}", ex);
+                }
+            }
+            return defaultValue;
+        }
+
+        internal static object ToEnumByDescription(this string description, Type enumType)
+        {
+            if (!enumType.IsEnum)
+            {
+                throw new ArgumentException("enumType must be an Enum", nameof(enumType));
             }
 
-            throw new IndexOutOfRangeException("Invalid periodNumber. Must be between 1 and 12 inclusive");
+            foreach (Enum enumValue in Enum.GetValues(enumType))
+            {
+                var enumDescription = enumValue.GetEnumDescription();
+                if (enumDescription.Equals(description, StringComparison.CurrentCultureIgnoreCase))
+                {
+                    return enumValue;
+                }
+            }
+
+            throw new ArgumentException($"Cannot find {enumType.Name} with description {description}");
+        }
+        internal static string GetEnumDescription(this Enum value)
+        {
+            var fi = value.GetType().GetField(value.ToString());
+
+            var attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+            if (attributes.Length > 0)
+            {
+                return attributes[0].Description;
+            }
+            return value.ToString();
         }
 
 

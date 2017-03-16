@@ -18,10 +18,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.PaymentsAndEar
                 var employerAccount = employerAccountContext.EmployerAccounts.SingleOrDefault(a => a.Id == period.EmployerAccountId);
                 var isLevyPayingEmployer = employerAccount == null ? true : employerAccount.IsLevyPayer;
                 var paymentsForEmployer = allPayments.Where(p => p.EmployerAccountId == period.EmployerAccountId || (!isLevyPayingEmployer && p.EmployerAccountId == 0)).ToArray();
-
-                var prevPeriodDate = new DateTime(int.Parse(period.PeriodName.Substring(3, 2)) + 2000, int.Parse(period.PeriodName.Substring(0, 2)), 1).AddMonths(-1);
-                var prevPeriodName = $"{prevPeriodDate.Month:00}/{prevPeriodDate.Year - 2000:00}";
-                period.PeriodName = prevPeriodName;
+                
+                period.PeriodName = period.PeriodName.ToPeriodDateTime().AddMonths(-1).ToPeriodName();
 
                 AssertResultsForPeriod(period, paymentsForEmployer);
             }
@@ -30,7 +28,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.PaymentsAndEar
         protected override string FormatAssertionFailureMessage(PeriodValue period, decimal actualPaymentInPeriod)
         {
             var employerPeriod = (EmployerAccountPeriodValue)period;
-            return $"Expected provider to be paid {period.Value} by employer {employerPeriod.EmployerAccountId} in {period.PeriodName} but actually paid {actualPaymentInPeriod}";
+            var specPeriod = period.PeriodName.ToPeriodDateTime().AddMonths(1).ToPeriodName();
+
+            return $"Expected provider to be paid {period.Value} by employer {employerPeriod.EmployerAccountId} in {specPeriod} but actually paid {actualPaymentInPeriod}";
         }
     }
 }
