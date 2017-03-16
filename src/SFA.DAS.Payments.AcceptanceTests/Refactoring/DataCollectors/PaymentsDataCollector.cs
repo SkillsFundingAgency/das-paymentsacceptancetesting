@@ -40,7 +40,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.DataCollectors
                                      p.FundingSource, p.TransactionType, p.Amount ,
                                      rp.ApprenticeshipContractType, rp.AccountId
                               FROM Payments.Payments p
-                                  JOIN PaymentsDue.RequiredPayments rp ON rp.Id = p.RequiredPaymentId ";
+                                  JOIN PaymentsDue.RequiredPayments rp ON rp.Id = p.RequiredPaymentId 
+                              ORDER BY p.DeliveryYear, p.DeliveryMonth";
 
                 return connection.Query<PaymentResultEntity>(query).ToArray();
             }

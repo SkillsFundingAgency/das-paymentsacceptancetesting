@@ -94,6 +94,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
         {
             foreach (var row in employmentDates.Rows)
             {
+                if (!row[0].StartsWith("employer"))
+                {
+                    continue;
+                }
+
                 var employerAccountId = int.Parse(row[0].Substring("employer ".Length));
                 var isLevyPayer = row[1].Equals("DAS", System.StringComparison.CurrentCultureIgnoreCase);
 

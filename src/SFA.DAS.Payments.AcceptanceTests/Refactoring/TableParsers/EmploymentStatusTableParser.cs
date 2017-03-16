@@ -83,13 +83,22 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
                 employerId = int.Parse(employerMatch.Groups[1].Value);
             }
 
-            return new EmploymentStatusReferenceData
+            var status = new EmploymentStatusReferenceData
             {
                 EmployerId = employerId,
                 EmploymentStatus = (EmploymentStatus)row.ReadRowColumnValue<string>(structure.EmploymentStatusIndex, "Employment Status").ToEnumByDescription(typeof(EmploymentStatus)),
                 EmploymentStatusApplies = row.ReadRowColumnValue<DateTime>(structure.EmploymentStatusAppliesIndex, "Employment Status Applies"),
-                SmallEmployer = row.ReadRowColumnValue<string>(structure.SmallEmployerIndex, "Small Employer")
+
             };
+
+            var smallEmployer = row.ReadRowColumnValue<string>(structure.SmallEmployerIndex, "Small Employer");
+            if (smallEmployer?.Length > 3)
+            {
+                status.MonitoringType = (EmploymentStatusMonitoringType)smallEmployer.Substring(0, 3).ToEnumByDescription(typeof(EmploymentStatusMonitoringType));
+                status.MonitoringCode = int.Parse(smallEmployer.Substring(3));
+            }
+
+            return status;
         }
 
 

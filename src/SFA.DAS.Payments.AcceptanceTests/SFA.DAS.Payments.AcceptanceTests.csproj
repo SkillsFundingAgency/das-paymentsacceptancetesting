@@ -193,6 +193,7 @@
     <Compile Include="Refactoring\ReferenceDataModels\EmployerAccountReferenceData.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\EmployerAccountPeriodValue.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\EmploymentStatus.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\EmploymentStatusMonitoringType.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\EmploymentStatusReferenceData.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\FundingSource.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\IlrLearnerReferenceData.cs" />

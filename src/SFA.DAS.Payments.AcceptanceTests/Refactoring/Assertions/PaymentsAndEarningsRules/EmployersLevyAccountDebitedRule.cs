@@ -15,17 +15,30 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.PaymentsAndEar
                 .ToArray();
             foreach (var period in breakdown.EmployersLevyAccountDebited)
             {
-                var prevPeriodDate = new DateTime(int.Parse(period.PeriodName.Substring(3, 2)) + 2000, int.Parse(period.PeriodName.Substring(0, 2)), 1).AddMonths(-1);
-                var prevPeriodName = $"{prevPeriodDate.Month:00}/{prevPeriodDate.Year - 2000:00}";
-                period.PeriodName = prevPeriodName;
+                var employerPayments = payments.Where(p => p.EmployerAccountId == period.EmployerAccountId).ToArray();
+                var prevPeriodDate = PeriodNameToDate(period.PeriodName).AddMonths(-1);
+                period.PeriodName = DateToPeriodName(prevPeriodDate);
 
-                AssertResultsForPeriod(period, payments);
+                AssertResultsForPeriod(period, employerPayments);
             }
         }
 
         protected override string FormatAssertionFailureMessage(PeriodValue period, decimal actualPaymentInPeriod)
         {
-            return $"Expected Employer levy budget to be debited {period.Value} in {period.PeriodName} but was actually debited {actualPaymentInPeriod}";
+            var employerPeriod = (EmployerAccountPeriodValue)period;
+            var specPeriod = DateToPeriodName(PeriodNameToDate(period.PeriodName).AddMonths(1));
+
+            return $"Expected Employer {employerPeriod.EmployerAccountId} levy budget to be debited {period.Value} in {specPeriod} but was actually debited {actualPaymentInPeriod}";
+        }
+
+
+        private DateTime PeriodNameToDate(string name)
+        {
+            return new DateTime(int.Parse(name.Substring(3, 2)) + 2000, int.Parse(name.Substring(0, 2)), 1);
+        }
+        private string DateToPeriodName(DateTime date)
+        {
+            return $"{date.Month:00}/{date.Year - 2000:00}";
         }
     }
 }
