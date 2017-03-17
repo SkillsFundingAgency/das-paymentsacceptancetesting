@@ -54,7 +54,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
         [Then("the transaction types for the payments are:")]
         public void ThenTheTransactionTypesForEarningsAre(Table earningBreakdown)
         {
-            ThenTheTransactionTypesForNamedProviderEarningsAre(Defaults.ProviderId, earningBreakdown);
+            ThenTheTransactionTypesForNamedProviderEarningsAre(Defaults.ProviderIdSuffix, earningBreakdown);
         }
 
         [Then("the transaction types for the payments for provider (.*) are:")]

@@ -17,10 +17,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.PaymentsAndEar
             {
                 // Currently have to assume there is only 1 non-levy employer in spec as there is no way to tell employer if there is no commitment.
                 var employerAccount = employerAccountContext.EmployerAccounts.SingleOrDefault(a => a.Id == period.EmployerAccountId);
-                var isLevyPayingEmployer = employerAccount == null ? true : employerAccount.IsLevyPayer;
+                var isLevyPayingEmployer = employerAccount == null ? false : employerAccount.IsLevyPayer;
                 var paymentsForEmployer = allPayments.Where(p => p.EmployerAccountId == period.EmployerAccountId || (!isLevyPayingEmployer && p.EmployerAccountId == 0)).ToArray();
-                var prevPeriod = new PeriodValue
+                var prevPeriod = new EmployerAccountPeriodValue
                 {
+                    EmployerAccountId = period.EmployerAccountId,
                     PeriodName = period.PeriodName.ToPeriodDateTime().AddMonths(-1).ToPeriodName(),
                     Value = period.Value
                 };

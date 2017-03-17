@@ -15,7 +15,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.TransactionTyp
         protected override string FormatAssertionFailureMessage(PeriodValue period, decimal actualPaymentInPeriod)
         {
             var employerPeriod = (ProviderEarnedPeriodValue)period;
-            return $"Expected provider {employerPeriod.ProviderId} to earn {period.Value} in {period.PeriodName} for on-programme but was actually earned {actualPaymentInPeriod}";
+            return $"Expected {employerPeriod.ProviderId} to earn {period.Value} in {period.PeriodName} for on-programme but was actually earned {actualPaymentInPeriod}";
         }
     }
 }
