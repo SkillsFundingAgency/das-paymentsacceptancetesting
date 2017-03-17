@@ -17,6 +17,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions
             new ProviderEarnedForOnProgrammeRule().AssertPeriodValues(earningsAndPaymentsContext.ProviderEarnedForOnProgramme, submissionResults, employerAccountContext);
             new ProviderEarnedForCompletionRule().AssertPeriodValues(earningsAndPaymentsContext.ProviderEarnedForCompletion, submissionResults, employerAccountContext);
             new ProviderEarnedForBalancingRule().AssertPeriodValues(earningsAndPaymentsContext.ProviderEarnedForBalancing, submissionResults, employerAccountContext);
+            new ProviderEarnedFor16To18IncentiveRule().AssertPeriodValues(earningsAndPaymentsContext.ProviderEarnedForBalancing, submissionResults, employerAccountContext);
         }
     }
 }

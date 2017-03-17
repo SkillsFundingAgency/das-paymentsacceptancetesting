@@ -165,6 +165,7 @@
     <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\SfaNonLevyCoFundBudgetRule.cs" />
     <Compile Include="Refactoring\Assertions\TransactionTypeAssertions.cs" />
     <Compile Include="Refactoring\Assertions\TransactionTypeRules\EmployerEarnedFor16To18IncentiveRule.cs" />
+    <Compile Include="Refactoring\Assertions\TransactionTypeRules\ProviderEarnedFor16To18IncentiveRule.cs" />
     <Compile Include="Refactoring\Assertions\TransactionTypeRules\ProviderEarnedForBalancingRule.cs" />
     <Compile Include="Refactoring\Assertions\TransactionTypeRules\ProviderEarnedForCompletionRule.cs" />
     <Compile Include="Refactoring\Assertions\TransactionTypeRules\ProviderEarnedForOnProgrammeRule.cs" />
