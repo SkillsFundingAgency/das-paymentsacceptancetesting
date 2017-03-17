@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.ReferenceDataModels;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.ResultsDataModels;
 
