@@ -52,7 +52,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
         {
             return new LearningSupportReferenceData
             {
-                LearningSupportCode = row.ReadRowColumnValue<string>(structure.LearningSupportCodeIndex, "Learning support code"),
+                LearningSupportCode = row.ReadRowColumnValue<int>(structure.LearningSupportCodeIndex, "Learning support code"),
                 DateFrom = row.ReadRowColumnValue<DateTime>(structure.DateFromIndex, "date from"),
                 DateTo = row.ReadRowColumnValue<DateTime>(structure.DateToIndex, "date to")
             };

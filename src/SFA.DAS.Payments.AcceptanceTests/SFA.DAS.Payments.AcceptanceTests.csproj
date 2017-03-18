@@ -173,6 +173,7 @@
     <Compile Include="Refactoring\Assertions\TransactionTypeRules\ProviderEarnedForFrameworkUpliftOnBalancingRule.cs" />
     <Compile Include="Refactoring\Assertions\TransactionTypeRules\ProviderEarnedForFrameworkUpliftOnCompletionRule.cs" />
     <Compile Include="Refactoring\Assertions\TransactionTypeRules\ProviderEarnedForFrameworkUpliftOnProgrammeRule.cs" />
+    <Compile Include="Refactoring\Assertions\TransactionTypeRules\ProviderEarnedForLearningSupportRule.cs" />
     <Compile Include="Refactoring\Assertions\TransactionTypeRules\ProviderEarnedForOnProgrammeRule.cs" />
     <Compile Include="Refactoring\Assertions\TransactionTypeRules\ProviderTransationTypeRuleBase.cs" />
     <Compile Include="Refactoring\Assertions\TransactionTypeRules\TransactionTypeRuleBase.cs" />

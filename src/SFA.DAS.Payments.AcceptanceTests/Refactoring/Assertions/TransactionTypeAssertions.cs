@@ -23,6 +23,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions
             new ProviderEarnedForFrameworkUpliftOnProgrammeRule().AssertPeriodValues(earningsAndPaymentsContext.ProviderEarnedForFrameworkUpliftOnProgramme, submissionResults, employerAccountContext);
             new ProviderEarnedForFrameworkUpliftOnCompletionRule().AssertPeriodValues(earningsAndPaymentsContext.ProviderEarnedForFrameworkUpliftOnCompletion, submissionResults, employerAccountContext);
             new ProviderEarnedForFrameworkUpliftOnBalancingRule().AssertPeriodValues(earningsAndPaymentsContext.ProviderEarnedForFrameworkUpliftOnBalancing, submissionResults, employerAccountContext);
+            new ProviderEarnedForLearningSupportRule().AssertPeriodValues(earningsAndPaymentsContext.ProviderEarnedForFrameworkUpliftOnBalancing, submissionResults, employerAccountContext);
         }
     }
 }

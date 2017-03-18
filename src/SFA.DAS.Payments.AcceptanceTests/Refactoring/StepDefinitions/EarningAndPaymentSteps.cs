@@ -35,7 +35,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
         {
             if (!SubmissionContext.HaveSubmissionsBeenDone)
             {
-                SubmissionContext.SubmissionResults = SubmissionManager.SubmitIlrAndRunMonthEndAndCollateResults(SubmissionContext.IlrLearnerDetails, LookupContext, EmployerAccountContext.EmployerAccounts, SubmissionContext.ContractTypes, SubmissionContext.EmploymentStatus);
+                SubmissionContext.SubmissionResults = SubmissionManager.SubmitIlrAndRunMonthEndAndCollateResults(SubmissionContext.IlrLearnerDetails,
+                    LookupContext, EmployerAccountContext.EmployerAccounts, SubmissionContext.ContractTypes, SubmissionContext.EmploymentStatus, SubmissionContext.LearningSupportStatus);
                 SubmissionContext.HaveSubmissionsBeenDone = true;
             }
 
@@ -62,7 +63,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
         {
             if (!SubmissionContext.HaveSubmissionsBeenDone)
             {
-                SubmissionContext.SubmissionResults = SubmissionManager.SubmitIlrAndRunMonthEndAndCollateResults(SubmissionContext.IlrLearnerDetails, LookupContext, EmployerAccountContext.EmployerAccounts, SubmissionContext.ContractTypes, SubmissionContext.EmploymentStatus);
+                SubmissionContext.SubmissionResults = SubmissionManager.SubmitIlrAndRunMonthEndAndCollateResults(SubmissionContext.IlrLearnerDetails, 
+                    LookupContext, EmployerAccountContext.EmployerAccounts, SubmissionContext.ContractTypes, SubmissionContext.EmploymentStatus, SubmissionContext.LearningSupportStatus);
                 SubmissionContext.HaveSubmissionsBeenDone = true;
             }
 
@@ -76,7 +78,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
         {
             if (!SubmissionContext.HaveSubmissionsBeenDone)
             {
-                SubmissionContext.SubmissionResults = SubmissionManager.SubmitIlrAndRunMonthEndAndCollateResults(SubmissionContext.IlrLearnerDetails, LookupContext, EmployerAccountContext.EmployerAccounts, SubmissionContext.ContractTypes, SubmissionContext.EmploymentStatus);
+                SubmissionContext.SubmissionResults = SubmissionManager.SubmitIlrAndRunMonthEndAndCollateResults(SubmissionContext.IlrLearnerDetails, 
+                    LookupContext, EmployerAccountContext.EmployerAccounts, SubmissionContext.ContractTypes, SubmissionContext.EmploymentStatus, SubmissionContext.LearningSupportStatus);
                 SubmissionContext.HaveSubmissionsBeenDone = true;
             }
 
