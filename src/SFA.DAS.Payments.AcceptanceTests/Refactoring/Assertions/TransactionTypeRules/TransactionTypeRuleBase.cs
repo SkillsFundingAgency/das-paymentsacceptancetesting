@@ -13,7 +13,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.TransactionTyp
         {
             foreach (var period in periodValues)
             {
-                var payments = FilterPayments(period, submissionResults);
+                var payments = FilterPayments(period, submissionResults, employerAccountContext);
                 var paidInPeriod = payments.Sum(p => p.Amount);
 
                 if (period.Value != paidInPeriod)
@@ -23,7 +23,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.TransactionTyp
             }
         }
 
-        protected abstract IEnumerable<PaymentResult> FilterPayments(PeriodValue period, IEnumerable<LearnerResults> submissionResults);
+        protected abstract IEnumerable<PaymentResult> FilterPayments(PeriodValue period, IEnumerable<LearnerResults> submissionResults, EmployerAccountContext employerAccountContext);
         protected abstract string FormatAssertionFailureMessage(PeriodValue period, decimal actualPaymentInPeriod);
     }
 }

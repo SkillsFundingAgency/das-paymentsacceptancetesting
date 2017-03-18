@@ -7,9 +7,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.TransactionTyp
 {
     public class ProviderEarnedFor16To18IncentiveRule : ProviderTransationTypeRuleBase
     {
+        protected override string GetPaymentFilterPeriodName(ProviderEarnedPeriodValue providerPeriod)
+        {
+            return providerPeriod.PeriodName.ToPeriodDateTime().AddMonths(-1).ToPeriodName();
+        }
         protected override IEnumerable<PaymentResult> FilterPeriodPayments(IEnumerable<PaymentResult> periodPayments)
         {
-            return periodPayments.Where(p => p.TransactionType == TransactionType.First16To18ProviderIncentive 
+            return periodPayments.Where(p => p.TransactionType == TransactionType.First16To18ProviderIncentive
                                           || p.TransactionType == TransactionType.Second16To18ProviderIncentive);
         }
 
@@ -17,7 +21,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.TransactionTyp
         {
             var providerPeriod = (ProviderEarnedPeriodValue)period;
             var specPeriod = providerPeriod.PeriodName.ToPeriodDateTime().AddMonths(-1).ToPeriodName();
-            return $"Expected provider {providerPeriod.ProviderId} to be paid {period.Value} in {specPeriod} for 16-18 incentive but was actually paid {actualPaymentInPeriod}";
+            return $"Expected {providerPeriod.ProviderId} to be paid {period.Value} in {specPeriod} for 16-18 incentive but was actually paid {actualPaymentInPeriod}";
         }
     }
 }

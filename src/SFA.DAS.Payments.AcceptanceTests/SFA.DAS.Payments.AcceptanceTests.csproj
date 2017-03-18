@@ -189,6 +189,7 @@
     <Compile Include="Refactoring\ExecutionManagers\CommitmentManager.cs" />
     <Compile Include="Refactoring\ExecutionManagers\EmployerAccountManager.cs" />
     <Compile Include="Refactoring\ExecutionManagers\PreperationManager.cs" />
+    <Compile Include="Refactoring\ExecutionManagers\ReferenceDataManager.cs" />
     <Compile Include="Refactoring\ExecutionManagers\SubmissionManager.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\AimType.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\CommitmentPaymentStatus.cs" />
@@ -221,6 +222,7 @@
     <Compile Include="Refactoring\StepDefinitions\CommitmentSteps.cs" />
     <Compile Include="Refactoring\StepDefinitions\DataLockSteps.cs" />
     <Compile Include="Refactoring\StepDefinitions\EarningAndPaymentSteps.cs" />
+    <Compile Include="Refactoring\StepDefinitions\ExternalSystemsDataSteps.cs" />
     <Compile Include="Refactoring\StepDefinitions\FeatureSteps\DataLockFeatureSteps.cs" />
     <Compile Include="Refactoring\StepDefinitions\FeatureSteps\EarningsCalcFeatureSteps.cs" />
     <Compile Include="Refactoring\StepDefinitions\FeatureSteps\PaymentsCalcFeatureSteps.cs" />
