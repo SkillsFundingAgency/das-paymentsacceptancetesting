@@ -168,6 +168,7 @@
     <Compile Include="Refactoring\Assertions\TransactionTypeRules\ProviderEarnedFor16To18IncentiveRule.cs" />
     <Compile Include="Refactoring\Assertions\TransactionTypeRules\ProviderEarnedForBalancingRule.cs" />
     <Compile Include="Refactoring\Assertions\TransactionTypeRules\ProviderEarnedForCompletionRule.cs" />
+    <Compile Include="Refactoring\Assertions\TransactionTypeRules\ProviderEarnedForDisadvantageUpliftRule.cs" />
     <Compile Include="Refactoring\Assertions\TransactionTypeRules\ProviderEarnedForEnglishAndMathBalancing.cs" />
     <Compile Include="Refactoring\Assertions\TransactionTypeRules\ProviderEarnedForEnglishAndMathOnProgrammeRule.cs" />
     <Compile Include="Refactoring\Assertions\TransactionTypeRules\ProviderEarnedForFrameworkUpliftOnBalancingRule.cs" />

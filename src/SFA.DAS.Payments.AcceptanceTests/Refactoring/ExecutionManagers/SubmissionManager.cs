@@ -39,6 +39,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
 
                 foreach (var providerDetails in providerLearners)
                 {
+                    SetupDisadvantagedPostcodeUplift(providerDetails);
                     BuildAndSubmitIlr(providerDetails, period, lookupContext, contractTypes, employmentStatus, learningSupportStatus);
                 }
                 RunMonthEnd(period);
@@ -97,6 +98,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                 ActualsSchemaPeriod = date.Year + date.Month.ToString("00"),
                 CollectionOpen = 1
             };
+        }
+        private static void SetupDisadvantagedPostcodeUplift(ProviderSubmissionDetails providerDetails)
+        {
+            var homePostcodeDeprivation = providerDetails.LearnerDetails.Select(l => l.HomePostcodeDeprivation)
+                                                                        .FirstOrDefault(d => !string.IsNullOrEmpty(d));
+            if (!string.IsNullOrEmpty(homePostcodeDeprivation))
+            {
+                ReferenceDataManager.AddDisadvantagedPostcodeUplift(homePostcodeDeprivation);
+            }
         }
         private static void BuildAndSubmitIlr(ProviderSubmissionDetails providerDetails, string period, LookupContext lookupContext, List<ContractTypeReferenceData> contractTypes, List<EmploymentStatusReferenceData> employmentStatus, List<LearningSupportReferenceData> learningSupportStatus)
         {

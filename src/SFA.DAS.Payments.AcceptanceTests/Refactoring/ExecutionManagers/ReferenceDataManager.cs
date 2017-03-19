@@ -26,6 +26,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
 
             using (var connection = new SqlConnection(TestEnvironment.Variables.DedsDatabaseConnectionString))
             {
+                connection.Execute("DELETE FROM AT.ReferenceData WHERE [Key]='OX17 1EZ' AND [Type]='PostCode'");
                 connection.Execute("INSERT INTO AT.ReferenceData ([Key],[Value],[Type]) VALUES ('OX17 1EZ',@value,'PostCode')", new { value });
             }
         }
