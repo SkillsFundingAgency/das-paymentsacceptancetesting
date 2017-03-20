@@ -161,7 +161,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
             DateTime? effectiveTo = null;
             if (structure.EffectiveToIndex > -1 && string.IsNullOrEmpty(row[structure.EffectiveToIndex]))
             {
-                effectiveTo = DateTime.MaxValue;
+                effectiveTo = null;
             }
             else if (structure.EffectiveToIndex > -1 && !TryParseNullableDateTime(row[structure.EffectiveToIndex], out effectiveTo))
             {
@@ -176,10 +176,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
             if (effectiveFrom == null)
             {
                 effectiveFrom = startDate;
-            }
-            if (effectiveTo == null)
-            {
-                effectiveTo = endDate;
             }
 
             return new CommitmentReferenceData
@@ -196,7 +192,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
                 StartDate = startDate,
                 EndDate = endDate,
                 EffectiveFrom = effectiveFrom.Value,
-                EffectiveTo = effectiveTo.Value,
+                EffectiveTo = effectiveTo,
                 Status = status,
                 StandardCode = standardCode,
                 FrameworkCode = frameworkCode == 0 ? 0 : frameworkCode,
