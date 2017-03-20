@@ -17,11 +17,40 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
         {
             using (var connection = new SqlConnection(TestEnvironment.Variables.DedsDatabaseConnectionString))
             {
+                connection.Execute("DELETE FROM Valid.Learner");
+                connection.Execute("DELETE FROM Valid.LearningProvider");
+                connection.Execute("DELETE FROM Valid.LearningDelivery");
+                connection.Execute("DELETE FROM Valid.LearningDeliveryFAM");
+                connection.Execute("DELETE FROM Valid.TrailblazerApprenticeshipFinancialRecord");
+
+                connection.Execute("DELETE FROM Rulebase.AEC_ApprenticeshipPriceEpisode");
+                connection.Execute("DELETE FROM Rulebase.AEC_ApprenticeshipPriceEpisode_Period");
+                connection.Execute("DELETE FROM Rulebase.AEC_ApprenticeshipPriceEpisode_PeriodisedValues");
+
+                connection.Execute("DELETE FROM Rulebase.AEC_LearningDelivery");
+                connection.Execute("DELETE FROM Rulebase.AEC_LearningDelivery_Period");
+                connection.Execute("DELETE FROM Rulebase.AEC_LearningDelivery_PeriodisedTextValues");
+                connection.Execute("DELETE FROM Rulebase.AEC_LearningDelivery_PeriodisedValues");
+
+                connection.Execute("DELETE FROM Rulebase.AEC_Cases");
+                connection.Execute("DELETE FROM Rulebase.AEC_global");
+                connection.Execute("DELETE FROM Rulebase.AEC_HistoricEarningOutput");
+
+                connection.Execute("DELETE FROM dbo.AEC_EarningHistory");
+
+                connection.Execute("DELETE FROM dbo.FileDetails");
                 connection.Execute("DELETE FROM dbo.DasCommitments");
                 connection.Execute("DELETE FROM dbo.DasAccounts");
+
+                connection.Execute("DELETE FROM DataLock.PriceEpisodeMatch");
+                connection.Execute("DELETE FROM DataLock.PriceEpisodePeriodMatch");
+                connection.Execute("DELETE FROM DataLock.ValidationError");
+
                 connection.Execute("DELETE FROM Payments.Payments");
                 connection.Execute("DELETE FROM PaymentsDue.RequiredPayments");
+
                 connection.Execute("DELETE FROM AT.ReferenceData");
+                connection.Execute("DELETE FROM Collection_Period_Mapping");
             }
         }
 
