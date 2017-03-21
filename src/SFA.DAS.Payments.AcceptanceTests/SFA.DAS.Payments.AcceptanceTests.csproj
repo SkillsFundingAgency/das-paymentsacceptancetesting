@@ -205,6 +205,7 @@
     <Compile Include="Refactoring\ReferenceDataModels\DataLockPeriodMatch.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\CompletionStatus.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\EarningsAndPaymentsBreakdown.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\EmployerAccountProviderPeriodValue.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\EmployerAccountReferenceData.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\EmployerAccountPeriodValue.cs" />
     <Compile Include="Refactoring\ReferenceDataModels\EmploymentStatus.cs" />

@@ -14,6 +14,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
 
             using (var connection = new SqlConnection(TestEnvironment.Variables.DedsDatabaseConnectionString))
             {
+                connection.Execute("DELETE FROM AT.ReferenceData WHERE [Key]='Cap' AND [Type]='FundingBandCap'");
                 connection.Execute("INSERT INTO AT.ReferenceData ([Key],[Value],[Type]) VALUES ('Cap',@value,'FundingBandCap')", new { value });
             }
         }

@@ -66,11 +66,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
                 }
                 else if (row[0] == "Employer 16-18 incentive")
                 {
-                    ParseEmployerRow(Defaults.EmployerAccountId.ToString(), row, periodNames, context.EmployerEarnedFor16To18Incentive);
+                    ParseEmployerRow(providerId, Defaults.EmployerAccountId.ToString(), row, periodNames, context.EmployerEarnedFor16To18Incentive);
                 }
                 else if ((match = Regex.Match(row[0], "Employer ([0-9]{1,}) 16-18 incentive", RegexOptions.IgnoreCase)).Success)
                 {
-                    ParseEmployerRow(match.Groups[1].Value, row, periodNames, context.EmployerEarnedFor16To18Incentive);
+                    ParseEmployerRow(providerId, match.Groups[1].Value, row, periodNames, context.EmployerEarnedFor16To18Incentive);
                 }
                 else if (row[0] == "Provider 16-18 incentive")
                 {
@@ -119,7 +119,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
                 Value = value
             });
         }
-        private static void ParseEmployerRow(string rowAccountId, TableRow row, string[] periodNames, List<EmployerAccountPeriodValue> contextList)
+        private static void ParseEmployerRow(string providerId, string rowAccountId, TableRow row, string[] periodNames, List<EmployerAccountProviderPeriodValue> contextList)
         {
             int employerAccountId;
             if (!int.TryParse(rowAccountId, out employerAccountId))
@@ -128,8 +128,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
             }
 
 
-            ParseRowValues(row, periodNames, contextList, (periodName, value) => new EmployerAccountPeriodValue
+            ParseRowValues(row, periodNames, contextList, (periodName, value) => new EmployerAccountProviderPeriodValue
             {
+                ProviderId = providerId,
                 EmployerAccountId = employerAccountId,
                 PeriodName = periodName,
                 Value = value

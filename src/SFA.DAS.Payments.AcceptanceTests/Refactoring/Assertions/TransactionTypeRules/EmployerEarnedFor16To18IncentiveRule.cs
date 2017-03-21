@@ -10,11 +10,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.TransactionTyp
     {
         protected override IEnumerable<PaymentResult> FilterPayments(PeriodValue period, IEnumerable<LearnerResults> submissionResults, EmployerAccountContext employerAccountContext)
         {
-            var employerPeriod = (EmployerAccountPeriodValue)period;
+            var employerPeriod = (EmployerAccountProviderPeriodValue)period;
             var employer = employerAccountContext.EmployerAccounts.SingleOrDefault(a => a.Id == employerPeriod.EmployerAccountId);
             var isLevyPayer = employer?.IsLevyPayer ?? false;
             var earningPeriod = employerPeriod.PeriodName.ToPeriodDateTime().AddMonths(-1).ToPeriodName();
-            return submissionResults.SelectMany(r => r.Payments).Where(p => (p.EmployerAccountId == employerPeriod.EmployerAccountId || !isLevyPayer && p.EmployerAccountId == 0)
+            return submissionResults.Where(l => l.ProviderId.Equals(employerPeriod.ProviderId, System.StringComparison.CurrentCultureIgnoreCase))
+                                    .SelectMany(r => r.Payments).Where(p => (p.EmployerAccountId == employerPeriod.EmployerAccountId || !isLevyPayer && p.EmployerAccountId == 0)
                                                                          && p.DeliveryPeriod == earningPeriod
                                                                          && (p.TransactionType == TransactionType.First16To18EmployerIncentive || p.TransactionType == TransactionType.Second16To18EmployerIncentive));
         }
@@ -22,8 +23,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.TransactionTyp
         protected override string FormatAssertionFailureMessage(PeriodValue period, decimal actualPaymentInPeriod)
         {
             var employerPeriod = (EmployerAccountPeriodValue)period;
-            var specPeriod = employerPeriod.PeriodName.ToPeriodDateTime().AddMonths(-1).ToPeriodName();
-            return $"Expected Employer {employerPeriod.EmployerAccountId} to be paid {period.Value} in {specPeriod} for 16-18 incentive but was actually paid {actualPaymentInPeriod}";
+            return $"Expected Employer {employerPeriod.EmployerAccountId} to be paid {period.Value} in {period.PeriodName} for 16-18 incentive but was actually paid {actualPaymentInPeriod}";
         }
     }
 }

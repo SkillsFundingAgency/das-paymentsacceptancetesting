@@ -17,8 +17,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.PaymentsAndEar
             foreach (var period in breakdown.EmployersLevyAccountDebited)
             {
                 var employerPayments = payments.Where(p => p.EmployerAccountId == period.EmployerAccountId).ToArray();
-                var prevPeriod = new PeriodValue
+                var prevPeriod = new EmployerAccountPeriodValue
                 {
+                    EmployerAccountId = period.EmployerAccountId,
                     PeriodName = period.PeriodName.ToPeriodDateTime().AddMonths(-1).ToPeriodName(),
                     Value = period.Value
                 };
