@@ -128,8 +128,8 @@ Feature: Provider earnings and payments where learner completes on time and is f
         And the employer 2 has a levy balance > agreed price for all months
         And the following commitments exist:
             | Employer   | ULN       | priority | agreed price | start date | end date   |
-            | employer 1 | learner a | 1        | 7500         | 08/09/2017 | 08/09/2018 |
-            | employer 2 | learner b | 1        | 15000        | 08/09/2017 | 08/09/2018 |
+            | employer 1 | learner a | 1        | 7500         | 01/09/2017 | 08/09/2018 |
+            | employer 2 | learner b | 1        | 15000        | 01/09/2017 | 08/09/2018 |
         When an ILR file is submitted with the following data:
             | ULN       | agreed price | learner type       | start date | planned end date | actual end date | completion status |
             | learner a | 7500         | programme only DAS | 01/09/2017 | 08/09/2018       | 08/09/2018      | completed         |
@@ -145,7 +145,7 @@ Feature: Provider earnings and payments where learner completes on time and is f
             | Payment due from Employer 2     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
             | employer 1 Levy account debited | 0     | 500   | 500   | ... | 500   | 500   | 1500  |
             | employer 2 Levy account debited | 0     | 1000  | 1000  | ... | 1000  | 1000  | 3000  |
-            | SFA Levy employer budget        | 1500  | 1500  | 1500  | ... | 1500  | 3000  | 0     |
+            | SFA Levy employer budget        | 1500  | 1500  | 1500  | ... | 1500  | 4500  | 0     |
             | SFA Levy co-funding budget      | 0     | 0     | 0     | ... | 0     | 0     | 0     |
             | SFA non-Levy co-funding budget  | 0     | 0     | 0     | ... | 0     | 0     | 0     |
 
@@ -159,8 +159,8 @@ Feature: Provider earnings and payments where learner completes on time and is f
             | 500   | 500   | 500   | 500 | 500   | 1500  |
         And the following commitments exist:
             | Employer   | ULN       | priority | agreed price | start date | end date   |
-            | employer 1 | learner a | 1        | 7500         | 08/09/2017 | 08/09/2018 |
-            | employer 2 | learner b | 1        | 15000        | 08/09/2017 | 08/09/2018 |
+            | employer 1 | learner a | 1        | 7500         | 01/09/2017 | 08/09/2018 |
+            | employer 2 | learner b | 1        | 15000        | 01/09/2017 | 08/09/2018 |
         When an ILR file is submitted with the following data:
             | ULN       | agreed price | learner type       | start date | planned end date | actual end date | completion status |
             | learner a | 7500         | programme only DAS | 01/09/2017 | 08/09/2018       | 08/09/2018      | completed         |

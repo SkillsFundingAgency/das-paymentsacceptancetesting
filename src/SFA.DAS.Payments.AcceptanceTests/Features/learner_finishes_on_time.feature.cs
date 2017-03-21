@@ -827,14 +827,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "learner a",
                         "1",
                         "7500",
-                        "08/09/2017",
+                        "01/09/2017",
                         "08/09/2018"});
             table416.AddRow(new string[] {
                         "employer 2",
                         "learner b",
                         "1",
                         "15000",
-                        "08/09/2017",
+                        "01/09/2017",
                         "08/09/2018"});
 #line 129
         testRunner.And("the following commitments exist:", ((string)(null)), table416, "And ");
@@ -963,7 +963,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "1500",
                         "...",
                         "1500",
-                        "3000",
+                        "4500",
                         "0"});
             table418.AddRow(new string[] {
                         "SFA Levy co-funding budget",
@@ -1045,14 +1045,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "learner a",
                         "1",
                         "7500",
-                        "08/09/2017",
+                        "01/09/2017",
                         "08/09/2018"});
             table421.AddRow(new string[] {
                         "employer 2",
                         "learner b",
                         "1",
                         "15000",
-                        "08/09/2017",
+                        "01/09/2017",
                         "08/09/2018"});
 #line 160
         testRunner.And("the following commitments exist:", ((string)(null)), table421, "And ");
