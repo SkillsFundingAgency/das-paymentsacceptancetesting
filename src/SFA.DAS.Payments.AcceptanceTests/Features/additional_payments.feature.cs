@@ -1778,15 +1778,15 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("AC9- Maths and English payments for a non-das learner finishing on time, funding " +
-            "agreed within band maximum, planned duration is same as programme (assumes both " +
-            "start and finish at same time)")]
+        [NUnit.Framework.DescriptionAttribute("589-AC01- Maths and English payments for a non-das learner finishing on time, fun" +
+            "ding agreed within band maximum, planned duration is same as programme (assumes " +
+            "both start and finish at same time)")]
         [NUnit.Framework.CategoryAttribute("MathsAndEnglishNonDas")]
-        public virtual void AC9_MathsAndEnglishPaymentsForANon_DasLearnerFinishingOnTimeFundingAgreedWithinBandMaximumPlannedDurationIsSameAsProgrammeAssumesBothStartAndFinishAtSameTime()
+        public virtual void _589_AC01_MathsAndEnglishPaymentsForANon_DasLearnerFinishingOnTimeFundingAgreedWithinBandMaximumPlannedDurationIsSameAsProgrammeAssumesBothStartAndFinishAtSameTime()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("AC9- Maths and English payments for a non-das learner finishing on time, funding " +
-                    "agreed within band maximum, planned duration is same as programme (assumes both " +
-                    "start and finish at same time)", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("589-AC01- Maths and English payments for a non-das learner finishing on time, fun" +
+                    "ding agreed within band maximum, planned duration is same as programme (assumes " +
+                    "both start and finish at same time)", new string[] {
                         "MathsAndEnglishNonDas"});
 #line 216
 this.ScenarioSetup(scenarioInfo);
@@ -2036,15 +2036,15 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("AC10- Maths and English payments for a das learner finishing on time, funding agr" +
-            "eed within band maximum, planned duration is same as programme (assumes both sta" +
-            "rt and finish at same time)")]
+        [NUnit.Framework.DescriptionAttribute("589-AC2- Maths and English payments for a das learner finishing on time, funding " +
+            "agreed within band maximum, planned duration is same as programme (assumes both " +
+            "start and finish at same time)")]
         [NUnit.Framework.CategoryAttribute("MathsAndEnglishDas")]
-        public virtual void AC10_MathsAndEnglishPaymentsForADasLearnerFinishingOnTimeFundingAgreedWithinBandMaximumPlannedDurationIsSameAsProgrammeAssumesBothStartAndFinishAtSameTime()
+        public virtual void _589_AC2_MathsAndEnglishPaymentsForADasLearnerFinishingOnTimeFundingAgreedWithinBandMaximumPlannedDurationIsSameAsProgrammeAssumesBothStartAndFinishAtSameTime()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("AC10- Maths and English payments for a das learner finishing on time, funding agr" +
-                    "eed within band maximum, planned duration is same as programme (assumes both sta" +
-                    "rt and finish at same time)", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("589-AC2- Maths and English payments for a das learner finishing on time, funding " +
+                    "agreed within band maximum, planned duration is same as programme (assumes both " +
+                    "start and finish at same time)", new string[] {
                         "MathsAndEnglishDas"});
 #line 246
 this.ScenarioSetup(scenarioInfo);
@@ -8735,7 +8735,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1083.64",
                         "1083.64",
                         "2883.64",
-                        "0",
+                        "183.64",
                         "0"});
             table131.AddRow(new string[] {
                         "Payment due from Employer",

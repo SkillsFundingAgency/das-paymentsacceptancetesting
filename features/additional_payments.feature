@@ -213,7 +213,7 @@ Scenario:AC7- Payment for a non-DAS learner, lives in a disadvantaged postocde a
 
 
 @MathsAndEnglishNonDas
-Scenario:AC9- Maths and English payments for a non-das learner finishing on time, funding agreed within band maximum, planned duration is same as programme (assumes both start and finish at same time)
+Scenario:589-AC01- Maths and English payments for a non-das learner finishing on time, funding agreed within band maximum, planned duration is same as programme (assumes both start and finish at same time)
     When an ILR file is submitted with the following data:
         | ULN       | learner type           | agreed price | start date | planned end date | actual end date | completion status | aim type         | aim rate | framework code | programme type | pathway code |
         | learner a | programme only non-DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | programme        |          | 403            | 2              | 1            |
@@ -243,7 +243,7 @@ Scenario:AC9- Maths and English payments for a non-das learner finishing on time
 
 
 @MathsAndEnglishDas
-Scenario:AC10- Maths and English payments for a das learner finishing on time, funding agreed within band maximum, planned duration is same as programme (assumes both start and finish at same time)
+Scenario:589-AC2- Maths and English payments for a das learner finishing on time, funding agreed within band maximum, planned duration is same as programme (assumes both start and finish at same time)
     Given levy balance > agreed price for all months
     And the following commitments exist:
         | commitment Id | ULN       | start date | end date   | agreed price | framework code | programme type | pathway code | status | effective from | effective to |
@@ -1012,16 +1012,16 @@ Scenario:657-AC01 Non-DAS learner, takes an English qualification that has a pla
         | learning support code | date from  | date to    |
         | 1                     | 06/08/2017 | 06/10/2018 |		  
 	Then the provider earnings and payments break down as follows:
-		| Type                                    | 08/17   | 09/17   | 10/17   | ... | 05/18   | 06/18   | 07/18   | 08/18   | 09/18   | 10/18 | 11/18 |
-		| Provider Earned Total                   | 1183.64 | 1183.64 | 1183.64 | ... | 1183.64 | 1183.64 | 1183.64 | 3183.64 | 183.64  | 0     | 0     |
-		| Provider Paid by SFA                    | 0       | 1083.64 | 1083.64 | ... | 1083.64 | 1083.64 | 1083.64 | 1083.64 | 2883.64 | 0     | 0     |
-		| Payment due from Employer               | 0       | 100     | 100     | ... | 100     | 100     | 100     | 100     | 300     | 0     | 0     |
-		| Levy account debited                    | 0       | 0       | 0       | ... | 0       | 0       | 0       | 0       | 0       | 0     | 0     |
-		| SFA Levy employer budget                | 0       | 0       | 0       | ... | 0       | 0       | 0       | 0       | 0       | 0     | 0     |
-		| SFA Levy co-funding budget              | 0       | 0       | 0       | ... | 0       | 0       | 0       | 0       | 0       | 0     | 0     |
-		| SFA non-Levy co-funding budget          | 900     | 900     | 900     | ... | 900     | 900     | 900     | 2700    | 0       | 0     | 0     |
-		| SFA Levy additional payments budget     | 0       | 0       | 0       | ... | 0       | 0       | 0       | 0       | 0       | 0     | 0     |
-		| SFA non-Levy additional payments budget | 183.64  | 183.64  | 183.64  | ... | 183.64  | 183.64  | 183.64  | 183.64  | 183.64  | 0     | 0     | 
+		| Type                                    | 08/17   | 09/17   | 10/17   | ... | 05/18   | 06/18   | 07/18   | 08/18   | 09/18   | 10/18  | 11/18 |
+		| Provider Earned Total                   | 1183.64 | 1183.64 | 1183.64 | ... | 1183.64 | 1183.64 | 1183.64 | 3183.64 | 183.64  | 0      | 0     |
+		| Provider Paid by SFA                    | 0       | 1083.64 | 1083.64 | ... | 1083.64 | 1083.64 | 1083.64 | 1083.64 | 2883.64 | 183.64 | 0     |
+		| Payment due from Employer               | 0       | 100     | 100     | ... | 100     | 100     | 100     | 100     | 300     | 0      | 0     |
+		| Levy account debited                    | 0       | 0       | 0       | ... | 0       | 0       | 0       | 0       | 0       | 0      | 0     |
+		| SFA Levy employer budget                | 0       | 0       | 0       | ... | 0       | 0       | 0       | 0       | 0       | 0      | 0     |
+		| SFA Levy co-funding budget              | 0       | 0       | 0       | ... | 0       | 0       | 0       | 0       | 0       | 0      | 0     |
+		| SFA non-Levy co-funding budget          | 900     | 900     | 900     | ... | 900     | 900     | 900     | 2700    | 0       | 0      | 0     |
+		| SFA Levy additional payments budget     | 0       | 0       | 0       | ... | 0       | 0       | 0       | 0       | 0       | 0      | 0     |
+		| SFA non-Levy additional payments budget | 183.64  | 183.64  | 183.64  | ... | 183.64  | 183.64  | 183.64  | 183.64  | 183.64  | 0      | 0     | 
     And the transaction types for the payments are:
 		| Payment type                   | 09/17 | 10/17 | ... | 05/18 | 06/18 | 07/18 | 08/18 | 09/18 | 10/18 | 11/18 |
 		| On-program                     | 900   | 900   | ... | 900   | 900   | 900   | 900   | 0     | 0     | 0     |
