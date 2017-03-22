@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.ReferenceDataModels;
@@ -16,6 +17,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.PaymentsAndEar
             foreach (var period in breakdown.SfaLevyBudget)
             {
                 AssertResultsForPeriod(period, payments);
+            }
+        }
+        protected new void AssertResultsForPeriod(PeriodValue period, PaymentResult[] allPayments)
+        {
+            var paidInPeriod = allPayments.Where(p => p.DeliveryPeriod == period.PeriodName).Sum(p => p.Amount);
+            if (period.Value != paidInPeriod)
+            {
+                throw new Exception(FormatAssertionFailureMessage(period, paidInPeriod));
             }
         }
 

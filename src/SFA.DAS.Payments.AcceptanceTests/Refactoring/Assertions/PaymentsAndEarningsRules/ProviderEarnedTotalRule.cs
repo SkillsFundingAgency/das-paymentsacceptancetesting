@@ -29,7 +29,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.PaymentsAndEar
         }
         private void AssertResultsForPeriod(PeriodValue period, EarningsResult[] allEarnings)
         {
-            var earnedInPeriod = allEarnings.Where(r => r.CalculationPeriod == period.PeriodName && r.DeliveryPeriod == period.PeriodName).Sum(r => r.Value);
+            var earnedInPeriod = allEarnings.FirstOrDefault(r => r.DeliveryPeriod == period.PeriodName)?.Value;
             if (period.Value != earnedInPeriod)
             {
                 throw new Exception($"Expected provider to earn {period.Value} in {period.PeriodName} but actually earned {earnedInPeriod}");

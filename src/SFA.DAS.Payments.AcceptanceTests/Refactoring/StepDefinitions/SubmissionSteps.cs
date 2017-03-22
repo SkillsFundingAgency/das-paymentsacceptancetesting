@@ -1,4 +1,5 @@
-﻿using SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts;
+﻿using System;
+using SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers;
 using TechTalk.SpecFlow;
 
@@ -36,6 +37,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
         public void WhenIlrSubmittedOnSpecificDate(string specSumissionDate, Table ilrDetails)
         {
             IlrTableParser.ParseIlrTableIntoContext(SubmissionsContext, ilrDetails);
+
+            DateTime firstSubmissionDate;
+            if (!DateTime.TryParse(specSumissionDate, out firstSubmissionDate))
+            {
+                throw new ArgumentException($"{specSumissionDate} is not a valid date");
+            }
+            SubmissionsContext.FirstSubmissionDate = firstSubmissionDate;
         }
 
         [When("the Contract type in the ILR is:")]

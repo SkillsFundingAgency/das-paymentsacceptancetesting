@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.ReferenceDataModels;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.ResultsDataModels;
 
@@ -21,5 +22,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Contexts
         public List<ContractTypeReferenceData> ContractTypes { get; set; }
         public List<EmploymentStatusReferenceData> EmploymentStatus { get; set; }
         public List<LearningSupportReferenceData> LearningSupportStatus { get; set; }
+        public DateTime? FirstSubmissionDate { get; set; }
     }
 }

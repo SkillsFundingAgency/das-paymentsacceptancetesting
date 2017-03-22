@@ -17,6 +17,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
         private const short FamCodeActNonDasValue = 2;
 
         internal static List<LearnerResults> SubmitIlrAndRunMonthEndAndCollateResults(List<IlrLearnerReferenceData> ilrLearnerDetails,
+                                                                                      DateTime? firstSubmissionDate,
                                                                                       LookupContext lookupContext,
                                                                                       List<EmployerAccountReferenceData> employers,
                                                                                       List<ContractTypeReferenceData> contractTypes,
@@ -30,7 +31,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
             }
 
 
-            var periods = ExtractPeriods(ilrLearnerDetails);
+            var periods = ExtractPeriods(ilrLearnerDetails, firstSubmissionDate);
             var providerLearners = GroupLearnersByProvider(ilrLearnerDetails, lookupContext);
             foreach (var period in periods)
             {
@@ -52,7 +53,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
             return results;
         }
 
-        private static string[] ExtractPeriods(List<IlrLearnerReferenceData> ilrLearnerDetails)
+        private static string[] ExtractPeriods(List<IlrLearnerReferenceData> ilrLearnerDetails, DateTime? firstSubmissionDate)
         {
             var periods = new List<string>();
 
@@ -64,6 +65,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
             var date = earliestDate;
             while (date <= latestDate)
             {
+                if (firstSubmissionDate.HasValue && date < firstSubmissionDate.Value.AddDays(-firstSubmissionDate.Value.Day + 1))
+                {
+                    date = date.AddMonths(1);
+                    continue;
+                }
+
                 periods.Add($"{date.Month:00}/{date.Year - 2000}");
                 date = date.AddMonths(1);
             }
