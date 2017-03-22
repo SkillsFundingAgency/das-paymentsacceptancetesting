@@ -397,7 +397,7 @@ Scenario:AC12- Payment for a 16-18 non-DAS learner, small employer at start, cha
 		| Provider Earned from SFA                | 620   | 620   | 570   | 1570  | 570   | ... | 2710  | 0     |
 		| Provider Earned from Employer           | 0     | 0     | 50    | 50    | 50    | ... | 150   | 0     |
 		| Provider Paid by SFA                    | 0     | 620   | 620   | 570   | 1570  | ... | 570   | 2710  |
-		| Payment due from Employer 98765432      | 0     | 0     | 50    | 50    | 50    | ... | 50    | 150   |
+		| Payment due from Employer 2             | 0     | 0     | 0     | 50    | 50    | ... | 50    | 150   |
 		| Levy account debited                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
 		| SFA Levy employer budget                | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
 		| SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
@@ -434,7 +434,7 @@ Scenario:AC13- Payment for a 16-18 non-DAS learner, large employer at start, cha
 	    | Provider Earned from SFA                | 570   | 570   | 620   | 1620  | 620   | ... | 2860  | 0     |
 	    | Provider Earned from Employer           | 50    | 50    | 0     | 0     | 0     | ... | 0     | 0     |
 	    | Provider Paid by SFA                    | 0     | 570   | 570   | 620   | 1620  | ... | 620   | 2860  |
-	    | Payment due from Employer 12345678      | 50    | 50    | 0     | 0     | 0     | ... | 0     | 0     |
+	    | Payment due from Employer 1             | 0     | 50    | 50    | 0     | 0     | ... | 0     | 0     |
 	    | Levy account debited                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
 	    | SFA Levy employer budget                | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
 	    | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     |

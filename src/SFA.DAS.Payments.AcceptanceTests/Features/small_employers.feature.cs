@@ -3135,10 +3135,10 @@ this.ScenarioSetup(scenarioInfo);
                         "570",
                         "2710"});
             table486.AddRow(new string[] {
-                        "Payment due from Employer 98765432",
+                        "Payment due from Employer 2",
                         "0",
                         "0",
-                        "50",
+                        "0",
                         "50",
                         "50",
                         "...",
@@ -3401,10 +3401,10 @@ this.ScenarioSetup(scenarioInfo);
                         "620",
                         "2860"});
             table490.AddRow(new string[] {
-                        "Payment due from Employer 12345678",
-                        "50",
-                        "50",
+                        "Payment due from Employer 1",
                         "0",
+                        "50",
+                        "50",
                         "0",
                         "0",
                         "...",
