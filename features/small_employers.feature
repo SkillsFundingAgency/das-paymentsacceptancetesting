@@ -4,8 +4,11 @@ Feature: 1 learner aged 16-18, non-DAS, employed with a small employer at start,
 Scenario:AC1-Payment for a 16-18 non-DAS learner, small employer at start
 	Given the apprenticeship funding band maximum is 9000
     When an ILR file is submitted with the following data:
-        | ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status | Employment Status Applies | Employer Id | Small Employer |
-        | learner a | 16-18 programme only non-DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment          | 05/08/2017                | 12345678    | SEM1           |
+        | ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status   | Employment Status Applies | Employer Id | Small Employer |
+        | learner a | 16-18 programme only non-DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment  | 05/08/2017                | 12345678    | SEM1           |
+	And the employment status in the ILR is:
+        | Employer    | Employment Status      | Employment Status Applies | Small Employer |
+        | employer 1  | in paid employment     | 05/08/2017                | SEM1           |
     Then the provider earnings and payments break down as follows:
         | Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
         | Provider Earned Total                   | 620   | 620   | 620   | 1620  | 620   | ... | 620   | 2860  | 0     |
@@ -36,9 +39,12 @@ Scenario:AC2- 1 learner aged 19-24, non-DAS, with an Education Health Care (EHC)
 #Note: EHC plans are flagged on the ILR through Eligibility for Enhanced Funding (EEF) code = 2*
 	Given the apprenticeship funding band maximum is 9000
     When an ILR file is submitted with the following data:
-        | ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status | Employment Status Applies | Employer Id | Small Employer | LearnDelFAM |
-        | learner a | 19-24 programme only non-DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment          | 05/08/2017                | 12345678    | SEM1           | EEF2        |
-  Then the provider earnings and payments break down as follows:
+        | ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status  | Employment Status Applies | Employer Id | Small Employer | LearnDelFAM |
+        | learner a | 19-24 programme only non-DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment | 05/08/2017                | 12345678    | SEM1           | EEF2        |
+	And the employment status in the ILR is:
+        | Employer    | Employment Status      | Employment Status Applies | Small Employer |
+        | employer 1  | in paid employment     | 05/08/2017                | SEM1           |
+	Then the provider earnings and payments break down as follows:
         | Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
         | Provider Earned Total                   | 620   | 620   | 620   | 1620  | 620   | ... | 620   | 2860  | 0     |
         | Provider Earned from SFA                | 620   | 620   | 620   | 1620  | 620   | ... | 620   | 2860  | 0     |
@@ -68,9 +74,11 @@ Scenario:AC3- 1 learner aged 19-24, non-DAS, is a care leaver, In paid employmen
 #Note: care leavers are flagged on the ILR through EEF code = 4*
 	Given the apprenticeship funding band maximum is 9000
     When an ILR file is submitted with the following data:
-        | ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status | Employment Status Applies | Employer Id | Small Employer | LearnDelFAM |
-        | learner a | 19-24 programme only non-DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment          | 05/08/2017                | 12345678    | SEM1           | EEF4        |
-
+        | ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status  | Employment Status Applies | Employer Id | Small Employer | LearnDelFAM |
+        | learner a | 19-24 programme only non-DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment | 05/08/2017                | 12345678    | SEM1           | EEF4        |
+	And the employment status in the ILR is:
+        | Employer    | Employment Status      | Employment Status Applies | Small Employer |
+        | employer 1  | in paid employment     | 05/08/2017                | SEM1           |
     Then the provider earnings and payments break down as follows:
         | Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
         | Provider Earned Total                   | 620   | 620   | 620   | 1620  | 620   | ... | 620   | 2860  | 0     |
@@ -99,9 +107,11 @@ Scenario:AC3- 1 learner aged 19-24, non-DAS, is a care leaver, In paid employmen
 Scenario:AC4- 1 learner aged 19-24, non-DAS, employed with a small employer at start, is co-funded for on programme and completion payments (this apprentice does not have a Education Health Care plan and is not a care leaver)
 
     When an ILR file is submitted with the following data:
-        | ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status | Employment Status Applies | Employer Id | Small Employer | LearnDelFAM |
-        | learner a | 19-24 programme only non-DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment          | 05/08/2017                | 12345678    | SEM1           |             |
-
+        | ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status  | Employment Status Applies | Employer Id | Small Employer | LearnDelFAM |
+        | learner a | 19-24 programme only non-DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment | 05/08/2017                | 12345678    | SEM1           |             |
+	And the employment status in the ILR is:
+        | Employer    | Employment Status      | Employment Status Applies | Small Employer |
+        | employer 1  | in paid employment     | 06/08/2017                | SEM1           |
     Then the provider earnings and payments break down as follows:
         | Type                           | 08/17 | 09/17 | 10/17 | ... | 08/18 | 09/18 |
         | Provider Earned Total          | 500   | 500   | 500   | ... | 1500  | 0     |
@@ -125,7 +135,10 @@ Scenario:AC4- 1 learner aged 19-24, non-DAS, employed with a small employer at s
     When an ILR file is submitted with the following data:
         | ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status  | Employment Status Applies | Employer Id | Small Employer |
         | learner a | 16-18 programme only non-DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment | 05/08/2017                | 12345678    |                |
-    Then the provider earnings and payments break down as follows:
+    And the employment status in the ILR is:
+        | Employer    | Employment Status      | Employment Status Applies | Small Employer |
+        | employer 1  | in paid employment     | 05/08/2017                |                |
+	Then the provider earnings and payments break down as follows:
         | Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
         | Provider Earned Total                   | 620   | 620   | 620   | 1620  | 620   | ... | 620   | 2860  | 0     |
         | Provider Earned from SFA                | 570   | 570   | 570   | 1570  | 570   | ... | 570   | 2710  | 0     |
@@ -195,6 +208,9 @@ Scenario:AC6- 1 learner aged 16-18, non-DAS. Second employment status record add
     When an ILR file is submitted with the following data:
         | ULN       | learner type             | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status  | Employment Status Applies | Employer Id | Small Employer |
         | learner a | 16-18 programme only DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment | 05/08/2017                | 12345678    | SEM1           |
+	And the employment status in the ILR is:
+        | Employer    | Employment Status      | Employment Status Applies | Small Employer |
+        | employer 1  | in paid employment     | 05/08/2017                | SEM1           |
     Then the provider earnings and payments break down as follows:
         | Type                                | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
         | Provider Earned Total               | 620   | 620   | 620   | 1620  | 620   | ... | 620   | 2860  | 0     |
@@ -229,6 +245,9 @@ Scenario:AC6- 1 learner aged 16-18, non-DAS. Second employment status record add
     When an ILR file is submitted with the following data:
         | ULN       | learner type             | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status  | Employment Status Applies | Employer Id | Small Employer | LearnDelFAM |
         | learner a | 19-24 programme only DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment | 05/08/2017                | 12345678    | SEM1           | EEF2        |
+	And the employment status in the ILR is:
+        | Employer    | Employment Status      | Employment Status Applies | Small Employer |
+        | employer 1  | in paid employment     | 05/08/2017                | SEM1           |
     Then the provider earnings and payments break down as follows:
         | Type                                | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
         | Provider Earned Total               | 620   | 620   | 620   | 1620  | 620   | ... | 620   | 2860  | 0     |
@@ -263,6 +282,9 @@ Scenario:AC9- 1 learner aged 19-24, DAS, is a care leaver, employed with a small
     When an ILR file is submitted with the following data:
         | ULN       | learner type             | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status  | Employment Status Applies | Employer Id | Small Employer | LearnDelFAM |
         | learner a | 19-24 programme only DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment | 05/08/2017                | 12345678    | SEM1           | EEF4        |
+	And the employment status in the ILR is:
+        | Employer    | Employment Status      | Employment Status Applies | Small Employer |
+        | employer 1  | in paid employment     | 05/08/2017                | SEM1           |
     Then the provider earnings and payments break down as follows:
         | Type                                | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
         | Provider Earned Total               | 620   | 620   | 620   | 1620  | 620   | ... | 620   | 2860  | 0     |
@@ -298,7 +320,10 @@ Scenario:AC10- 1 learner aged 19-24, DAS, employed with a small employer at star
     When an ILR file is submitted with the following data:
         | ULN       | learner type             | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | Employment Status  | Employment Status Applies | Employer Id | Small Employer | LearnDelFAM |
         | learner a | 19-24 programme only DAS | 7500         | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 403            | 2              | 1            | In paid employment | 05/08/2017                | 12345678    | SEM1           |             |
- Then the provider earnings and payments break down as follows:
+	And the employment status in the ILR is:
+        | Employer    | Employment Status      | Employment Status Applies | Small Employer |
+        | employer 1  | in paid employment     | 05/08/2017                | SEM1           |
+	Then the provider earnings and payments break down as follows:
         | Type                           | 08/17 | 09/17 | 10/17 | ... | 07/18 | 08/18 | 09/18 |
         | Provider Earned Total          | 500   | 500   | 500   | ... | 500   | 1500  | 0     |
         | Provider Earned from SFA       | 500   | 500   | 500   | ... | 500   | 1500  | 0     |
