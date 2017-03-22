@@ -53,7 +53,7 @@ Feature: Provider earnings and payments where learner changes apprenticeship sta
             | commitment Id | version Id | ULN       | standard code | start date | end date   | agreed price | effective from | effective to |
             | 1             | 1          | learner a | 51            | 03/08/2017 | 04/08/2018 | 15000        | 03/08/2017     | 31/10/2017   |
             | 1             | 2          | learner a | 52            | 03/08/2017 | 04/08/2018 | 5625         | 01/11/2017     |              |
-        When an ILR file is submitted on 03/12/2017 with the following data:
+		When an ILR file is submitted with the following data:
             | ULN       | standard code | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date |
             | learner a | 51            | 03/08/2017 | 04/08/2018       |                 | continuing        | 12000                | 03/08/2017                          | 3000                   | 03/08/2017                            |
         Then the data lock status of the ILR in 03/12/2017 is:
@@ -65,7 +65,7 @@ Feature: Provider earnings and payments where learner changes apprenticeship sta
             | Provider Earned from SFA   | 1000  | 1000  | 1000  | 1000  | 1000  | 1000  |
             | Provider Paid by SFA       | 0     | 1000  | 1000  | 1000  | 0     | 0     |
             | Levy account debited       | 0     | 1000  | 1000  | 1000  | 0     | 0     |
-            | SFA Levy employer budget   | 1000  | 1000  | 1000  | 1000  | 1000  | 1000  |
+            | SFA Levy employer budget   | 1000  | 1000  | 1000  | 0     | 0     | 0     |
             | SFA Levy co-funding budget | 0     | 0     | 0     | 0     | 0     | 0     |
 
 
