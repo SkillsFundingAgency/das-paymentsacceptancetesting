@@ -242,8 +242,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
 
             var actFamCodes = BuildActFamCodes(learnerDetails.LearnerType, learnerDetails.StartDate, learningEndDate, contractTypes);
             var lsfFamCodes = BuildLsfFamCodes(learningSupportStatus);
+            var eefFamCodes = BuildEefFamCodes(learnerDetails);
 
-            return actFamCodes.Concat(lsfFamCodes).ToArray();
+            return actFamCodes.Concat(lsfFamCodes).Concat(eefFamCodes).ToArray();
         }
         private static LearningDeliveryFamRecord[] BuildActFamCodes(LearnerType learnerType, DateTime learningStart, DateTime learningEnd, List<ContractTypeReferenceData> contractTypes)
         {
@@ -277,6 +278,23 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                 From = s.DateFrom,
                 To = s.DateTo
             }).ToArray();
+        }
+        private static LearningDeliveryFamRecord[] BuildEefFamCodes(IlrLearnerReferenceData learnerDetails)
+        {
+            if (learnerDetails.LearnDelFam == null || !learnerDetails.LearnDelFam.ToUpper().StartsWith("EEF"))
+            {
+                return new LearningDeliveryFamRecord[0];
+            }
+
+            return new[]
+            {
+                new LearningDeliveryFamRecord
+                {
+                    FamType = "EEF",
+                    Code = int.Parse(learnerDetails.LearnDelFam.Substring(3)),
+                    From = learnerDetails.StartDate
+                }
+            };
         }
         private static bool IsLearnerTypeLevy(LearnerType learnerType)
         {
