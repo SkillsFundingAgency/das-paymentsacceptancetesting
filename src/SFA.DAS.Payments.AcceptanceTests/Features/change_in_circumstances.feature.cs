@@ -158,7 +158,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "1125",
                         "03/11/2017"});
 #line 13
-        testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table126, "When ");
+        testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table126, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table127 = new TechTalk.SpecFlow.Table(new string[] {
                         "Payment type",
@@ -218,7 +218,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "1000",
                         "1000",
                         "500",
-                        "0"});
+                        "500"});
             table128.AddRow(new string[] {
                         "SFA Levy co-funding budget",
                         "0",
@@ -1665,7 +1665,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1125",
                         "11/11/2017"});
 #line 209
-        testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table161, "When ");
+        testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table161, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table162 = new TechTalk.SpecFlow.Table(new string[] {
                         "Payment type",
@@ -1723,7 +1723,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1000",
                         "1000",
                         "1000",
-                        "1000",
+                        "0",
                         "0",
                         "0"});
             table163.AddRow(new string[] {

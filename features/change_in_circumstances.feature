@@ -10,7 +10,7 @@ Feature: Provider earnings and payments where learner changes apprenticeship sta
             | commitment Id | version Id | ULN       | standard code | start date | end date   | agreed price | effective from | effective to |
             | 1             | 1          | learner a | 51            | 01/08/2017 | 01/08/2018 | 15000        | 01/08/2017     | 31/10/2017   |
             | 1             | 2          | learner a | 52            | 01/08/2017 | 01/08/2018 | 5625         | 03/11/2017     |              |
-        When an ILR file is submitted on 03/12/2017 with the following data:
+        When an ILR file is submitted with the following data:
             | ULN       | standard code | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date |
             | learner a | 51            | 03/08/2017 | 01/08/2018       | 31/10/2017      | withdrawn         | 12000                | 03/08/2017                          | 3000                   | 03/08/2017                            |
             | learner a | 52            | 03/11/2017 | 01/08/2018       |                 | continuing        | 4500                 | 03/11/2017                          | 1125                   | 03/11/2017                            |
@@ -23,7 +23,7 @@ Feature: Provider earnings and payments where learner changes apprenticeship sta
             | Provider Earned from SFA   | 1000  | 1000  | 1000  | 500   | 500   |
             | Provider Paid by SFA       | 0     | 1000  | 1000  | 1000  | 500   |
             | Levy account debited       | 0     | 1000  | 1000  | 1000  | 500   |
-            | SFA Levy employer budget   | 1000  | 1000  | 1000  | 500   | 0     |
+            | SFA Levy employer budget   | 1000  | 1000  | 1000  | 500   | 500   |
             | SFA Levy co-funding budget | 0     | 0     | 0     | 0     | 0     |
 
 
@@ -206,7 +206,7 @@ Scenario: ILR changes standard in the middle of the month, but no corresponding 
         Given the following commitments exist:
             | commitment Id | version Id | ULN       | standard code | start date | end date   | agreed price | status | effective from | effective to |
             | 1             | 1          | learner a | 51            | 01/08/2017 | 01/08/2018 | 15000        | active | 01/08/2017     |              |
-        When an ILR file is submitted on 03/12/2017 with the following data:
+        When an ILR file is submitted with the following data:
             | ULN       | standard code | start date | planned end date | actual end date | completion status | Total training price 1 | Total training price 1 effective date | Total assessment price 1 | Total assessment price 1 effective date |
             | learner a | 51            | 03/08/2017 | 04/08/2018       | 10/11/2017      | withdrawn         | 12000                  | 03/08/2017                            | 3000                     | 03/08/2017                              |
             | learner a | 52            | 11/11/2017 | 04/08/2018       |                 | continuing        | 4500                   | 11/11/2017                            | 1125                     | 11/11/2017                              | 
@@ -220,7 +220,7 @@ Scenario: ILR changes standard in the middle of the month, but no corresponding 
             | Provider Earned Total      | 1000  | 1000  | 1000  | 500   | 500   | 500   |
             | Provider Paid by SFA       | 0     | 1000  | 1000  | 1000  | 0     | 0     |
             | Levy account debited       | 0     | 1000  | 1000  | 1000  | 0     | 0     |
-            | SFA Levy employer budget   | 1000  | 1000  | 1000  | 1000  | 0     | 0     |
+            | SFA Levy employer budget   | 1000  | 1000  | 1000  | 0     | 0     | 0     |
             | SFA Levy co-funding budget | 0     | 0     | 0     | 0     | 0     | 0     |
             
 Scenario: Earnings and payments for a DAS learner, levy available, where the apprenticeship standard changes middle of month A commitment is updated to show a change in standard, mid-month, but the ILR does not reflect this
