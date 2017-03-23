@@ -143,6 +143,7 @@
     <Compile Include="Features\learner_finishes_late.feature.cs" />
     <Compile Include="Features\learner_finishes_on_time.feature.cs" />
     <Compile Include="Features\payments_calc.feature.cs" />
+    <Compile Include="Features\refunds.feature.cs" />
     <Compile Include="Features\small_employers.feature.cs" />
     <Compile Include="Features\two_learners_paid_in_priority.feature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -193,6 +194,7 @@
     <Compile Include="Refactoring\AcceptanceTestsLogger.cs" />
     <Compile Include="Refactoring\ExecutionManagers\CommitmentManager.cs" />
     <Compile Include="Refactoring\ExecutionManagers\EmployerAccountManager.cs" />
+    <Compile Include="Refactoring\ExecutionManagers\PaymentsManager.cs" />
     <Compile Include="Refactoring\ExecutionManagers\PreperationManager.cs" />
     <Compile Include="Refactoring\ExecutionManagers\ReferenceDataManager.cs" />
     <Compile Include="Refactoring\ExecutionManagers\SubmissionManager.cs" />
@@ -299,6 +301,10 @@
     </None>
     <None Include="..\..\features\payments_calc.feature">
       <Link>Features\payments_calc.feature</Link>
+    </None>
+    <None Include="..\..\features\refunds.feature">
+      <Link>Features\refunds.feature</Link>
+      <LastGenOutput>refunds.feature.cs</LastGenOutput>
     </None>
     <None Include="..\..\features\small_employers.feature">
       <Link>Features\small_employers.feature</Link>

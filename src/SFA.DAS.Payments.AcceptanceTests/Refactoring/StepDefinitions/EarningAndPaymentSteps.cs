@@ -5,23 +5,31 @@ using SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.ReferenceDataModels;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers;
 using TechTalk.SpecFlow;
+using System;
 
 namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
 {
     [Binding]
     public class EarningAndPaymentSteps
     {
-        public EarningAndPaymentSteps(EmployerAccountContext employerAccountContext, EarningsAndPaymentsContext earningsAndPaymentsContext, SubmissionContext submissionContext, LookupContext lookupContext)
+        public EarningAndPaymentSteps(EmployerAccountContext employerAccountContext,
+                                    EarningsAndPaymentsContext earningsAndPaymentsContext, 
+                                    SubmissionContext submissionContext, 
+                                    LookupContext lookupContext,
+                                    CommitmentsContext commitmentsContext)
         {
             EmployerAccountContext = employerAccountContext;
             EarningsAndPaymentsContext = earningsAndPaymentsContext;
             SubmissionContext = submissionContext;
             LookupContext = lookupContext;
+            CommitmentsContext = commitmentsContext;
         }
         public EmployerAccountContext EmployerAccountContext { get; }
         public EarningsAndPaymentsContext EarningsAndPaymentsContext { get; }
         public SubmissionContext SubmissionContext { get; }
         public LookupContext LookupContext { get; }
+        public CommitmentsContext CommitmentsContext { get; }
+
 
 
         [Then("the provider earnings and payments break down as follows:")]
@@ -63,7 +71,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
         {
             if (!SubmissionContext.HaveSubmissionsBeenDone)
             {
-                SubmissionContext.SubmissionResults = SubmissionManager.SubmitIlrAndRunMonthEndAndCollateResults(SubmissionContext.IlrLearnerDetails, 
+                SubmissionContext.SubmissionResults = SubmissionManager.SubmitIlrAndRunMonthEndAndCollateResults(SubmissionContext.IlrLearnerDetails,
                     LookupContext, EmployerAccountContext.EmployerAccounts, SubmissionContext.ContractTypes, SubmissionContext.EmploymentStatus, SubmissionContext.LearningSupportStatus);
                 SubmissionContext.HaveSubmissionsBeenDone = true;
             }
@@ -78,7 +86,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
         {
             if (!SubmissionContext.HaveSubmissionsBeenDone)
             {
-                SubmissionContext.SubmissionResults = SubmissionManager.SubmitIlrAndRunMonthEndAndCollateResults(SubmissionContext.IlrLearnerDetails, 
+                SubmissionContext.SubmissionResults = SubmissionManager.SubmitIlrAndRunMonthEndAndCollateResults(SubmissionContext.IlrLearnerDetails,
                     LookupContext, EmployerAccountContext.EmployerAccounts, SubmissionContext.ContractTypes, SubmissionContext.EmploymentStatus, SubmissionContext.LearningSupportStatus);
                 SubmissionContext.HaveSubmissionsBeenDone = true;
             }
@@ -92,6 +100,42 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
             EarningAndPaymentTableParser.ParseEarningsAndPaymentsTableIntoContext(breakdown, earningAndPayments);
             PaymentsAndEarningsAssestions.AssertPaymentsAndEarningsResults(EarningsAndPaymentsContext, SubmissionContext, EmployerAccountContext);
             TransactionTypeAssertions.AssertPaymentsAndEarningsResults(EarningsAndPaymentsContext, SubmissionContext, EmployerAccountContext);
+        }
+
+        [Given(@"the following earnings and payments have been made to the provider for (.*):")]
+        public void GivenTheFollowingEarningsAndPaymentsHaveBeenMadeToTheProviderForLearnerA(string learner, Table table)
+        {
+            
+            var learnerBreakdown = new EarningsAndPaymentsBreakdown { ProviderId = "provider " + Defaults.ProviderIdSuffix };
+            EarningAndPaymentTableParser.ParseEarningsAndPaymentsTableIntoContext(learnerBreakdown, table);
+
+            var commitment = CommitmentsContext.Commitments.First();
+            foreach (var earned in learnerBreakdown.ProviderEarnedTotal)
+            {
+                var requiredPaymentId = Guid.NewGuid().ToString();
+                var month = earned.PeriodName.Split('/').First();
+                var year = $"20{earned.PeriodName.Split('/').Last()}";
+
+                if (earned.Value > 0)
+                {
+                    PaymentsManager.SavePaymentDue(requiredPaymentId,
+                                                        commitment,
+                                                        learner, earned.PeriodName,
+                                                        int.Parse(month), int.Parse(year),
+                                                        (int)TransactionType.OnProgram,
+                                                        ContractType.ContractWithEmployer,
+                                                        earned.Value);
+                    var levyPayment = learnerBreakdown.SfaLevyBudget.Where(x => x.PeriodName == earned.PeriodName).SingleOrDefault();
+                    if (levyPayment != null && levyPayment.Value > 0)
+                    {
+                        PaymentsManager.SavePayment(requiredPaymentId, learner, earned.PeriodName, int.Parse(month), int.Parse(year),
+                                                          (int)TransactionType.OnProgram, FundingSource.Levy, earned.Value);
+                    }
+                }
+
+            }
+
+          
         }
     }
 }
