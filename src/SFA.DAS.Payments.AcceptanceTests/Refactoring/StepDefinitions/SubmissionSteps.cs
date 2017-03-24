@@ -32,9 +32,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
             IlrTableParser.ParseIlrTableIntoContext(SubmissionsContext, ilrDetails);
         }
 
-        [When("an ILR file is submitted for the first time on (.*) with the following data:")]
         [When(@"an ILR file is submitted on (.*) with the following data:")] // what is the purpose of the dates?
         public void WhenIlrSubmittedOnSpecificDate(string specSumissionDate, Table ilrDetails)
+        {
+            IlrTableParser.ParseIlrTableIntoContext(SubmissionsContext, ilrDetails);
+        }
+
+        [When("an ILR file is submitted for the first time on (.*) with the following data:")]
+        public void WhenIlrFirstSubmittedOnSpecificDate(string specSumissionDate, Table ilrDetails)
         {
             IlrTableParser.ParseIlrTableIntoContext(SubmissionsContext, ilrDetails);
 
