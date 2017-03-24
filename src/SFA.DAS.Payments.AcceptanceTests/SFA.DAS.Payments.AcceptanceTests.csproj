@@ -87,6 +87,7 @@
     <Compile Include="Builders\IlrLearnersBuilder.cs" />
     <Compile Include="Builders\IlrLearningDeliveryBuilder.cs" />
     <Compile Include="Builders\IlrSubmissionDefaults.cs" />
+    <Compile Include="DataExtensions.cs" />
     <Compile Include="DataHelpers\DataLockDataHelper.cs" />
     <Compile Include="DataHelpers\Entities\CommitmentEntity.cs" />
     <Compile Include="DataHelpers\ReferenceDataHelper.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="Features\learner_finishes_late.feature.cs" />
     <Compile Include="Features\learner_finishes_on_time.feature.cs" />
     <Compile Include="Features\payments_calc.feature.cs" />
+    <Compile Include="Features\refunds.feature.cs" />
     <Compile Include="Features\small_employers.feature.cs" />
     <Compile Include="Features\two_learners_paid_in_priority.feature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -150,6 +152,100 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Refactoring\Assertions\PaymentsAndEarningsAssestions.cs" />
+    <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\EarningsAndPaymentsRuleBase.cs" />
+    <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\EmployersLevyAccountDebitedRule.cs" />
+    <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\PaymentDueFromEmployersRule.cs" />
+    <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\PaymentsRuleBase.cs" />
+    <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\ProviderEarnedTotalRule.cs" />
+    <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\ProviderPaidBySfaRule.cs" />
+    <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\SfaLevyAdditionalPaymentsRule.cs" />
+    <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\SfaLevyBudgetRule.cs" />
+    <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\SfaLevyCoFundBudgetRule.cs" />
+    <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\SfaNonLevyAdditionalPaymentsRule.cs" />
+    <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\SfaNonLevyCoFundBudgetRule.cs" />
+    <Compile Include="Refactoring\Assertions\TransactionTypeAssertions.cs" />
+    <Compile Include="Refactoring\Assertions\TransactionTypeRules\EmployerEarnedFor16To18IncentiveRule.cs" />
+    <Compile Include="Refactoring\Assertions\TransactionTypeRules\ProviderEarnedFor16To18IncentiveRule.cs" />
+    <Compile Include="Refactoring\Assertions\TransactionTypeRules\ProviderEarnedForBalancingRule.cs" />
+    <Compile Include="Refactoring\Assertions\TransactionTypeRules\ProviderEarnedForCompletionRule.cs" />
+    <Compile Include="Refactoring\Assertions\TransactionTypeRules\ProviderEarnedForDisadvantageUpliftRule.cs" />
+    <Compile Include="Refactoring\Assertions\TransactionTypeRules\ProviderEarnedForEnglishAndMathBalancing.cs" />
+    <Compile Include="Refactoring\Assertions\TransactionTypeRules\ProviderEarnedForEnglishAndMathOnProgrammeRule.cs" />
+    <Compile Include="Refactoring\Assertions\TransactionTypeRules\ProviderEarnedForFrameworkUpliftOnBalancingRule.cs" />
+    <Compile Include="Refactoring\Assertions\TransactionTypeRules\ProviderEarnedForFrameworkUpliftOnCompletionRule.cs" />
+    <Compile Include="Refactoring\Assertions\TransactionTypeRules\ProviderEarnedForFrameworkUpliftOnProgrammeRule.cs" />
+    <Compile Include="Refactoring\Assertions\TransactionTypeRules\ProviderEarnedForLearningSupportRule.cs" />
+    <Compile Include="Refactoring\Assertions\TransactionTypeRules\ProviderEarnedForOnProgrammeRule.cs" />
+    <Compile Include="Refactoring\Assertions\TransactionTypeRules\ProviderTransationTypeRuleBase.cs" />
+    <Compile Include="Refactoring\Assertions\TransactionTypeRules\TransactionTypeRuleBase.cs" />
+    <Compile Include="Refactoring\Contexts\CommitmentsContext.cs" />
+    <Compile Include="Refactoring\Contexts\DataLockContext.cs" />
+    <Compile Include="Refactoring\Contexts\EarningsAndPaymentsContext.cs" />
+    <Compile Include="Refactoring\Contexts\LookupContext.cs" />
+    <Compile Include="Refactoring\Contexts\SubmissionContext.cs" />
+    <Compile Include="Refactoring\DataCollectors\DataLockResultCollector.cs" />
+    <Compile Include="Refactoring\DataCollectors\EarningsCollector.cs" />
+    <Compile Include="Refactoring\DataCollectors\Entities\DataLockResultEntity.cs" />
+    <Compile Include="Refactoring\DataCollectors\Entities\PaymentResultEntity.cs" />
+    <Compile Include="Refactoring\DataCollectors\Entities\PeriodisedValuesEntity.cs" />
+    <Compile Include="Refactoring\DataCollectors\PaymentsDataCollector.cs" />
+    <Compile Include="Refactoring\Defaults.cs" />
+    <Compile Include="Refactoring\AcceptanceTestsLogger.cs" />
+    <Compile Include="Refactoring\ExecutionManagers\CommitmentManager.cs" />
+    <Compile Include="Refactoring\ExecutionManagers\EmployerAccountManager.cs" />
+    <Compile Include="Refactoring\ExecutionManagers\PaymentsManager.cs" />
+    <Compile Include="Refactoring\ExecutionManagers\PreperationManager.cs" />
+    <Compile Include="Refactoring\ExecutionManagers\ReferenceDataManager.cs" />
+    <Compile Include="Refactoring\ExecutionManagers\SubmissionManager.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\AimType.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\CommitmentPaymentStatus.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\CommitmentReferenceData.cs" />
+    <Compile Include="Refactoring\Contexts\EmployerAccountContext.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\ContractType.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\ContractTypeReferenceData.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\DataLockPeriodMatch.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\CompletionStatus.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\EarningsAndPaymentsBreakdown.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\EmployerAccountProviderPeriodValue.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\EmployerAccountReferenceData.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\EmployerAccountPeriodValue.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\EmploymentStatus.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\EmploymentStatusMonitoringType.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\EmploymentStatusReferenceData.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\FundingSource.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\IlrLearnerReferenceData.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\LearnerEarningsAndPaymentsBreakdown.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\LearnerType.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\LearningSupportReferenceData.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\PeriodValue.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\ProviderEarnedPeriodValue.cs" />
+    <Compile Include="Refactoring\ReferenceDataModels\TransactionType.cs" />
+    <Compile Include="Refactoring\ResultsDataModels\DataLockPeriodResults.cs" />
+    <Compile Include="Refactoring\ResultsDataModels\DataLockResult.cs" />
+    <Compile Include="Refactoring\ResultsDataModels\EarningsResult.cs" />
+    <Compile Include="Refactoring\ResultsDataModels\LearnerResults.cs" />
+    <Compile Include="Refactoring\ResultsDataModels\PaymentResult.cs" />
+    <Compile Include="Refactoring\SpecFlowHooks.cs" />
+    <Compile Include="Refactoring\StepDefinitions\CommitmentSteps.cs" />
+    <Compile Include="Refactoring\StepDefinitions\DataLockSteps.cs" />
+    <Compile Include="Refactoring\StepDefinitions\EarningAndPaymentSteps.cs" />
+    <Compile Include="Refactoring\StepDefinitions\ExternalSystemsDataSteps.cs" />
+    <Compile Include="Refactoring\StepDefinitions\FeatureSteps\DataLockFeatureSteps.cs" />
+    <Compile Include="Refactoring\StepDefinitions\FeatureSteps\EarningsCalcFeatureSteps.cs" />
+    <Compile Include="Refactoring\StepDefinitions\FeatureSteps\PaymentsCalcFeatureSteps.cs" />
+    <Compile Include="Refactoring\StepDefinitions\SubmissionSteps.cs" />
+    <Compile Include="Refactoring\StepDefinitions\UntestedSteps.cs" />
+    <Compile Include="Refactoring\TableParsers\CommitmentsTableParser.cs" />
+    <Compile Include="Refactoring\TableParsers\ContractTypeTableParser.cs" />
+    <Compile Include="Refactoring\TableParsers\DataLockTableParser.cs" />
+    <Compile Include="Refactoring\TableParsers\EarningAndPaymentTableParser.cs" />
+    <Compile Include="Refactoring\TableParsers\EmploymentStatusTableParser.cs" />
+    <Compile Include="Refactoring\TableParsers\IlrTableParser.cs" />
+    <Compile Include="Refactoring\TableParsers\LearningSupportTableParser.cs" />
+    <Compile Include="Refactoring\TableParsers\TransactionTypeTableParser.cs" />
+    <Compile Include="Refactoring\TestEnvironment.cs" />
+    <Compile Include="Refactoring\Validations.cs" />
     <Compile Include="RowKeys.cs" />
     <Compile Include="SpecFlowHooks.cs" />
     <Compile Include="StepDefinitions\Base\BaseStepDefinitions.cs" />
@@ -160,6 +256,7 @@
     <Compile Include="StepDefinitions\Intermediate\PaymentStepDefinitions.cs" />
     <Compile Include="StepDefinitions\Base\ReferenceDataSteps.cs" />
     <Compile Include="ExecutionEnvironment\TestLogger.cs" />
+    <Compile Include="Refactoring\StepDefinitions\EmployerAccountSteps.cs" />
     <Compile Include="Translators\IlrTranslator.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -205,6 +302,10 @@
     <None Include="..\..\features\payments_calc.feature">
       <Link>Features\payments_calc.feature</Link>
     </None>
+    <None Include="..\..\features\refunds.feature">
+      <Link>Features\refunds.feature</Link>
+      <LastGenOutput>refunds.feature.cs</LastGenOutput>
+    </None>
     <None Include="..\..\features\small_employers.feature">
       <Link>Features\small_employers.feature</Link>
       <LastGenOutput>small_employers.feature.cs</LastGenOutput>
@@ -228,6 +329,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -236,6 +338,7 @@
   <ItemGroup>
     <None Include="Resources\ddl.AT.deds.tables.sql" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -9,7 +9,7 @@ Feature: 2 learners, paid in priority order
                 | 08/17 | 09/17 | 10/17 | 11/17 | ...  | 08/18 | 09/18 |
                 | 2000  | 2000  | 2000  | 2000  | 2000 | 2000  | 2000  |
         And the following commitments exist on 03/12/2017:
-                | priority | ULN | start date | end date   | Agreed Price |
+                | priority | ULN | start date | end date   | agreed price |
                 | 1        | 123 | 01/08/2017 | 28/08/2018 | 15000        |
                 | 2        | 456 | 01/08/2017 | 28/08/2018 | 15000        |
         When an ILR file is submitted on 03/12/2017 with the following data:
@@ -56,7 +56,7 @@ Feature: 2 learners, paid in priority order
                 | 08/17 | 09/17 | 10/17 | 11/17 | ...  | 08/18 | 09/18 |
                 | 1000  | 1000  | 1000  | 1000  | 1000 | 1000  | 1000  |
         And the following commitments exist on 03/12/2017:
-                | priority | ULN | start date | end date   | Agreed Price |
+                | priority | ULN | start date | end date   | agreed price |
                 | 1        | 123 | 01/08/2017 | 28/08/2018 | 15000        |
                 | 2        | 456 | 01/08/2017 | 28/08/2018 | 15000        |
         When an ILR file is submitted on 03/12/2017 with the following data:
@@ -103,7 +103,7 @@ Feature: 2 learners, paid in priority order
                 | 08/17 | 09/17 | 10/17 | 11/17 | ...  | 08/18 | 09/18 |
                 | 1500  | 1500  | 1500  | 1500  | 1500 | 1500  | 1500  |
         And the following commitments exist on 03/12/2017:
-                | priority | ULN | start date | end date   | Agreed Price |
+                | priority | ULN | start date | end date   | agreed price |
                 | 1        | 123 | 01/08/2017 | 28/08/2018 | 15000        |
                 | 2        | 456 | 01/08/2017 | 28/08/2018 | 15000        |
         When an ILR file is submitted on 03/12/2017 with the following data:

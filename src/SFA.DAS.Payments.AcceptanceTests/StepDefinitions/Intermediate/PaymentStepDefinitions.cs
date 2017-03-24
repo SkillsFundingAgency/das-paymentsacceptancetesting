@@ -12,7 +12,7 @@ using IlrBuilder = SFA.DAS.Payments.AcceptanceTests.Builders.IlrBuilder;
 
 namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
 {
-    [Binding]
+    //[Binding]
     public class PaymentStepDefinitions : BaseStepDefinitions
     {
         public PaymentStepDefinitions(StepDefinitionsContext earningAndPaymentsContext)

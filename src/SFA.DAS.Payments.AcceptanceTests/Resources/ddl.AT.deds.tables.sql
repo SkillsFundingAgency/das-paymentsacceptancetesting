@@ -25,16 +25,16 @@ GO
 IF NOT EXISTS (SELECT [object_id] FROM sys.tables WHERE [name] = 'Logs' AND [schema_id] = SCHEMA_ID('AT'))
 	BEGIN
 		CREATE TABLE [AT].[Logs](
-			[LogId] [uniqueidentifier] NOT NULL CONSTRAINT [DF__Logs__LogId__145C0A3F]  DEFAULT (newid()),
+			[LogId] [uniqueidentifier] NOT NULL DEFAULT (newid()),
 			[RunId] [varchar](50) NOT NULL,
 			[LogLevel] [int] NOT NULL,
-			[LogDtTm] [datetime] NOT NULL,
+			[LogDtTm] [datetime] NOT NULL DEFAULT(GETDATE()),
 			[LogMessage] [nvarchar](max) NOT NULL,
 			[ExceptionDetails] [nvarchar](max) NULL,
 			[ScenarioTitle] [nvarchar](max) NULL
-			CONSTRAINT [PK__Logs__5E54864804C01630] PRIMARY KEY CLUSTERED 
+			PRIMARY KEY CLUSTERED 
 			(
-			[LogId] ASC
+				[LogId] ASC
 			)
 		)
 	END

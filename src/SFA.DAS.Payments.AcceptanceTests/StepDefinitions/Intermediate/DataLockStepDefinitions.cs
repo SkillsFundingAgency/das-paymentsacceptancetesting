@@ -15,7 +15,7 @@ using SFA.DAS.Payments.AcceptanceTests.Enums;
 
 namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Intermediate
 {
-    [Binding, Scope(Feature  = "Datalock validation fails for different reasons")]
+    //[Binding, Scope(Feature  = "Datalock validation fails for different reasons")]
     public class DataLockStepDefinitions : BaseStepDefinitions
     {
         public DataLockStepDefinitions(StepDefinitionsContext context)

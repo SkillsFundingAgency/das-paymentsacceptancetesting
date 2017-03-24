@@ -71,7 +71,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Properties {
         ///----------------------------------------------------------------------------------------------------------------------------
         ///IF NOT EXISTS (SELECT [object_id] FROM sys.tables WHERE [name] = &apos;TestRuns&apos; AND [schema_id] = SCHEMA_ID(&apos;AT&apos;))
         ///	BEGIN
-        ///		CREATE [rest of string was truncated]&quot;;.
+        ///		CREATE TABLE [AT [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ddl_AT_deds_tables {
             get {

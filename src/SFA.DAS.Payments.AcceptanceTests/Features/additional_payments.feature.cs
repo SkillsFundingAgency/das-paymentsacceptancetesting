@@ -257,7 +257,7 @@ this.ScenarioSetup(scenarioInfo);
     testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
-                        "commitment number",
+                        "commitment Id",
                         "ULN",
                         "start date",
                         "end date",
@@ -293,10 +293,44 @@ this.ScenarioSetup(scenarioInfo);
      testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table6, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
-                        "type",
-                        "08/17 onwards"});
+                        "Payment type",
+                        "08/17",
+                        "09/17",
+                        "10/17",
+                        "11/17",
+                        "12/17",
+                        "...",
+                        "08/18",
+                        "09/18"});
             table7.AddRow(new string[] {
-                        "matching commitment",
+                        "On-program",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "...",
+                        "",
+                        ""});
+            table7.AddRow(new string[] {
+                        "Employer 16-18 incentive",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "...",
+                        "",
+                        ""});
+            table7.AddRow(new string[] {
+                        "Provider 16-18 incentive",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "...",
+                        "",
                         ""});
 #line 44
     testRunner.Then("the data lock status will be as follows:", ((string)(null)), table7, "Then ");
@@ -371,7 +405,7 @@ this.ScenarioSetup(scenarioInfo);
                         "...",
                         "0",
                         "0"});
-#line 48
+#line 50
     testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table8, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -384,9 +418,9 @@ this.ScenarioSetup(scenarioInfo);
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("AC3-Learner finishes on time, earns on-programme and completion payments. Assumes" +
                     " 12 month apprenticeship and learner completes after 10 months.", ((string[])(null)));
-#line 58
+#line 60
 this.ScenarioSetup(scenarioInfo);
-#line 59
+#line 61
     testRunner.Given("the apprenticeship funding band maximum is 9000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
@@ -397,9 +431,9 @@ this.ScenarioSetup(scenarioInfo);
                         "planned end date",
                         "actual end date",
                         "completion status",
-                        "Framework Code",
-                        "Programme Type",
-                        "Pathway Code"});
+                        "framework code",
+                        "programme type",
+                        "pathway code"});
             table9.AddRow(new string[] {
                         "123456",
                         "16-18 programme only non-DAS",
@@ -411,7 +445,7 @@ this.ScenarioSetup(scenarioInfo);
                         "403",
                         "2",
                         "1"});
-#line 60
+#line 62
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table9, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
@@ -523,7 +557,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table10.AddRow(new string[] {
-                        "SFA non Levy co-funding budget",
+                        "SFA non-Levy co-funding budget",
                         "540",
                         "540",
                         "540",
@@ -546,7 +580,7 @@ this.ScenarioSetup(scenarioInfo);
                         "120",
                         "1360",
                         "0"});
-#line 64
+#line 66
     testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table10, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
@@ -669,7 +703,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 77
+#line 79
     testRunner.And("the transaction types for the payments are:", ((string)(null)), table11, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -680,9 +714,9 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void AC4_LearnerFinishesOnTimePriceIsLessThanFundingBandMaximumOf9000()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("AC4-Learner finishes on time, Price is less than Funding Band Maximum of �9,000", ((string[])(null)));
-#line 90
+#line 92
 this.ScenarioSetup(scenarioInfo);
-#line 91
+#line 93
     testRunner.Given("the apprenticeship funding band maximum is 9000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
@@ -693,9 +727,9 @@ this.ScenarioSetup(scenarioInfo);
                         "planned end date",
                         "actual end date",
                         "completion status",
-                        "Framework Code",
-                        "Programme Type",
-                        "Pathway Code"});
+                        "framework code",
+                        "programme type",
+                        "pathway code"});
             table12.AddRow(new string[] {
                         "123455",
                         "16-18 programme only non-DAS",
@@ -707,7 +741,7 @@ this.ScenarioSetup(scenarioInfo);
                         "403",
                         "2",
                         "1"});
-#line 92
+#line 94
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table12, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
@@ -819,7 +853,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table13.AddRow(new string[] {
-                        "SFA non Levy co-funding budget",
+                        "SFA non-Levy co-funding budget",
                         "495",
                         "495",
                         "495",
@@ -842,7 +876,7 @@ this.ScenarioSetup(scenarioInfo);
                         "120",
                         "1360",
                         "0"});
-#line 96
+#line 98
     testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table13, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
@@ -965,7 +999,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 109
+#line 111
       testRunner.And("the transaction types for the payments are:", ((string)(null)), table14, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -976,7 +1010,7 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void AC5_PaymentForANon_DASLearnerLivesInADisadvantagedPostocdeArea_1_10MostDeprivedFundingAgreedWithinBandMaximumUNDERTAKINGAPPRENTICESHIPFRAMEWORKTheProviderIncentiveForThisPostcodeGroupIs600SplitEquallyInto2PaymentsAt90And365Days_INELIGIBLEFORAPPRENTICESHIPSTANDARDS()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo(@"AC5- Payment for a non-DAS learner, lives in a disadvantaged postocde area - 1-10% most deprived, funding agreed within band maximum, UNDERTAKING APPRENTICESHIP FRAMEWORK The provider incentive for this postcode group is �600 split equally into 2 payments at 90 and 365 days. INELIGIBLE FOR APPRENTICESHIP STANDARDS", ((string[])(null)));
-#line 121
+#line 123
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
@@ -993,7 +1027,7 @@ this.ScenarioSetup(scenarioInfo);
                         "home postcode deprivation"});
             table15.AddRow(new string[] {
                         "learner a",
-                        "programme only non - DAS",
+                        "programme only non-DAS",
                         "15000",
                         "06/08/2017",
                         "08/08/2018",
@@ -1003,7 +1037,7 @@ this.ScenarioSetup(scenarioInfo);
                         "2",
                         "1",
                         "1-10%"});
-#line 123
+#line 125
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table15, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1073,7 +1107,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table16.AddRow(new string[] {
-                        "SFA levy co-funding budget",
+                        "SFA Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -1084,7 +1118,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table16.AddRow(new string[] {
-                        "SFA non-levy co-funding budget",
+                        "SFA non-Levy co-funding budget",
                         "900",
                         "900",
                         "900",
@@ -1095,7 +1129,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table16.AddRow(new string[] {
-                        "SFA non-levy additional payments budget",
+                        "SFA non-Levy additional payments budget",
                         "0",
                         "0",
                         "0",
@@ -1106,7 +1140,7 @@ this.ScenarioSetup(scenarioInfo);
                         "300",
                         "0"});
             table16.AddRow(new string[] {
-                        "SFA levy additional payments budget",
+                        "SFA Levy additional payments budget",
                         "0",
                         "0",
                         "0",
@@ -1116,7 +1150,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 126
+#line 128
     testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table16, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1164,7 +1198,7 @@ this.ScenarioSetup(scenarioInfo);
                         "...",
                         "0",
                         "300"});
-#line 137
+#line 139
     testRunner.And("the transaction types for the payments are:", ((string)(null)), table17, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1179,7 +1213,7 @@ this.ScenarioSetup(scenarioInfo);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("AC6- Payment for a non-DAS learner, lives in a disadvantaged postocde area - 11-2" +
                     "0% most deprived, funding agreed within band maximum, UNDERTAKING APPRENTICESHIP" +
                     " FRAMEWORK", ((string[])(null)));
-#line 144
+#line 146
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1206,7 +1240,7 @@ this.ScenarioSetup(scenarioInfo);
                         "2",
                         "1",
                         "11-20%"});
-#line 146
+#line 148
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table18, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1276,7 +1310,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table19.AddRow(new string[] {
-                        "SFA levy co-funding budget",
+                        "SFA Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -1287,7 +1321,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table19.AddRow(new string[] {
-                        "SFA non-levy co-funding budget",
+                        "SFA non-Levy co-funding budget",
                         "900",
                         "900",
                         "900",
@@ -1298,7 +1332,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table19.AddRow(new string[] {
-                        "SFA non-levy  additional payments budget",
+                        "SFA non-Levy additional payments budget",
                         "0",
                         "0",
                         "0",
@@ -1309,7 +1343,7 @@ this.ScenarioSetup(scenarioInfo);
                         "150",
                         "0"});
             table19.AddRow(new string[] {
-                        "SFA levy additional payments budget",
+                        "SFA Levy additional payments budget",
                         "0",
                         "0",
                         "0",
@@ -1319,7 +1353,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 150
+#line 152
     testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table19, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1367,7 +1401,7 @@ this.ScenarioSetup(scenarioInfo);
                         "...",
                         "0",
                         "150"});
-#line 161
+#line 163
       testRunner.And("the transaction types for the payments are:", ((string)(null)), table20, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1382,7 +1416,7 @@ this.ScenarioSetup(scenarioInfo);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("AC7- Payment for a non-DAS learner, lives in a disadvantaged postocde area - 21-2" +
                     "7% most deprived, funding agreed within band maximum, UNDERTAKING APPRENTICESHIP" +
                     " FRAMEWORK", ((string[])(null)));
-#line 168
+#line 170
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1399,7 +1433,7 @@ this.ScenarioSetup(scenarioInfo);
                         "home postcode deprivation"});
             table21.AddRow(new string[] {
                         "learner a",
-                        "programme only non- DAS",
+                        "programme only non-DAS",
                         "15000",
                         "06/08/2017",
                         "08/08/2018",
@@ -1409,7 +1443,7 @@ this.ScenarioSetup(scenarioInfo);
                         "2",
                         "1",
                         "20-27%"});
-#line 170
+#line 172
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table21, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1479,7 +1513,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table22.AddRow(new string[] {
-                        "SFA levy co-funding budget",
+                        "SFA Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -1490,7 +1524,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table22.AddRow(new string[] {
-                        "SFA non-levy co-funding budget",
+                        "SFA non-Levy co-funding budget",
                         "900",
                         "900",
                         "900",
@@ -1501,7 +1535,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table22.AddRow(new string[] {
-                        "SFA non-levy additional payments budget",
+                        "SFA non-Levy additional payments budget",
                         "0",
                         "0",
                         "0",
@@ -1512,7 +1546,7 @@ this.ScenarioSetup(scenarioInfo);
                         "100",
                         "0"});
             table22.AddRow(new string[] {
-                        "SFA levy additional payments budget",
+                        "SFA Levy additional payments budget",
                         "0",
                         "0",
                         "0",
@@ -1522,7 +1556,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 173
+#line 175
     testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table22, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1570,7 +1604,7 @@ this.ScenarioSetup(scenarioInfo);
                         "...",
                         "0",
                         "100"});
-#line 184
+#line 186
     testRunner.And("the transaction types for the payments are:", ((string)(null)), table23, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -1583,7 +1617,7 @@ this.ScenarioSetup(scenarioInfo);
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("AC8- Payment for a non-DAS learner, does not live in a disadvantaged postcode are" +
                     "a - no uplift earned, despite them doing a framework", ((string[])(null)));
-#line 191
+#line 193
  this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1600,7 +1634,7 @@ this.ScenarioSetup(scenarioInfo);
                         "home postcode deprivation"});
             table24.AddRow(new string[] {
                         "learner a",
-                        "programme only non- DAS",
+                        "programme only non-DAS",
                         "15000",
                         "06/08/2017",
                         "08/08/2018",
@@ -1610,7 +1644,7 @@ this.ScenarioSetup(scenarioInfo);
                         "2",
                         "1",
                         "not deprived"});
-#line 193
+#line 195
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table24, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1680,7 +1714,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table25.AddRow(new string[] {
-                        "SFA levy co-funding budget",
+                        "SFA Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -1691,7 +1725,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table25.AddRow(new string[] {
-                        "SFA non-levy co-funding budget",
+                        "SFA non-Levy co-funding budget",
                         "900",
                         "900",
                         "900",
@@ -1702,7 +1736,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table25.AddRow(new string[] {
-                        "SFA non-levy additional payments budget",
+                        "SFA non-Levy additional payments budget",
                         "0",
                         "0",
                         "0",
@@ -1713,7 +1747,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table25.AddRow(new string[] {
-                        "SFA levy additional payments budget",
+                        "SFA Levy additional payments budget",
                         "0",
                         "0",
                         "0",
@@ -1723,7 +1757,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 196
+#line 198
     testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table25, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table26 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1771,24 +1805,24 @@ this.ScenarioSetup(scenarioInfo);
                         "...",
                         "0",
                         "0"});
-#line 207
+#line 209
     testRunner.And("the transaction types for the payments are:", ((string)(null)), table26, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("589-AC01- Maths and English payments for a non-das learner finishing on time, fun" +
-            "ding agreed within band maximum, planned duration is same as programme (assumes " +
-            "both start and finish at same time)")]
+        [NUnit.Framework.DescriptionAttribute("AC9- Maths and English payments for a non-das learner finishing on time, funding " +
+            "agreed within band maximum, planned duration is same as programme (assumes both " +
+            "start and finish at same time)")]
         [NUnit.Framework.CategoryAttribute("MathsAndEnglishNonDas")]
-        public virtual void _589_AC01_MathsAndEnglishPaymentsForANon_DasLearnerFinishingOnTimeFundingAgreedWithinBandMaximumPlannedDurationIsSameAsProgrammeAssumesBothStartAndFinishAtSameTime()
+        public virtual void AC9_MathsAndEnglishPaymentsForANon_DasLearnerFinishingOnTimeFundingAgreedWithinBandMaximumPlannedDurationIsSameAsProgrammeAssumesBothStartAndFinishAtSameTime()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("589-AC01- Maths and English payments for a non-das learner finishing on time, fun" +
-                    "ding agreed within band maximum, planned duration is same as programme (assumes " +
-                    "both start and finish at same time)", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("AC9- Maths and English payments for a non-das learner finishing on time, funding " +
+                    "agreed within band maximum, planned duration is same as programme (assumes both " +
+                    "start and finish at same time)", new string[] {
                         "MathsAndEnglishNonDas"});
-#line 216
+#line 218
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table27 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1830,7 +1864,7 @@ this.ScenarioSetup(scenarioInfo);
                         "403",
                         "2",
                         "1"});
-#line 217
+#line 219
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table27, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table28 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1954,7 +1988,7 @@ this.ScenarioSetup(scenarioInfo);
                         "39.25",
                         "0",
                         "0"});
-#line 221
+#line 223
     testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table28, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table29 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2029,26 +2063,26 @@ this.ScenarioSetup(scenarioInfo);
                         "...",
                         "0",
                         "0"});
-#line 233
+#line 235
     testRunner.And("the transaction types for the payments are:", ((string)(null)), table29, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("589-AC2- Maths and English payments for a das learner finishing on time, funding " +
-            "agreed within band maximum, planned duration is same as programme (assumes both " +
-            "start and finish at same time)")]
+        [NUnit.Framework.DescriptionAttribute("AC10- Maths and English payments for a das learner finishing on time, funding agr" +
+            "eed within band maximum, planned duration is same as programme (assumes both sta" +
+            "rt and finish at same time)")]
         [NUnit.Framework.CategoryAttribute("MathsAndEnglishDas")]
-        public virtual void _589_AC2_MathsAndEnglishPaymentsForADasLearnerFinishingOnTimeFundingAgreedWithinBandMaximumPlannedDurationIsSameAsProgrammeAssumesBothStartAndFinishAtSameTime()
+        public virtual void AC10_MathsAndEnglishPaymentsForADasLearnerFinishingOnTimeFundingAgreedWithinBandMaximumPlannedDurationIsSameAsProgrammeAssumesBothStartAndFinishAtSameTime()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("589-AC2- Maths and English payments for a das learner finishing on time, funding " +
-                    "agreed within band maximum, planned duration is same as programme (assumes both " +
-                    "start and finish at same time)", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("AC10- Maths and English payments for a das learner finishing on time, funding agr" +
+                    "eed within band maximum, planned duration is same as programme (assumes both sta" +
+                    "rt and finish at same time)", new string[] {
                         "MathsAndEnglishDas"});
-#line 246
-this.ScenarioSetup(scenarioInfo);
 #line 247
+this.ScenarioSetup(scenarioInfo);
+#line 248
     testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table30 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2075,7 +2109,7 @@ this.ScenarioSetup(scenarioInfo);
                         "active",
                         "01/08/2017",
                         ""});
-#line 248
+#line 249
     testRunner.And("the following commitments exist:", ((string)(null)), table30, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table31 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2117,7 +2151,7 @@ this.ScenarioSetup(scenarioInfo);
                         "403",
                         "2",
                         "1"});
-#line 251
+#line 252
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table31, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table32 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2241,7 +2275,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 255
+#line 256
     testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table32, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table33 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2316,7 +2350,7 @@ this.ScenarioSetup(scenarioInfo);
                         "...",
                         "0",
                         "0"});
-#line 267
+#line 268
     testRunner.And("the transaction types for the payments are:", ((string)(null)), table33, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -2331,14 +2365,14 @@ this.ScenarioSetup(scenarioInfo);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("AC11- Payment for a DAS learner, lives in a disadvantaged postocde area - 01-10% " +
                     "most deprived, employer has sufficient levy funds in account, funding agreed wit" +
                     "hin band maximum, UNDERTAKING APPRENTICESHIP FRAMEWORK", ((string[])(null)));
-#line 278
+#line 279
 this.ScenarioSetup(scenarioInfo);
-#line 280
+#line 281
     testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table34 = new TechTalk.SpecFlow.Table(new string[] {
-                        "commitment ID",
-                        "version ID",
+                        "commitment Id",
+                        "version Id",
                         "ULN",
                         "start date",
                         "end date",
@@ -2358,7 +2392,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "15000",
                         "active"});
-#line 281
+#line 282
     testRunner.And("the following commitments exist:", ((string)(null)), table34, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table35 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2385,7 +2419,7 @@ this.ScenarioSetup(scenarioInfo);
                         "2",
                         "1",
                         "1-10%"});
-#line 284
+#line 285
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table35, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table36 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2455,7 +2489,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table36.AddRow(new string[] {
-                        "SFA levy co-funding budget",
+                        "SFA Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -2466,7 +2500,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table36.AddRow(new string[] {
-                        "SFA non-levy co-funding budget",
+                        "SFA non-Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -2477,7 +2511,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table36.AddRow(new string[] {
-                        "SFA non-levy additional payments budget",
+                        "SFA non-Levy additional payments budget",
                         "0",
                         "0",
                         "0",
@@ -2488,7 +2522,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table36.AddRow(new string[] {
-                        "SFA levy additional payments budget",
+                        "SFA Levy additional payments budget",
                         "0",
                         "0",
                         "0",
@@ -2498,7 +2532,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "300",
                         "0"});
-#line 287
+#line 288
     testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table36, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table37 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2546,7 +2580,7 @@ this.ScenarioSetup(scenarioInfo);
                         "...",
                         "0",
                         "300"});
-#line 298
+#line 299
     testRunner.And("the transaction types for the payments are:", ((string)(null)), table37, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -2561,14 +2595,14 @@ this.ScenarioSetup(scenarioInfo);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("AC12- Payment for a DAS learner, lives in a disadvantaged postocde area - 11-20% " +
                     "most deprived, employer has sufficient levy funds in account, funding agreed wit" +
                     "hin band maximum, UNDERTAKING APPRENTICESHIP FRAMEWORK", ((string[])(null)));
-#line 305
+#line 306
 this.ScenarioSetup(scenarioInfo);
-#line 307
+#line 308
     testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table38 = new TechTalk.SpecFlow.Table(new string[] {
-                        "commitment ID",
-                        "version ID",
+                        "commitment Id",
+                        "version Id",
                         "ULN",
                         "start date",
                         "end date",
@@ -2588,7 +2622,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "15000",
                         "active"});
-#line 308
+#line 309
     testRunner.And("the following commitments exist:", ((string)(null)), table38, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table39 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2615,7 +2649,7 @@ this.ScenarioSetup(scenarioInfo);
                         "2",
                         "1",
                         "11-20%"});
-#line 311
+#line 312
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table39, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table40 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2685,7 +2719,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table40.AddRow(new string[] {
-                        "SFA levy co-funding budget",
+                        "SFA Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -2696,7 +2730,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table40.AddRow(new string[] {
-                        "SFA non-levy co-funding budget",
+                        "SFA non-Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -2707,7 +2741,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table40.AddRow(new string[] {
-                        "SFA non-levy additional payments budget",
+                        "SFA non-Levy additional payments budget",
                         "0",
                         "0",
                         "0",
@@ -2718,7 +2752,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table40.AddRow(new string[] {
-                        "SFA levy additional payments budget",
+                        "SFA Levy additional payments budget",
                         "0",
                         "0",
                         "0",
@@ -2728,7 +2762,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "150",
                         "0"});
-#line 314
+#line 315
     testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table40, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table41 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2776,7 +2810,7 @@ this.ScenarioSetup(scenarioInfo);
                         "...",
                         "0",
                         "150"});
-#line 325
+#line 326
     testRunner.And("the transaction types for the payments are:", ((string)(null)), table41, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -2791,14 +2825,14 @@ this.ScenarioSetup(scenarioInfo);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("AC13- Payment for a DAS learner, lives in a disadvantaged postocde area - 21-27% " +
                     "most deprived, employer has sufficient levy funds in account, funding agreed wit" +
                     "hin band maximum, UNDERTAKING APPRENTICESHIP FRAMEWORK", ((string[])(null)));
-#line 333
+#line 334
 this.ScenarioSetup(scenarioInfo);
-#line 335
+#line 336
     testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table42 = new TechTalk.SpecFlow.Table(new string[] {
-                        "commitment ID",
-                        "version ID",
+                        "commitment Id",
+                        "version Id",
                         "ULN",
                         "start date",
                         "end date",
@@ -2818,7 +2852,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "15000",
                         "active"});
-#line 336
+#line 337
     testRunner.And("the following commitments exist:", ((string)(null)), table42, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table43 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2845,7 +2879,7 @@ this.ScenarioSetup(scenarioInfo);
                         "2",
                         "1",
                         "20-27%"});
-#line 340
+#line 341
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table43, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table44 = new TechTalk.SpecFlow.Table(new string[] {
@@ -2915,7 +2949,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table44.AddRow(new string[] {
-                        "SFA levy co-funding budget",
+                        "SFA Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -2926,7 +2960,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table44.AddRow(new string[] {
-                        "SFA non-levy co-funding budget",
+                        "SFA non-Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -2937,7 +2971,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table44.AddRow(new string[] {
-                        "SFA non-levy additional payments budget",
+                        "SFA non-Levy additional payments budget",
                         "0",
                         "0",
                         "0",
@@ -2948,7 +2982,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table44.AddRow(new string[] {
-                        "SFA levy  additional payments budget",
+                        "SFA Levy additional payments budget",
                         "0",
                         "0",
                         "0",
@@ -2958,7 +2992,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "100",
                         "0"});
-#line 344
+#line 345
     testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table44, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table45 = new TechTalk.SpecFlow.Table(new string[] {
@@ -3006,7 +3040,7 @@ this.ScenarioSetup(scenarioInfo);
                         "...",
                         "0",
                         "100"});
-#line 355
+#line 356
   testRunner.And("the transaction types for the payments are:", ((string)(null)), table45, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -3021,14 +3055,14 @@ this.ScenarioSetup(scenarioInfo);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("AC14- Payment for a DAS learner, does not live in a disadvantaged postocde area -" +
                     " employer has sufficient levy funds in account, funding agreed within band maxim" +
                     "um, UNDERTAKING APPRENTICESHIP FRAMEWORK", ((string[])(null)));
-#line 362
+#line 363
 this.ScenarioSetup(scenarioInfo);
-#line 364
+#line 365
     testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table46 = new TechTalk.SpecFlow.Table(new string[] {
-                        "commitment ID",
-                        "version ID",
+                        "commitment Id",
+                        "version Id",
                         "ULN",
                         "start date",
                         "end date",
@@ -3048,7 +3082,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "15000",
                         "active"});
-#line 365
+#line 366
     testRunner.And("the following commitments exist:", ((string)(null)), table46, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table47 = new TechTalk.SpecFlow.Table(new string[] {
@@ -3075,7 +3109,7 @@ this.ScenarioSetup(scenarioInfo);
                         "2",
                         "1",
                         "not deprived"});
-#line 368
+#line 369
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table47, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table48 = new TechTalk.SpecFlow.Table(new string[] {
@@ -3145,7 +3179,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table48.AddRow(new string[] {
-                        "SFA levy co-funding budget",
+                        "SFA Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -3156,7 +3190,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table48.AddRow(new string[] {
-                        "SFA non-levy co-funding budget",
+                        "SFA non-Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -3167,7 +3201,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table48.AddRow(new string[] {
-                        "SFA non-levy additional payments budget",
+                        "SFA non-Levy additional payments budget",
                         "0",
                         "0",
                         "0",
@@ -3178,7 +3212,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table48.AddRow(new string[] {
-                        "SFA levy additional payments budget",
+                        "SFA Levy additional payments budget",
                         "0",
                         "0",
                         "0",
@@ -3188,7 +3222,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 371
+#line 372
     testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table48, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table49 = new TechTalk.SpecFlow.Table(new string[] {
@@ -3236,7 +3270,7 @@ this.ScenarioSetup(scenarioInfo);
                         "...",
                         "0",
                         "0"});
-#line 382
+#line 383
     testRunner.And("the transaction types for the payments are:", ((string)(null)), table49, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -3253,7 +3287,7 @@ this.ScenarioSetup(scenarioInfo);
                     "1-10% most deprived, funding agreed within band maximum, undertaking apprentices" +
                     "hip standard", new string[] {
                         "DisadvantageUpliftsNonDasForStandard"});
-#line 391
+#line 392
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table50 = new TechTalk.SpecFlow.Table(new string[] {
@@ -3268,7 +3302,7 @@ this.ScenarioSetup(scenarioInfo);
                         "home postcode deprivation"});
             table50.AddRow(new string[] {
                         "learner a",
-                        "programme only non - DAS",
+                        "programme only non-DAS",
                         "15000",
                         "06/08/2017",
                         "08/08/2018",
@@ -3276,7 +3310,7 @@ this.ScenarioSetup(scenarioInfo);
                         "continuing",
                         "50",
                         "1-10%"});
-#line 392
+#line 393
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table50, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table51 = new TechTalk.SpecFlow.Table(new string[] {
@@ -3389,7 +3423,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 395
+#line 396
     testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table51, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table52 = new TechTalk.SpecFlow.Table(new string[] {
@@ -3437,7 +3471,7 @@ this.ScenarioSetup(scenarioInfo);
                         "...",
                         "0",
                         "0"});
-#line 406
+#line 407
     testRunner.And("the transaction types for the payments are:", ((string)(null)), table52, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -3454,7 +3488,7 @@ this.ScenarioSetup(scenarioInfo);
                     "11-20% most deprived, funding agreed within band maximum, undertaking apprentice" +
                     "ship standard", new string[] {
                         "DisadvantageUpliftsNonDasForStandard"});
-#line 415
+#line 416
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table53 = new TechTalk.SpecFlow.Table(new string[] {
@@ -3469,7 +3503,7 @@ this.ScenarioSetup(scenarioInfo);
                         "home postcode deprivation"});
             table53.AddRow(new string[] {
                         "learner a",
-                        "programme only non - DAS",
+                        "programme only non-DAS",
                         "15000",
                         "06/08/2017",
                         "08/08/2018",
@@ -3477,7 +3511,7 @@ this.ScenarioSetup(scenarioInfo);
                         "continuing",
                         "50",
                         "11-20%"});
-#line 416
+#line 417
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table53, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table54 = new TechTalk.SpecFlow.Table(new string[] {
@@ -3590,7 +3624,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 419
+#line 420
     testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table54, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table55 = new TechTalk.SpecFlow.Table(new string[] {
@@ -3638,7 +3672,7 @@ this.ScenarioSetup(scenarioInfo);
                         "...",
                         "0",
                         "0"});
-#line 430
+#line 431
     testRunner.And("the transaction types for the payments are:", ((string)(null)), table55, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -3655,7 +3689,7 @@ this.ScenarioSetup(scenarioInfo);
                     "21-27% most deprived, funding agreed within band maximum, undertaking apprentice" +
                     "ship standard", new string[] {
                         "DisadvantageUpliftsNonDasForStandard"});
-#line 439
+#line 440
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table56 = new TechTalk.SpecFlow.Table(new string[] {
@@ -3670,7 +3704,7 @@ this.ScenarioSetup(scenarioInfo);
                         "home postcode deprivation"});
             table56.AddRow(new string[] {
                         "learner a",
-                        "programme only non - DAS",
+                        "programme only non-DAS",
                         "15000",
                         "06/08/2017",
                         "08/08/2018",
@@ -3678,7 +3712,7 @@ this.ScenarioSetup(scenarioInfo);
                         "continuing",
                         "50",
                         "21-27%"});
-#line 440
+#line 441
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table56, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table57 = new TechTalk.SpecFlow.Table(new string[] {
@@ -3791,7 +3825,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 443
+#line 444
     testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table57, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table58 = new TechTalk.SpecFlow.Table(new string[] {
@@ -3839,7 +3873,7 @@ this.ScenarioSetup(scenarioInfo);
                         "...",
                         "0",
                         "0"});
-#line 454
+#line 455
     testRunner.And("the transaction types for the payments are:", ((string)(null)), table58, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -3854,7 +3888,7 @@ this.ScenarioSetup(scenarioInfo);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("624-AC04-Payment for a non-DAS learner, does not live in a disadvantaged postocde" +
                     " area, funding agreed within band maximum, undertaking apprenticeship standard", new string[] {
                         "DisadvantageUpliftsNonDasForStandard"});
-#line 463
+#line 464
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table59 = new TechTalk.SpecFlow.Table(new string[] {
@@ -3869,7 +3903,7 @@ this.ScenarioSetup(scenarioInfo);
                         "home postcode deprivation"});
             table59.AddRow(new string[] {
                         "learner a",
-                        "programme only non - DAS",
+                        "programme only non-DAS",
                         "15000",
                         "06/08/2017",
                         "08/08/2018",
@@ -3877,7 +3911,7 @@ this.ScenarioSetup(scenarioInfo);
                         "continuing",
                         "50",
                         "not deprived"});
-#line 464
+#line 465
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table59, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table60 = new TechTalk.SpecFlow.Table(new string[] {
@@ -3990,7 +4024,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 467
+#line 468
     testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table60, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table61 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4038,7 +4072,7 @@ this.ScenarioSetup(scenarioInfo);
                         "...",
                         "0",
                         "0"});
-#line 478
+#line 479
     testRunner.And("the transaction types for the payments are:", ((string)(null)), table61, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -4055,9 +4089,9 @@ this.ScenarioSetup(scenarioInfo);
                     "% most deprived, funding agreed within band maximum, undertaking apprenticeship " +
                     "standard", new string[] {
                         "DisadvantageUpliftsDasForStandard"});
-#line 487
-this.ScenarioSetup(scenarioInfo);
 #line 488
+this.ScenarioSetup(scenarioInfo);
+#line 489
     testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table62 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4078,7 +4112,7 @@ this.ScenarioSetup(scenarioInfo);
                         "50",
                         "15000",
                         "active"});
-#line 489
+#line 490
     testRunner.And("the following commitments exist:", ((string)(null)), table62, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table63 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4101,7 +4135,7 @@ this.ScenarioSetup(scenarioInfo);
                         "continuing",
                         "50",
                         "1-10%"});
-#line 492
+#line 493
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table63, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table64 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4214,7 +4248,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 495
+#line 496
     testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table64, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table65 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4262,7 +4296,7 @@ this.ScenarioSetup(scenarioInfo);
                         "...",
                         "0",
                         "0"});
-#line 506
+#line 507
     testRunner.And("the transaction types for the payments are:", ((string)(null)), table65, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -4279,9 +4313,9 @@ this.ScenarioSetup(scenarioInfo);
                     "11-20% most deprived, funding agreed within band maximum, undertaking apprentice" +
                     "ship standard", new string[] {
                         "DisadvantageUpliftsDasForStandard"});
-#line 515
-this.ScenarioSetup(scenarioInfo);
 #line 516
+this.ScenarioSetup(scenarioInfo);
+#line 517
     testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table66 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4302,7 +4336,7 @@ this.ScenarioSetup(scenarioInfo);
                         "50",
                         "15000",
                         "active"});
-#line 517
+#line 518
     testRunner.And("the following commitments exist:", ((string)(null)), table66, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table67 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4325,7 +4359,7 @@ this.ScenarioSetup(scenarioInfo);
                         "continuing",
                         "50",
                         "11-20%"});
-#line 520
+#line 521
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table67, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table68 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4438,7 +4472,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 523
+#line 524
     testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table68, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table69 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4486,7 +4520,7 @@ this.ScenarioSetup(scenarioInfo);
                         "...",
                         "0",
                         "0"});
-#line 534
+#line 535
     testRunner.And("the transaction types for the payments are:", ((string)(null)), table69, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -4503,9 +4537,9 @@ this.ScenarioSetup(scenarioInfo);
                     "0% most deprived, employer has sufficient levy funds in account, funding agreed " +
                     "within band maximum, undertaking apprenticeship standard", new string[] {
                         "DisadvantageUpliftsDasForStandard"});
-#line 543
-this.ScenarioSetup(scenarioInfo);
 #line 544
+this.ScenarioSetup(scenarioInfo);
+#line 545
     testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table70 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4526,7 +4560,7 @@ this.ScenarioSetup(scenarioInfo);
                         "50",
                         "15000",
                         "active"});
-#line 545
+#line 546
     testRunner.And("the following commitments exist:", ((string)(null)), table70, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table71 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4549,7 +4583,7 @@ this.ScenarioSetup(scenarioInfo);
                         "continuing",
                         "50",
                         "21-27%"});
-#line 548
+#line 549
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table71, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table72 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4662,7 +4696,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 551
+#line 552
     testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table72, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table73 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4710,7 +4744,7 @@ this.ScenarioSetup(scenarioInfo);
                         "...",
                         "0",
                         "0"});
-#line 562
+#line 563
     testRunner.And("the transaction types for the payments are:", ((string)(null)), table73, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -4725,9 +4759,9 @@ this.ScenarioSetup(scenarioInfo);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("625-AC04-Payment for a non-DAS learner, does not live in a disadvantaged postocde" +
                     " area, funding agreed within band maximum, undertaking apprenticeship standard", new string[] {
                         "DisadvantageUpliftsDasForStandard"});
-#line 571
-this.ScenarioSetup(scenarioInfo);
 #line 572
+this.ScenarioSetup(scenarioInfo);
+#line 573
     testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table74 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4748,7 +4782,7 @@ this.ScenarioSetup(scenarioInfo);
                         "50",
                         "15000",
                         "active"});
-#line 573
+#line 574
     testRunner.And("the following commitments exist:", ((string)(null)), table74, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table75 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4771,7 +4805,7 @@ this.ScenarioSetup(scenarioInfo);
                         "continuing",
                         "50",
                         "not deprived"});
-#line 576
+#line 577
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table75, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table76 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4884,7 +4918,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 579
+#line 580
     testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table76, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table77 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4932,7 +4966,7 @@ this.ScenarioSetup(scenarioInfo);
                         "...",
                         "0",
                         "0"});
-#line 590
+#line 591
     testRunner.And("the transaction types for the payments are:", ((string)(null)), table77, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -4943,7 +4977,7 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void _590_AC01_1Non_DASPaymentForANon_DASLearnerFundingAgreedWithinFundingBandMaximumWithThePlannedDurationTheSameAsTheProgrammeDurationAssumesBothStartAtTheSameTimeANDTheLearnerCompletesTheAim1MonthEarlierThanPlanned_()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo(@"590-AC01- 1 non-DAS Payment for a non-DAS learner, funding agreed within funding band maximum, with the planned duration the same as the programme duration (assumes both start at the same time), AND the learner completes the aim 1 month earlier than planned.", ((string[])(null)));
-#line 598
+#line 599
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table78 = new TechTalk.SpecFlow.Table(new string[] {
@@ -4985,7 +5019,7 @@ this.ScenarioSetup(scenarioInfo);
                         "403",
                         "2",
                         "1"});
-#line 600
+#line 601
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table78, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table79 = new TechTalk.SpecFlow.Table(new string[] {
@@ -5076,7 +5110,7 @@ this.ScenarioSetup(scenarioInfo);
                         "31.40",
                         "94.20",
                         "0"});
-#line 604
+#line 605
     testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table79, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table80 = new TechTalk.SpecFlow.Table(new string[] {
@@ -5133,7 +5167,7 @@ this.ScenarioSetup(scenarioInfo);
                         "...",
                         "0",
                         "94.20"});
-#line 613
+#line 614
     testRunner.And("the transaction types for the payments are:", ((string)(null)), table80, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -5148,9 +5182,9 @@ this.ScenarioSetup(scenarioInfo);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("590-AC02- Payment for a* DAS learner*, funding agreed within band, with the plann" +
                     "ed duration the same as the programme duration (assumes both start at same time)" +
                     ", but learner completes aim 1 month early.", ((string[])(null)));
-#line 622
+#line 623
 this.ScenarioSetup(scenarioInfo);
-#line 624
+#line 625
     testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table81 = new TechTalk.SpecFlow.Table(new string[] {
@@ -5177,7 +5211,7 @@ this.ScenarioSetup(scenarioInfo);
                         "active",
                         "01/08/2017",
                         ""});
-#line 625
+#line 626
     testRunner.And("the following commitments exist:", ((string)(null)), table81, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table82 = new TechTalk.SpecFlow.Table(new string[] {
@@ -5219,7 +5253,7 @@ this.ScenarioSetup(scenarioInfo);
                         "403",
                         "2",
                         "1"});
-#line 628
+#line 629
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table82, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table83 = new TechTalk.SpecFlow.Table(new string[] {
@@ -5310,7 +5344,7 @@ this.ScenarioSetup(scenarioInfo);
                         "31.40",
                         "94.20",
                         "0"});
-#line 632
+#line 633
     testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table83, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table84 = new TechTalk.SpecFlow.Table(new string[] {
@@ -5376,7 +5410,7 @@ this.ScenarioSetup(scenarioInfo);
                         "...",
                         "0",
                         "0"});
-#line 641
+#line 642
     testRunner.And("the transaction types for the payments are:", ((string)(null)), table84, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -5393,9 +5427,9 @@ this.ScenarioSetup(scenarioInfo);
                     "arns balancing and completion framework uplift payments. Assumes 15 month appren" +
                     "ticeship and learner completes after 12 months.", new string[] {
                         "FrameworkUpliftsForNonDasFinishingEarly"});
-#line 652
-this.ScenarioSetup(scenarioInfo);
 #line 653
+this.ScenarioSetup(scenarioInfo);
+#line 654
     testRunner.Given("the apprenticeship funding band maximum is 9000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table85 = new TechTalk.SpecFlow.Table(new string[] {
@@ -5406,9 +5440,9 @@ this.ScenarioSetup(scenarioInfo);
                         "planned end date",
                         "actual end date",
                         "completion status",
-                        "Framework Code",
-                        "Programme Type",
-                        "Pathway Code"});
+                        "framework code",
+                        "programme type",
+                        "pathway code"});
             table85.AddRow(new string[] {
                         "123456",
                         "16-18 programme only non-DAS",
@@ -5420,7 +5454,7 @@ this.ScenarioSetup(scenarioInfo);
                         "403",
                         "2",
                         "1"});
-#line 654
+#line 655
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table85, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table86 = new TechTalk.SpecFlow.Table(new string[] {
@@ -5532,7 +5566,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table86.AddRow(new string[] {
-                        "SFA non Levy co-funding budget",
+                        "SFA non-Levy co-funding budget",
                         "432",
                         "432",
                         "432",
@@ -5555,7 +5589,7 @@ this.ScenarioSetup(scenarioInfo);
                         "96",
                         "1648",
                         "0"});
-#line 657
+#line 658
     testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table86, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table87 = new TechTalk.SpecFlow.Table(new string[] {
@@ -5678,7 +5712,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 669
+#line 670
     testRunner.And("the transaction types for the payments are:", ((string)(null)), table87, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -5695,9 +5729,9 @@ this.ScenarioSetup(scenarioInfo);
                     "m, earns balancing and completion framework uplift payments. Assumes 15 month ap" +
                     "prenticeship and learner completes after 12 months.", new string[] {
                         "FrameworkUpliftsForNonDasFinishingEarly"});
-#line 683
-this.ScenarioSetup(scenarioInfo);
 #line 684
+this.ScenarioSetup(scenarioInfo);
+#line 685
     testRunner.Given("the apprenticeship funding band maximum is 9000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table88 = new TechTalk.SpecFlow.Table(new string[] {
@@ -5708,9 +5742,9 @@ this.ScenarioSetup(scenarioInfo);
                         "planned end date",
                         "actual end date",
                         "completion status",
-                        "Framework Code",
-                        "Programme Type",
-                        "Pathway Code"});
+                        "framework code",
+                        "programme type",
+                        "pathway code"});
             table88.AddRow(new string[] {
                         "123456",
                         "16-18 programme only non-DAS",
@@ -5722,7 +5756,7 @@ this.ScenarioSetup(scenarioInfo);
                         "403",
                         "2",
                         "1"});
-#line 685
+#line 686
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table88, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table89 = new TechTalk.SpecFlow.Table(new string[] {
@@ -5834,7 +5868,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table89.AddRow(new string[] {
-                        "SFA non Levy co-funding budget",
+                        "SFA non-Levy co-funding budget",
                         "360",
                         "360",
                         "360",
@@ -5857,7 +5891,7 @@ this.ScenarioSetup(scenarioInfo);
                         "96",
                         "1648",
                         "0"});
-#line 688
+#line 689
     testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table89, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table90 = new TechTalk.SpecFlow.Table(new string[] {
@@ -5980,7 +6014,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 700
+#line 701
     testRunner.And("the transaction types for the payments are:", ((string)(null)), table90, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -5993,7 +6027,7 @@ this.ScenarioSetup(scenarioInfo);
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("591-AC01 Payment for a non -DAS learner, funding agreed within band maximum, plan" +
                     "ned duration is same as programme (assumes both start and finish at same time).", ((string[])(null)));
-#line 713
+#line 714
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table91 = new TechTalk.SpecFlow.Table(new string[] {
@@ -6032,7 +6066,7 @@ this.ScenarioSetup(scenarioInfo);
                         "403",
                         "2",
                         "1"});
-#line 715
+#line 716
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table91, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table92 = new TechTalk.SpecFlow.Table(new string[] {
@@ -6147,7 +6181,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 719
+#line 720
     testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table92, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table93 = new TechTalk.SpecFlow.Table(new string[] {
@@ -6222,7 +6256,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 728
+#line 729
     testRunner.And("the transaction types for the payments are:", ((string)(null)), table93, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -6235,9 +6269,9 @@ this.ScenarioSetup(scenarioInfo);
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("591_AC02- Payment for a DAS learner, funding agreed within band maximum, planned " +
                     "duration is same as programme (assumes both start and finish at same time).", ((string[])(null)));
-#line 737
+#line 738
 this.ScenarioSetup(scenarioInfo);
-#line 740
+#line 741
     testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table94 = new TechTalk.SpecFlow.Table(new string[] {
@@ -6264,7 +6298,7 @@ this.ScenarioSetup(scenarioInfo);
                         "active",
                         "01/08/2017",
                         ""});
-#line 741
+#line 742
     testRunner.And("the following commitments exist:", ((string)(null)), table94, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table95 = new TechTalk.SpecFlow.Table(new string[] {
@@ -6303,7 +6337,7 @@ this.ScenarioSetup(scenarioInfo);
                         "403",
                         "2",
                         "1"});
-#line 744
+#line 745
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table95, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table96 = new TechTalk.SpecFlow.Table(new string[] {
@@ -6418,7 +6452,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 748
+#line 749
     testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table96, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table97 = new TechTalk.SpecFlow.Table(new string[] {
@@ -6505,14 +6539,14 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0",
+                        "...",
                         "0",
-                        "..",
                         "0",
                         "0",
                         "0",
                         "0",
                         "0"});
-#line 757
+#line 758
     testRunner.And("the transaction types for the payments are:", ((string)(null)), table97, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -6527,7 +6561,7 @@ this.ScenarioSetup(scenarioInfo);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("637-AC01-Payment for a non-DAS learner, requires learning support, doing an appre" +
                     "nticeship framework", new string[] {
                         "LearningSupport"});
-#line 768
+#line 769
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table98 = new TechTalk.SpecFlow.Table(new string[] {
@@ -6552,7 +6586,7 @@ this.ScenarioSetup(scenarioInfo);
                         "403",
                         "2",
                         "1"});
-#line 769
+#line 770
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table98, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table99 = new TechTalk.SpecFlow.Table(new string[] {
@@ -6563,7 +6597,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "06/08/2017",
                         "10/08/2018"});
-#line 772
+#line 773
     testRunner.And("the learning support status of the ILR is:", ((string)(null)), table99, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table100 = new TechTalk.SpecFlow.Table(new string[] {
@@ -6666,7 +6700,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table100.AddRow(new string[] {
-                        "SFA non Levy co-funding budget",
+                        "SFA non-Levy co-funding budget",
                         "900",
                         "900",
                         "900",
@@ -6687,7 +6721,7 @@ this.ScenarioSetup(scenarioInfo);
                         "150",
                         "0",
                         "0"});
-#line 775
+#line 776
     testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table100, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table101 = new TechTalk.SpecFlow.Table(new string[] {
@@ -6778,7 +6812,7 @@ this.ScenarioSetup(scenarioInfo);
                         "150",
                         "150",
                         "0"});
-#line 787
+#line 788
     testRunner.And("the transaction types for the payments are:", ((string)(null)), table101, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -6793,7 +6827,7 @@ this.ScenarioSetup(scenarioInfo);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("637-AC02-Payment for a non-DAS learner, requires learning support, doing an appre" +
                     "nticeship standard", new string[] {
                         "LearningSupport"});
-#line 799
+#line 800
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table102 = new TechTalk.SpecFlow.Table(new string[] {
@@ -6814,7 +6848,7 @@ this.ScenarioSetup(scenarioInfo);
                         "10/08/2018",
                         "completed",
                         "50"});
-#line 800
+#line 801
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table102, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table103 = new TechTalk.SpecFlow.Table(new string[] {
@@ -6825,7 +6859,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "06/08/2017",
                         "10/08/2018"});
-#line 803
+#line 804
     testRunner.And("the learning support status of the ILR is:", ((string)(null)), table103, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table104 = new TechTalk.SpecFlow.Table(new string[] {
@@ -6928,7 +6962,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table104.AddRow(new string[] {
-                        "SFA non Levy co-funding budget",
+                        "SFA non-Levy co-funding budget",
                         "900",
                         "900",
                         "900",
@@ -6949,7 +6983,7 @@ this.ScenarioSetup(scenarioInfo);
                         "150",
                         "0",
                         "0"});
-#line 806
+#line 807
     testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table104, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table105 = new TechTalk.SpecFlow.Table(new string[] {
@@ -7040,7 +7074,7 @@ this.ScenarioSetup(scenarioInfo);
                         "150",
                         "150",
                         "0"});
-#line 818
+#line 819
     testRunner.And("the transaction types for the payments are:", ((string)(null)), table105, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -7055,9 +7089,9 @@ this.ScenarioSetup(scenarioInfo);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("637-AC03-Payment for a DAS learner, requires learning support, doing an apprentic" +
                     "eship framework", new string[] {
                         "LearningSupport"});
-#line 830
-this.ScenarioSetup(scenarioInfo);
 #line 831
+this.ScenarioSetup(scenarioInfo);
+#line 832
     testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table106 = new TechTalk.SpecFlow.Table(new string[] {
@@ -7082,7 +7116,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "15000",
                         "active"});
-#line 832
+#line 833
     testRunner.And("the following commitments exist:", ((string)(null)), table106, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table107 = new TechTalk.SpecFlow.Table(new string[] {
@@ -7107,7 +7141,7 @@ this.ScenarioSetup(scenarioInfo);
                         "403",
                         "2",
                         "1"});
-#line 835
+#line 836
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table107, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table108 = new TechTalk.SpecFlow.Table(new string[] {
@@ -7118,7 +7152,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "06/08/2017",
                         "10/08/2018"});
-#line 838
+#line 839
     testRunner.And("the learning support status of the ILR is:", ((string)(null)), table108, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table109 = new TechTalk.SpecFlow.Table(new string[] {
@@ -7221,7 +7255,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table109.AddRow(new string[] {
-                        "SFA non Levy co-funding budget",
+                        "SFA non-Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -7253,7 +7287,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 841
+#line 842
     testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table109, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table110 = new TechTalk.SpecFlow.Table(new string[] {
@@ -7344,7 +7378,7 @@ this.ScenarioSetup(scenarioInfo);
                         "150",
                         "150",
                         "0"});
-#line 854
+#line 855
     testRunner.And("the transaction types for the payments are:", ((string)(null)), table110, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -7359,9 +7393,9 @@ this.ScenarioSetup(scenarioInfo);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("637-AC04-Payment for a DAS learner, requires learning support, doing an apprentic" +
                     "eship framework", new string[] {
                         "LearningSupport"});
-#line 866
-this.ScenarioSetup(scenarioInfo);
 #line 867
+this.ScenarioSetup(scenarioInfo);
+#line 868
     testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table111 = new TechTalk.SpecFlow.Table(new string[] {
@@ -7382,7 +7416,7 @@ this.ScenarioSetup(scenarioInfo);
                         "50",
                         "15000",
                         "active"});
-#line 868
+#line 869
     testRunner.And("the following commitments exist:", ((string)(null)), table111, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table112 = new TechTalk.SpecFlow.Table(new string[] {
@@ -7403,7 +7437,7 @@ this.ScenarioSetup(scenarioInfo);
                         "10/08/2018",
                         "completed",
                         "50"});
-#line 871
+#line 872
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table112, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table113 = new TechTalk.SpecFlow.Table(new string[] {
@@ -7414,7 +7448,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "06/08/2017",
                         "10/08/2018"});
-#line 874
+#line 875
     testRunner.And("the learning support status of the ILR is:", ((string)(null)), table113, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table114 = new TechTalk.SpecFlow.Table(new string[] {
@@ -7517,7 +7551,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table114.AddRow(new string[] {
-                        "SFA non Levy co-funding budget",
+                        "SFA non-Levy co-funding budget",
                         "0",
                         "0",
                         "0",
@@ -7549,7 +7583,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 877
+#line 878
     testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table114, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table115 = new TechTalk.SpecFlow.Table(new string[] {
@@ -7640,2461 +7674,8 @@ this.ScenarioSetup(scenarioInfo);
                         "150",
                         "150",
                         "0"});
-#line 890
+#line 891
     testRunner.And("the transaction types for the payments are:", ((string)(null)), table115, "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("638-AC01 Non-DAS learner, takes an English qualification that has a planned end d" +
-            "ate that exceeds the actual end date of the programme aim")]
-        [NUnit.Framework.CategoryAttribute("MathsAndEnglishNonDas")]
-        public virtual void _638_AC01Non_DASLearnerTakesAnEnglishQualificationThatHasAPlannedEndDateThatExceedsTheActualEndDateOfTheProgrammeAim()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("638-AC01 Non-DAS learner, takes an English qualification that has a planned end d" +
-                    "ate that exceeds the actual end date of the programme aim", new string[] {
-                        "MathsAndEnglishNonDas"});
-#line 902
-this.ScenarioSetup(scenarioInfo);
-#line hidden
-            TechTalk.SpecFlow.Table table116 = new TechTalk.SpecFlow.Table(new string[] {
-                        "ULN",
-                        "learner type",
-                        "aim type",
-                        "agreed price",
-                        "aim rate",
-                        "start date",
-                        "planned end date",
-                        "actual end date",
-                        "completion status"});
-            table116.AddRow(new string[] {
-                        "learner a",
-                        "programme only non-DAS",
-                        "programme",
-                        "15000",
-                        "",
-                        "06/08/2017",
-                        "08/08/2018",
-                        "08/08/2018",
-                        "completed"});
-            table116.AddRow(new string[] {
-                        "learner a",
-                        "programme only non-DAS",
-                        "maths or english",
-                        "",
-                        "471",
-                        "06/08/2017",
-                        "06/10/2018",
-                        "06/10/2018",
-                        "completed"});
-#line 904
- testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table116, "When ");
-#line hidden
-            TechTalk.SpecFlow.Table table117 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Type",
-                        "08/17",
-                        "09/17",
-                        "10/17",
-                        "...",
-                        "05/18",
-                        "06/18",
-                        "07/18",
-                        "08/18",
-                        "09/18",
-                        "10/18",
-                        "11/18"});
-            table117.AddRow(new string[] {
-                        "Provider Earned Total",
-                        "1033.64",
-                        "1033.64",
-                        "1033.64",
-                        "...",
-                        "1033.64",
-                        "1033.64",
-                        "1033.64",
-                        "3033.64",
-                        "33.64",
-                        "0",
-                        "0"});
-            table117.AddRow(new string[] {
-                        "Provider Paid by SFA",
-                        "0",
-                        "933.64",
-                        "933.64",
-                        "...",
-                        "933.64",
-                        "933.64",
-                        "933.64",
-                        "933.64",
-                        "2733.64",
-                        "33.64",
-                        "0"});
-            table117.AddRow(new string[] {
-                        "Payment due from Employer",
-                        "0",
-                        "100",
-                        "100",
-                        "...",
-                        "100",
-                        "100",
-                        "100",
-                        "100",
-                        "300",
-                        "0",
-                        "0"});
-            table117.AddRow(new string[] {
-                        "Levy account debited",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table117.AddRow(new string[] {
-                        "SFA Levy employer budget",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table117.AddRow(new string[] {
-                        "SFA Levy co-funding budget",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table117.AddRow(new string[] {
-                        "SFA non-Levy co-funding budget",
-                        "900",
-                        "900",
-                        "900",
-                        "...",
-                        "900",
-                        "900",
-                        "900",
-                        "2700",
-                        "0",
-                        "0",
-                        "0"});
-            table117.AddRow(new string[] {
-                        "SFA Levy additional payments budget",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table117.AddRow(new string[] {
-                        "SFA non-Levy additional payments budget",
-                        "33.64",
-                        "33.64",
-                        "33.64",
-                        "...",
-                        "33.64",
-                        "33.64",
-                        "33.64",
-                        "33.64",
-                        "33.64",
-                        "0",
-                        "0"});
-#line 908
- testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table117, "Then ");
-#line hidden
-            TechTalk.SpecFlow.Table table118 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Payment type",
-                        "09/17",
-                        "10/17",
-                        "...",
-                        "05/18",
-                        "06/18",
-                        "07/18",
-                        "08/18",
-                        "09/18",
-                        "10/18",
-                        "11/18"});
-            table118.AddRow(new string[] {
-                        "On-program",
-                        "900",
-                        "900",
-                        "...",
-                        "900",
-                        "900",
-                        "900",
-                        "900",
-                        "0",
-                        "0",
-                        "0"});
-            table118.AddRow(new string[] {
-                        "Completion",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "2700",
-                        "0",
-                        "0"});
-            table118.AddRow(new string[] {
-                        "Balancing",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table118.AddRow(new string[] {
-                        "English and maths on programme",
-                        "33.64",
-                        "33.64",
-                        "...",
-                        "33.64",
-                        "33.64",
-                        "33.64",
-                        "33.64",
-                        "33.64",
-                        "33.64",
-                        "0"});
-            table118.AddRow(new string[] {
-                        "English and maths Balancing",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-#line 919
-    testRunner.And("the transaction types for the payments are:", ((string)(null)), table118, "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("638-AC02 DAS learner, takes an English qualification that has a planned end date " +
-            "that exceeds the actual end date of the programme aim")]
-        [NUnit.Framework.CategoryAttribute("MathsAndEnglishDas")]
-        public virtual void _638_AC02DASLearnerTakesAnEnglishQualificationThatHasAPlannedEndDateThatExceedsTheActualEndDateOfTheProgrammeAim()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("638-AC02 DAS learner, takes an English qualification that has a planned end date " +
-                    "that exceeds the actual end date of the programme aim", new string[] {
-                        "MathsAndEnglishDas"});
-#line 928
-this.ScenarioSetup(scenarioInfo);
-#line 929
- testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-            TechTalk.SpecFlow.Table table119 = new TechTalk.SpecFlow.Table(new string[] {
-                        "commitment Id",
-                        "version Id",
-                        "ULN",
-                        "start date",
-                        "end date",
-                        "agreed price",
-                        "status"});
-            table119.AddRow(new string[] {
-                        "1",
-                        "1",
-                        "learner a",
-                        "01/08/2017",
-                        "01/08/2018",
-                        "15000",
-                        "active"});
-#line 930
- testRunner.And("the following commitments exist:", ((string)(null)), table119, "And ");
-#line hidden
-            TechTalk.SpecFlow.Table table120 = new TechTalk.SpecFlow.Table(new string[] {
-                        "ULN",
-                        "learner type",
-                        "aim type",
-                        "agreed price",
-                        "aim rate",
-                        "start date",
-                        "planned end date",
-                        "actual end date",
-                        "completion status"});
-            table120.AddRow(new string[] {
-                        "learner a",
-                        "programme only DAS",
-                        "programme",
-                        "15000",
-                        "",
-                        "06/08/2017",
-                        "08/08/2018",
-                        "08/08/2018",
-                        "completed"});
-            table120.AddRow(new string[] {
-                        "learner a",
-                        "programme only DAS",
-                        "maths or english",
-                        "",
-                        "471",
-                        "06/08/2017",
-                        "06/10/2018",
-                        "06/10/2018",
-                        "completed"});
-#line 933
- testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table120, "When ");
-#line hidden
-            TechTalk.SpecFlow.Table table121 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Payment type",
-                        "08/17",
-                        "09/17",
-                        "10/17",
-                        "...",
-                        "07/18",
-                        "08/18",
-                        "09/18",
-                        "10/18",
-                        "11/18"});
-            table121.AddRow(new string[] {
-                        "On-program",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "...",
-                        "commitment 1 v1",
-                        "",
-                        "",
-                        "",
-                        ""});
-            table121.AddRow(new string[] {
-                        "Completion",
-                        "",
-                        "",
-                        "",
-                        "...",
-                        "",
-                        "commitment 1 v1",
-                        "",
-                        "",
-                        ""});
-            table121.AddRow(new string[] {
-                        "Employer 16-18 incentive",
-                        "",
-                        "",
-                        "",
-                        "...",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""});
-            table121.AddRow(new string[] {
-                        "Provider 16-18 incentive",
-                        "",
-                        "",
-                        "",
-                        "...",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""});
-            table121.AddRow(new string[] {
-                        "Provider learning support",
-                        "",
-                        "",
-                        "",
-                        "...",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""});
-            table121.AddRow(new string[] {
-                        "English and maths on programme",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "...",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "",
-                        ""});
-            table121.AddRow(new string[] {
-                        "English and maths balancing",
-                        "",
-                        "",
-                        "",
-                        "...",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""});
-#line 937
- testRunner.Then("the data lock status will be as follows:", ((string)(null)), table121, "Then ");
-#line hidden
-            TechTalk.SpecFlow.Table table122 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Type",
-                        "08/17",
-                        "09/17",
-                        "10/17",
-                        "...",
-                        "05/18",
-                        "06/18",
-                        "07/18",
-                        "08/18",
-                        "09/18",
-                        "10/18",
-                        "11/18"});
-            table122.AddRow(new string[] {
-                        "Provider Earned Total",
-                        "1033.64",
-                        "1033.64",
-                        "1033.64",
-                        "...",
-                        "1033.64",
-                        "1033.64",
-                        "1033.64",
-                        "3033.64",
-                        "33.64",
-                        "0",
-                        "0"});
-            table122.AddRow(new string[] {
-                        "Provider Paid by SFA",
-                        "0",
-                        "1033.64",
-                        "1033.64",
-                        "...",
-                        "1033.64",
-                        "1033.64",
-                        "1033.64",
-                        "1033.64",
-                        "3033.64",
-                        "33.64",
-                        "0"});
-            table122.AddRow(new string[] {
-                        "Payment due from Employer",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table122.AddRow(new string[] {
-                        "Levy account debited",
-                        "0",
-                        "1000",
-                        "1000",
-                        "...",
-                        "1000",
-                        "1000",
-                        "1000",
-                        "1000",
-                        "3000",
-                        "0",
-                        "0"});
-            table122.AddRow(new string[] {
-                        "SFA Levy employer budget",
-                        "1000",
-                        "1000",
-                        "1000",
-                        "...",
-                        "1000",
-                        "1000",
-                        "1000",
-                        "3000",
-                        "0",
-                        "0",
-                        "0"});
-            table122.AddRow(new string[] {
-                        "SFA Levy co-funding budget",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table122.AddRow(new string[] {
-                        "SFA non-Levy co-funding budget",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table122.AddRow(new string[] {
-                        "SFA Levy additional payments budget",
-                        "33.64",
-                        "33.64",
-                        "33.64",
-                        "...",
-                        "33.64",
-                        "33.64",
-                        "33.64",
-                        "33.64",
-                        "33.64",
-                        "0",
-                        "0"});
-            table122.AddRow(new string[] {
-                        "SFA non-Levy additional payments budget",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-#line 946
-    testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table122, "And ");
-#line hidden
-            TechTalk.SpecFlow.Table table123 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Payment type",
-                        "09/17",
-                        "10/17",
-                        "...",
-                        "05/18",
-                        "06/18",
-                        "07/18",
-                        "08/18",
-                        "09/18",
-                        "10/18",
-                        "11/18"});
-            table123.AddRow(new string[] {
-                        "On-program",
-                        "1000",
-                        "1000",
-                        "...",
-                        "1000",
-                        "1000",
-                        "1000",
-                        "1000",
-                        "0",
-                        "0",
-                        "0"});
-            table123.AddRow(new string[] {
-                        "Completion",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "3000",
-                        "0",
-                        "0"});
-            table123.AddRow(new string[] {
-                        "Balancing",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table123.AddRow(new string[] {
-                        "English and maths on programme",
-                        "33.64",
-                        "33.64",
-                        "...",
-                        "33.64",
-                        "33.64",
-                        "33.64",
-                        "33.64",
-                        "33.64",
-                        "33.64",
-                        "0"});
-            table123.AddRow(new string[] {
-                        "English and maths Balancing",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-#line 957
-    testRunner.And("the transaction types for the payments are:", ((string)(null)), table123, "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("638-AC03 DAS learner, takes an English qualification that has a planned end date " +
-            "that exceeds the actual end date of the programme aim - but the apprentice fails" +
-            " data lock so no payments occur")]
-        [NUnit.Framework.CategoryAttribute("MathsAndEnglishDas")]
-        public virtual void _638_AC03DASLearnerTakesAnEnglishQualificationThatHasAPlannedEndDateThatExceedsTheActualEndDateOfTheProgrammeAim_ButTheApprenticeFailsDataLockSoNoPaymentsOccur()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("638-AC03 DAS learner, takes an English qualification that has a planned end date " +
-                    "that exceeds the actual end date of the programme aim - but the apprentice fails" +
-                    " data lock so no payments occur", new string[] {
-                        "MathsAndEnglishDas"});
-#line 966
-this.ScenarioSetup(scenarioInfo);
-#line 967
- testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-            TechTalk.SpecFlow.Table table124 = new TechTalk.SpecFlow.Table(new string[] {
-                        "commitment ID",
-                        "version Id",
-                        "ULN",
-                        "start date",
-                        "end date",
-                        "agreed price",
-                        "status"});
-            table124.AddRow(new string[] {
-                        "1",
-                        "1",
-                        "learner a",
-                        "01/08/2017",
-                        "01/08/2018",
-                        "15500",
-                        "active"});
-#line 968
- testRunner.And("the following commitments exist:", ((string)(null)), table124, "And ");
-#line hidden
-            TechTalk.SpecFlow.Table table125 = new TechTalk.SpecFlow.Table(new string[] {
-                        "ULN",
-                        "learner type",
-                        "aim type",
-                        "agreed price",
-                        "aim rate",
-                        "start date",
-                        "planned end date",
-                        "actual end date",
-                        "completion status"});
-            table125.AddRow(new string[] {
-                        "learner a",
-                        "programme only DAS",
-                        "programme",
-                        "15000",
-                        "",
-                        "06/08/2017",
-                        "08/08/2018",
-                        "08/08/2018",
-                        "completed"});
-            table125.AddRow(new string[] {
-                        "learner a",
-                        "programme only DAS",
-                        "maths or english",
-                        "",
-                        "471",
-                        "06/08/2017",
-                        "06/10/2018",
-                        "06/10/2018",
-                        "completed"});
-#line 971
- testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table125, "When ");
-#line hidden
-            TechTalk.SpecFlow.Table table126 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Payment type",
-                        "08/17",
-                        "09/17",
-                        "10/17",
-                        "...",
-                        "07/18",
-                        "08/18",
-                        "09/18",
-                        "10/18",
-                        "11/18"});
-            table126.AddRow(new string[] {
-                        "On-program",
-                        "",
-                        "",
-                        "",
-                        "...",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""});
-            table126.AddRow(new string[] {
-                        "Completion",
-                        "",
-                        "",
-                        "",
-                        "...",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""});
-            table126.AddRow(new string[] {
-                        "Employer 16-18 incentive",
-                        "",
-                        "",
-                        "",
-                        "...",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""});
-            table126.AddRow(new string[] {
-                        "Provider 16-18 incentive",
-                        "",
-                        "",
-                        "",
-                        "...",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""});
-            table126.AddRow(new string[] {
-                        "Provider learning support",
-                        "",
-                        "",
-                        "",
-                        "...",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""});
-            table126.AddRow(new string[] {
-                        "English and maths on programme",
-                        "",
-                        "",
-                        "",
-                        "...",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""});
-            table126.AddRow(new string[] {
-                        "English and maths balancing",
-                        "",
-                        "",
-                        "",
-                        "...",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""});
-#line 975
-    testRunner.Then("the data lock status will be as follows:", ((string)(null)), table126, "Then ");
-#line hidden
-            TechTalk.SpecFlow.Table table127 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Type",
-                        "08/17",
-                        "09/17",
-                        "10/17",
-                        "...",
-                        "05/18",
-                        "06/18",
-                        "07/18",
-                        "08/18",
-                        "09/18",
-                        "10/18",
-                        "11/18"});
-            table127.AddRow(new string[] {
-                        "Provider Earned Total",
-                        "1033.64",
-                        "1033.64",
-                        "1033.64",
-                        "...",
-                        "1033.64",
-                        "1033.64",
-                        "1033.64",
-                        "3033.64",
-                        "33.64",
-                        "0",
-                        "0"});
-            table127.AddRow(new string[] {
-                        "Provider Paid by SFA",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table127.AddRow(new string[] {
-                        "Payment due from Employer",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table127.AddRow(new string[] {
-                        "Levy account debited",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table127.AddRow(new string[] {
-                        "SFA Levy employer budget",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table127.AddRow(new string[] {
-                        "SFA Levy co-funding budget",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table127.AddRow(new string[] {
-                        "SFA non-Levy co-funding budget",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table127.AddRow(new string[] {
-                        "SFA Levy additional payments budget",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table127.AddRow(new string[] {
-                        "SFA non-Levy additional payments budget",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-#line 984
-    testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table127, "And ");
-#line hidden
-            TechTalk.SpecFlow.Table table128 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Payment type",
-                        "09/17",
-                        "10/17",
-                        "...",
-                        "05/18",
-                        "06/18",
-                        "07/18",
-                        "08/18",
-                        "09/18",
-                        "10/18",
-                        "11/18"});
-            table128.AddRow(new string[] {
-                        "On-program",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table128.AddRow(new string[] {
-                        "Completion",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table128.AddRow(new string[] {
-                        "Balancing",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table128.AddRow(new string[] {
-                        "English and maths on programme",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table128.AddRow(new string[] {
-                        "English and maths Balancing",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-#line 995
-    testRunner.And("the transaction types for the payments are:", ((string)(null)), table128, "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("657-AC01 Non-DAS learner, takes an English qualification that has a planned end d" +
-            "ate that exceeds the actual end date of the programme aim and learning support i" +
-            "s applicable to all learning")]
-        [NUnit.Framework.CategoryAttribute("LearningSupport")]
-        public virtual void _657_AC01Non_DASLearnerTakesAnEnglishQualificationThatHasAPlannedEndDateThatExceedsTheActualEndDateOfTheProgrammeAimAndLearningSupportIsApplicableToAllLearning()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("657-AC01 Non-DAS learner, takes an English qualification that has a planned end d" +
-                    "ate that exceeds the actual end date of the programme aim and learning support i" +
-                    "s applicable to all learning", new string[] {
-                        "LearningSupport"});
-#line 1004
-this.ScenarioSetup(scenarioInfo);
-#line hidden
-            TechTalk.SpecFlow.Table table129 = new TechTalk.SpecFlow.Table(new string[] {
-                        "ULN",
-                        "learner type",
-                        "aim type",
-                        "agreed price",
-                        "aim rate",
-                        "start date",
-                        "planned end date",
-                        "actual end date",
-                        "completion status"});
-            table129.AddRow(new string[] {
-                        "learner a",
-                        "programme only non-DAS",
-                        "programme",
-                        "15000",
-                        "",
-                        "06/08/2017",
-                        "08/08/2018",
-                        "08/08/2018",
-                        "completed"});
-            table129.AddRow(new string[] {
-                        "learner a",
-                        "programme only non-DAS",
-                        "maths or english",
-                        "",
-                        "471",
-                        "06/08/2017",
-                        "06/10/2018",
-                        "06/10/2018",
-                        "completed"});
-#line 1006
- testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table129, "When ");
-#line hidden
-            TechTalk.SpecFlow.Table table130 = new TechTalk.SpecFlow.Table(new string[] {
-                        "learning support code",
-                        "date from",
-                        "date to"});
-            table130.AddRow(new string[] {
-                        "1",
-                        "06/08/2017",
-                        "06/10/2018"});
-#line 1011
- testRunner.And("the learning support status of the ILR is:", ((string)(null)), table130, "And ");
-#line hidden
-            TechTalk.SpecFlow.Table table131 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Type",
-                        "08/17",
-                        "09/17",
-                        "10/17",
-                        "...",
-                        "05/18",
-                        "06/18",
-                        "07/18",
-                        "08/18",
-                        "09/18",
-                        "10/18",
-                        "11/18"});
-            table131.AddRow(new string[] {
-                        "Provider Earned Total",
-                        "1183.64",
-                        "1183.64",
-                        "1183.64",
-                        "...",
-                        "1183.64",
-                        "1183.64",
-                        "1183.64",
-                        "3183.64",
-                        "183.64",
-                        "0",
-                        "0"});
-            table131.AddRow(new string[] {
-                        "Provider Paid by SFA",
-                        "0",
-                        "1083.64",
-                        "1083.64",
-                        "...",
-                        "1083.64",
-                        "1083.64",
-                        "1083.64",
-                        "1083.64",
-                        "2883.64",
-                        "183.64",
-                        "0"});
-            table131.AddRow(new string[] {
-                        "Payment due from Employer",
-                        "0",
-                        "100",
-                        "100",
-                        "...",
-                        "100",
-                        "100",
-                        "100",
-                        "100",
-                        "300",
-                        "0",
-                        "0"});
-            table131.AddRow(new string[] {
-                        "Levy account debited",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table131.AddRow(new string[] {
-                        "SFA Levy employer budget",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table131.AddRow(new string[] {
-                        "SFA Levy co-funding budget",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table131.AddRow(new string[] {
-                        "SFA non-Levy co-funding budget",
-                        "900",
-                        "900",
-                        "900",
-                        "...",
-                        "900",
-                        "900",
-                        "900",
-                        "2700",
-                        "0",
-                        "0",
-                        "0"});
-            table131.AddRow(new string[] {
-                        "SFA Levy additional payments budget",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table131.AddRow(new string[] {
-                        "SFA non-Levy additional payments budget",
-                        "183.64",
-                        "183.64",
-                        "183.64",
-                        "...",
-                        "183.64",
-                        "183.64",
-                        "183.64",
-                        "183.64",
-                        "183.64",
-                        "0",
-                        "0"});
-#line 1014
- testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table131, "Then ");
-#line hidden
-            TechTalk.SpecFlow.Table table132 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Payment type",
-                        "09/17",
-                        "10/17",
-                        "...",
-                        "05/18",
-                        "06/18",
-                        "07/18",
-                        "08/18",
-                        "09/18",
-                        "10/18",
-                        "11/18"});
-            table132.AddRow(new string[] {
-                        "On-program",
-                        "900",
-                        "900",
-                        "...",
-                        "900",
-                        "900",
-                        "900",
-                        "900",
-                        "0",
-                        "0",
-                        "0"});
-            table132.AddRow(new string[] {
-                        "Completion",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "2700",
-                        "0",
-                        "0"});
-            table132.AddRow(new string[] {
-                        "Balancing",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table132.AddRow(new string[] {
-                        "English and maths on programme",
-                        "33.64",
-                        "33.64",
-                        "...",
-                        "33.64",
-                        "33.64",
-                        "33.64",
-                        "33.64",
-                        "33.64",
-                        "33.64",
-                        "0"});
-            table132.AddRow(new string[] {
-                        "English and maths Balancing",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table132.AddRow(new string[] {
-                        "Provider learning support",
-                        "150",
-                        "150",
-                        "...",
-                        "150",
-                        "150",
-                        "150",
-                        "150",
-                        "150",
-                        "150",
-                        "0"});
-#line 1025
-    testRunner.And("the transaction types for the payments are:", ((string)(null)), table132, "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("657-AC02 DAS learner, takes an English qualification that has a planned end date " +
-            "that exceeds the actual end date of the programme aim and learning support is ap" +
-            "plicable for all learning")]
-        [NUnit.Framework.CategoryAttribute("LearningSupport")]
-        public virtual void _657_AC02DASLearnerTakesAnEnglishQualificationThatHasAPlannedEndDateThatExceedsTheActualEndDateOfTheProgrammeAimAndLearningSupportIsApplicableForAllLearning()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("657-AC02 DAS learner, takes an English qualification that has a planned end date " +
-                    "that exceeds the actual end date of the programme aim and learning support is ap" +
-                    "plicable for all learning", new string[] {
-                        "LearningSupport"});
-#line 1036
-this.ScenarioSetup(scenarioInfo);
-#line 1037
- testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-            TechTalk.SpecFlow.Table table133 = new TechTalk.SpecFlow.Table(new string[] {
-                        "commitment ID",
-                        "ULN",
-                        "start date",
-                        "end date",
-                        "agreed price",
-                        "status"});
-            table133.AddRow(new string[] {
-                        "1",
-                        "learner a",
-                        "01/08/2017",
-                        "01/08/2018",
-                        "15000",
-                        "active"});
-#line 1038
- testRunner.And("the following commitments exist:", ((string)(null)), table133, "And ");
-#line hidden
-            TechTalk.SpecFlow.Table table134 = new TechTalk.SpecFlow.Table(new string[] {
-                        "ULN",
-                        "learner type",
-                        "aim type",
-                        "agreed price",
-                        "aim rate",
-                        "start date",
-                        "planned end date",
-                        "actual end date",
-                        "completion status"});
-            table134.AddRow(new string[] {
-                        "learner a",
-                        "programme only DAS",
-                        "programme",
-                        "15000",
-                        "",
-                        "06/08/2017",
-                        "08/08/2018",
-                        "08/08/2018",
-                        "completed"});
-            table134.AddRow(new string[] {
-                        "learner a",
-                        "programme only DAS",
-                        "maths or english",
-                        "",
-                        "471",
-                        "06/08/2017",
-                        "06/10/2018",
-                        "06/10/2018",
-                        "completed"});
-#line 1041
- testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table134, "When ");
-#line hidden
-            TechTalk.SpecFlow.Table table135 = new TechTalk.SpecFlow.Table(new string[] {
-                        "learning support code",
-                        "date from",
-                        "date to"});
-            table135.AddRow(new string[] {
-                        "1",
-                        "06/08/2017",
-                        "06/10/2018"});
-#line 1045
- testRunner.And("the learning support status of the ILR is:", ((string)(null)), table135, "And ");
-#line hidden
-            TechTalk.SpecFlow.Table table136 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Payment type",
-                        "08/17",
-                        "09/17",
-                        "10/17",
-                        "...",
-                        "07/18",
-                        "08/18",
-                        "09/18",
-                        "10/18",
-                        "11/18"});
-            table136.AddRow(new string[] {
-                        "On-program",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "...",
-                        "commitment 1 v1",
-                        "",
-                        "",
-                        "",
-                        ""});
-            table136.AddRow(new string[] {
-                        "Completion",
-                        "",
-                        "",
-                        "",
-                        "...",
-                        "",
-                        "commitment 1 v1",
-                        "",
-                        "",
-                        ""});
-            table136.AddRow(new string[] {
-                        "Employer 16-18 incentive",
-                        "",
-                        "",
-                        "",
-                        "...",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""});
-            table136.AddRow(new string[] {
-                        "Provider 16-18 incentive",
-                        "",
-                        "",
-                        "",
-                        "...",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""});
-            table136.AddRow(new string[] {
-                        "Provider learning support",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "...",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "",
-                        ""});
-            table136.AddRow(new string[] {
-                        "English and maths on programme",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "...",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "",
-                        ""});
-            table136.AddRow(new string[] {
-                        "English and maths balancing",
-                        "",
-                        "",
-                        "",
-                        "...",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""});
-#line 1048
- testRunner.Then("the data lock status will be as follows:", ((string)(null)), table136, "Then ");
-#line hidden
-            TechTalk.SpecFlow.Table table137 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Type",
-                        "08/17",
-                        "09/17",
-                        "10/17",
-                        "...",
-                        "05/18",
-                        "06/18",
-                        "07/18",
-                        "08/18",
-                        "09/18",
-                        "10/18",
-                        "11/18"});
-            table137.AddRow(new string[] {
-                        "Provider Earned Total",
-                        "1183.64",
-                        "1183.64",
-                        "1183.64",
-                        "...",
-                        "1183.64",
-                        "1183.64",
-                        "1183.64",
-                        "3183.64",
-                        "183.64",
-                        "0",
-                        "0"});
-            table137.AddRow(new string[] {
-                        "Provider Paid by SFA",
-                        "0",
-                        "1183.64",
-                        "1183.64",
-                        "...",
-                        "1183.64",
-                        "1183.64",
-                        "1183.64",
-                        "1183.64",
-                        "3183.64",
-                        "183.64",
-                        "0"});
-            table137.AddRow(new string[] {
-                        "Payment due from Employer",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table137.AddRow(new string[] {
-                        "Levy account debited",
-                        "0",
-                        "1000",
-                        "1000",
-                        "...",
-                        "1000",
-                        "1000",
-                        "1000",
-                        "1000",
-                        "3000",
-                        "0",
-                        "0"});
-            table137.AddRow(new string[] {
-                        "SFA Levy employer budget",
-                        "1000",
-                        "1000",
-                        "1000",
-                        "...",
-                        "1000",
-                        "1000",
-                        "1000",
-                        "3000",
-                        "0",
-                        "0",
-                        "0"});
-            table137.AddRow(new string[] {
-                        "SFA Levy co-funding budget",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table137.AddRow(new string[] {
-                        "SFA non-Levy co-funding budget",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table137.AddRow(new string[] {
-                        "SFA Levy additional payments budget",
-                        "183.64",
-                        "183.64",
-                        "183.64",
-                        "...",
-                        "183.64",
-                        "183.64",
-                        "183.64",
-                        "183.64",
-                        "183.64",
-                        "0",
-                        "0"});
-            table137.AddRow(new string[] {
-                        "SFA non-Levy additional payments budget",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-#line 1057
-    testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table137, "And ");
-#line hidden
-            TechTalk.SpecFlow.Table table138 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Payment type",
-                        "09/17",
-                        "10/17",
-                        "...",
-                        "05/18",
-                        "06/18",
-                        "07/18",
-                        "08/18",
-                        "09/18",
-                        "10/18",
-                        "11/18"});
-            table138.AddRow(new string[] {
-                        "On-program",
-                        "1000",
-                        "1000",
-                        "...",
-                        "1000",
-                        "1000",
-                        "1000",
-                        "1000",
-                        "0",
-                        "0",
-                        "0"});
-            table138.AddRow(new string[] {
-                        "Completion",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "3000",
-                        "0",
-                        "0"});
-            table138.AddRow(new string[] {
-                        "Balancing",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table138.AddRow(new string[] {
-                        "English and maths on programme",
-                        "33.64",
-                        "33.64",
-                        "...",
-                        "33.64",
-                        "33.64",
-                        "33.64",
-                        "33.64",
-                        "33.64",
-                        "33.64",
-                        "0"});
-            table138.AddRow(new string[] {
-                        "English and maths Balancing",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table138.AddRow(new string[] {
-                        "Provider learning support",
-                        "150",
-                        "150",
-                        "...",
-                        "150",
-                        "150",
-                        "150",
-                        "150",
-                        "150",
-                        "150",
-                        "0"});
-#line 1068
-    testRunner.And("the transaction types for the payments are:", ((string)(null)), table138, "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("657-AC03 DAS learner, takes an English qualification that has a planned end date " +
-            "that exceeds the actual end date of the programme aim and learning support is ap" +
-            "plicable for all learning - but the apprentice fails data lock and so no payment" +
-            "s are made")]
-        [NUnit.Framework.CategoryAttribute("LearningSupport")]
-        public virtual void _657_AC03DASLearnerTakesAnEnglishQualificationThatHasAPlannedEndDateThatExceedsTheActualEndDateOfTheProgrammeAimAndLearningSupportIsApplicableForAllLearning_ButTheApprenticeFailsDataLockAndSoNoPaymentsAreMade()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("657-AC03 DAS learner, takes an English qualification that has a planned end date " +
-                    "that exceeds the actual end date of the programme aim and learning support is ap" +
-                    "plicable for all learning - but the apprentice fails data lock and so no payment" +
-                    "s are made", new string[] {
-                        "LearningSupport"});
-#line 1078
-this.ScenarioSetup(scenarioInfo);
-#line 1079
- testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-            TechTalk.SpecFlow.Table table139 = new TechTalk.SpecFlow.Table(new string[] {
-                        "commitment ID",
-                        "ULN",
-                        "start date",
-                        "end date",
-                        "agreed price",
-                        "status"});
-            table139.AddRow(new string[] {
-                        "1",
-                        "learner a",
-                        "01/08/2017",
-                        "01/08/2018",
-                        "15500",
-                        "active"});
-#line 1080
- testRunner.And("the following commitments exist:", ((string)(null)), table139, "And ");
-#line hidden
-            TechTalk.SpecFlow.Table table140 = new TechTalk.SpecFlow.Table(new string[] {
-                        "ULN",
-                        "learner type",
-                        "aim type",
-                        "agreed price",
-                        "aim rate",
-                        "start date",
-                        "planned end date",
-                        "actual end date",
-                        "completion status"});
-            table140.AddRow(new string[] {
-                        "learner a",
-                        "programme only DAS",
-                        "programme",
-                        "15000",
-                        "",
-                        "06/08/2017",
-                        "08/08/2018",
-                        "08/08/2018",
-                        "completed"});
-            table140.AddRow(new string[] {
-                        "learner a",
-                        "programme only DAS",
-                        "maths or english",
-                        "",
-                        "471",
-                        "06/08/2017",
-                        "06/10/2018",
-                        "06/10/2018",
-                        "completed"});
-#line 1083
- testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table140, "When ");
-#line hidden
-            TechTalk.SpecFlow.Table table141 = new TechTalk.SpecFlow.Table(new string[] {
-                        "learning support code",
-                        "date from",
-                        "date to"});
-            table141.AddRow(new string[] {
-                        "1",
-                        "06/08/2017",
-                        "06/10/2018"});
-#line 1087
- testRunner.And("the learning support status of the ILR is:", ((string)(null)), table141, "And ");
-#line hidden
-            TechTalk.SpecFlow.Table table142 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Payment type",
-                        "08/17",
-                        "09/17",
-                        "10/17",
-                        "...",
-                        "07/18",
-                        "08/18",
-                        "09/18",
-                        "10/18",
-                        "11/18"});
-            table142.AddRow(new string[] {
-                        "On-program",
-                        "",
-                        "",
-                        "",
-                        "...",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""});
-            table142.AddRow(new string[] {
-                        "Completion",
-                        "",
-                        "",
-                        "",
-                        "...",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""});
-            table142.AddRow(new string[] {
-                        "Employer 16-18 incentive",
-                        "",
-                        "",
-                        "",
-                        "...",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""});
-            table142.AddRow(new string[] {
-                        "Provider 16-18 incentive",
-                        "",
-                        "",
-                        "",
-                        "...",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""});
-            table142.AddRow(new string[] {
-                        "Provider learning support",
-                        "",
-                        "",
-                        "",
-                        "...",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""});
-            table142.AddRow(new string[] {
-                        "English and maths on programme",
-                        "",
-                        "",
-                        "",
-                        "...",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""});
-            table142.AddRow(new string[] {
-                        "English and maths balancing",
-                        "",
-                        "",
-                        "",
-                        "...",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""});
-#line 1090
- testRunner.Then("the data lock status will be as follows:", ((string)(null)), table142, "Then ");
-#line hidden
-            TechTalk.SpecFlow.Table table143 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Type",
-                        "08/17",
-                        "09/17",
-                        "10/17",
-                        "...",
-                        "05/18",
-                        "06/18",
-                        "07/18",
-                        "08/18",
-                        "09/18",
-                        "10/18",
-                        "11/18"});
-            table143.AddRow(new string[] {
-                        "Provider Earned Total",
-                        "1183.64",
-                        "1183.64",
-                        "1183.64",
-                        "...",
-                        "1183.64",
-                        "1183.64",
-                        "1183.64",
-                        "3183.64",
-                        "183.64",
-                        "0",
-                        "0"});
-            table143.AddRow(new string[] {
-                        "Provider Paid by SFA",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table143.AddRow(new string[] {
-                        "Payment due from Employer",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table143.AddRow(new string[] {
-                        "Levy account debited",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table143.AddRow(new string[] {
-                        "SFA Levy employer budget",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table143.AddRow(new string[] {
-                        "SFA Levy co-funding budget",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table143.AddRow(new string[] {
-                        "SFA non-Levy co-funding budget",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table143.AddRow(new string[] {
-                        "SFA Levy additional payments budget",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table143.AddRow(new string[] {
-                        "SFA non-Levy additional payments budget",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-#line 1100
-    testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table143, "And ");
-#line hidden
-            TechTalk.SpecFlow.Table table144 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Payment type",
-                        "09/17",
-                        "10/17",
-                        "...",
-                        "05/18",
-                        "06/18",
-                        "07/18",
-                        "08/18",
-                        "09/18",
-                        "10/18",
-                        "11/18"});
-            table144.AddRow(new string[] {
-                        "On-program",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table144.AddRow(new string[] {
-                        "Completion",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table144.AddRow(new string[] {
-                        "Balancing",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table144.AddRow(new string[] {
-                        "English and maths on programme",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table144.AddRow(new string[] {
-                        "English and maths Balancing",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-#line 1111
-      testRunner.And("the transaction types for the payments are:", ((string)(null)), table144, "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute(@"658-AC01 DAS learner, takes an English qualification that has a planned end date that exceeds the actual end date of the programme aim and learning support is applicable for all learning. The learning is split into tow price episodes, and the second price episode fails data lock - the English and learning support payments are not paid after the point at which data lock fails.")]
-        [NUnit.Framework.CategoryAttribute("LearningSupport")]
-        public virtual void _658_AC01DASLearnerTakesAnEnglishQualificationThatHasAPlannedEndDateThatExceedsTheActualEndDateOfTheProgrammeAimAndLearningSupportIsApplicableForAllLearning_TheLearningIsSplitIntoTowPriceEpisodesAndTheSecondPriceEpisodeFailsDataLock_TheEnglishAndLearningSupportPaymentsAreNotPaidAfterThePointAtWhichDataLockFails_()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo(@"658-AC01 DAS learner, takes an English qualification that has a planned end date that exceeds the actual end date of the programme aim and learning support is applicable for all learning. The learning is split into tow price episodes, and the second price episode fails data lock - the English and learning support payments are not paid after the point at which data lock fails.", new string[] {
-                        "LearningSupport"});
-#line 1121
-this.ScenarioSetup(scenarioInfo);
-#line 1122
- testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-            TechTalk.SpecFlow.Table table145 = new TechTalk.SpecFlow.Table(new string[] {
-                        "commitment ID",
-                        "version ID",
-                        "ULN",
-                        "start date",
-                        "end date",
-                        "agreed price",
-                        "status",
-                        "effective from",
-                        "effective to"});
-            table145.AddRow(new string[] {
-                        "1",
-                        "1",
-                        "learner a",
-                        "01/08/2017",
-                        "01/08/2018",
-                        "15000",
-                        "active",
-                        "01/08/2017",
-                        "10/06/2018"});
-            table145.AddRow(new string[] {
-                        "1",
-                        "2",
-                        "learner a",
-                        "01/08/2017",
-                        "01/08/2018",
-                        "14000",
-                        "withdrawn",
-                        "11/06/2018",
-                        ""});
-#line 1123
- testRunner.And("the following commitments exist:", ((string)(null)), table145, "And ");
-#line hidden
-            TechTalk.SpecFlow.Table table146 = new TechTalk.SpecFlow.Table(new string[] {
-                        "ULN",
-                        "learner type",
-                        "aim type",
-                        "agreed price",
-                        "aim rate",
-                        "start date",
-                        "planned end date",
-                        "actual end date",
-                        "completion status"});
-            table146.AddRow(new string[] {
-                        "learner a",
-                        "programme only DAS",
-                        "programme",
-                        "15000",
-                        "",
-                        "06/08/2017",
-                        "08/08/2018",
-                        "08/08/2018",
-                        "completed"});
-            table146.AddRow(new string[] {
-                        "learner a",
-                        "programme only DAS",
-                        "maths or english",
-                        "",
-                        "471",
-                        "06/08/2017",
-                        "06/10/2018",
-                        "06/10/2018",
-                        "completed"});
-#line 1127
- testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table146, "When ");
-#line hidden
-            TechTalk.SpecFlow.Table table147 = new TechTalk.SpecFlow.Table(new string[] {
-                        "learning support code",
-                        "date from",
-                        "date to"});
-            table147.AddRow(new string[] {
-                        "1",
-                        "06/08/2017",
-                        "06/10/2018"});
-#line 1131
- testRunner.And("the learning support status of the ILR is:", ((string)(null)), table147, "And ");
-#line hidden
-            TechTalk.SpecFlow.Table table148 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Payment type",
-                        "08/17",
-                        "09/17",
-                        "10/17",
-                        "...",
-                        "05/18",
-                        "06/18",
-                        "07/18",
-                        "08/18",
-                        "09/18",
-                        "10/18",
-                        "11/18"});
-            table148.AddRow(new string[] {
-                        "On-program",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "...",
-                        "commitment 1 v1",
-                        "",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""});
-            table148.AddRow(new string[] {
-                        "Employer 16-18 incentive",
-                        "",
-                        "",
-                        "",
-                        "...",
-                        "",
-                        "",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""});
-            table148.AddRow(new string[] {
-                        "Provider 16-18 incentive",
-                        "",
-                        "",
-                        "",
-                        "...",
-                        "",
-                        "",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""});
-            table148.AddRow(new string[] {
-                        "Provider learning support",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "...",
-                        "commitment 1 v1",
-                        "",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""});
-            table148.AddRow(new string[] {
-                        "English and maths on programme",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "...",
-                        "commitment 1 v1",
-                        "",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""});
-            table148.AddRow(new string[] {
-                        "English and maths balancing",
-                        "",
-                        "",
-                        "",
-                        "...",
-                        "",
-                        "",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""});
-#line 1134
-    testRunner.Then("the data lock status will be as follows:", ((string)(null)), table148, "Then ");
-#line hidden
-            TechTalk.SpecFlow.Table table149 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Type",
-                        "08/17",
-                        "09/17",
-                        "10/17",
-                        "...",
-                        "05/18",
-                        "06/18",
-                        "07/18",
-                        "08/18",
-                        "09/18",
-                        "10/18",
-                        "11/18"});
-            table149.AddRow(new string[] {
-                        "Provider Earned Total",
-                        "1183.64",
-                        "1183.64",
-                        "1183.64",
-                        "...",
-                        "1183.64",
-                        "1183.64",
-                        "1183.64",
-                        "3183.64",
-                        "183.64",
-                        "0",
-                        "0"});
-            table149.AddRow(new string[] {
-                        "Provider Paid by SFA",
-                        "0",
-                        "1183.64",
-                        "1183.64",
-                        "...",
-                        "1183.64",
-                        "1183.64",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table149.AddRow(new string[] {
-                        "Payment due from Employer",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table149.AddRow(new string[] {
-                        "Levy account debited",
-                        "0",
-                        "1000",
-                        "1000",
-                        "...",
-                        "1000",
-                        "1000",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table149.AddRow(new string[] {
-                        "SFA Levy employer budget",
-                        "1000",
-                        "1000",
-                        "1000",
-                        "...",
-                        "1000",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table149.AddRow(new string[] {
-                        "SFA Levy co-funding budget",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table149.AddRow(new string[] {
-                        "SFA non-Levy co-funding budget",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table149.AddRow(new string[] {
-                        "SFA Levy additional payments budget",
-                        "183.64",
-                        "183.64",
-                        "183.64",
-                        "...",
-                        "183.64",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table149.AddRow(new string[] {
-                        "SFA non-Levy additional payments budget",
-                        "0",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-#line 1142
-    testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table149, "And ");
-#line hidden
-            TechTalk.SpecFlow.Table table150 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Payment type",
-                        "09/17",
-                        "10/17",
-                        "...",
-                        "05/18",
-                        "06/18",
-                        "07/18",
-                        "08/18",
-                        "09/18",
-                        "10/18",
-                        "11/18"});
-            table150.AddRow(new string[] {
-                        "On-program",
-                        "1000",
-                        "1000",
-                        "...",
-                        "1000",
-                        "1000",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table150.AddRow(new string[] {
-                        "Completion",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table150.AddRow(new string[] {
-                        "Balancing",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table150.AddRow(new string[] {
-                        "English and maths on programme",
-                        "33.64",
-                        "33.64",
-                        "...",
-                        "33.64",
-                        "33.64",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table150.AddRow(new string[] {
-                        "English and maths Balancing",
-                        "0",
-                        "0",
-                        "...",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-            table150.AddRow(new string[] {
-                        "Provider learning support",
-                        "150",
-                        "150",
-                        "...",
-                        "150",
-                        "150",
-                        "0",
-                        "0",
-                        "0",
-                        "0",
-                        "0"});
-#line 1153
-    testRunner.And("the transaction types for the payments are:", ((string)(null)), table150, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
