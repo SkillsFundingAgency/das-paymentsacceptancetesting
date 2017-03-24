@@ -18,22 +18,39 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.PaymentsAndEar
             }
         }
 
-        private EarningsResult[] GetEarningsForBreakdown(EarningsAndPaymentsBreakdown breakdown, IEnumerable<LearnerResults> submissionResults)
+        private LearnerEarningsResult[] GetEarningsForBreakdown(EarningsAndPaymentsBreakdown breakdown, IEnumerable<LearnerResults> submissionResults)
         {
-            var earnings = submissionResults.Where(r => r.ProviderId.Equals(breakdown.ProviderId, StringComparison.CurrentCultureIgnoreCase));
+            var filteredResults = submissionResults.Where(r => r.ProviderId.Equals(breakdown.ProviderId, StringComparison.CurrentCultureIgnoreCase));
             if (breakdown is LearnerEarningsAndPaymentsBreakdown)
             {
-                earnings = earnings.Where(r => r.LearnerId.Equals(((LearnerEarningsAndPaymentsBreakdown)breakdown).LearnerId, StringComparison.CurrentCultureIgnoreCase));
+                filteredResults = filteredResults.Where(r => r.LearnerId.Equals(((LearnerEarningsAndPaymentsBreakdown)breakdown).LearnerId, StringComparison.CurrentCultureIgnoreCase));
             }
-            return earnings.SelectMany(r => r.Earnings).ToArray();
+            return filteredResults.Select(r => r.Earnings.Select(e => new LearnerEarningsResult
+            {
+                LearnerId = r.LearnerId,
+                DeliveryPeriod = e.DeliveryPeriod,
+                CalculationPeriod = e.CalculationPeriod,
+                Value = e.Value
+            })).SelectMany(e => e)
+            .OrderBy(e => e.DeliveryPeriod)
+            .ThenBy(e => e.LearnerId)
+            .ToArray();
         }
-        private void AssertResultsForPeriod(PeriodValue period, EarningsResult[] allEarnings)
+        private void AssertResultsForPeriod(PeriodValue period, LearnerEarningsResult[] allEarnings)
         {
-            var earnedInPeriod = allEarnings.FirstOrDefault(r => r.DeliveryPeriod == period.PeriodName)?.Value;
+            var earnedInPeriod = (from e in allEarnings
+                                  where e.DeliveryPeriod == period.PeriodName
+                                  group e by e.LearnerId into g
+                                  select g.First()).Sum(x => x.Value);
             if (period.Value != earnedInPeriod)
             {
                 throw new Exception($"Expected provider to earn {period.Value} in {period.PeriodName} but actually earned {earnedInPeriod}");
             }
+        }
+
+        private class LearnerEarningsResult : EarningsResult
+        {
+            public string LearnerId { get; set; }
         }
     }
 }
