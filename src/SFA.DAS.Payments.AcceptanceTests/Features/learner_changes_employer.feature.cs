@@ -1490,7 +1490,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "5000",
                         "05/11/2017",
                         "625",
-                        "25/11/2017"});
+                        "05/11/2017"});
 #line 229
         testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table258, "When ");
 #line hidden
@@ -4533,7 +4533,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "1000",
                         "1000",
-                        "0",
+                        "900",
                         "500"});
             table324.AddRow(new string[] {
                         "Employer 1 Levy account debited",

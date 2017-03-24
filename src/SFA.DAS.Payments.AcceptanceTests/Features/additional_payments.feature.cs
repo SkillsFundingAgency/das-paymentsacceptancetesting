@@ -2680,7 +2680,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1000",
                         "1000",
                         "1000",
-                        "1500",
+                        "1150",
                         "...",
                         "1000",
                         "1000",
@@ -6803,7 +6803,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0"});
             table101.AddRow(new string[] {
                         "Provider learning support",
-                        "150",
+                        "0",
                         "150",
                         "150",
                         "150",
@@ -7065,7 +7065,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0"});
             table105.AddRow(new string[] {
                         "Provider learning support",
-                        "150",
+                        "0",
                         "150",
                         "150",
                         "150",
@@ -7369,7 +7369,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0"});
             table110.AddRow(new string[] {
                         "Provider learning support",
-                        "150",
+                        "0",
                         "150",
                         "150",
                         "150",
@@ -7665,7 +7665,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0"});
             table115.AddRow(new string[] {
                         "Provider learning support",
-                        "150",
+                        "0",
                         "150",
                         "150",
                         "150",

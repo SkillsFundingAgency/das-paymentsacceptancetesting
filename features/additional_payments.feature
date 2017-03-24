@@ -315,14 +315,14 @@ Scenario:AC12- Payment for a DAS learner, lives in a disadvantaged postocde area
     Then the provider earnings and payments break down as follows:
         | Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
         | Provider Earned Total                   | 1000  | 1000  | 1000  | 1150  | 1000  | ... | 1000  | 150   | 0     |
-        | Provider Paid by SFA                    | 0     | 1000  | 1000  | 1000  | 1500  | ... | 1000  | 1000  | 150   |
+        | Provider Paid by SFA                    | 0     | 1000  | 1000  | 1000  | 1150  | ... | 1000  | 1000  | 150   |
         | Payment due from Employer               | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | Levy account debited                    | 0     | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 1000  | 0     |
         | SFA Levy employer budget                | 1000  | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     | 0     |
-		  | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-		  | SFA non-Levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-		  | SFA non-Levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-		  | SFA Levy additional payments budget     | 0     | 0     | 0     | 150   | 0     | ... | 0     | 150   | 0     |
+		| SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| SFA non-Levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| SFA non-Levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| SFA Levy additional payments budget     | 0     | 0     | 0     | 150   | 0     | ... | 0     | 150   | 0     |
     And the transaction types for the payments are:
         | Payment type                 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
         | On-program                   | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     |
@@ -793,7 +793,7 @@ Scenario: 637-AC01-Payment for a non-DAS learner, requires learning support, doi
         | Employer 16-18 incentive     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | Provider 16-18 incentive     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | Provider disadvantage uplift | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | Provider learning support    | 150   | 150   | 150   | 150   | 150   | ... | 150   | 150   | 0     |
+        | Provider learning support    | 0     | 150   | 150   | 150   | 150   | ... | 150   | 150   | 0     |
 
 
 @LearningSupport
@@ -824,7 +824,7 @@ Scenario: 637-AC02-Payment for a non-DAS learner, requires learning support, doi
         | Employer 16-18 incentive     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | Provider 16-18 incentive     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | Provider disadvantage uplift | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | Provider learning support    | 150   | 150   | 150   | 150   | 150   | ... | 150   | 150   | 0     |
+        | Provider learning support    | 0     | 150   | 150   | 150   | 150   | ... | 150   | 150   | 0     |
 
 
 @LearningSupport
@@ -860,7 +860,7 @@ Scenario: 637-AC03-Payment for a DAS learner, requires learning support, doing a
         | Employer 16-18 incentive     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | Provider 16-18 incentive     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | Provider disadvantage uplift | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | Provider learning support    | 150   | 150   | 150   | 150   | 150   | ... | 150   | 150   | 0     |
+        | Provider learning support    | 0     | 150   | 150   | 150   | 150   | ... | 150   | 150   | 0     |
 
 
 @LearningSupport
@@ -896,4 +896,4 @@ Scenario: 637-AC04-Payment for a DAS learner, requires learning support, doing a
         | Employer 16-18 incentive     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | Provider 16-18 incentive     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | Provider disadvantage uplift | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | Provider learning support    | 150   | 150   | 150   | 150   | 150   | ... | 150   | 150   | 0     |
+        | Provider learning support    | 0     | 150   | 150   | 150   | 150   | ... | 150   | 150   | 0     |
