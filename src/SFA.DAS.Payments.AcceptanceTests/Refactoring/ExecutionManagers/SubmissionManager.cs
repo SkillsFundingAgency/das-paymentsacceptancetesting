@@ -157,7 +157,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                     ActualStartDate = x.StartDate,
                     PlannedEndDate = x.PlannedEndDate,
                     ActualEndDate = x.ActualEndDate,
-                    //ActFamCodeValue = IsLearnerTypeLevy(x.LearnerType) ? (short)1 : (short)2,
                     FamRecords = BuildLearningDeliveryFamCodes(x, contractTypes, learningSupportStatus),
                     CompletionStatus = (IlrGenerator.CompletionStatus)(int)x.CompletionStatus,
                     Type = (IlrGenerator.AimType)(int)x.AimType,
@@ -299,7 +298,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                 {
                     FamType = "EEF",
                     Code = int.Parse(learnerDetails.LearnDelFam.Substring(3)),
-                    From = learnerDetails.StartDate
+                    //From = learnerDetails.StartDate,
+                    //To = learnerDetails.PlannedEndDate
                 }
             };
         }
@@ -319,7 +319,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
             {
                 return DateTime.Today.AddYears(-17);
             }
-            if (learnerType == LearnerType.ProgrammeOnlyNonDas1924 || learnerType == LearnerType.ProgrammeOnlyNonDas1924)
+            if (learnerType == LearnerType.ProgrammeOnlyDas1924 || learnerType == LearnerType.ProgrammeOnlyNonDas1924)
             {
                 return DateTime.Today.AddYears(-20);
             }
