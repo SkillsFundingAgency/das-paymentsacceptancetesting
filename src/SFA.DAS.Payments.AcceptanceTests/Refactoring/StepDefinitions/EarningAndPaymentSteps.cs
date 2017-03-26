@@ -129,7 +129,21 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
                     if (levyPayment != null && levyPayment.Value > 0)
                     {
                         PaymentsManager.SavePayment(requiredPaymentId, learner, earned.PeriodName, int.Parse(month), int.Parse(year),
-                                                          (int)TransactionType.OnProgram, FundingSource.Levy, earned.Value);
+                                                          (int)TransactionType.OnProgram, FundingSource.Levy, levyPayment.Value);
+                    }
+
+                    var earnedFromEmployer = learnerBreakdown.ProviderEarnedFromEmployers.Where(x => x.PeriodName == earned.PeriodName).SingleOrDefault();
+                    if (earnedFromEmployer != null && earnedFromEmployer.Value > 0)
+                    {
+                        PaymentsManager.SavePayment(requiredPaymentId, learner, earned.PeriodName, int.Parse(month), int.Parse(year),
+                                                          (int)TransactionType.OnProgram, FundingSource.CoInvestedEmployer, earnedFromEmployer.Value);
+                    }
+
+                    var coInvestedBySfa= learnerBreakdown.SfaLevyCoFundBudget.Where(x => x.PeriodName == earned.PeriodName).SingleOrDefault();
+                    if (coInvestedBySfa != null && coInvestedBySfa.Value > 0)
+                    {
+                        PaymentsManager.SavePayment(requiredPaymentId, learner, earned.PeriodName, int.Parse(month), int.Parse(year),
+                                                          (int)TransactionType.OnProgram, FundingSource.CoInvestedSfa, coInvestedBySfa.Value);
                     }
                 }
 
