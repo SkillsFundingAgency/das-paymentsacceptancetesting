@@ -277,26 +277,26 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                 });
             }
 
-            //if (learnerReferenceData.ResidualTrainingPrice2 > 0 && learnerReferenceData.ResidualAssessmentPrice2 != learnerReferenceData.ResidualTrainingPrice1)
-            //{
-            //    financialRecords.Add(new FinancialRecord
-            //    {
-            //        Code = 3,
-            //        Type = "TNP",
-            //        Amount = learnerReferenceData.ResidualTrainingPrice2,
-            //        Date = learnerReferenceData.ResidualTrainingPrice2EffectiveDate == DateTime.MinValue ? learnerReferenceData.StartDate : learnerReferenceData.ResidualTrainingPrice2EffectiveDate
-            //    });
-            //}
-            //if (learnerReferenceData.ResidualAssessmentPrice2 > 0 && learnerReferenceData.ResidualAssessmentPrice2 != learnerReferenceData.ResidualAssessmentPrice1)
-            //{
-            //    financialRecords.Add(new FinancialRecord
-            //    {
-            //        Code = 4,
-            //        Type = "TNP",
-            //        Amount = learnerReferenceData.ResidualAssessmentPrice2,
-            //        Date = learnerReferenceData.ResidualAssessmentPrice2EffectiveDate == DateTime.MinValue ? learnerReferenceData.StartDate : learnerReferenceData.ResidualAssessmentPrice2EffectiveDate
-            //    });
-            //}
+            ////////////////////////////////////////////////////////////////////
+            // Old style agreed price
+            ////////////////////////////////////////////////////////////////////
+            if (financialRecords.Count == 0)
+            {
+                financialRecords.Add(new FinancialRecord
+                {
+                    Code = 1,
+                    Type = "TNP",
+                    Amount = agreedTrainingPrice,
+                    Date = learnerReferenceData.StartDate
+                });
+                financialRecords.Add(new FinancialRecord
+                {
+                    Code = 2,
+                    Type = "TNP",
+                    Amount = agreedAssesmentPrice,
+                    Date = learnerReferenceData.StartDate
+                });
+            }
 
             return financialRecords.ToArray();
         }
