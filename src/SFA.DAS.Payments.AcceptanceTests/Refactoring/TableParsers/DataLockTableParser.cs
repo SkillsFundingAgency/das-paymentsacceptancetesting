@@ -101,7 +101,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
                 }
                 else
                 {
-                    throw new ArgumentException($"Unexpected earning and payments row type of '{row[0]}'");
+                    throw new ArgumentException($"Unexpected data lock row type of '{row[0]}'");
                 }
             }
         }

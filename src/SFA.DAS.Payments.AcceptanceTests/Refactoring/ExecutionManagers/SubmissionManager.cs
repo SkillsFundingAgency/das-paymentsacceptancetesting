@@ -189,21 +189,32 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
             var agreedAssesmentPrice = learnerReferenceData.AgreedPrice - agreedTrainingPrice;
 
             var financialRecords = new List<FinancialRecord>();
-            financialRecords.Add(new FinancialRecord
+
+            ////////////////////////////////////////////////////////////////////
+            // TNP1 & 2
+            ////////////////////////////////////////////////////////////////////
+            if (learnerReferenceData.TotalTrainingPrice1 > 0)
             {
-                Code = 1,
-                Type = "TNP",
-                Amount = learnerReferenceData.TotalTrainingPrice1 == 0 ? agreedTrainingPrice : learnerReferenceData.TotalTrainingPrice1,
-                Date = learnerReferenceData.TotalTrainingPrice1EffectiveDate == DateTime.MinValue ? learnerReferenceData.StartDate : learnerReferenceData.TotalTrainingPrice1EffectiveDate
-            });
-            financialRecords.Add(new FinancialRecord
+                financialRecords.Add(new FinancialRecord
+                {
+                    Code = 1,
+                    Type = "TNP",
+                    Amount = learnerReferenceData.TotalTrainingPrice1 == 0 ? agreedTrainingPrice : learnerReferenceData.TotalTrainingPrice1,
+                    Date = learnerReferenceData.TotalTrainingPrice1EffectiveDate == DateTime.MinValue ? learnerReferenceData.StartDate : learnerReferenceData.TotalTrainingPrice1EffectiveDate
+                });
+            }
+            if (learnerReferenceData.TotalAssessmentPrice1 > 0)
             {
-                Code = 2,
-                Type = "TNP",
-                Amount = learnerReferenceData.TotalAssessmentPrice1 == 0 ? agreedAssesmentPrice : learnerReferenceData.TotalAssessmentPrice1,
-                Date = learnerReferenceData.TotalAssessmentPrice1EffectiveDate == DateTime.MinValue ? learnerReferenceData.StartDate : learnerReferenceData.TotalAssessmentPrice1EffectiveDate
-            });
-            if (learnerReferenceData.TotalTrainingPrice2 > 0 || learnerReferenceData.TotalAssessmentPrice2 > 0)
+                financialRecords.Add(new FinancialRecord
+                {
+                    Code = 2,
+                    Type = "TNP",
+                    Amount = learnerReferenceData.TotalAssessmentPrice1 == 0 ? agreedAssesmentPrice : learnerReferenceData.TotalAssessmentPrice1,
+                    Date = learnerReferenceData.TotalAssessmentPrice1EffectiveDate == DateTime.MinValue ? learnerReferenceData.StartDate : learnerReferenceData.TotalAssessmentPrice1EffectiveDate
+                });
+            }
+
+            if (learnerReferenceData.TotalTrainingPrice2 > 0 && learnerReferenceData.TotalTrainingPrice2 != learnerReferenceData.TotalTrainingPrice1)
             {
                 financialRecords.Add(new FinancialRecord
                 {
@@ -212,6 +223,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                     Amount = learnerReferenceData.TotalTrainingPrice2,
                     Date = learnerReferenceData.TotalTrainingPrice2EffectiveDate == DateTime.MinValue ? learnerReferenceData.StartDate : learnerReferenceData.TotalTrainingPrice2EffectiveDate
                 });
+            }
+            if (learnerReferenceData.TotalAssessmentPrice2 > 0 || learnerReferenceData.TotalAssessmentPrice2 != learnerReferenceData.TotalAssessmentPrice1)
+            {
                 financialRecords.Add(new FinancialRecord
                 {
                     Code = 2,
@@ -220,23 +234,69 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                     Date = learnerReferenceData.TotalAssessmentPrice2EffectiveDate == DateTime.MinValue ? learnerReferenceData.StartDate : learnerReferenceData.TotalAssessmentPrice2EffectiveDate
                 });
             }
-            if (learnerReferenceData.ResidualTrainingPrice > 0 || learnerReferenceData.ResidualAssessmentPrice > 0)
+
+
+            ////////////////////////////////////////////////////////////////////
+            // TNP3 & 4
+            ////////////////////////////////////////////////////////////////////
+            if (learnerReferenceData.ResidualTrainingPrice1 > 0 || learnerReferenceData.ResidualAssessmentPrice1 > 0)
             {
                 financialRecords.Add(new FinancialRecord
                 {
                     Code = 3,
                     Type = "TNP",
-                    Amount = learnerReferenceData.ResidualTrainingPrice,
-                    Date = learnerReferenceData.ResidualTrainingPriceEffectiveDate == DateTime.MinValue ? learnerReferenceData.StartDate : learnerReferenceData.ResidualTrainingPriceEffectiveDate
+                    Amount = learnerReferenceData.ResidualTrainingPrice1,
+                    Date = learnerReferenceData.ResidualTrainingPrice1EffectiveDate == DateTime.MinValue ? learnerReferenceData.StartDate : learnerReferenceData.ResidualTrainingPrice1EffectiveDate
                 });
                 financialRecords.Add(new FinancialRecord
                 {
                     Code = 4,
                     Type = "TNP",
-                    Amount = learnerReferenceData.ResidualAssessmentPrice,
-                    Date = learnerReferenceData.ResidualAssessmentPriceEffectiveDate == DateTime.MinValue ? learnerReferenceData.StartDate : learnerReferenceData.ResidualAssessmentPriceEffectiveDate
+                    Amount = learnerReferenceData.ResidualAssessmentPrice1,
+                    Date = learnerReferenceData.ResidualAssessmentPrice1EffectiveDate == DateTime.MinValue ? learnerReferenceData.StartDate : learnerReferenceData.ResidualAssessmentPrice1EffectiveDate
                 });
             }
+
+            // Change in residual
+            if ((learnerReferenceData.ResidualTrainingPrice2 > 0 && learnerReferenceData.ResidualTrainingPrice2 != learnerReferenceData.ResidualTrainingPrice1)
+                || (learnerReferenceData.ResidualAssessmentPrice2 > 0 && learnerReferenceData.ResidualAssessmentPrice2 != learnerReferenceData.ResidualAssessmentPrice1))
+            {
+                financialRecords.Add(new FinancialRecord
+                {
+                    Code = 3,
+                    Type = "TNP",
+                    Amount = learnerReferenceData.ResidualTrainingPrice2 == 0 ? learnerReferenceData.ResidualTrainingPrice1 : learnerReferenceData.ResidualTrainingPrice2,
+                    Date = learnerReferenceData.ResidualTrainingPrice2EffectiveDate == DateTime.MinValue ? learnerReferenceData.ResidualAssessmentPrice2EffectiveDate : learnerReferenceData.ResidualTrainingPrice2EffectiveDate
+                });
+                financialRecords.Add(new FinancialRecord
+                {
+                    Code = 4,
+                    Type = "TNP",
+                    Amount = learnerReferenceData.ResidualAssessmentPrice2 == 0 ? learnerReferenceData.ResidualAssessmentPrice1 : learnerReferenceData.ResidualAssessmentPrice2,
+                    Date = learnerReferenceData.ResidualAssessmentPrice2EffectiveDate == DateTime.MinValue ? learnerReferenceData.ResidualTrainingPrice2EffectiveDate : learnerReferenceData.ResidualAssessmentPrice2EffectiveDate
+                });
+            }
+
+            //if (learnerReferenceData.ResidualTrainingPrice2 > 0 && learnerReferenceData.ResidualAssessmentPrice2 != learnerReferenceData.ResidualTrainingPrice1)
+            //{
+            //    financialRecords.Add(new FinancialRecord
+            //    {
+            //        Code = 3,
+            //        Type = "TNP",
+            //        Amount = learnerReferenceData.ResidualTrainingPrice2,
+            //        Date = learnerReferenceData.ResidualTrainingPrice2EffectiveDate == DateTime.MinValue ? learnerReferenceData.StartDate : learnerReferenceData.ResidualTrainingPrice2EffectiveDate
+            //    });
+            //}
+            //if (learnerReferenceData.ResidualAssessmentPrice2 > 0 && learnerReferenceData.ResidualAssessmentPrice2 != learnerReferenceData.ResidualAssessmentPrice1)
+            //{
+            //    financialRecords.Add(new FinancialRecord
+            //    {
+            //        Code = 4,
+            //        Type = "TNP",
+            //        Amount = learnerReferenceData.ResidualAssessmentPrice2,
+            //        Date = learnerReferenceData.ResidualAssessmentPrice2EffectiveDate == DateTime.MinValue ? learnerReferenceData.StartDate : learnerReferenceData.ResidualAssessmentPrice2EffectiveDate
+            //    });
+            //}
 
             return financialRecords.ToArray();
         }

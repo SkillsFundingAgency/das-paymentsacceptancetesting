@@ -944,7 +944,7 @@ Scenario:638-AC02 DAS learner, takes an English qualification that has a planned
 		| Provider 16-18 incentive       |                 |                 |                 | ... |                 |                 |                 |       |       |
 		| Provider learning support      |                 |                 |                 | ... |                 |                 |                 |       |       |
 		| English and maths on programme | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | ... | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 |       |       |
-		| English and maths balancing    |                 |                 |                 | ... |                 |                 |                 |       |       |      
+		| English and maths Balancing    |                 |                 |                 | ... |                 |                 |                 |       |       |      
     And the provider earnings and payments break down as follows:
 		| Type                                    | 08/17   | 09/17   | 10/17   | ... | 05/18   | 06/18   | 07/18   | 08/18   | 09/18   | 10/18 | 11/18 |
 		| Provider Earned Total                   | 1033.64 | 1033.64 | 1033.64 | ... | 1033.64 | 1033.64 | 1033.64 | 3033.64 | 33.64   | 0     | 0     |
@@ -968,7 +968,7 @@ Scenario:638-AC02 DAS learner, takes an English qualification that has a planned
 Scenario:638-AC03 DAS learner, takes an English qualification that has a planned end date that exceeds the actual end date of the programme aim - but the apprentice fails data lock so no payments occur
 	Given levy balance > agreed price for all months 
 	And the following commitments exist:
-		| commitment ID | version Id | ULN       | start date | end date   | agreed price | status |
+		| commitment Id | version Id | ULN       | start date | end date   | agreed price | status |
 		| 1             | 1          | learner a | 01/08/2017 | 01/08/2018 | 15500        | active |
 	When an ILR file is submitted with the following data:
 		| ULN       | learner type       | aim type         | agreed price | aim rate | start date | planned end date | actual end date | completion status |
@@ -982,7 +982,7 @@ Scenario:638-AC03 DAS learner, takes an English qualification that has a planned
 		| Provider 16-18 incentive       |       |       |       | ... |       |       |       |       |       |
 		| Provider learning support      |       |       |       | ... |       |       |       |       |       |
 		| English and maths on programme |       |       |       | ... |       |       |       |       |       |
-		| English and maths balancing    |       |       |       | ... |       |       |       |       |       |      
+		| English and maths Balancing    |       |       |       | ... |       |       |       |       |       |      
     And the provider earnings and payments break down as follows:
 		| Type                                    | 08/17   | 09/17   | 10/17   | ... | 05/18   | 06/18   | 07/18   | 08/18   | 09/18 | 10/18 | 11/18 |
 		| Provider Earned Total                   | 1033.64 | 1033.64 | 1033.64 | ... | 1033.64 | 1033.64 | 1033.64 | 3033.64 | 33.64 | 0     | 0     |
@@ -1011,7 +1011,7 @@ Scenario:657-AC01 Non-DAS learner, takes an English qualification that has a pla
 		| learner a | programme only non-DAS | maths or english |              | 471      | 06/08/2017 | 06/10/2018       | 06/10/2018      | completed         |
 
 	And the learning support status of the ILR is:
-        | learning support code | date from  | date to    |
+        | Learning support code | date from  | date to    |
         | 1                     | 06/08/2017 | 06/10/2018 |		  
 	Then the provider earnings and payments break down as follows:
 		| Type                                    | 08/17   | 09/17   | 10/17   | ... | 05/18   | 06/18   | 07/18   | 08/18   | 09/18   | 10/18  | 11/18 |
@@ -1038,14 +1038,14 @@ Scenario:657-AC01 Non-DAS learner, takes an English qualification that has a pla
 Scenario:657-AC02 DAS learner, takes an English qualification that has a planned end date that exceeds the actual end date of the programme aim and learning support is applicable for all learning
 	Given levy balance > agreed price for all months 
 	And the following commitments exist:
-		| commitment ID | ULN       | start date | end date   | agreed price | status |
+		| commitment Id | ULN       | start date | end date   | agreed price | status |
 		| 1             | learner a | 01/08/2017 | 01/08/2018 | 15000        | active |
 	When an ILR file is submitted with the following data:
 		| ULN       | learner type       | aim type         | agreed price | aim rate | start date | planned end date | actual end date | completion status |
 		| learner a | programme only DAS | programme        | 15000        |          | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         |
 		| learner a | programme only DAS | maths or english |              | 471      | 06/08/2017 | 06/10/2018       | 06/10/2018      | completed         |	
 	And the learning support status of the ILR is:
-        | learning support code | date from  | date to    |
+        | Learning support code | date from  | date to    |
         | 1                     | 06/08/2017 | 06/10/2018 |		  
 	Then the data lock status will be as follows:
 		| Payment type                   | 08/17           | 09/17           | 10/17           | ... | 07/18           | 08/18           | 09/18           | 10/18 | 11/18 |
@@ -1055,7 +1055,7 @@ Scenario:657-AC02 DAS learner, takes an English qualification that has a planned
 		| Provider 16-18 incentive       |                 |                 |                 | ... |                 |                 |                 |       |       |
 		| Provider learning support      | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | ... | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 |       |       |
 		| English and maths on programme | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | ... | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 |       |       |
-		| English and maths balancing    |                 |                 |                 | ... |                 |                 |                 |       |       |      
+		| English and maths Balancing    |                 |                 |                 | ... |                 |                 |                 |       |       |      
     And the provider earnings and payments break down as follows:
 		| Type                                    | 08/17   | 09/17   | 10/17   | ... | 05/18   | 06/18   | 07/18   | 08/18   | 09/18   | 10/18  | 11/18 |
 		| Provider Earned Total                   | 1183.64 | 1183.64 | 1183.64 | ... | 1183.64 | 1183.64 | 1183.64 | 3183.64 | 183.64  | 0      | 0     |
@@ -1080,14 +1080,14 @@ Scenario:657-AC02 DAS learner, takes an English qualification that has a planned
 Scenario:657-AC03 DAS learner, takes an English qualification that has a planned end date that exceeds the actual end date of the programme aim and learning support is applicable for all learning - but the apprentice fails data lock and so no payments are made
 	Given levy balance > agreed price for all months 
 	And the following commitments exist:
-		| commitment ID | ULN       | start date | end date   | agreed price | status |
+		| commitment Id | ULN       | start date | end date   | agreed price | status |
 		| 1             | learner a | 01/08/2017 | 01/08/2018 | 15500        | active |
 	When an ILR file is submitted with the following data:
 		| ULN       | learner type       | aim type         | agreed price | aim rate | start date | planned end date | actual end date | completion status |
 		| learner a | programme only DAS | programme        | 15000        |          | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         |
 		| learner a | programme only DAS | maths or english |              | 471      | 06/08/2017 | 06/10/2018       | 06/10/2018      | completed         |	
 	And the learning support status of the ILR is:
-        | learning support code | date from  | date to    |
+        | Learning support code | date from  | date to    |
         | 1                     | 06/08/2017 | 06/10/2018 | 		  
 	Then the data lock status will be as follows:
 		| Payment type                   | 08/17 | 09/17 | 10/17 | ... | 07/18 | 08/18 | 09/18 | 10/18 | 11/18 |
@@ -1097,7 +1097,7 @@ Scenario:657-AC03 DAS learner, takes an English qualification that has a planned
 		| Provider 16-18 incentive       |       |       |       | ... |       |       |       |       |       |
 		| Provider learning support      |       |       |       | ... |       |       |       |       |       |
 		| English and maths on programme |       |       |       | ... |       |       |       |       |       |
-		| English and maths balancing    |       |       |       | ... |       |       |       |       |       |        
+		| English and maths Balancing    |       |       |       | ... |       |       |       |       |       |        
 
     And the provider earnings and payments break down as follows:
 		| Type                                    | 08/17   | 09/17   | 10/17   | ... | 05/18   | 06/18   | 07/18   | 08/18   | 09/18  | 10/18 | 11/18 |
@@ -1123,15 +1123,15 @@ Scenario:657-AC03 DAS learner, takes an English qualification that has a planned
 Scenario:658-AC01 DAS learner, takes an English qualification that has a planned end date that exceeds the actual end date of the programme aim and learning support is applicable for all learning. The learning is split into tow price episodes, and the second price episode fails data lock - the English and learning support payments are not paid after the point at which data lock fails.
 	Given levy balance > agreed price for all months
 	And the following commitments exist:
-		| commitment ID | version ID | ULN       | start date | end date   | agreed price | status    | effective from | effective to |
+		| commitment Id | version Id | ULN       | start date | end date   | agreed price | status    | effective from | effective to |
 		| 1             | 1          | learner a | 01/08/2017 | 01/08/2018 | 15000        | active    | 01/08/2017     | 10/06/2018   |
-		| 1             | 2          | learner a | 01/08/2017 | 01/08/2018 | 14000        | withdrawn | 11/06/2018     |              |
+		| 1             | 2          | learner a | 01/08/2017 | 01/08/2018 | 14000        | cancelled | 11/06/2018     |              |
 	When an ILR file is submitted with the following data:
 		| ULN       | learner type       | aim type         | agreed price | aim rate | start date | planned end date | actual end date | completion status |
 		| learner a | programme only DAS | programme        | 15000        |          | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         |
 		| learner a | programme only DAS | maths or english |              | 471      | 06/08/2017 | 06/10/2018       | 06/10/2018      | completed         |	
 	And the learning support status of the ILR is:
-        | learning support code | date from  | date to    |
+        | Learning support code | date from  | date to    |
         | 1                     | 06/08/2017 | 06/10/2018 | 		  
     Then the data lock status will be as follows:
 		| Payment type                   | 08/17           | 09/17           | 10/17           | ... | 05/18           | 06/18 | 07/18 | 08/18 | 09/18 | 10/18 | 11/18 |
@@ -1140,7 +1140,7 @@ Scenario:658-AC01 DAS learner, takes an English qualification that has a planned
 		| Provider 16-18 incentive       |                 |                 |                 | ... |                 |       |       |       |       |       |       |
 		| Provider learning support      | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | ... | commitment 1 v1 |       |       |       |       |       |       |
 		| English and maths on programme | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | ... | commitment 1 v1 |       |       |       |       |       |       |
-		| English and maths balancing    |                 |                 |                 | ... |                 |       |       |       |       |       |       | 
+		| English and maths Balancing    |                 |                 |                 | ... |                 |       |       |       |       |       |       | 
     And the provider earnings and payments break down as follows:
 		| Type                                    | 08/17   | 09/17   | 10/17   | ... | 05/18   | 06/18   | 07/18   | 08/18   | 09/18  | 10/18 | 11/18 |
 		| Provider Earned Total                   | 1183.64 | 1183.64 | 1183.64 | ... | 1183.64 | 1183.64 | 1183.64 | 3183.64 | 183.64 | 0     | 0     |

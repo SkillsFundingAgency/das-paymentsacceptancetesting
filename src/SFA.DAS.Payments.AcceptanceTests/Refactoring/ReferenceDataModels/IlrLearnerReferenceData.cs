@@ -16,10 +16,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ReferenceDataModels
         public DateTime TotalTrainingPrice1EffectiveDate { get; set; }
         public int TotalAssessmentPrice1 { get; set; }
         public DateTime TotalAssessmentPrice1EffectiveDate { get; set; }
-        public int ResidualTrainingPrice { get; set; }
-        public DateTime ResidualTrainingPriceEffectiveDate { get; set; }
-        public int ResidualAssessmentPrice { get; set; }
-        public DateTime ResidualAssessmentPriceEffectiveDate { get; set; }
+        public int ResidualTrainingPrice1 { get; set; }
+        public DateTime ResidualTrainingPrice1EffectiveDate { get; set; }
+        public int ResidualAssessmentPrice1 { get; set; }
+        public DateTime ResidualAssessmentPrice1EffectiveDate { get; set; }
         public int TotalTrainingPrice2 { get; set; }
         public DateTime TotalTrainingPrice2EffectiveDate { get; set; }
         public int TotalAssessmentPrice2 { get; set; }
@@ -36,5 +36,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ReferenceDataModels
         public string EmployerId { get; set; }
         public string SmallEmployer { get; set; }
         public string LearnDelFam { get; set; }
+        public int ResidualTrainingPrice2 { get; set; }
+        public DateTime ResidualTrainingPrice2EffectiveDate { get; set; }
+        public int ResidualAssessmentPrice2 { get; set; }
+        public DateTime ResidualAssessmentPrice2EffectiveDate { get; set; }
     }
 }

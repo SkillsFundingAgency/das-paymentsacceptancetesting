@@ -85,16 +85,32 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
                         structure.TotalAssessmentPrice2EffectiveDateIndex = c;
                         break;
                     case "Residual training price":
-                        structure.ResidualTrainingPriceIndex = c;
+                    case "Residual training price 1":
+                        structure.ResidualTrainingPrice1Index = c;
                         break;
                     case "Residual training price effective date":
-                        structure.ResidualTrainingPriceEffectiveDateIndex = c;
+                    case "Residual training price 1 effective date":
+                        structure.ResidualTrainingPrice1EffectiveDateIndex = c;
                         break;
                     case "Residual assessment price":
-                        structure.ResidualAssessmentPriceIndex = c;
+                    case "Residual assessment price 1":
+                        structure.ResidualAssessmentPrice1Index = c;
                         break;
                     case "Residual assessment price effective date":
-                        structure.ResidualAssessmentPriceEffectiveDateIndex = c;
+                    case "Residual assessment price 1 effective date":
+                        structure.ResidualAssessmentPrice1EffectiveDateIndex = c;
+                        break;
+                    case "Residual training price 2":
+                        structure.ResidualTrainingPrice2Index = c;
+                        break;
+                    case "Residual training price 2 effective date":
+                        structure.ResidualTrainingPrice2EffectiveDateIndex = c;
+                        break;
+                    case "Residual assessment price 2":
+                        structure.ResidualAssessmentPrice2Index = c;
+                        break;
+                    case "Residual assessment price 2 effective date":
+                        structure.ResidualAssessmentPrice2EffectiveDateIndex = c;
                         break;
                     case "aim type":
                         structure.AimTypeIndex = c;
@@ -155,14 +171,18 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
                 TotalTrainingPrice1EffectiveDate = row.ReadRowColumnValue<DateTime>(structure.TotalTrainingPrice1EffectiveDateIndex, "total training price 1 effective date"),
                 TotalAssessmentPrice1 = row.ReadRowColumnValue<int>(structure.TotalAssessmentPrice1Index, "total assessment price 1"),
                 TotalAssessmentPrice1EffectiveDate = row.ReadRowColumnValue<DateTime>(structure.TotalAssessmentPrice1EffectiveDateIndex, "total assessment price 1 effective date"),
-                ResidualTrainingPrice = row.ReadRowColumnValue<int>(structure.ResidualTrainingPriceIndex, "residual training price"),
-                ResidualTrainingPriceEffectiveDate = row.ReadRowColumnValue<DateTime>(structure.ResidualTrainingPriceEffectiveDateIndex, "residual training price effective date"),
-                ResidualAssessmentPrice = row.ReadRowColumnValue<int>(structure.ResidualAssessmentPriceIndex, "residual assessment price"),
-                ResidualAssessmentPriceEffectiveDate = row.ReadRowColumnValue<DateTime>(structure.ResidualAssessmentPriceEffectiveDateIndex, "residual assessment price effective date"),
                 TotalTrainingPrice2 = row.ReadRowColumnValue<int>(structure.TotalTrainingPrice2Index, "total training price 2"),
                 TotalTrainingPrice2EffectiveDate = row.ReadRowColumnValue<DateTime>(structure.TotalTrainingPrice2EffectiveDateIndex, "total training price 2 effective date"),
                 TotalAssessmentPrice2 = row.ReadRowColumnValue<int>(structure.TotalAssessmentPrice2Index, "total assessment price 2"),
                 TotalAssessmentPrice2EffectiveDate = row.ReadRowColumnValue<DateTime>(structure.TotalAssessmentPrice2EffectiveDateIndex, "total assessment price 2 effective date"),
+                ResidualTrainingPrice1 = row.ReadRowColumnValue<int>(structure.ResidualTrainingPrice1Index, "residual training price 1"),
+                ResidualTrainingPrice1EffectiveDate = row.ReadRowColumnValue<DateTime>(structure.ResidualTrainingPrice1EffectiveDateIndex, "residual training price 1 effective date"),
+                ResidualAssessmentPrice1 = row.ReadRowColumnValue<int>(structure.ResidualAssessmentPrice1Index, "residual assessment price 1"),
+                ResidualAssessmentPrice1EffectiveDate = row.ReadRowColumnValue<DateTime>(structure.ResidualAssessmentPrice1EffectiveDateIndex, "residual assessment price 1 effective date"),
+                ResidualTrainingPrice2 = row.ReadRowColumnValue<int>(structure.ResidualTrainingPrice2Index, "residual training price 2"),
+                ResidualTrainingPrice2EffectiveDate = row.ReadRowColumnValue<DateTime>(structure.ResidualTrainingPrice2EffectiveDateIndex, "residual training price 2 effective date"),
+                ResidualAssessmentPrice2 = row.ReadRowColumnValue<int>(structure.ResidualAssessmentPrice2Index, "residual assessment price 2"),
+                ResidualAssessmentPrice2EffectiveDate = row.ReadRowColumnValue<DateTime>(structure.ResidualAssessmentPrice2EffectiveDateIndex, "residual assessment price 2 effective date"),
                 AimType = (AimType)row.ReadRowColumnValue<string>(structure.AimTypeIndex, "aim type", "Programme").ToEnumByDescription(typeof(AimType)),
                 AimRate = row.ReadRowColumnValue<string>(structure.AimRateIndex, "aim rate"),
                 StandardCode = row.ReadRowColumnValue<long>(structure.StandardCodeIndex, "standard code"),
@@ -200,10 +220,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
             public int TotalTrainingPrice1EffectiveDateIndex { get; set; } = -1;
             public int TotalAssessmentPrice1Index { get; set; } = -1;
             public int TotalAssessmentPrice1EffectiveDateIndex { get; set; } = -1;
-            public int ResidualTrainingPriceIndex { get; set; } = -1;
-            public int ResidualTrainingPriceEffectiveDateIndex { get; set; } = -1;
-            public int ResidualAssessmentPriceIndex { get; set; } = -1;
-            public int ResidualAssessmentPriceEffectiveDateIndex { get; set; } = -1;
+            public int ResidualTrainingPrice1Index { get; set; } = -1;
+            public int ResidualTrainingPrice1EffectiveDateIndex { get; set; } = -1;
+            public int ResidualAssessmentPrice1Index { get; set; } = -1;
+            public int ResidualAssessmentPrice1EffectiveDateIndex { get; set; } = -1;
             public int TotalTrainingPrice2Index { get; set; } = -1;
             public int TotalTrainingPrice2EffectiveDateIndex { get; set; } = -1;
             public int TotalAssessmentPrice2Index { get; set; } = -1;
@@ -220,6 +240,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.TableParsers
             public int EmployerIdIndex { get; set; } = -1;
             public int SmallEmployerIndex { get; set; } = -1;
             public int LearnDelFamIndex { get; set; } = -1;
+            public int ResidualTrainingPrice2Index { get; set; } = -1;
+            public int ResidualTrainingPrice2EffectiveDateIndex { get; set; } = -1;
+            public int ResidualAssessmentPrice2Index { get; set; } = -1;
+            public int ResidualAssessmentPrice2EffectiveDateIndex { get; set; } = -1;
         }
     }
 }

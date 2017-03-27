@@ -42,7 +42,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.Assertions.PaymentsAndEar
                                   where e.DeliveryPeriod == period.PeriodName
                                   group e by e.LearnerId into g
                                   select g.First()).Sum(x => x.Value);
-            if (period.Value != earnedInPeriod)
+            if (!AreValuesEqual(period.Value, earnedInPeriod))
             {
                 throw new Exception($"Expected provider to earn {period.Value} in {period.PeriodName} but actually earned {earnedInPeriod}");
             }
