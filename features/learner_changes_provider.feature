@@ -3,6 +3,7 @@ Feature: Apprentice changes provider scenarios
     Scenario: Apprentice changes provider but remains with the same employer, and there is a gap between the two learning spells
         Given The learner is programme only DAS
         And levy balance > agreed price for all months
+		And the apprenticeship funding band maximum is 15000
         And the following commitments exist:
             | commitment Id | version Id | Provider   | ULN       | start date | end date   | agreed price | status    | effective from | effective to |
             | 1             | 1          | provider a | learner a | 01/08/2017 | 01/08/2018 | 7500         | active    | 01/08/2017     | 04/03/2018   |
@@ -46,6 +47,7 @@ Feature: Apprentice changes provider scenarios
     Scenario: Apprentice changes provider but remains with the same employer
         Given The learner is programme only DAS
         And levy balance > agreed price for all months
+		And the apprenticeship funding band maximum is 15000
         And the following commitments exist:
             | commitment Id | version Id | Provider   | ULN       | start date | end date   | agreed price | status    | effective from | effective to |
             | 1             | 1          | provider a | learner a | 01/08/2017 | 01/08/2018 | 7500         | active    | 01/08/2017     | 04/03/2018   |
@@ -85,6 +87,7 @@ Feature: Apprentice changes provider scenarios
     Scenario: Apprentice changes provider but remains with the same employer, ILR changes after the new commitment is in place
         Given The learner is programme only DAS
         And levy balance > agreed price for all months
+		And the apprenticeship funding band maximum is 15000
         And the following commitments exist:
             | commitment Id | version Id | Provider   | ULN       | start date | end date   | agreed price | status    | effective from | effective to |
             | 1             | 1          | provider a | learner a | 01/08/2017 | 01/08/2018 | 7500         | active    | 01/08/2017     | 04/03/2018   |
@@ -124,6 +127,7 @@ Feature: Apprentice changes provider scenarios
     Scenario: Apprentice changes provider but remains with the same employer, ILR changes before the new commitment is in place
         Given The learner is programme only DAS
         And levy balance > agreed price for all months
+		And the apprenticeship funding band maximum is 15000
         And the following commitments exist:
             | commitment Id | version Id | Provider   | ULN       | start date | end date   | agreed price | status    | effective from | effective to |
             | 1             | 1          | provider a | learner a | 01/08/2017 | 01/08/2018 | 7500         | active    | 01/08/2017     | 04/03/2018   |
@@ -163,6 +167,7 @@ Feature: Apprentice changes provider scenarios
 Scenario: 1 learner aged 16-18, levy available, changes provider, earns incentive payment in the transfer month - and the date at which the incentive is earned is before the transfer date 
     
         Given levy balance > agreed price for all months
+		And the apprenticeship funding band maximum is 15000
         And the following commitments exist:
             | commitment Id | version Id | Provider   | ULN       | start date | end date   | agreed price | status    | effective from | effective to |
             | 1             | 1          | provider a | learner a | 01/08/2017 | 01/08/2018 | 7500         | active    | 01/08/2017     | 14/11/2017   |
@@ -223,6 +228,7 @@ Scenario: 1 learner aged 16-18, levy available, changes provider, earns incentiv
 Scenario: 1 learner aged 16-18, levy available, changes provider, earns incentive payment in the commitment transfer month - and the ILR transfer happens in a later month  
     
         Given levy balance > agreed price for all months
+		And the apprenticeship funding band maximum is 15000
         And the following commitments exist:
             | commitment Id | version Id | Provider   | ULN       | start date | end date   | agreed price | status    | effective from | effective to |
             | 1             | 1          | provider a | learner a | 01/08/2017 | 01/08/2018 | 7500         | active    | 01/08/2017     | 14/11/2017   |
@@ -286,6 +292,7 @@ Scenario: 1 learner aged 16-18, levy available, changes provider, earns incentiv
  Scenario: 1 learner aged 16-18, levy available, changes provider, earns incentive payment in the commitment transfer month - and the ILR transfer happens at an earlier point than the commitment   
     
     Given levy balance > agreed price for all months
+	And the apprenticeship funding band maximum is 15000
     And the following commitments exist:
             | commitment Id | version Id | Provider   | ULN       | start date | end date   | agreed price | status    | effective from | effective to |
             | 1             | 1          | provider a | learner a | 01/08/2017 | 01/08/2018 | 7500         | active    | 01/08/2017     | 14/11/2017   |

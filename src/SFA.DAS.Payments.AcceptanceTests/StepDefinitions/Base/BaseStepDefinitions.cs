@@ -431,13 +431,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                     ? table.Rows[rowIndex]["Provider"]
                     : "provider";
 
-                if(table.Header.Contains("LearnDelFAM") && !string.IsNullOrEmpty(table.Rows[rowIndex]["LearnDelFAM"]))
+                if (table.Header.Contains("LearnDelFAM") && !string.IsNullOrEmpty(table.Rows[rowIndex]["LearnDelFAM"]))
                 {
                     var famValue = table.Rows[rowIndex]["LearnDelFAM"];
                     var famCode = new LearningDeliveryFam
                     {
                         FamType = famValue.Substring(0, 3),
-                        FamCode =int.Parse(famValue.Substring(3))
+                        FamCode = int.Parse(famValue.Substring(3))
                     };
 
                     StepDefinitionsContext.ReferenceDataContext.AddLearningDeliveryFam(famCode);
@@ -469,7 +469,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                         : Enums.AimType.Programme
                 };
 
-                var standardCode = table.Rows[rowIndex].Value<int>("standard code") > 0 ? table.Rows[rowIndex].Value<int>("standard code")  : IlrBuilder.Defaults.StandardCode;
+                var standardCode = table.Rows[rowIndex].Value<int>("standard code") > 0 ? table.Rows[rowIndex].Value<int>("standard code") : IlrBuilder.Defaults.StandardCode;
                 learningDelivery.StandardCode = learningDelivery.FrameworkCode > 0 &&
                                                         learningDelivery.PathwayCode > 0 &&
                                                         learningDelivery.ProgrammeType > 0 ? 0 : standardCode;
@@ -500,12 +500,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                         learner.Uln = GetUln(learner.Name, string.Empty);
                     }
 
-                    learner.LearnRefNumber = $"{StepDefinitionsContext.GetProvider(provider).Ukprn}-{rowIndex+1}";
+                    learner.LearnRefNumber = $"{StepDefinitionsContext.GetProvider(provider).Ukprn}-{rowIndex + 1}";
                     learner.DateOfBirth = GetDateOfBirth(learningDelivery.LearnerType, learningDelivery.StartDate);
-                    
+
                     learner.EmploymentStatuses = StepDefinitionsContext.ReferenceDataContext.EmploymentStatuses;
 
-                 
+
                     StepDefinitionsContext.AddProviderLearner(provider, learner);
                 }
 
@@ -515,9 +515,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
 
         private DateTime GetDateOfBirth(LearnerType learnerType, DateTime startDate)
         {
-            return learnerType == LearnerType.ProgrammeOnlyDas16To18 || learnerType == LearnerType.ProgrammeOnlyNonDas16To18
-                       ? startDate.AddYears(-17)
-                       : new DateTime(1985, 10, 10);
+            if (learnerType == LearnerType.ProgrammeOnlyDas16To18 || learnerType == LearnerType.ProgrammeOnlyNonDas16To18)
+                return startDate.AddYears(-17);
+            else if (learnerType == LearnerType.ProgrammeOnlyDas19To24 || learnerType == LearnerType.ProgrammeOnlyNonDas19To24)
+                return startDate.AddYears(-21);
+            else
+                return new DateTime(1985, 10, 10);
 
         }
 
@@ -527,20 +530,20 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
             {
                 AddEmploymentStatus(table.Rows[rowIndex]);
             }
-          
+
         }
 
         private void AddEmploymentStatus(TableRow row)
         {
-           
+
             var status = new Entities.EmploymentStatus();
 
-            status.StatusCode = row.Contains("Employment Status") && 
-                        row.Value<string>("Employment Status").Equals("In paid employment",StringComparison.InvariantCultureIgnoreCase) ? EmploymentType.InPaidEmpoyment : EmploymentType.NotInPaidEmpoyment;
-            status.DateFrom = row.Value<DateTime>("Employment Status Applies") ;
+            status.StatusCode = row.Contains("Employment Status") &&
+                        row.Value<string>("Employment Status").Equals("In paid employment", StringComparison.InvariantCultureIgnoreCase) ? EmploymentType.InPaidEmpoyment : EmploymentType.NotInPaidEmpoyment;
+            status.DateFrom = row.Value<DateTime>("Employment Status Applies");
             status.EmployerId = GetEmployerId(row);
 
-            if (row.Contains("Small Employer") )
+            if (row.Contains("Small Employer"))
             {
                 var employerFlag = row.Value<string>("Small Employer");
                 status.EmploymentStatusMonitoring = new Entities.EmploymentStatusMonitoring
@@ -563,18 +566,18 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                 var empName = row.Value<string>("Employer");
                 var employer = StepDefinitionsContext.ReferenceDataContext.Employers.Where(
                                 x => x.Name.Equals(empName, StringComparison.InvariantCultureIgnoreCase));
-                return employer.Any() ? int.Parse(employer.First().AccountId.ToString().Substring(0,4)) : 0;
+                return employer.Any() ? int.Parse(employer.First().AccountId.ToString().Substring(0, 4)) : 0;
             }
             else
             {
                 return 0;
-            }     
-            
+            }
+
         }
 
         private EmploymentStatusMonitoringType GetEmploymentStatusMonitringType(string value)
         {
-            EmploymentStatusMonitoringType type ;
+            EmploymentStatusMonitoringType type;
 
             if (Enum.TryParse(value, true, out type))
             {
@@ -649,31 +652,83 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                 return priceEpisodes;
             }
 
-            if (table.Header.Contains("Total training price 1"))
+            var index = 1;
+
+            if (table.Header.Contains("Total training price 1") ||  
+                (table.Header.Contains("Total assessment price 1")) ||
+                (table.Header.Contains("residual training price 1")))
             {
-                var index = 1;
-
-                while (table.Header.Contains($"Total training price {index}"))
+                if (table.Header.Contains("Total training price 1"))
                 {
-                    startDate = DateTime.Parse(table.Rows[rowIndex][$"Total training price {index} effective date"]);
 
-                    priceEpisodes.Add(new PriceEpisode
+                    while (table.Header.Contains($"Total training price {index}"))
                     {
-                        Id = GetPriceEpisodeIdentifier(startDate, standardCode),
-                        StartDate = startDate,
-                        EndDate = table.Header.Contains($"Total training price {index + 1} effective date") && !string.IsNullOrEmpty(table.Rows[rowIndex][$"Total training price {index + 1} effective date"])
-                            ? DateTime.Parse(table.Rows[rowIndex][$"Total training price {index + 1} effective date"]).AddDays(-1)
-                            : string.IsNullOrEmpty(table.Rows[rowIndex]["actual end date"])
-                                ? (DateTime?)null
-                                : DateTime.Parse(table.Rows[rowIndex]["actual end date"]),
-                        TotalPrice = table.Rows[rowIndex][$"Total training price {index}"].GetDecimalValue() + table.Rows[rowIndex][$"Total assessment price {index}"].GetDecimalValue(),
-                        Tnp1 = table.Rows[rowIndex][$"Total training price {index}"].GetDecimalValue(),
-                        Tnp2 = table.Rows[rowIndex][$"Total assessment price {index}"].GetDecimalValue()
-                    });
+                        startDate = DateTime.Parse(table.Rows[rowIndex][$"Total training price {index} effective date"]);
 
-                    index++;
+                        priceEpisodes.Add(new PriceEpisode
+                        {
+                            Id = GetPriceEpisodeIdentifier(startDate, standardCode),
+                            StartDate = startDate,
+                            EndDate = table.Header.Contains($"Total training price {index + 1} effective date") && !string.IsNullOrEmpty(table.Rows[rowIndex][$"Total training price {index + 1} effective date"])
+                                ? DateTime.Parse(table.Rows[rowIndex][$"Total training price {index + 1} effective date"]).AddDays(-1)
+                                : string.IsNullOrEmpty(table.Rows[rowIndex]["actual end date"])
+                                    ? (DateTime?)null
+                                    : DateTime.Parse(table.Rows[rowIndex]["actual end date"]),
+                            TotalPrice = table.Rows[rowIndex][$"Total training price {index}"].GetDecimalValue() + table.Rows[rowIndex][$"Total assessment price {index}"].GetDecimalValue(),
+                            Tnp1 = table.Rows[rowIndex][$"Total training price {index}"].GetDecimalValue(),
+                            Tnp2 = table.Rows[rowIndex][$"Total assessment price {index}"].GetDecimalValue()
+                        });
+
+                        index++;
+                    }
                 }
+                if (table.Header.Contains("Total assessment price 1"))
+                {
+                    while (table.Header.Contains($"Total assessment price {index}"))
+                    {
+                        startDate = table.Rows[rowIndex].Value<DateTime>($"Total assessment price {index} effective date");
 
+                        priceEpisodes.Add(new PriceEpisode
+                        {
+                            Id = GetPriceEpisodeIdentifier(startDate, standardCode),
+                            StartDate = startDate,
+                            EndDate = table.Header.Contains($"Total training price 1 effective date") && !string.IsNullOrEmpty(table.Rows[rowIndex][$"Total training price 1 effective date"])
+                                ? DateTime.Parse(table.Rows[rowIndex][$"Total training price 1 effective date"]).AddDays(-1)
+                                : string.IsNullOrEmpty(table.Rows[rowIndex]["actual end date"])
+                                    ? (DateTime?)null
+                                    : DateTime.Parse(table.Rows[rowIndex]["actual end date"]),
+                            TotalPrice = table.Rows[rowIndex][$"Total training price 1"].GetDecimalValue() + table.Rows[rowIndex][$"Total assessment price {index}"].GetDecimalValue(),
+                            Tnp1 = table.Rows[rowIndex][$"Total training price 1"].GetDecimalValue(),
+                            Tnp2 = table.Rows[rowIndex][$"Total assessment price {index}"].GetDecimalValue()
+                        });
+
+                        index++;
+                    }
+                }
+                if (table.Header.Contains($"residual assessment price 1"))
+                {
+                    index = 1;
+                    while (table.Header.Contains($"residual assessment price {index}"))
+                    {
+                        startDate = table.Rows[rowIndex].Value<DateTime>($"residual assessment price {index} effective date");
+
+                        priceEpisodes.Add(new PriceEpisode
+                        {
+                            Id = GetPriceEpisodeIdentifier(startDate, standardCode),
+                            StartDate = startDate,
+                            EndDate = table.Header.Contains($"residual training price 1 effective date") && !string.IsNullOrEmpty(table.Rows[rowIndex][$"residual training price 1 effective date"])
+                                ? DateTime.Parse(table.Rows[rowIndex][$"residual training price 1 effective date"]).AddDays(-1)
+                                : string.IsNullOrEmpty(table.Rows[rowIndex]["actual end date"])
+                                    ? (DateTime?)null
+                                    : DateTime.Parse(table.Rows[rowIndex]["actual end date"]),
+                            TotalPrice = table.Rows[rowIndex][$"residual training price 1"].GetDecimalValue() + table.Rows[rowIndex][$"residual assessment price {index}"].GetDecimalValue(),
+                            Tnp3 = table.Rows[rowIndex][$"residual training price 1"].GetDecimalValue(),
+                            Tnp4 = table.Rows[rowIndex][$"residual assessment price {index}"].GetDecimalValue()
+                        });
+
+                        index++;
+                    }
+                }
                 return priceEpisodes;
             }
             if (table.Header.Contains("start date") && table.Header.Contains("agreed price"))
@@ -690,6 +745,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Base
                 });
             }
             return priceEpisodes;
+
+
         }
 
         protected CommitmentPaymentStatus GetCommitmentStatusOrThrow(string status)

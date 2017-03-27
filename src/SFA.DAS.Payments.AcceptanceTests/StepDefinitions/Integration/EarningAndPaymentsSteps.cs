@@ -574,7 +574,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             var actualPaymentDue = paymentsDue.Length == 0 ? 0m : paymentsDue.Where(p => paymentTypesFilter.Contains(p.TransactionType)).Sum(p => p.Amount);
             var expectedPaymentDue = decimal.Parse(paymentsRow[colIndex]);
             
-            Assert.AreEqual(expectedPaymentDue, actualPaymentDue, $"Expected {string.Join(" and ",paymentTypes)} payment due of {expectedPaymentDue} but made a payment of {actualPaymentDue} for {periodName}");
+            Assert.AreEqual(expectedPaymentDue, Math.Round(actualPaymentDue,2), $"Expected {string.Join(" and ",paymentTypes)} payment due of {expectedPaymentDue} but made a payment of {actualPaymentDue} for {periodName}");
         }
 
         private void VerifyAdditionalGovtFundedEarnings(long ukprn,
@@ -604,7 +604,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions.Integration
             var actualEarningsDue = additionalEarnings.Length == 0 ? 0m : additionalEarnings.Sum(p => p.Amount);
 
             var expectedPaymentDue = decimal.Parse(additionalEarningsRow[colIndex]);
-            Assert.AreEqual(expectedPaymentDue, actualEarningsDue, $"Expected additional earnings of {expectedPaymentDue} but earned a payment of {actualEarningsDue} for {periodName}");
+            Assert.AreEqual(expectedPaymentDue, Math.Round(actualEarningsDue,2), $"Expected additional earnings of {expectedPaymentDue} but earned a payment of {actualEarningsDue} for {periodName}");
 
         }
 
