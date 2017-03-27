@@ -17,11 +17,22 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
         private const short FamCodeActNonDasValue = 2;
 
         internal static List<LearnerResults> SubmitIlrAndRunMonthEndAndCollateResults(List<IlrLearnerReferenceData> ilrLearnerDetails,
+                                                                                   LookupContext lookupContext,
+                                                                                   List<EmployerAccountReferenceData> employers,
+                                                                                   List<ContractTypeReferenceData> contractTypes,
+                                                                                   List<EmploymentStatusReferenceData> employmentStatus,
+                                                                                   List<LearningSupportReferenceData> learningSupportStatus)
+        {
+
+            return SubmitIlrAndRunMonthEndAndCollateResults(ilrLearnerDetails, lookupContext, employers, contractTypes, employmentStatus, learningSupportStatus, null);
+        }
+        internal static List<LearnerResults> SubmitIlrAndRunMonthEndAndCollateResults(List<IlrLearnerReferenceData> ilrLearnerDetails,
                                                                                       LookupContext lookupContext,
                                                                                       List<EmployerAccountReferenceData> employers,
                                                                                       List<ContractTypeReferenceData> contractTypes,
                                                                                       List<EmploymentStatusReferenceData> employmentStatus,
-                                                                                      List<LearningSupportReferenceData> learningSupportStatus)
+                                                                                      List<LearningSupportReferenceData> learningSupportStatus,
+                                                                                      string[] periods)
         {
             var results = new List<LearnerResults>();
             if (TestEnvironment.ValidateSpecsOnly)
@@ -30,7 +41,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
             }
 
 
-            var periods = ExtractPeriods(ilrLearnerDetails);
+            periods = periods ?? ExtractPeriods(ilrLearnerDetails);
             var providerLearners = GroupLearnersByProvider(ilrLearnerDetails, lookupContext);
             foreach (var period in periods)
             {

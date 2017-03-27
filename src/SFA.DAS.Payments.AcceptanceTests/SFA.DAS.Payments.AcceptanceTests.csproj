@@ -154,10 +154,12 @@
     </Compile>
     <Compile Include="Refactoring\Assertions\PaymentsAndEarningsAssestions.cs" />
     <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\EarningsAndPaymentsRuleBase.cs" />
+    <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\EmployersLevyAccountCreditedRule.cs" />
     <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\EmployersLevyAccountDebitedRule.cs" />
     <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\PaymentDueFromEmployersRule.cs" />
     <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\PaymentsRuleBase.cs" />
     <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\ProviderEarnedTotalRule.cs" />
+    <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\RefundTakenBySfaRule.cs" />
     <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\ProviderPaidBySfaRule.cs" />
     <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\SfaLevyAdditionalPaymentsRule.cs" />
     <Compile Include="Refactoring\Assertions\PaymentsAndEarningsRules\SfaLevyBudgetRule.cs" />

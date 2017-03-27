@@ -201,7 +201,8 @@ this.ScenarioSetup(scenarioInfo);
                         "2250",
                         "04/08/2017"});
 #line 22
- testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table473, "When ");
+ testRunner.When("an ILR file is submitted with the following data for period 08/17,09/17,10/17,02/" +
+                    "18:", ((string)(null)), table473, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table474 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -241,8 +242,8 @@ this.ScenarioSetup(scenarioInfo);
                         "750",
                         "750",
                         "750",
-                        "750",
-                        "750"});
+                        "0",
+                        "0"});
             table474.AddRow(new string[] {
                         "Refund taken by SFA",
                         "0",
@@ -265,8 +266,8 @@ this.ScenarioSetup(scenarioInfo);
                         "750",
                         "750",
                         "750",
-                        "750",
-                        "750"});
+                        "0",
+                        "0"});
             table474.AddRow(new string[] {
                         "Levy account credited",
                         "0",
@@ -433,7 +434,7 @@ this.ScenarioSetup(scenarioInfo);
                         "2250",
                         "04/08/2017"});
 #line 57
- testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table477, "When ");
+ testRunner.When("an ILR file is submitted with the following data for period 02/18:", ((string)(null)), table477, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table478 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",

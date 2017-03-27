@@ -44,7 +44,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
             if (!SubmissionContext.HaveSubmissionsBeenDone)
             {
                 SubmissionContext.SubmissionResults = SubmissionManager.SubmitIlrAndRunMonthEndAndCollateResults(SubmissionContext.IlrLearnerDetails,
-                    LookupContext, EmployerAccountContext.EmployerAccounts, SubmissionContext.ContractTypes, SubmissionContext.EmploymentStatus, SubmissionContext.LearningSupportStatus);
+                    LookupContext, EmployerAccountContext.EmployerAccounts, SubmissionContext.ContractTypes,
+                    SubmissionContext.EmploymentStatus, SubmissionContext.LearningSupportStatus,SubmissionContext.Periods);
                 SubmissionContext.HaveSubmissionsBeenDone = true;
             }
 
@@ -72,7 +73,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
             if (!SubmissionContext.HaveSubmissionsBeenDone)
             {
                 SubmissionContext.SubmissionResults = SubmissionManager.SubmitIlrAndRunMonthEndAndCollateResults(SubmissionContext.IlrLearnerDetails,
-                    LookupContext, EmployerAccountContext.EmployerAccounts, SubmissionContext.ContractTypes, SubmissionContext.EmploymentStatus, SubmissionContext.LearningSupportStatus);
+                    LookupContext, EmployerAccountContext.EmployerAccounts, SubmissionContext.ContractTypes, SubmissionContext.EmploymentStatus, 
+                    SubmissionContext.LearningSupportStatus, SubmissionContext.Periods);
                 SubmissionContext.HaveSubmissionsBeenDone = true;
             }
 
@@ -103,7 +105,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
         }
 
         [Given(@"the following earnings and payments have been made to the provider for (.*):")]
-        public void GivenTheFollowingEarningsAndPaymentsHaveBeenMadeToTheProviderForLearnerA(string learner, Table table)
+        public void GivenTheFollowingEarningsAndPaymentsHaveBeenMadeToTheProviderForLearner(string learner, Table table)
         {
             
             var learnerBreakdown = new EarningsAndPaymentsBreakdown { ProviderId = "provider " + Defaults.ProviderIdSuffix };

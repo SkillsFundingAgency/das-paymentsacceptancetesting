@@ -38,6 +38,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
             IlrTableParser.ParseIlrTableIntoContext(SubmissionsContext, ilrDetails);
         }
 
+        [When(@"an ILR file is submitted with the following data for period (.*):")]
+        public void WhenAnILRFileIsSubmittedWithTheFollowingDataForPeriod(string periods, Table table)
+        {
+            SubmissionsContext.Periods = periods.Split(',');
+            IlrTableParser.ParseIlrTableIntoContext(SubmissionsContext, table);
+
+        }
+
+
         [When("the Contract type in the ILR is:")]
         public void WhenTheContractTypeInTheIlrIs(Table contractTypes)
         {
