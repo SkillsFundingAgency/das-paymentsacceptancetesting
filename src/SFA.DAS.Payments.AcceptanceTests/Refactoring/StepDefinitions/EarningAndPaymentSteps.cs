@@ -105,13 +105,17 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
         }
 
         [Given(@"the following earnings and payments have been made to the provider for (.*):")]
-        public void GivenTheFollowingEarningsAndPaymentsHaveBeenMadeToTheProviderForLearner(string learner, Table table)
+        public void GivenTheFollowingEarningsAndPaymentsHaveBeenMadeToTheProviderForLearner(string learnerName, Table table)
         {
             
             var learnerBreakdown = new EarningsAndPaymentsBreakdown { ProviderId = "provider " + Defaults.ProviderIdSuffix };
             EarningAndPaymentTableParser.ParseEarningsAndPaymentsTableIntoContext(learnerBreakdown, table);
+            
+            var learner = LookupContext.AddOrGetUln(learnerName);
+            var provider = LookupContext.AddOrGetUkprn(learnerBreakdown.ProviderId);
 
-            var commitment = CommitmentsContext.Commitments.First();
+
+            var commitment = CommitmentsContext.Commitments.FirstOrDefault();
             foreach (var earned in learnerBreakdown.ProviderEarnedTotal)
             {
                 var requiredPaymentId = Guid.NewGuid().ToString();
@@ -120,33 +124,40 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.StepDefinitions
 
                 if (earned.Value > 0)
                 {
-                    PaymentsManager.SavePaymentDue(requiredPaymentId,
-                                                        commitment,
-                                                        learner, earned.PeriodName,
+                    PaymentsManager.SavePaymentDue(requiredPaymentId,provider,learner,null,null,null,Defaults.StandardCode,
+                                                        commitment,learnerName, earned.PeriodName,
                                                         int.Parse(month), int.Parse(year),
                                                         (int)TransactionType.OnProgram,
-                                                        ContractType.ContractWithEmployer,
+                                                        commitment == null? ContractType.ContractWithSfa : ContractType.ContractWithEmployer,
                                                         earned.Value);
                     var levyPayment = learnerBreakdown.SfaLevyBudget.Where(x => x.PeriodName == earned.PeriodName).SingleOrDefault();
                     if (levyPayment != null && levyPayment.Value > 0)
                     {
-                        PaymentsManager.SavePayment(requiredPaymentId, learner, earned.PeriodName, int.Parse(month), int.Parse(year),
+                        PaymentsManager.SavePayment(requiredPaymentId,  earned.PeriodName, int.Parse(month), int.Parse(year),
                                                           (int)TransactionType.OnProgram, FundingSource.Levy, levyPayment.Value);
                     }
 
                     var earnedFromEmployer = learnerBreakdown.ProviderEarnedFromEmployers.Where(x => x.PeriodName == earned.PeriodName).SingleOrDefault();
                     if (earnedFromEmployer != null && earnedFromEmployer.Value > 0)
                     {
-                        PaymentsManager.SavePayment(requiredPaymentId, learner, earned.PeriodName, int.Parse(month), int.Parse(year),
+                        PaymentsManager.SavePayment(requiredPaymentId, earned.PeriodName, int.Parse(month), int.Parse(year),
                                                           (int)TransactionType.OnProgram, FundingSource.CoInvestedEmployer, earnedFromEmployer.Value);
                     }
 
-                    var coInvestedBySfa= learnerBreakdown.SfaLevyCoFundBudget.Where(x => x.PeriodName == earned.PeriodName).SingleOrDefault();
-                    if (coInvestedBySfa != null && coInvestedBySfa.Value > 0)
+                    var coInvestedBySfaLevy= learnerBreakdown.SfaLevyCoFundBudget.Where(x => x.PeriodName == earned.PeriodName).SingleOrDefault();
+                    if (coInvestedBySfaLevy != null && coInvestedBySfaLevy.Value > 0)
                     {
-                        PaymentsManager.SavePayment(requiredPaymentId, learner, earned.PeriodName, int.Parse(month), int.Parse(year),
-                                                          (int)TransactionType.OnProgram, FundingSource.CoInvestedSfa, coInvestedBySfa.Value);
+                        PaymentsManager.SavePayment(requiredPaymentId,  earned.PeriodName, int.Parse(month), int.Parse(year),
+                                                          (int)TransactionType.OnProgram, FundingSource.CoInvestedSfa, coInvestedBySfaLevy.Value);
                     }
+
+                    var coInvestedBySfaNonLevy = learnerBreakdown.SfaNonLevyCoFundBudget.Where(x => x.PeriodName == earned.PeriodName).SingleOrDefault();
+                    if (coInvestedBySfaNonLevy != null && coInvestedBySfaNonLevy.Value > 0)
+                    {
+                        PaymentsManager.SavePayment(requiredPaymentId, earned.PeriodName, int.Parse(month), int.Parse(year),
+                                                          (int)TransactionType.OnProgram, FundingSource.CoInvestedSfa, coInvestedBySfaNonLevy.Value);
+                    }
+
                 }
 
             }
