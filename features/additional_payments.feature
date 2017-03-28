@@ -1166,9 +1166,9 @@ Scenario:671-AC01 DAS learner, levy available, is taking an English or maths qua
     Given the apprenticeship funding band maximum is 18000
     And levy balance > agreed price for all months
     And the following commitments exist:
-		| commitment Id | version Id | ULN       | start date | end date   | status | standard code | agreed price | effective from | effective to |
-		| 1             | 1          | learner a | 01/08/2017 | 01/08/2018 | active | 25            | 11250        | 01/08/2017     | 10/11/2017   |
-		| 1             | 2          | learner a | 01/08/2017 | 01/08/2018 | active | 25            | 6750         | 11/11/2017     |              |
+		| commitment Id | version Id | ULN       | start date | end date   | status | agreed price | effective from | effective to |
+		| 1             | 1          | learner a | 01/08/2017 | 01/08/2018 | active | 11250        | 01/08/2017     | 10/11/2017   |
+		| 1             | 2          | learner a | 01/08/2017 | 01/08/2018 | active | 6750         | 11/11/2017     |              |
 
     When an ILR file is submitted with the following data:
         | ULN       | learner type       | aim type         | start date | planned end date | actual end date | completion status | aim rate | Total training price 1 | Total training price 1 effective date | Total assessment price 1 | Total assessment price 1 effective date | Total training price 2 | Total training price 2 effective date | Total assessment price 2 | Total assessment price 2 effective date | 
@@ -1244,9 +1244,9 @@ Scenario:671-AC03 DAS learner, levy available, is taking an English or maths qua
     Given the apprenticeship funding band maximum is 18000
     And levy balance > agreed price for all months
     And the following commitments exist:
-        | commitment Id | version Id | ULN       | start date | end date   | status | standard code | agreed price | effective from | effective to |
-        | 1             | 1          | learner a | 01/08/2017 | 01/08/2018 | active | 25            | 11250        | 01/08/2017     | 10/11/2017   |
-        | 1             | 2          | learner a | 01/08/2017 | 01/08/2018 | active | 25            | 6750         | 11/11/2017     |              |
+        | commitment Id | version Id | ULN       | start date | end date   | status | agreed price | effective from | effective to |
+        | 1             | 1          | learner a | 01/08/2017 | 01/08/2018 | active | 11250        | 01/08/2017     | 10/11/2017   |
+        | 1             | 2          | learner a | 01/08/2017 | 01/08/2018 | active | 6750         | 11/11/2017     |              |
 
     When an ILR file is submitted with the following data:
         | ULN       | learner type       | aim type         | start date | planned end date | actual end date | completion status | aim rate | Total training price 1 | Total training price 1 effective date | Total assessment price 1 | Total assessment price 1 effective date | Total training price 2 | Total training price 2 effective date | Total assessment price 2 | Total assessment price 2 effective date | 
