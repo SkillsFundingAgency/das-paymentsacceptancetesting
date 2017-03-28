@@ -101,6 +101,7 @@
     <Compile Include="Features\learner_finishes_late.feature.cs" />
     <Compile Include="Features\learner_finishes_on_time.feature.cs" />
     <Compile Include="Features\payments_calc.feature.cs" />
+    <Compile Include="Features\refunds.feature.cs" />
     <Compile Include="Features\small_employers.feature.cs" />
     <Compile Include="Features\two_learners_paid_in_priority.feature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

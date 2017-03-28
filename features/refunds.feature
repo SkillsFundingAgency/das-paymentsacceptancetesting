@@ -19,7 +19,7 @@ Scenario:673-AC01 DAS learner, levy available, provider retrospectively notifies
         | Levy account debited          | 0     | 750   | 750   | 750   | 750   | 750   |         
         | SFA Levy employer budget      | 750   | 750   | 750   | 750   | 750   | 0     |        
         | SFA Levy co-funding budget    | 0     | 0     | 0     | 0     | 0     | 0     |       
-	When an ILR file is submitted with the following data for period 08/17,09/17,10/17,02/18:
+    When an ILR file is submitted for the first time on 28/02/18 with the following data:
         | ULN       | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date | 
         | learner a | 04/08/2017 | 20/08/2018       | 12/11/2017      | withdrawn         | 9000                 | 04/08/2017                          | 2250                   | 04/08/2017                            | 
 	Then the provider earnings and payments break down as follows:
@@ -55,7 +55,7 @@ Scenario:673-AC02 Non-DAS learner, levy available, provider retrospectively noti
         | SFA Levy co-funding budget     | 0     | 0     | 0     | 0     | 0     | 0     |       
         | SFA non-Levy co-funding budget | 675   | 675   | 675   | 675   | 675   | 0     |
         
-	When an ILR file is submitted with the following data for period 02/18:
+    When an ILR file is submitted for the first time on 28/02/18 with the following data:
         
         | ULN       | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date | 
         | learner a | 04/08/2017 | 20/08/2018       | 12/11/2017      | withdrawn         | 9000                 | 04/08/2017                          | 2250                   | 04/08/2017                            | 
@@ -92,7 +92,7 @@ Scenario:673-AC03 DAS learner, insufficient levy available to cover full payment
 		| Levy account debited          | 0     | 500   | 500   | 500   | 500   | 500   |         
 		| SFA Levy employer budget      | 500   | 500   | 500   | 500   | 500   | 0     |        
 		| SFA Levy co-funding budget    | 225   | 225   | 225   | 225   | 225   | 0     |       
-	When an ILR file is submitted with the following data for period 02/18:
+    When an ILR file is submitted for the first time on 28/02/18 with the following data:
         | ULN       | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date | 
         | learner a | 04/08/2017 | 20/08/2018       | 12/11/2017      | withdrawn         | 9000                 | 04/08/2017                          | 2250                   | 04/08/2017                            | 
 	Then the provider earnings and payments break down as follows:
