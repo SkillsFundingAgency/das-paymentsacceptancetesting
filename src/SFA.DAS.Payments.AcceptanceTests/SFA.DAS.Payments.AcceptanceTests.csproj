@@ -82,6 +82,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assertions\DataLockAssertions.cs" />
+    <Compile Include="Assertions\DataLockRules\BalancingDataLockRule.cs" />
+    <Compile Include="Assertions\DataLockRules\CompletionDataLockRule.cs" />
+    <Compile Include="Assertions\DataLockRules\DataLockRuleBase.cs" />
+    <Compile Include="Assertions\DataLockRules\DisadvantageUpliftDataLockRule.cs" />
+    <Compile Include="Assertions\DataLockRules\Employer16To18IncentiveDataLockRule.cs" />
+    <Compile Include="Assertions\DataLockRules\EnglishAndMathsBalancingDataLockRule.cs" />
+    <Compile Include="Assertions\DataLockRules\EnglishAndMathsOnProgrammeDataLockRule.cs" />
+    <Compile Include="Assertions\DataLockRules\FrameworkUpliftBalancingDataLockRule.cs" />
+    <Compile Include="Assertions\DataLockRules\FrameworkUpliftCompletionDataLockRule.cs" />
+    <Compile Include="Assertions\DataLockRules\FrameworkUpliftOnProgrammeDataLockRule.cs" />
+    <Compile Include="Assertions\DataLockRules\LearningSupportDataLockRule.cs" />
+    <Compile Include="Assertions\DataLockRules\OnProgrammeDataLockRule.cs" />
+    <Compile Include="Assertions\DataLockRules\Provider16To18IncentiveDataLockRule.cs" />
     <Compile Include="DataExtensions.cs" />
     <Compile Include="DataHelpers\IdentifierGenerator.cs" />
     <Compile Include="Extensions.cs" />
