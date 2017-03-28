@@ -1161,7 +1161,7 @@ Scenario:658-AC01 DAS learner, takes an English qualification that has a planned
 		| English and maths Balancing    | 0     | 0     | ... | 0     | 0     | 0     | 0     | 0     | 0     | 0     |
 		| Provider learning support      | 150   | 150   | ... | 150   | 150   | 0     | 0     | 0     | 0     | 0     |
 
-
+@MathsAndEnglishDas
 Scenario:671-AC01 DAS learner, levy available, is taking an English or maths qualification, has learning support and the negotiated price changes during the programme
     Given the apprenticeship funding band maximum is 18000
     And levy balance > agreed price for all months
@@ -1207,6 +1207,7 @@ Scenario:671-AC01 DAS learner, levy available, is taking an English or maths qua
 		| English and maths Balancing    | 0     | 0     | 0     | 0     | 0     |
         | Provider learning support      | 150   | 150   | 150   | 150   | 150   |
 
+@MathsAndEnglishNonDas
 Scenario:671-AC02 Non-DAS learner, levy available, is taking an English or maths qualification, has learning support and the negotiated price changes during the programme
     Given the apprenticeship funding band maximum is 18000
     
@@ -1240,6 +1241,7 @@ Scenario:671-AC02 Non-DAS learner, levy available, is taking an English or maths
 		| English and maths Balancing    | 0     | 0     | 0     | 0     | 0     |
         | Provider learning support      | 150   | 150   | 150   | 150   | 150   |
 
+@MathsAndEnglishDas
 Scenario:671-AC03 DAS learner, levy available, is taking an English or maths qualification, has learning support and the negotiated price changes during the programme - no payments are made against the second price episode as it fails data lock 
     Given the apprenticeship funding band maximum is 18000
     And levy balance > agreed price for all months
