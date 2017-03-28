@@ -16,7 +16,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Assertions.TransactionTypeRules
                 var payments = FilterPayments(period, submissionResults, employerAccountContext);
                 var paidInPeriod = payments.Sum(p => p.Amount);
 
-                if (period.Value != paidInPeriod)
+                if(Math.Round(paidInPeriod, 2) != Math.Round(period.Value, 2))
                 {
                     throw new Exception(FormatAssertionFailureMessage(period, paidInPeriod));
                 }
