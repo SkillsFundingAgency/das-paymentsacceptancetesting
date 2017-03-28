@@ -2680,7 +2680,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1000",
                         "1000",
                         "1000",
-                        "1500",
+                        "1150",
                         "...",
                         "1000",
                         "1000",
@@ -6803,7 +6803,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0"});
             table101.AddRow(new string[] {
                         "Provider learning support",
-                        "150",
+                        "0",
                         "150",
                         "150",
                         "150",
@@ -7065,7 +7065,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0"});
             table105.AddRow(new string[] {
                         "Provider learning support",
-                        "150",
+                        "0",
                         "150",
                         "150",
                         "150",
@@ -7369,7 +7369,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0"});
             table110.AddRow(new string[] {
                         "Provider learning support",
-                        "150",
+                        "0",
                         "150",
                         "150",
                         "150",
@@ -7665,7 +7665,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0"});
             table115.AddRow(new string[] {
                         "Provider learning support",
-                        "150",
+                        "0",
                         "150",
                         "150",
                         "150",
@@ -8080,7 +8080,7 @@ this.ScenarioSetup(scenarioInfo);
                         "",
                         ""});
             table121.AddRow(new string[] {
-                        "English and maths balancing",
+                        "English and maths Balancing",
                         "",
                         "",
                         "",
@@ -8321,7 +8321,7 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table124 = new TechTalk.SpecFlow.Table(new string[] {
-                        "commitment ID",
+                        "commitment Id",
                         "version Id",
                         "ULN",
                         "start date",
@@ -8450,7 +8450,7 @@ this.ScenarioSetup(scenarioInfo);
                         "",
                         ""});
             table126.AddRow(new string[] {
-                        "English and maths balancing",
+                        "English and maths Balancing",
                         "",
                         "",
                         "",
@@ -8722,7 +8722,7 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table129, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table130 = new TechTalk.SpecFlow.Table(new string[] {
-                        "learning support code",
+                        "Learning support code",
                         "date from",
                         "date to"});
             table130.AddRow(new string[] {
@@ -8972,7 +8972,7 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table133 = new TechTalk.SpecFlow.Table(new string[] {
-                        "commitment ID",
+                        "commitment Id",
                         "ULN",
                         "start date",
                         "end date",
@@ -9022,7 +9022,7 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table134, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table135 = new TechTalk.SpecFlow.Table(new string[] {
-                        "learning support code",
+                        "Learning support code",
                         "date from",
                         "date to"});
             table135.AddRow(new string[] {
@@ -9110,7 +9110,7 @@ this.ScenarioSetup(scenarioInfo);
                         "",
                         ""});
             table136.AddRow(new string[] {
-                        "English and maths balancing",
+                        "English and maths Balancing",
                         "",
                         "",
                         "",
@@ -9365,7 +9365,7 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table139 = new TechTalk.SpecFlow.Table(new string[] {
-                        "commitment ID",
+                        "commitment Id",
                         "ULN",
                         "start date",
                         "end date",
@@ -9415,7 +9415,7 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table140, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table141 = new TechTalk.SpecFlow.Table(new string[] {
-                        "learning support code",
+                        "Learning support code",
                         "date from",
                         "date to"});
             table141.AddRow(new string[] {
@@ -9503,7 +9503,7 @@ this.ScenarioSetup(scenarioInfo);
                         "",
                         ""});
             table142.AddRow(new string[] {
-                        "English and maths balancing",
+                        "English and maths Balancing",
                         "",
                         "",
                         "",
@@ -9740,8 +9740,8 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table145 = new TechTalk.SpecFlow.Table(new string[] {
-                        "commitment ID",
-                        "version ID",
+                        "commitment Id",
+                        "version Id",
                         "ULN",
                         "start date",
                         "end date",
@@ -9766,7 +9766,7 @@ this.ScenarioSetup(scenarioInfo);
                         "01/08/2017",
                         "01/08/2018",
                         "14000",
-                        "withdrawn",
+                        "cancelled",
                         "11/06/2018",
                         ""});
 #line 1125
@@ -9806,7 +9806,7 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table146, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table147 = new TechTalk.SpecFlow.Table(new string[] {
-                        "learning support code",
+                        "Learning support code",
                         "date from",
                         "date to"});
             table147.AddRow(new string[] {
@@ -9895,7 +9895,7 @@ this.ScenarioSetup(scenarioInfo);
                         "",
                         ""});
             table148.AddRow(new string[] {
-                        "English and maths balancing",
+                        "English and maths Balancing",
                         "",
                         "",
                         "",

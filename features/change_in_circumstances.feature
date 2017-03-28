@@ -1,3 +1,4 @@
+@ChangeInCircumstances
 Feature: Provider earnings and payments where learner changes apprenticeship standard or there is a change to the negotiated price at the end of a month, remaining with the same employer and provider
 
     Background:
@@ -10,7 +11,7 @@ Feature: Provider earnings and payments where learner changes apprenticeship sta
             | commitment Id | version Id | ULN       | standard code | start date | end date   | agreed price | effective from | effective to |
             | 1             | 1          | learner a | 51            | 01/08/2017 | 01/08/2018 | 15000        | 01/08/2017     | 31/10/2017   |
             | 1             | 2          | learner a | 52            | 01/08/2017 | 01/08/2018 | 5625         | 03/11/2017     |              |
-        When an ILR file is submitted on 03/12/2017 with the following data:
+        When an ILR file is submitted with the following data:
             | ULN       | standard code | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date |
             | learner a | 51            | 03/08/2017 | 01/08/2018       | 31/10/2017      | withdrawn         | 12000                | 03/08/2017                          | 3000                   | 03/08/2017                            |
             | learner a | 52            | 03/11/2017 | 01/08/2018       |                 | continuing        | 4500                 | 03/11/2017                          | 1125                   | 03/11/2017                            |
@@ -23,7 +24,7 @@ Feature: Provider earnings and payments where learner changes apprenticeship sta
             | Provider Earned from SFA   | 1000  | 1000  | 1000  | 500   | 500   |
             | Provider Paid by SFA       | 0     | 1000  | 1000  | 1000  | 500   |
             | Levy account debited       | 0     | 1000  | 1000  | 1000  | 500   |
-            | SFA Levy employer budget   | 1000  | 1000  | 1000  | 500   | 0     |
+            | SFA Levy employer budget   | 1000  | 1000  | 1000  | 500   | 500   |
             | SFA Levy co-funding budget | 0     | 0     | 0     | 0     | 0     |
 
 
@@ -53,7 +54,7 @@ Feature: Provider earnings and payments where learner changes apprenticeship sta
             | commitment Id | version Id | ULN       | standard code | start date | end date   | agreed price | effective from | effective to |
             | 1             | 1          | learner a | 51            | 03/08/2017 | 04/08/2018 | 15000        | 03/08/2017     | 31/10/2017   |
             | 1             | 2          | learner a | 52            | 03/08/2017 | 04/08/2018 | 5625         | 01/11/2017     |              |
-        When an ILR file is submitted on 03/12/2017 with the following data:
+		When an ILR file is submitted with the following data:
             | ULN       | standard code | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date |
             | learner a | 51            | 03/08/2017 | 04/08/2018       |                 | continuing        | 12000                | 03/08/2017                          | 3000                   | 03/08/2017                            |
         Then the data lock status of the ILR in 03/12/2017 is:
@@ -65,7 +66,7 @@ Feature: Provider earnings and payments where learner changes apprenticeship sta
             | Provider Earned from SFA   | 1000  | 1000  | 1000  | 1000  | 1000  | 1000  |
             | Provider Paid by SFA       | 0     | 1000  | 1000  | 1000  | 0     | 0     |
             | Levy account debited       | 0     | 1000  | 1000  | 1000  | 0     | 0     |
-            | SFA Levy employer budget   | 1000  | 1000  | 1000  | 1000  | 1000  | 1000  |
+            | SFA Levy employer budget   | 1000  | 1000  | 1000  | 0     | 0     | 0     |
             | SFA Levy co-funding budget | 0     | 0     | 0     | 0     | 0     | 0     |
 
 
@@ -206,7 +207,7 @@ Scenario: ILR changes standard in the middle of the month, but no corresponding 
         Given the following commitments exist:
             | commitment Id | version Id | ULN       | standard code | start date | end date   | agreed price | status | effective from | effective to |
             | 1             | 1          | learner a | 51            | 01/08/2017 | 01/08/2018 | 15000        | active | 01/08/2017     |              |
-        When an ILR file is submitted on 03/12/2017 with the following data:
+        When an ILR file is submitted with the following data:
             | ULN       | standard code | start date | planned end date | actual end date | completion status | Total training price 1 | Total training price 1 effective date | Total assessment price 1 | Total assessment price 1 effective date |
             | learner a | 51            | 03/08/2017 | 04/08/2018       | 10/11/2017      | withdrawn         | 12000                  | 03/08/2017                            | 3000                     | 03/08/2017                              |
             | learner a | 52            | 11/11/2017 | 04/08/2018       |                 | continuing        | 4500                   | 11/11/2017                            | 1125                     | 11/11/2017                              | 
@@ -220,7 +221,7 @@ Scenario: ILR changes standard in the middle of the month, but no corresponding 
             | Provider Earned Total      | 1000  | 1000  | 1000  | 500   | 500   | 500   |
             | Provider Paid by SFA       | 0     | 1000  | 1000  | 1000  | 0     | 0     |
             | Levy account debited       | 0     | 1000  | 1000  | 1000  | 0     | 0     |
-            | SFA Levy employer budget   | 1000  | 1000  | 1000  | 1000  | 0     | 0     |
+            | SFA Levy employer budget   | 1000  | 1000  | 1000  | 0     | 0     | 0     |
             | SFA Levy co-funding budget | 0     | 0     | 0     | 0     | 0     | 0     |
             
 Scenario: Earnings and payments for a DAS learner, levy available, where the apprenticeship standard changes middle of month A commitment is updated to show a change in standard, mid-month, but the ILR does not reflect this
@@ -309,3 +310,168 @@ Scenario: Earnings and payments for a DAS learner, levy available, where the app
             | Levy account debited       | 0     | 1000  | 1000  | 1000  | 0     |
             | SFA Levy employer budget   | 1000  | 1000  | 1000  | 0     | 0     |
             | SFA Levy co-funding budget | 0     | 0     | 0     | 0     | 0     |
+
+@TNP2OrTNP4Change
+Scenario:630-AC01  Earnings and payments for a DAS learner, levy available, and the total assessment cost is increased in isolation (no change to total training price) during the programme
+
+        Given The learner is programme only DAS
+        And levy balance > agreed price for all months
+		And the apprenticeship funding band maximum is 27000
+        And the following commitments exist:
+			| commitment Id | version Id | ULN       | start date | end date   | standard code | agreed price | status | effective from | effective to |
+			| 1             | 1          | learner a | 01/08/2017 | 28/08/2018 | 11            | 15500        | active | 01/08/2017     | 14/11/2017   |
+			| 1             | 2          | learner a | 01/08/2017 | 28/08/2018 | 11            | 16000        | active | 15/11/2017     |              |
+        When an ILR file is submitted on 03/12/2017 with the following data:
+            | ULN       | start date | planned end date | actual end date | completion status | standard code | Total training price 1 | Total training price 1 effective date | Total assessment price 1 | Total assessment price 1 effective date | Total assessment price 2 | Total assessment price 2 effective date |
+            | learner a | 05/08/2017 | 28/08/2018       |                 | continuing        | 11            | 12000                  | 05/08/2017                            | 3500                     | 05/08/2017                              | 4000                     | 15/11/2017                              |
+		Then the data lock status will be as follows:
+			| Payment type                   | 08/17           | 09/17           | 10/17           | 11/17           | 12/17           | 01/18           |
+			| On-program                     | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | commitment 1 v2 | commitment 1 v2 | commitment 1 v2 |
+			| Completion                     |                 |                 |                 |                 |                 |                 |
+			| Employer 16-18 incentive       |                 |                 |                 |                 |                 |                 |
+			| Provider 16-18 incentive       |                 |                 |                 |                 |                 |                 |
+			| Provider learning support      |                 |                 |                 |                 |                 |                 |
+			| English and maths on programme |                 |                 |                 |                 |                 |                 |
+			| English and maths Balancing    |                 |                 |                 |                 |                 |                 | 
+        And the provider earnings and payments break down as follows:
+            | Type                          | 08/17   | 09/17   | 10/17   | 11/17   | 12/17   | 01/18   |
+            | Provider Earned Total         | 1033.33 | 1033.33 | 1033.33 | 1077.78 | 1077.78 | 1077.78 |
+            | Provider Earned from SFA      | 1033.33 | 1033.33 | 1033.33 | 1077.78 | 1077.78 | 1077.78 |
+            | Provider Earned from Employer | 0       | 0       | 0       | 0       | 0       | 0       |
+            | Provider Paid by SFA          | 0       | 1033.33 | 1033.33 | 1033.33 | 1077.78 | 1077.78 |
+            | Payment due from employer 1   | 0       | 0       | 0       | 0       | 0       | 0       |
+            | Levy account debited          | 0       | 1033.33 | 1033.33 | 1033.33 | 1077.78 | 1077.78 |
+            | SFA Levy employer budget      | 1033.33 | 1033.33 | 1033.33 | 1077.78 | 1077.78 | 1077.78 |
+            | SFA Levy co-funding budget    | 0       | 0       | 0       | 0       | 0       | 0       |
+
+@TNP2OrTNP4Change
+Scenario:630-AC02  Earnings and payments for a DAS learner, levy available, and the total assessment cost is decreased in isolation (no change to total training price) during the programme
+
+        Given The learner is programme only DAS
+        And levy balance > agreed price for all months
+		And the apprenticeship funding band maximum is 27000
+        And the following commitments exist:
+			| commitment Id | version Id | ULN       | start date | end date   | standard code | agreed price | status | effective from | effective to |
+			| 1             | 1          | learner a | 01/08/2017 | 28/08/2018 | 11            | 15500        | active | 01/08/2017     | 14/11/2017   |
+			| 1             | 2          | learner a | 01/08/2017 | 28/08/2018 | 11            | 14000        | active | 15/11/2017     |              |
+		When an ILR file is submitted on 03/12/2017 with the following data:
+			| ULN       | start date | planned end date | actual end date | completion status | standard code | Total training price 1 | Total training price 1 effective date | Total assessment price 1 | Total assessment price 1 effective date | Total assessment price 2 | Total assessment price 2 effective date |
+			| learner a | 05/08/2017 | 28/08/2018       |                 | continuing        | 11            | 12000                  | 05/08/2017                            | 3500                     | 05/08/2017                              | 2000                     | 15/11/2017                              |
+        
+		Then the data lock status will be as follows:
+			| Payment type                   | 08/17           | 09/17           | 10/17           | 11/17           | 12/17           | 01/18           |
+			| On-program                     | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | commitment 1 v2 | commitment 1 v2 | commitment 1 v2 |
+			| Completion                     |                 |                 |                 |                 |                 |                 |
+			| Employer 16-18 incentive       |                 |                 |                 |                 |                 |                 |
+			| Provider 16-18 incentive       |                 |                 |                 |                 |                 |                 |
+			| Provider learning support      |                 |                 |                 |                 |                 |                 |
+			| English and maths on programme |                 |                 |                 |                 |                 |                 |
+			| English and maths Balancing    |                 |                 |                 |                 |                 |                 | 
+		And the provider earnings and payments break down as follows:
+			| Type                          | 08/17   | 09/17   | 10/17   | 11/17   | 12/17  | 01/18  |
+			| Provider Earned Total         | 1033.33 | 1033.33 | 1033.33 | 900.00  | 900.00 | 900.00 |
+			| Provider Earned from SFA      | 1033.33 | 1033.33 | 1033.33 | 900.00  | 900.00 | 900.00 |
+			| Provider Earned from Employer | 0       | 0       | 0       | 0       | 0      | 0      |
+			| Provider Paid by SFA          | 0       | 1033.33 | 1033.33 | 1033.33 | 900.00 | 900.00 |
+			| Payment due from Employer     | 0       | 0       | 0       | 0       | 0      | 0      |
+			| Levy account debited          | 0       | 1033.33 | 1033.33 | 1033.33 | 900.00 | 900.00 |
+			| SFA Levy employer budget      | 1033.33 | 1033.33 | 1033.33 | 900.00  | 900.00 | 900.00 |
+			| SFA Levy co-funding budget    | 0       | 0       | 0       | 0       | 0      | 0      |
+
+@TNP2OrTNP4Change
+Scenario:630-AC03  Earnings and payments for a DAS learner, levy available, and the residual assessment cost is increased in isolation (no change to residual training price) during the programme
+
+		Given The learner is programme only DAS
+        And levy balance > agreed price for all months
+		And the apprenticeship funding band maximum is 27000
+        And the following commitments exist:
+		    | commitment Id | version Id | ULN       | start date | end date   | standard code | agreed price | status | effective from | effective to |
+		    | 1             | 1          | learner a | 01/08/2017 | 28/08/2018 | 11            | 15500        | active | 01/08/2017     | 14/11/2017   |
+		    | 1             | 3          | learner a | 01/08/2017 | 28/08/2018 | 11            | 16000        | active | 15/11/2017     |              |
+        When an ILR file is submitted on 03/12/2017 with the following data:
+            | ULN       | start date | planned end date | actual end date | completion status | standard code | Residual training price 1 | Residual training price 1 effective date | Residual assessment price 1 | Residual assessment price 1 effective date | Residual assessment price 2 | Residual assessment price 2 effective date |
+            | learner a | 05/08/2017 | 28/08/2018       |                 | continuing        | 11            | 12000                     | 05/08/2017                               | 3500                        | 05/08/2017                                 | 4000                        | 15/11/2017                                 |
+  		Then the data lock status will be as follows:
+		   | Payment type                   | 08/17           | 09/17           | 10/17           | 11/17           | 12/17           | 01/18           |
+		   | On-program                     | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | commitment 1 v2 | commitment 1 v2 | commitment 1 v2 |
+		   | Completion                     |                 |                 |                 |                 |                 |                 |
+		   | Employer 16-18 incentive       |                 |                 |                 |                 |                 |                 |
+		   | Provider 16-18 incentive       |                 |                 |                 |                 |                 |                 |
+		   | Provider learning support      |                 |                 |                 |                 |                 |                 |
+		   | English and maths on programme |                 |                 |                 |                 |                 |                 |
+		   | English and maths Balancing    |                 |                 |                 |                 |                 |                 | 
+        And the provider earnings and payments break down as follows:
+            | Type                          | 08/17   | 09/17   | 10/17   | 11/17   | 12/17   | 01/18   |
+            | Provider Earned Total         | 1033.33 | 1033.33 | 1033.33 | 1422.22 | 1422.22 | 1422.22 |
+            | Provider Earned from SFA      | 1033.33 | 1033.33 | 1033.33 | 1422.22 | 1422.22 | 1422.22 |
+            | Provider Earned from Employer | 0       | 0       | 0       | 0       | 0       | 0       |
+            | Provider Paid by SFA          | 0       | 1033.33 | 1033.33 | 1033.33 | 1422.22 | 1422.22 |
+            | Payment due from Employer     | 0       | 0       | 0       | 0       | 0       | 0       |
+            | Levy account debited          | 0       | 1033.33 | 1033.33 | 1033.33 | 1422.22 | 1422.22 |
+            | SFA Levy employer budget      | 1033.33 | 1033.33 | 1033.33 | 1422.22 | 1422.22 | 1422.22 |
+            | SFA Levy co-funding budget    | 0       | 0       | 0       | 0       | 0       | 0       |
+
+@TNP2OrTNP4Change
+Scenario:630-AC04  Earnings and payments for a DAS learner, levy available, and the residual assessment cost is decreased in isolation (no change to residual training price) during the programme
+		Given The learner is programme only DAS
+        And levy balance > agreed price for all months
+		And the apprenticeship funding band maximum is 27000
+        And the following commitments exist:
+            | commitment Id | version Id | ULN       | start date | end date   | standard code | agreed price | status | effective from | effective to |
+            | 1             | 1          | learner a | 01/08/2017 | 28/08/2018 | 11            | 15500        | active | 01/08/2017     | 14/11/2017   |
+            | 1             | 3          | learner a | 01/08/2017 | 28/08/2018 | 11            | 14000        | active | 15/11/2017     |              |
+        When an ILR file is submitted on 03/12/2017 with the following data:
+            | ULN       | start date | planned end date | actual end date | completion status | standard code | Residual training price 1 | Residual training price 1 effective date | Residual assessment price 1 | Residual assessment price 1 effective date | Residual assessment price 2 | Residual assessment price 2 effective date |
+            | learner a | 05/08/2017 | 28/08/2018       |                 | continuing        | 11            | 12000                     | 05/08/2017                               | 3500                        | 05/08/2017                                 | 2000                        | 15/11/2017                                 |
+		Then the data lock status will be as follows:
+			| Payment type                   | 08/17           | 09/17           | 10/17           | 11/17           | 12/17           | 01/18           |
+			| On-program                     | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | commitment 1 v2 | commitment 1 v2 | commitment 1 v2 |
+			| Completion                     |                 |                 |                 |                 |                 |                 |
+			| Employer 16-18 incentive       |                 |                 |                 |                 |                 |                 |
+			| Provider 16-18 incentive       |                 |                 |                 |                 |                 |                 |
+			| Provider learning support      |                 |                 |                 |                 |                 |                 |
+			| English and maths on programme |                 |                 |                 |                 |                 |                 |
+			| English and maths Balancing    |                 |                 |                 |                 |                 |                 | 
+	   And the provider earnings and payments break down as follows:
+			| Type                          | 08/17   | 09/17   | 10/17   | 11/17   | 12/17   | 01/18   |
+			| Provider Earned Total         | 1033.33 | 1033.33 | 1033.33 | 1244.44 | 1244.44 | 1244.44 |
+			| Provider Earned from SFA      | 1033.33 | 1033.33 | 1033.33 | 1244.44 | 1244.44 | 1244.44 |
+			| Provider Earned from Employer | 0       | 0       | 0       | 0       | 0       | 0       |
+			| Provider Paid by SFA          | 0       | 1033.33 | 1033.33 | 1033.33 | 1244.44 | 1244.44 |
+			| Payment due from Employer     | 0       | 0       | 0       | 0       | 0       | 0       |
+			| Levy account debited          | 0       | 1033.33 | 1033.33 | 1033.33 | 1244.44 | 1244.44 |
+			| SFA Levy employer budget      | 1033.33 | 1033.33 | 1033.33 | 1244.44 | 1244.44 | 1244.44 |
+			| SFA Levy co-funding budget    | 0       | 0       | 0       | 0       | 0       | 0       |
+
+@TNP2OrTNP4Change			
+ Scenario:630-AC05  Earnings and payments for a DAS learner, levy available, and the total assessment cost is added in isolation (no change to total training price, and no assessment cost initially exists) during the programme
+
+      	Given The learner is programme only DAS
+        And levy balance > agreed price for all months
+		And the apprenticeship funding band maximum is 27000
+        And the following commitments exist:
+            | commitment Id | version Id | ULN       | start date | end date   | standard code | agreed price | status | effective from | effective to |
+            | 1             | 1          | learner a | 01/08/2017 | 28/08/2018 | 11             | 15500        | active | 01/08/2017     | 14/11/2017   |
+            | 1             | 3          | learner a | 01/08/2017 | 28/08/2018 | 11             | 16000        | active | 15/11/2017     |              |
+        When an ILR file is submitted on 03/12/2017 with the following data:
+            | ULN       | start date | planned end date | actual end date | completion status | standard code | Total training price 1 | Total training price 1 effective date | Total assessment price 1 | Total assessment price 1 effective date | Total assessment price 2 | Total assessment price 2 effective date |
+            | learner a | 05/08/2017 | 28/08/2018       |                 | continuing        | 11            | 15500                  | 05/08/2017                            | 0                        | 05/08/2017                              | 500                      | 15/11/2017                              |
+		Then the data lock status will be as follows:
+			| Payment type                   | 08/17           | 09/17           | 10/17           | 11/17           | 12/17           | 01/18           |
+			| On-program                     | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | commitment 1 v2 | commitment 1 v2 | commitment 1 v2 |
+			| Completion                     |                 |                 |                 |                 |                 |                 |
+			| Employer 16-18 incentive       |                 |                 |                 |                 |                 |                 |
+			| Provider 16-18 incentive       |                 |                 |                 |                 |                 |                 |
+			| Provider learning support      |                 |                 |                 |                 |                 |                 |
+			| English and maths on programme |                 |                 |                 |                 |                 |                 |
+			| English and maths Balancing    |                 |                 |                 |                 |                 |                 | 
+        And the provider earnings and payments break down as follows:
+            | Type                          | 08/17   | 09/17   | 10/17   | 11/17   | 12/17   | 01/18   |
+            | Provider Earned Total         | 1033.33 | 1033.33 | 1033.33 | 1077.78 | 1077.78 | 1077.78 |
+            | Provider Earned from SFA      | 1033.33 | 1033.33 | 1033.33 | 1077.78 | 1077.78 | 1077.78 |
+            | Provider Earned from Employer | 0       | 0       | 0       | 0       | 0       | 0       |
+            | Provider Paid by SFA          | 0       | 1033.33 | 1033.33 | 1033.33 | 1077.78 | 1077.78 |
+            | Payment due from Employer     | 0       | 0       | 0       | 0       | 0       | 0       |
+            | Levy account debited          | 0       | 1033.33 | 1033.33 | 1033.33 | 1077.78 | 1077.78 |
+            | SFA Levy employer budget      | 1033.33 | 1033.33 | 1033.33 | 1077.78 | 1077.78 | 1077.78 |
+            | SFA Levy co-funding budget    | 0       | 0       | 0       | 0       | 0       | 0       |

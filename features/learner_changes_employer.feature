@@ -228,7 +228,7 @@ Feature: Provider earnings and payments where a learner changes employers
             | employer 2 | 2             | 1          | learner a | 15/11/2017 | 28/08/2018 | 5625         | active    | 15/11/2017     |              |
         When an ILR file is submitted on 03/12/2017 with the following data:
             | ULN       | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date | Residual training price | Residual training price effective date | Residual assessment price | Residual assessment price effective date |
-            | learner a | 01/08/2017 | 28/08/2018       |                 | continuing        | 12000                | 01/08/2017                          | 3000                   | 01/08/2017                            | 5000                    | 05/11/2017                             | 625                       | 25/11/2017                               |
+            | learner a | 01/08/2017 | 28/08/2018       |                 | continuing        | 12000                | 01/08/2017                          | 3000                   | 01/08/2017                            | 5000                    | 05/11/2017                             | 625                       | 05/11/2017                               |
         Then the data lock status of the ILR in 03/12/2017 is:
             | Payment type | 08/17           | 09/17           | 10/17           | 11/17 | 12/17 |
             | On-program   | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 |       |       |
@@ -679,10 +679,10 @@ Scenario:AC3- Provider earnings and payments where learner changes employer and 
             | No employer | Non-DAS | 03/10/2017                |
             | employer 2  | DAS     | 03/11/2017                |
         And the following commitments exist:
-            | commitment Id | version Id | Employer | Provider   | ULN       | start date | end date   | agreed price | status    | effective from | effective to |
-            | 1             | 1          | employer 1      | provider a | learner a | 01/08/2017 | 04/08/2018 | 15000        | Active    | 01/08/2017     | 02/10/2017   |
-            | 1             | 2          | employer 1      | provider a | learner a | 01/08/2017 | 04/08/2018 | 15000        | cancelled | 03/10/2017     |              |
-            | 2             | 1          | employer 2      | provider a | learner a | 01/11/2017 | 04/08/2018 | 5625         | Active    | 01/11/2017     |              |
+            | commitment Id | version Id | Employer   | Provider   | ULN       | start date | end date   | agreed price | status    | effective from | effective to |
+            | 1             | 1          | employer 1 | provider a | learner a | 01/08/2017 | 04/08/2018 | 15000        | Active    | 01/08/2017     | 02/10/2017   |
+            | 1             | 2          | employer 1 | provider a | learner a | 01/08/2017 | 04/08/2018 | 15000        | cancelled | 03/10/2017     |              |
+            | 2             | 1          | employer 2 | provider a | learner a | 01/11/2017 | 04/08/2018 | 5625         | Active    | 01/11/2017     |              |
         When an ILR file is submitted with the following data:
             | ULN       | Provider   | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date | Residual training price | Residual training price effective date | Residual assessment price | Residual assessment price effective date |
             | learner a | provider a | 03/08/2017 | 04/08/2018       |                 | continuing        | 12000                | 03/08/2017                          | 3000                   | 03/08/2017                            | 4500                    | 03/11/2017                             | 1125                      | 03/11/2017                               |
@@ -700,7 +700,7 @@ Scenario:AC3- Provider earnings and payments where learner changes employer and 
         And the provider earnings and payments break down as follows:
             | Type                            | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 |
             | Provider Earned Total           | 1000  | 1000  | 1000  | 500   | 500   |
-            | Provider Paid by SFA            | 0     | 1000  | 1000  | 0     | 500   |
+            | Provider Paid by SFA            | 0     | 1000  | 1000  | 900   | 500   |
             | Employer 1 Levy account debited | 0     | 1000  | 1000  | 0     | 0     |
             | Employer 2 Levy account debited | 0     | 0     | 0     | 0     | 500   |
             | SFA Levy employer budget        | 1000  | 1000  | 0     | 500   | 500   |
