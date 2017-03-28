@@ -19,7 +19,7 @@ Scenario:673-AC01 DAS learner, levy available, provider retrospectively notifies
         | Levy account debited          | 0     | 750   | 750   | 750   | 750   | 750   |         
         | SFA Levy employer budget      | 750   | 750   | 750   | 750   | 750   | 0     |        
         | SFA Levy co-funding budget    | 0     | 0     | 0     | 0     | 0     | 0     |       
-    When an ILR file is submitted for the first time on 28/02/18 with the following data:
+    When an ILR file is submitted for the first time on 31/12/17 with the following data:
         | ULN       | start date | planned end date | actual end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date | 
         | learner a | 04/08/2017 | 20/08/2018       | 12/11/2017      | withdrawn         | 9000                 | 04/08/2017                          | 2250                   | 04/08/2017                            | 
 	Then the provider earnings and payments break down as follows:
@@ -27,12 +27,12 @@ Scenario:673-AC01 DAS learner, levy available, provider retrospectively notifies
         | Provider Earned Total         | 750   | 750   | 750   | 0     | 0     | 0     |
         | Provider Earned from SFA      | 750   | 750   | 750   | 0     | 0     | 0     |
         | Provider Earned from Employer | 0     | 0     | 0     | 0     | 0     | 0     |
-        | Provider Paid by SFA          | 0     | 750   | 750   | 750   | 0     | 0     |
-        | Refund taken by SFA           | 0     | 0     | 0     | 0     | -750  | -750  |
+        | Provider Paid by SFA          | 0     | 750   | 750   | 750   | 750   | 0     |
+        | Refund taken by SFA           | 0     | 0     | 0     | 0     | 0     | -1500 |
         | Payment due from Employer     | 0     | 0     | 0     | 0     | 0     | 0     |
-        | Levy account debited          | 0     | 750   | 750   | 750   | 0     | 0     |
-        | Levy account credited         | 0     | 0     | 0     | 0     | 750   | 750   |
-        | SFA Levy employer budget      | 750   | 750   | 750   | 0     | 0     | 0     |
+        | Levy account debited          | 0     | 750   | 750   | 750   | 750   | 0     |
+        | Levy account credited         | 0     | 0     | 0     | 0     | 0     | 1500  |
+        | SFA Levy employer budget      | 750   | 750   | 750   | 750   | 750   | 0     |
         | SFA Levy co-funding budget    | 0     | 0     | 0     | 0     | 0     | 0     |
 
 

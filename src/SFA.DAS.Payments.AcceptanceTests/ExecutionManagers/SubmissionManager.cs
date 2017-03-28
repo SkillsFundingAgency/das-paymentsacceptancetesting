@@ -224,7 +224,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                     Date = learnerReferenceData.TotalTrainingPrice2EffectiveDate == DateTime.MinValue ? learnerReferenceData.StartDate : learnerReferenceData.TotalTrainingPrice2EffectiveDate
                 });
             }
-            if (learnerReferenceData.TotalAssessmentPrice2 > 0 || learnerReferenceData.TotalAssessmentPrice2 != learnerReferenceData.TotalAssessmentPrice1)
+            if (learnerReferenceData.TotalAssessmentPrice2 > 0 && learnerReferenceData.TotalAssessmentPrice2 != learnerReferenceData.TotalAssessmentPrice1)
             {
                 financialRecords.Add(new FinancialRecord
                 {

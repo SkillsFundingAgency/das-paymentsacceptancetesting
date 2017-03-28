@@ -201,7 +201,7 @@ this.ScenarioSetup(scenarioInfo);
                         "2250",
                         "04/08/2017"});
 #line 22
-    testRunner.When("an ILR file is submitted for the first time on 28/02/18 with the following data:", ((string)(null)), table494, "When ");
+    testRunner.When("an ILR file is submitted for the first time on 31/12/17 with the following data:", ((string)(null)), table494, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table495 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -241,7 +241,7 @@ this.ScenarioSetup(scenarioInfo);
                         "750",
                         "750",
                         "750",
-                        "0",
+                        "750",
                         "0"});
             table495.AddRow(new string[] {
                         "Refund taken by SFA",
@@ -249,8 +249,8 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0",
-                        "-750",
-                        "-750"});
+                        "0",
+                        "-1500"});
             table495.AddRow(new string[] {
                         "Payment due from Employer",
                         "0",
@@ -265,7 +265,7 @@ this.ScenarioSetup(scenarioInfo);
                         "750",
                         "750",
                         "750",
-                        "0",
+                        "750",
                         "0"});
             table495.AddRow(new string[] {
                         "Levy account credited",
@@ -273,15 +273,15 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0",
-                        "750",
-                        "750"});
+                        "0",
+                        "1500"});
             table495.AddRow(new string[] {
                         "SFA Levy employer budget",
                         "750",
                         "750",
                         "750",
-                        "0",
-                        "0",
+                        "750",
+                        "750",
                         "0"});
             table495.AddRow(new string[] {
                         "SFA Levy co-funding budget",

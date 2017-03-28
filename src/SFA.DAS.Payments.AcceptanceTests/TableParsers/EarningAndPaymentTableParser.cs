@@ -113,7 +113,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                 }
                 else if (row[0] == "Levy account credited")
                 {
-                    ParseEmployerRow(Defaults.EmployerAccountId.ToString(), row, periodNames, breakdown.EmployersLevyAccountDebited);
+                    ParseEmployerRow(Defaults.EmployerAccountId.ToString(), row, periodNames, breakdown.EmployersLevyAccountCredited);
                 }
                 else
                 {

@@ -21,7 +21,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Assertions.PaymentsAndEarningsRules
         }
         protected new void AssertResultsForPeriod(PeriodValue period, PaymentResult[] allPayments)
         {
-            var paidInPeriod = allPayments.Where(p => p.DeliveryPeriod == period.PeriodName).Sum(p => p.Amount);
+            var paidInPeriod = allPayments.Where(p => p.DeliveryPeriod == period.PeriodName && p.Amount>=0).Sum(p => p.Amount);
             if (!AreValuesEqual(period.Value, paidInPeriod))
             {
                 throw new Exception(FormatAssertionFailureMessage(period, paidInPeriod));
