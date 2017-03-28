@@ -12,13 +12,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
     internal class PaymentsManager
     {
         internal static void SavePaymentDue(string requiredPaymentId,
-                                            long ukprn,
-                                            long uln,
-                                           int? FrameworkCode,
-                                            int? PathwayCode,
-                                            int? ProgrammeType,
-                                            long? StandardCode,
-                                            CommitmentReferenceData commitment,
+                                                CommitmentReferenceData commitment,
                                               string learnRefNumber,
                                               string collectionPeriodName,
                                               int collectionPeriodMonth,
@@ -88,22 +82,22 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                     new
                     {
                         requiredPaymentId,
-                        commitmentId =  commitment == null ? (long?)null : commitment.CommitmentId,
-                        VersionId = commitment==null?  0 : commitment.VersionId,
-                        EmployerAccountId = commitment == null ? 0: commitment.EmployerAccountId,
-                        accountVersionId = commitment == null ? 0 : commitment.VersionId,
-                        uln,
+                        commitment.CommitmentId,
+                        commitment.VersionId,
+                        commitment.EmployerAccountId,
+                        accountVersionId = commitment.VersionId,
+                        commitment.Uln,
                         learnRefNumber,
-                        ukprn,
+                        commitment.Ukprn,
                         collectionPeriodName,
                         collectionPeriodMonth,
                         collectionPeriodYear,
                         transactionType,
                         amountDue,
-                        StandardCode = StandardCode ,
-                        ProgrammeType  = ProgrammeType,
-                        FrameworkCode = FrameworkCode ,
-                        PathwayCode = PathwayCode ,
+                        StandardCode = commitment.StandardCode> 0 ? commitment.StandardCode : null,
+                        ProgrammeType  = commitment.ProgrammeType > 0 ? commitment.ProgrammeType : null  ,
+                        FrameworkCode = commitment.FrameworkCode > 0 ? commitment.FrameworkCode : null,
+                        PathwayCode = commitment.PathwayCode > 0 ? commitment.PathwayCode : null,
                         contractType
                     });
             }
@@ -111,6 +105,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
 
 
         internal static void SavePayment(string requiredPaymentId,
+                                            string learnRefNumber,
                                             string collectionPeriodName,
                                             int collectionPeriodMonth,
                                             int collectionPeriodYear,
