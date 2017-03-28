@@ -106,7 +106,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Assertions\PaymentsAndEarningsAssestions.cs" />
+    <Compile Include="Assertions\PaymentsAndEarningsAssertions.cs" />
     <Compile Include="Assertions\PaymentsAndEarningsRules\EarningsAndPaymentsRuleBase.cs" />
     <Compile Include="Assertions\PaymentsAndEarningsRules\EmployersLevyAccountDebitedRule.cs" />
     <Compile Include="Assertions\PaymentsAndEarningsRules\PaymentDueFromEmployersRule.cs" />
