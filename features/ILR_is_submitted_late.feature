@@ -7,6 +7,9 @@ Feature: The ILR is submitted late
         And levy balance > agreed price for all months
 
     Scenario: ILR submitted late for a DAS learner, levy available, learner finishes on time
+		Given the following commitments exist:
+            | ULN       | priority | start date | end date   | agreed price |
+            | learner a | 1        | 01/09/2017 | 08/09/2018 | 15000        |
         When an ILR file is submitted for the first time on 28/12/17 with the following data:
             | learner type       | agreed price | start date | planned end date | completion status |
             | programme only DAS | 15000        | 01/09/2017 | 08/09/2018       | continuing        |

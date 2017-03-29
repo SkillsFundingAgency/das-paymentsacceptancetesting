@@ -7,6 +7,9 @@ Feature: Provider earnings and payments where learner completes earlier than pla
 
     Scenario: A DAS learner, levy available, learner finishes one month early
         Given levy balance > agreed price for all months
+		And the following commitments exist:
+            | ULN       | priority | start date | end date   | agreed price |
+            | learner a | 1        | 01/09/2017 | 08/09/2018 | 15000        |
         When an ILR file is submitted with the following data:
             | learner type       | agreed price | start date | planned end date | actual end date | completion status |
             | programme only DAS | 15000        | 01/09/2017 | 08/09/2018       | 08/08/2018      | completed         |
@@ -26,6 +29,9 @@ Feature: Provider earnings and payments where learner completes earlier than pla
 
     Scenario: A DAS learner, levy available, learner finishes two months early
         Given levy balance > agreed price for all months
+		And the following commitments exist:
+            | ULN       | priority | start date | end date   | agreed price |
+            | learner a | 1        | 01/09/2017 | 08/09/2018 | 15000        |
         When an ILR file is submitted with the following data:
             | learner type       | agreed price | start date | planned end date | actual end date | completion status |
             | programme only DAS | 15000        | 01/09/2017 | 08/09/2018       | 08/07/2018      | completed         |

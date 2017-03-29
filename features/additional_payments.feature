@@ -34,16 +34,18 @@ Scenario:AC2- Payment for a 16-18 DAS learner, levy available, incentives not pa
     
     Given levy balance > agreed price for all months
     And the following commitments exist:
-        | commitment number | ULN       | start date | end date   | agreed price | status |
-        | 1                 | learner a | 01/09/2017 | 01/09/2018 | 15000        | active |
+        | commitment Id | ULN       | start date | end date   | agreed price | status |
+        | 1             | learner a | 01/09/2017 | 01/09/2018 | 15000        | active |
     
      When an ILR file is submitted with the following data:
         | ULN       | learner type             | agreed price | start date | planned end date | actual end date | completion status |
         | learner a | 16-18 programme only DAS | 15000        | 28/08/2017 | 29/08/2018       |                 | continuing        |
       
     Then the data lock status will be as follows:
-        | type                | 08/17 onwards |   
-        | matching commitment |               |   
+        | Payment type             | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
+        | On-program               |       |       |       |       |       | ... |       |       |
+        | Employer 16-18 incentive |       |       |       |       |       | ... |       |       |
+        | Provider 16-18 incentive |       |       |       |       |       | ... |       |       |
       
     And the provider earnings and payments break down as follows:
         | Type                                | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
@@ -58,7 +60,7 @@ Scenario:AC2- Payment for a 16-18 DAS learner, levy available, incentives not pa
 Scenario:AC3-Learner finishes on time, earns on-programme and completion payments. Assumes 12 month apprenticeship and learner completes after 10 months.
     Given the apprenticeship funding band maximum is 9000
     When an ILR file is submitted with the following data:
-        | ULN    | learner type                 | agreed price | start date | planned end date | actual end date | completion status | Framework Code | Programme Type | Pathway Code |
+		| ULN    | learner type                 | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code |
         | 123456 | 16-18 programme only non-DAS | 9000         | 06/08/2017 | 09/08/2018       | 10/08/2018      | Completed         | 403            | 2              | 1            |
 
     Then the provider earnings and payments break down as follows:
@@ -71,7 +73,7 @@ Scenario:AC3-Learner finishes on time, earns on-programme and completion payment
         | Levy account debited                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     |
         | SFA Levy employer budget                | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     |
         | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     |
-        | SFA non Levy co-funding budget          | 540   | 540   | 540   | 540   | 540   | ... | 540   | 540   | 1620  | 0     |
+		| SFA non-Levy co-funding budget          | 540   | 540   | 540   | 540   | 540   | ... | 540   | 540   | 1620  | 0     |
         | SFA non-Levy additional payments budget | 120   | 120   | 120   | 1120  | 120   | ... | 120   | 120   | 1360  | 0     |
 
     And the transaction types for the payments are:
@@ -90,7 +92,7 @@ Scenario:AC3-Learner finishes on time, earns on-programme and completion payment
 Scenario:AC4-Learner finishes on time, Price is less than Funding Band Maximum of £9,000
     Given the apprenticeship funding band maximum is 9000
     When an ILR file is submitted with the following data:
-        | ULN    | learner type                 | agreed price | start date | planned end date | actual end date | completion status | Framework Code | Programme Type | Pathway Code |
+		| ULN    | learner type                 | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code |
         | 123455 | 16-18 programme only non-DAS | 8250         | 06/08/2017 | 09/08/2018       | 10/08/2018      | Completed         | 403            | 2              | 1            |
 
     Then the provider earnings and payments break down as follows:
@@ -103,7 +105,7 @@ Scenario:AC4-Learner finishes on time, Price is less than Funding Band Maximum o
         | Levy account debited                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     |
         | SFA Levy employer budget                | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     |
         | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     |
-        | SFA non Levy co-funding budget          | 495   | 495   | 495   | 495   | 495   | ... | 495   | 495   | 1485  | 0     |
+		| SFA non-Levy co-funding budget          | 495   | 495   | 495   | 495   | 495   | ... | 495   | 495   | 1485  | 0     |
         | SFA non-Levy additional payments budget | 120   | 120   | 120   | 1120  | 120   | ... | 120   | 120   | 1360  | 0     |
 
       And the transaction types for the payments are:
@@ -122,7 +124,7 @@ Scenario:AC5- Payment for a non-DAS learner, lives in a disadvantaged postocde a
   
     When an ILR file is submitted with the following data:
         | ULN       | learner type             | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | home postcode deprivation |
-        | learner a | programme only non - DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | 403            | 2              | 1            | 1-10%                     |
+		  | learner a | programme only non-DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | 403            | 2              | 1            | 1-10%                     |
     Then the provider earnings and payments break down as follows:
         | Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
         | Provider Earned Total                   | 1000  | 1000  | 1000  | 1300  | 1000  | ... | 1000  | 300   | 0     |
@@ -130,10 +132,10 @@ Scenario:AC5- Payment for a non-DAS learner, lives in a disadvantaged postocde a
         | Payment due from Employer               | 0     | 100   | 100   | 100   | 100   | ... | 100   | 100   | 0     |
         | Levy account debited                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | SFA Levy employer budget                | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | SFA levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | SFA non-levy co-funding budget          | 900   | 900   | 900   | 900   | 900   | ... | 900   | 0     | 0     |
-        | SFA non-levy additional payments budget | 0     | 0     | 0     | 300   | 0     | ... | 0     | 300   | 0     |
-        | SFA levy additional payments budget     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA non-Levy co-funding budget          | 900   | 900   | 900   | 900   | 900   | ... | 900   | 0     | 0     |
+		  | SFA non-Levy additional payments budget | 0     | 0     | 0     | 300   | 0     | ... | 0     | 300   | 0     |
+		  | SFA Levy additional payments budget     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
     And the transaction types for the payments are:
         | Payment type                 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
         | On-program                   | 900   | 900   | 900   | 900   | ... | 900   | 0     |
@@ -154,10 +156,10 @@ Scenario:AC6- Payment for a non-DAS learner, lives in a disadvantaged postocde a
         | Payment due from Employer                | 0     | 100   | 100   | 100   | 100   | ... | 100   | 100   | 0     |
         | Levy account debited                     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | SFA Levy employer budget                 | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | SFA levy co-funding budget               | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | SFA non-levy co-funding budget           | 900   | 900   | 900   | 900   | 900   | ... | 900   | 0     | 0     |
-        | SFA non-levy  additional payments budget | 0     | 0     | 0     | 150   | 0     | ... | 0     | 150   | 0     |
-        | SFA levy additional payments budget      | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA Levy co-funding budget               | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA non-Levy co-funding budget           | 900   | 900   | 900   | 900   | 900   | ... | 900   | 0     | 0     |
+		  | SFA non-Levy additional payments budget | 0     | 0     | 0     | 150   | 0     | ... | 0     | 150   | 0     |
+		  | SFA Levy additional payments budget      | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
       And the transaction types for the payments are:
         | Payment type                 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
         | On-program                   | 900   | 900   | 900   | 900   | ... | 900   | 0     |
@@ -169,7 +171,7 @@ Scenario:AC7- Payment for a non-DAS learner, lives in a disadvantaged postocde a
     #The provider incentive for this postcode group is £200 split equally into 2 payments at 90 and 365 days. INELIGIBLE FOR APPRENITCESHIP STANDARDS
     When an ILR file is submitted with the following data:
         | ULN       | learner type            | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | home postcode deprivation |
-        | learner a | programme only non- DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | 403            | 2              | 1            | 20-27%                    |
+		  | learner a | programme only non-DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | 403            | 2              | 1            | 20-27%                    |
     Then the provider earnings and payments break down as follows:
         | Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
         | Provider Earned Total                   | 1000  | 1000  | 1000  | 1100  | 1000  | ... | 1000  | 100   | 0     |
@@ -177,10 +179,10 @@ Scenario:AC7- Payment for a non-DAS learner, lives in a disadvantaged postocde a
         | Payment due from Employer               | 0     | 100   | 100   | 100   | 100   | ... | 100   | 100   | 0     |
         | Levy account debited                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | SFA Levy employer budget                | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | SFA levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | SFA non-levy co-funding budget          | 900   | 900   | 900   | 900   | 900   | ... | 900   | 0     | 0     |
-        | SFA non-levy additional payments budget | 0     | 0     | 0     | 100   | 0     | ... | 0     | 100   | 0     |
-        | SFA levy additional payments budget     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA non-Levy co-funding budget          | 900   | 900   | 900   | 900   | 900   | ... | 900   | 0     | 0     |
+		  | SFA non-Levy additional payments budget | 0     | 0     | 0     | 100   | 0     | ... | 0     | 100   | 0     |
+		  | SFA Levy additional payments budget     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
     And the transaction types for the payments are:
         | Payment type                 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
         | On-program                   | 900   | 900   | 900   | 900   | ... | 900   | 0     |
@@ -192,7 +194,7 @@ Scenario:AC7- Payment for a non-DAS learner, lives in a disadvantaged postocde a
   
     When an ILR file is submitted with the following data:
         | ULN       | learner type            | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | home postcode deprivation |
-        | learner a | programme only non- DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | 403            | 2              | 1            | not deprived              |
+		  | learner a | programme only non-DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | 403            | 2              | 1            | not deprived              |
     Then the provider earnings and payments break down as follows:
         | Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
         | Provider Earned Total                   | 1000  | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     | 0     |
@@ -200,10 +202,10 @@ Scenario:AC7- Payment for a non-DAS learner, lives in a disadvantaged postocde a
         | Payment due from Employer               | 0     | 100   | 100   | 100   | 100   | ... | 100   | 100   | 0     |
         | Levy account debited                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | SFA Levy employer budget                | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | SFA levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | SFA non-levy co-funding budget          | 900   | 900   | 900   | 900   | 900   | ... | 900   | 0     | 0     |
-        | SFA non-levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | SFA levy additional payments budget     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA non-Levy co-funding budget          | 900   | 900   | 900   | 900   | 900   | ... | 900   | 0     | 0     |
+		  | SFA non-Levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA Levy additional payments budget     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
     And the transaction types for the payments are:
         | Payment type                 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
         | On-program                   | 900   | 900   | 900   | 900   | ... | 900   | 0     |
@@ -279,7 +281,7 @@ Scenario:AC11- Payment for a DAS learner, lives in a disadvantaged postocde area
     #The provider incentive for this postcode group is £600 split equally into 2 payments at 90 and 365 days.INELIGIBLE FOR APPRENTICESHIP STANDARDS
     Given levy balance > agreed price for all months
     And the following commitments exist:
-        | commitment ID | version ID | ULN       | start date  | end date   | framework code | programme type | pathway code | agreed price | status   |
+		  | commitment Id | version Id | ULN       | start date  | end date   | framework code | programme type | pathway code | agreed price | status   |
         | 1             | 1          | learner a | 01/08/2017  | 01/08/2018 | 403            | 2              | 1            | 15000        | active   |
     When an ILR file is submitted with the following data:
         | ULN       | learner type       | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | home postcode deprivation |
@@ -291,10 +293,10 @@ Scenario:AC11- Payment for a DAS learner, lives in a disadvantaged postocde area
         | Payment due from Employer               | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | Levy account debited                    | 0     | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 1000  | 0     |
         | SFA Levy employer budget                | 1000  | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     | 0     |
-        | SFA levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | SFA non-levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | SFA non-levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | SFA levy additional payments budget     | 0     | 0     | 0     | 300   | 0     | ... | 0     | 300   | 0     |
+		  | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA non-Levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA non-Levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA Levy additional payments budget     | 0     | 0     | 0     | 300   | 0     | ... | 0     | 300   | 0     |
     And the transaction types for the payments are:
         | Payment type                 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
         | On-program                   | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     |
@@ -306,7 +308,7 @@ Scenario:AC12- Payment for a DAS learner, lives in a disadvantaged postocde area
     #The provider incentive for this postcode group is £300 split equally into 2 payments at 90 and 365 days. INELIGIBLE FOR APPRENITCESHIP STANDARDS
     Given levy balance > agreed price for all months
     And the following commitments exist:
-        | commitment ID | version ID | ULN       | start date  | end date   | framework code | programme type | pathway code | agreed price | status   |
+		  | commitment Id | version Id | ULN       | start date  | end date   | framework code | programme type | pathway code | agreed price | status   |
         | 1             | 1          | learner a | 01/08/2017  | 01/08/2018 | 403            | 2              | 1            | 15000        | active   |
     When an ILR file is submitted with the following data:
         | ULN       | learner type       | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | home postcode deprivation |
@@ -314,14 +316,14 @@ Scenario:AC12- Payment for a DAS learner, lives in a disadvantaged postocde area
     Then the provider earnings and payments break down as follows:
         | Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
         | Provider Earned Total                   | 1000  | 1000  | 1000  | 1150  | 1000  | ... | 1000  | 150   | 0     |
-        | Provider Paid by SFA                    | 0     | 1000  | 1000  | 1000  | 1500  | ... | 1000  | 1000  | 150   |
+        | Provider Paid by SFA                    | 0     | 1000  | 1000  | 1000  | 1150  | ... | 1000  | 1000  | 150   |
         | Payment due from Employer               | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | Levy account debited                    | 0     | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 1000  | 0     |
         | SFA Levy employer budget                | 1000  | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     | 0     |
-        | SFA levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | SFA non-levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | SFA non-levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | SFA levy additional payments budget     | 0     | 0     | 0     | 150   | 0     | ... | 0     | 150   | 0     |
+		| SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| SFA non-Levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| SFA non-Levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		| SFA Levy additional payments budget     | 0     | 0     | 0     | 150   | 0     | ... | 0     | 150   | 0     |
     And the transaction types for the payments are:
         | Payment type                 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
         | On-program                   | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     |
@@ -334,7 +336,7 @@ Scenario:AC13- Payment for a DAS learner, lives in a disadvantaged postocde area
     #The provider incentive for this postcode group is £200 split equally into 2 payments at 90 and 365 days. INELIGIBLE FOR APPRENITCESHIP STANDARDS
     Given levy balance > agreed price for all months
     And the following commitments exist:
-        | commitment ID | version ID | ULN       | start date  | end date   | framework code | programme type | pathway code | agreed price | status   | 
+		  | commitment Id | version Id | ULN       | start date  | end date   | framework code | programme type | pathway code | agreed price | status   | 
         | 1             | 1          | learner a | 01/08/2017  | 01/08/2018 | 403            | 2              | 1            | 15000        | active   | 
 
     When an ILR file is submitted with the following data:
@@ -348,10 +350,10 @@ Scenario:AC13- Payment for a DAS learner, lives in a disadvantaged postocde area
         | Payment due from Employer               | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | Levy account debited                    | 0     | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 1000  | 0     |
         | SFA Levy employer budget                | 1000  | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     | 0     |
-        | SFA levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | SFA non-levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | SFA non-levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | SFA levy  additional payments budget    | 0     | 0     | 0     | 100   | 0     | ... | 0     | 100   | 0     |
+		  | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA non-Levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA non-Levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA Levy additional payments budget    | 0     | 0     | 0     | 100   | 0     | ... | 0     | 100   | 0     |
   And the transaction types for the payments are:
         | Payment type                 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
         | On-program                   | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     |
@@ -363,7 +365,7 @@ Scenario:AC14- Payment for a DAS learner, does not live in a disadvantaged posto
    
     Given levy balance > agreed price for all months
     And the following commitments exist:
-        | commitment ID | version ID | ULN       | start date  | end date   | framework code | programme type | pathway code | agreed price | status   | 
+		  | commitment Id | version Id | ULN       | start date  | end date   | framework code | programme type | pathway code | agreed price | status   | 
         | 1             | 1          | learner a | 01/08/2017  | 01/08/2018 | 403            | 2              | 1            | 15000        | active   | 
     When an ILR file is submitted with the following data:
         | ULN       | learner type       | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | home postcode deprivation |
@@ -375,10 +377,10 @@ Scenario:AC14- Payment for a DAS learner, does not live in a disadvantaged posto
         | Payment due from Employer               | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | Levy account debited                    | 0     | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 1000  | 0     |
         | SFA Levy employer budget                | 1000  | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     | 0     |
-        | SFA levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | SFA non-levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | SFA non-levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | SFA levy additional payments budget     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA non-Levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA non-Levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+		  | SFA Levy additional payments budget     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
     And the transaction types for the payments are:
         | Payment type                 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
         | On-program                   | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     |
@@ -391,7 +393,7 @@ Scenario:AC14- Payment for a DAS learner, does not live in a disadvantaged posto
 Scenario: 624-AC01-Payment for a non-DAS learner, lives in a disadvantaged postocde area - 1-10% most deprived, funding agreed within band maximum, undertaking apprenticeship standard
     When an ILR file is submitted with the following data:
         | ULN       | learner type             | agreed price | start date | planned end date | actual end date | completion status | standard code | home postcode deprivation |
-        | learner a | programme only non - DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | 50            | 1-10%                     |
+        | learner a | programme only non-DAS   | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | 50            | 1-10%                     |
     Then the provider earnings and payments break down as follows:
         | Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
         | Provider Earned Total                   | 1000  | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     | 0     |
@@ -415,7 +417,7 @@ Scenario: 624-AC01-Payment for a non-DAS learner, lives in a disadvantaged posto
 Scenario: 624-AC02-Payment for a non-DAS learner, lives in a disadvantaged postocde area - 11-20% most deprived, funding agreed within band maximum, undertaking apprenticeship standard
     When an ILR file is submitted with the following data:
         | ULN       | learner type             | agreed price | start date | planned end date | actual end date | completion status | standard code | home postcode deprivation |
-        | learner a | programme only non - DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | 50            | 11-20%                    |
+        | learner a | programme only non-DAS   | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | 50            | 11-20%                    |
     Then the provider earnings and payments break down as follows:
         | Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
         | Provider Earned Total                   | 1000  | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     | 0     |
@@ -439,7 +441,7 @@ Scenario: 624-AC02-Payment for a non-DAS learner, lives in a disadvantaged posto
 Scenario: 624-AC03-Payment for a non-DAS learner, lives in a disadvantaged postocde area - 21-27% most deprived, funding agreed within band maximum, undertaking apprenticeship standard
     When an ILR file is submitted with the following data:
         | ULN       | learner type             | agreed price | start date | planned end date | actual end date | completion status | standard code | home postcode deprivation |
-        | learner a | programme only non - DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | 50            | 21-27%                    |
+        | learner a | programme only non-DAS   | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | 50            | 21-27%                    |
     Then the provider earnings and payments break down as follows:
         | Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
         | Provider Earned Total                   | 1000  | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     | 0     |
@@ -463,7 +465,7 @@ Scenario: 624-AC03-Payment for a non-DAS learner, lives in a disadvantaged posto
 Scenario: 624-AC04-Payment for a non-DAS learner, does not live in a disadvantaged postocde area, funding agreed within band maximum, undertaking apprenticeship standard
     When an ILR file is submitted with the following data:
         | ULN       | learner type             | agreed price | start date | planned end date | actual end date | completion status | standard code | home postcode deprivation |
-        | learner a | programme only non - DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | 50            | not deprived              |
+        | learner a | programme only non-DAS   | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | 50            | not deprived              |
     Then the provider earnings and payments break down as follows:
         | Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
         | Provider Earned Total                   | 1000  | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     | 0     |
@@ -652,7 +654,7 @@ Scenario:590-AC02- Payment for a* DAS learner*, funding agreed within band, with
 Scenario: 581-AC01-Non DAS learner finishes early, price equals the funding band maximum, earns balancing and completion framework uplift payments. Assumes 15 month apprenticeship and learner completes after 12 months.
     Given the apprenticeship funding band maximum is 9000
     When an ILR file is submitted with the following data:
-        | ULN    | learner type                 | agreed price | start date | planned end date | actual end date | completion status | Framework Code | Programme Type | Pathway Code |
+		| ULN    | learner type                 | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code |
         | 123456 | 16-18 programme only non-DAS | 9000         | 06/08/2017 | 09/11/2018       | 09/08/2018      | Completed         | 403            | 2              | 1            |
     Then the provider earnings and payments break down as follows:
         | Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 06/18 | 07/18 | 08/18 | 09/18 |
@@ -664,7 +666,7 @@ Scenario: 581-AC01-Non DAS learner finishes early, price equals the funding band
         | Levy account debited                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     |
         | SFA Levy employer budget                | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     |
         | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     |
-        | SFA non Levy co-funding budget          | 432   | 432   | 432   | 432   | 432   | ... | 432   | 432   | 2916  | 0     |
+		| SFA non-Levy co-funding budget          | 432   | 432   | 432   | 432   | 432   | ... | 432   | 432   | 2916  | 0     |
         | SFA non-Levy additional payments budget | 96    | 96    | 96    | 1096  | 96    | ... | 96    | 96    | 1648  | 0     |
     And the transaction types for the payments are:
         | Payment type                 | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 06/18 | 07/18 | 08/18 | 09/18 |
@@ -683,7 +685,7 @@ Scenario: 581-AC01-Non DAS learner finishes early, price equals the funding band
 Scenario: 581-AC02-Non DAS learner finishes early, price lower than the funding band maximum, earns balancing and completion framework uplift payments. Assumes 15 month apprenticeship and learner completes after 12 months.
     Given the apprenticeship funding band maximum is 9000
     When an ILR file is submitted with the following data:
-        | ULN    | learner type                 | agreed price | start date | planned end date | actual end date | completion status | Framework Code | Programme Type | Pathway Code |
+		| ULN    | learner type                 | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code |
         | 123456 | 16-18 programme only non-DAS | 7500         | 06/08/2017 | 09/11/2018       | 09/08/2018      | Completed         | 403            | 2              | 1            |
     Then the provider earnings and payments break down as follows:
         | Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 06/18 | 07/18 | 08/18 | 09/18 |
@@ -695,7 +697,7 @@ Scenario: 581-AC02-Non DAS learner finishes early, price lower than the funding 
         | Levy account debited                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     |
         | SFA Levy employer budget                | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     |
         | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     |
-        | SFA non Levy co-funding budget          | 360   | 360   | 360   | 360   | 360   | ... | 360   | 360   | 2430  | 0     |
+		| SFA non-Levy co-funding budget          | 360   | 360   | 360   | 360   | 360   | ... | 360   | 360   | 2430  | 0     |
         | SFA non-Levy additional payments budget | 96    | 96    | 96    | 1096  | 96    | ... | 96    | 96    | 1648  | 0     |
     And the transaction types for the payments are:
         | Payment type                 | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 06/18 | 07/18 | 08/18 | 09/18 |
@@ -761,7 +763,7 @@ Scenario:591_AC02- Payment for a DAS learner, funding agreed within band maximum
         | Balancing                      | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     | 0     | 0     |
         | English and maths on programme | 39.25 | 39.25 | 39.25 | 39.25 | ... | 39.25 | 39.25 | 0     | 0     | 0     | 0     |
         | English and maths Balancing    | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     | 0     | 0     |
-        | Provider disadvantage uplift   | 0     | 0     | 0     | 0     | 0   | ..    | 0     | 0     | 0     | 0     | 0     |
+        | Provider disadvantage uplift   | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | 0     | 0     | 0     |
 
 
 @LearningSupport
@@ -782,7 +784,7 @@ Scenario: 637-AC01-Payment for a non-DAS learner, requires learning support, doi
         | Levy account debited                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | SFA Levy employer budget                | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | SFA non Levy co-funding budget          | 900   | 900   | 900   | 900   | 900   | ... | 900   | 2700  | 0     |
+        | SFA non-Levy co-funding budget          | 900   | 900   | 900   | 900   | 900   | ... | 900   | 2700  | 0     |
         | SFA non-Levy additional payments budget | 150   | 150   | 150   | 150   | 150   | ... | 150   | 0     | 0     |
     And the transaction types for the payments are:
         | Payment type                 | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
@@ -792,7 +794,7 @@ Scenario: 637-AC01-Payment for a non-DAS learner, requires learning support, doi
         | Employer 16-18 incentive     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | Provider 16-18 incentive     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | Provider disadvantage uplift | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | Provider learning support    | 150   | 150   | 150   | 150   | 150   | ... | 150   | 150   | 0     |
+        | Provider learning support    | 0     | 150   | 150   | 150   | 150   | ... | 150   | 150   | 0     |
 
 
 @LearningSupport
@@ -813,7 +815,7 @@ Scenario: 637-AC02-Payment for a non-DAS learner, requires learning support, doi
         | Levy account debited                    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | SFA Levy employer budget                | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | SFA non Levy co-funding budget          | 900   | 900   | 900   | 900   | 900   | ... | 900   | 2700  | 0     |
+        | SFA non-Levy co-funding budget          | 900   | 900   | 900   | 900   | 900   | ... | 900   | 2700  | 0     |
         | SFA non-Levy additional payments budget | 150   | 150   | 150   | 150   | 150   | ... | 150   | 0     | 0     |
     And the transaction types for the payments are:
         | Payment type                 | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 | 09/18 |
@@ -823,7 +825,7 @@ Scenario: 637-AC02-Payment for a non-DAS learner, requires learning support, doi
         | Employer 16-18 incentive     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | Provider 16-18 incentive     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | Provider disadvantage uplift | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | Provider learning support    | 150   | 150   | 150   | 150   | 150   | ... | 150   | 150   | 0     |
+        | Provider learning support    | 0     | 150   | 150   | 150   | 150   | ... | 150   | 150   | 0     |
 
 
 @LearningSupport
@@ -848,7 +850,7 @@ Scenario: 637-AC03-Payment for a DAS learner, requires learning support, doing a
         | Levy account debited                    | 0     | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 1000  | 3000  |
         | SFA Levy employer budget                | 1000  | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 3000  | 0     |
         | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | SFA non Levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+        | SFA non-Levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | SFA Levy additional payments budget     | 150   | 150   | 150   | 150   | 150   | ... | 150   | 0     | 0     |
         | SFA non-Levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
     And the transaction types for the payments are:
@@ -859,7 +861,7 @@ Scenario: 637-AC03-Payment for a DAS learner, requires learning support, doing a
         | Employer 16-18 incentive     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | Provider 16-18 incentive     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | Provider disadvantage uplift | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | Provider learning support    | 150   | 150   | 150   | 150   | 150   | ... | 150   | 150   | 0     |
+        | Provider learning support    | 0     | 150   | 150   | 150   | 150   | ... | 150   | 150   | 0     |
 
 
 @LearningSupport
@@ -884,7 +886,7 @@ Scenario: 637-AC04-Payment for a DAS learner, requires learning support, doing a
         | Levy account debited                    | 0     | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 1000  | 3000  |
         | SFA Levy employer budget                | 1000  | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 3000  | 0     |
         | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | SFA non Levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+        | SFA non-Levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | SFA Levy additional payments budget     | 150   | 150   | 150   | 150   | 150   | ... | 150   | 0     | 0     |
         | SFA non-Levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
     And the transaction types for the payments are:
@@ -895,7 +897,7 @@ Scenario: 637-AC04-Payment for a DAS learner, requires learning support, doing a
         | Employer 16-18 incentive     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | Provider 16-18 incentive     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | Provider disadvantage uplift | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-        | Provider learning support    | 150   | 150   | 150   | 150   | 150   | ... | 150   | 150   | 0     |
+        | Provider learning support    | 0     | 150   | 150   | 150   | 150   | ... | 150   | 150   | 0     |
 
 
 @MathsAndEnglishNonDas
@@ -942,7 +944,7 @@ Scenario:638-AC02 DAS learner, takes an English qualification that has a planned
 		| Provider 16-18 incentive       |                 |                 |                 | ... |                 |                 |                 |       |       |
 		| Provider learning support      |                 |                 |                 | ... |                 |                 |                 |       |       |
 		| English and maths on programme | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | ... | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 |       |       |
-		| English and maths balancing    |                 |                 |                 | ... |                 |                 |                 |       |       |      
+		| English and maths Balancing    |                 |                 |                 | ... |                 |                 |                 |       |       |      
     And the provider earnings and payments break down as follows:
 		| Type                                    | 08/17   | 09/17   | 10/17   | ... | 05/18   | 06/18   | 07/18   | 08/18   | 09/18   | 10/18 | 11/18 |
 		| Provider Earned Total                   | 1033.64 | 1033.64 | 1033.64 | ... | 1033.64 | 1033.64 | 1033.64 | 3033.64 | 33.64   | 0     | 0     |
@@ -966,7 +968,7 @@ Scenario:638-AC02 DAS learner, takes an English qualification that has a planned
 Scenario:638-AC03 DAS learner, takes an English qualification that has a planned end date that exceeds the actual end date of the programme aim - but the apprentice fails data lock so no payments occur
 	Given levy balance > agreed price for all months 
 	And the following commitments exist:
-		| commitment ID | version Id | ULN       | start date | end date   | agreed price | status |
+		| commitment Id | version Id | ULN       | start date | end date   | agreed price | status |
 		| 1             | 1          | learner a | 01/08/2017 | 01/08/2018 | 15500        | active |
 	When an ILR file is submitted with the following data:
 		| ULN       | learner type       | aim type         | agreed price | aim rate | start date | planned end date | actual end date | completion status |
@@ -980,7 +982,7 @@ Scenario:638-AC03 DAS learner, takes an English qualification that has a planned
 		| Provider 16-18 incentive       |       |       |       | ... |       |       |       |       |       |
 		| Provider learning support      |       |       |       | ... |       |       |       |       |       |
 		| English and maths on programme |       |       |       | ... |       |       |       |       |       |
-		| English and maths balancing    |       |       |       | ... |       |       |       |       |       |      
+		| English and maths Balancing    |       |       |       | ... |       |       |       |       |       |      
     And the provider earnings and payments break down as follows:
 		| Type                                    | 08/17   | 09/17   | 10/17   | ... | 05/18   | 06/18   | 07/18   | 08/18   | 09/18 | 10/18 | 11/18 |
 		| Provider Earned Total                   | 1033.64 | 1033.64 | 1033.64 | ... | 1033.64 | 1033.64 | 1033.64 | 3033.64 | 33.64 | 0     | 0     |
@@ -1009,7 +1011,7 @@ Scenario:657-AC01 Non-DAS learner, takes an English qualification that has a pla
 		| learner a | programme only non-DAS | maths or english |              | 471      | 06/08/2017 | 06/10/2018       | 06/10/2018      | completed         |
 
 	And the learning support status of the ILR is:
-        | learning support code | date from  | date to    |
+        | Learning support code | date from  | date to    |
         | 1                     | 06/08/2017 | 06/10/2018 |		  
 	Then the provider earnings and payments break down as follows:
 		| Type                                    | 08/17   | 09/17   | 10/17   | ... | 05/18   | 06/18   | 07/18   | 08/18   | 09/18   | 10/18  | 11/18 |
@@ -1036,14 +1038,14 @@ Scenario:657-AC01 Non-DAS learner, takes an English qualification that has a pla
 Scenario:657-AC02 DAS learner, takes an English qualification that has a planned end date that exceeds the actual end date of the programme aim and learning support is applicable for all learning
 	Given levy balance > agreed price for all months 
 	And the following commitments exist:
-		| commitment ID | ULN       | start date | end date   | agreed price | status |
+		| commitment Id | ULN       | start date | end date   | agreed price | status |
 		| 1             | learner a | 01/08/2017 | 01/08/2018 | 15000        | active |
 	When an ILR file is submitted with the following data:
 		| ULN       | learner type       | aim type         | agreed price | aim rate | start date | planned end date | actual end date | completion status |
 		| learner a | programme only DAS | programme        | 15000        |          | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         |
 		| learner a | programme only DAS | maths or english |              | 471      | 06/08/2017 | 06/10/2018       | 06/10/2018      | completed         |	
 	And the learning support status of the ILR is:
-        | learning support code | date from  | date to    |
+        | Learning support code | date from  | date to    |
         | 1                     | 06/08/2017 | 06/10/2018 |		  
 	Then the data lock status will be as follows:
 		| Payment type                   | 08/17           | 09/17           | 10/17           | ... | 07/18           | 08/18           | 09/18           | 10/18 | 11/18 |
@@ -1053,7 +1055,7 @@ Scenario:657-AC02 DAS learner, takes an English qualification that has a planned
 		| Provider 16-18 incentive       |                 |                 |                 | ... |                 |                 |                 |       |       |
 		| Provider learning support      | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | ... | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 |       |       |
 		| English and maths on programme | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | ... | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 |       |       |
-		| English and maths balancing    |                 |                 |                 | ... |                 |                 |                 |       |       |      
+		| English and maths Balancing    |                 |                 |                 | ... |                 |                 |                 |       |       |      
     And the provider earnings and payments break down as follows:
 		| Type                                    | 08/17   | 09/17   | 10/17   | ... | 05/18   | 06/18   | 07/18   | 08/18   | 09/18   | 10/18  | 11/18 |
 		| Provider Earned Total                   | 1183.64 | 1183.64 | 1183.64 | ... | 1183.64 | 1183.64 | 1183.64 | 3183.64 | 183.64  | 0      | 0     |
@@ -1078,14 +1080,14 @@ Scenario:657-AC02 DAS learner, takes an English qualification that has a planned
 Scenario:657-AC03 DAS learner, takes an English qualification that has a planned end date that exceeds the actual end date of the programme aim and learning support is applicable for all learning - but the apprentice fails data lock and so no payments are made
 	Given levy balance > agreed price for all months 
 	And the following commitments exist:
-		| commitment ID | ULN       | start date | end date   | agreed price | status |
+		| commitment Id | ULN       | start date | end date   | agreed price | status |
 		| 1             | learner a | 01/08/2017 | 01/08/2018 | 15500        | active |
 	When an ILR file is submitted with the following data:
 		| ULN       | learner type       | aim type         | agreed price | aim rate | start date | planned end date | actual end date | completion status |
 		| learner a | programme only DAS | programme        | 15000        |          | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         |
 		| learner a | programme only DAS | maths or english |              | 471      | 06/08/2017 | 06/10/2018       | 06/10/2018      | completed         |	
 	And the learning support status of the ILR is:
-        | learning support code | date from  | date to    |
+        | Learning support code | date from  | date to    |
         | 1                     | 06/08/2017 | 06/10/2018 | 		  
 	Then the data lock status will be as follows:
 		| Payment type                   | 08/17 | 09/17 | 10/17 | ... | 07/18 | 08/18 | 09/18 | 10/18 | 11/18 |
@@ -1095,7 +1097,7 @@ Scenario:657-AC03 DAS learner, takes an English qualification that has a planned
 		| Provider 16-18 incentive       |       |       |       | ... |       |       |       |       |       |
 		| Provider learning support      |       |       |       | ... |       |       |       |       |       |
 		| English and maths on programme |       |       |       | ... |       |       |       |       |       |
-		| English and maths balancing    |       |       |       | ... |       |       |       |       |       |        
+		| English and maths Balancing    |       |       |       | ... |       |       |       |       |       |        
 
     And the provider earnings and payments break down as follows:
 		| Type                                    | 08/17   | 09/17   | 10/17   | ... | 05/18   | 06/18   | 07/18   | 08/18   | 09/18  | 10/18 | 11/18 |
@@ -1121,15 +1123,15 @@ Scenario:657-AC03 DAS learner, takes an English qualification that has a planned
 Scenario:658-AC01 DAS learner, takes an English qualification that has a planned end date that exceeds the actual end date of the programme aim and learning support is applicable for all learning. The learning is split into tow price episodes, and the second price episode fails data lock - the English and learning support payments are not paid after the point at which data lock fails.
 	Given levy balance > agreed price for all months
 	And the following commitments exist:
-		| commitment ID | version ID | ULN       | start date | end date   | agreed price | status    | effective from | effective to |
+		| commitment Id | version Id | ULN       | start date | end date   | agreed price | status    | effective from | effective to |
 		| 1             | 1          | learner a | 01/08/2017 | 01/08/2018 | 15000        | active    | 01/08/2017     | 10/06/2018   |
-		| 1             | 2          | learner a | 01/08/2017 | 01/08/2018 | 14000        | withdrawn | 11/06/2018     |              |
+		| 1             | 2          | learner a | 01/08/2017 | 01/08/2018 | 14000        | cancelled | 11/06/2018     |              |
 	When an ILR file is submitted with the following data:
 		| ULN       | learner type       | aim type         | agreed price | aim rate | start date | planned end date | actual end date | completion status |
 		| learner a | programme only DAS | programme        | 15000        |          | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         |
 		| learner a | programme only DAS | maths or english |              | 471      | 06/08/2017 | 06/10/2018       | 06/10/2018      | completed         |	
 	And the learning support status of the ILR is:
-        | learning support code | date from  | date to    |
+        | Learning support code | date from  | date to    |
         | 1                     | 06/08/2017 | 06/10/2018 | 		  
     Then the data lock status will be as follows:
 		| Payment type                   | 08/17           | 09/17           | 10/17           | ... | 05/18           | 06/18 | 07/18 | 08/18 | 09/18 | 10/18 | 11/18 |
@@ -1138,7 +1140,7 @@ Scenario:658-AC01 DAS learner, takes an English qualification that has a planned
 		| Provider 16-18 incentive       |                 |                 |                 | ... |                 |       |       |       |       |       |       |
 		| Provider learning support      | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | ... | commitment 1 v1 |       |       |       |       |       |       |
 		| English and maths on programme | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | ... | commitment 1 v1 |       |       |       |       |       |       |
-		| English and maths balancing    |                 |                 |                 | ... |                 |       |       |       |       |       |       | 
+		| English and maths Balancing    |                 |                 |                 | ... |                 |       |       |       |       |       |       | 
     And the provider earnings and payments break down as follows:
 		| Type                                    | 08/17   | 09/17   | 10/17   | ... | 05/18   | 06/18   | 07/18   | 08/18   | 09/18  | 10/18 | 11/18 |
 		| Provider Earned Total                   | 1183.64 | 1183.64 | 1183.64 | ... | 1183.64 | 1183.64 | 1183.64 | 3183.64 | 183.64 | 0     | 0     |
