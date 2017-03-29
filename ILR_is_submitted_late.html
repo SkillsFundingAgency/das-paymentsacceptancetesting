@@ -25,106 +25,55 @@ $(document).ready(function() {
           </li>
           <li class="file">
             <a href="small_employers.html">1 learner aged 16-18, non-DAS, employed with a small employer at start, is fully funded for on programme and completion payments</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="additional_payments.html">16 to 18 learner incentives, framework uplifts, level 2 english or maths payments</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="two_learners_paid_in_priority.html">2 learners, paid in priority order</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="earnings_calc.html">Amount due is calculated based on previously earned amount</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="learner_changes_provider.html">Apprentice changes provider scenarios</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="definitions.html">Business definitions</a>
-            <span class="float-right">
-              <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="payments_calc.html">Calculate the payments</a>
-            <span class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="datalock_errors.html">Datalock validation fails for different reasons</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="employer_stops_payments.html">Employer stops payments on a commitment</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="capping.html">Provider earnings and payments for a learner with a negotiated price above the funding band cap</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="learner_changes_employer.html">Provider earnings and payments where a learner changes employers</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="change_in_circumstances.html">Provider earnings and payments where learner changes apprenticeship standard or there is a change to the negotiated price at the end of a month, remaining with the same employer and provider</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="learner_finishes_early.html">Provider earnings and payments where learner completes earlier than planned</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="learner_finishes_late.html">Provider earnings and payments where learner completes later than planned</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="learner_finishes_on_time.html">Provider earnings and payments where learner completes on time and is funded by levy</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <span class="current">The ILR is submitted late</span>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
         </ul>
       </div>
       <div id="feature">
-        <div class="float-right">
-          <i class="icon-minus-sign failed" title="Failed"> </i>
-        </div>
         <h1>The ILR is submitted late</h1>
         <div class="description">
           <pre>
@@ -134,9 +83,6 @@ $(document).ready(function() {
         </div>
         <ul id="scenarios">
           <li class="scenario">
-            <div class="float-right">
-              <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
-            </div>
             <div class="scenario-heading">
               <h2></h2>
             </div>
@@ -150,14 +96,13 @@ $(document).ready(function() {
             </div>
           </li>
           <li class="scenario">
-            <div class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </div>
             <div class="scenario-heading" id="ilr-submitted-late-for-a-das-learner-levy-available-learner-finishes-on-time">
               <h2>ILR submitted late for a DAS learner, levy available, learner finishes on time</h2>
             </div>
             <div class="steps">
               <ul>
+                <li class="step">
+                  <span class="keyword">Given </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>priority</th><th>start date</th><th>end date</th><th>agreed price</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>1</td><td>01/09/2017</td><td>08/09/2018</td><td>15000</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted for the first time on 28/12/17 with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>learner type</th><th>agreed price</th><th>start date</th><th>planned end date</th><th>completion status</th><th> </th></tr></thead><tbody><tr><td>programme only DAS</td><td>15000</td><td>01/09/2017</td><td>08/09/2018</td><td>continuing</td></tr></tbody></table></div></li>
                 <li class="step">
@@ -171,7 +116,7 @@ $(document).ready(function() {
         </ul>
       </div>
       <div id="footer">
-        <p>Generated on: 29 March 2017 20:43:06</p>
+        <p>Generated on: 29 March 2017 20:44:26</p>
         <p>Produced by Pickles, version 2.8.2.0</p>
       </div>
     </div>

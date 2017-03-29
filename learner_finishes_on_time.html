@@ -25,106 +25,55 @@ $(document).ready(function() {
           </li>
           <li class="file">
             <a href="small_employers.html">1 learner aged 16-18, non-DAS, employed with a small employer at start, is fully funded for on programme and completion payments</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="additional_payments.html">16 to 18 learner incentives, framework uplifts, level 2 english or maths payments</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="two_learners_paid_in_priority.html">2 learners, paid in priority order</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="earnings_calc.html">Amount due is calculated based on previously earned amount</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="learner_changes_provider.html">Apprentice changes provider scenarios</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="definitions.html">Business definitions</a>
-            <span class="float-right">
-              <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="payments_calc.html">Calculate the payments</a>
-            <span class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="datalock_errors.html">Datalock validation fails for different reasons</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="employer_stops_payments.html">Employer stops payments on a commitment</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="capping.html">Provider earnings and payments for a learner with a negotiated price above the funding band cap</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="learner_changes_employer.html">Provider earnings and payments where a learner changes employers</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="change_in_circumstances.html">Provider earnings and payments where learner changes apprenticeship standard or there is a change to the negotiated price at the end of a month, remaining with the same employer and provider</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="learner_finishes_early.html">Provider earnings and payments where learner completes earlier than planned</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="learner_finishes_late.html">Provider earnings and payments where learner completes later than planned</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <span class="current">Provider earnings and payments where learner completes on time and is funded by levy</span>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="ILR_is_submitted_late.html">The ILR is submitted late</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
         </ul>
       </div>
       <div id="feature">
-        <div class="float-right">
-          <i class="icon-minus-sign failed" title="Failed"> </i>
-        </div>
         <h1>Provider earnings and payments where learner completes on time and is funded by levy</h1>
         <div class="description">
           <pre>
@@ -145,9 +94,6 @@ For payments, where there is no lag in ILR submission, payments follow these rul
         </div>
         <ul id="scenarios">
           <li class="scenario">
-            <div class="float-right">
-              <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
-            </div>
             <div class="scenario-heading">
               <h2></h2>
             </div>
@@ -159,9 +105,6 @@ For payments, where there is no lag in ILR submission, payments follow these rul
             </div>
           </li>
           <li class="scenario">
-            <div class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </div>
             <div class="scenario-heading" id="a-das-learner-levy-available-learner-finishes-on-time">
               <h2>A DAS learner, levy available, learner finishes on time</h2>
             </div>
@@ -169,6 +112,8 @@ For payments, where there is no lag in ILR submission, payments follow these rul
               <ul>
                 <li class="step">
                   <span class="keyword">Given </span>levy balance &gt; agreed price for all months</li>
+                <li class="step">
+                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>priority</th><th>start date</th><th>end date</th><th>agreed price</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>1</td><td>01/09/2017</td><td>08/09/2018</td><td>15000</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>learner type</th><th>agreed price</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th> </th></tr></thead><tbody><tr><td>programme only DAS</td><td>15000</td><td>01/09/2017</td><td>08/09/2018</td><td>08/09/2018</td><td>completed</td></tr></tbody></table></div></li>
                 <li class="step">
@@ -180,9 +125,6 @@ For payments, where there is no lag in ILR submission, payments follow these rul
             </a>
           </li>
           <li class="scenario">
-            <div class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </div>
             <div class="scenario-heading" id="a-das-learner-no-levy-available-learner-finishes-on-time">
               <h2>A DAS learner, no levy available, learner finishes on time</h2>
             </div>
@@ -190,6 +132,8 @@ For payments, where there is no lag in ILR submission, payments follow these rul
               <ul>
                 <li class="step">
                   <span class="keyword">Given </span>levy balance = 0 for all months</li>
+                <li class="step">
+                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>priority</th><th>start date</th><th>end date</th><th>agreed price</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>1</td><td>01/09/2017</td><td>08/09/2018</td><td>15000</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>learner type</th><th>agreed price</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th> </th></tr></thead><tbody><tr><td>programme only DAS</td><td>15000</td><td>01/09/2017</td><td>08/09/2018</td><td>08/09/2018</td><td>completed</td></tr></tbody></table></div></li>
                 <li class="step">
@@ -201,9 +145,6 @@ For payments, where there is no lag in ILR submission, payments follow these rul
             </a>
           </li>
           <li class="scenario">
-            <div class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </div>
             <div class="scenario-heading" id="2-das-learners-only-enough-levy-to-cover-1">
               <h2>2 DAS learners, only enough levy to cover 1</h2>
             </div>
@@ -212,7 +153,7 @@ For payments, where there is no lag in ILR submission, payments follow these rul
                 <li class="step">
                   <span class="keyword">Given </span>the employer's levy balance is:<div class="table_container"><table class="datatable"><thead><tr><th>09/17</th><th>10/17</th><th>11/17</th><th>...</th><th>08/18</th><th>09/18</th><th> </th></tr></thead><tbody><tr><td>0</td><td>500</td><td>500</td><td>500</td><td>500</td><td>1500</td></tr></tbody></table></div></li>
                 <li class="step">
-                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>priority</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>1</td></tr><tr><td>learner b</td><td>2</td></tr></tbody></table></div></li>
+                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>priority</th><th>start date</th><th>end date</th><th>agreed price</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>1</td><td>01/09/2017</td><td>08/09/2018</td><td>7500</td></tr><tr><td>learner b</td><td>2</td><td>01/09/2017</td><td>08/09/2018</td><td>15000</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>agreed price</th><th>learner type</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>7500</td><td>programme only DAS</td><td>01/09/2017</td><td>08/09/2018</td><td>08/09/2018</td><td>completed</td></tr><tr><td>learner b</td><td>15000</td><td>programme only DAS</td><td>01/09/2017</td><td>08/09/2018</td><td>08/09/2018</td><td>completed</td></tr></tbody></table></div></li>
                 <li class="step">
@@ -224,14 +165,13 @@ For payments, where there is no lag in ILR submission, payments follow these rul
             </a>
           </li>
           <li class="scenario">
-            <div class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </div>
             <div class="scenario-heading" id="a-non-das-learner-learner-finishes-on-time">
               <h2>A non-DAS learner, learner finishes on time</h2>
             </div>
             <div class="steps">
               <ul>
+                <li class="step">
+                  <span class="keyword">Given </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>priority</th><th>start date</th><th>end date</th><th>agreed price</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>1</td><td>01/09/2017</td><td>08/09/2018</td><td>15000</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>agreed price</th><th>learner type</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th> </th></tr></thead><tbody><tr><td>15000</td><td>programme only non-DAS</td><td>01/09/2017</td><td>08/09/2018</td><td>08/09/2018</td><td>completed</td></tr></tbody></table></div></li>
                 <li class="step">
@@ -243,9 +183,6 @@ For payments, where there is no lag in ILR submission, payments follow these rul
             </a>
           </li>
           <li class="scenario">
-            <div class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </div>
             <div class="scenario-heading" id="1-das-learner-not-enough-levy-to-cover-full-payment">
               <h2>1 DAS Learner, not enough levy to cover full payment</h2>
             </div>
@@ -253,6 +190,8 @@ For payments, where there is no lag in ILR submission, payments follow these rul
               <ul>
                 <li class="step">
                   <span class="keyword">Given </span>the employer's levy balance is:<div class="table_container"><table class="datatable"><thead><tr><th>09/17</th><th>10/17</th><th>11/17</th><th>...</th><th>08/18</th><th>09/18</th><th> </th></tr></thead><tbody><tr><td>500</td><td>500</td><td>500</td><td>500</td><td>500</td><td>1500</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>priority</th><th>start date</th><th>end date</th><th>agreed price</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>1</td><td>01/09/2017</td><td>08/09/2018</td><td>15000</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>learner type</th><th>agreed price</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th> </th></tr></thead><tbody><tr><td>programme only DAS</td><td>15000</td><td>01/09/2017</td><td>08/09/2018</td><td>08/09/2018</td><td>completed</td></tr></tbody></table></div></li>
                 <li class="step">
@@ -264,9 +203,6 @@ For payments, where there is no lag in ILR submission, payments follow these rul
             </a>
           </li>
           <li class="scenario">
-            <div class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </div>
             <div class="scenario-heading" id="2-learners-2-employers-1-provider---enough-levy">
               <h2>2 learners, 2 employers, 1 provider - enough levy</h2>
             </div>
@@ -277,11 +213,11 @@ For payments, where there is no lag in ILR submission, payments follow these rul
                 <li class="step">
                   <span class="keyword">And </span>the employer 2 has a levy balance &gt; agreed price for all months</li>
                 <li class="step">
-                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>Employer</th><th>ULN</th><th>priority</th><th>agreed price</th><th> </th></tr></thead><tbody><tr><td>employer 1</td><td>learner a</td><td>1</td><td>7500</td></tr><tr><td>employer 2</td><td>learner b</td><td>1</td><td>15000</td></tr></tbody></table></div></li>
+                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>Employer</th><th>ULN</th><th>priority</th><th>agreed price</th><th>start date</th><th>end date</th><th> </th></tr></thead><tbody><tr><td>employer 1</td><td>learner a</td><td>1</td><td>7500</td><td>01/09/2017</td><td>08/09/2018</td></tr><tr><td>employer 2</td><td>learner b</td><td>1</td><td>15000</td><td>01/09/2017</td><td>08/09/2018</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>agreed price</th><th>learner type</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>7500</td><td>programme only DAS</td><td>01/09/2017</td><td>08/09/2018</td><td>08/09/2018</td><td>completed</td></tr><tr><td>learner b</td><td>15000</td><td>programme only DAS</td><td>01/09/2017</td><td>08/09/2018</td><td>08/09/2018</td><td>completed</td></tr></tbody></table></div></li>
                 <li class="step">
-                  <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>09/17</th><th>10/17</th><th>11/17</th><th>...</th><th>08/18</th><th>09/18</th><th>10/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>1500</td><td>1500</td><td>1500</td><td>...</td><td>1500</td><td>4500</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>1500</td><td>1500</td><td>1500</td><td>...</td><td>1500</td><td>4500</td><td>0</td></tr><tr><td>Provider Earned from Employer 1</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Provider Earned from Employer 2</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>1500</td><td>1500</td><td>...</td><td>1500</td><td>1500</td><td>4500</td></tr><tr><td>Payment due from Employer 1</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Payment due from Employer 2</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>employer 1 Levy account debited</td><td>0</td><td>500</td><td>500</td><td>...</td><td>500</td><td>500</td><td>1500</td></tr><tr><td>employer 2 Levy account debited</td><td>0</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>1000</td><td>3000</td></tr><tr><td>SFA Levy employer budget</td><td>1500</td><td>1500</td><td>1500</td><td>...</td><td>1500</td><td>3000</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA non-Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr></tbody></table></div></li>
+                  <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>09/17</th><th>10/17</th><th>11/17</th><th>...</th><th>08/18</th><th>09/18</th><th>10/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>1500</td><td>1500</td><td>1500</td><td>...</td><td>1500</td><td>4500</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>1500</td><td>1500</td><td>1500</td><td>...</td><td>1500</td><td>4500</td><td>0</td></tr><tr><td>Provider Earned from Employer 1</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Provider Earned from Employer 2</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>1500</td><td>1500</td><td>...</td><td>1500</td><td>1500</td><td>4500</td></tr><tr><td>Payment due from Employer 1</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Payment due from Employer 2</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>employer 1 Levy account debited</td><td>0</td><td>500</td><td>500</td><td>...</td><td>500</td><td>500</td><td>1500</td></tr><tr><td>employer 2 Levy account debited</td><td>0</td><td>1000</td><td>1000</td><td>...</td><td>1000</td><td>1000</td><td>3000</td></tr><tr><td>SFA Levy employer budget</td><td>1500</td><td>1500</td><td>1500</td><td>...</td><td>1500</td><td>4500</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA non-Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr></tbody></table></div></li>
               </ul>
             </div>
             <a class="scenario-link" href="javascript:showImageLink('2-learners-2-employers-1-provider---enough-levy')" title="Copy scenario link to clipboard.">
@@ -289,9 +225,6 @@ For payments, where there is no lag in ILR submission, payments follow these rul
             </a>
           </li>
           <li class="scenario">
-            <div class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </div>
             <div class="scenario-heading" id="2-learners-2-employers-1-provider---not-enough-levy">
               <h2>2 learners, 2 employers, 1 provider - not enough levy</h2>
             </div>
@@ -302,7 +235,7 @@ For payments, where there is no lag in ILR submission, payments follow these rul
                 <li class="step">
                   <span class="keyword">And </span>the employer 2 has a levy balance of:<div class="table_container"><table class="datatable"><thead><tr><th>09/17</th><th>10/17</th><th>11/17</th><th>...</th><th>08/18</th><th>09/18</th><th> </th></tr></thead><tbody><tr><td>500</td><td>500</td><td>500</td><td>500</td><td>500</td><td>1500</td></tr></tbody></table></div></li>
                 <li class="step">
-                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>Employer</th><th>ULN</th><th>priority</th><th>agreed price</th><th> </th></tr></thead><tbody><tr><td>employer 1</td><td>learner a</td><td>1</td><td>7500</td></tr><tr><td>employer 2</td><td>learner b</td><td>1</td><td>15000</td></tr></tbody></table></div></li>
+                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>Employer</th><th>ULN</th><th>priority</th><th>agreed price</th><th>start date</th><th>end date</th><th> </th></tr></thead><tbody><tr><td>employer 1</td><td>learner a</td><td>1</td><td>7500</td><td>01/09/2017</td><td>08/09/2018</td></tr><tr><td>employer 2</td><td>learner b</td><td>1</td><td>15000</td><td>01/09/2017</td><td>08/09/2018</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>agreed price</th><th>learner type</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>7500</td><td>programme only DAS</td><td>01/09/2017</td><td>08/09/2018</td><td>08/09/2018</td><td>completed</td></tr><tr><td>learner b</td><td>15000</td><td>programme only DAS</td><td>01/09/2017</td><td>08/09/2018</td><td>08/09/2018</td><td>completed</td></tr></tbody></table></div></li>
                 <li class="step">
@@ -314,9 +247,6 @@ For payments, where there is no lag in ILR submission, payments follow these rul
             </a>
           </li>
           <li class="scenario">
-            <div class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </div>
             <div class="scenario-heading" id="2-learners-1-employer-2-providers---enough-levy">
               <h2>2 learners, 1 employer, 2 providers - enough levy</h2>
             </div>
@@ -325,7 +255,7 @@ For payments, where there is no lag in ILR submission, payments follow these rul
                 <li class="step">
                   <span class="keyword">Given </span>the employer 1 has a levy balance &gt; agreed price for all months</li>
                 <li class="step">
-                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>Employer</th><th>Provider</th><th>ULN</th><th>priority</th><th>agreed price</th><th> </th></tr></thead><tbody><tr><td>employer 1</td><td>provider A</td><td>learner a</td><td>1</td><td>7500</td></tr><tr><td>employer 1</td><td>provider B</td><td>learner b</td><td>2</td><td>15000</td></tr></tbody></table></div></li>
+                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>Employer</th><th>Provider</th><th>ULN</th><th>priority</th><th>agreed price</th><th>start date</th><th>end date</th><th> </th></tr></thead><tbody><tr><td>employer 1</td><td>provider A</td><td>learner a</td><td>1</td><td>7500</td><td>01/09/2017</td><td>08/09/2018</td></tr><tr><td>employer 1</td><td>provider B</td><td>learner b</td><td>2</td><td>15000</td><td>01/09/2017</td><td>08/09/2018</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">When </span>the providers submit the following ILR files:<div class="table_container"><table class="datatable"><thead><tr><th>Provider</th><th>ULN</th><th>agreed price</th><th>learner type</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th> </th></tr></thead><tbody><tr><td>provider A</td><td>learner a</td><td>7500</td><td>programme only DAS</td><td>01/09/2017</td><td>08/09/2018</td><td>08/09/2018</td><td>completed</td></tr><tr><td>provider B</td><td>learner b</td><td>15000</td><td>programme only DAS</td><td>01/09/2017</td><td>08/09/2018</td><td>08/09/2018</td><td>completed</td></tr></tbody></table></div></li>
                 <li class="step">
@@ -339,9 +269,6 @@ For payments, where there is no lag in ILR submission, payments follow these rul
             </a>
           </li>
           <li class="scenario">
-            <div class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </div>
             <div class="scenario-heading" id="2-learners-1-employer-2-providers---not-enough-levy">
               <h2>2 learners, 1 employer, 2 providers - not enough levy</h2>
             </div>
@@ -350,7 +277,7 @@ For payments, where there is no lag in ILR submission, payments follow these rul
                 <li class="step">
                   <span class="keyword">Given </span>the employer 1 has a levy balance of:<div class="table_container"><table class="datatable"><thead><tr><th>09/17</th><th>10/17</th><th>11/17</th><th>...</th><th>08/18</th><th>09/18</th><th> </th></tr></thead><tbody><tr><td>750</td><td>750</td><td>750</td><td>750</td><td>1000</td><td>1000</td></tr></tbody></table></div></li>
                 <li class="step">
-                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>Employer</th><th>Provider</th><th>ULN</th><th>priority</th><th>agreed price</th><th> </th></tr></thead><tbody><tr><td>employer 1</td><td>provider A</td><td>learner a</td><td>1</td><td>7500</td></tr><tr><td>employer 1</td><td>provider B</td><td>learner b</td><td>2</td><td>15000</td></tr></tbody></table></div></li>
+                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>Employer</th><th>Provider</th><th>ULN</th><th>priority</th><th>agreed price</th><th>start date</th><th>end date</th><th> </th></tr></thead><tbody><tr><td>employer 1</td><td>provider A</td><td>learner a</td><td>1</td><td>7500</td><td>01/09/2017</td><td>08/09/2018</td></tr><tr><td>employer 1</td><td>provider B</td><td>learner b</td><td>2</td><td>15000</td><td>01/09/2017</td><td>08/09/2018</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">When </span>the providers submit the following ILR files:<div class="table_container"><table class="datatable"><thead><tr><th>Provider</th><th>ULN</th><th>agreed price</th><th>learner type</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th> </th></tr></thead><tbody><tr><td>provider A</td><td>learner a</td><td>7500</td><td>programme only DAS</td><td>01/09/2017</td><td>08/09/2018</td><td>08/09/2018</td><td>completed</td></tr><tr><td>provider B</td><td>learner b</td><td>15000</td><td>programme only DAS</td><td>01/09/2017</td><td>08/09/2018</td><td>08/09/2018</td><td>completed</td></tr></tbody></table></div></li>
                 <li class="step">
@@ -366,7 +293,7 @@ For payments, where there is no lag in ILR submission, payments follow these rul
         </ul>
       </div>
       <div id="footer">
-        <p>Generated on: 29 March 2017 20:43:06</p>
+        <p>Generated on: 29 March 2017 20:44:26</p>
         <p>Produced by Pickles, version 2.8.2.0</p>
       </div>
     </div>

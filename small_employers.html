@@ -25,112 +25,58 @@ $(document).ready(function() {
           </li>
           <li class="file">
             <span class="current">1 learner aged 16-18, non-DAS, employed with a small employer at start, is fully funded for on programme and completion payments</span>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="additional_payments.html">16 to 18 learner incentives, framework uplifts, level 2 english or maths payments</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="two_learners_paid_in_priority.html">2 learners, paid in priority order</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="earnings_calc.html">Amount due is calculated based on previously earned amount</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="learner_changes_provider.html">Apprentice changes provider scenarios</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="definitions.html">Business definitions</a>
-            <span class="float-right">
-              <i class="icon-warning-sign inconclusive" title="Inconclusive"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="payments_calc.html">Calculate the payments</a>
-            <span class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="datalock_errors.html">Datalock validation fails for different reasons</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="employer_stops_payments.html">Employer stops payments on a commitment</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="capping.html">Provider earnings and payments for a learner with a negotiated price above the funding band cap</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="learner_changes_employer.html">Provider earnings and payments where a learner changes employers</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="change_in_circumstances.html">Provider earnings and payments where learner changes apprenticeship standard or there is a change to the negotiated price at the end of a month, remaining with the same employer and provider</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="learner_finishes_early.html">Provider earnings and payments where learner completes earlier than planned</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="learner_finishes_late.html">Provider earnings and payments where learner completes later than planned</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="learner_finishes_on_time.html">Provider earnings and payments where learner completes on time and is funded by levy</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
           <li class="file">
             <a href="ILR_is_submitted_late.html">The ILR is submitted late</a>
-            <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </span>
           </li>
         </ul>
       </div>
       <div id="feature">
-        <div class="float-right">
-          <i class="icon-minus-sign failed" title="Failed"> </i>
-        </div>
         <h1>1 learner aged 16-18, non-DAS, employed with a small employer at start, is fully funded for on programme and completion payments</h1>
         <ul id="scenarios">
           <li class="scenario">
-            <div class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </div>
             <div class="scenario-heading" id="ac1-payment-for-a-16-18-non-das-learner-small-employer-at-start">
               <h2>AC1-Payment for a 16-18 non-DAS learner, small employer at start</h2>
               <p class="tags">Tags: <span>@SmallEmployerNonDas</span></p>
@@ -142,6 +88,8 @@ $(document).ready(function() {
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>learner type</th><th>agreed price</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>Employment Status</th><th>Employment Status Applies</th><th>Employer Id</th><th>Small Employer</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>16-18 programme only non-DAS</td><td>7500</td><td>06/08/2017</td><td>08/08/2018</td><td>08/08/2018</td><td>completed</td><td>403</td><td>2</td><td>1</td><td>In paid employment</td><td>05/08/2017</td><td>12345678</td><td>SEM1</td></tr></tbody></table></div></li>
                 <li class="step">
+                  <span class="keyword">And </span>the employment status in the ILR is:<div class="table_container"><table class="datatable"><thead><tr><th>Employer</th><th>Employment Status</th><th>Employment Status Applies</th><th>Small Employer</th><th> </th></tr></thead><tbody><tr><td>employer 1</td><td>in paid employment</td><td>05/08/2017</td><td>SEM1</td></tr></tbody></table></div></li>
+                <li class="step">
                   <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>...</th><th>07/18</th><th>08/18</th><th>09/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>620</td><td>620</td><td>620</td><td>1620</td><td>620</td><td>...</td><td>620</td><td>2860</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>620</td><td>620</td><td>620</td><td>1620</td><td>620</td><td>...</td><td>620</td><td>2860</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>620</td><td>620</td><td>620</td><td>1620</td><td>...</td><td>620</td><td>620</td><td>2860</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Levy account debited</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA Levy employer budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA non-Levy co-funding budget</td><td>500</td><td>500</td><td>500</td><td>500</td><td>500</td><td>...</td><td>500</td><td>1500</td><td>0</td></tr><tr><td>SFA non-Levy additional payments budget</td><td>120</td><td>120</td><td>120</td><td>1120</td><td>120</td><td>...</td><td>120</td><td>1360</td><td>0</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">And </span>the transaction types for the payments are:<div class="table_container"><table class="datatable"><thead><tr><th>Payment type</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>...</th><th>08/18</th><th>09/18</th><th> </th></tr></thead><tbody><tr><td>On-program</td><td>500</td><td>500</td><td>500</td><td>500</td><td>...</td><td>500</td><td>0</td></tr><tr><td>Completion</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>1500</td></tr><tr><td>Balancing</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Employer 16-18 incentive</td><td>0</td><td>0</td><td>0</td><td>500</td><td>...</td><td>0</td><td>500</td></tr><tr><td>Provider 16-18 incentive</td><td>0</td><td>0</td><td>0</td><td>500</td><td>...</td><td>0</td><td>500</td></tr><tr><td>Framework uplift on-program</td><td>120</td><td>120</td><td>120</td><td>120</td><td>...</td><td>120</td><td>0</td></tr><tr><td>Framework uplift completion</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>360</td></tr><tr><td>Framework uplift balancing</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Provider disadvantage uplift</td><td>0</td><td>0</td><td>0</td><td>0</td><td>..</td><td>0</td><td>0</td></tr></tbody></table></div></li>
@@ -152,9 +100,6 @@ $(document).ready(function() {
             </a>
           </li>
           <li class="scenario">
-            <div class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </div>
             <div class="scenario-heading" id="ac2--1-learner-aged-19-24-non-das-with-an-education-health-care-ehc-plan-in-paid-employment-with-a-small-employer-at-start-is-fully-funded-for-on-programme-and-completion-payments">
               <h2>AC2- 1 learner aged 19-24, non-DAS, with an Education Health Care (EHC) plan, In paid employment with a small employer at start, is fully funded for on programme and completion payments</h2>
               <p class="tags">Tags: <span>@SmallEmployerNonDas</span></p>
@@ -167,6 +112,8 @@ $(document).ready(function() {
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>learner type</th><th>agreed price</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>Employment Status</th><th>Employment Status Applies</th><th>Employer Id</th><th>Small Employer</th><th>LearnDelFAM</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>19-24 programme only non-DAS</td><td>7500</td><td>06/08/2017</td><td>08/08/2018</td><td>08/08/2018</td><td>completed</td><td>403</td><td>2</td><td>1</td><td>In paid employment</td><td>05/08/2017</td><td>12345678</td><td>SEM1</td><td>EEF2</td></tr></tbody></table></div></li>
                 <li class="step">
+                  <span class="keyword">And </span>the employment status in the ILR is:<div class="table_container"><table class="datatable"><thead><tr><th>Employer</th><th>Employment Status</th><th>Employment Status Applies</th><th>Small Employer</th><th> </th></tr></thead><tbody><tr><td>employer 1</td><td>in paid employment</td><td>05/08/2017</td><td>SEM1</td></tr></tbody></table></div></li>
+                <li class="step">
                   <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>...</th><th>07/18</th><th>08/18</th><th>09/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>620</td><td>620</td><td>620</td><td>1620</td><td>620</td><td>...</td><td>620</td><td>2860</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>620</td><td>620</td><td>620</td><td>1620</td><td>620</td><td>...</td><td>620</td><td>2860</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>620</td><td>620</td><td>620</td><td>1620</td><td>...</td><td>620</td><td>620</td><td>2860</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Levy account debited</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA Levy employer budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA non-Levy co-funding budget</td><td>500</td><td>500</td><td>500</td><td>500</td><td>500</td><td>...</td><td>500</td><td>1500</td><td>0</td></tr><tr><td>SFA non-Levy additional payments budget</td><td>120</td><td>120</td><td>120</td><td>1120</td><td>120</td><td>...</td><td>120</td><td>1360</td><td>0</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">And </span>the transaction types for the payments are:<div class="table_container"><table class="datatable"><thead><tr><th>Payment type</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>...</th><th>08/18</th><th>09/18</th><th> </th></tr></thead><tbody><tr><td>On-program</td><td>500</td><td>500</td><td>500</td><td>500</td><td>...</td><td>500</td><td>0</td></tr><tr><td>Completion</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>1500</td></tr><tr><td>Balancing</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Employer 16-18 incentive</td><td>0</td><td>0</td><td>0</td><td>500</td><td>...</td><td>0</td><td>500</td></tr><tr><td>Provider 16-18 incentive</td><td>0</td><td>0</td><td>0</td><td>500</td><td>...</td><td>0</td><td>500</td></tr><tr><td>Framework uplift on-program</td><td>120</td><td>120</td><td>120</td><td>120</td><td>...</td><td>120</td><td>0</td></tr><tr><td>Framework uplift completion</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>360</td></tr><tr><td>Framework uplift balancing</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Provider disadvantage uplift</td><td>0</td><td>0</td><td>0</td><td>0</td><td>..</td><td>0</td><td>0</td></tr></tbody></table></div></li>
@@ -177,9 +124,6 @@ $(document).ready(function() {
             </a>
           </li>
           <li class="scenario">
-            <div class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </div>
             <div class="scenario-heading" id="ac3--1-learner-aged-19-24-non-das-is-a-care-leaver-in-paid-employment-with-a-small-employer-at-start-is-fully-funded-for-on-programme-and-completion-payments">
               <h2>AC3- 1 learner aged 19-24, non-DAS, is a care leaver, In paid employment with a small employer at start, is fully funded for on programme and completion payments</h2>
               <p class="tags">Tags: <span>@SmallEmployerNonDas</span></p>
@@ -192,6 +136,8 @@ $(document).ready(function() {
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>learner type</th><th>agreed price</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>Employment Status</th><th>Employment Status Applies</th><th>Employer Id</th><th>Small Employer</th><th>LearnDelFAM</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>19-24 programme only non-DAS</td><td>7500</td><td>06/08/2017</td><td>08/08/2018</td><td>08/08/2018</td><td>completed</td><td>403</td><td>2</td><td>1</td><td>In paid employment</td><td>05/08/2017</td><td>12345678</td><td>SEM1</td><td>EEF4</td></tr></tbody></table></div></li>
                 <li class="step">
+                  <span class="keyword">And </span>the employment status in the ILR is:<div class="table_container"><table class="datatable"><thead><tr><th>Employer</th><th>Employment Status</th><th>Employment Status Applies</th><th>Small Employer</th><th> </th></tr></thead><tbody><tr><td>employer 1</td><td>in paid employment</td><td>05/08/2017</td><td>SEM1</td></tr></tbody></table></div></li>
+                <li class="step">
                   <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>...</th><th>07/18</th><th>08/18</th><th>09/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>620</td><td>620</td><td>620</td><td>1620</td><td>620</td><td>...</td><td>620</td><td>2860</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>620</td><td>620</td><td>620</td><td>1620</td><td>620</td><td>...</td><td>620</td><td>2860</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>620</td><td>620</td><td>620</td><td>1620</td><td>...</td><td>620</td><td>620</td><td>2860</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Levy account debited</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA Levy employer budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA non-Levy co-funding budget</td><td>500</td><td>500</td><td>500</td><td>500</td><td>500</td><td>...</td><td>500</td><td>1500</td><td>0</td></tr><tr><td>SFA non-Levy additional payments budget</td><td>120</td><td>120</td><td>120</td><td>1120</td><td>120</td><td>...</td><td>120</td><td>1360</td><td>0</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">And </span>the transaction types for the payments are:<div class="table_container"><table class="datatable"><thead><tr><th>Payment type</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>...</th><th>08/18</th><th>09/18</th><th> </th></tr></thead><tbody><tr><td>On-program</td><td>500</td><td>500</td><td>500</td><td>500</td><td>...</td><td>500</td><td>0</td></tr><tr><td>Completion</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>1500</td></tr><tr><td>Balancing</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Employer 16-18 incentive</td><td>0</td><td>0</td><td>0</td><td>500</td><td>...</td><td>0</td><td>500</td></tr><tr><td>Provider 16-18 incentive</td><td>0</td><td>0</td><td>0</td><td>500</td><td>...</td><td>0</td><td>500</td></tr><tr><td>Framework uplift on-program</td><td>120</td><td>120</td><td>120</td><td>120</td><td>...</td><td>120</td><td>0</td></tr><tr><td>Framework uplift completion</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>360</td></tr><tr><td>Framework uplift balancing</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Provider disadvantage uplift</td><td>0</td><td>0</td><td>0</td><td>0</td><td>..</td><td>0</td><td>0</td></tr></tbody></table></div></li>
@@ -202,9 +148,6 @@ $(document).ready(function() {
             </a>
           </li>
           <li class="scenario">
-            <div class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </div>
             <div class="scenario-heading" id="ac4--1-learner-aged-19-24-non-das-employed-with-a-small-employer-at-start-is-co-funded-for-on-programme-and-completion-payments-this-apprentice-does-not-have-a-education-health-care-plan-and-is-not-a-care-leaver">
               <h2>AC4- 1 learner aged 19-24, non-DAS, employed with a small employer at start, is co-funded for on programme and completion payments (this apprentice does not have a Education Health Care plan and is not a care leaver)</h2>
               <p class="tags">Tags: <span>@SmallEmployerNonDas</span></p>
@@ -213,6 +156,8 @@ $(document).ready(function() {
               <ul>
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>learner type</th><th>agreed price</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>Employment Status</th><th>Employment Status Applies</th><th>Employer Id</th><th>Small Employer</th><th>LearnDelFAM</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>19-24 programme only non-DAS</td><td>7500</td><td>06/08/2017</td><td>08/08/2018</td><td>08/08/2018</td><td>completed</td><td>403</td><td>2</td><td>1</td><td>In paid employment</td><td>05/08/2017</td><td>12345678</td><td>SEM1</td><td></td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the employment status in the ILR is:<div class="table_container"><table class="datatable"><thead><tr><th>Employer</th><th>Employment Status</th><th>Employment Status Applies</th><th>Small Employer</th><th> </th></tr></thead><tbody><tr><td>employer 1</td><td>in paid employment</td><td>06/08/2017</td><td>SEM1</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>...</th><th>08/18</th><th>09/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>500</td><td>500</td><td>500</td><td>...</td><td>1500</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>450</td><td>450</td><td>450</td><td>...</td><td>1350</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>50</td><td>50</td><td>50</td><td>...</td><td>150</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>450</td><td>450</td><td>...</td><td>450</td><td>1350</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>50</td><td>50</td><td>...</td><td>50</td><td>150</td></tr><tr><td>Levy account debited</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>SFA Levy employer budget</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>SFA non-Levy co-funding budget</td><td>450</td><td>450</td><td>450</td><td>...</td><td>1350</td><td>0</td></tr></tbody></table></div></li>
                 <li class="step">
@@ -224,9 +169,6 @@ $(document).ready(function() {
             </a>
           </li>
           <li class="scenario">
-            <div class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </div>
             <div class="scenario-heading" id="ac5--payment-for-a-16-18-non-das-learner-employer-is-not-small">
               <h2>AC5- Payment for a 16-18 non-DAS learner, employer is not small</h2>
               <p class="tags">Tags: <span>@SmallEmployerNonDas</span></p>
@@ -238,6 +180,8 @@ $(document).ready(function() {
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>learner type</th><th>agreed price</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>Employment Status</th><th>Employment Status Applies</th><th>Employer Id</th><th>Small Employer</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>16-18 programme only non-DAS</td><td>7500</td><td>06/08/2017</td><td>08/08/2018</td><td>08/08/2018</td><td>completed</td><td>403</td><td>2</td><td>1</td><td>In paid employment</td><td>05/08/2017</td><td>12345678</td><td></td></tr></tbody></table></div></li>
                 <li class="step">
+                  <span class="keyword">And </span>the employment status in the ILR is:<div class="table_container"><table class="datatable"><thead><tr><th>Employer</th><th>Employment Status</th><th>Employment Status Applies</th><th>Small Employer</th><th> </th></tr></thead><tbody><tr><td>employer 1</td><td>in paid employment</td><td>05/08/2017</td><td></td></tr></tbody></table></div></li>
+                <li class="step">
                   <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>...</th><th>07/18</th><th>08/18</th><th>09/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>620</td><td>620</td><td>620</td><td>1620</td><td>620</td><td>...</td><td>620</td><td>2860</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>570</td><td>570</td><td>570</td><td>1570</td><td>570</td><td>...</td><td>570</td><td>2710</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>50</td><td>50</td><td>50</td><td>50</td><td>50</td><td>...</td><td>50</td><td>150</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>570</td><td>570</td><td>570</td><td>1570</td><td>...</td><td>570</td><td>570</td><td>2710</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>50</td><td>50</td><td>50</td><td>50</td><td>...</td><td>50</td><td>50</td><td>150</td></tr><tr><td>Levy account debited</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA Levy employer budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA non-Levy co-funding budget</td><td>450</td><td>450</td><td>450</td><td>450</td><td>450</td><td>...</td><td>450</td><td>1350</td><td>0</td></tr><tr><td>SFA non-Levy additional payments budget</td><td>120</td><td>120</td><td>120</td><td>1120</td><td>120</td><td>...</td><td>120</td><td>1360</td><td>0</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">And </span>the transaction types for the payments are:<div class="table_container"><table class="datatable"><thead><tr><th>Payment type</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>...</th><th>08/18</th><th>09/18</th><th> </th></tr></thead><tbody><tr><td>On-program</td><td>450</td><td>450</td><td>450</td><td>450</td><td>...</td><td>450</td><td>0</td></tr><tr><td>Completion</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>1350</td></tr><tr><td>Balancing</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Employer 16-18 incentive</td><td>0</td><td>0</td><td>0</td><td>500</td><td>...</td><td>0</td><td>500</td></tr><tr><td>Provider 16-18 incentive</td><td>0</td><td>0</td><td>0</td><td>500</td><td>...</td><td>0</td><td>500</td></tr><tr><td>Framework uplift on-program</td><td>120</td><td>120</td><td>120</td><td>120</td><td>...</td><td>120</td><td>0</td></tr><tr><td>Framework uplift completion</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>360</td></tr><tr><td>Framework uplift balancing</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Provider disadvantage uplift</td><td>0</td><td>0</td><td>0</td><td>0</td><td>..</td><td>0</td><td>0</td></tr></tbody></table></div></li>
@@ -248,9 +192,6 @@ $(document).ready(function() {
             </a>
           </li>
           <li class="scenario">
-            <div class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </div>
             <div class="scenario-heading" id="ac6--1-learner-aged-16-18-non-das-second-employment-status-record-added-with-same-employer-id-but-small-employer-flag-removed-learner-retains-small-employer-funding">
               <h2>AC6- 1 learner aged 16-18, non-DAS. Second employment status record added with same employer id but small employer flag removed. Learner retains small employer funding.</h2>
               <p class="tags">Tags: <span>@SmallEmployerNonDasMultipleEmploymentStatuses</span></p>
@@ -262,7 +203,7 @@ $(document).ready(function() {
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>learner type</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th> </th></tr></thead><tbody><tr><td>1234567891</td><td>16-18 programme only non-DAS</td><td>06/08/2017</td><td>08/08/2018</td><td>08/08/2018</td><td>completed</td><td>403</td><td>2</td><td>1</td><td>7500</td></tr></tbody></table></div></li>
                 <li class="step">
-                  <span class="keyword">And </span>the employment status in the ILR is:<div class="table_container"><table class="datatable"><thead><tr><th>Employer ID</th><th>Employment Status</th><th>Employment Status Applies</th><th>Small Employer</th><th> </th></tr></thead><tbody><tr><td>123456</td><td>in paid employment</td><td>05/08/2017</td><td>SEM1</td></tr><tr><td>123456</td><td>in paid employment</td><td>05/10/2017</td><td></td></tr></tbody></table></div></li>
+                  <span class="keyword">And </span>the employment status in the ILR is:<div class="table_container"><table class="datatable"><thead><tr><th>Employer</th><th>Employment Status</th><th>Employment Status Applies</th><th>Small Employer</th><th> </th></tr></thead><tbody><tr><td>employer 1</td><td>in paid employment</td><td>05/08/2017</td><td>SEM1</td></tr><tr><td>employer 1</td><td>in paid employment</td><td>05/10/2017</td><td></td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>...</th><th>08/18</th><th>09/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>620</td><td>620</td><td>620</td><td>1620</td><td>620</td><td>...</td><td>2860</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>620</td><td>620</td><td>620</td><td>1620</td><td>620</td><td>...</td><td>2860</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>620</td><td>620</td><td>620</td><td>1620</td><td>...</td><td>620</td><td>2860</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Levy account debited</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>SFA Levy employer budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>SFA non-Levy co-funding budget</td><td>500</td><td>500</td><td>500</td><td>500</td><td>500</td><td>...</td><td>1500</td><td>0</td></tr><tr><td>SFA non-Levy additional payments budget</td><td>120</td><td>120</td><td>120</td><td>1120</td><td>120</td><td>...</td><td>1360</td><td>0</td></tr></tbody></table></div></li>
                 <li class="step">
@@ -274,9 +215,6 @@ $(document).ready(function() {
             </a>
           </li>
           <li class="scenario">
-            <div class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </div>
             <div class="scenario-heading" id="ac7--payment-for-a-16-18-das-learner-small-employer-at-start">
               <h2>AC7- Payment for a 16-18 DAS learner, small employer at start</h2>
               <p class="tags">Tags: <span>@SmallEmployerDas</span></p>
@@ -288,9 +226,11 @@ $(document).ready(function() {
                 <li class="step">
                   <span class="keyword">And </span>the apprenticeship funding band maximum is 9000</li>
                 <li class="step">
-                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>403</td><td>2</td><td>1</td><td>7500</td><td>06/08/2017</td></tr></tbody></table></div></li>
+                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th>end date</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>403</td><td>2</td><td>1</td><td>7500</td><td>06/08/2017</td><td>08/08/2018</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>learner type</th><th>agreed price</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>Employment Status</th><th>Employment Status Applies</th><th>Employer Id</th><th>Small Employer</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>16-18 programme only DAS</td><td>7500</td><td>06/08/2017</td><td>08/08/2018</td><td>08/08/2018</td><td>completed</td><td>403</td><td>2</td><td>1</td><td>In paid employment</td><td>05/08/2017</td><td>12345678</td><td>SEM1</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the employment status in the ILR is:<div class="table_container"><table class="datatable"><thead><tr><th>Employer</th><th>Employment Status</th><th>Employment Status Applies</th><th>Small Employer</th><th> </th></tr></thead><tbody><tr><td>employer 1</td><td>in paid employment</td><td>05/08/2017</td><td>SEM1</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>...</th><th>07/18</th><th>08/18</th><th>09/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>620</td><td>620</td><td>620</td><td>1620</td><td>620</td><td>...</td><td>620</td><td>2860</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>620</td><td>620</td><td>620</td><td>1620</td><td>620</td><td>...</td><td>620</td><td>2860</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>620</td><td>620</td><td>620</td><td>1620</td><td>...</td><td>620</td><td>620</td><td>2860</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Levy account debited</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA Levy employer budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>500</td><td>500</td><td>500</td><td>500</td><td>500</td><td>...</td><td>500</td><td>1500</td><td>0</td></tr><tr><td>SFA Levy additional payments budget</td><td>120</td><td>120</td><td>120</td><td>1120</td><td>120</td><td>...</td><td>120</td><td>1360</td><td>0</td></tr></tbody></table></div></li>
                 <li class="step">
@@ -302,9 +242,6 @@ $(document).ready(function() {
             </a>
           </li>
           <li class="scenario">
-            <div class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </div>
             <div class="scenario-heading" id="ac8--scenario-1-learner-aged-19-24-das-with-an-education-health-care-ehc-plan-employed-with-a-small-employer-at-start-is-fully-funded-for-on-programme-and-completion-payments">
               <h2>AC8- Scenario: 1 learner aged 19-24, DAS, with an Education Health Care (EHC) plan, employed with a small employer at start, is fully funded for on programme and completion payments</h2>
               <p class="tags">Tags: <span>@SmallEmployerDas</span></p>
@@ -316,9 +253,11 @@ $(document).ready(function() {
                 <li class="step">
                   <span class="keyword">And </span>the apprenticeship funding band maximum is 9000</li>
                 <li class="step">
-                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>403</td><td>2</td><td>1</td><td>7500</td><td>06/08/2017</td></tr></tbody></table></div></li>
+                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th>end date</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>403</td><td>2</td><td>1</td><td>7500</td><td>06/08/2017</td><td>08/08/2018</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>learner type</th><th>agreed price</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>Employment Status</th><th>Employment Status Applies</th><th>Employer Id</th><th>Small Employer</th><th>LearnDelFAM</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>19-24 programme only DAS</td><td>7500</td><td>06/08/2017</td><td>08/08/2018</td><td>08/08/2018</td><td>completed</td><td>403</td><td>2</td><td>1</td><td>In paid employment</td><td>05/08/2017</td><td>12345678</td><td>SEM1</td><td>EEF2</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the employment status in the ILR is:<div class="table_container"><table class="datatable"><thead><tr><th>Employer</th><th>Employment Status</th><th>Employment Status Applies</th><th>Small Employer</th><th> </th></tr></thead><tbody><tr><td>employer 1</td><td>in paid employment</td><td>05/08/2017</td><td>SEM1</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>...</th><th>07/18</th><th>08/18</th><th>09/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>620</td><td>620</td><td>620</td><td>1620</td><td>620</td><td>...</td><td>620</td><td>2860</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>620</td><td>620</td><td>620</td><td>1620</td><td>620</td><td>...</td><td>620</td><td>2860</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>620</td><td>620</td><td>620</td><td>1620</td><td>...</td><td>620</td><td>620</td><td>2860</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Levy account debited</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA Levy employer budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>500</td><td>500</td><td>500</td><td>500</td><td>500</td><td>...</td><td>500</td><td>1500</td><td>0</td></tr><tr><td>SFA Levy additional payments budget</td><td>120</td><td>120</td><td>120</td><td>1120</td><td>120</td><td>...</td><td>120</td><td>1360</td><td>0</td></tr></tbody></table></div></li>
                 <li class="step">
@@ -330,9 +269,6 @@ $(document).ready(function() {
             </a>
           </li>
           <li class="scenario">
-            <div class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </div>
             <div class="scenario-heading" id="ac9--1-learner-aged-19-24-das-is-a-care-leaver-employed-with-a-small-employer-at-start-is-fully-funded-for-on-programme-and-completion-payments">
               <h2>AC9- 1 learner aged 19-24, DAS, is a care leaver, employed with a small employer at start, is fully funded for on programme and completion payments</h2>
               <p class="tags">Tags: <span>@SmallEmployerDas</span></p>
@@ -344,9 +280,11 @@ $(document).ready(function() {
                 <li class="step">
                   <span class="keyword">And </span>the apprenticeship funding band maximum is 9000</li>
                 <li class="step">
-                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>403</td><td>2</td><td>1</td><td>7500</td><td>06/08/2017</td></tr></tbody></table></div></li>
+                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th>end date</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>403</td><td>2</td><td>1</td><td>7500</td><td>06/08/2017</td><td>08/08/2018</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>learner type</th><th>agreed price</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>Employment Status</th><th>Employment Status Applies</th><th>Employer Id</th><th>Small Employer</th><th>LearnDelFAM</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>19-24 programme only DAS</td><td>7500</td><td>06/08/2017</td><td>08/08/2018</td><td>08/08/2018</td><td>completed</td><td>403</td><td>2</td><td>1</td><td>In paid employment</td><td>05/08/2017</td><td>12345678</td><td>SEM1</td><td>EEF4</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the employment status in the ILR is:<div class="table_container"><table class="datatable"><thead><tr><th>Employer</th><th>Employment Status</th><th>Employment Status Applies</th><th>Small Employer</th><th> </th></tr></thead><tbody><tr><td>employer 1</td><td>in paid employment</td><td>05/08/2017</td><td>SEM1</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>...</th><th>07/18</th><th>08/18</th><th>09/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>620</td><td>620</td><td>620</td><td>1620</td><td>620</td><td>...</td><td>620</td><td>2860</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>620</td><td>620</td><td>620</td><td>1620</td><td>620</td><td>...</td><td>620</td><td>2860</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>620</td><td>620</td><td>620</td><td>1620</td><td>...</td><td>620</td><td>620</td><td>2860</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Levy account debited</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA Levy employer budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>500</td><td>500</td><td>500</td><td>500</td><td>500</td><td>...</td><td>500</td><td>1500</td><td>0</td></tr><tr><td>SFA Levy additional payments budget</td><td>120</td><td>120</td><td>120</td><td>1120</td><td>120</td><td>...</td><td>120</td><td>1360</td><td>0</td></tr></tbody></table></div></li>
                 <li class="step">
@@ -358,9 +296,6 @@ $(document).ready(function() {
             </a>
           </li>
           <li class="scenario">
-            <div class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </div>
             <div class="scenario-heading" id="ac10--1-learner-aged-19-24-das-employed-with-a-small-employer-at-start-is-funded-using-levy-for-on-programme-and-completion-payments-this-apprentice-does-not-have-a-education-health-care-plan-and-is-not-a-care-leaver">
               <h2>AC10- 1 learner aged 19-24, DAS, employed with a small employer at start, is funded using levy for on programme and completion payments (this apprentice does not have a Education Health Care plan and is not a care leaver)</h2>
               <p class="tags">Tags: <span>@SmallEmployerDas</span></p>
@@ -370,9 +305,11 @@ $(document).ready(function() {
                 <li class="step">
                   <span class="keyword">Given </span>levy balance &gt; agreed price for all months</li>
                 <li class="step">
-                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>403</td><td>2</td><td>1</td><td>7500</td><td>06/08/2017</td></tr></tbody></table></div></li>
+                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th>end date</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>403</td><td>2</td><td>1</td><td>7500</td><td>06/08/2017</td><td>08/08/2018</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>learner type</th><th>agreed price</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>Employment Status</th><th>Employment Status Applies</th><th>Employer Id</th><th>Small Employer</th><th>LearnDelFAM</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>19-24 programme only DAS</td><td>7500</td><td>06/08/2017</td><td>08/08/2018</td><td>08/08/2018</td><td>completed</td><td>403</td><td>2</td><td>1</td><td>In paid employment</td><td>05/08/2017</td><td>12345678</td><td>SEM1</td><td></td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the employment status in the ILR is:<div class="table_container"><table class="datatable"><thead><tr><th>Employer</th><th>Employment Status</th><th>Employment Status Applies</th><th>Small Employer</th><th> </th></tr></thead><tbody><tr><td>employer 1</td><td>in paid employment</td><td>05/08/2017</td><td>SEM1</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>...</th><th>07/18</th><th>08/18</th><th>09/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>500</td><td>500</td><td>500</td><td>...</td><td>500</td><td>1500</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>500</td><td>500</td><td>500</td><td>...</td><td>500</td><td>1500</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>500</td><td>500</td><td>...</td><td>500</td><td>500</td><td>1500</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Levy account debited</td><td>0</td><td>500</td><td>500</td><td>...</td><td>500</td><td>500</td><td>1500</td></tr><tr><td>SFA Levy employer budget</td><td>500</td><td>500</td><td>500</td><td>...</td><td>500</td><td>1500</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA non-Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td><td>0</td></tr></tbody></table></div></li>
                 <li class="step">
@@ -384,9 +321,6 @@ $(document).ready(function() {
             </a>
           </li>
           <li class="scenario">
-            <div class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </div>
             <div class="scenario-heading" id="ac11--payment-for-a-16-18-das-learner-employer-is-not-small">
               <h2>AC11- Payment for a 16-18 DAS learner, employer is not small</h2>
               <p class="tags">Tags: <span>@SmallEmployerDas</span></p>
@@ -398,7 +332,7 @@ $(document).ready(function() {
                 <li class="step">
                   <span class="keyword">And </span>the apprenticeship funding band maximum is 9000</li>
                 <li class="step">
-                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>403</td><td>2</td><td>1</td><td>7500</td><td>06/08/2017</td></tr></tbody></table></div></li>
+                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th>end date</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>403</td><td>2</td><td>1</td><td>7500</td><td>06/08/2017</td><td>08/08/2018</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>learner type</th><th>agreed price</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>Employment Status</th><th>Employment Status Applies</th><th>Employer Id</th><th>Small Employer</th><th>LearnDelFAM</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>16-18 programme only DAS</td><td>7500</td><td>06/08/2017</td><td>08/08/2018</td><td>08/08/2018</td><td>completed</td><td>403</td><td>2</td><td>1</td><td>In paid employment</td><td>05/08/2017</td><td>12345678</td><td></td><td></td></tr></tbody></table></div></li>
                 <li class="step">
@@ -412,9 +346,6 @@ $(document).ready(function() {
             </a>
           </li>
           <li class="scenario">
-            <div class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </div>
             <div class="scenario-heading" id="ac12--payment-for-a-16-18-non-das-learner-small-employer-at-start-change-to-large-employer">
               <h2>AC12- Payment for a 16-18 non-DAS learner, small employer at start, change to large employer</h2>
               <p class="tags">Tags: <span>@SmallEmployerMultipleEmploymentStatus</span></p>
@@ -426,9 +357,9 @@ $(document).ready(function() {
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>learner type</th><th>agreed price</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>framework code</th><th>programme type</th><th>pathway code</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>16-18 programme only non-DAS</td><td>7500</td><td>06/08/2017</td><td>08/08/2018</td><td>08/08/2018</td><td>completed</td><td>403</td><td>2</td><td>1</td></tr></tbody></table></div></li>
                 <li class="step">
-                  <span class="keyword">And </span>the employment status in the ILR is:<div class="table_container"><table class="datatable"><thead><tr><th>Employer Id</th><th>Employment Status</th><th>Employment Status Applies</th><th>Small Employer</th><th> </th></tr></thead><tbody><tr><td>12345678</td><td>in paid employment</td><td>05/08/2017</td><td>SEM1</td></tr><tr><td>98765432</td><td>in paid employment</td><td>05/10/2017</td><td></td></tr></tbody></table></div></li>
+                  <span class="keyword">And </span>the employment status in the ILR is:<div class="table_container"><table class="datatable"><thead><tr><th>Employer</th><th>Employment Status</th><th>Employment Status Applies</th><th>Small Employer</th><th> </th></tr></thead><tbody><tr><td>employer 1</td><td>in paid employment</td><td>05/08/2017</td><td>SEM1</td></tr><tr><td>employer 2</td><td>in paid employment</td><td>05/10/2017</td><td></td></tr></tbody></table></div></li>
                 <li class="step">
-                  <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>...</th><th>08/18</th><th>09/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>620</td><td>620</td><td>620</td><td>1620</td><td>620</td><td>...</td><td>2860</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>620</td><td>620</td><td>570</td><td>1570</td><td>570</td><td>...</td><td>2710</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>0</td><td>0</td><td>50</td><td>50</td><td>50</td><td>...</td><td>150</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>620</td><td>620</td><td>570</td><td>1570</td><td>...</td><td>570</td><td>2710</td></tr><tr><td>Payment due from Employer 98765432</td><td>0</td><td>0</td><td>50</td><td>50</td><td>50</td><td>...</td><td>50</td><td>150</td></tr><tr><td>Levy account debited</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>SFA Levy employer budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>SFA non-Levy co-funding budget</td><td>500</td><td>500</td><td>450</td><td>450</td><td>450</td><td>...</td><td>1350</td><td>0</td></tr><tr><td>SFA non-Levy additional payments budget</td><td>120</td><td>120</td><td>120</td><td>1120</td><td>120</td><td>...</td><td>1360</td><td>0</td></tr></tbody></table></div></li>
+                  <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>...</th><th>08/18</th><th>09/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>620</td><td>620</td><td>620</td><td>1620</td><td>620</td><td>...</td><td>2860</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>620</td><td>620</td><td>570</td><td>1570</td><td>570</td><td>...</td><td>2710</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>0</td><td>0</td><td>50</td><td>50</td><td>50</td><td>...</td><td>150</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>620</td><td>620</td><td>570</td><td>1570</td><td>...</td><td>570</td><td>2710</td></tr><tr><td>Payment due from Employer 2</td><td>0</td><td>0</td><td>0</td><td>50</td><td>50</td><td>...</td><td>50</td><td>150</td></tr><tr><td>Levy account debited</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>SFA Levy employer budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>SFA non-Levy co-funding budget</td><td>500</td><td>500</td><td>450</td><td>450</td><td>450</td><td>...</td><td>1350</td><td>0</td></tr><tr><td>SFA non-Levy additional payments budget</td><td>120</td><td>120</td><td>120</td><td>1120</td><td>120</td><td>...</td><td>1360</td><td>0</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">And </span>the transaction types for the payments are:<div class="table_container"><table class="datatable"><thead><tr><th>Payment type</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>...</th><th>08/18</th><th>09/18</th><th> </th></tr></thead><tbody><tr><td>On-program</td><td>500</td><td>500</td><td>450</td><td>450</td><td>...</td><td>450</td><td>0</td></tr><tr><td>Completion</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>1350</td></tr><tr><td>Balancing</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Employer 16-18 incentive</td><td>0</td><td>0</td><td>0</td><td>500</td><td>...</td><td>0</td><td>500</td></tr><tr><td>Provider 16-18 incentive</td><td>0</td><td>0</td><td>0</td><td>500</td><td>...</td><td>0</td><td>500</td></tr><tr><td>Framework uplift on-program</td><td>120</td><td>120</td><td>120</td><td>120</td><td>...</td><td>120</td><td>0</td></tr><tr><td>Framework uplift completion</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>360</td></tr><tr><td>Framework uplift balancing</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Provider disadvantage uplift</td><td>0</td><td>0</td><td>0</td><td>0</td><td>..</td><td>0</td><td>0</td></tr></tbody></table></div></li>
               </ul>
@@ -438,9 +369,6 @@ $(document).ready(function() {
             </a>
           </li>
           <li class="scenario">
-            <div class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
-            </div>
             <div class="scenario-heading" id="ac13--payment-for-a-16-18-non-das-learner-large-employer-at-start-change-to-small-employer">
               <h2>AC13- Payment for a 16-18 non-DAS learner, large employer at start, change to small employer</h2>
               <p class="tags">Tags: <span>@SmallEmployerMultipleEmploymentStatus</span></p>
@@ -452,9 +380,9 @@ $(document).ready(function() {
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>learner type</th><th>agreed price</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>framework code</th><th>programme type</th><th>pathway code</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>16-18 programme only non-DAS</td><td>7500</td><td>06/08/2017</td><td>08/08/2018</td><td>08/08/2018</td><td>completed</td><td>403</td><td>2</td><td>1</td></tr></tbody></table></div></li>
                 <li class="step">
-                  <span class="keyword">And </span>the employment status in the ILR is:<div class="table_container"><table class="datatable"><thead><tr><th>Employer Id</th><th>Employment Status</th><th>Employment Status Applies</th><th>Small Employer</th><th> </th></tr></thead><tbody><tr><td>12345678</td><td>in paid employment</td><td>05/08/2017</td><td></td></tr><tr><td>98765432</td><td>in paid employment</td><td>05/10/2017</td><td>SEM1</td></tr></tbody></table></div></li>
+                  <span class="keyword">And </span>the employment status in the ILR is:<div class="table_container"><table class="datatable"><thead><tr><th>Employer</th><th>Employment Status</th><th>Employment Status Applies</th><th>Small Employer</th><th> </th></tr></thead><tbody><tr><td>employer 1</td><td>in paid employment</td><td>05/08/2017</td><td></td></tr><tr><td>employer 2</td><td>in paid employment</td><td>05/10/2017</td><td>SEM1</td></tr></tbody></table></div></li>
                 <li class="step">
-                  <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>...</th><th>08/18</th><th>09/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>620</td><td>620</td><td>620</td><td>1620</td><td>620</td><td>...</td><td>2860</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>570</td><td>570</td><td>620</td><td>1620</td><td>620</td><td>...</td><td>2860</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>50</td><td>50</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>570</td><td>570</td><td>620</td><td>1620</td><td>...</td><td>620</td><td>2860</td></tr><tr><td>Payment due from Employer 12345678</td><td>50</td><td>50</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Levy account debited</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>SFA Levy employer budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>SFA non-Levy co-funding budget</td><td>450</td><td>450</td><td>500</td><td>500</td><td>500</td><td>...</td><td>1500</td><td>0</td></tr><tr><td>SFA non-Levy additional payments budget</td><td>120</td><td>120</td><td>120</td><td>1120</td><td>120</td><td>...</td><td>1360</td><td>0</td></tr></tbody></table></div></li>
+                  <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>...</th><th>08/18</th><th>09/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>620</td><td>620</td><td>620</td><td>1620</td><td>620</td><td>...</td><td>2860</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>570</td><td>570</td><td>620</td><td>1620</td><td>620</td><td>...</td><td>2860</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>50</td><td>50</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>570</td><td>570</td><td>620</td><td>1620</td><td>...</td><td>620</td><td>2860</td></tr><tr><td>Payment due from Employer 1</td><td>0</td><td>50</td><td>50</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Levy account debited</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>SFA Levy employer budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>SFA non-Levy co-funding budget</td><td>450</td><td>450</td><td>500</td><td>500</td><td>500</td><td>...</td><td>1500</td><td>0</td></tr><tr><td>SFA non-Levy additional payments budget</td><td>120</td><td>120</td><td>120</td><td>1120</td><td>120</td><td>...</td><td>1360</td><td>0</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">And </span>the transaction types for the payments are:<div class="table_container"><table class="datatable"><thead><tr><th>Payment type</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>...</th><th>08/18</th><th>09/18</th><th> </th></tr></thead><tbody><tr><td>On-program</td><td>450</td><td>450</td><td>500</td><td>500</td><td>...</td><td>500</td><td>0</td></tr><tr><td>Completion</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>1500</td></tr><tr><td>Balancing</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Employer 16-18 incentive</td><td>0</td><td>0</td><td>0</td><td>500</td><td>...</td><td>0</td><td>500</td></tr><tr><td>Provider 16-18 incentive</td><td>0</td><td>0</td><td>0</td><td>500</td><td>...</td><td>0</td><td>500</td></tr><tr><td>Framework uplift on-program</td><td>120</td><td>120</td><td>120</td><td>120</td><td>...</td><td>120</td><td>0</td></tr><tr><td>Framework uplift completion</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>360</td></tr><tr><td>Framework uplift balancing</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Provider disadvantage uplift</td><td>0</td><td>0</td><td>0</td><td>0</td><td>..</td><td>0</td><td>0</td></tr></tbody></table></div></li>
               </ul>
@@ -466,7 +394,7 @@ $(document).ready(function() {
         </ul>
       </div>
       <div id="footer">
-        <p>Generated on: 29 March 2017 20:43:06</p>
+        <p>Generated on: 29 March 2017 20:44:26</p>
         <p>Produced by Pickles, version 2.8.2.0</p>
       </div>
     </div>
