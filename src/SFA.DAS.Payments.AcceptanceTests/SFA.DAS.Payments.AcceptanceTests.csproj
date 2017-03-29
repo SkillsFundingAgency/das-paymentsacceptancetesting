@@ -82,6 +82,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contexts\ProviderAdjustmentsContext.cs" />
     <Compile Include="DataExtensions.cs" />
     <Compile Include="DataHelpers\IdentifierGenerator.cs" />
     <Compile Include="Extensions.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Features\learner_finishes_late.feature.cs" />
     <Compile Include="Features\learner_finishes_on_time.feature.cs" />
     <Compile Include="Features\payments_calc.feature.cs" />
+    <Compile Include="Features\provider_adjustments.feature.cs" />
     <Compile Include="Features\small_employers.feature.cs" />
     <Compile Include="Features\two_learners_paid_in_priority.feature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -187,6 +189,7 @@
     <Compile Include="StepDefinitions\FeatureSteps\DataLockFeatureSteps.cs" />
     <Compile Include="StepDefinitions\FeatureSteps\EarningsCalcFeatureSteps.cs" />
     <Compile Include="StepDefinitions\FeatureSteps\PaymentsCalcFeatureSteps.cs" />
+    <Compile Include="StepDefinitions\ProviderAdjustmentsSteps.cs" />
     <Compile Include="StepDefinitions\SubmissionSteps.cs" />
     <Compile Include="StepDefinitions\UntestedSteps.cs" />
     <Compile Include="TableParsers\CommitmentsTableParser.cs" />
@@ -243,6 +246,9 @@
     </None>
     <None Include="..\..\features\payments_calc.feature">
       <Link>Features\payments_calc.feature</Link>
+    </None>
+    <None Include="..\..\features\provider_adjustments.feature">
+      <Link>Features\provider_adjustments.feature</Link>
     </None>
     <None Include="..\..\features\small_employers.feature">
       <Link>Features\small_employers.feature</Link>
