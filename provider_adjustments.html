@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"[]>
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Provider adjustments (EAS) payments</title>
+    <link rel="stylesheet" href="css/master.css" type="text/css" />
+    <link rel="stylesheet" href="css/print.css" type="text/css" media="print" />
+    <script src="js/jquery.js" type="text/javascript"></script>
+    <script src="js/scripts.js" type="text/javascript"></script>
+    <script type="text/javascript">
+$(document).ready(function() {
+  initializeToc();
+});
+</script>
+    <!-- We are using Font Awesome - http://fortawesome.github.com/Font-Awesome - licensed under CC BY 3.0 -->
+  </head>
+  <body>
+    <div id="container">
+      <div id="top" />
+      <div id="toc">
+        <p class="tocCollapser" title="Collapse Table of Content">«</p>
+        <ul class="features">
+          <li class="file" id="root">
+            <a href="index.html">Home</a>
+          </li>
+          <li class="file">
+            <a href="small_employers.html">1 learner aged 16-18, non-DAS, employed with a small employer at start, is fully funded for on programme and completion payments</a>
+          </li>
+          <li class="file">
+            <a href="additional_payments.html">16 to 18 learner incentives, framework uplifts, level 2 english or maths payments</a>
+          </li>
+          <li class="file">
+            <a href="two_learners_paid_in_priority.html">2 learners, paid in priority order</a>
+          </li>
+          <li class="file">
+            <a href="earnings_calc.html">Amount due is calculated based on previously earned amount</a>
+          </li>
+          <li class="file">
+            <a href="learner_changes_provider.html">Apprentice changes provider scenarios</a>
+          </li>
+          <li class="file">
+            <a href="definitions.html">Business definitions</a>
+          </li>
+          <li class="file">
+            <a href="payments_calc.html">Calculate the payments</a>
+          </li>
+          <li class="file">
+            <a href="datalock_errors.html">Datalock validation fails for different reasons</a>
+          </li>
+          <li class="file">
+            <a href="employer_stops_payments.html">Employer stops payments on a commitment</a>
+          </li>
+          <li class="file">
+            <span class="current">Provider adjustments (EAS) payments</span>
+          </li>
+          <li class="file">
+            <a href="capping.html">Provider earnings and payments for a learner with a negotiated price above the funding band cap</a>
+          </li>
+          <li class="file">
+            <a href="learner_changes_employer.html">Provider earnings and payments where a learner changes employers</a>
+          </li>
+          <li class="file">
+            <a href="change_in_circumstances.html">Provider earnings and payments where learner changes apprenticeship standard or there is a change to the negotiated price at the end of a month, remaining with the same employer and provider</a>
+          </li>
+          <li class="file">
+            <a href="learner_finishes_early.html">Provider earnings and payments where learner completes earlier than planned</a>
+          </li>
+          <li class="file">
+            <a href="learner_finishes_late.html">Provider earnings and payments where learner completes later than planned</a>
+          </li>
+          <li class="file">
+            <a href="learner_finishes_on_time.html">Provider earnings and payments where learner completes on time and is funded by levy</a>
+          </li>
+          <li class="file">
+            <a href="ILR_is_submitted_late.html">The ILR is submitted late</a>
+          </li>
+        </ul>
+      </div>
+      <div id="feature">
+        <h1>Provider adjustments (EAS) payments</h1>
+        <ul id="scenarios">
+          <li class="scenario">
+            <div class="scenario-heading" id="payments-when-current-and-previous-provider-adjustments-exist">
+              <h2>Payments when current and previous provider adjustments exist</h2>
+            </div>
+            <div class="steps">
+              <ul>
+                <li class="step">
+                  <span class="keyword">Given </span>that the previous EAS entries for a provider are as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>05/17</th><th>06/17</th><th>year to date total</th><th> </th></tr></thead><tbody><tr><td>16-18 levy additional provider payments: audit adjustments</td><td>143.52</td><td>13.59</td><td>157.11</td></tr><tr><td>16-18 non-levy additional provider payments: training authorised claims</td><td>17.57</td><td>11.89</td><td>29.46</td></tr><tr><td>Adult levy training: authorised claims</td><td>501.02</td><td>98.14</td><td>599.16</td></tr><tr><td>Adult non-levy additional employer payments: audit adjustments</td><td>305.25</td><td>5.23</td><td>310.48</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">When </span>the following EAS entries are submitted:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>05/17</th><th>06/17</th><th>07/17</th><th>year to date total</th><th> </th></tr></thead><tbody><tr><td>16-18 levy additional provider payments: audit adjustments</td><td>195.17</td><td>4.98</td><td>63.42</td><td>263.57</td></tr><tr><td>16-18 non-levy additional provider payments: training authorised claims</td><td>17.57</td><td>2.89</td><td>2.45</td><td>22.91</td></tr><tr><td>Adult levy training: authorised claims</td><td>475.34</td><td>98.14</td><td>65.49</td><td>638.97</td></tr><tr><td>Adult levy additional provider payments: audit adjustments</td><td>0</td><td>18.65</td><td>1.63</td><td>20.28</td></tr><tr><td>Adult non-levy additional employer payments: audit adjustments</td><td>341.25</td><td>5.23</td><td>159.34</td><td>505.82</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">Then </span>the following adjustments will be generated:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>05/17</th><th>06/17</th><th>07/17</th><th>payments year to date</th><th> </th></tr></thead><tbody><tr><td>16-18 levy additional provider payments: audit adjustments</td><td>51.65</td><td>-8.61</td><td>63.42</td><td>106.46</td></tr><tr><td>16-18 non-levy additional provider payments: training authorised claims</td><td>0</td><td>-9.00</td><td>2.45</td><td>-6.55</td></tr><tr><td>Adult levy training: authorised claims</td><td>-25.68</td><td>0</td><td>65.49</td><td>39.81</td></tr><tr><td>Adult levy additional provider payments: audit adjustments</td><td>0</td><td>18.65</td><td>1.63</td><td>20.28</td></tr><tr><td>Adult non-levy additional employer payments: audit adjustments</td><td>36.00</td><td>0</td><td>159.34</td><td>195.34</td></tr></tbody></table></div></li>
+              </ul>
+            </div>
+            <a class="scenario-link" href="javascript:showImageLink('payments-when-current-and-previous-provider-adjustments-exist')" title="Copy scenario link to clipboard.">
+              <i class="icon-link"> </i>
+            </a>
+          </li>
+          <li class="scenario">
+            <div class="scenario-heading" id="payments-when-only-current-provider-adjustments-exist">
+              <h2>Payments when only current provider adjustments exist</h2>
+            </div>
+            <div class="steps">
+              <ul>
+                <li class="step">
+                  <span class="keyword">Given </span>that the previous EAS entries for a provider are as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>05/17</th><th>06/17</th><th>year to date total</th><th> </th></tr></thead><tbody><tr><td>16-18 levy additional provider payments: audit adjustments</td><td>0</td><td>0</td><td>0</td></tr><tr><td>16-18 non-levy additional provider payments: training authorised claims</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Adult levy training: authorised claims</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Adult non-levy additional employer payments: audit adjustments</td><td>0</td><td>0</td><td>0</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">When </span>the following EAS entries are submitted:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>05/17</th><th>06/17</th><th>07/17</th><th>year to date total</th><th> </th></tr></thead><tbody><tr><td>16-18 levy additional provider payments: audit adjustments</td><td>195.17</td><td>4.98</td><td>63.42</td><td>263.57</td></tr><tr><td>16-18 non-levy additional provider payments: training authorised claims</td><td>17.57</td><td>2.89</td><td>2.45</td><td>22.91</td></tr><tr><td>Adult levy training: authorised claims</td><td>475.34</td><td>98.14</td><td>65.49</td><td>638.97</td></tr><tr><td>Adult levy additional provider payments: audit adjustments</td><td>0</td><td>18.65</td><td>1.63</td><td>20.28</td></tr><tr><td>Adult non-levy additional employer payments: audit adjustments</td><td>341.25</td><td>5.23</td><td>159.34</td><td>505.82</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">Then </span>the following adjustments will be generated:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>05/17</th><th>06/17</th><th>07/17</th><th>year to date total</th><th> </th></tr></thead><tbody><tr><td>16-18 levy additional provider payments: audit adjustments</td><td>195.17</td><td>4.98</td><td>63.42</td><td>263.57</td></tr><tr><td>16-18 non-levy additional provider payments: training authorised claims</td><td>17.57</td><td>2.89</td><td>2.45</td><td>22.91</td></tr><tr><td>Adult levy training: authorised claims</td><td>475.34</td><td>98.14</td><td>65.49</td><td>638.97</td></tr><tr><td>Adult levy additional provider payments: audit adjustments</td><td>0</td><td>18.65</td><td>1.63</td><td>20.28</td></tr><tr><td>Adult non-levy additional employer payments: audit adjustments</td><td>341.25</td><td>5.23</td><td>159.34</td><td>505.82</td></tr></tbody></table></div></li>
+              </ul>
+            </div>
+            <a class="scenario-link" href="javascript:showImageLink('payments-when-only-current-provider-adjustments-exist')" title="Copy scenario link to clipboard.">
+              <i class="icon-link"> </i>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div id="footer">
+        <p>Generated on: 30 March 2017 18:01:16</p>
+        <p>Produced by Pickles, version 2.8.2.0</p>
+      </div>
+    </div>
+  </body>
+</html>
