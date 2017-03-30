@@ -117,7 +117,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
         }
         private static void BuildAndSubmitIlr(ProviderSubmissionDetails providerDetails, string period, LookupContext lookupContext, List<ContractTypeReferenceData> contractTypes, List<EmploymentStatusReferenceData> employmentStatus, List<LearningSupportReferenceData> learningSupportStatus)
         {
-            IlrSubmission submission = BuildIlrSubmission(providerDetails, lookupContext, contractTypes, employmentStatus, learningSupportStatus);
+            IlrSubmission submission = BuildIlrSubmission(providerDetails, period, lookupContext, contractTypes, employmentStatus, learningSupportStatus);
             TestEnvironment.ProcessService.RunIlrSubmission(submission, TestEnvironment.Variables, new LoggingStatusWatcher($"ILR submission for provider {providerDetails.ProviderId} in {period}"));
         }
         private static void RunMonthEnd(string period)
@@ -126,11 +126,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
         }
 
 
-        private static IlrSubmission BuildIlrSubmission(ProviderSubmissionDetails providerDetails, LookupContext lookupContext, List<ContractTypeReferenceData> contractTypes, List<EmploymentStatusReferenceData> employmentStatus, List<LearningSupportReferenceData> learningSupportStatus)
+        private static IlrSubmission BuildIlrSubmission(ProviderSubmissionDetails providerDetails, string period, LookupContext lookupContext, List<ContractTypeReferenceData> contractTypes, List<EmploymentStatusReferenceData> employmentStatus, List<LearningSupportReferenceData> learningSupportStatus)
         {
             var learners = (from x in providerDetails.LearnerDetails
                             group x by x.LearnerId into g
-                            select BuildLearner(g.ToArray(), lookupContext, contractTypes, employmentStatus, learningSupportStatus)).ToArray();
+                            select BuildLearner(g.ToArray(), period, lookupContext, contractTypes, employmentStatus, learningSupportStatus)).ToArray();
             var submission = new IlrSubmission
             {
                 Ukprn = providerDetails.Ukprn,
@@ -142,9 +142,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
             }
             return submission;
         }
-        private static Learner BuildLearner(IlrLearnerReferenceData[] learnerDetails, LookupContext lookupContext, List<ContractTypeReferenceData> contractTypes, List<EmploymentStatusReferenceData> employmentStatus, List<LearningSupportReferenceData> learningSupportStatus)
+        private static Learner BuildLearner(IlrLearnerReferenceData[] learnerDetails, string period, LookupContext lookupContext, List<ContractTypeReferenceData> contractTypes, List<EmploymentStatusReferenceData> employmentStatus, List<LearningSupportReferenceData> learningSupportStatus)
         {
-            var deliveries = learnerDetails.Select(x =>
+            var periodMonth = int.Parse(period.Substring(0, 2));
+            var periodYear = int.Parse(period.Substring(3)) + 2000;
+            var endOfPeriod = new DateTime(periodYear, periodMonth, 1).AddMonths(1).AddSeconds(-1);
+
+            var deliveries = learnerDetails.Where(x => x.StartDate <= endOfPeriod).Select(x =>
             {
                 var financialRecords = BuildLearningDeliveryFinancials(x);
 
@@ -156,7 +160,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                     PathwayCode = x.PathwayCode,
                     ActualStartDate = x.StartDate,
                     PlannedEndDate = x.PlannedEndDate,
-                    ActualEndDate = x.ActualEndDate,
+                    ActualEndDate = x.ActualEndDate <= endOfPeriod ? x.ActualEndDate : (DateTime?)null,
                     FamRecords = BuildLearningDeliveryFamCodes(x, contractTypes, learningSupportStatus),
                     CompletionStatus = (IlrGenerator.CompletionStatus)(int)x.CompletionStatus,
                     Type = (IlrGenerator.AimType)(int)x.AimType,
