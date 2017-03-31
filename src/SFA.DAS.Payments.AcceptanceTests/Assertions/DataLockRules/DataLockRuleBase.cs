@@ -28,7 +28,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Assertions.DataLockRules
                 }
                 if (period.CommitmentId != match.CommitmentId || period.CommitmentVersion != match.CommitmentVersion)
                 {
-                    throw new ArgumentException($"Expected {_transactionTypeName} match for commitment {period.CommitmentId} v{period.CommitmentVersion} in period {period.PeriodName}, but found match for commitment {period.CommitmentId} v{period.CommitmentVersion}");
+                    throw new ArgumentException($"Expected {_transactionTypeName} match for commitment {period.CommitmentId} v{period.CommitmentVersion} in period {period.PeriodName}, but found match for commitment {match.CommitmentId} v{match.CommitmentVersion}");
                 }
             }
         }
