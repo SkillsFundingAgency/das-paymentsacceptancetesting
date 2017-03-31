@@ -13,19 +13,22 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
     [Binding]
     public class EarningAndPaymentSteps
     {
-        public EarningAndPaymentSteps(EmployerAccountContext employerAccountContext,
-                                    EarningsAndPaymentsContext earningsAndPaymentsContext, 
-                                    SubmissionContext submissionContext, 
-                                    LookupContext lookupContext,
+        public EarningAndPaymentSteps(EmployerAccountContext employerAccountContext, 
+                                      EarningsAndPaymentsContext earningsAndPaymentsContext,
+                                      DataLockContext dataLockContext,
+                                      SubmissionContext submissionContext, 
+                                      LookupContext lookupContext,
                                     CommitmentsContext commitmentsContext)
         {
             EmployerAccountContext = employerAccountContext;
             EarningsAndPaymentsContext = earningsAndPaymentsContext;
+            DataLockContext = dataLockContext;
             SubmissionContext = submissionContext;
             LookupContext = lookupContext;
             CommitmentsContext = commitmentsContext;
         }
         public EmployerAccountContext EmployerAccountContext { get; }
+        public DataLockContext DataLockContext { get; }
         public EarningsAndPaymentsContext EarningsAndPaymentsContext { get; }
         public SubmissionContext SubmissionContext { get; }
         public LookupContext LookupContext { get; }
@@ -57,8 +60,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             }
 
             EarningAndPaymentTableParser.ParseEarningsAndPaymentsTableIntoContext(providerBreakdown, earningAndPayments);
-            PaymentsAndEarningsAssestions.AssertPaymentsAndEarningsResults(EarningsAndPaymentsContext, SubmissionContext, EmployerAccountContext);
-            TransactionTypeAssertions.AssertPaymentsAndEarningsResults(EarningsAndPaymentsContext, SubmissionContext, EmployerAccountContext);
+            AssertResults();
         }
 
         [Then("the transaction types for the payments are:")]
@@ -78,8 +80,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             }
 
             TransactionTypeTableParser.ParseTransactionTypeTableIntoContext(EarningsAndPaymentsContext, $"provider {providerIdSuffix}", transactionTypes);
-            PaymentsAndEarningsAssestions.AssertPaymentsAndEarningsResults(EarningsAndPaymentsContext, SubmissionContext, EmployerAccountContext);
-            TransactionTypeAssertions.AssertPaymentsAndEarningsResults(EarningsAndPaymentsContext, SubmissionContext, EmployerAccountContext);
+            AssertResults();
         }
 
         [Then(@"the provider earnings and payments break down for ULN (.*) as follows:")]
@@ -99,8 +100,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             };
             EarningsAndPaymentsContext.LearnerOverallEarningsAndPayments.Add(breakdown);
             EarningAndPaymentTableParser.ParseEarningsAndPaymentsTableIntoContext(breakdown, earningAndPayments);
-            PaymentsAndEarningsAssestions.AssertPaymentsAndEarningsResults(EarningsAndPaymentsContext, SubmissionContext, EmployerAccountContext);
+            AssertResults();
+        }
+
+        private void AssertResults()
+        {
+            PaymentsAndEarningsAssertions.AssertPaymentsAndEarningsResults(EarningsAndPaymentsContext, SubmissionContext, EmployerAccountContext);
             TransactionTypeAssertions.AssertPaymentsAndEarningsResults(EarningsAndPaymentsContext, SubmissionContext, EmployerAccountContext);
+            //DataLockAssertions.AssertPaymentsAndEarningsResults(DataLockContext, SubmissionContext);
         }
 
         [Given(@"the following earnings and payments have been made to the provider for (.*):")]
