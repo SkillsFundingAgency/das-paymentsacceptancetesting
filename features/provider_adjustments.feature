@@ -1,3 +1,4 @@
+@ProviderAdjustments
 Feature: Provider adjustments (EAS) payments
 
     Scenario: Payments when current and previous provider adjustments exist

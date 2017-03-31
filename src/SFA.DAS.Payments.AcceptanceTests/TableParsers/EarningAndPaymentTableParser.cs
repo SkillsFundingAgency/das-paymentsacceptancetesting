@@ -107,6 +107,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                 {
                     ParseNonEmployerRow(row, periodNames, breakdown.SfaNonLevyAdditionalPayments);
                 }
+                else if (row[0] == "Refund taken by SFA")
+                {
+                    ParseNonEmployerRow(row, periodNames, breakdown.RefundTakenBySfa);
+                }
+                else if (row[0] == "Levy account credited")
+                {
+                    ParseEmployerRow(Defaults.EmployerAccountId.ToString(), row, periodNames, breakdown.EmployersLevyAccountCredited);
+                }
                 else
                 {
                     throw new ArgumentException($"Unexpected earning and payments row type of '{row[0]}'");
