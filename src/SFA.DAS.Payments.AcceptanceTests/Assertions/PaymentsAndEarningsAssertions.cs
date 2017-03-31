@@ -5,7 +5,7 @@ using SFA.DAS.Payments.AcceptanceTests.Contexts;
 
 namespace SFA.DAS.Payments.AcceptanceTests.Assertions
 {
-    public static class PaymentsAndEarningsAssestions
+    public static class PaymentsAndEarningsAssertions
     {
         private static readonly EarningsAndPaymentsRuleBase[] Rules =
         {

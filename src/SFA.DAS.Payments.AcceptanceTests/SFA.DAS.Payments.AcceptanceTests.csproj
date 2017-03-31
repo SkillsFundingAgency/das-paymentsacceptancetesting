@@ -83,6 +83,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contexts\ProviderAdjustmentsContext.cs" />
+    <Compile Include="Assertions\DataLockRules\BalancingDataLockRule.cs" />
+    <Compile Include="Assertions\DataLockRules\CompletionDataLockRule.cs" />
+    <Compile Include="Assertions\DataLockRules\DataLockRuleBase.cs" />
+    <Compile Include="Assertions\DataLockRules\DisadvantageUpliftDataLockRule.cs" />
+    <Compile Include="Assertions\DataLockRules\Employer16To18IncentiveDataLockRule.cs" />
+    <Compile Include="Assertions\DataLockRules\EnglishAndMathsBalancingDataLockRule.cs" />
+    <Compile Include="Assertions\DataLockRules\EnglishAndMathsOnProgrammeDataLockRule.cs" />
+    <Compile Include="Assertions\DataLockRules\FrameworkUpliftBalancingDataLockRule.cs" />
+    <Compile Include="Assertions\DataLockRules\FrameworkUpliftCompletionDataLockRule.cs" />
+    <Compile Include="Assertions\DataLockRules\FrameworkUpliftOnProgrammeDataLockRule.cs" />
+    <Compile Include="Assertions\DataLockRules\LearningSupportDataLockRule.cs" />
+    <Compile Include="Assertions\DataLockRules\OnProgrammeDataLockRule.cs" />
+    <Compile Include="Assertions\DataLockRules\Provider16To18IncentiveDataLockRule.cs" />
     <Compile Include="DataExtensions.cs" />
     <Compile Include="DataHelpers\IdentifierGenerator.cs" />
     <Compile Include="Extensions.cs" />
@@ -108,7 +121,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Assertions\PaymentsAndEarningsAssestions.cs" />
+    <Compile Include="Assertions\PaymentsAndEarningsAssertions.cs" />
     <Compile Include="Assertions\PaymentsAndEarningsRules\EarningsAndPaymentsRuleBase.cs" />
     <Compile Include="Assertions\PaymentsAndEarningsRules\EmployersLevyAccountDebitedRule.cs" />
     <Compile Include="Assertions\PaymentsAndEarningsRules\PaymentDueFromEmployersRule.cs" />
