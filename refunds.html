@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"[]>
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Provider earnings and payments where learner refund payments are due</title>
+    <link rel="stylesheet" href="css/master.css" type="text/css" />
+    <link rel="stylesheet" href="css/print.css" type="text/css" media="print" />
+    <script src="js/jquery.js" type="text/javascript"></script>
+    <script src="js/scripts.js" type="text/javascript"></script>
+    <script type="text/javascript">
+$(document).ready(function() {
+  initializeToc();
+});
+</script>
+    <!-- We are using Font Awesome - http://fortawesome.github.com/Font-Awesome - licensed under CC BY 3.0 -->
+  </head>
+  <body>
+    <div id="container">
+      <div id="top" />
+      <div id="toc">
+        <p class="tocCollapser" title="Collapse Table of Content">«</p>
+        <ul class="features">
+          <li class="file" id="root">
+            <a href="index.html">Home</a>
+          </li>
+          <li class="file">
+            <a href="small_employers.html">1 learner aged 16-18, non-DAS, employed with a small employer at start, is fully funded for on programme and completion payments</a>
+          </li>
+          <li class="file">
+            <a href="additional_payments.html">16 to 18 learner incentives, framework uplifts, level 2 english or maths payments</a>
+          </li>
+          <li class="file">
+            <a href="two_learners_paid_in_priority.html">2 learners, paid in priority order</a>
+          </li>
+          <li class="file">
+            <a href="earnings_calc.html">Amount due is calculated based on previously earned amount</a>
+          </li>
+          <li class="file">
+            <a href="learner_changes_provider.html">Apprentice changes provider scenarios</a>
+          </li>
+          <li class="file">
+            <a href="definitions.html">Business definitions</a>
+          </li>
+          <li class="file">
+            <a href="payments_calc.html">Calculate the payments</a>
+          </li>
+          <li class="file">
+            <a href="datalock_errors.html">Datalock validation fails for different reasons</a>
+          </li>
+          <li class="file">
+            <a href="employer_stops_payments.html">Employer stops payments on a commitment</a>
+          </li>
+          <li class="file">
+            <a href="provider_adjustments.html">Provider adjustments (EAS) payments</a>
+          </li>
+          <li class="file">
+            <a href="capping.html">Provider earnings and payments for a learner with a negotiated price above the funding band cap</a>
+          </li>
+          <li class="file">
+            <a href="learner_changes_employer.html">Provider earnings and payments where a learner changes employers</a>
+          </li>
+          <li class="file">
+            <a href="change_in_circumstances.html">Provider earnings and payments where learner changes apprenticeship standard or there is a change to the negotiated price at the end of a month, remaining with the same employer and provider</a>
+          </li>
+          <li class="file">
+            <a href="learner_finishes_early.html">Provider earnings and payments where learner completes earlier than planned</a>
+          </li>
+          <li class="file">
+            <a href="learner_finishes_late.html">Provider earnings and payments where learner completes later than planned</a>
+          </li>
+          <li class="file">
+            <a href="learner_finishes_on_time.html">Provider earnings and payments where learner completes on time and is funded by levy</a>
+          </li>
+          <li class="file">
+            <span class="current">Provider earnings and payments where learner refund payments are due</span>
+          </li>
+          <li class="file">
+            <a href="ILR_is_submitted_late.html">The ILR is submitted late</a>
+          </li>
+        </ul>
+      </div>
+      <div id="feature">
+        <h1>Provider earnings and payments where learner refund payments are due</h1>
+        <p class="tags">Tags: <span>@Refunds</span></p>
+        <ul id="scenarios">
+          <li class="scenario">
+            <div class="scenario-heading" id="673-ac01-das-learner-levy-available-provider-retrospectively-notifies-a-withdrawal-and-previously-paid-monthly-instalments-need-to-be-refunded">
+              <h2>673-AC01 DAS learner, levy available, provider retrospectively notifies a withdrawal and previously-paid monthly instalments need to be refunded.</h2>
+              <p class="tags">Tags: <span>@Refunds</span></p>
+            </div>
+            <div class="steps">
+              <ul>
+                <li class="step">
+                  <span class="keyword">Given </span>The learner is programme only DAS</li>
+                <li class="step">
+                  <span class="keyword">And </span>the apprenticeship funding band maximum is 17000</li>
+                <li class="step">
+                  <span class="keyword">And </span>levy balance &gt; agreed price for all months</li>
+                <li class="step">
+                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>version Id</th><th>ULN</th><th>start date</th><th>end date</th><th>status</th><th>agreed price</th><th>effective from</th><th>effective to</th><th> </th></tr></thead><tbody><tr><td>1</td><td>1</td><td>learner a</td><td>01/08/2017</td><td>01/08/2018</td><td>active</td><td>11250</td><td>01/08/2017</td><td></td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the following earnings and payments have been made to the provider for learner a:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>01/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>750</td><td>750</td><td>750</td><td>750</td><td>750</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>750</td><td>750</td><td>750</td><td>750</td><td>750</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>750</td><td>750</td><td>750</td><td>750</td><td>750</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Levy account debited</td><td>0</td><td>750</td><td>750</td><td>750</td><td>750</td><td>750</td></tr><tr><td>SFA Levy employer budget</td><td>750</td><td>750</td><td>750</td><td>750</td><td>750</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">When </span>an ILR file is submitted for the first time on 10/01/18 with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>Total training price</th><th>Total training price effective date</th><th>Total assessment price</th><th>Total assessment price effective date</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>04/08/2017</td><td>20/08/2018</td><td>12/11/2017</td><td>withdrawn</td><td>9000</td><td>04/08/2017</td><td>2250</td><td>04/08/2017</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>01/18</th><th>02/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>750</td><td>750</td><td>750</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>750</td><td>750</td><td>750</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>750</td><td>750</td><td>750</td><td>750</td><td>750</td><td>0</td></tr><tr><td>Refund taken by SFA</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>-1500</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Levy account debited</td><td>0</td><td>750</td><td>750</td><td>750</td><td>750</td><td>750</td><td>0</td></tr><tr><td>Levy account credited</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1500</td></tr><tr><td>SFA Levy employer budget</td><td>750</td><td>750</td><td>750</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody></table></div></li>
+              </ul>
+            </div>
+            <a class="scenario-link" href="javascript:showImageLink('673-ac01-das-learner-levy-available-provider-retrospectively-notifies-a-withdrawal-and-previously-paid-monthly-instalments-need-to-be-refunded')" title="Copy scenario link to clipboard.">
+              <i class="icon-link"> </i>
+            </a>
+          </li>
+          <li class="scenario">
+            <div class="scenario-heading" id="673-ac02-non-das-learner-levy-available-provider-retrospectively-notifies-a-withdrawal-and-previously-paid-monthly-instalments-need-to-be-refunded">
+              <h2>673-AC02 Non-DAS learner, levy available, provider retrospectively notifies a withdrawal and previously-paid monthly instalments need to be refunded.</h2>
+              <p class="tags">Tags: <span>@Refunds</span></p>
+            </div>
+            <div class="steps">
+              <ul>
+                <li class="step">
+                  <span class="keyword">Given </span>the apprenticeship funding band maximum is 17000</li>
+                <li class="step">
+                  <span class="keyword">And </span>the following earnings and payments have been made to the provider for learner a:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>01/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>750</td><td>750</td><td>750</td><td>750</td><td>750</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>675</td><td>675</td><td>675</td><td>675</td><td>675</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>75</td><td>75</td><td>75</td><td>75</td><td>75</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>675</td><td>675</td><td>675</td><td>675</td><td>675</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>75</td><td>75</td><td>75</td><td>75</td><td>75</td></tr><tr><td>Levy account debited</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA Levy employer budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA non-Levy co-funding budget</td><td>675</td><td>675</td><td>675</td><td>675</td><td>675</td><td>0</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">When </span>an ILR file is submitted for the first time on 10/01/18 with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>learner type</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>Total training price</th><th>Total training price effective date</th><th>Total assessment price</th><th>Total assessment price effective date</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>programme only non-DAS</td><td>04/08/2017</td><td>20/08/2018</td><td>12/11/2017</td><td>withdrawn</td><td>9000</td><td>04/08/2017</td><td>2250</td><td>04/08/2017</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>01/18</th><th>02/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>750</td><td>750</td><td>750</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>675</td><td>675</td><td>675</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>75</td><td>75</td><td>75</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>675</td><td>675</td><td>675</td><td>675</td><td>675</td><td>0</td></tr><tr><td>Refund taken by SFA</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>-1350</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>75</td><td>75</td><td>75</td><td>75</td><td>75</td><td>0</td></tr><tr><td>Levy account debited</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Levy account credited</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA Levy employer budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA non-Levy co-funding budget</td><td>675</td><td>675</td><td>675</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody></table></div></li>
+              </ul>
+            </div>
+            <a class="scenario-link" href="javascript:showImageLink('673-ac02-non-das-learner-levy-available-provider-retrospectively-notifies-a-withdrawal-and-previously-paid-monthly-instalments-need-to-be-refunded')" title="Copy scenario link to clipboard.">
+              <i class="icon-link"> </i>
+            </a>
+          </li>
+          <li class="scenario">
+            <div class="scenario-heading" id="673-ac03-das-learner-insufficient-levy-available-to-cover-full-payments-provider-retrospectively-notifies-a-withdrawal-and-previously-paid-monthly-instalments-need-to-be-refunded-given-the-learner-is-programme-only-das">
+              <h2>673-AC03 DAS learner, insufficient levy available to cover full payments, provider retrospectively notifies a withdrawal and previously-paid monthly instalments need to be refunded.	Given The learner is programme only DAS</h2>
+              <p class="tags">Tags: <span>@Refunds</span></p>
+            </div>
+            <div class="steps">
+              <ul>
+                <li class="step">
+                  <span class="keyword">Given </span>The learner is programme only DAS</li>
+                <li class="step">
+                  <span class="keyword">And </span>the apprenticeship funding band maximum is 17000</li>
+                <li class="step">
+                  <span class="keyword">And </span>levy balance &gt; agreed price for all months</li>
+                <li class="step">
+                  <span class="keyword">And </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>version Id</th><th>ULN</th><th>start date</th><th>end date</th><th>status</th><th>agreed price</th><th>effective from</th><th>effective to</th><th> </th></tr></thead><tbody><tr><td>1</td><td>1</td><td>learner a</td><td>01/08/2017</td><td>01/08/2018</td><td>active</td><td>11250</td><td>01/08/2017</td><td></td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the following earnings and payments have been made to the provider for learner a:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>01/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>750</td><td>750</td><td>750</td><td>750</td><td>750</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>725</td><td>725</td><td>725</td><td>725</td><td>725</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>25</td><td>25</td><td>25</td><td>25</td><td>25</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>725</td><td>725</td><td>725</td><td>725</td><td>725</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>25</td><td>25</td><td>25</td><td>25</td><td>25</td></tr><tr><td>Levy account debited</td><td>0</td><td>500</td><td>500</td><td>500</td><td>500</td><td>500</td></tr><tr><td>SFA Levy employer budget</td><td>500</td><td>500</td><td>500</td><td>500</td><td>500</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>225</td><td>225</td><td>225</td><td>225</td><td>225</td><td>0</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">When </span>an ILR file is submitted for the first time on 10/01/18 with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>Total training price</th><th>Total training price effective date</th><th>Total assessment price</th><th>Total assessment price effective date</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>04/08/2017</td><td>20/08/2018</td><td>12/11/2017</td><td>withdrawn</td><td>9000</td><td>04/08/2017</td><td>2250</td><td>04/08/2017</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">Then </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>01/18</th><th>02/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>750</td><td>750</td><td>750</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>725</td><td>725</td><td>725</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>25</td><td>25</td><td>25</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>725</td><td>725</td><td>725</td><td>725</td><td>725</td><td>0</td></tr><tr><td>Refund taken by SFA</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>-1450</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>25</td><td>25</td><td>25</td><td>25</td><td>25</td><td>0</td></tr><tr><td>Levy account debited</td><td>0</td><td>500</td><td>500</td><td>500</td><td>500</td><td>500</td><td>0</td></tr><tr><td>Levy account credited</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1000</td></tr><tr><td>SFA Levy employer budget</td><td>500</td><td>500</td><td>500</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>225</td><td>225</td><td>225</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody></table></div></li>
+              </ul>
+            </div>
+            <a class="scenario-link" href="javascript:showImageLink('673-ac03-das-learner-insufficient-levy-available-to-cover-full-payments-provider-retrospectively-notifies-a-withdrawal-and-previously-paid-monthly-instalments-need-to-be-refunded-given-the-learner-is-programme-only-das')" title="Copy scenario link to clipboard.">
+              <i class="icon-link"> </i>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div id="footer">
+        <p>Generated on: 31 March 2017 18:01:30</p>
+        <p>Produced by Pickles, version 2.8.2.0</p>
+      </div>
+    </div>
+  </body>
+</html>
