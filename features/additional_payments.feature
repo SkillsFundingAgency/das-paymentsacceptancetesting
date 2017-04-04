@@ -1160,3 +1160,129 @@ Scenario:658-AC01 DAS learner, takes an English qualification that has a planned
 		| English and maths on programme | 33.64 | 33.64 | ... | 33.64 | 33.64 | 0     | 0     | 0     | 0     | 0     |
 		| English and maths Balancing    | 0     | 0     | ... | 0     | 0     | 0     | 0     | 0     | 0     | 0     |
 		| Provider learning support      | 150   | 150   | ... | 150   | 150   | 0     | 0     | 0     | 0     | 0     |
+
+@MathsAndEnglishDas
+Scenario:671-AC01 DAS learner, levy available, is taking an English or maths qualification, has learning support and the negotiated price changes during the programme
+    Given the apprenticeship funding band maximum is 18000
+    And levy balance > agreed price for all months
+    And the following commitments exist:
+		| commitment Id | version Id | ULN       | start date | end date   | status | agreed price | effective from | effective to |
+		| 1             | 1          | learner a | 01/08/2017 | 01/08/2018 | active | 11250        | 01/08/2017     | 10/11/2017   |
+		| 1             | 2          | learner a | 01/08/2017 | 01/08/2018 | active | 6750         | 11/11/2017     |              |
+
+    When an ILR file is submitted with the following data:
+        | ULN       | learner type       | aim type         | start date | planned end date | actual end date | completion status | aim rate | Total training price 1 | Total training price 1 effective date | Total assessment price 1 | Total assessment price 1 effective date | Total training price 2 | Total training price 2 effective date | Total assessment price 2 | Total assessment price 2 effective date | 
+        | learner a | programme only DAS | programme        | 04/08/2017 | 20/08/2018       |                 | continuing        |          | 9000                   | 04/08/2017                            | 2250                     | 04/08/2017                              | 5400                   | 11/11/2017                            | 1350                     | 11/11/2017                              | 
+        | learner a | programme only DAS | maths or english | 04/08/2017 | 06/10/2018       |                 | continuing        | 471      |                        |                                       |                          |                                         |                        |                                       |                          |                                         | 
+    And the learning support status of the ILR is:
+        | Learning support code | date from  | date to    |
+        | 1                     | 06/08/2017 | 06/10/2018 |	
+
+    Then the data lock status will be as follows:
+		| Payment type                   | 08/17           | 09/17           | 10/17           | 11/17           | 12/17           |
+		| On-program                     | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | commitment 1 v2 | commitment 1 v2 |
+		| Completion                     |                 |                 |                 |                 |                 |
+		| Employer 16-18 incentive       |                 |                 |                 |                 |                 |
+		| Provider 16-18 incentive       |                 |                 |                 |                 |                 |
+		| Provider learning support      | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | commitment 1 v2 | commitment 1 v2 |
+		| English and maths on programme | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | commitment 1 v2 | commitment 1 v2 |
+		| English and maths Balancing    |                 |                 |                 |                 |                 |     
+	 And the provider earnings and payments break down as follows: 
+        | Type                                | 08/17   | 09/17  | 10/17  | 11/17   | 12/17  | 01/18  | 
+        | Provider Earned Total               | 933.64  | 933.64 | 933.64 | 533.64  | 533.64 | 533.64 |       
+        | Provider Earned from SFA            | 933.64  | 933.64 | 933.64 | 533.64  | 533.64 | 583.64 |       
+        | Provider Earned from Employer       | 0       | 0      | 0      | 0       | 0      | 0      |       
+        | Provider Paid by SFA                | 0       | 933.64 | 933.64 | 933.64  | 533.64 | 533.64 |        
+        | Payment due from Employer           | 0       | 0      | 0      | 0       | 0      | 0      |       
+        | Levy account debited                | 0       | 750    | 750    | 750     | 350    | 350    |         
+        | SFA Levy employer budget            | 750     | 750    | 750    | 350     | 350    | 350    |        
+        | SFA Levy co-funding budget          | 0       | 0      | 0      | 0       | 0      | 0      |       
+        | SFA Levy additional payments budget | 183.64  | 183.64 | 183.64 | 183.64  | 183.64 | 183.64 |        
+	And the transaction types for the payments are:
+		| Payment type                   | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 |
+		| On-program                     | 750   | 750   | 750   | 350   | 350   |
+		| Completion                     | 0     | 0     | 0     | 0     | 0     |
+		| Balancing                      | 0     | 0     | 0     | 0     | 0     |
+        | English and maths on programme | 33.64 | 33.64 | 33.64 | 33.64 | 33.64 |
+		| English and maths Balancing    | 0     | 0     | 0     | 0     | 0     |
+        | Provider learning support      | 150   | 150   | 150   | 150   | 150   |
+
+@MathsAndEnglishNonDas
+Scenario:671-AC02 Non-DAS learner, levy available, is taking an English or maths qualification, has learning support and the negotiated price changes during the programme
+    Given the apprenticeship funding band maximum is 18000
+    
+    When an ILR file is submitted with the following data:
+        | ULN       | learner type           | aim type         | start date | planned end date | actual end date | completion status | aim rate | Total training price 1 | Total training price 1 effective date | Total assessment price 1 | Total assessment price 1 effective date | Total training price 2 | Total training price 2 effective date | Total assessment price 2 | Total assessment price 2 effective date | 
+        | learner a | programme only non-DAS | programme        | 04/08/2017 | 20/08/2018       |                 | continuing        |          | 9000                   | 04/08/2017                            | 2250                     | 04/08/2017                              | 5400                   | 11/11/2017                            | 1350                     | 11/11/2017                              | 
+        | learner a | programme only non-DAS | maths or english | 04/08/2017 | 06/10/2018       |                 | continuing        | 471      |                        |                                       |                          |                                         |                        |                                       |                          |                                         |      
+    And the learning support status of the ILR is:
+        | Learning support code | date from  | date to    |
+        | 1                     | 06/08/2017 | 06/10/2018 |	
+        
+    Then the provider earnings and payments break down as follows: 
+        | Type                                    | 08/17   | 09/17  | 10/17   | 11/17   | 12/17  | 01/18  | 
+        | Provider Earned Total                   | 933.64  | 933.64 | 933.64  | 533.64  | 533.64 | 533.64 |       
+        | Provider Earned from SFA                | 858.64  | 858.64 | 858.64  | 498.64  | 498.64 | 498.64 |       
+        | Provider Earned from Employer           | 75      | 75     | 75      | 35      | 35     | 35     |       
+        | Provider Paid by SFA                    | 0       | 858.64 | 858.64  | 858.64  | 498.64 | 498.64 |        
+        | Payment due from Employer               | 0       | 75     | 75      | 75      | 35     | 35     |       
+        | Levy account debited                    | 0       | 0      | 0       | 0       | 0      | 0      |         
+        | SFA Levy employer budget                | 0       | 0      | 0       | 0       | 0      | 0      |
+        | SFA Levy co-funding budget              | 0       | 0      | 0       | 0       | 0      | 0      |
+        | SFA non-Levy co-funding budget          | 675     | 675    | 675     | 315     | 315    | 315    |               
+        | SFA Levy additional payments budget     | 0       | 0      | 0       | 0       | 0      | 0      |
+        | SFA non-Levy additional payments budget | 183.64  | 183.64 | 183.64  | 183.64  | 183.64 | 183.64 |         
+    And the transaction types for the payments are:
+		| Payment type                   | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 |
+		| On-program                     | 675   | 675   | 675   | 315   | 315   |
+		| Completion                     | 0     | 0     | 0     | 0     | 0     |
+		| Balancing                      | 0     | 0     | 0     | 0     | 0     |
+        | English and maths on programme | 33.64 | 33.64 | 33.64 | 33.64 | 33.64 |
+		| English and maths Balancing    | 0     | 0     | 0     | 0     | 0     |
+        | Provider learning support      | 150   | 150   | 150   | 150   | 150   |
+
+@MathsAndEnglishDas
+Scenario:671-AC03 DAS learner, levy available, is taking an English or maths qualification, has learning support and the negotiated price changes during the programme - no payments are made against the second price episode as it fails data lock 
+    Given the apprenticeship funding band maximum is 18000
+    And levy balance > agreed price for all months
+    And the following commitments exist:
+        | commitment Id | version Id | ULN       | start date | end date   | status | agreed price | effective from | effective to |
+        | 1             | 1          | learner a | 01/08/2017 | 01/08/2018 | active | 11250        | 01/08/2017     | 10/11/2017   |
+        | 1             | 2          | learner a | 01/08/2017 | 01/08/2018 | active | 6750         | 11/11/2017     |              |
+
+    When an ILR file is submitted with the following data:
+        | ULN       | learner type       | aim type         | start date | planned end date | actual end date | completion status | aim rate | Total training price 1 | Total training price 1 effective date | Total assessment price 1 | Total assessment price 1 effective date | Total training price 2 | Total training price 2 effective date | Total assessment price 2 | Total assessment price 2 effective date | 
+        | learner a | programme only DAS | programme        | 04/08/2017 | 20/08/2018       |                 | continuing        |          | 9000                   | 04/08/2017                            | 2250                     | 04/08/2017                              | 5400                   | 09/11/2017                            | 1350                     | 09/11/2017                              | 
+        | learner a | programme only DAS | maths or english | 04/08/2017 | 06/10/2018       |                 | continuing        | 471      |                        |                                       |                          |                                         |                        |                                       |                          |                                         | 
+    And the learning support status of the ILR is:
+        | Learning support code | date from  | date to    |
+        | 1                     | 06/08/2017 | 06/10/2018 |	
+ 
+    Then the data lock status will be as follows:
+        | Payment type                   | 08/17           | 09/17           | 10/17           | 11/17           | 12/17           |
+        | On-program                     | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 |                 |                 |
+        | Completion                     |                 |                 |                 |                 |                 |
+        | Employer 16-18 incentive       |                 |                 |                 |                 |                 |
+        | Provider 16-18 incentive       |                 |                 |                 |                 |                 |
+        | Provider learning support      | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 |                 |                 |
+        | English and maths on programme | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 |                 |                 |
+        | English and maths Balancing    |                 |                 |                 |                 |                 |     
+    And the provider earnings and payments break down as follows: 
+        | Type                                | 08/17   | 09/17  | 10/17  | 11/17   | 12/17  | 01/18  | 
+        | Provider Earned Total               | 933.64  | 933.64 | 933.64 | 533.64  | 533.64 | 533.64 |       
+        | Provider Earned from SFA            | 933.64  | 933.64 | 933.64 | 0       | 0      | 0      |      
+        | Provider Earned from Employer       | 0       | 0      | 0      | 0       | 0      | 0      |       
+        | Provider Paid by SFA                | 0       | 933.64 | 933.64 | 933.64  | 0      | 0      |         
+        | Payment due from Employer           | 0       | 0      | 0      | 0       | 0      | 0      |       
+        | Levy account debited                | 0       | 750    | 750    | 750     | 0      | 0      |          
+        | SFA Levy employer budget            | 750     | 750    | 750    | 0       | 0      | 0      |        
+        | SFA Levy co-funding budget          | 0       | 0      | 0      | 0       | 0      | 0      |       
+        | SFA Levy additional payments budget | 183.64  | 183.64 | 183.64 | 0       | 0      | 0      |      
+    And the transaction types for the payments are:
+        | Payment type                   | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 |
+        | On-program                     | 750   | 750   | 750   | 0     | 0     |
+        | Completion                     | 0     | 0     | 0     | 0     | 0     |
+        | Balancing                      | 0     | 0     | 0     | 0     | 0     |
+        | English and maths on programme | 33.64 | 33.64 | 33.64 | 0     | 0     |
+        | English and maths Balancing    | 0     | 0     | 0     | 0     | 0     |    
+        | Provider learning support      | 150   | 150   | 150   | 0     | 0     |

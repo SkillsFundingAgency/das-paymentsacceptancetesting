@@ -129,7 +129,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
 
                 if (string.IsNullOrWhiteSpace(row[i]))
                 {
-                    contextList.Add(valueCreator(periodName, null, null));
                     continue;
                 }
 
