@@ -177,8 +177,8 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
 #line 12
- testRunner.And("the following earnings and payments have been made to the provider for learner a:" +
-                    "", ((string)(null)), table515, "And ");
+ testRunner.And("the following earnings and payments have been made to the provider A for learner " +
+                    "a:", ((string)(null)), table515, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table516 = new TechTalk.SpecFlow.Table(new string[] {
                         "ULN",
@@ -401,8 +401,8 @@ this.ScenarioSetup(scenarioInfo);
                         "675",
                         "0"});
 #line 41
- testRunner.And("the following earnings and payments have been made to the provider for learner a:" +
-                    "", ((string)(null)), table518, "And ");
+ testRunner.And("the following earnings and payments have been made to the provider A for learner " +
+                    "a:", ((string)(null)), table518, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table519 = new TechTalk.SpecFlow.Table(new string[] {
                         "ULN",
@@ -657,8 +657,8 @@ this.ScenarioSetup(scenarioInfo);
                         "225",
                         "0"});
 #line 76
- testRunner.And("the following earnings and payments have been made to the provider for learner a:" +
-                    "", ((string)(null)), table522, "And ");
+ testRunner.And("the following earnings and payments have been made to the provider A for learner " +
+                    "a:", ((string)(null)), table522, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table523 = new TechTalk.SpecFlow.Table(new string[] {
                         "ULN",

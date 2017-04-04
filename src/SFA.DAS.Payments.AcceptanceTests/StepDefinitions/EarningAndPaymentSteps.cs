@@ -110,17 +110,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             //DataLockAssertions.AssertPaymentsAndEarningsResults(DataLockContext, SubmissionContext);
         }
 
-        [Given(@"the following earnings and payments have been made to the provider for (.*):")]
-        public void GivenTheFollowingEarningsAndPaymentsHaveBeenMadeToTheProviderForLearner(string learnerName, Table table)
-        {
-            GivenTheFollowingEarningsAndPaymentsHaveBeenMadeToTheProviderAForLearnerA("provider " + Defaults.ProviderIdSuffix, learnerName, table);
-
-       }
 
         [Given(@"the following earnings and payments have been made to the (.*) for (.*):")]
         public void GivenTheFollowingEarningsAndPaymentsHaveBeenMadeToTheProviderAForLearnerA(string providerName, string learnerName, Table table)
         {
-      
+
+            
             var learnerBreakdown = new EarningsAndPaymentsBreakdown { ProviderId = providerName };
             EarningAndPaymentTableParser.ParseEarningsAndPaymentsTableIntoContext(learnerBreakdown, table);
 
