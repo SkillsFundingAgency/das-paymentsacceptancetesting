@@ -8,5 +8,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.ReferenceDataModels
         public decimal Balance { get; set; }
         public List<PeriodValue> PeriodBalances { get; set; }
         public bool IsLevyPayer { get; set; } = true;
+
+        public bool IsRunningBalance { get; set; }
+
     }
 }

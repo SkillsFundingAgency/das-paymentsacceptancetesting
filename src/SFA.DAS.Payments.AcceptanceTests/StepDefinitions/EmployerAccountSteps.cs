@@ -5,16 +5,23 @@ using SFA.DAS.Payments.AcceptanceTests.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.ExecutionManagers;
 using SFA.DAS.Payments.AcceptanceTests.ReferenceDataModels;
 using TechTalk.SpecFlow;
+using SFA.DAS.Payments.AcceptanceTests.TableParsers;
+using SFA.DAS.Payments.AcceptanceTests.Assertions;
 
 namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 {
     [Binding]
     public class EmployerAccountSteps
     {
-        public EmployerAccountSteps(EmployerAccountContext employerAccountContext)
+        public EmployerAccountSteps(EmployerAccountContext employerAccountContext,
+                                    SubmissionContext submissionContext)
         {
             EmployerAccountContext = employerAccountContext;
+            SubmissionContext = submissionContext;
+
         }
+        public SubmissionContext SubmissionContext { get; }
+
         public EmployerAccountContext EmployerAccountContext { get; }
 
         [Given("levy balance > agreed price for all months")]
@@ -55,37 +62,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             {
                 throw new ArgumentException($"Employer number '{employerNumber}' is not a valid number");
             }
-            if (employerBalancesTable.RowCount > 1)
-            {
-                throw new ArgumentOutOfRangeException(nameof(employerBalancesTable), "Balances table can only contain a single row");
-            }
-
-            var periodBalances = new List<PeriodValue>();
-            for (var c = 0; c < employerBalancesTable.Header.Count; c++)
-            {
-                var periodName = employerBalancesTable.Header.ElementAt(c);
-                if (periodName == "...")
-                {
-                    continue;
-                }
-                if (!Validations.IsValidPeriodName(periodName))
-                {
-                    throw new ArgumentException($"'{periodName}' is not a valid period name format. Expected MM/YY");
-                }
-
-                int periodBalance;
-                if (!int.TryParse(employerBalancesTable.Rows[0][c], out periodBalance))
-                {
-                    throw new ArgumentException($"Balance '{employerBalancesTable.Rows[0][c]}' is not a value balance");
-                }
-
-                periodBalances.Add(new PeriodValue
-                {
-                    PeriodName = periodName,
-                    Value = periodBalance
-                });
-            }
-
+            var periodBalances = LevyBalanceTableParser.ParseLevyAccountBalanceTable(employerBalancesTable);
             AddOrUpdateEmployerAccount(id, 0m, periodBalances);
         }
 
@@ -111,8 +88,25 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             }
         }
 
+        [Given(@"the employer's declared levy balance is:")]
+        public void GivenTheEmployerSDeclaredLevyBalanceIs(Table table)
+        {
+           
+            var periodBalances = LevyBalanceTableParser.ParseLevyAccountBalanceTable(table);
+            AddOrUpdateEmployerAccount(Defaults.EmployerAccountId, 0m, periodBalances,isRunningBalance:true);
+        }
 
-        private EmployerAccountReferenceData AddOrUpdateEmployerAccount(int id, decimal balance, List<PeriodValue> periodBalances = null, bool isLevyPayer = true)
+
+        [Then(@"the employer's levy balance after each period end is:")]
+        public void ThenTheEmployerSLevyBalanceIs(Table table)
+        {
+           
+            var periodBalances = LevyBalanceTableParser.ParseLevyAccountBalanceTable(table);
+            LevyAccountBalanceAssertions.AssertLevyAccountBalanceResults(SubmissionContext, periodBalances);
+        }
+
+
+        private EmployerAccountReferenceData AddOrUpdateEmployerAccount(int id, decimal balance, List<PeriodValue> periodBalances = null, bool isLevyPayer = true, bool isRunningBalance = false)
         {
             var account = EmployerAccountContext.EmployerAccounts.SingleOrDefault(a => a.Id == id);
             if (account == null)
@@ -127,6 +121,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             account.Balance = balance;
             account.PeriodBalances = periodBalances ?? new List<PeriodValue>();
             account.IsLevyPayer = isLevyPayer;
+            account.IsRunningBalance = isRunningBalance;
 
             EmployerAccountManager.AddOrUpdateAccount(account);
 

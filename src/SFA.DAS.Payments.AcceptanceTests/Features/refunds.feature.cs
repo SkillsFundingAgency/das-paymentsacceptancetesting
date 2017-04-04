@@ -809,15 +809,21 @@ this.ScenarioSetup(scenarioInfo);
                         "10/17",
                         "11/17",
                         "12/17",
-                        "01/18"});
+                        "01/18",
+                        "02/18",
+                        "...",
+                        "07/18"});
             table525.AddRow(new string[] {
                         "1125",
                         "1125",
                         "1125",
                         "1125",
-                        "0"});
+                        "0",
+                        "1125",
+                        "1125",
+                        "1125"});
 #line 108
- testRunner.And("the employer\'s levy balance is:", ((string)(null)), table525, "And ");
+ testRunner.And("the employer\'s declared levy balance is:", ((string)(null)), table525, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table526 = new TechTalk.SpecFlow.Table(new string[] {
                         "commitment Id",
@@ -1056,9 +1062,11 @@ this.ScenarioSetup(scenarioInfo);
                         "10/17",
                         "11/17",
                         "12/17",
-                        "01/18"});
+                        "01/18",
+                        "02/18"});
             table530.AddRow(new string[] {
                         "Provider Earned Total",
+                        "375",
                         "375",
                         "375",
                         "375",
@@ -1072,9 +1080,11 @@ this.ScenarioSetup(scenarioInfo);
                         "375",
                         "375",
                         "375",
-                        "0"});
+                        "375",
+                        "375"});
             table530.AddRow(new string[] {
                         "Provider Earned from Employer",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -1088,9 +1098,11 @@ this.ScenarioSetup(scenarioInfo);
                         "375",
                         "375",
                         "375",
+                        "375",
                         "375"});
             table530.AddRow(new string[] {
                         "Refund taken by SFA",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -1104,6 +1116,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0",
+                        "0",
                         "0"});
             table530.AddRow(new string[] {
                         "Levy account debited",
@@ -1112,9 +1125,11 @@ this.ScenarioSetup(scenarioInfo);
                         "375",
                         "375",
                         "375",
+                        "375",
                         "375"});
             table530.AddRow(new string[] {
                         "Levy account credited",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -1128,9 +1143,11 @@ this.ScenarioSetup(scenarioInfo);
                         "375",
                         "375",
                         "375",
+                        "375",
                         "375"});
             table530.AddRow(new string[] {
                         "SFA Levy co-funding budget",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -1241,6 +1258,19 @@ this.ScenarioSetup(scenarioInfo);
                         "0"});
 #line 153
     testRunner.Then("the earnings and payments break down for provider B is as follows:", ((string)(null)), table531, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table532 = new TechTalk.SpecFlow.Table(new string[] {
+                        "01/18",
+                        "02/18",
+                        "...",
+                        "07/18"});
+            table532.AddRow(new string[] {
+                        "1125",
+                        "1875",
+                        "750",
+                        "750"});
+#line 165
+  testRunner.And("the employer\'s levy balance after each period end is:", ((string)(null)), table532, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
