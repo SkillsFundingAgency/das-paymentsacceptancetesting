@@ -113,15 +113,24 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
         [Given(@"the following earnings and payments have been made to the provider for (.*):")]
         public void GivenTheFollowingEarningsAndPaymentsHaveBeenMadeToTheProviderForLearner(string learnerName, Table table)
         {
+            GivenTheFollowingEarningsAndPaymentsHaveBeenMadeToTheProviderAForLearnerA("provider " + Defaults.ProviderIdSuffix, learnerName, table);
 
-            var learnerBreakdown = new EarningsAndPaymentsBreakdown { ProviderId = "provider " + Defaults.ProviderIdSuffix };
+       }
+
+        [Given(@"the following earnings and payments have been made to the (.*) for (.*):")]
+        public void GivenTheFollowingEarningsAndPaymentsHaveBeenMadeToTheProviderAForLearnerA(string providerName, string learnerName, Table table)
+        {
+      
+            var learnerBreakdown = new EarningsAndPaymentsBreakdown { ProviderId = providerName };
             EarningAndPaymentTableParser.ParseEarningsAndPaymentsTableIntoContext(learnerBreakdown, table);
 
             var learner = LookupContext.AddOrGetUln(learnerName);
             var provider = LookupContext.AddOrGetUkprn(learnerBreakdown.ProviderId);
 
 
-            var commitment = CommitmentsContext.Commitments.FirstOrDefault();
+            var commitment = CommitmentsContext.Commitments.FirstOrDefault(x=> x.ProviderId == learnerBreakdown.ProviderId && x.LearnerId == learnerName);
+
+            var standardCode = commitment != null ? commitment.StandardCode : Defaults.StandardCode;
             foreach (var earned in learnerBreakdown.ProviderEarnedTotal)
             {
                 var requiredPaymentId = Guid.NewGuid().ToString();
@@ -133,7 +142,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 
                 if (earned.Value > 0)
                 {
-                    PaymentsManager.SavePaymentDue(requiredPaymentId, provider, learner, null, null, null, Defaults.StandardCode,
+                    PaymentsManager.SavePaymentDue(requiredPaymentId, provider, learner, null, null, null, standardCode,
                                                         commitment, learnerName, periodName,
                                                         month, year,
                                                         (int)TransactionType.OnProgram,
