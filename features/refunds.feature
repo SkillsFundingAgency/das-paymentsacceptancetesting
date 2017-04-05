@@ -105,9 +105,9 @@ and this refund must be credited to Provider A where refunded Levy amount will b
 
 	Given The learner is programme only DAS
 	And the apprenticeship funding band maximum is 17000
-	And the employer's declared levy balance is:
-        | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 | 02/18 | ...  | 07/18 |
-        | 1125  | 1125  | 1125  | 1125  | 0     | 1125  | 1125 | 1125  |
+	And the employer's levy balance is:
+        | 01/18 | 02/18 | 03/18 | 04/18 | 05/18 | 06/18 | 07/18 |
+        | 0     | 1125  | 1125  | 1125  | 1125  | 1125  | 1125  |
 	And the following commitments exist:
 		| commitment Id | Provider   | version Id | ULN       | start date | end date   | status | standard code | agreed price | effective from | effective to |
 		| 1             | Provider A | 1          | Learner A | 01/08/2017 | 01/08/2018 | active | 25            | 5625         | 01/08/2017     |              |
@@ -162,6 +162,7 @@ and this refund must be credited to Provider A where refunded Levy amount will b
         | Levy account credited         | 0     | 0     | 0     | 0     | 0     | 0     | 1500  |
         | SFA Levy employer budget      | 750   | 750   | 750   | 0     | 0     | 0     | 0     |
         | SFA Levy co-funding budget    | 0     | 0     | 0     | 0     | 0     | 0     | 0     |
-	 And the employer's levy balance after each period end is:
-        | 01/18 | 02/18 | ... | 07/18 |
-        | 1125  | 1875   | 750 | 750   |
+	 And the net effect on employer's levy balance after each period end is:
+        | 01/18 | 02/18 | 03/18 | 04/18 | 05/18 | 06/18 | 07/18 |
+        | -1125 | 750   | 750   | 750   | 750   | 750   | 750   |
+

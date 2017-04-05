@@ -14,15 +14,19 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
     public class EmployerAccountSteps
     {
         public EmployerAccountSteps(EmployerAccountContext employerAccountContext,
+                                    EarningsAndPaymentsContext earningsAndPaymentsContext,
                                     SubmissionContext submissionContext)
         {
             EmployerAccountContext = employerAccountContext;
+            EarningsAndPaymentsContext = earningsAndPaymentsContext;
             SubmissionContext = submissionContext;
 
         }
-        public SubmissionContext SubmissionContext { get; }
-
         public EmployerAccountContext EmployerAccountContext { get; }
+
+        public EarningsAndPaymentsContext EarningsAndPaymentsContext { get; }
+
+        public SubmissionContext SubmissionContext { get; set; }
 
         [Given("levy balance > agreed price for all months")]
         public void GivenUnnamedEmployersLevyBalanceIsMoreThanPrice()
@@ -62,7 +66,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             {
                 throw new ArgumentException($"Employer number '{employerNumber}' is not a valid number");
             }
-            var periodBalances = LevyBalanceTableParser.ParseLevyAccountBalanceTable(employerBalancesTable);
+            var periodBalances = LevyBalanceTableParser.ParseLevyAccountBalanceTable(employerBalancesTable,id);
             AddOrUpdateEmployerAccount(id, 0m, periodBalances);
         }
 
@@ -77,7 +81,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                 }
 
                 var employerAccountId = int.Parse(row[0].Substring("employer ".Length));
-                var isLevyPayer = row[1].Equals("DAS", System.StringComparison.CurrentCultureIgnoreCase);
+                var isLevyPayer = row[1].Equals("DAS", StringComparison.CurrentCultureIgnoreCase);
 
                 var account = EmployerAccountContext.EmployerAccounts.SingleOrDefault(a => a.Id == employerAccountId);
                 if (account == null)
@@ -88,25 +92,25 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             }
         }
 
-        [Given(@"the employer's declared levy balance is:")]
-        public void GivenTheEmployerSDeclaredLevyBalanceIs(Table table)
-        {
-           
-            var periodBalances = LevyBalanceTableParser.ParseLevyAccountBalanceTable(table);
-            AddOrUpdateEmployerAccount(Defaults.EmployerAccountId, 0m, periodBalances,isRunningBalance:true);
-        }
+       
 
-
-        [Then(@"the employer's levy balance after each period end is:")]
+        [Then(@"the net effect on employer's levy balance after each period end is:")]
         public void ThenTheEmployerSLevyBalanceIs(Table table)
         {
            
-            var periodBalances = LevyBalanceTableParser.ParseLevyAccountBalanceTable(table);
-            LevyAccountBalanceAssertions.AssertLevyAccountBalanceResults(SubmissionContext, periodBalances);
+            var periodBalances = LevyBalanceTableParser.ParseLevyAccountBalanceTable(table,Defaults.EmployerAccountId);
+
+            var breakdown = new  EarningsAndPaymentsBreakdown
+            {
+                EmployerLevyTransactions = periodBalances
+            };
+
+            EarningsAndPaymentsContext.OverallEarningsAndPayments.Add(breakdown);
+            PaymentsAndEarningsAssertions.AssertPaymentsAndEarningsResults(EarningsAndPaymentsContext, SubmissionContext, EmployerAccountContext);
         }
 
 
-        private EmployerAccountReferenceData AddOrUpdateEmployerAccount(int id, decimal balance, List<PeriodValue> periodBalances = null, bool isLevyPayer = true, bool isRunningBalance = false)
+        private EmployerAccountReferenceData AddOrUpdateEmployerAccount(int id, decimal balance, List<EmployerAccountPeriodValue> periodBalances = null, bool isLevyPayer = true)
         {
             var account = EmployerAccountContext.EmployerAccounts.SingleOrDefault(a => a.Id == id);
             if (account == null)
@@ -119,9 +123,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             }
 
             account.Balance = balance;
-            account.PeriodBalances = periodBalances ?? new List<PeriodValue>();
+            account.PeriodBalances = periodBalances ?? new List<EmployerAccountPeriodValue>();
             account.IsLevyPayer = isLevyPayer;
-            account.IsRunningBalance = isRunningBalance;
 
             EmployerAccountManager.AddOrUpdateAccount(account);
 

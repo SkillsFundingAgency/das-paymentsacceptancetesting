@@ -19,6 +19,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
     [NUnit.Framework.DescriptionAttribute("2 learners, paid in priority order")]
+    [NUnit.Framework.CategoryAttribute("LearnersPaidInPriority")]
     public partial class _2LearnersPaidInPriorityOrderFeature
     {
         
@@ -31,7 +32,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-GB"), "2 learners, paid in priority order", null, ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-GB"), "2 learners, paid in priority order", null, ProgrammingLanguage.CSharp, new string[] {
+                        "LearnersPaidInPriority"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -65,10 +67,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         
         public virtual void FeatureBackground()
         {
-#line 3
-    #line 4
+#line 4
+    #line 5
         testRunner.Given("Two learners are programme only DAS", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 5
+#line 6
         testRunner.And("the apprenticeship funding band maximum for each learner is 17000", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
         }
@@ -80,9 +82,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Earnings and payments for two DAS learners, levy is spent in priority order and a" +
                     "vailable for both learners", ((string[])(null)));
-#line 7
+#line 8
     this.ScenarioSetup(scenarioInfo);
-#line 3
+#line 4
     this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table589 = new TechTalk.SpecFlow.Table(new string[] {
@@ -101,7 +103,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "2000",
                         "2000",
                         "2000"});
-#line 8
+#line 9
         testRunner.Given("the employer\'s levy balance is:", ((string)(null)), table589, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table590 = new TechTalk.SpecFlow.Table(new string[] {
@@ -122,7 +124,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "01/08/2017",
                         "28/08/2018",
                         "15000"});
-#line 11
+#line 12
         testRunner.And("the following commitments exist on 03/12/2017:", ((string)(null)), table590, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table591 = new TechTalk.SpecFlow.Table(new string[] {
@@ -155,7 +157,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "01/08/2017",
                         "3000",
                         "01/08/2017"});
-#line 15
+#line 16
         testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table591, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table592 = new TechTalk.SpecFlow.Table(new string[] {
@@ -248,7 +250,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "...",
                         "0",
                         "0"});
-#line 19
+#line 20
         testRunner.Then("the provider earnings and payments break down for ULN 123 as follows:", ((string)(null)), table592, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table593 = new TechTalk.SpecFlow.Table(new string[] {
@@ -341,7 +343,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "...",
                         "0",
                         "0"});
-#line 30
+#line 31
         testRunner.And("the provider earnings and payments break down for ULN 456 as follows:", ((string)(null)), table593, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table594 = new TechTalk.SpecFlow.Table(new string[] {
@@ -434,7 +436,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "...",
                         "0",
                         "0"});
-#line 41
+#line 42
         testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table594, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -447,9 +449,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Earnings and payments for two DAS learners, levy is spent in priority order and i" +
                     "s available for one learner only", ((string[])(null)));
-#line 54
+#line 55
     this.ScenarioSetup(scenarioInfo);
-#line 3
+#line 4
     this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table595 = new TechTalk.SpecFlow.Table(new string[] {
@@ -468,7 +470,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "1000",
                         "1000",
                         "1000"});
-#line 55
+#line 56
         testRunner.Given("the employer\'s levy balance is:", ((string)(null)), table595, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table596 = new TechTalk.SpecFlow.Table(new string[] {
@@ -489,7 +491,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "01/08/2017",
                         "28/08/2018",
                         "15000"});
-#line 58
+#line 59
         testRunner.And("the following commitments exist on 03/12/2017:", ((string)(null)), table596, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table597 = new TechTalk.SpecFlow.Table(new string[] {
@@ -522,7 +524,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "01/08/2017",
                         "3000",
                         "01/08/2017"});
-#line 62
+#line 63
         testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table597, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table598 = new TechTalk.SpecFlow.Table(new string[] {
@@ -615,7 +617,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "...",
                         "0",
                         "0"});
-#line 66
+#line 67
         testRunner.Then("the provider earnings and payments break down for ULN 123 as follows:", ((string)(null)), table598, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table599 = new TechTalk.SpecFlow.Table(new string[] {
@@ -708,7 +710,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "...",
                         "0",
                         "0"});
-#line 77
+#line 78
         testRunner.And("the provider earnings and payments break down for ULN 456 as follows:", ((string)(null)), table599, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table600 = new TechTalk.SpecFlow.Table(new string[] {
@@ -801,7 +803,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "...",
                         "0",
                         "0"});
-#line 88
+#line 89
         testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table600, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -814,9 +816,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Earnings and payments for two DAS learners, levy is spent in priority order and t" +
                     "here is enough levy to fund one and a half learners", ((string[])(null)));
-#line 101
+#line 102
     this.ScenarioSetup(scenarioInfo);
-#line 3
+#line 4
     this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table601 = new TechTalk.SpecFlow.Table(new string[] {
@@ -835,7 +837,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "1500",
                         "1500",
                         "1500"});
-#line 102
+#line 103
         testRunner.Given("the employer\'s levy balance is:", ((string)(null)), table601, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table602 = new TechTalk.SpecFlow.Table(new string[] {
@@ -856,7 +858,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "01/08/2017",
                         "28/08/2018",
                         "15000"});
-#line 105
+#line 106
         testRunner.And("the following commitments exist on 03/12/2017:", ((string)(null)), table602, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table603 = new TechTalk.SpecFlow.Table(new string[] {
@@ -889,7 +891,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "01/08/2017",
                         "3000",
                         "01/08/2017"});
-#line 109
+#line 110
         testRunner.When("an ILR file is submitted on 03/12/2017 with the following data:", ((string)(null)), table603, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table604 = new TechTalk.SpecFlow.Table(new string[] {
@@ -982,7 +984,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "...",
                         "0",
                         "0"});
-#line 113
+#line 114
         testRunner.Then("the provider earnings and payments break down for ULN 123 as follows:", ((string)(null)), table604, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table605 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1075,7 +1077,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "...",
                         "0",
                         "0"});
-#line 124
+#line 125
         testRunner.And("the provider earnings and payments break down for ULN 456 as follows:", ((string)(null)), table605, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table606 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1168,7 +1170,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "...",
                         "0",
                         "0"});
-#line 135
+#line 136
         testRunner.And("the provider earnings and payments break down as follows:", ((string)(null)), table606, "And ");
 #line hidden
             this.ScenarioCleanup();

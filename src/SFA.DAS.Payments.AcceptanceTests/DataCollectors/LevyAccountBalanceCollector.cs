@@ -34,13 +34,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataCollectors
         {
             using (var connection = new SqlConnection(TestEnvironment.Variables.DedsDatabaseConnectionString))
             {
-                var command = "SELECT  Sum(a.Balance) - Sum(p.Amount) " + 
+                var command = "SELECT Sum(p.Amount) " + 
                             " FROM Payments.Payments p " + 
                             " JOIN PaymentsDue.RequiredPayments rp " +
                                 "  ON rp.Id = p.RequiredPaymentId " +
-                            " JOIN dbo.DasAccounts a on " +
-                                " a.AccountId = rp.AccountId" +
-                            " AND a.VersionId = rp.AccountVersionId" +
                             " WHERE p.FundingSource = 1 " +
                             " AND p.CollectionPeriodMonth = @calculationPeriodMonth AND p.CollectionPeriodYear = @calculationPeriodYear";
                 return connection.Query<decimal?>(command,new { calculationPeriodMonth, calculationPeriodYear }).Single();

@@ -11,7 +11,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
     {
         
 
-        internal static List<PeriodValue> ParseLevyAccountBalanceTable( Table employerBalancesTable)
+        internal static List<EmployerAccountPeriodValue> ParseLevyAccountBalanceTable(Table employerBalancesTable, int employerAccountId)
         {
           
             if (employerBalancesTable.RowCount > 1)
@@ -19,7 +19,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                 throw new ArgumentOutOfRangeException(nameof(employerBalancesTable), "Balances table can only contain a single row");
             }
 
-            var periodBalances = new List<PeriodValue>();
+            var periodBalances = new List<EmployerAccountPeriodValue>();
             for (var c = 0; c < employerBalancesTable.Header.Count; c++)
             {
                 var periodName = employerBalancesTable.Header.ElementAt(c);
@@ -38,10 +38,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                     throw new ArgumentException($"Balance '{employerBalancesTable.Rows[0][c]}' is not a value balance");
                 }
 
-                periodBalances.Add(new PeriodValue
+                periodBalances.Add(new EmployerAccountPeriodValue
                 {
                     PeriodName = periodName,
-                    Value = periodBalance
+                    Value = periodBalance,
+                    EmployerAccountId= employerAccountId
                 });
             }
 

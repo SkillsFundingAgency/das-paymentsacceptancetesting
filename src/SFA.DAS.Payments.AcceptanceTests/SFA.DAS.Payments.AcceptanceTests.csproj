@@ -82,7 +82,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assertions\LevyAccountBalanceRules\LevyAccountBalanceRule.cs" />
+    <Compile Include="Assertions\PaymentsAndEarningsRules\EmployerLevyTransactionsRule.cs" />
     <Compile Include="Assertions\LevyAccountBalanceAssertions.cs" />
     <Compile Include="Assertions\PaymentsAndEarningsRules\EmployersLevyAccountCreditedRule.cs" />
     <Compile Include="Assertions\PaymentsAndEarningsRules\RefundTakenBySfaRule.cs" />
