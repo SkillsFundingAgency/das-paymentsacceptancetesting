@@ -11021,7 +11021,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Total assessment price 1 effective date"});
             table167.AddRow(new string[] {
                         "learner a",
-                        "programme only DAS",
+                        "programme only non-DAS",
                         "programme",
                         "06/08/2017",
                         "22/08/2018",
@@ -11034,7 +11034,7 @@ this.ScenarioSetup(scenarioInfo);
                         "06/08/2017"});
             table167.AddRow(new string[] {
                         "learner a",
-                        "programme only DAS",
+                        "programme only non-DAS",
                         "maths or english",
                         "06/08/2017",
                         "08/06/2018",
@@ -11047,7 +11047,7 @@ this.ScenarioSetup(scenarioInfo);
                         ""});
             table167.AddRow(new string[] {
                         "learner a",
-                        "programme only DAS",
+                        "programme only non-DAS",
                         "maths or english",
                         "09/06/2018",
                         "08/06/2019",
@@ -11278,14 +11278,14 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table170 = new TechTalk.SpecFlow.Table(new string[] {
                         "ULN",
-                        "price effective date",
-                        "planned end date",
+                        "start date",
+                        "end date",
                         "agreed price",
                         "status"});
             table170.AddRow(new string[] {
                         "learner a",
-                        "06/08/2017",
-                        "08/08/2018",
+                        "01/08/2017",
+                        "01/08/2018",
                         "15000",
                         "active"});
 #line 1322

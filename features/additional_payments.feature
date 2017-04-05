@@ -1292,10 +1292,10 @@ Scenario:671-AC03 DAS learner, levy available, is taking an English or maths qua
 @MathsAndEnglishDas
 Scenario:597_AC01 Non-DAS learner, fails their English or maths aim during their programme and retakes it - the second instance of the aim goes beyond the actual end date of the programme.
 	When an ILR file is submitted with the following data:
-		| ULN       | learner type       | aim type         | start date | planned end date | actual end date | completion status | aim rate | Total training price 1 | Total training price 1 effective date | Total assessment price 1 | Total assessment price 1 effective date | 
-		| learner a | programme only DAS | programme        | 06/08/2017 | 22/08/2018       | 22/08/2018      | completed         |          | 12000                  | 06/08/2017                            | 3000                     | 06/08/2017                              | 
-		| learner a | programme only DAS | maths or english | 06/08/2017 | 08/06/2018       | 08/06/2018      | completed         | 471      |                        |                                       |                          |                                         | 
-		| learner a | programme only DAS | maths or english | 09/06/2018 | 08/06/2019       | 08/06/2019      | completed         | 471      |                        |                                       |                          |                                         |		  
+		| ULN       | learner type           | aim type         | start date | planned end date | actual end date | completion status | aim rate | Total training price 1 | Total training price 1 effective date | Total assessment price 1 | Total assessment price 1 effective date | 
+		| learner a | programme only non-DAS | programme        | 06/08/2017 | 22/08/2018       | 22/08/2018      | completed         |          | 12000                  | 06/08/2017                            | 3000                     | 06/08/2017                              | 
+		| learner a | programme only non-DAS | maths or english | 06/08/2017 | 08/06/2018       | 08/06/2018      | completed         | 471      |                        |                                       |                          |                                         | 
+		| learner a | programme only non-DAS | maths or english | 09/06/2018 | 08/06/2019       | 08/06/2019      | completed         | 471      |                        |                                       |                          |                                         |		  
 
 	Then the provider earnings and payments break down as follows:
 		| Type                                | 08/17 | 09/17 | 10/17 | ... | 05/18 | 06/18 | 07/18 | 08/18 | 09/18 | ... | 06/19 | 07/19 |
@@ -1320,8 +1320,8 @@ Scenario:597_AC01 Non-DAS learner, fails their English or maths aim during their
 Scenario:597_AC02 DAS learner, fails their English or maths aim during their programme and retakes it - the second instance of the aim goes beyond the actual end date of the programme.
 	Given levy balance > agreed price for all months 
 	And the following commitments exist:
-		| ULN       | price effective date  | planned end date   | agreed price | status   |
-		| learner a | 06/08/2017            | 08/08/2018         | 15000        | active   |
+		| ULN       | start date | end date   | agreed price | status   |
+		| learner a | 01/08/2017 | 01/08/2018 | 15000        | active   |
 
 	When the following ILR file has been submitted:
 		| ULN       | learner type       | aim type         | start date | planned end date | actual end date | completion status | aim rate | Total training price 1 | Total training price 1 effective date | Total assessment price 1 | Total assessment price 1 effective date | 

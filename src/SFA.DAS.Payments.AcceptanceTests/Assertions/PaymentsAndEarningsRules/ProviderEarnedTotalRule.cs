@@ -38,14 +38,23 @@ namespace SFA.DAS.Payments.AcceptanceTests.Assertions.PaymentsAndEarningsRules
         }
         private void AssertResultsForPeriod(PeriodValue period, LearnerEarningsResult[] allEarnings)
         {
+            // This is not picking correct earning when price changed mid-year and the change period it the one we care about.
             var earnedInPeriod = (from e in allEarnings
                                   where e.DeliveryPeriod == period.PeriodName
+                                  && ComparePeriods(e.CalculationPeriod, period.PeriodName) >= 0
                                   group e by e.LearnerId into g
                                   select g.First()).Sum(x => x.Value);
             if (!AreValuesEqual(period.Value, earnedInPeriod))
             {
                 throw new Exception($"Expected provider to earn {period.Value} in {period.PeriodName} but actually earned {earnedInPeriod}");
             }
+        }
+
+        private int ComparePeriods(string x, string y)
+        {
+            var xDate = x.ToPeriodDateTime();
+            var yDate = y.ToPeriodDateTime();
+            return xDate.CompareTo(yDate);
         }
 
         private class LearnerEarningsResult : EarningsResult
