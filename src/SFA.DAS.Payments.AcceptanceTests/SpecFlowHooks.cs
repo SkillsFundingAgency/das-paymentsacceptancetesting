@@ -26,6 +26,10 @@ namespace SFA.DAS.Payments.AcceptanceTests
                                                                                   .Replace("&", "and")
                                                                                   .Replace("\\", "")
                                                                                   .Replace(" ", "_");
+            if (scenarioDirectoryName.Length > 50)
+            {
+                scenarioDirectoryName = scenarioDirectoryName.Substring(0, 50);
+            }
 
             TestEnvironment.Variables.IlrFileDirectory = Path.Combine(TestEnvironment.Variables.WorkingDirectory, "IlrFiles", scenarioDirectoryName);
             if (Directory.Exists(TestEnvironment.Variables.IlrFileDirectory))
