@@ -412,7 +412,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
             }
             public override void TaskCompleted(string taskId, Exception error)
             {
-                TestEnvironment.Logger.Info($"Completed task {taskId} of {_processName}");
+                if (error != null)
+                {
+                    TestEnvironment.Logger.Error(error, $"Error running task {taskId} or {_processName}");
+                }
+                else
+                {
+                    TestEnvironment.Logger.Info($"Completed task {taskId} of {_processName}");
+                }
             }
             public override void ExecutionCompleted(Exception error)
             {
