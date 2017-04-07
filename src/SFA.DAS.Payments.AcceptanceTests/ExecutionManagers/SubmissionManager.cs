@@ -182,7 +182,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                 Uln = lookupContext.AddOrGetUln(learnerDetails[0].LearnerId),
                 DateOfBirth = GetDateOfBirthBasedOnLearnerType(learnerDetails[0].LearnerType),
                 LearningDeliveries = deliveries,
-                EmploymentStatuses = employmentStatuses
+                EmploymentStatuses = employmentStatuses.Any() ? employmentStatuses : null
             };
         }
         private static FinancialRecord[] BuildLearningDeliveryFinancials(IlrLearnerReferenceData learnerReferenceData)
