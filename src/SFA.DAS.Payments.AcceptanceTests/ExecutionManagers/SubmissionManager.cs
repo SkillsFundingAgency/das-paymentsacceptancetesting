@@ -117,7 +117,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
         }
         private static void BuildAndSubmitIlr(ProviderSubmissionDetails providerDetails, string period, LookupContext lookupContext, List<ContractTypeReferenceData> contractTypes, List<EmploymentStatusReferenceData> employmentStatus, List<LearningSupportReferenceData> learningSupportStatus)
         {
-            IlrSubmission submission = BuildIlrSubmission(providerDetails, lookupContext, contractTypes, employmentStatus, learningSupportStatus);
+            IlrSubmission submission = BuildIlrSubmission(providerDetails, lookupContext, contractTypes, employmentStatus, learningSupportStatus, period);
             TestEnvironment.ProcessService.RunIlrSubmission(submission, TestEnvironment.Variables, new LoggingStatusWatcher($"ILR submission for provider {providerDetails.ProviderId} in {period}"));
         }
         private static void RunMonthEnd(string period)
@@ -126,7 +126,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
         }
 
 
-        private static IlrSubmission BuildIlrSubmission(ProviderSubmissionDetails providerDetails, LookupContext lookupContext, List<ContractTypeReferenceData> contractTypes, List<EmploymentStatusReferenceData> employmentStatus, List<LearningSupportReferenceData> learningSupportStatus)
+        private static IlrSubmission BuildIlrSubmission(ProviderSubmissionDetails providerDetails, LookupContext lookupContext, List<ContractTypeReferenceData> contractTypes, List<EmploymentStatusReferenceData> employmentStatus, List<LearningSupportReferenceData> learningSupportStatus, string period)
         {
             var learners = (from x in providerDetails.LearnerDetails
                             group x by x.LearnerId into g
@@ -134,6 +134,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
             var submission = new IlrSubmission
             {
                 Ukprn = providerDetails.Ukprn,
+                AcademicYear = period.ToPeriodDateTime().GetAcademicYear(),
+                PreperationDate = period.ToPeriodDateTime().AddDays(27),
                 Learners = learners
             };
             for (var i = 0; i < submission.Learners.Length; i++)

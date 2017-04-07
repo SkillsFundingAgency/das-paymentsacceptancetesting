@@ -16,6 +16,7 @@ namespace SFA.DAS.Payments.AcceptanceTests
                 TransientConnectionString = ConfigurationManager.AppSettings["TransientConnectionString"],
                 DedsDatabaseConnectionString = ConfigurationManager.AppSettings["DedsConnectionString"],
                 WorkingDirectory = ConfigurationManager.AppSettings["WorkingDir"],
+                IlrFileDirectory = System.IO.Path.Combine(ConfigurationManager.AppSettings["WorkingDir"], "IlrFiles"),
                 CurrentYear = DateTime.Today.GetAcademicYear(),
                 LogLevel = "Trace",
 
