@@ -100,7 +100,7 @@ Scenario:673-AC03 DAS learner, insufficient levy available to cover full payment
         | SFA Levy co-funding budget    | 225   | 225   | 225   | 0     | 0     | 0     | 0     |
 
 
-Scenario:683-AC01- DAS learner, levy available, 2 providers – provider A and provider B, Provider B retrospectively notifies a withdrawal and previously-paid monthly instalments need to be refunded, 
+Scenario:683-AC01- DAS learner, levy available, 2 providers - provider A and provider B, Provider B retrospectively notifies a withdrawal and previously-paid monthly instalments need to be refunded, 
 and this refund must be credited to Provider A where refunded Levy amount will be in excess of the available Levy for that period.
 
 	Given The learner is programme only DAS

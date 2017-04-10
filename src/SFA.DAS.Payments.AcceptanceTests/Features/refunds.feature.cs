@@ -789,12 +789,12 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("683-AC01- DAS learner, levy available, 2 providers � provider A and provider B, P" +
+        [NUnit.Framework.DescriptionAttribute("683-AC01- DAS learner, levy available, 2 providers - provider A and provider B, P" +
             "rovider B retrospectively notifies a withdrawal and previously-paid monthly inst" +
             "alments need to be refunded,")]
-        public virtual void _683_AC01_DASLearnerLevyAvailable2ProvidersProviderAAndProviderBProviderBRetrospectivelyNotifiesAWithdrawalAndPreviously_PaidMonthlyInstalmentsNeedToBeRefunded()
+        public virtual void _683_AC01_DASLearnerLevyAvailable2Providers_ProviderAAndProviderBProviderBRetrospectivelyNotifiesAWithdrawalAndPreviously_PaidMonthlyInstalmentsNeedToBeRefunded()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("683-AC01- DAS learner, levy available, 2 providers � provider A and provider B, P" +
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("683-AC01- DAS learner, levy available, 2 providers - provider A and provider B, P" +
                     "rovider B retrospectively notifies a withdrawal and previously-paid monthly inst" +
                     "alments need to be refunded,", ((string[])(null)));
 #line 103
