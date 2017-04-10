@@ -117,8 +117,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
         }
         private static void BuildAndSubmitIlr(ProviderSubmissionDetails providerDetails, string period, LookupContext lookupContext, List<ContractTypeReferenceData> contractTypes, List<EmploymentStatusReferenceData> employmentStatus, List<LearningSupportReferenceData> learningSupportStatus)
         {
-            IlrSubmission submission = BuildIlrSubmission(providerDetails, lookupContext, contractTypes, employmentStatus, learningSupportStatus, period);
-            TestEnvironment.ProcessService.RunIlrSubmission(submission, TestEnvironment.Variables, new LoggingStatusWatcher($"ILR submission for provider {providerDetails.ProviderId} in {period}"));
+            try
+            {
+                IlrSubmission submission = BuildIlrSubmission(providerDetails, lookupContext, contractTypes, employmentStatus, learningSupportStatus, period);
+                TestEnvironment.ProcessService.RunIlrSubmission(submission, TestEnvironment.Variables, new LoggingStatusWatcher($"ILR submission for provider {providerDetails.ProviderId} in {period}"));
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
         private static void RunMonthEnd(string period)
         {
@@ -425,7 +432,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
             }
             public override void ExecutionCompleted(Exception error)
             {
-                TestEnvironment.Logger.Info($"Completed execution of {_processName}");
+                if (error != null)
+                {
+                    TestEnvironment.Logger.Error(error, $"Error running {_processName}");
+                }
+                else
+                {
+                    TestEnvironment.Logger.Info($"Completed execution of {_processName}");
+                }
             }
         }
     }
