@@ -1,3 +1,4 @@
+@LearnersPaidInPriority
 Feature: 2 learners, paid in priority order
 
     Background:

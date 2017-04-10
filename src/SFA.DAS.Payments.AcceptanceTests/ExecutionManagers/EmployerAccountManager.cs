@@ -43,7 +43,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
 
         internal static void UpdateAccountBalancesForPeriod(IEnumerable<EmployerAccountReferenceData> accounts, string period)
         {
-            foreach(var account in accounts)
+            foreach (var account in accounts)
             {
                 UpdateAccountBalanceForPeriod(account, period);
             }

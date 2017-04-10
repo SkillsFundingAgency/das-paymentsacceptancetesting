@@ -82,6 +82,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assertions\PaymentsAndEarningsRules\EmployerLevyTransactionsRule.cs" />
+    <Compile Include="Assertions\LevyAccountBalanceAssertions.cs" />
     <Compile Include="Assertions\PaymentsAndEarningsRules\EmployersLevyAccountCreditedRule.cs" />
     <Compile Include="Assertions\PaymentsAndEarningsRules\RefundTakenBySfaRule.cs" />
     <Compile Include="Contexts\ProviderAdjustmentsContext.cs" />
@@ -98,6 +100,7 @@
     <Compile Include="Assertions\DataLockRules\LearningSupportDataLockRule.cs" />
     <Compile Include="Assertions\DataLockRules\OnProgrammeDataLockRule.cs" />
     <Compile Include="Assertions\DataLockRules\Provider16To18IncentiveDataLockRule.cs" />
+    <Compile Include="DataCollectors\LevyAccountBalanceCollector.cs" />
     <Compile Include="DataExtensions.cs" />
     <Compile Include="DataHelpers\IdentifierGenerator.cs" />
     <Compile Include="ExecutionManagers\PaymentsManager.cs" />
@@ -178,6 +181,7 @@
     <Compile Include="ReferenceDataModels\ContractTypeReferenceData.cs" />
     <Compile Include="ReferenceDataModels\DataLockPeriodMatch.cs" />
     <Compile Include="ReferenceDataModels\CompletionStatus.cs" />
+    <Compile Include="ReferenceDataModels\LevyAccountBalanceBreakdown.cs" />
     <Compile Include="ReferenceDataModels\EarningsAndPaymentsBreakdown.cs" />
     <Compile Include="ReferenceDataModels\EmployerAccountProviderPeriodValue.cs" />
     <Compile Include="ReferenceDataModels\EmployerAccountReferenceData.cs" />
@@ -197,6 +201,7 @@
     <Compile Include="ResultsDataModels\DataLockResult.cs" />
     <Compile Include="ResultsDataModels\EarningsResult.cs" />
     <Compile Include="ResultsDataModels\LearnerResults.cs" />
+    <Compile Include="ResultsDataModels\LevyAccountBalanceResult.cs" />
     <Compile Include="ResultsDataModels\PaymentResult.cs" />
     <Compile Include="SpecFlowHooks.cs" />
     <Compile Include="StepDefinitions\CommitmentSteps.cs" />
@@ -216,6 +221,7 @@
     <Compile Include="TableParsers\EmploymentStatusTableParser.cs" />
     <Compile Include="TableParsers\IlrTableParser.cs" />
     <Compile Include="TableParsers\LearningSupportTableParser.cs" />
+    <Compile Include="TableParsers\LevyBalanceTableParser.cs" />
     <Compile Include="TableParsers\TransactionTypeTableParser.cs" />
     <Compile Include="TestEnvironment.cs" />
     <Compile Include="Validations.cs" />

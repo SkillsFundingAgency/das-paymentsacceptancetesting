@@ -47,6 +47,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
 
                 EarningsCollector.CollectForPeriod(period, results, lookupContext);
                 DataLockResultCollector.CollectForPeriod(period, results, lookupContext);
+                LevyAccountBalanceCollector.CollectForPeriod(period, results, lookupContext);
+
             }
             PaymentsDataCollector.CollectForPeriod(results, lookupContext);
 
