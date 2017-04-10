@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using SFA.DAS.Payments.AcceptanceTests.DataCollectors;
 using SFA.DAS.Payments.AcceptanceTests.ExecutionManagers;
 using TechTalk.SpecFlow;
 
@@ -20,7 +21,7 @@ namespace SFA.DAS.Payments.AcceptanceTests
         }
 
         [BeforeScenario]
-        public static void SetIlrFileDirectoryForScenario()
+        public static void SetFileDirectoryForScenario()
         {
             var scenarioDirectoryName = ScenarioContext.Current.ScenarioInfo.Title.Replace(",", "")
                                                                                   .Replace("&", "and")
@@ -31,7 +32,7 @@ namespace SFA.DAS.Payments.AcceptanceTests
                 scenarioDirectoryName = scenarioDirectoryName.Substring(0, 50);
             }
 
-            TestEnvironment.Variables.IlrFileDirectory = Path.Combine(TestEnvironment.Variables.WorkingDirectory, "IlrFiles", scenarioDirectoryName);
+            TestEnvironment.Variables.IlrFileDirectory = Path.Combine(TestEnvironment.Variables.WorkingDirectory, "Collect", scenarioDirectoryName, "Ilr");
             if (Directory.Exists(TestEnvironment.Variables.IlrFileDirectory))
             {
                 foreach (var file in Directory.GetFiles(TestEnvironment.Variables.IlrFileDirectory))
@@ -43,6 +44,12 @@ namespace SFA.DAS.Payments.AcceptanceTests
             {
                 Directory.CreateDirectory(TestEnvironment.Variables.IlrFileDirectory);
             }
+        }
+
+        [AfterScenario]
+        public static void CaptureDetailsForScenario()
+        {
+            EventsDataCollector.CaptureEventsDataForScenario();
         }
     }
 }
