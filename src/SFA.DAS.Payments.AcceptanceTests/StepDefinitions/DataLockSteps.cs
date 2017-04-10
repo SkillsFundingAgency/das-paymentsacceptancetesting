@@ -14,16 +14,30 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 
         public DataLockContext DataLockContext { get; }
 
-        [Then(@"the data lock status will be as follows:")]
-        public void ThenTheDataLockStatusWillBeAsFollows(Table table)
+        [Given(@"the following commitment exists for an apprentice:")]
+        public void GivenTheFollowingCommitmentExistsForAnApprentice(Table table)
         {
-            DataLockTableParser.ParseDataLockStatusTableIntoContext(DataLockContext, Defaults.LearnerId, table);
         }
 
-        [Then(@"the data lock status of the ILR in (.*) is:")] //what is the point of this date?
-        public void ThenTheDataLockStatusWillBeAsFollowsOnSpecificDate(string specDate, Table table)
+        [Then(@"the following data lock event is returned:")]
+        public void ThenTheFollowingDataLockEventIsReturned(Table table)
         {
-            ThenTheDataLockStatusWillBeAsFollows(table);
         }
+
+        [Then(@"the data lock event has the following errors:")]
+        public void ThenTheDataLockEventHasTheFollowingErrors(Table table)
+        {
+        }
+
+        [Then(@"the data lock event has the following periods")]
+        public void ThenTheDataLockEventHasTheFollowingPeriods(Table table)
+        {
+        }
+
+        [Then(@"the data lock event used the following commitments")]
+        public void ThenTheDataLockEventUsedTheFollowingCommitments(Table table)
+        {
+        }
+
     }
 }
