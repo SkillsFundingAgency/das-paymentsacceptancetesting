@@ -218,8 +218,8 @@ Scenario:AC7- Payment for a non-DAS learner, lives in a disadvantaged postocde a
 Scenario:589-AC01- Maths and English payments for a non-das learner finishing on time, funding agreed within band maximum, planned duration is same as programme (assumes both start and finish at same time)
     When an ILR file is submitted with the following data:
         | ULN       | learner type           | agreed price | start date | planned end date | actual end date | completion status | aim type         | aim rate | framework code | programme type | pathway code |
-        | learner a | programme only non-DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | programme        |          | 403            | 2              | 1            |
-        | learner a | programme only non-DAS |              | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | maths or english | 471      | 403            | 2              | 1            |
+        | learner a | programme only non-DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | programme        |          | 563            | 21             | 2            |
+        | learner a | programme only non-DAS |              | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | maths or english | 471      | 563            | 21             | 2            |
     Then the provider earnings and payments break down as follows:
         | Type                                    | 08/17   | 09/17   | 10/17   | 11/17   | 12/17   | ... | 07/18   | 08/18  | 09/18 |
         | Provider Earned Total                   | 1039.25 | 1039.25 | 1039.25 | 1039.25 | 1039.25 | ... | 1039.25 | 0      | 0     |
@@ -377,10 +377,10 @@ Scenario:AC14- Payment for a DAS learner, does not live in a disadvantaged posto
         | Payment due from Employer               | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
         | Levy account debited                    | 0     | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 1000  | 0     |
         | SFA Levy employer budget                | 1000  | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     | 0     |
-		  | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-		  | SFA non-Levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-		  | SFA non-Levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
-		  | SFA Levy additional payments budget     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+        | SFA Levy co-funding budget              | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+        | SFA non-Levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+        | SFA non-Levy additional payments budget | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
+        | SFA Levy additional payments budget     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     |
     And the transaction types for the payments are:
         | Payment type                 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 08/18 | 09/18 |
         | On-program                   | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 0     |
@@ -770,7 +770,7 @@ Scenario:591_AC02- Payment for a DAS learner, funding agreed within band maximum
 Scenario: 637-AC01-Payment for a non-DAS learner, requires learning support, doing an apprenticeship framework
     When an ILR file is submitted with the following data:
         | ULN       | learner type           | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code |
-        | learner a | programme only non-DAS | 15000        | 06/08/2017 | 08/08/2018       | 10/08/2018      | completed         | 403            | 2              | 1            |
+        | learner a | programme only non-DAS | 15000        | 06/08/2017 | 08/08/2018       | 10/08/2018      | completed         | 563            | 21             | 2            |
     And the learning support status of the ILR is:
         | Learning support code | date from  | date to    |
         | 1                     | 06/08/2017 | 10/08/2018 |
