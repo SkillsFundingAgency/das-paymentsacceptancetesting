@@ -49,6 +49,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                 connection.Execute("DELETE FROM Payments.Payments");
                 connection.Execute("DELETE FROM PaymentsDue.RequiredPayments");
 
+                connection.Execute("DELETE FROM DataLock.DataLockEventCommitmentVersions");
+                connection.Execute("DELETE FROM DataLock.DataLockEventErrors");
+                connection.Execute("DELETE FROM DataLock.DataLockEventPeriods");
+                connection.Execute("DELETE FROM DataLock.DataLockEvents");
+
+                connection.Execute("DELETE FROM Submissions.LastSeenVersion");
+                connection.Execute("DELETE FROM Submissions.SubmissionEvents");
+
                 connection.Execute("DELETE FROM AT.ReferenceData");
                 connection.Execute("DELETE FROM Collection_Period_Mapping");
             }
@@ -75,6 +83,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
             PrepareDatabaseForComponent(TestEnvironment.ProcessService, ComponentType.ReferenceCommitments, TestEnvironment.Variables, watcher);
             PrepareDatabaseForComponent(TestEnvironment.ProcessService, ComponentType.ReferenceAccounts, TestEnvironment.Variables, watcher);
             PrepareDatabaseForComponent(TestEnvironment.ProcessService, ComponentType.PeriodEndScripts, TestEnvironment.Variables, watcher);
+            PrepareDatabaseForComponent(TestEnvironment.ProcessService, ComponentType.DataLockEvents, TestEnvironment.Variables, watcher);
+            PrepareDatabaseForComponent(TestEnvironment.ProcessService, ComponentType.SubmissionEvents, TestEnvironment.Variables, watcher);
         }
         private static void PrepareDatabaseForComponent(ProcessService processService, ComponentType componentType, EnvironmentVariables environmentVariables, RebuildStatusWatcher watcher)
         {
