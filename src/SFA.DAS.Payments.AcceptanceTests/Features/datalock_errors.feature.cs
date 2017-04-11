@@ -102,40 +102,46 @@ this.ScenarioSetup(scenarioInfo);
                         "active",
                         "01/05/2017"});
 #line 4
-    testRunner.Given("the following commitment exists for an apprentice:", ((string)(null)), table251, "Given ");
+    testRunner.Given("the following commitments exist:", ((string)(null)), table251, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table252 = new TechTalk.SpecFlow.Table(new string[] {
                         "Provider",
                         "ULN",
-                        "standard code",
                         "framework code",
                         "programme type",
                         "pathway code",
-                        "agreed price",
                         "start date",
-                        "completion status"});
+                        "planned end date",
+                        "completion status",
+                        "Total training price",
+                        "Total training price effective date",
+                        "Total assessment price",
+                        "Total assessment price effective date"});
             table252.AddRow(new string[] {
                         "Provider a",
                         "learner a",
-                        "1",
                         "450",
                         "2",
                         "1",
-                        "10010",
                         "01/05/2017",
-                        "continuing"});
+                        "08/08/2018",
+                        "continuing",
+                        "9000",
+                        "01/05/2017",
+                        "1010",
+                        "01/05/2017"});
 #line 8
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table252, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table253 = new TechTalk.SpecFlow.Table(new string[] {
                         "Price Episode identifier",
-                        "Apprenticeship ID",
+                        "Apprenticeship Id",
                         "ULN",
                         "ILR Start Date",
                         "ILR Training Price",
                         "ILR End point assessment price"});
             table253.AddRow(new string[] {
-                        "450-2-1/05/2017",
+                        "2-450-1-01/05/2017",
                         "73",
                         "learner a",
                         "01/05/2017",
@@ -149,7 +155,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Error code",
                         "Error Description"});
             table254.AddRow(new string[] {
-                        "450-2-1/05/2017",
+                        "2-450-1-01/05/2017",
                         "DLOCK_07",
                         "No matching record found in the employer digital account for the negotiated cost " +
                             "of training"});
@@ -162,17 +168,17 @@ this.ScenarioSetup(scenarioInfo);
                         "Payable Flag",
                         "Transaction Type"});
             table255.AddRow(new string[] {
-                        "450-2-1/05/2017",
+                        "2-450-1-01/05/2017",
                         "1617-R10",
                         "false",
                         "Learning"});
             table255.AddRow(new string[] {
-                        "450-2-1/05/2017",
+                        "2-450-1-01/05/2017",
                         "1617-R11",
                         "false",
                         "Learning"});
             table255.AddRow(new string[] {
-                        "450-2-1/05/2017",
+                        "2-450-1-01/05/2017",
                         "1617-R12",
                         "false",
                         "Learning"});
@@ -187,7 +193,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Negotiated Price",
                         "Effective Date"});
             table256.AddRow(new string[] {
-                        "450-2-1/05/2017",
+                        "2-450-1-01/05/2017",
                         "125",
                         "01/05/2017",
                         "450-2-1",

@@ -22,7 +22,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                                                                                       List<EmployerAccountReferenceData> employers,
                                                                                       List<ContractTypeReferenceData> contractTypes,
                                                                                       List<EmploymentStatusReferenceData> employmentStatus,
-                                                                                      List<LearningSupportReferenceData> learningSupportStatus)
+                                                                                      List<LearningSupportReferenceData> learningSupportStatus,
+                                                                                      string[] periodsToSubmitTo = null)
         {
             var results = new List<LearnerResults>();
             if (TestEnvironment.ValidateSpecsOnly)
@@ -31,7 +32,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
             }
 
 
-            var periods = ExtractPeriods(ilrLearnerDetails, firstSubmissionDate);
+            var periods = periodsToSubmitTo ?? ExtractPeriods(ilrLearnerDetails, firstSubmissionDate);
             var providerLearners = GroupLearnersByProvider(ilrLearnerDetails, lookupContext);
             foreach (var period in periods)
             {
@@ -46,10 +47,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                 RunMonthEnd(period);
 
                 EarningsCollector.CollectForPeriod(period, results, lookupContext);
-                DataLockResultCollector.CollectForPeriod(period, results, lookupContext);
                 LevyAccountBalanceCollector.CollectForPeriod(period, results, lookupContext);
 
             }
+            DataLockEventsDataCollector.CollectDataLockEventsForAllPeriods(results, lookupContext);
             PaymentsDataCollector.CollectForPeriod(results, lookupContext);
 
             return results;
