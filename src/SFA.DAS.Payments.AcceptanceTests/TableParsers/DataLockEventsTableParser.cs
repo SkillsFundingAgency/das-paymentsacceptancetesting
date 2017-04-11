@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using SFA.DAS.Payments.AcceptanceTests.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.ReferenceDataModels;
 using TechTalk.SpecFlow;
@@ -52,6 +50,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                         structure.IlrEndpointAssementPriceIndex = c;
                         break;
                 }
+            }
+
+            if (structure.PriceEpisodeIdentifierIndex == -1)
+            {
+                throw new ArgumentException("Data lock events table is missing Price Episode identifier column");
             }
 
             return structure;

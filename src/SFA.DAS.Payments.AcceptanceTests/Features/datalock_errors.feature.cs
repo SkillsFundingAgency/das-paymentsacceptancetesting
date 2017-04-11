@@ -189,14 +189,18 @@ this.ScenarioSetup(scenarioInfo);
                         "Price Episode identifier",
                         "Apprentice Version",
                         "Start Date",
-                        "Course",
+                        "framework code",
+                        "programme type",
+                        "pathway code",
                         "Negotiated Price",
                         "Effective Date"});
             table256.AddRow(new string[] {
                         "2-450-1-01/05/2017",
                         "125",
                         "01/05/2017",
-                        "450-2-1",
+                        "450",
+                        "2",
+                        "1",
                         "10000",
                         "01/05/2017"});
 #line 23

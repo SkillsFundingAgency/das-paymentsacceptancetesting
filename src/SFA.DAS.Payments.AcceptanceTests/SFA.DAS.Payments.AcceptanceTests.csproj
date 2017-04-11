@@ -170,6 +170,9 @@
     <Compile Include="Contexts\EmployerAccountContext.cs" />
     <Compile Include="ReferenceDataModels\ContractType.cs" />
     <Compile Include="ReferenceDataModels\ContractTypeReferenceData.cs" />
+    <Compile Include="ReferenceDataModels\DataLockEventCommitmentReferenceData.cs" />
+    <Compile Include="ReferenceDataModels\DataLockEventErrorReferenceData.cs" />
+    <Compile Include="ReferenceDataModels\DataLockEventPeriodReferenceData.cs" />
     <Compile Include="ReferenceDataModels\DataLockEventReferenceData.cs" />
     <Compile Include="ReferenceDataModels\DataLockPeriodMatch.cs" />
     <Compile Include="ReferenceDataModels\CompletionStatus.cs" />
@@ -210,6 +213,9 @@
     <Compile Include="StepDefinitions\UntestedSteps.cs" />
     <Compile Include="TableParsers\CommitmentsTableParser.cs" />
     <Compile Include="TableParsers\ContractTypeTableParser.cs" />
+    <Compile Include="TableParsers\DataLockEventCommitmentsTableParser.cs" />
+    <Compile Include="TableParsers\DataLockEventErrorsTableParser.cs" />
+    <Compile Include="TableParsers\DataLockEventPeriodTableParser.cs" />
     <Compile Include="TableParsers\DataLockEventsTableParser.cs" />
     <Compile Include="TableParsers\EarningAndPaymentTableParser.cs" />
     <Compile Include="TableParsers\EmploymentStatusTableParser.cs" />

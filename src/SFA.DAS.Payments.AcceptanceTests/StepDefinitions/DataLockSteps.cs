@@ -37,18 +37,30 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
         public void ThenTheDataLockEventHasTheFollowingErrors(Table table)
         {
             EnsureSubmissionsHaveHappened();
+
+            DataLockEventErrorsTableParser.ParseDataLockEventErrorsIntoContext(DataLockContext, table, LookupContext);
+
+            DataLockAssertions.AssertDataLockOutput(DataLockContext, SubmissionContext.SubmissionResults.ToArray());
         }
 
         [Then(@"the data lock event has the following periods")]
         public void ThenTheDataLockEventHasTheFollowingPeriods(Table table)
         {
             EnsureSubmissionsHaveHappened();
+
+            DataLockEventPeriodTableParser.ParseDataLockEventPeriodsIntoContext(DataLockContext, table, LookupContext);
+
+            DataLockAssertions.AssertDataLockOutput(DataLockContext, SubmissionContext.SubmissionResults.ToArray());
         }
 
         [Then(@"the data lock event used the following commitments")]
         public void ThenTheDataLockEventUsedTheFollowingCommitments(Table table)
         {
             EnsureSubmissionsHaveHappened();
+
+            DataLockEventCommitmentsTableParser.ParseDataLockEventCommitmentsIntoContext(DataLockContext, table, LookupContext);
+
+            DataLockAssertions.AssertDataLockOutput(DataLockContext, SubmissionContext.SubmissionResults.ToArray());
         }
 
 
