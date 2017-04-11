@@ -29,5 +29,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ResultsDataModels
         public DateTime IlrPriceEffectiveDate { get; set; }
 
         public DataLockEventPeriod[] Periods { get; set; }
+        public DataLockEventError[] Errors { get; set; }
+        public DataLockEventCommitmentVersion[] CommitmentVersions { get; set; }
     }
 }
