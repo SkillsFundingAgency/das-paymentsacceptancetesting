@@ -83,7 +83,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assertions\DataLockAssertions.cs" />
+    <Compile Include="Assertions\DataLockRules\DataLockCommitmentVersionRule.cs" />
+    <Compile Include="Assertions\DataLockRules\DataLockErrorsRule.cs" />
     <Compile Include="Assertions\DataLockRules\DataLockEventsRule.cs" />
+    <Compile Include="Assertions\DataLockRules\DataLockPeriodsRule.cs" />
     <Compile Include="Assertions\DataLockRules\DataLockRuleBase.cs" />
     <Compile Include="Assertions\PaymentsAndEarningsRules\EmployerLevyTransactionsRule.cs" />
     <Compile Include="Assertions\LevyAccountBalanceAssertions.cs" />
