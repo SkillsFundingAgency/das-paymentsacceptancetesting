@@ -8,8 +8,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
         public DataLockContext()
         {
             DataLockEvents = new List<DataLockEventReferenceData>();
+            DataLockEventErrors = new List<DataLockEventErrorReferenceData>();
+            DataLockEventCommitments = new List<DataLockEventCommitmentReferenceData>();
+            DataLockEventPeriods = new List<DataLockEventPeriodReferenceData>();
         }
 
         public List<DataLockEventReferenceData> DataLockEvents { get; set; }
+        public List<DataLockEventErrorReferenceData> DataLockEventErrors { get; set; }
+        public List<DataLockEventCommitmentReferenceData> DataLockEventCommitments { get; set; }
+        public List<DataLockEventPeriodReferenceData> DataLockEventPeriods { get; set; }
     }
 }

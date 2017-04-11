@@ -6,13 +6,18 @@ namespace SFA.DAS.Payments.AcceptanceTests.Assertions
 {
     public static class DataLockAssertions
     {
-        private static readonly DataLockRuleBase[] Rules = 
+        private static readonly DataLockRuleBase[] Rules =
         {
             new DataLockEventsRule()
         };
 
         public static void AssertDataLockOutput(DataLockContext context, LearnerResults[] results)
         {
+            if (TestEnvironment.ValidateSpecsOnly)
+            {
+                return;
+            }
+
             foreach (var rule in Rules)
             {
                 rule.AssertDataLockEvents(context, results);

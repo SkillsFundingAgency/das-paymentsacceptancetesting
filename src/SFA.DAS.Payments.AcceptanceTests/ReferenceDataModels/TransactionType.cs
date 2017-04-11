@@ -1,7 +1,10 @@
-﻿namespace SFA.DAS.Payments.AcceptanceTests.ReferenceDataModels
+﻿using System.ComponentModel;
+
+namespace SFA.DAS.Payments.AcceptanceTests.ReferenceDataModels
 {
     public enum TransactionType
     {
+        [Description("Learning")]
         OnProgram = 1,
         Completion = 2,
         Balancing = 3,

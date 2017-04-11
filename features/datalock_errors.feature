@@ -21,5 +21,5 @@ Scenario: When no matching record found in an employer digital account for for t
         | 2-450-1-01/05/2017       | 1617-R11 | false        | Learning         |
         | 2-450-1-01/05/2017       | 1617-R12 | false        | Learning         |
     And the data lock event used the following commitments   
-        | Price Episode identifier | Apprentice Version | Start Date | Course  | Negotiated Price | Effective Date |
-        | 2-450-1-01/05/2017       | 125                | 01/05/2017 | 450-2-1 | 10000            | 01/05/2017     |
+        | Price Episode identifier | Apprentice Version | Start Date | framework code | programme type | pathway code | Negotiated Price | Effective Date |
+        | 2-450-1-01/05/2017       | 125                | 01/05/2017 | 450            | 2              | 1            | 10000            | 01/05/2017     |
