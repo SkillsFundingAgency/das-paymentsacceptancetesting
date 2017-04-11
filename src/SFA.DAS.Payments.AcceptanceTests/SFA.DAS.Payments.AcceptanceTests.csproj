@@ -189,6 +189,8 @@
     <Compile Include="ReferenceDataModels\PeriodValue.cs" />
     <Compile Include="ReferenceDataModels\ProviderEarnedPeriodValue.cs" />
     <Compile Include="ReferenceDataModels\TransactionType.cs" />
+    <Compile Include="ResultsDataModels\DataLockEventCommitmentVersion.cs" />
+    <Compile Include="ResultsDataModels\DataLockEventError.cs" />
     <Compile Include="ResultsDataModels\DataLockEventPeriod.cs" />
     <Compile Include="ResultsDataModels\DataLockEventResult.cs" />
     <Compile Include="ResultsDataModels\EarningsResult.cs" />

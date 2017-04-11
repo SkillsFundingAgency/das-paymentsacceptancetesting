@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Dapper;
 using SFA.DAS.Payments.AcceptanceTests.Contexts;
-using SFA.DAS.Payments.AcceptanceTests.DataCollectors.Entities;
 using SFA.DAS.Payments.AcceptanceTests.ResultsDataModels;
 
 namespace SFA.DAS.Payments.AcceptanceTests.DataCollectors
@@ -42,6 +38,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataCollectors
         private static void PopulateEventChildProperties(SqlConnection connection, DataLockEventResult result)
         {
             result.Periods = connection.Query<DataLockEventPeriod>("SELECT * FROM DataLock.DataLockEventPeriods WHERE DataLockEventId = @DataLockEventId", 
+                new { result.DataLockEventId }).ToArray();
+
+            result.Errors = connection.Query<DataLockEventError>("SELECT * FROM DataLock.DataLockEventErrors WHERE DataLockEventId = @DataLockEventId",
+                new { result.DataLockEventId }).ToArray();
+
+            result.CommitmentVersions = connection.Query<DataLockEventCommitmentVersion>("SELECT * FROM DataLock.DataLockEventCommitmentVersions WHERE DataLockEventId = @DataLockEventId",
                 new { result.DataLockEventId }).ToArray();
         }
     }
