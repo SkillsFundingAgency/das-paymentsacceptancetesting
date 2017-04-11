@@ -8,7 +8,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.Assertions
     {
         private static readonly DataLockRuleBase[] Rules =
         {
-            new DataLockEventsRule()
+            new DataLockEventsRule(),
+            new DataLockErrorsRule(),
+            new DataLockPeriodsRule(),
+            new DataLockCommitmentVersionRule(),
         };
 
         public static void AssertDataLockOutput(DataLockContext context, LearnerResults[] results)

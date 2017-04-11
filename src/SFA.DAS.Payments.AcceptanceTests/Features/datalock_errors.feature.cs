@@ -170,17 +170,17 @@ this.ScenarioSetup(scenarioInfo);
             table255.AddRow(new string[] {
                         "2-450-1-01/05/2017",
                         "1617-R10",
-                        "false",
+                        "true",
                         "Learning"});
             table255.AddRow(new string[] {
                         "2-450-1-01/05/2017",
                         "1617-R11",
-                        "false",
+                        "true",
                         "Learning"});
             table255.AddRow(new string[] {
                         "2-450-1-01/05/2017",
                         "1617-R12",
-                        "false",
+                        "true",
                         "Learning"});
 #line 18
     testRunner.And("the data lock event has the following periods", ((string)(null)), table255, "And ");
