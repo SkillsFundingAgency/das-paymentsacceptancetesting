@@ -26,7 +26,9 @@ namespace SFA.DAS.Payments.AcceptanceTests
             var scenarioDirectoryName = ScenarioContext.Current.ScenarioInfo.Title.Replace(",", "")
                                                                                   .Replace("&", "and")
                                                                                   .Replace("\\", "")
-                                                                                  .Replace(" ", "_");
+                                                                                  .Replace(" ", "_")
+                                                                                  .Replace("*", "_")
+                                                                                  .Replace(":", "_");
             if (scenarioDirectoryName.Length > 50)
             {
                 scenarioDirectoryName = scenarioDirectoryName.Substring(0, 50);
