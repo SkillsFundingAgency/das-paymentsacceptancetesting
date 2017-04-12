@@ -47,6 +47,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
 
                 EarningsCollector.CollectForPeriod(period, results, lookupContext);
                 DataLockResultCollector.CollectForPeriod(period, results, lookupContext);
+                LevyAccountBalanceCollector.CollectForPeriod(period, results, lookupContext);
+
             }
             PaymentsDataCollector.CollectForPeriod(results, lookupContext);
 
@@ -134,6 +136,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
             var submission = new IlrSubmission
             {
                 Ukprn = providerDetails.Ukprn,
+                AcademicYear = period.ToPeriodDateTime().GetAcademicYear(),
+                PreperationDate = period.ToPeriodDateTime().AddDays(27),
                 Learners = learners
             };
             for (var i = 0; i < submission.Learners.Length; i++)
@@ -184,12 +188,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                 Uln = lookupContext.AddOrGetUln(learnerDetails[0].LearnerId),
                 DateOfBirth = GetDateOfBirthBasedOnLearnerType(learnerDetails[0].LearnerType),
                 LearningDeliveries = deliveries,
-                EmploymentStatuses = employmentStatuses
+                EmploymentStatuses = employmentStatuses.Any() ? employmentStatuses : null
             };
         }
         private static FinancialRecord[] BuildLearningDeliveryFinancials(IlrLearnerReferenceData learnerReferenceData)
         {
-            var agreedTrainingPrice = (int)Math.Floor(learnerReferenceData.AgreedPrice * 0.8m);
+            var agreedTrainingPrice = learnerReferenceData.FrameworkCode > 0 ? learnerReferenceData.AgreedPrice :
+                                     (int)Math.Floor(learnerReferenceData.AgreedPrice * 0.8m);
             var agreedAssesmentPrice = learnerReferenceData.AgreedPrice - agreedTrainingPrice;
 
             var financialRecords = new List<FinancialRecord>();
@@ -293,13 +298,16 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                     Amount = agreedTrainingPrice,
                     Date = learnerReferenceData.StartDate
                 });
-                financialRecords.Add(new FinancialRecord
+                if (learnerReferenceData.FrameworkCode <= 0)
                 {
-                    Code = 2,
-                    Type = "TNP",
-                    Amount = agreedAssesmentPrice,
-                    Date = learnerReferenceData.StartDate
-                });
+                    financialRecords.Add(new FinancialRecord
+                    {
+                        Code = 2,
+                        Type = "TNP",
+                        Amount = agreedAssesmentPrice,
+                        Date = learnerReferenceData.StartDate
+                    });
+                }
             }
 
             return financialRecords.ToArray();
@@ -416,11 +424,25 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
             }
             public override void TaskCompleted(string taskId, Exception error)
             {
-                TestEnvironment.Logger.Info($"Completed task {taskId} of {_processName}");
+                if (error != null)
+                {
+                    TestEnvironment.Logger.Error(error, $"Error running task {taskId} or {_processName}");
+                }
+                else
+                {
+                    TestEnvironment.Logger.Info($"Completed task {taskId} of {_processName}");
+                }
             }
             public override void ExecutionCompleted(Exception error)
             {
-                TestEnvironment.Logger.Info($"Completed execution of {_processName}");
+                if (error != null)
+                {
+                    TestEnvironment.Logger.Error(error, $"Error running {_processName}");
+                }
+                else
+                {
+                    TestEnvironment.Logger.Info($"Completed execution of {_processName}");
+                }
             }
         }
     }

@@ -10,14 +10,17 @@ namespace SFA.DAS.Payments.AcceptanceTests
         static TestEnvironment()
         {
             RunId = IdentifierGenerator.GenerateIdentifier();
+            //ValidateSpecsOnly = true;
 
             Variables = new EnvironmentVariables
             {
                 TransientConnectionString = ConfigurationManager.AppSettings["TransientConnectionString"],
                 DedsDatabaseConnectionString = ConfigurationManager.AppSettings["DedsConnectionString"],
                 WorkingDirectory = ConfigurationManager.AppSettings["WorkingDir"],
+                IlrFileDirectory = System.IO.Path.Combine(ConfigurationManager.AppSettings["WorkingDir"], "Collect", "Ilr"),
                 CurrentYear = DateTime.Today.GetAcademicYear(),
                 LogLevel = "Trace",
+                
 
                 AccountsApiBaseUrl = "",
                 AccountsApiClientSecret = "",
@@ -36,6 +39,7 @@ namespace SFA.DAS.Payments.AcceptanceTests
         internal static ILogger Logger { get; }
         internal static EnvironmentVariables Variables { get; }
         internal static ProcessService ProcessService { get; }
+        internal static string DataCollectionDirectory { get; }
         internal static bool ValidateSpecsOnly { get; } = false;
     }
 }

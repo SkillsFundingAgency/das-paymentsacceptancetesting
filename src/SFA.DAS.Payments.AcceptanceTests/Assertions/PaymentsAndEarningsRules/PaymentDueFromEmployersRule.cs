@@ -3,6 +3,7 @@ using System.Linq;
 using SFA.DAS.Payments.AcceptanceTests.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.ReferenceDataModels;
 using SFA.DAS.Payments.AcceptanceTests.ResultsDataModels;
+using System;
 
 namespace SFA.DAS.Payments.AcceptanceTests.Assertions.PaymentsAndEarningsRules
 {
@@ -27,6 +28,18 @@ namespace SFA.DAS.Payments.AcceptanceTests.Assertions.PaymentsAndEarningsRules
                 };
 
                 AssertResultsForPeriod(prevPeriod, paymentsForEmployer);
+            }
+        }
+
+        protected new void AssertResultsForPeriod(PeriodValue period, PaymentResult[] allPayments)
+        {
+            var paidInPeriod = allPayments
+                            .Where(p => p.CalculationPeriod == period.PeriodName )
+                            .Sum(p => p.Amount);
+            
+            if (paidInPeriod >= 0 && !AreValuesEqual(period.Value, paidInPeriod))
+            {
+                throw new Exception(FormatAssertionFailureMessage(period, paidInPeriod));
             }
         }
 

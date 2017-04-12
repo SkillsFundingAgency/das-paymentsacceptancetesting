@@ -17,6 +17,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.ReferenceDataModels
             SfaNonLevyCoFundBudget = new List<PeriodValue>();
             SfaLevyAdditionalPayments = new List<PeriodValue>();
             SfaNonLevyAdditionalPayments = new List<PeriodValue>();
+            RefundTakenBySfa = new List<PeriodValue>();
+            EmployersLevyAccountCredited= new List<EmployerAccountPeriodValue>();
+            EmployerLevyTransactions = new List<EmployerAccountPeriodValue>();
         }
 
         public string ProviderId { get; set; }
@@ -31,5 +34,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.ReferenceDataModels
         public List<PeriodValue> SfaNonLevyCoFundBudget { get; set; }
         public List<PeriodValue> SfaLevyAdditionalPayments { get; set; }
         public List<PeriodValue> SfaNonLevyAdditionalPayments { get; set; }
+
+        public List<PeriodValue> RefundTakenBySfa { get; set; }
+        public List<EmployerAccountPeriodValue> EmployersLevyAccountCredited { get; set; }
+        public List<EmployerAccountPeriodValue> EmployerLevyTransactions { get; set; }
+        
+
+
     }
 }

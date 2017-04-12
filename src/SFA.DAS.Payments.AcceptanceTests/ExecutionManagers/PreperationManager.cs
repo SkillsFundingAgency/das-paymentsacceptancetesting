@@ -49,6 +49,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                 connection.Execute("DELETE FROM Payments.Payments");
                 connection.Execute("DELETE FROM PaymentsDue.RequiredPayments");
 
+                connection.Execute("DELETE FROM DataLock.DataLockEventCommitmentVersions");
+                connection.Execute("DELETE FROM DataLock.DataLockEventErrors");
+                connection.Execute("DELETE FROM DataLock.DataLockEventPeriods");
+                connection.Execute("DELETE FROM DataLock.DataLockEvents");
+
+                connection.Execute("DELETE FROM Submissions.LastSeenVersion");
+                connection.Execute("DELETE FROM Submissions.SubmissionEvents");
+
                 connection.Execute("DELETE FROM AT.ReferenceData");
                 connection.Execute("DELETE FROM Collection_Period_Mapping");
             }
@@ -75,6 +83,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
             PrepareDatabaseForComponent(TestEnvironment.ProcessService, ComponentType.ReferenceCommitments, TestEnvironment.Variables, watcher);
             PrepareDatabaseForComponent(TestEnvironment.ProcessService, ComponentType.ReferenceAccounts, TestEnvironment.Variables, watcher);
             PrepareDatabaseForComponent(TestEnvironment.ProcessService, ComponentType.PeriodEndScripts, TestEnvironment.Variables, watcher);
+            PrepareDatabaseForComponent(TestEnvironment.ProcessService, ComponentType.DataLockEvents, TestEnvironment.Variables, watcher);
+            PrepareDatabaseForComponent(TestEnvironment.ProcessService, ComponentType.SubmissionEvents, TestEnvironment.Variables, watcher);
         }
         private static void PrepareDatabaseForComponent(ProcessService processService, ComponentType componentType, EnvironmentVariables environmentVariables, RebuildStatusWatcher watcher)
         {
@@ -92,11 +102,42 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
 
             public override void ExecutionStarted(TaskDescriptor[] tasks)
             {
+                TestEnvironment.Logger.Info("Started execution of rebuild");
                 LastError = null;
+            }
+            public override void TaskStarted(string taskId)
+            {
+                TestEnvironment.Logger.Info($"Task {taskId} started");
+            }
+            public override void TaskCompleted(string taskId, Exception error)
+            {
+                if (error != null)
+                {
+                    TestEnvironment.Logger.Error(error, $"Task {taskId} failed");
+                    if (LastError == null)
+                    {
+                        LastError = error;
+                    }
+                }
+                else
+                {
+                    TestEnvironment.Logger.Info($"Task {taskId} succeeded");
+                }
             }
             public override void ExecutionCompleted(Exception error)
             {
-                LastError = error;
+                if (error != null)
+                {
+                    TestEnvironment.Logger.Error(error, "Execution of rebuild failed");
+                    if (LastError == null)
+                    {
+                        LastError = error;
+                    }
+                }
+                else
+                {
+                    TestEnvironment.Logger.Info("Execution of rebuild succeeded");
+                }
             }
         }
     }

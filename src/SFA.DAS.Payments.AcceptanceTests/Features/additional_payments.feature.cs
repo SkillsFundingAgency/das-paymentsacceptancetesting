@@ -1848,9 +1848,9 @@ this.ScenarioSetup(scenarioInfo);
                         "continuing",
                         "programme",
                         "",
-                        "403",
-                        "2",
-                        "1"});
+                        "563",
+                        "21",
+                        "2"});
             table27.AddRow(new string[] {
                         "learner a",
                         "programme only non-DAS",
@@ -1861,9 +1861,9 @@ this.ScenarioSetup(scenarioInfo);
                         "completed",
                         "maths or english",
                         "471",
-                        "403",
-                        "2",
-                        "1"});
+                        "563",
+                        "21",
+                        "2"});
 #line 219
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table27, "When ");
 #line hidden
@@ -6583,9 +6583,9 @@ this.ScenarioSetup(scenarioInfo);
                         "08/08/2018",
                         "10/08/2018",
                         "completed",
-                        "403",
-                        "2",
-                        "1"});
+                        "563",
+                        "21",
+                        "2"});
 #line 771
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table98, "When ");
 #line hidden
