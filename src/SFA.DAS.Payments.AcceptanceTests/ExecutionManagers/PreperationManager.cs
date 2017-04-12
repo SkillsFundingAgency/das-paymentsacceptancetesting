@@ -107,7 +107,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
             }
             public override void TaskStarted(string taskId)
             {
-                TestEnvironment.Logger.Info("Task {taskId} started");
+                TestEnvironment.Logger.Info($"Task {taskId} started");
             }
             public override void TaskCompleted(string taskId, Exception error)
             {
@@ -121,7 +121,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                 }
                 else
                 {
-                    TestEnvironment.Logger.Info("Task {taskId} succeeded");
+                    TestEnvironment.Logger.Info($"Task {taskId} succeeded");
                 }
             }
             public override void ExecutionCompleted(Exception error)
