@@ -102,11 +102,42 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
 
             public override void ExecutionStarted(TaskDescriptor[] tasks)
             {
+                TestEnvironment.Logger.Info("Started execution of rebuild");
                 LastError = null;
+            }
+            public override void TaskStarted(string taskId)
+            {
+                TestEnvironment.Logger.Info("Task {taskId} started");
+            }
+            public override void TaskCompleted(string taskId, Exception error)
+            {
+                if (error != null)
+                {
+                    TestEnvironment.Logger.Error(error, $"Task {taskId} failed");
+                    if (LastError == null)
+                    {
+                        LastError = error;
+                    }
+                }
+                else
+                {
+                    TestEnvironment.Logger.Info("Task {taskId} succeeded");
+                }
             }
             public override void ExecutionCompleted(Exception error)
             {
-                LastError = error;
+                if (error != null)
+                {
+                    TestEnvironment.Logger.Error(error, "Execution of rebuild failed");
+                    if (LastError == null)
+                    {
+                        LastError = error;
+                    }
+                }
+                else
+                {
+                    TestEnvironment.Logger.Info("Execution of rebuild succeeded");
+                }
             }
         }
     }
