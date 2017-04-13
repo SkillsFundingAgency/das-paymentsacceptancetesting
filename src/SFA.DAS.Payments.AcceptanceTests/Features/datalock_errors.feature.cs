@@ -329,6 +329,137 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("When no matching record found in an employer digital account for for the standard" +
+            " then datalock DLOCK_03 will be produced")]
+        public virtual void WhenNoMatchingRecordFoundInAnEmployerDigitalAccountForForTheStandardThenDatalockDLOCK_03WillBeProduced()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When no matching record found in an employer digital account for for the standard" +
+                    " then datalock DLOCK_03 will be produced", ((string[])(null)));
+#line 54
+this.ScenarioSetup(scenarioInfo);
+#line hidden
+            TechTalk.SpecFlow.Table table263 = new TechTalk.SpecFlow.Table(new string[] {
+                        "commitment Id",
+                        "version Id",
+                        "Provider",
+                        "ULN",
+                        "standard code",
+                        "agreed price",
+                        "start date",
+                        "end date",
+                        "status",
+                        "effective from"});
+            table263.AddRow(new string[] {
+                        "73",
+                        "125",
+                        "Provider a",
+                        "learner a",
+                        "21",
+                        "10000",
+                        "01/05/2017",
+                        "01/05/2018",
+                        "active",
+                        "01/05/2017"});
+#line 55
+    testRunner.Given("the following commitments exist:", ((string)(null)), table263, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table264 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Provider",
+                        "ULN",
+                        "standard code",
+                        "start date",
+                        "planned end date",
+                        "completion status",
+                        "Total training price",
+                        "Total training price effective date",
+                        "Total assessment price",
+                        "Total assessment price effective date"});
+            table264.AddRow(new string[] {
+                        "Provider a",
+                        "learner a",
+                        "23",
+                        "01/05/2017",
+                        "08/08/2018",
+                        "continuing",
+                        "9000",
+                        "01/05/2017",
+                        "1000",
+                        "01/05/2017"});
+#line 59
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table264, "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table265 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Price Episode identifier",
+                        "Apprenticeship Id",
+                        "ULN",
+                        "ILR Start Date",
+                        "ILR Training Price",
+                        "ILR End point assessment price"});
+            table265.AddRow(new string[] {
+                        "25-23-01/05/2017",
+                        "73",
+                        "learner a",
+                        "01/05/2017",
+                        "9000",
+                        "1000"});
+#line 63
+    testRunner.Then("the following data lock event is returned:", ((string)(null)), table265, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table266 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Price Episode identifier",
+                        "Error code",
+                        "Error Description"});
+            table266.AddRow(new string[] {
+                        "25-23-01/05/2017",
+                        "DLOCK_03",
+                        "No matching record found in the employer digital account for the standard code"});
+#line 66
+    testRunner.And("the data lock event has the following errors:", ((string)(null)), table266, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table267 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Price Episode identifier",
+                        "Period",
+                        "Payable Flag",
+                        "Transaction Type"});
+            table267.AddRow(new string[] {
+                        "25-23-01/05/2017",
+                        "1617-R10",
+                        "true",
+                        "Learning"});
+            table267.AddRow(new string[] {
+                        "25-23-01/05/2017",
+                        "1617-R11",
+                        "true",
+                        "Learning"});
+            table267.AddRow(new string[] {
+                        "25-23-01/05/2017",
+                        "1617-R12",
+                        "true",
+                        "Learning"});
+#line 69
+    testRunner.And("the data lock event has the following periods", ((string)(null)), table267, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table268 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Price Episode identifier",
+                        "Apprentice Version",
+                        "Start Date",
+                        "standard code",
+                        "Negotiated Price",
+                        "Effective Date"});
+            table268.AddRow(new string[] {
+                        "25-23-01/05/2017",
+                        "125",
+                        "01/05/2017",
+                        "21",
+                        "10000",
+                        "01/05/2017"});
+#line 74
+    testRunner.And("the data lock event used the following commitments", ((string)(null)), table268, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
