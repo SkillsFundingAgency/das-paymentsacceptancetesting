@@ -64,12 +64,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("When no matching record found in an employer digital account for for the agreed p" +
-            "rice then datalock DLOCK_07 will be produced")]
-        public virtual void WhenNoMatchingRecordFoundInAnEmployerDigitalAccountForForTheAgreedPriceThenDatalockDLOCK_07WillBeProduced()
+        [NUnit.Framework.DescriptionAttribute("DLOCK07 - When no matching record found in an employer digital account for for th" +
+            "e agreed price then datalock DLOCK_07 will be produced")]
+        public virtual void DLOCK07_WhenNoMatchingRecordFoundInAnEmployerDigitalAccountForForTheAgreedPriceThenDatalockDLOCK_07WillBeProduced()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When no matching record found in an employer digital account for for the agreed p" +
-                    "rice then datalock DLOCK_07 will be produced", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("DLOCK07 - When no matching record found in an employer digital account for for th" +
+                    "e agreed price then datalock DLOCK_07 will be produced", ((string[])(null)));
 #line 3
 this.ScenarioSetup(scenarioInfo);
 #line hidden
@@ -202,12 +202,12 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("When no matching record found in an employer digital account for for the start da" +
-            "te then datalock DLOCK_09 will be produced")]
-        public virtual void WhenNoMatchingRecordFoundInAnEmployerDigitalAccountForForTheStartDateThenDatalockDLOCK_09WillBeProduced()
+        [NUnit.Framework.DescriptionAttribute("DLOCK09 - When no matching record found in an employer digital account for for th" +
+            "e start date then datalock DLOCK_09 will be produced")]
+        public virtual void DLOCK09_WhenNoMatchingRecordFoundInAnEmployerDigitalAccountForForTheStartDateThenDatalockDLOCK_09WillBeProduced()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When no matching record found in an employer digital account for for the start da" +
-                    "te then datalock DLOCK_09 will be produced", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("DLOCK09 - When no matching record found in an employer digital account for for th" +
+                    "e start date then datalock DLOCK_09 will be produced", ((string[])(null)));
 #line 29
 this.ScenarioSetup(scenarioInfo);
 #line hidden
@@ -329,12 +329,12 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("When no matching record found in an employer digital account for for the standard" +
-            " code then datalock DLOCK_03 will be produced")]
-        public virtual void WhenNoMatchingRecordFoundInAnEmployerDigitalAccountForForTheStandardCodeThenDatalockDLOCK_03WillBeProduced()
+        [NUnit.Framework.DescriptionAttribute("DLOCK03 - When no matching record found in an employer digital account for for th" +
+            "e standard code then datalock DLOCK_03 will be produced")]
+        public virtual void DLOCK03_WhenNoMatchingRecordFoundInAnEmployerDigitalAccountForForTheStandardCodeThenDatalockDLOCK_03WillBeProduced()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When no matching record found in an employer digital account for for the standard" +
-                    " code then datalock DLOCK_03 will be produced", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("DLOCK03 - When no matching record found in an employer digital account for for th" +
+                    "e standard code then datalock DLOCK_03 will be produced", ((string[])(null)));
 #line 54
 this.ScenarioSetup(scenarioInfo);
 #line hidden
@@ -460,12 +460,12 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("When no matching record found in an employer digital account for for the framewor" +
-            "k code then datalock DLOCK_04 will be produced")]
-        public virtual void WhenNoMatchingRecordFoundInAnEmployerDigitalAccountForForTheFrameworkCodeThenDatalockDLOCK_04WillBeProduced()
+        [NUnit.Framework.DescriptionAttribute("DLOCK04 - When no matching record found in an employer digital account for for th" +
+            "e framework code then datalock DLOCK_04 will be produced")]
+        public virtual void DLOCK04_WhenNoMatchingRecordFoundInAnEmployerDigitalAccountForForTheFrameworkCodeThenDatalockDLOCK_04WillBeProduced()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When no matching record found in an employer digital account for for the framewor" +
-                    "k code then datalock DLOCK_04 will be produced", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("DLOCK04 - When no matching record found in an employer digital account for for th" +
+                    "e framework code then datalock DLOCK_04 will be produced", ((string[])(null)));
 #line 79
 this.ScenarioSetup(scenarioInfo);
 #line hidden
@@ -597,12 +597,12 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("When no matching record found in an employer digital account for for the programm" +
-            "e type then datalock DLOCK_05 will be produced")]
-        public virtual void WhenNoMatchingRecordFoundInAnEmployerDigitalAccountForForTheProgrammeTypeThenDatalockDLOCK_05WillBeProduced()
+        [NUnit.Framework.DescriptionAttribute("DLOCK05 - When no matching record found in an employer digital account for for th" +
+            "e programme type then datalock DLOCK_05 will be produced")]
+        public virtual void DLOCK05_WhenNoMatchingRecordFoundInAnEmployerDigitalAccountForForTheProgrammeTypeThenDatalockDLOCK_05WillBeProduced()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When no matching record found in an employer digital account for for the programm" +
-                    "e type then datalock DLOCK_05 will be produced", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("DLOCK05 - When no matching record found in an employer digital account for for th" +
+                    "e programme type then datalock DLOCK_05 will be produced", ((string[])(null)));
 #line 104
 this.ScenarioSetup(scenarioInfo);
 #line hidden
@@ -734,12 +734,12 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("When no matching record found in an employer digital account for for the pathway " +
-            "code then datalock DLOCK_06 will be produced")]
-        public virtual void WhenNoMatchingRecordFoundInAnEmployerDigitalAccountForForThePathwayCodeThenDatalockDLOCK_06WillBeProduced()
+        [NUnit.Framework.DescriptionAttribute("DLOCK06 - When no matching record found in an employer digital account for for th" +
+            "e pathway code then datalock DLOCK_06 will be produced")]
+        public virtual void DLOCK06_WhenNoMatchingRecordFoundInAnEmployerDigitalAccountForForThePathwayCodeThenDatalockDLOCK_06WillBeProduced()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When no matching record found in an employer digital account for for the pathway " +
-                    "code then datalock DLOCK_06 will be produced", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("DLOCK06 - When no matching record found in an employer digital account for for th" +
+                    "e pathway code then datalock DLOCK_06 will be produced", ((string[])(null)));
 #line 129
 this.ScenarioSetup(scenarioInfo);
 #line hidden
