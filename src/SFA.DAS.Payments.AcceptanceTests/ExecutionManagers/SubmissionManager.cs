@@ -196,7 +196,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
         }
         private static FinancialRecord[] BuildLearningDeliveryFinancials(IlrLearnerReferenceData learnerReferenceData)
         {
-            var agreedTrainingPrice = (int)Math.Floor(learnerReferenceData.AgreedPrice * 0.8m);
+            var agreedTrainingPrice = learnerReferenceData.FrameworkCode > 0 ? learnerReferenceData.AgreedPrice :
+                                     (int)Math.Floor(learnerReferenceData.AgreedPrice * 0.8m);
             var agreedAssesmentPrice = learnerReferenceData.AgreedPrice - agreedTrainingPrice;
 
             var financialRecords = new List<FinancialRecord>();
@@ -300,13 +301,16 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                     Amount = agreedTrainingPrice,
                     Date = learnerReferenceData.StartDate
                 });
-                financialRecords.Add(new FinancialRecord
+                if (learnerReferenceData.FrameworkCode <= 0)
                 {
-                    Code = 2,
-                    Type = "TNP",
-                    Amount = agreedAssesmentPrice,
-                    Date = learnerReferenceData.StartDate
-                });
+                    financialRecords.Add(new FinancialRecord
+                    {
+                        Code = 2,
+                        Type = "TNP",
+                        Amount = agreedAssesmentPrice,
+                        Date = learnerReferenceData.StartDate
+                    });
+                }
             }
 
             return financialRecords.ToArray();

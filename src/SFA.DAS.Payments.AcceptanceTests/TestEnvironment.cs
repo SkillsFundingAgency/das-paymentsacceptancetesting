@@ -10,6 +10,7 @@ namespace SFA.DAS.Payments.AcceptanceTests
         static TestEnvironment()
         {
             RunId = IdentifierGenerator.GenerateIdentifier();
+            //ValidateSpecsOnly = true;
 
             Variables = new EnvironmentVariables
             {
@@ -19,6 +20,7 @@ namespace SFA.DAS.Payments.AcceptanceTests
                 IlrFileDirectory = System.IO.Path.Combine(ConfigurationManager.AppSettings["WorkingDir"], "Collect", "Ilr"),
                 CurrentYear = DateTime.Today.GetAcademicYear(),
                 LogLevel = "Trace",
+                
 
                 AccountsApiBaseUrl = "",
                 AccountsApiClientSecret = "",
