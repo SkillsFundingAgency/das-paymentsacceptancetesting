@@ -78,7 +78,6 @@ this.ScenarioSetup(scenarioInfo);
                         "version Id",
                         "Provider",
                         "ULN",
-                        "standard code",
                         "framework code",
                         "programme type",
                         "pathway code",
@@ -92,7 +91,6 @@ this.ScenarioSetup(scenarioInfo);
                         "125",
                         "Provider a",
                         "learner a",
-                        "1",
                         "450",
                         "2",
                         "1",
@@ -114,9 +112,7 @@ this.ScenarioSetup(scenarioInfo);
                         "planned end date",
                         "completion status",
                         "Total training price",
-                        "Total training price effective date",
-                        "Total assessment price",
-                        "Total assessment price effective date"});
+                        "Total training price effective date"});
             table252.AddRow(new string[] {
                         "Provider a",
                         "learner a",
@@ -126,9 +122,7 @@ this.ScenarioSetup(scenarioInfo);
                         "01/05/2017",
                         "08/08/2018",
                         "continuing",
-                        "9000",
-                        "01/05/2017",
-                        "1010",
+                        "10010",
                         "01/05/2017"});
 #line 8
     testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table252, "When ");
@@ -205,6 +199,133 @@ this.ScenarioSetup(scenarioInfo);
                         "01/05/2017"});
 #line 23
     testRunner.And("the data lock event used the following commitments", ((string)(null)), table256, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("When no matching record found in an employer digital account for for the start da" +
+            "te then datalock DLOCK_09 will be produced")]
+        public virtual void WhenNoMatchingRecordFoundInAnEmployerDigitalAccountForForTheStartDateThenDatalockDLOCK_09WillBeProduced()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When no matching record found in an employer digital account for for the start da" +
+                    "te then datalock DLOCK_09 will be produced", ((string[])(null)));
+#line 29
+this.ScenarioSetup(scenarioInfo);
+#line hidden
+            TechTalk.SpecFlow.Table table257 = new TechTalk.SpecFlow.Table(new string[] {
+                        "commitment Id",
+                        "version Id",
+                        "Provider",
+                        "ULN",
+                        "standard code",
+                        "agreed price",
+                        "start date",
+                        "end date",
+                        "status",
+                        "effective from"});
+            table257.AddRow(new string[] {
+                        "73",
+                        "125",
+                        "Provider a",
+                        "learner a",
+                        "23",
+                        "10000",
+                        "01/06/2017",
+                        "01/05/2018",
+                        "active",
+                        "01/06/2017"});
+#line 30
+    testRunner.Given("the following commitments exist:", ((string)(null)), table257, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table258 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Provider",
+                        "ULN",
+                        "standard code",
+                        "start date",
+                        "planned end date",
+                        "completion status",
+                        "Total training price",
+                        "Total training price effective date",
+                        "Total assessment price",
+                        "Total assessment price effective date"});
+            table258.AddRow(new string[] {
+                        "Provider a",
+                        "learner a",
+                        "23",
+                        "01/05/2017",
+                        "08/08/2018",
+                        "continuing",
+                        "9000",
+                        "01/05/2017",
+                        "1000",
+                        "01/05/2017"});
+#line 34
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table258, "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table259 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Price Episode identifier",
+                        "Apprenticeship Id",
+                        "ULN",
+                        "ILR Start Date",
+                        "ILR Training Price",
+                        "ILR End point assessment price"});
+            table259.AddRow(new string[] {
+                        "25-23-01/05/2017",
+                        "73",
+                        "learner a",
+                        "01/05/2017",
+                        "9000",
+                        "1000"});
+#line 38
+    testRunner.Then("the following data lock event is returned:", ((string)(null)), table259, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table260 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Price Episode identifier",
+                        "Error code",
+                        "Error Description"});
+            table260.AddRow(new string[] {
+                        "25-23-01/05/2017",
+                        "DLOCK_09",
+                        "The start date for this negotiated price is before the corresponding price start " +
+                            "date in the employer digital account"});
+#line 41
+    testRunner.And("the data lock event has the following errors:", ((string)(null)), table260, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table261 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Price Episode identifier",
+                        "Period",
+                        "Payable Flag",
+                        "Transaction Type"});
+            table261.AddRow(new string[] {
+                        "25-23-01/05/2017",
+                        "1617-R11",
+                        "true",
+                        "Learning"});
+            table261.AddRow(new string[] {
+                        "25-23-01/05/2017",
+                        "1617-R12",
+                        "true",
+                        "Learning"});
+#line 44
+    testRunner.And("the data lock event has the following periods", ((string)(null)), table261, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table262 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Price Episode identifier",
+                        "Apprentice Version",
+                        "Start Date",
+                        "standard code",
+                        "Negotiated Price",
+                        "Effective Date"});
+            table262.AddRow(new string[] {
+                        "25-23-01/05/2017",
+                        "125",
+                        "01/06/2017",
+                        "23",
+                        "10000",
+                        "01/06/2017"});
+#line 48
+    testRunner.And("the data lock event used the following commitments", ((string)(null)), table262, "And ");
 #line hidden
             this.ScenarioCleanup();
         }
