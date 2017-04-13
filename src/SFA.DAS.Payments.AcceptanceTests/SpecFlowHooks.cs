@@ -34,24 +34,35 @@ namespace SFA.DAS.Payments.AcceptanceTests
                 scenarioDirectoryName = scenarioDirectoryName.Substring(0, 50);
             }
 
-            TestEnvironment.Variables.IlrFileDirectory = Path.Combine(TestEnvironment.Variables.WorkingDirectory, "Collect", scenarioDirectoryName, "Ilr");
-            if (Directory.Exists(TestEnvironment.Variables.IlrFileDirectory))
+            TestEnvironment.BaseScenarioDirectory = Path.Combine(TestEnvironment.Variables.WorkingDirectory, "Collect", scenarioDirectoryName );
+            if (Directory.Exists(TestEnvironment.BaseScenarioDirectory))
             {
-                foreach (var file in Directory.GetFiles(TestEnvironment.Variables.IlrFileDirectory))
+                foreach (var file in Directory.GetFiles(TestEnvironment.BaseScenarioDirectory))
                 {
                     File.Delete(file);
+                }
+                foreach (var dir in Directory.GetDirectories(TestEnvironment.BaseScenarioDirectory))
+                {
+                    foreach (var file in Directory.GetFiles(dir))
+                    {
+                        File.Delete(file);
+                    }
+                    Directory.Delete(dir);
                 }
             }
             else
             {
-                Directory.CreateDirectory(TestEnvironment.Variables.IlrFileDirectory);
+                Directory.CreateDirectory(TestEnvironment.BaseScenarioDirectory);
             }
         }
 
         [AfterScenario]
         public static void CaptureDetailsForScenario()
         {
-            EventsDataCollector.CaptureEventsDataForScenario();
+            SavedDataCollector.CaptureEventsDataForScenario();
+            SavedDataCollector.CapturePaymentsDataForScenario();
+
         }
+
     }
 }
