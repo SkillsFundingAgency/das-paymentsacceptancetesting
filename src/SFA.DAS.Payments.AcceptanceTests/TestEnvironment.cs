@@ -17,7 +17,7 @@ namespace SFA.DAS.Payments.AcceptanceTests
                 TransientConnectionString = ConfigurationManager.AppSettings["TransientConnectionString"],
                 DedsDatabaseConnectionString = ConfigurationManager.AppSettings["DedsConnectionString"],
                 WorkingDirectory = ConfigurationManager.AppSettings["WorkingDir"],
-                IlrFileDirectory = System.IO.Path.Combine(ConfigurationManager.AppSettings["WorkingDir"], "Collect", "Ilr"),
+                IlrFileDirectory = System.IO.Path.Combine(ConfigurationManager.AppSettings["WorkingDir"], "Collect"),
                 CurrentYear = DateTime.Today.GetAcademicYear(),
                 LogLevel = "Trace",
                 
@@ -41,5 +41,6 @@ namespace SFA.DAS.Payments.AcceptanceTests
         internal static ProcessService ProcessService { get; }
         internal static string DataCollectionDirectory { get; }
         internal static bool ValidateSpecsOnly { get; } = false;
+        internal static string BaseScenarioDirectory { get; set; }
     }
 }
