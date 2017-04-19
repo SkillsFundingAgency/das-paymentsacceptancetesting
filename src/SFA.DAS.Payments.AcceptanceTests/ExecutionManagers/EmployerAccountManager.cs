@@ -27,15 +27,16 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                                                       });
                 if (rowsAffected < 1)
                 {
-                    connection.Execute("INSERT INTO dbo.DasAccounts (AccountId, AccountHashId, AccountName, Balance, VersionId) " +
-                                       "VALUES (@AccountId, @AccountHashId, @AccountName, @Balance, @VersionId)",
+                    connection.Execute("INSERT INTO dbo.DasAccounts (AccountId, AccountHashId, AccountName, Balance, VersionId,IsLevyPayer) " +
+                                       "VALUES (@AccountId, @AccountHashId, @AccountName, @Balance, @VersionId,@IsLevyPayer)",
                         new
                         {
                             AccountId = account.Id,
                             AccountHashId = account.Id.ToString(),
                             AccountName = $"Employer {account.Id}",
                             Balance = account.Balance,
-                            VersionId = 1
+                            VersionId = 1,
+                            IsLevyPayer = account.IsLevyPayer
                         });
                 }
             }
