@@ -1,4 +1,7 @@
-﻿using SFA.DAS.Payments.AcceptanceTests.Contexts;
+﻿using System.Linq;
+using SFA.DAS.Payments.AcceptanceTests.Assertions;
+using SFA.DAS.Payments.AcceptanceTests.Contexts;
+using SFA.DAS.Payments.AcceptanceTests.ExecutionManagers;
 using SFA.DAS.Payments.AcceptanceTests.TableParsers;
 using TechTalk.SpecFlow;
 
@@ -7,23 +10,73 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
     [Binding]
     public class DataLockSteps
     {
-        public DataLockSteps(DataLockContext dataLockContext)
+        public DataLockSteps(DataLockContext dataLockContext, SubmissionContext submissionContext, EmployerAccountContext employerAccountContext, LookupContext lookupContext)
         {
             DataLockContext = dataLockContext;
+            SubmissionContext = submissionContext;
+            EmployerAccountContext = employerAccountContext;
+            LookupContext = lookupContext;
         }
 
         public DataLockContext DataLockContext { get; }
+        public SubmissionContext SubmissionContext { get; }
+        public EmployerAccountContext EmployerAccountContext { get; }
+        public LookupContext LookupContext { get; }
 
-        [Then(@"the data lock status will be as follows:")]
-        public void ThenTheDataLockStatusWillBeAsFollows(Table table)
+        [Then(@"the following data lock event is returned:")]
+        public void ThenTheFollowingDataLockEventIsReturned(Table table)
         {
-            DataLockTableParser.ParseDataLockStatusTableIntoContext(DataLockContext, Defaults.LearnerId, table);
+            EnsureSubmissionsHaveHappened();
+
+            DataLockEventsTableParser.ParseDataLockEventsIntoContext(DataLockContext, table, LookupContext);
+
+            DataLockAssertions.AssertDataLockOutput(DataLockContext, SubmissionContext.SubmissionResults.ToArray());
         }
 
-        [Then(@"the data lock status of the ILR in (.*) is:")] //what is the point of this date?
-        public void ThenTheDataLockStatusWillBeAsFollowsOnSpecificDate(string specDate, Table table)
+        [Then(@"the data lock event has the following errors:")]
+        public void ThenTheDataLockEventHasTheFollowingErrors(Table table)
         {
-            ThenTheDataLockStatusWillBeAsFollows(table);
+            EnsureSubmissionsHaveHappened();
+
+            DataLockEventErrorsTableParser.ParseDataLockEventErrorsIntoContext(DataLockContext, table, LookupContext);
+
+            DataLockAssertions.AssertDataLockOutput(DataLockContext, SubmissionContext.SubmissionResults.ToArray());
         }
+
+        [Then(@"the data lock event has the following periods")]
+        public void ThenTheDataLockEventHasTheFollowingPeriods(Table table)
+        {
+            EnsureSubmissionsHaveHappened();
+
+            DataLockEventPeriodTableParser.ParseDataLockEventPeriodsIntoContext(DataLockContext, table, LookupContext);
+
+            DataLockAssertions.AssertDataLockOutput(DataLockContext, SubmissionContext.SubmissionResults.ToArray());
+        }
+
+        [Then(@"the data lock event used the following commitments")]
+        public void ThenTheDataLockEventUsedTheFollowingCommitments(Table table)
+        {
+            EnsureSubmissionsHaveHappened();
+
+            DataLockEventCommitmentsTableParser.ParseDataLockEventCommitmentsIntoContext(DataLockContext, table, LookupContext);
+
+            DataLockAssertions.AssertDataLockOutput(DataLockContext, SubmissionContext.SubmissionResults.ToArray());
+        }
+
+
+        private void EnsureSubmissionsHaveHappened()
+        {
+            if (!SubmissionContext.HaveSubmissionsBeenDone)
+            {
+                var periodsToSubmitTo = new[]
+                {
+                    SubmissionContext.IlrLearnerDetails.Min(x => x.StartDate).ToString("MM/yy")
+                };
+                SubmissionContext.SubmissionResults = SubmissionManager.SubmitIlrAndRunMonthEndAndCollateResults(SubmissionContext.IlrLearnerDetails, SubmissionContext.FirstSubmissionDate,
+                    LookupContext, EmployerAccountContext.EmployerAccounts, SubmissionContext.ContractTypes, SubmissionContext.EmploymentStatus, SubmissionContext.LearningSupportStatus, periodsToSubmitTo);
+                SubmissionContext.HaveSubmissionsBeenDone = true;
+            }
+        }
+
     }
 }

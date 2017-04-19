@@ -82,24 +82,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assertions\DataLockAssertions.cs" />
+    <Compile Include="Assertions\DataLockRules\DataLockCommitmentVersionRule.cs" />
+    <Compile Include="Assertions\DataLockRules\DataLockErrorsRule.cs" />
+    <Compile Include="Assertions\DataLockRules\DataLockEventsRule.cs" />
+    <Compile Include="Assertions\DataLockRules\DataLockPeriodsRule.cs" />
+    <Compile Include="Assertions\DataLockRules\DataLockRuleBase.cs" />
     <Compile Include="Assertions\PaymentsAndEarningsRules\EmployerLevyTransactionsRule.cs" />
     <Compile Include="Assertions\LevyAccountBalanceAssertions.cs" />
     <Compile Include="Assertions\PaymentsAndEarningsRules\EmployersLevyAccountCreditedRule.cs" />
     <Compile Include="Assertions\PaymentsAndEarningsRules\RefundTakenBySfaRule.cs" />
     <Compile Include="Contexts\ProviderAdjustmentsContext.cs" />
-    <Compile Include="Assertions\DataLockRules\BalancingDataLockRule.cs" />
-    <Compile Include="Assertions\DataLockRules\CompletionDataLockRule.cs" />
-    <Compile Include="Assertions\DataLockRules\DataLockRuleBase.cs" />
-    <Compile Include="Assertions\DataLockRules\DisadvantageUpliftDataLockRule.cs" />
-    <Compile Include="Assertions\DataLockRules\Employer16To18IncentiveDataLockRule.cs" />
-    <Compile Include="Assertions\DataLockRules\EnglishAndMathsBalancingDataLockRule.cs" />
-    <Compile Include="Assertions\DataLockRules\EnglishAndMathsOnProgrammeDataLockRule.cs" />
-    <Compile Include="Assertions\DataLockRules\FrameworkUpliftBalancingDataLockRule.cs" />
-    <Compile Include="Assertions\DataLockRules\FrameworkUpliftCompletionDataLockRule.cs" />
-    <Compile Include="Assertions\DataLockRules\FrameworkUpliftOnProgrammeDataLockRule.cs" />
-    <Compile Include="Assertions\DataLockRules\LearningSupportDataLockRule.cs" />
-    <Compile Include="Assertions\DataLockRules\OnProgrammeDataLockRule.cs" />
-    <Compile Include="Assertions\DataLockRules\Provider16To18IncentiveDataLockRule.cs" />
+    <Compile Include="DataCollectors\DataLockEventsDataCollector.cs" />
     <Compile Include="DataCollectors\LevyAccountBalanceCollector.cs" />
     <Compile Include="DataCollectors\EventsDataCollector.cs" />
     <Compile Include="DataExtensions.cs" />
@@ -161,7 +155,6 @@
     <Compile Include="Contexts\EarningsAndPaymentsContext.cs" />
     <Compile Include="Contexts\LookupContext.cs" />
     <Compile Include="Contexts\SubmissionContext.cs" />
-    <Compile Include="DataCollectors\DataLockResultCollector.cs" />
     <Compile Include="DataCollectors\EarningsCollector.cs" />
     <Compile Include="DataCollectors\Entities\DataLockResultEntity.cs" />
     <Compile Include="DataCollectors\Entities\PaymentResultEntity.cs" />
@@ -180,6 +173,10 @@
     <Compile Include="Contexts\EmployerAccountContext.cs" />
     <Compile Include="ReferenceDataModels\ContractType.cs" />
     <Compile Include="ReferenceDataModels\ContractTypeReferenceData.cs" />
+    <Compile Include="ReferenceDataModels\DataLockEventCommitmentReferenceData.cs" />
+    <Compile Include="ReferenceDataModels\DataLockEventErrorReferenceData.cs" />
+    <Compile Include="ReferenceDataModels\DataLockEventPeriodReferenceData.cs" />
+    <Compile Include="ReferenceDataModels\DataLockEventReferenceData.cs" />
     <Compile Include="ReferenceDataModels\DataLockPeriodMatch.cs" />
     <Compile Include="ReferenceDataModels\CompletionStatus.cs" />
     <Compile Include="ReferenceDataModels\LevyAccountBalanceBreakdown.cs" />
@@ -198,8 +195,10 @@
     <Compile Include="ReferenceDataModels\PeriodValue.cs" />
     <Compile Include="ReferenceDataModels\ProviderEarnedPeriodValue.cs" />
     <Compile Include="ReferenceDataModels\TransactionType.cs" />
-    <Compile Include="ResultsDataModels\DataLockPeriodResults.cs" />
-    <Compile Include="ResultsDataModels\DataLockResult.cs" />
+    <Compile Include="ResultsDataModels\DataLockEventCommitmentVersion.cs" />
+    <Compile Include="ResultsDataModels\DataLockEventError.cs" />
+    <Compile Include="ResultsDataModels\DataLockEventPeriod.cs" />
+    <Compile Include="ResultsDataModels\DataLockEventResult.cs" />
     <Compile Include="ResultsDataModels\EarningsResult.cs" />
     <Compile Include="ResultsDataModels\LearnerResults.cs" />
     <Compile Include="ResultsDataModels\LevyAccountBalanceResult.cs" />
@@ -217,7 +216,10 @@
     <Compile Include="StepDefinitions\UntestedSteps.cs" />
     <Compile Include="TableParsers\CommitmentsTableParser.cs" />
     <Compile Include="TableParsers\ContractTypeTableParser.cs" />
-    <Compile Include="TableParsers\DataLockTableParser.cs" />
+    <Compile Include="TableParsers\DataLockEventCommitmentsTableParser.cs" />
+    <Compile Include="TableParsers\DataLockEventErrorsTableParser.cs" />
+    <Compile Include="TableParsers\DataLockEventPeriodTableParser.cs" />
+    <Compile Include="TableParsers\DataLockEventsTableParser.cs" />
     <Compile Include="TableParsers\EarningAndPaymentTableParser.cs" />
     <Compile Include="TableParsers\EmploymentStatusTableParser.cs" />
     <Compile Include="TableParsers\IlrTableParser.cs" />
