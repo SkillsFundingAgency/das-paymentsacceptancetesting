@@ -18,20 +18,20 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataCollectors
         {
             var script = InitialiseScript();
 
-            AppendTableDataToScript("DataLock.DataLockEvents",  script);
-            AppendTableDataToScript("DataLock.DataLockEventPeriods",  script);
-            AppendTableDataToScript("DataLock.DataLockEventErrors",  script);
-            AppendTableDataToScript("DataLock.DataLockEventCommitmentVersions",  script);
-            AppendTableDataToScript("Submissions.SubmissionEvents",  script);
+            AppendTableDataToScript("DataLock.DataLockEvents", script);
+            AppendTableDataToScript("DataLock.DataLockEventPeriods", script);
+            AppendTableDataToScript("DataLock.DataLockEventErrors", script);
+            AppendTableDataToScript("DataLock.DataLockEventCommitmentVersions", script);
+            AppendTableDataToScript("Submissions.SubmissionEvents", script);
 
-            SaveSqlFile("events.sql",script.ToString(), TestEnvironment.BaseScenarioDirectory);
+            SaveSqlFile("events.sql", script.ToString(), TestEnvironment.BaseScenarioDirectory);
         }
         public static void CapturePaymentsDataForScenario()
         {
             var script = InitialiseScript();
 
-            AppendTableDataToScript("PaymentsDue.RequiredPayments",  script);
-            AppendTableDataToScript("Payments.Periods",  script);
+            AppendTableDataToScript("PaymentsDue.RequiredPayments", script);
+            AppendTableDataToScript("Payments.Periods", script);
             AppendTableDataToScript("Payments.Payments", script);
 
             SaveSqlFile("payments.sql", script.ToString(), TestEnvironment.BaseScenarioDirectory);
@@ -42,12 +42,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataCollectors
             var script = InitialiseScript();
 
             AppendTableDataToScript("dbo.DasAccounts", script);
-             
+
             SaveSqlFile("dbo_Accounts.sql", script.ToString(), TestEnvironment.Variables.IlrFileDirectory);
         }
         public static void CaptureCommitmentsDataForScenario()
         {
-            
+
             var script = InitialiseScript();
 
             AppendTableDataToScript("dbo.DasCommitments", script);
@@ -55,10 +55,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataCollectors
             SaveSqlFile("dbo_DasCommitments.sql", script.ToString(), TestEnvironment.Variables.IlrFileDirectory);
         }
 
-        public static void SaveSqlFile(string fileName,  string script, string directoryPath)
+        public static void SaveSqlFile(string fileName, string script, string directoryPath)
         {
-            
-          
+
+
             if (!Directory.Exists(directoryPath))
             {
                 Directory.CreateDirectory(directoryPath);
@@ -111,7 +111,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataCollectors
             var structure = GetTableStructure(tableName, connection);
             using (var command = connection.CreateCommand())
             {
-                command.CommandText = $"SELECT * FROM {tableName}";
+                var columnList = structure.Select(x => x.Name).Aggregate((x, y) => $"{x}, {y}");
+                command.CommandText = $"SELECT {columnList} FROM {tableName}";
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
@@ -126,7 +127,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataCollectors
             var structure = new List<TableColumn>();
             using (var command = connection.CreateCommand())
             {
-                command.CommandText = $"SELECT name, system_type_id, is_nullable FROM sys.columns WHERE [object_id] = OBJECT_ID('{tableName}') ORDER BY column_id";
+                command.CommandText = $"SELECT name, system_type_id, is_nullable FROM sys.columns WHERE [object_id] = OBJECT_ID('{tableName}') AND is_identity = 0 ORDER BY column_id";
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
