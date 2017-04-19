@@ -9,6 +9,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ResultsDataModels
             Earnings = new List<EarningsResult>();
             Payments = new List<PaymentResult>();
             LevyAccountBalanceResults = new List<LevyAccountBalanceResult>();
+            SubmissionDataLockResults = new List<SubmissionDataLockPeriodResults>();
         }
         public string ProviderId { get; set; }
         public string LearnerId { get; set; }
@@ -16,5 +17,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.ResultsDataModels
         public List<PaymentResult> Payments { get; set; }
         public List<LevyAccountBalanceResult> LevyAccountBalanceResults { get; set; }
         public DataLockEventResult[] DataLockEvents { get; set; }
+        public List<SubmissionDataLockPeriodResults> SubmissionDataLockResults { get; set; }
     }
 }
