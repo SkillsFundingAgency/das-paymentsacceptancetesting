@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"[]>
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>Datalock validation fails for different reasons</title>
+    <title>Datalock produces correct errors when ILR does not match commitment</title>
     <link rel="stylesheet" href="css/master.css" type="text/css" />
     <link rel="stylesheet" href="css/print.css" type="text/css" media="print" />
     <script src="js/jquery.js" type="text/javascript"></script>
@@ -38,7 +38,7 @@ $(document).ready(function() {
           <li class="file">
             <a href="two_learners_paid_in_priority.html">2 learners, paid in priority order</a>
             <span class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
+              <i class="icon-minus-sign failed" title="Failed"> </i>
             </span>
           </li>
           <li class="file">
@@ -50,7 +50,7 @@ $(document).ready(function() {
           <li class="file">
             <a href="learner_changes_provider.html">Apprentice changes provider scenarios</a>
             <span class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
+              <i class="icon-minus-sign failed" title="Failed"> </i>
             </span>
           </li>
           <li class="file">
@@ -66,15 +66,15 @@ $(document).ready(function() {
             </span>
           </li>
           <li class="file">
-            <span class="current">Datalock validation fails for different reasons</span>
+            <span class="current">Datalock produces correct errors when ILR does not match commitment</span>
             <span class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
+              <i class="icon-minus-sign failed" title="Failed"> </i>
             </span>
           </li>
           <li class="file">
             <a href="employer_stops_payments.html">Employer stops payments on a commitment</a>
             <span class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
+              <i class="icon-minus-sign failed" title="Failed"> </i>
             </span>
           </li>
           <li class="file">
@@ -86,459 +86,279 @@ $(document).ready(function() {
           <li class="file">
             <a href="capping.html">Provider earnings and payments for a learner with a negotiated price above the funding band cap</a>
             <span class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
+              <i class="icon-minus-sign failed" title="Failed"> </i>
             </span>
           </li>
           <li class="file">
             <a href="learner_changes_employer.html">Provider earnings and payments where a learner changes employers</a>
             <span class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
+              <i class="icon-minus-sign failed" title="Failed"> </i>
             </span>
           </li>
           <li class="file">
             <a href="change_in_circumstances.html">Provider earnings and payments where learner changes apprenticeship standard or there is a change to the negotiated price at the end of a month, remaining with the same employer and provider</a>
             <span class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
+              <i class="icon-minus-sign failed" title="Failed"> </i>
             </span>
           </li>
           <li class="file">
             <a href="learner_finishes_early.html">Provider earnings and payments where learner completes earlier than planned</a>
             <span class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
+              <i class="icon-minus-sign failed" title="Failed"> </i>
             </span>
           </li>
           <li class="file">
             <a href="learner_finishes_late.html">Provider earnings and payments where learner completes later than planned</a>
             <span class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
+              <i class="icon-minus-sign failed" title="Failed"> </i>
             </span>
           </li>
           <li class="file">
             <a href="learner_finishes_on_time.html">Provider earnings and payments where learner completes on time and is funded by levy</a>
             <span class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
+              <i class="icon-minus-sign failed" title="Failed"> </i>
             </span>
           </li>
           <li class="file">
             <a href="refunds.html">Provider earnings and payments where learner refund payments are due</a>
             <span class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
+              <i class="icon-minus-sign failed" title="Failed"> </i>
             </span>
           </li>
           <li class="file">
             <a href="ILR_is_submitted_late.html">The ILR is submitted late</a>
             <span class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
+              <i class="icon-minus-sign failed" title="Failed"> </i>
             </span>
           </li>
         </ul>
       </div>
       <div id="feature">
         <div class="float-right">
-          <i class="icon-ok passed" title="Successful"> </i>
+          <i class="icon-minus-sign failed" title="Failed"> </i>
         </div>
-        <h1>Datalock validation fails for different reasons</h1>
+        <h1>Datalock produces correct errors when ILR does not match commitment</h1>
         <ul id="scenarios">
           <li class="scenario">
             <div class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
+              <i class="icon-minus-sign failed" title="Failed"> </i>
             </div>
-            <div class="scenario-heading" id="when-no-matching-record-found-in-an-employer-digital-account-for-the-ukprn-then-datalock-dlock01-will-be-produced">
-              <h2>When no matching record found in an employer digital account for the UKPRN then datalock DLOCK_01 will be produced</h2>
-              <p class="tags">Tags: <span>@ILRSubmissionDataLockErrors</span></p>
+            <div class="scenario-heading" id="dlock07---when-no-matching-record-found-in-an-employer-digital-account-for-for-the-agreed-price-then-datalock-dlock07-will-be-produced">
+              <h2>DLOCK07 - When no matching record found in an employer digital account for for the agreed price then datalock DLOCK_07 will be produced</h2>
             </div>
             <div class="steps">
               <ul>
                 <li class="step">
-                  <span class="keyword">Given </span>the following commitment exists for an apprentice:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>standard code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
+                  <span class="keyword">Given </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>version Id</th><th>Provider</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th>end date</th><th>status</th><th>effective from</th><th> </th></tr></thead><tbody><tr><td>73</td><td>125</td><td>Provider a</td><td>learner a</td><td>450</td><td>2</td><td>1</td><td>10000</td><td>01/05/2017</td><td>01/05/2018</td><td>active</td><td>01/05/2017</td></tr></tbody></table></div></li>
                 <li class="step">
-                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>standard code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>1000000</td><td>1234</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
+                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>Provider</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>start date</th><th>planned end date</th><th>completion status</th><th>Total training price</th><th>Total training price effective date</th><th> </th></tr></thead><tbody><tr><td>Provider a</td><td>learner a</td><td>450</td><td>2</td><td>1</td><td>01/05/2017</td><td>08/08/2018</td><td>continuing</td><td>10010</td><td>01/05/2017</td></tr></tbody></table></div></li>
                 <li class="step">
-                  <span class="keyword">Then </span>a datalock error DLOCK_01 is produced</li>
+                  <span class="keyword">Then </span>the following data lock event is returned:<div class="table_container"><table class="datatable"><thead><tr><th>Price Episode identifier</th><th>Apprenticeship Id</th><th>ULN</th><th>ILR Start Date</th><th>ILR Training Price</th><th> </th></tr></thead><tbody><tr><td>2-450-1-01/05/2017</td><td>73</td><td>learner a</td><td>01/05/2017</td><td>10010</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the data lock event has the following errors:<div class="table_container"><table class="datatable"><thead><tr><th>Price Episode identifier</th><th>Error code</th><th>Error Description</th><th> </th></tr></thead><tbody><tr><td>2-450-1-01/05/2017</td><td>DLOCK_07</td><td>No matching record found in the employer digital account for the negotiated cost of training</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the data lock event has the following periods<div class="table_container"><table class="datatable"><thead><tr><th>Price Episode identifier</th><th>Period</th><th>Payable Flag</th><th>Transaction Type</th><th> </th></tr></thead><tbody><tr><td>2-450-1-01/05/2017</td><td>1617-R10</td><td>true</td><td>Learning</td></tr><tr><td>2-450-1-01/05/2017</td><td>1617-R11</td><td>true</td><td>Learning</td></tr><tr><td>2-450-1-01/05/2017</td><td>1617-R12</td><td>true</td><td>Learning</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the data lock event used the following commitments<div class="table_container"><table class="datatable"><thead><tr><th>Price Episode identifier</th><th>Apprentice Version</th><th>Start Date</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>Negotiated Price</th><th>Effective Date</th><th> </th></tr></thead><tbody><tr><td>2-450-1-01/05/2017</td><td>125</td><td>01/05/2017</td><td>450</td><td>2</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
               </ul>
             </div>
-            <a class="scenario-link" href="javascript:showImageLink('when-no-matching-record-found-in-an-employer-digital-account-for-the-ukprn-then-datalock-dlock01-will-be-produced')" title="Copy scenario link to clipboard.">
+            <a class="scenario-link" href="javascript:showImageLink('dlock07---when-no-matching-record-found-in-an-employer-digital-account-for-for-the-agreed-price-then-datalock-dlock07-will-be-produced')" title="Copy scenario link to clipboard.">
               <i class="icon-link"> </i>
             </a>
           </li>
           <li class="scenario">
             <div class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
+              <i class="icon-minus-sign failed" title="Failed"> </i>
             </div>
-            <div class="scenario-heading" id="when-no-matching-record-found-in-an-employer-digital-account-for-the-uln-then-datalock-dlock02-will-be-produced">
-              <h2>When no matching record found in an employer digital account for the ULN then datalock DLOCK_02 will be produced</h2>
-              <p class="tags">Tags: <span>@ILRSubmissionDataLockErrors</span></p>
+            <div class="scenario-heading" id="dlock09---when-no-matching-record-found-in-an-employer-digital-account-for-for-the-start-date-then-datalock-dlock09-will-be-produced">
+              <h2>DLOCK09 - When no matching record found in an employer digital account for for the start date then datalock DLOCK_09 will be produced</h2>
             </div>
             <div class="steps">
               <ul>
                 <li class="step">
-                  <span class="keyword">Given </span>the following commitment exists for an apprentice:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>standard code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
+                  <span class="keyword">Given </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>version Id</th><th>Provider</th><th>ULN</th><th>standard code</th><th>agreed price</th><th>start date</th><th>end date</th><th>status</th><th>effective from</th><th> </th></tr></thead><tbody><tr><td>73</td><td>125</td><td>Provider a</td><td>learner a</td><td>23</td><td>10000</td><td>01/06/2017</td><td>01/05/2018</td><td>active</td><td>01/06/2017</td></tr></tbody></table></div></li>
                 <li class="step">
-                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>standard code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>3456</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
+                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>Provider</th><th>ULN</th><th>standard code</th><th>start date</th><th>planned end date</th><th>completion status</th><th>Total training price</th><th>Total training price effective date</th><th>Total assessment price</th><th>Total assessment price effective date</th><th> </th></tr></thead><tbody><tr><td>Provider a</td><td>learner a</td><td>23</td><td>01/05/2017</td><td>08/08/2018</td><td>continuing</td><td>9000</td><td>01/05/2017</td><td>1000</td><td>01/05/2017</td></tr></tbody></table></div></li>
                 <li class="step">
-                  <span class="keyword">Then </span>a datalock error DLOCK_02 is produced</li>
+                  <span class="keyword">Then </span>the following data lock event is returned:<div class="table_container"><table class="datatable"><thead><tr><th>Price Episode identifier</th><th>Apprenticeship Id</th><th>ULN</th><th>ILR Start Date</th><th>ILR Training Price</th><th>ILR End point assessment price</th><th> </th></tr></thead><tbody><tr><td>25-23-01/05/2017</td><td>73</td><td>learner a</td><td>01/05/2017</td><td>9000</td><td>1000</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the data lock event has the following errors:<div class="table_container"><table class="datatable"><thead><tr><th>Price Episode identifier</th><th>Error code</th><th>Error Description</th><th> </th></tr></thead><tbody><tr><td>25-23-01/05/2017</td><td>DLOCK_09</td><td>The start date for this negotiated price is before the corresponding price start date in the employer digital account</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the data lock event has the following periods<div class="table_container"><table class="datatable"><thead><tr><th>Price Episode identifier</th><th>Period</th><th>Payable Flag</th><th>Transaction Type</th><th> </th></tr></thead><tbody><tr><td>25-23-01/05/2017</td><td>1617-R11</td><td>true</td><td>Learning</td></tr><tr><td>25-23-01/05/2017</td><td>1617-R12</td><td>true</td><td>Learning</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the data lock event used the following commitments<div class="table_container"><table class="datatable"><thead><tr><th>Price Episode identifier</th><th>Apprentice Version</th><th>Start Date</th><th>standard code</th><th>Negotiated Price</th><th>Effective Date</th><th> </th></tr></thead><tbody><tr><td>25-23-01/05/2017</td><td>125</td><td>01/06/2017</td><td>23</td><td>10000</td><td>01/06/2017</td></tr></tbody></table></div></li>
               </ul>
             </div>
-            <a class="scenario-link" href="javascript:showImageLink('when-no-matching-record-found-in-an-employer-digital-account-for-the-uln-then-datalock-dlock02-will-be-produced')" title="Copy scenario link to clipboard.">
+            <a class="scenario-link" href="javascript:showImageLink('dlock09---when-no-matching-record-found-in-an-employer-digital-account-for-for-the-start-date-then-datalock-dlock09-will-be-produced')" title="Copy scenario link to clipboard.">
               <i class="icon-link"> </i>
             </a>
           </li>
           <li class="scenario">
             <div class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
+              <i class="icon-minus-sign failed" title="Failed"> </i>
             </div>
-            <div class="scenario-heading" id="when-no-matching-record-found-in-an-employer-digital-account-for-the-standard-code-then-datalock-dlock03-will-be-produced">
-              <h2>When no matching record found in an employer digital account for the standard code then datalock DLOCK_03 will be produced</h2>
-              <p class="tags">Tags: <span>@ILRSubmissionDataLockErrors</span></p>
+            <div class="scenario-heading" id="dlock03---when-no-matching-record-found-in-an-employer-digital-account-for-for-the-standard-code-then-datalock-dlock03-will-be-produced">
+              <h2>DLOCK03 - When no matching record found in an employer digital account for for the standard code then datalock DLOCK_03 will be produced</h2>
             </div>
             <div class="steps">
               <ul>
                 <li class="step">
-                  <span class="keyword">Given </span>the following commitment exists for an apprentice:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>standard code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
+                  <span class="keyword">Given </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>version Id</th><th>Provider</th><th>ULN</th><th>standard code</th><th>agreed price</th><th>start date</th><th>end date</th><th>status</th><th>effective from</th><th> </th></tr></thead><tbody><tr><td>73</td><td>125</td><td>Provider a</td><td>learner a</td><td>21</td><td>10000</td><td>01/05/2017</td><td>01/05/2018</td><td>active</td><td>01/05/2017</td></tr></tbody></table></div></li>
                 <li class="step">
-                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>standard code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>2</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
+                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>Provider</th><th>ULN</th><th>standard code</th><th>start date</th><th>planned end date</th><th>completion status</th><th>Total training price</th><th>Total training price effective date</th><th>Total assessment price</th><th>Total assessment price effective date</th><th> </th></tr></thead><tbody><tr><td>Provider a</td><td>learner a</td><td>23</td><td>01/05/2017</td><td>08/08/2018</td><td>continuing</td><td>9000</td><td>01/05/2017</td><td>1000</td><td>01/05/2017</td></tr></tbody></table></div></li>
                 <li class="step">
-                  <span class="keyword">Then </span>a datalock error DLOCK_03 is produced</li>
+                  <span class="keyword">Then </span>the following data lock event is returned:<div class="table_container"><table class="datatable"><thead><tr><th>Price Episode identifier</th><th>Apprenticeship Id</th><th>ULN</th><th>ILR Start Date</th><th>ILR Training Price</th><th>ILR End point assessment price</th><th> </th></tr></thead><tbody><tr><td>25-23-01/05/2017</td><td>73</td><td>learner a</td><td>01/05/2017</td><td>9000</td><td>1000</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the data lock event has the following errors:<div class="table_container"><table class="datatable"><thead><tr><th>Price Episode identifier</th><th>Error code</th><th>Error Description</th><th> </th></tr></thead><tbody><tr><td>25-23-01/05/2017</td><td>DLOCK_03</td><td>No matching record found in the employer digital account for the standard code</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the data lock event has the following periods<div class="table_container"><table class="datatable"><thead><tr><th>Price Episode identifier</th><th>Period</th><th>Payable Flag</th><th>Transaction Type</th><th> </th></tr></thead><tbody><tr><td>25-23-01/05/2017</td><td>1617-R10</td><td>true</td><td>Learning</td></tr><tr><td>25-23-01/05/2017</td><td>1617-R11</td><td>true</td><td>Learning</td></tr><tr><td>25-23-01/05/2017</td><td>1617-R12</td><td>true</td><td>Learning</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the data lock event used the following commitments<div class="table_container"><table class="datatable"><thead><tr><th>Price Episode identifier</th><th>Apprentice Version</th><th>Start Date</th><th>standard code</th><th>Negotiated Price</th><th>Effective Date</th><th> </th></tr></thead><tbody><tr><td>25-23-01/05/2017</td><td>125</td><td>01/05/2017</td><td>21</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
               </ul>
             </div>
-            <a class="scenario-link" href="javascript:showImageLink('when-no-matching-record-found-in-an-employer-digital-account-for-the-standard-code-then-datalock-dlock03-will-be-produced')" title="Copy scenario link to clipboard.">
+            <a class="scenario-link" href="javascript:showImageLink('dlock03---when-no-matching-record-found-in-an-employer-digital-account-for-for-the-standard-code-then-datalock-dlock03-will-be-produced')" title="Copy scenario link to clipboard.">
               <i class="icon-link"> </i>
             </a>
           </li>
           <li class="scenario">
             <div class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
+              <i class="icon-minus-sign failed" title="Failed"> </i>
             </div>
-            <div class="scenario-heading" id="when-no-matching-record-found-in-an-employer-digital-account-for-the-framework-code-then-datalock-dlock04-will-be-produced">
-              <h2>When no matching record found in an employer digital account for the framework code then datalock DLOCK_04 will be produced</h2>
-              <p class="tags">Tags: <span>@ILRSubmissionDataLockErrors</span></p>
+            <div class="scenario-heading" id="dlock04---when-no-matching-record-found-in-an-employer-digital-account-for-for-the-framework-code-then-datalock-dlock04-will-be-produced">
+              <h2>DLOCK04 - When no matching record found in an employer digital account for for the framework code then datalock DLOCK_04 will be produced</h2>
             </div>
             <div class="steps">
               <ul>
                 <li class="step">
-                  <span class="keyword">Given </span>the following commitment exists for an apprentice:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>450</td><td>2</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
+                  <span class="keyword">Given </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>version Id</th><th>Provider</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th>end date</th><th>status</th><th>effective from</th><th> </th></tr></thead><tbody><tr><td>73</td><td>125</td><td>Provider a</td><td>learner a</td><td>451</td><td>2</td><td>1</td><td>10000</td><td>01/05/2017</td><td>01/05/2018</td><td>active</td><td>01/05/2017</td></tr></tbody></table></div></li>
                 <li class="step">
-                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>451</td><td>2</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
+                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>Provider</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>start date</th><th>planned end date</th><th>completion status</th><th>Total training price</th><th>Total training price effective date</th><th> </th></tr></thead><tbody><tr><td>Provider a</td><td>learner a</td><td>450</td><td>2</td><td>1</td><td>01/05/2017</td><td>08/08/2018</td><td>continuing</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
                 <li class="step">
-                  <span class="keyword">Then </span>a datalock error DLOCK_04 is produced</li>
+                  <span class="keyword">Then </span>the following data lock event is returned:<div class="table_container"><table class="datatable"><thead><tr><th>Price Episode identifier</th><th>Apprenticeship Id</th><th>ULN</th><th>ILR Start Date</th><th>ILR Training Price</th><th> </th></tr></thead><tbody><tr><td>2-450-1-01/05/2017</td><td>73</td><td>learner a</td><td>01/05/2017</td><td>10000</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the data lock event has the following errors:<div class="table_container"><table class="datatable"><thead><tr><th>Price Episode identifier</th><th>Error code</th><th>Error Description</th><th> </th></tr></thead><tbody><tr><td>2-450-1-01/05/2017</td><td>DLOCK_04</td><td>No matching record found in the employer digital account for the framework code</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the data lock event has the following periods<div class="table_container"><table class="datatable"><thead><tr><th>Price Episode identifier</th><th>Period</th><th>Payable Flag</th><th>Transaction Type</th><th> </th></tr></thead><tbody><tr><td>2-450-1-01/05/2017</td><td>1617-R10</td><td>true</td><td>Learning</td></tr><tr><td>2-450-1-01/05/2017</td><td>1617-R11</td><td>true</td><td>Learning</td></tr><tr><td>2-450-1-01/05/2017</td><td>1617-R12</td><td>true</td><td>Learning</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the data lock event used the following commitments<div class="table_container"><table class="datatable"><thead><tr><th>Price Episode identifier</th><th>Apprentice Version</th><th>Start Date</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>Negotiated Price</th><th>Effective Date</th><th> </th></tr></thead><tbody><tr><td>2-450-1-01/05/2017</td><td>125</td><td>01/05/2017</td><td>451</td><td>2</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
               </ul>
             </div>
-            <a class="scenario-link" href="javascript:showImageLink('when-no-matching-record-found-in-an-employer-digital-account-for-the-framework-code-then-datalock-dlock04-will-be-produced')" title="Copy scenario link to clipboard.">
+            <a class="scenario-link" href="javascript:showImageLink('dlock04---when-no-matching-record-found-in-an-employer-digital-account-for-for-the-framework-code-then-datalock-dlock04-will-be-produced')" title="Copy scenario link to clipboard.">
               <i class="icon-link"> </i>
             </a>
           </li>
           <li class="scenario">
             <div class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
+              <i class="icon-minus-sign failed" title="Failed"> </i>
             </div>
-            <div class="scenario-heading" id="when-no-matching-record-found-in-an-employer-digital-account-for-the-programme-type-then-datalock-dlock05-will-be-produced">
-              <h2>When no matching record found in an employer digital account for the programme type then datalock DLOCK_05 will be produced</h2>
-              <p class="tags">Tags: <span>@ILRSubmissionDataLockErrors</span></p>
+            <div class="scenario-heading" id="dlock05---when-no-matching-record-found-in-an-employer-digital-account-for-for-the-programme-type-then-datalock-dlock05-will-be-produced">
+              <h2>DLOCK05 - When no matching record found in an employer digital account for for the programme type then datalock DLOCK_05 will be produced</h2>
             </div>
             <div class="steps">
               <ul>
                 <li class="step">
-                  <span class="keyword">Given </span>the following commitment exists for an apprentice:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>450</td><td>2</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
+                  <span class="keyword">Given </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>version Id</th><th>Provider</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th>end date</th><th>status</th><th>effective from</th><th> </th></tr></thead><tbody><tr><td>73</td><td>125</td><td>Provider a</td><td>learner a</td><td>450</td><td>3</td><td>1</td><td>10000</td><td>01/05/2017</td><td>01/05/2018</td><td>active</td><td>01/05/2017</td></tr></tbody></table></div></li>
                 <li class="step">
-                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>450</td><td>3</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
+                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>Provider</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>start date</th><th>planned end date</th><th>completion status</th><th>Total training price</th><th>Total training price effective date</th><th> </th></tr></thead><tbody><tr><td>Provider a</td><td>learner a</td><td>450</td><td>2</td><td>1</td><td>01/05/2017</td><td>08/08/2018</td><td>continuing</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
                 <li class="step">
-                  <span class="keyword">Then </span>a datalock error DLOCK_05 is produced</li>
+                  <span class="keyword">Then </span>the following data lock event is returned:<div class="table_container"><table class="datatable"><thead><tr><th>Price Episode identifier</th><th>Apprenticeship Id</th><th>ULN</th><th>ILR Start Date</th><th>ILR Training Price</th><th> </th></tr></thead><tbody><tr><td>2-450-1-01/05/2017</td><td>73</td><td>learner a</td><td>01/05/2017</td><td>10000</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the data lock event has the following errors:<div class="table_container"><table class="datatable"><thead><tr><th>Price Episode identifier</th><th>Error code</th><th>Error Description</th><th> </th></tr></thead><tbody><tr><td>2-450-1-01/05/2017</td><td>DLOCK_05</td><td>No matching record found in the employer digital account for the programme type</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the data lock event has the following periods<div class="table_container"><table class="datatable"><thead><tr><th>Price Episode identifier</th><th>Period</th><th>Payable Flag</th><th>Transaction Type</th><th> </th></tr></thead><tbody><tr><td>2-450-1-01/05/2017</td><td>1617-R10</td><td>true</td><td>Learning</td></tr><tr><td>2-450-1-01/05/2017</td><td>1617-R11</td><td>true</td><td>Learning</td></tr><tr><td>2-450-1-01/05/2017</td><td>1617-R12</td><td>true</td><td>Learning</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the data lock event used the following commitments<div class="table_container"><table class="datatable"><thead><tr><th>Price Episode identifier</th><th>Apprentice Version</th><th>Start Date</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>Negotiated Price</th><th>Effective Date</th><th> </th></tr></thead><tbody><tr><td>2-450-1-01/05/2017</td><td>125</td><td>01/05/2017</td><td>450</td><td>3</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
               </ul>
             </div>
-            <a class="scenario-link" href="javascript:showImageLink('when-no-matching-record-found-in-an-employer-digital-account-for-the-programme-type-then-datalock-dlock05-will-be-produced')" title="Copy scenario link to clipboard.">
+            <a class="scenario-link" href="javascript:showImageLink('dlock05---when-no-matching-record-found-in-an-employer-digital-account-for-for-the-programme-type-then-datalock-dlock05-will-be-produced')" title="Copy scenario link to clipboard.">
               <i class="icon-link"> </i>
             </a>
           </li>
           <li class="scenario">
             <div class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
+              <i class="icon-minus-sign failed" title="Failed"> </i>
             </div>
-            <div class="scenario-heading" id="when-no-matching-record-found-in-an-employer-digital-account-for-the-pathway-code-then-datalock-dlock06-will-be-produced">
-              <h2>When no matching record found in an employer digital account for the pathway code then datalock DLOCK_06 will be produced</h2>
-              <p class="tags">Tags: <span>@ILRSubmissionDataLockErrors</span></p>
+            <div class="scenario-heading" id="dlock06---when-no-matching-record-found-in-an-employer-digital-account-for-for-the-pathway-code-then-datalock-dlock06-will-be-produced">
+              <h2>DLOCK06 - When no matching record found in an employer digital account for for the pathway code then datalock DLOCK_06 will be produced</h2>
             </div>
             <div class="steps">
               <ul>
                 <li class="step">
-                  <span class="keyword">Given </span>the following commitment exists for an apprentice:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>450</td><td>2</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
+                  <span class="keyword">Given </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>version Id</th><th>Provider</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th>end date</th><th>status</th><th>effective from</th><th> </th></tr></thead><tbody><tr><td>73</td><td>125</td><td>Provider a</td><td>learner a</td><td>450</td><td>2</td><td>6</td><td>10000</td><td>01/05/2017</td><td>01/05/2018</td><td>active</td><td>01/05/2017</td></tr></tbody></table></div></li>
                 <li class="step">
-                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>450</td><td>2</td><td>2</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
+                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>Provider</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>start date</th><th>planned end date</th><th>completion status</th><th>Total training price</th><th>Total training price effective date</th><th> </th></tr></thead><tbody><tr><td>Provider a</td><td>learner a</td><td>450</td><td>2</td><td>1</td><td>01/05/2017</td><td>08/08/2018</td><td>continuing</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
                 <li class="step">
-                  <span class="keyword">Then </span>a datalock error DLOCK_06 is produced</li>
+                  <span class="keyword">Then </span>the following data lock event is returned:<div class="table_container"><table class="datatable"><thead><tr><th>Price Episode identifier</th><th>Apprenticeship Id</th><th>ULN</th><th>ILR Start Date</th><th>ILR Training Price</th><th> </th></tr></thead><tbody><tr><td>2-450-1-01/05/2017</td><td>73</td><td>learner a</td><td>01/05/2017</td><td>10000</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the data lock event has the following errors:<div class="table_container"><table class="datatable"><thead><tr><th>Price Episode identifier</th><th>Error code</th><th>Error Description</th><th> </th></tr></thead><tbody><tr><td>2-450-1-01/05/2017</td><td>DLOCK_06</td><td>No matching record found in the employer digital account for the pathway code</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the data lock event has the following periods<div class="table_container"><table class="datatable"><thead><tr><th>Price Episode identifier</th><th>Period</th><th>Payable Flag</th><th>Transaction Type</th><th> </th></tr></thead><tbody><tr><td>2-450-1-01/05/2017</td><td>1617-R10</td><td>true</td><td>Learning</td></tr><tr><td>2-450-1-01/05/2017</td><td>1617-R11</td><td>true</td><td>Learning</td></tr><tr><td>2-450-1-01/05/2017</td><td>1617-R12</td><td>true</td><td>Learning</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the data lock event used the following commitments<div class="table_container"><table class="datatable"><thead><tr><th>Price Episode identifier</th><th>Apprentice Version</th><th>Start Date</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>Negotiated Price</th><th>Effective Date</th><th> </th></tr></thead><tbody><tr><td>2-450-1-01/05/2017</td><td>125</td><td>01/05/2017</td><td>450</td><td>2</td><td>6</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
               </ul>
             </div>
-            <a class="scenario-link" href="javascript:showImageLink('when-no-matching-record-found-in-an-employer-digital-account-for-the-pathway-code-then-datalock-dlock06-will-be-produced')" title="Copy scenario link to clipboard.">
+            <a class="scenario-link" href="javascript:showImageLink('dlock06---when-no-matching-record-found-in-an-employer-digital-account-for-for-the-pathway-code-then-datalock-dlock06-will-be-produced')" title="Copy scenario link to clipboard.">
               <i class="icon-link"> </i>
             </a>
           </li>
           <li class="scenario">
             <div class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
+              <i class="icon-minus-sign failed" title="Failed"> </i>
             </div>
-            <div class="scenario-heading" id="when-no-matching-record-found-in-an-employer-digital-account-for-for-the-agreed-price-then-datalock-dlock07-will-be-produced">
-              <h2>When no matching record found in an employer digital account for for the agreed price then datalock DLOCK_07 will be produced</h2>
-              <p class="tags">Tags: <span>@ILRSubmissionDataLockErrors</span></p>
+            <div class="scenario-heading" id="dlock04-dlock05---when-no-matching-record-found-in-an-employer-digital-account-for-for-the-framework-code-and-programme-type-then-datalock-dlock04-and-dlock05-will-be-produced">
+              <h2>DLOCK04 + DLOCK05 - When no matching record found in an employer digital account for for the framework code and programme type then datalock DLOCK_04 and DLOCK05 will be produced</h2>
             </div>
             <div class="steps">
               <ul>
                 <li class="step">
-                  <span class="keyword">Given </span>the following commitment exists for an apprentice:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>450</td><td>2</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
+                  <span class="keyword">Given </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>version Id</th><th>Provider</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th>end date</th><th>status</th><th>effective from</th><th> </th></tr></thead><tbody><tr><td>73</td><td>125</td><td>Provider a</td><td>learner a</td><td>451</td><td>3</td><td>1</td><td>10000</td><td>01/05/2017</td><td>01/05/2018</td><td>active</td><td>01/05/2017</td></tr></tbody></table></div></li>
                 <li class="step">
-                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>450</td><td>2</td><td>1</td><td>10010</td><td>01/05/2017</td></tr></tbody></table></div></li>
+                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>Provider</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>start date</th><th>planned end date</th><th>completion status</th><th>Total training price</th><th>Total training price effective date</th><th> </th></tr></thead><tbody><tr><td>Provider a</td><td>learner a</td><td>450</td><td>2</td><td>1</td><td>01/05/2017</td><td>08/08/2018</td><td>continuing</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
                 <li class="step">
-                  <span class="keyword">Then </span>a datalock error DLOCK_07 is produced</li>
+                  <span class="keyword">Then </span>the following data lock event is returned:<div class="table_container"><table class="datatable"><thead><tr><th>Price Episode identifier</th><th>Apprenticeship Id</th><th>ULN</th><th>ILR Start Date</th><th>ILR Training Price</th><th> </th></tr></thead><tbody><tr><td>2-450-1-01/05/2017</td><td>73</td><td>learner a</td><td>01/05/2017</td><td>10000</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the data lock event has the following errors:<div class="table_container"><table class="datatable"><thead><tr><th>Price Episode identifier</th><th>Error code</th><th>Error Description</th><th> </th></tr></thead><tbody><tr><td>2-450-1-01/05/2017</td><td>DLOCK_04</td><td>No matching record found in the employer digital account for the framework code</td></tr><tr><td>2-450-1-01/05/2017</td><td>DLOCK_05</td><td>No matching record found in the employer digital account for the programme type</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the data lock event has the following periods<div class="table_container"><table class="datatable"><thead><tr><th>Price Episode identifier</th><th>Period</th><th>Payable Flag</th><th>Transaction Type</th><th> </th></tr></thead><tbody><tr><td>2-450-1-01/05/2017</td><td>1617-R10</td><td>true</td><td>Learning</td></tr><tr><td>2-450-1-01/05/2017</td><td>1617-R11</td><td>true</td><td>Learning</td></tr><tr><td>2-450-1-01/05/2017</td><td>1617-R12</td><td>true</td><td>Learning</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the data lock event used the following commitments<div class="table_container"><table class="datatable"><thead><tr><th>Price Episode identifier</th><th>Apprentice Version</th><th>Start Date</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>Negotiated Price</th><th>Effective Date</th><th> </th></tr></thead><tbody><tr><td>2-450-1-01/05/2017</td><td>125</td><td>01/05/2017</td><td>451</td><td>3</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
               </ul>
             </div>
-            <a class="scenario-link" href="javascript:showImageLink('when-no-matching-record-found-in-an-employer-digital-account-for-for-the-agreed-price-then-datalock-dlock07-will-be-produced')" title="Copy scenario link to clipboard.">
+            <a class="scenario-link" href="javascript:showImageLink('dlock04-dlock05---when-no-matching-record-found-in-an-employer-digital-account-for-for-the-framework-code-and-programme-type-then-datalock-dlock04-and-dlock05-will-be-produced')" title="Copy scenario link to clipboard.">
               <i class="icon-link"> </i>
             </a>
           </li>
           <li class="scenario">
             <div class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
+              <i class="icon-minus-sign failed" title="Failed"> </i>
             </div>
-            <div class="scenario-heading" id="when-there-is-more-than-one-matching-commitment-in-the-employer-digital-account-then-datalock-dlock08-will-be-produced">
-              <h2>When there is more than one matching commitment in the employer digital account then datalock DLOCK_08 will be produced</h2>
-              <p class="tags">Tags: <span>@ILRSubmissionDataLockErrors</span></p>
-            </div>
-            <div class="steps">
-              <ul>
-                <li class="step">
-                  <span class="keyword">Given </span>the following commitments exist for an apprentice:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>450</td><td>2</td><td>1</td><td>10000</td><td>01/05/2017</td></tr><tr><td>9999999</td><td>1234</td><td>450</td><td>2</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
-                <li class="step">
-                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>450</td><td>2</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
-                <li class="step">
-                  <span class="keyword">Then </span>a datalock error DLOCK_08 is produced</li>
-              </ul>
-            </div>
-            <a class="scenario-link" href="javascript:showImageLink('when-there-is-more-than-one-matching-commitment-in-the-employer-digital-account-then-datalock-dlock08-will-be-produced')" title="Copy scenario link to clipboard.">
-              <i class="icon-link"> </i>
-            </a>
-          </li>
-          <li class="scenario">
-            <div class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
-            </div>
-            <div class="scenario-heading" id="when-the-start-month-recorded-in-the-employer-digital-account-is-after-the-start-month-in-the-ilr-then-datalock-dlock09-will-be-produced">
-              <h2>When the start month recorded in the employer digital account is after the start month in the ILR then datalock DLOCK_09 will be produced</h2>
-              <p class="tags">Tags: <span>@ILRSubmissionDataLockErrors</span></p>
+            <div class="scenario-heading" id="dlock04-dlock05-dlock06---when-no-matching-record-found-in-an-employer-digital-account-for-for-the-framework-code-programme-type-and-pathway-code-then-datalock-dlock04-dlock05-and-dlock06-will-be-produced">
+              <h2>DLOCK04 + DLOCK05 + DLOCK06 - When no matching record found in an employer digital account for for the framework code, programme type and pathway code then datalock DLOCK_04, DLOCK05 and DLOCK06 will be produced</h2>
             </div>
             <div class="steps">
               <ul>
                 <li class="step">
-                  <span class="keyword">Given </span>the following commitment exists for an apprentice:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>450</td><td>2</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
+                  <span class="keyword">Given </span>the following commitments exist:<div class="table_container"><table class="datatable"><thead><tr><th>commitment Id</th><th>version Id</th><th>Provider</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th>end date</th><th>status</th><th>effective from</th><th> </th></tr></thead><tbody><tr><td>73</td><td>125</td><td>Provider a</td><td>learner a</td><td>451</td><td>3</td><td>6</td><td>10000</td><td>01/05/2017</td><td>01/05/2018</td><td>active</td><td>01/05/2017</td></tr></tbody></table></div></li>
                 <li class="step">
-                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>450</td><td>2</td><td>1</td><td>10000</td><td>30/04/2017</td></tr></tbody></table></div></li>
+                  <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>Provider</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>start date</th><th>planned end date</th><th>completion status</th><th>Total training price</th><th>Total training price effective date</th><th> </th></tr></thead><tbody><tr><td>Provider a</td><td>learner a</td><td>450</td><td>2</td><td>1</td><td>01/05/2017</td><td>08/08/2018</td><td>continuing</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
                 <li class="step">
-                  <span class="keyword">Then </span>a datalock error DLOCK_09 is produced<span class="comment">#####################################################################<br />#These scenarios are for Period End submission related data lock errors<br />#####################################################################</span></li>
+                  <span class="keyword">Then </span>the following data lock event is returned:<div class="table_container"><table class="datatable"><thead><tr><th>Price Episode identifier</th><th>Apprenticeship Id</th><th>ULN</th><th>ILR Start Date</th><th>ILR Training Price</th><th> </th></tr></thead><tbody><tr><td>2-450-1-01/05/2017</td><td>73</td><td>learner a</td><td>01/05/2017</td><td>10000</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the data lock event has the following errors:<div class="table_container"><table class="datatable"><thead><tr><th>Price Episode identifier</th><th>Error code</th><th>Error Description</th><th> </th></tr></thead><tbody><tr><td>2-450-1-01/05/2017</td><td>DLOCK_04</td><td>No matching record found in the employer digital account for the framework code</td></tr><tr><td>2-450-1-01/05/2017</td><td>DLOCK_05</td><td>No matching record found in the employer digital account for the programme type</td></tr><tr><td>2-450-1-01/05/2017</td><td>DLOCK_06</td><td>No matching record found in the employer digital account for the pathway code</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the data lock event has the following periods<div class="table_container"><table class="datatable"><thead><tr><th>Price Episode identifier</th><th>Period</th><th>Payable Flag</th><th>Transaction Type</th><th> </th></tr></thead><tbody><tr><td>2-450-1-01/05/2017</td><td>1617-R10</td><td>true</td><td>Learning</td></tr><tr><td>2-450-1-01/05/2017</td><td>1617-R11</td><td>true</td><td>Learning</td></tr><tr><td>2-450-1-01/05/2017</td><td>1617-R12</td><td>true</td><td>Learning</td></tr></tbody></table></div></li>
+                <li class="step">
+                  <span class="keyword">And </span>the data lock event used the following commitments<div class="table_container"><table class="datatable"><thead><tr><th>Price Episode identifier</th><th>Apprentice Version</th><th>Start Date</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>Negotiated Price</th><th>Effective Date</th><th> </th></tr></thead><tbody><tr><td>2-450-1-01/05/2017</td><td>125</td><td>01/05/2017</td><td>451</td><td>3</td><td>6</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
               </ul>
             </div>
-            <a class="scenario-link" href="javascript:showImageLink('when-the-start-month-recorded-in-the-employer-digital-account-is-after-the-start-month-in-the-ilr-then-datalock-dlock09-will-be-produced')" title="Copy scenario link to clipboard.">
-              <i class="icon-link"> </i>
-            </a>
-          </li>
-          <li class="scenario">
-            <div class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
-            </div>
-            <div class="scenario-heading" id="when-monthly-payment-process-runs-and-no-matching-record-is-found-in-an-employer-digital-account-for-the-ukprn-then-datalock-dlock01-will-be-produced">
-              <h2>When monthly payment process runs and no matching record is found in an employer digital account for the UKPRN then datalock DLOCK_01 will be produced</h2>
-              <p class="tags">Tags: <span>@PeriodEndDataLockErrors</span></p>
-            </div>
-            <div class="steps">
-              <ul>
-                <li class="step">
-                  <span class="keyword">Given </span>the following commitment exists for an apprentice:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>standard code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
-                <li class="step">
-                  <span class="keyword">When </span>monthly payment process runs for the following ILR data:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>standard code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>1000000</td><td>1234</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
-                <li class="step">
-                  <span class="keyword">Then </span>a datalock error DLOCK_01 is produced</li>
-              </ul>
-            </div>
-            <a class="scenario-link" href="javascript:showImageLink('when-monthly-payment-process-runs-and-no-matching-record-is-found-in-an-employer-digital-account-for-the-ukprn-then-datalock-dlock01-will-be-produced')" title="Copy scenario link to clipboard.">
-              <i class="icon-link"> </i>
-            </a>
-          </li>
-          <li class="scenario">
-            <div class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
-            </div>
-            <div class="scenario-heading" id="when-monthly-payment-process-runs-and-no-matching-record-found-in-an-employer-digital-account-for-the-uln-then-datalock-dlock02-will-be-produced">
-              <h2>When monthly payment process runs and no matching record found in an employer digital account for the ULN then datalock DLOCK_02 will be produced</h2>
-              <p class="tags">Tags: <span>@PeriodEndDataLockErrors</span></p>
-            </div>
-            <div class="steps">
-              <ul>
-                <li class="step">
-                  <span class="keyword">Given </span>the following commitment exists for an apprentice:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>standard code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
-                <li class="step">
-                  <span class="keyword">When </span>monthly payment process runs for the following ILR data:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>standard code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>3456</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
-                <li class="step">
-                  <span class="keyword">Then </span>a datalock error DLOCK_02 is produced</li>
-              </ul>
-            </div>
-            <a class="scenario-link" href="javascript:showImageLink('when-monthly-payment-process-runs-and-no-matching-record-found-in-an-employer-digital-account-for-the-uln-then-datalock-dlock02-will-be-produced')" title="Copy scenario link to clipboard.">
-              <i class="icon-link"> </i>
-            </a>
-          </li>
-          <li class="scenario">
-            <div class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
-            </div>
-            <div class="scenario-heading" id="when-monthly-payment-process-runs-and-no-matching-record-found-in-an-employer-digital-account-for-the-standard-code-then-datalock-dlock03-will-be-produced">
-              <h2>When monthly payment process runs and no matching record found in an employer digital account for the standard code then datalock DLOCK_03 will be produced</h2>
-              <p class="tags">Tags: <span>@PeriodEndDataLockErrors</span></p>
-            </div>
-            <div class="steps">
-              <ul>
-                <li class="step">
-                  <span class="keyword">Given </span>the following commitment exists for an apprentice:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>standard code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
-                <li class="step">
-                  <span class="keyword">When </span>monthly payment process runs for the following ILR data:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>standard code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>2</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
-                <li class="step">
-                  <span class="keyword">Then </span>a datalock error DLOCK_03 is produced</li>
-              </ul>
-            </div>
-            <a class="scenario-link" href="javascript:showImageLink('when-monthly-payment-process-runs-and-no-matching-record-found-in-an-employer-digital-account-for-the-standard-code-then-datalock-dlock03-will-be-produced')" title="Copy scenario link to clipboard.">
-              <i class="icon-link"> </i>
-            </a>
-          </li>
-          <li class="scenario">
-            <div class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
-            </div>
-            <div class="scenario-heading" id="when-monthly-payment-process-runs-and-no-matching-record-found-in-an-employer-digital-account-for-the-framework-code-then-datalock-dlock04-will-be-produced">
-              <h2>When monthly payment process runs and no matching record found in an employer digital account for the framework code then datalock DLOCK_04 will be produced</h2>
-              <p class="tags">Tags: <span>@PeriodEndDataLockErrors</span></p>
-            </div>
-            <div class="steps">
-              <ul>
-                <li class="step">
-                  <span class="keyword">Given </span>the following commitment exists for an apprentice:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>450</td><td>2</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
-                <li class="step">
-                  <span class="keyword">When </span>monthly payment process runs for the following ILR data:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>451</td><td>2</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
-                <li class="step">
-                  <span class="keyword">Then </span>a datalock error DLOCK_04 is produced</li>
-              </ul>
-            </div>
-            <a class="scenario-link" href="javascript:showImageLink('when-monthly-payment-process-runs-and-no-matching-record-found-in-an-employer-digital-account-for-the-framework-code-then-datalock-dlock04-will-be-produced')" title="Copy scenario link to clipboard.">
-              <i class="icon-link"> </i>
-            </a>
-          </li>
-          <li class="scenario">
-            <div class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
-            </div>
-            <div class="scenario-heading" id="when-monthly-payment-process-runs-and-no-matching-record-found-in-an-employer-digital-account-for-the-programme-type-then-datalock-dlock05-will-be-produced">
-              <h2>When monthly payment process runs and no matching record found in an employer digital account for the programme type then datalock DLOCK_05 will be produced</h2>
-              <p class="tags">Tags: <span>@PeriodEndDataLockErrors</span></p>
-            </div>
-            <div class="steps">
-              <ul>
-                <li class="step">
-                  <span class="keyword">Given </span>the following commitment exists for an apprentice:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>450</td><td>2</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
-                <li class="step">
-                  <span class="keyword">When </span>monthly payment process runs for the following ILR data:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>450</td><td>3</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
-                <li class="step">
-                  <span class="keyword">Then </span>a datalock error DLOCK_05 is produced</li>
-              </ul>
-            </div>
-            <a class="scenario-link" href="javascript:showImageLink('when-monthly-payment-process-runs-and-no-matching-record-found-in-an-employer-digital-account-for-the-programme-type-then-datalock-dlock05-will-be-produced')" title="Copy scenario link to clipboard.">
-              <i class="icon-link"> </i>
-            </a>
-          </li>
-          <li class="scenario">
-            <div class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
-            </div>
-            <div class="scenario-heading" id="when-monthly-payment-process-runs-and-no-matching-record-found-in-an-employer-digital-account-for-the-pathway-code-then-datalock-dlock06-will-be-produced">
-              <h2>When monthly payment process runs and no matching record found in an employer digital account for the pathway code then datalock DLOCK_06 will be produced</h2>
-              <p class="tags">Tags: <span>@PeriodEndDataLockErrors</span></p>
-            </div>
-            <div class="steps">
-              <ul>
-                <li class="step">
-                  <span class="keyword">Given </span>the following commitment exists for an apprentice:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>450</td><td>2</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
-                <li class="step">
-                  <span class="keyword">When </span>monthly payment process runs for the following ILR data:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>450</td><td>2</td><td>2</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
-                <li class="step">
-                  <span class="keyword">Then </span>a datalock error DLOCK_06 is produced</li>
-              </ul>
-            </div>
-            <a class="scenario-link" href="javascript:showImageLink('when-monthly-payment-process-runs-and-no-matching-record-found-in-an-employer-digital-account-for-the-pathway-code-then-datalock-dlock06-will-be-produced')" title="Copy scenario link to clipboard.">
-              <i class="icon-link"> </i>
-            </a>
-          </li>
-          <li class="scenario">
-            <div class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
-            </div>
-            <div class="scenario-heading" id="when-monthly-payment-process-runs-and-no-matching-record-found-in-an-employer-digital-account-for-for-the-agreed-price-then-datalock-dlock07-will-be-produced">
-              <h2>When monthly payment process runs and no matching record found in an employer digital account for for the agreed price then datalock DLOCK_07 will be produced</h2>
-              <p class="tags">Tags: <span>@PeriodEndDataLockErrors</span></p>
-            </div>
-            <div class="steps">
-              <ul>
-                <li class="step">
-                  <span class="keyword">Given </span>the following commitment exists for an apprentice:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>450</td><td>2</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
-                <li class="step">
-                  <span class="keyword">When </span>monthly payment process runs for the following ILR data:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>450</td><td>2</td><td>1</td><td>10001</td><td>01/05/2017</td></tr></tbody></table></div></li>
-                <li class="step">
-                  <span class="keyword">Then </span>a datalock error DLOCK_07 is produced</li>
-              </ul>
-            </div>
-            <a class="scenario-link" href="javascript:showImageLink('when-monthly-payment-process-runs-and-no-matching-record-found-in-an-employer-digital-account-for-for-the-agreed-price-then-datalock-dlock07-will-be-produced')" title="Copy scenario link to clipboard.">
-              <i class="icon-link"> </i>
-            </a>
-          </li>
-          <li class="scenario">
-            <div class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
-            </div>
-            <div class="scenario-heading" id="when-monthly-payment-process-runs-and-there-is-more-than-one-matching-commitment-in-the-employer-digital-account-then-datalock-dlock08-will-be-produced">
-              <h2>When monthly payment process runs and there is more than one matching commitment in the employer digital account then datalock DLOCK_08 will be produced</h2>
-              <p class="tags">Tags: <span>@PeriodEndDataLockErrors</span></p>
-            </div>
-            <div class="steps">
-              <ul>
-                <li class="step">
-                  <span class="keyword">Given </span>the following commitments exist for an apprentice:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>450</td><td>2</td><td>1</td><td>10000</td><td>01/05/2017</td></tr><tr><td>9999999</td><td>1234</td><td>450</td><td>2</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
-                <li class="step">
-                  <span class="keyword">When </span>monthly payment process runs for the following ILR data:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>450</td><td>2</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
-                <li class="step">
-                  <span class="keyword">Then </span>a datalock error DLOCK_08 is produced</li>
-              </ul>
-            </div>
-            <a class="scenario-link" href="javascript:showImageLink('when-monthly-payment-process-runs-and-there-is-more-than-one-matching-commitment-in-the-employer-digital-account-then-datalock-dlock08-will-be-produced')" title="Copy scenario link to clipboard.">
-              <i class="icon-link"> </i>
-            </a>
-          </li>
-          <li class="scenario">
-            <div class="float-right">
-              <i class="icon-ok passed" title="Successful"> </i>
-            </div>
-            <div class="scenario-heading" id="when-monthly-payment-process-runs-and-the-start-month-recorded-in-the-employer-digital-account-is-after-the-start-month-in-the-ilr-then-datalock-dlock09-will-be-produced">
-              <h2>When monthly payment process runs and the start month recorded in the employer digital account is after the start month in the ILR then datalock DLOCK_09 will be produced</h2>
-              <p class="tags">Tags: <span>@PeriodEndDataLockErrors</span></p>
-            </div>
-            <div class="steps">
-              <ul>
-                <li class="step">
-                  <span class="keyword">Given </span>the following commitment exists for an apprentice:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>450</td><td>2</td><td>1</td><td>10000</td><td>01/05/2017</td></tr></tbody></table></div></li>
-                <li class="step">
-                  <span class="keyword">When </span>monthly payment process runs for the following ILR data:<div class="table_container"><table class="datatable"><thead><tr><th>UKPRN</th><th>ULN</th><th>framework code</th><th>programme type</th><th>pathway code</th><th>agreed price</th><th>start date</th><th> </th></tr></thead><tbody><tr><td>9999999</td><td>1234</td><td>450</td><td>2</td><td>1</td><td>10000</td><td>30/04/2017</td></tr></tbody></table></div></li>
-                <li class="step">
-                  <span class="keyword">Then </span>a datalock error DLOCK_09 is produced</li>
-              </ul>
-            </div>
-            <a class="scenario-link" href="javascript:showImageLink('when-monthly-payment-process-runs-and-the-start-month-recorded-in-the-employer-digital-account-is-after-the-start-month-in-the-ilr-then-datalock-dlock09-will-be-produced')" title="Copy scenario link to clipboard.">
+            <a class="scenario-link" href="javascript:showImageLink('dlock04-dlock05-dlock06---when-no-matching-record-found-in-an-employer-digital-account-for-for-the-framework-code-programme-type-and-pathway-code-then-datalock-dlock04-dlock05-and-dlock06-will-be-produced')" title="Copy scenario link to clipboard.">
               <i class="icon-link"> </i>
             </a>
           </li>
         </ul>
       </div>
       <div id="footer">
-        <p>Generated on: 19 April 2017 23:24:40</p>
+        <p>Generated on: 20 April 2017 05:52:05</p>
         <p>Produced by Pickles, version 2.8.2.0</p>
       </div>
     </div>
