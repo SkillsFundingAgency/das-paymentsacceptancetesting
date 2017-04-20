@@ -73,3 +73,35 @@ Scenario:700_AC01 DAS learner, payments are stopped as the employer has never pa
             | SFA Levy employer budget   | 0     | 0     | 0     | 
             | SFA Levy co-funding budget | 0     | 0     | 0     | 
             
+
+Scenario:700_AC02 DAS learner, payments are allowed as the employer has previously paid levy
+ 
+        Given levy balance = 0 for all months
+		And the following commitments exist:
+            | commitment Id | ULN       | priority | start date | end date   | agreed price | 
+            | 1             | learner a | 1        | 01/08/2017 | 01/08/2018 | 15000        | 
+            
+        When an ILR file is submitted with the following data:
+            | learner type       | agreed price | start date | planned end date | actual end date | completion status |
+            | programme only DAS | 15000        | 05/08/2017 | 20/08/2018       |                 | continuing        |
+      
+		Then the data lock status will be as follows:
+			| Payment type                   | 08/17           | 09/17           | 10/17           | 11/17           | 12/17           |
+			| On-program                     | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 |
+			| Completion                     |                 |                 |                 |                 |                 |
+			| Employer 16-18 incentive       |                 |                 |                 |                 |                 |
+			| Provider 16-18 incentive       |                 |                 |                 |                 |                 |
+			| Provider learning support      |                 |                 |                 |                 |                 |
+			| English and maths on programme |                 |                 |                 |                 |                 |
+			| English and maths Balancing    |                 |                 |                 |                 |                 |     
+
+		And the provider earnings and payments break down as follows:
+            | Type                          | 08/17 | 09/17 | 10/17 | 
+            | Provider Earned Total         | 1000  | 1000  | 1000  | 
+            | Provider Earned from SFA      | 900   | 900   | 900   |
+            | Provider Earned from Employer | 100   | 100   | 100   |
+            | Provider Paid by SFA          | 0     | 900   | 900   |
+            | Payment due from Employer     | 0     | 100   | 100   |            
+            | Levy account debited          | 0     | 0     | 0     | 
+            | SFA Levy employer budget      | 0     | 0     | 0     | 
+            | SFA Levy co-funding budget    | 900   | 900   | 900   |
