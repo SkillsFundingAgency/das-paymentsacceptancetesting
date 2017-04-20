@@ -2,15 +2,15 @@
 using System.Linq;
 using SFA.DAS.Payments.AcceptanceTests.ResultsDataModels;
 
-namespace SFA.DAS.Payments.AcceptanceTests.Assertions.DataLockRules
+namespace SFA.DAS.Payments.AcceptanceTests.Assertions.SubmissionDataLockRules
 {
-    public class BalancingDataLockRule : DataLockRuleBase
+    public class BalancingDataLockRule : SubmissionDataLockRuleBase
     {
         public BalancingDataLockRule() : base("balancing")
         {
         }
 
-        protected override IEnumerable<DataLockResult> FilterPeriodStatuses(DataLockPeriodResults periodStatuses)
+        protected override IEnumerable<SubmissionDataLockResult> FilterPeriodStatuses(SubmissionDataLockPeriodResults periodStatuses)
         {
             return periodStatuses.Matches.Where(m => m.TransactionType == ReferenceDataModels.TransactionType.Balancing);
         }

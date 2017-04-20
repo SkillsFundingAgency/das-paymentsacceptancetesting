@@ -1,6 +1,6 @@
 ﻿namespace SFA.DAS.Payments.AcceptanceTests.DataCollectors.Entities
 {
-    public class DataLockResultEntity
+    public class SubmissionDataLockResultEntity
     {
         public long Ukprn { get; set; }
         public long Uln { get; set; }

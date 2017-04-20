@@ -105,8 +105,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataCollectors
             script.AppendLine(TableSeperator);
             script.AppendLine($"-- {tableName}");
             script.AppendLine(TableSeperator);
-            script.AppendLine();
-            script.AppendLine();
 
             var structure = GetTableStructure(tableName, connection);
             using (var command = connection.CreateCommand())
