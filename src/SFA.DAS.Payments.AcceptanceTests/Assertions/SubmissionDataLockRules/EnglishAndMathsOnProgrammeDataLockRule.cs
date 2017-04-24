@@ -4,7 +4,7 @@ using SFA.DAS.Payments.AcceptanceTests.ResultsDataModels;
 
 namespace SFA.DAS.Payments.AcceptanceTests.Assertions.SubmissionDataLockRules
 {
-    public class EnglishAndMathsOnProgrammeDataLockRule : SubmissionDataLockRuleBase
+    public class EnglishAndMathsOnProgrammeDataLockRule : IncentiveBeyondMainAimDataLockRuleBase
     {
         public EnglishAndMathsOnProgrammeDataLockRule() : base("english and maths on-programme")
         {

@@ -20,7 +20,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Assertions.SubmissionDataLockRules
             var allStatuses = learnerResults.SelectMany(l => l.SubmissionDataLockResults).ToArray();
             foreach (var period in expectedPeriodMatches)
             {
-                var periodStatuses = allStatuses.FirstOrDefault(s => s.MatchPeriod == period.PeriodName);
+                var periodStatuses = GetPeriodStatuses(allStatuses, period); // allStatuses.FirstOrDefault(s => s.MatchPeriod == period.PeriodName);
                 var match = periodStatuses == null ? null : FilterPeriodStatuses(periodStatuses).FirstOrDefault();
                 if (match == null)
                 {
@@ -33,6 +33,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.Assertions.SubmissionDataLockRules
             }
         }
 
+        protected virtual SubmissionDataLockPeriodResults GetPeriodStatuses(SubmissionDataLockPeriodResults[] allStatuses, SubmissionDataLockPeriodMatch period)
+        {
+            return allStatuses.FirstOrDefault(s => s.MatchPeriod == period.PeriodName);
+        }
         protected abstract IEnumerable<SubmissionDataLockResult> FilterPeriodStatuses(SubmissionDataLockPeriodResults periodStatuses);
     }
 }
