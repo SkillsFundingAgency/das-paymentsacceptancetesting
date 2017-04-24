@@ -162,17 +162,17 @@ this.ScenarioSetup(scenarioInfo);
             table255.AddRow(new string[] {
                         "2-450-1-01/05/2017",
                         "1617-R10",
-                        "true",
+                        "false",
                         "Learning"});
             table255.AddRow(new string[] {
                         "2-450-1-01/05/2017",
                         "1617-R11",
-                        "true",
+                        "false",
                         "Learning"});
             table255.AddRow(new string[] {
                         "2-450-1-01/05/2017",
                         "1617-R12",
-                        "true",
+                        "false",
                         "Learning"});
 #line 18
     testRunner.And("the data lock event has the following periods", ((string)(null)), table255, "And ");
@@ -298,12 +298,12 @@ this.ScenarioSetup(scenarioInfo);
             table261.AddRow(new string[] {
                         "25-23-01/05/2017",
                         "1617-R11",
-                        "true",
+                        "false",
                         "Learning"});
             table261.AddRow(new string[] {
                         "25-23-01/05/2017",
                         "1617-R12",
-                        "true",
+                        "false",
                         "Learning"});
 #line 44
     testRunner.And("the data lock event has the following periods", ((string)(null)), table261, "And ");
@@ -424,17 +424,17 @@ this.ScenarioSetup(scenarioInfo);
             table267.AddRow(new string[] {
                         "25-23-01/05/2017",
                         "1617-R10",
-                        "true",
+                        "false",
                         "Learning"});
             table267.AddRow(new string[] {
                         "25-23-01/05/2017",
                         "1617-R11",
-                        "true",
+                        "false",
                         "Learning"});
             table267.AddRow(new string[] {
                         "25-23-01/05/2017",
                         "1617-R12",
-                        "true",
+                        "false",
                         "Learning"});
 #line 69
     testRunner.And("the data lock event has the following periods", ((string)(null)), table267, "And ");
@@ -557,17 +557,17 @@ this.ScenarioSetup(scenarioInfo);
             table273.AddRow(new string[] {
                         "2-450-1-01/05/2017",
                         "1617-R10",
-                        "true",
+                        "false",
                         "Learning"});
             table273.AddRow(new string[] {
                         "2-450-1-01/05/2017",
                         "1617-R11",
-                        "true",
+                        "false",
                         "Learning"});
             table273.AddRow(new string[] {
                         "2-450-1-01/05/2017",
                         "1617-R12",
-                        "true",
+                        "false",
                         "Learning"});
 #line 94
     testRunner.And("the data lock event has the following periods", ((string)(null)), table273, "And ");
@@ -694,17 +694,17 @@ this.ScenarioSetup(scenarioInfo);
             table279.AddRow(new string[] {
                         "2-450-1-01/05/2017",
                         "1617-R10",
-                        "true",
+                        "false",
                         "Learning"});
             table279.AddRow(new string[] {
                         "2-450-1-01/05/2017",
                         "1617-R11",
-                        "true",
+                        "false",
                         "Learning"});
             table279.AddRow(new string[] {
                         "2-450-1-01/05/2017",
                         "1617-R12",
-                        "true",
+                        "false",
                         "Learning"});
 #line 119
     testRunner.And("the data lock event has the following periods", ((string)(null)), table279, "And ");
@@ -831,17 +831,17 @@ this.ScenarioSetup(scenarioInfo);
             table285.AddRow(new string[] {
                         "2-450-1-01/05/2017",
                         "1617-R10",
-                        "true",
+                        "false",
                         "Learning"});
             table285.AddRow(new string[] {
                         "2-450-1-01/05/2017",
                         "1617-R11",
-                        "true",
+                        "false",
                         "Learning"});
             table285.AddRow(new string[] {
                         "2-450-1-01/05/2017",
                         "1617-R12",
-                        "true",
+                        "false",
                         "Learning"});
 #line 144
     testRunner.And("the data lock event has the following periods", ((string)(null)), table285, "And ");
@@ -974,17 +974,17 @@ this.ScenarioSetup(scenarioInfo);
             table291.AddRow(new string[] {
                         "2-450-1-01/05/2017",
                         "1617-R10",
-                        "true",
+                        "false",
                         "Learning"});
             table291.AddRow(new string[] {
                         "2-450-1-01/05/2017",
                         "1617-R11",
-                        "true",
+                        "false",
                         "Learning"});
             table291.AddRow(new string[] {
                         "2-450-1-01/05/2017",
                         "1617-R12",
-                        "true",
+                        "false",
                         "Learning"});
 #line 172
     testRunner.And("the data lock event has the following periods", ((string)(null)), table291, "And ");
@@ -1121,17 +1121,17 @@ this.ScenarioSetup(scenarioInfo);
             table297.AddRow(new string[] {
                         "2-450-1-01/05/2017",
                         "1617-R10",
-                        "true",
+                        "false",
                         "Learning"});
             table297.AddRow(new string[] {
                         "2-450-1-01/05/2017",
                         "1617-R11",
-                        "true",
+                        "false",
                         "Learning"});
             table297.AddRow(new string[] {
                         "2-450-1-01/05/2017",
                         "1617-R12",
-                        "true",
+                        "false",
                         "Learning"});
 #line 201
     testRunner.And("the data lock event has the following periods", ((string)(null)), table297, "And ");
