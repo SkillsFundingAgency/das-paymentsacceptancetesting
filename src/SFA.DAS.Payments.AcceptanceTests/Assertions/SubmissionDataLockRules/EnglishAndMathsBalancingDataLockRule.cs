@@ -4,7 +4,7 @@ using SFA.DAS.Payments.AcceptanceTests.ResultsDataModels;
 
 namespace SFA.DAS.Payments.AcceptanceTests.Assertions.SubmissionDataLockRules
 {
-    public class EnglishAndMathsBalancingDataLockRule : SubmissionDataLockRuleBase
+    public class EnglishAndMathsBalancingDataLockRule : IncentiveBeyondMainAimDataLockRuleBase
     {
         public EnglishAndMathsBalancingDataLockRule() : base("english and maths balancing")
         {

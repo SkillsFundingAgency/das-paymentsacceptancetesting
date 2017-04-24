@@ -4,7 +4,7 @@ using SFA.DAS.Payments.AcceptanceTests.ResultsDataModels;
 
 namespace SFA.DAS.Payments.AcceptanceTests.Assertions.SubmissionDataLockRules
 {
-    public class LearningSupportDataLockRule : SubmissionDataLockRuleBase
+    public class LearningSupportDataLockRule : IncentiveBeyondMainAimDataLockRuleBase
     {
         public LearningSupportDataLockRule() : base("learning support")
         {
