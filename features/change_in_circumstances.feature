@@ -387,7 +387,7 @@ Scenario:630-AC03  Earnings and payments for a DAS learner, levy available, and 
         And the following commitments exist:
 		    | commitment Id | version Id | ULN       | start date | end date   | standard code | agreed price | status | effective from | effective to |
 		    | 1             | 1          | learner a | 01/08/2017 | 28/08/2018 | 11            | 15500        | active | 01/08/2017     | 14/11/2017   |
-		    | 1             | 3          | learner a | 01/08/2017 | 28/08/2018 | 11            | 16000        | active | 15/11/2017     |              |
+		    | 1             | 2          | learner a | 01/08/2017 | 28/08/2018 | 11            | 16000        | active | 15/11/2017     |              |
         When an ILR file is submitted on 03/12/2017 with the following data:
             | ULN       | start date | planned end date | actual end date | completion status | standard code | Residual training price 1 | Residual training price 1 effective date | Residual assessment price 1 | Residual assessment price 1 effective date | Residual assessment price 2 | Residual assessment price 2 effective date |
             | learner a | 05/08/2017 | 28/08/2018       |                 | continuing        | 11            | 12000                     | 05/08/2017                               | 3500                        | 05/08/2017                                 | 4000                        | 15/11/2017                                 |
@@ -419,7 +419,7 @@ Scenario:630-AC04  Earnings and payments for a DAS learner, levy available, and 
         And the following commitments exist:
             | commitment Id | version Id | ULN       | start date | end date   | standard code | agreed price | status | effective from | effective to |
             | 1             | 1          | learner a | 01/08/2017 | 28/08/2018 | 11            | 15500        | active | 01/08/2017     | 14/11/2017   |
-            | 1             | 3          | learner a | 01/08/2017 | 28/08/2018 | 11            | 14000        | active | 15/11/2017     |              |
+            | 1             | 2          | learner a | 01/08/2017 | 28/08/2018 | 11            | 14000        | active | 15/11/2017     |              |
         When an ILR file is submitted on 03/12/2017 with the following data:
             | ULN       | start date | planned end date | actual end date | completion status | standard code | Residual training price 1 | Residual training price 1 effective date | Residual assessment price 1 | Residual assessment price 1 effective date | Residual assessment price 2 | Residual assessment price 2 effective date |
             | learner a | 05/08/2017 | 28/08/2018       |                 | continuing        | 11            | 12000                     | 05/08/2017                               | 3500                        | 05/08/2017                                 | 2000                        | 15/11/2017                                 |
@@ -452,7 +452,7 @@ Scenario:630-AC04  Earnings and payments for a DAS learner, levy available, and 
         And the following commitments exist:
             | commitment Id | version Id | ULN       | start date | end date   | standard code | agreed price | status | effective from | effective to |
             | 1             | 1          | learner a | 01/08/2017 | 28/08/2018 | 11             | 15500        | active | 01/08/2017     | 14/11/2017   |
-            | 1             | 3          | learner a | 01/08/2017 | 28/08/2018 | 11             | 16000        | active | 15/11/2017     |              |
+            | 1             | 2          | learner a | 01/08/2017 | 28/08/2018 | 11             | 16000        | active | 15/11/2017     |              |
         When an ILR file is submitted on 03/12/2017 with the following data:
             | ULN       | start date | planned end date | actual end date | completion status | standard code | Total training price 1 | Total training price 1 effective date | Total assessment price 1 | Total assessment price 1 effective date | Total assessment price 2 | Total assessment price 2 effective date |
             | learner a | 05/08/2017 | 28/08/2018       |                 | continuing        | 11            | 15500                  | 05/08/2017                            | 0                        | 05/08/2017                              | 500                      | 15/11/2017                              |

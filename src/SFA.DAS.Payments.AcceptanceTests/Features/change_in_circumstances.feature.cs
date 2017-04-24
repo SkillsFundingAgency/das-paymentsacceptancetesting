@@ -2861,7 +2861,7 @@ this.ScenarioSetup(scenarioInfo);
                         "14/11/2017"});
             table239.AddRow(new string[] {
                         "1",
-                        "3",
+                        "2",
                         "learner a",
                         "01/08/2017",
                         "28/08/2018",
@@ -3093,7 +3093,7 @@ this.ScenarioSetup(scenarioInfo);
                         "14/11/2017"});
             table243.AddRow(new string[] {
                         "1",
-                        "3",
+                        "2",
                         "learner a",
                         "01/08/2017",
                         "28/08/2018",
@@ -3325,7 +3325,7 @@ this.ScenarioSetup(scenarioInfo);
                         "14/11/2017"});
             table247.AddRow(new string[] {
                         "1",
-                        "3",
+                        "2",
                         "learner a",
                         "01/08/2017",
                         "28/08/2018",
