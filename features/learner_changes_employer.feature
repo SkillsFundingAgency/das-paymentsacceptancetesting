@@ -265,8 +265,8 @@ Feature: Provider earnings and payments where a learner changes employers
             | Non-DAS       | 06/08/2017 | 31/03/2018 |
             | DAS           | 01/04/2018 | 08/08/2018 |
         Then the data lock status will be as follows:
-            | Payment type | 08/17 | 09/17 | 10/17 | ... | 03/18 | 04/18           | 05/18           | 06/18           | 07/18           | 08/18           |
-            | On-program   |       |       |       | ... |       | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 |
+            | Payment type | 08/17 | 09/17 | 10/17 | ... | 03/18 | 04/18           | 05/18           | 06/18           | 07/18           | 
+            | On-program   |       |       |       | ... |       | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | 
         And the provider earnings and payments break down as follows:
             | Type                            | 08/17 | 09/17 | 10/17 | ... | 03/18 | 04/18 | 05/18 | 06/18 | 07/18 | 08/18 |
             | Provider Earned Total           | 400   | 400   | 400   | ... | 400   | 700   | 700   | 700   | 700   | 0     |
