@@ -1713,8 +1713,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "04/18",
                         "05/18",
                         "06/18",
-                        "07/18",
-                        "08/18"});
+                        "07/18"});
             table348.AddRow(new string[] {
                         "On-program",
                         "",
@@ -1722,7 +1721,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "",
                         "...",
                         "",
-                        "commitment 1 v1",
                         "commitment 1 v1",
                         "commitment 1 v1",
                         "commitment 1 v1",

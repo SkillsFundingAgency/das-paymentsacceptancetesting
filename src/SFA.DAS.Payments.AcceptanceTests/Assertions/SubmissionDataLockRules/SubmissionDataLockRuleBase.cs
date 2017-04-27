@@ -35,7 +35,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.Assertions.SubmissionDataLockRules
 
         protected virtual SubmissionDataLockPeriodResults GetPeriodStatuses(SubmissionDataLockPeriodResults[] allStatuses, SubmissionDataLockPeriodMatch period)
         {
-            return allStatuses.FirstOrDefault(s => s.MatchPeriod == period.PeriodName);
+            var results = allStatuses.FirstOrDefault(s => s.MatchPeriod == period.PeriodName);
+            if (results != null)
+            {
+                results.Matches = new List<SubmissionDataLockResult>();
+                results.Matches.AddRange(allStatuses.Where(s => s.MatchPeriod == period.PeriodName).SelectMany(x => x.Matches));
+            }
+            return results;
         }
         protected abstract IEnumerable<SubmissionDataLockResult> FilterPeriodStatuses(SubmissionDataLockPeriodResults periodStatuses);
     }

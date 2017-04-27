@@ -16,8 +16,8 @@ Feature: Apprentice changes provider scenarios
             | provider b | learner a | 06/06/2018 | 20/11/2018       |                 | continuing        | 3000                 | 06/06/2018                          | 1500                   | 06/06/2018                            |
         
         Then the data lock status will be as follows:
-            | Payment type | 08/17           | 09/17           | 10/17           | ... | 02/18           | 03/18 | 04/18 | 05/18 | 06/18           | 07/18           | 08/18           | 09/18           | 10/18           | 11/18           |
-            | On-program   | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | ... | commitment 1 v1 |       |       |       | commitment 2 v1 | commitment 2 v1 | commitment 2 v1 | commitment 2 v1 | commitment 2 v1 | commitment 2 v1 |
+            | Payment type | 08/17           | 09/17           | 10/17           | ... | 02/18           | 03/18 | 04/18 | 05/18 | 06/18           | 07/18           | 08/18           | 09/18           | 10/18           | 
+            | On-program   | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | ... | commitment 1 v1 |       |       |       | commitment 2 v1 | commitment 2 v1 | commitment 2 v1 | commitment 2 v1 | commitment 2 v1 | 
         
         And the earnings and payments break down for provider a is as follows:
             | Type                           | 08/17 | 09/17 | 10/17 | ... | 02/18 | 03/18 |
@@ -58,8 +58,8 @@ Feature: Apprentice changes provider scenarios
             | provider a | learner a | 06/08/2017 | 08/08/2018       | 04/03/2018      | withdrawn         | 6000                 | 06/08/2017                          | 1500                   | 06/08/2017                            |
             | provider b | learner a | 05/03/2018 | 20/08/2018       |                 | continuing        | 3000                 | 05/03/2018                          | 1500                   | 05/03/2018                            |
         Then the data lock status will be as follows:
-            | Payment type | 08/17           | 09/17           | 10/17           | ... | 02/18           | 03/18           | 04/18           | 05/18           | 06/18           | 07/18           | 08/18           |
-            | On-program   | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | ... | commitment 1 v1 | commitment 2 v1 | commitment 2 v1 | commitment 2 v1 | commitment 2 v1 | commitment 2 v1 | commitment 2 v1 |
+            | Payment type | 08/17           | 09/17           | 10/17           | ... | 02/18           | 03/18           | 04/18           | 05/18           | 06/18           | 07/18           | 
+            | On-program   | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | ... | commitment 1 v1 | commitment 2 v1 | commitment 2 v1 | commitment 2 v1 | commitment 2 v1 | commitment 2 v1 | 
         And the earnings and payments break down for provider a is as follows:
             | Type                           | 08/17 | 09/17 | 10/17 | ... | 02/18 | 03/18 |
             | Provider Earned Total          | 500   | 500   | 500   | ... | 500   | 0     |
@@ -98,8 +98,8 @@ Feature: Apprentice changes provider scenarios
             | provider a | learner a | 06/08/2017 | 08/08/2018       | 04/04/2018      | withdrawn         | 6000                 | 06/08/2017                          | 1500                   | 06/08/2017                            |
             | provider b | learner a | 05/04/2018 | 08/08/2018       |                 | continuing        | 3000                 | 05/04/2018                          | 1500                   | 05/04/2018                            |
         Then the data lock status will be as follows:
-            | Payment type | 08/17           | 09/17           | 10/17           | ... | 02/18           | 03/18 | 04/18           | 05/18           | 06/18           | 07/18           | 08/18           |
-            | On-program   | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | ... | commitment 1 v1 |       | commitment 2 v1 | commitment 2 v1 | commitment 2 v1 | commitment 2 v1 | commitment 2 v1 |
+            | Payment type | 08/17           | 09/17           | 10/17           | ... | 02/18           | 03/18 | 04/18           | 05/18           | 06/18           | 07/18           | 
+            | On-program   | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | ... | commitment 1 v1 |       | commitment 2 v1 | commitment 2 v1 | commitment 2 v1 | commitment 2 v1 | 
         And the earnings and payments break down for provider a is as follows:
             | Type                           | 08/17 | 09/17 | 10/17 | ... | 02/18 | 03/18 | 04/18 |
             | Provider Earned Total          | 500   | 500   | 500   | ... | 500   | 500   | 0     |
