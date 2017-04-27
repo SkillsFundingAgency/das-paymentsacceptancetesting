@@ -2,15 +2,15 @@
 using System.Linq;
 using SFA.DAS.Payments.AcceptanceTests.ResultsDataModels;
 
-namespace SFA.DAS.Payments.AcceptanceTests.Assertions.DataLockRules
+namespace SFA.DAS.Payments.AcceptanceTests.Assertions.SubmissionDataLockRules
 {
-    public class CompletionDataLockRule : DataLockRuleBase
+    public class CompletionDataLockRule : SubmissionDataLockRuleBase
     {
         public CompletionDataLockRule() : base("completion")
         {
         }
 
-        protected override IEnumerable<DataLockResult> FilterPeriodStatuses(DataLockPeriodResults periodStatuses)
+        protected override IEnumerable<SubmissionDataLockResult> FilterPeriodStatuses(SubmissionDataLockPeriodResults periodStatuses)
         {
             return periodStatuses.Matches.Where(m => m.TransactionType == ReferenceDataModels.TransactionType.Completion);
         }

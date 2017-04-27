@@ -9,18 +9,62 @@ using TechTalk.SpecFlow;
 
 namespace SFA.DAS.Payments.AcceptanceTests.DataCollectors
 {
-    public static class EventsDataCollector
+    public static class SavedDataCollector
     {
         private static readonly int SeperatorLength = 100;
         private static readonly string TableSeperator = new string('-', SeperatorLength);
 
         public static void CaptureEventsDataForScenario()
         {
-            var scenarioName = ScenarioContext.Current.ScenarioInfo.Title;
-            var script = BuildScript(scenarioName);
+            var script = InitialiseScript();
 
-            var scenarioDirectory = new DirectoryInfo(TestEnvironment.Variables.IlrFileDirectory).Parent.FullName;
-            var path = Path.Combine(scenarioDirectory, "events.sql");
+            AppendTableDataToScript("DataLock.DataLockEvents", script);
+            AppendTableDataToScript("DataLock.DataLockEventPeriods", script);
+            AppendTableDataToScript("DataLock.DataLockEventErrors", script);
+            AppendTableDataToScript("DataLock.DataLockEventCommitmentVersions", script);
+            AppendTableDataToScript("Submissions.SubmissionEvents", script);
+
+            SaveSqlFile("events.sql", script.ToString(), TestEnvironment.BaseScenarioDirectory);
+        }
+        public static void CapturePaymentsDataForScenario()
+        {
+            var script = InitialiseScript();
+
+            AppendTableDataToScript("PaymentsDue.RequiredPayments", script);
+            AppendTableDataToScript("Payments.Periods", script);
+            AppendTableDataToScript("Payments.Payments", script);
+
+            SaveSqlFile("payments.sql", script.ToString(), TestEnvironment.BaseScenarioDirectory);
+        }
+
+        public static void CaptureAccountsDataForScenario()
+        {
+            var script = InitialiseScript();
+
+            AppendTableDataToScript("dbo.DasAccounts", script);
+
+            SaveSqlFile("dbo_Accounts.sql", script.ToString(), TestEnvironment.Variables.IlrFileDirectory);
+        }
+        public static void CaptureCommitmentsDataForScenario()
+        {
+
+            var script = InitialiseScript();
+
+            AppendTableDataToScript("dbo.DasCommitments", script);
+
+            SaveSqlFile("dbo_DasCommitments.sql", script.ToString(), TestEnvironment.Variables.IlrFileDirectory);
+        }
+
+        public static void SaveSqlFile(string fileName, string script, string directoryPath)
+        {
+
+
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
+
+            var path = Path.Combine(directoryPath, fileName);
             if (File.Exists(path))
             {
                 File.Delete(path);
@@ -28,50 +72,45 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataCollectors
             File.WriteAllText(path, script);
         }
 
-        private static string BuildScript(string scenarioName)
+        private static StringBuilder InitialiseScript()
         {
+            var scenarioName = ScenarioContext.Current.ScenarioInfo.Title;
+
             var script = new StringBuilder();
             script.AppendLine($"/{new string('*', SeperatorLength - 1)}");
             script.AppendLine($"* Scenario: {scenarioName}");
             script.AppendLine($"* Produced on {DateTime.Now:dd/MM/yyyy HH:mm:ss}");
             script.AppendLine($"{new string('*', SeperatorLength - 1)}/");
 
+            return script;
+        }
+        private static void AppendTableDataToScript(string tableName, StringBuilder script)
+        {
             using (var connection = new SqlConnection(TestEnvironment.Variables.DedsDatabaseConnectionString))
             {
                 connection.Open();
                 try
                 {
-                    AppendTableDataToScript("DataLock.DataLockEvents", connection, script);
-                    AppendTableDataToScript("DataLock.DataLockEventPeriods", connection, script);
-                    AppendTableDataToScript("DataLock.DataLockEventErrors", connection, script);
-                    AppendTableDataToScript("DataLock.DataLockEventCommitmentVersions", connection, script);
+                    AppendTableDataToScript(tableName, connection, script);
 
-                    AppendTableDataToScript("Submissions.SubmissionEvents", connection, script);
-
-                    AppendTableDataToScript("PaymentsDue.RequiredPayments", connection, script);
-                    AppendTableDataToScript("Payments.Periods", connection, script);
-                    AppendTableDataToScript("Payments.Payments", connection, script);
                 }
                 finally
                 {
                     connection.Close();
                 }
             }
-
-            return script.ToString();
         }
         private static void AppendTableDataToScript(string tableName, SqlConnection connection, StringBuilder script)
         {
             script.AppendLine(TableSeperator);
             script.AppendLine($"-- {tableName}");
             script.AppendLine(TableSeperator);
-            script.AppendLine();
-            script.AppendLine();
 
             var structure = GetTableStructure(tableName, connection);
             using (var command = connection.CreateCommand())
             {
-                command.CommandText = $"SELECT * FROM {tableName}";
+                var columnList = structure.Select(x => x.Name).Aggregate((x, y) => $"{x}, {y}");
+                command.CommandText = $"SELECT {columnList} FROM {tableName}";
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
@@ -86,7 +125,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataCollectors
             var structure = new List<TableColumn>();
             using (var command = connection.CreateCommand())
             {
-                command.CommandText = $"SELECT name, system_type_id, is_nullable FROM sys.columns WHERE [object_id] = OBJECT_ID('{tableName}') ORDER BY column_id";
+                command.CommandText = $"SELECT name, system_type_id, is_nullable FROM sys.columns WHERE [object_id] = OBJECT_ID('{tableName}') AND is_identity = 0 ORDER BY column_id";
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
@@ -132,7 +171,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataCollectors
                 }
                 else
                 {
-                    script.Append($"\t'{value}'");
+                    if (structure[i].TypeId == 40 || structure[i].TypeId == 61)
+                    {
+                        script.Append($"\t'{((DateTime)value).ToString("yyyy-MM-dd hh:mm:ss")}'");
+                    }
+                    else
+                    {
+                        script.Append($"\t'{value}'");
+                    }
                 }
             }
             script.AppendLine();

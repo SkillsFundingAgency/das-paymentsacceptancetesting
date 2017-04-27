@@ -1,6 +1,6 @@
 ﻿namespace SFA.DAS.Payments.AcceptanceTests.ReferenceDataModels
 {
-    public class DataLockPeriodMatch
+    public class SubmissionDataLockPeriodMatch
     {
         public string LearnerId { get; set; }
         public string PeriodName { get; set; }

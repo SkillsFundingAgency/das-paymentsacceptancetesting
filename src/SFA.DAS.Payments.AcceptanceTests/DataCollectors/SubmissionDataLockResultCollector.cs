@@ -10,7 +10,7 @@ using SFA.DAS.Payments.AcceptanceTests.ResultsDataModels;
 
 namespace SFA.DAS.Payments.AcceptanceTests.DataCollectors
 {
-    public static class DataLockResultCollector
+    public static class SubmissionDataLockResultCollector
     {
         public static void CollectForPeriod(string period, List<LearnerResults> results, LookupContext lookupContext)
         {
@@ -20,32 +20,24 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataCollectors
             {
                 var learner = GetOrCreateLearner(dataLockEntity.Ukprn, dataLockEntity.Uln, results, lookupContext);
 
-                CreateOrUpdateDataLockPeriodResults(learner.DataLockResults, dataLockEntity, period);
+                CreateOrUpdateDataLockPeriodResults(learner.SubmissionDataLockResults, dataLockEntity, period);
             }
         }
 
-        private static DataLockResultEntity[] ReadDataLockResultsFromDeds()
+        private static SubmissionDataLockResultEntity[] ReadDataLockResultsFromDeds()
         {
             using (var connection = new SqlConnection(TestEnvironment.Variables.DedsDatabaseConnectionString))
             {
                 var query = "SELECT "
-                            + " pepm.Ukprn, "
-                            + " l.Uln, "
-                            + " pepm.Period, "
-                            + " pepm.CommitmentId, "
-                            + " pepm.VersionId AS CommitmentVersion, "
-                            + " pepm.TransactionType "
-                            + "FROM DataLock.PriceEpisodeMatch pem "
-                            + " JOIN DataLock.PriceEpisodePeriodMatch pepm ON pepm.Ukprn = pem.Ukprn "
-                            + "  AND pem.PriceEpisodeIdentifier = pepm.PriceEpisodeIdentifier "
-                            + "  AND pem.LearnRefNumber = pepm.LearnRefNumber "
-                            + "  AND pem.AimSeqNumber = pepm.AimSeqNumber "
-                            + " JOIN Valid.Learner l ON l.UKPRN = pepm.Ukprn "
-                            + "  AND l.LearnRefNumber = pepm.LearnRefNumber "
-                            + "WHERE pem.IsSuccess = 1 "
-                            + " AND pepm.Payable = 1";
-
-                return connection.Query<DataLockResultEntity>(query).ToArray();
+                            + " Ukprn, "
+                            + " Uln, "
+                            + " CollectionPeriodMonth,"
+                            + " CollectionPeriodYear,"
+                            + " CommitmentId, "
+                            + " CommitmentVersionId AS CommitmentVersion,"
+                            + " TransactionType "
+                            + " FROM PaymentsDue.RequiredPayments";
+                return connection.Query<SubmissionDataLockResultEntity>(query).ToArray();
             }
         }
 
@@ -66,18 +58,18 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataCollectors
             return learner;
         }
 
-        private static void CreateOrUpdateDataLockPeriodResults(List<DataLockPeriodResults> periodResults, DataLockResultEntity entity, string collectionPeriod)
+        private static void CreateOrUpdateDataLockPeriodResults(List<SubmissionDataLockPeriodResults> periodResults, SubmissionDataLockResultEntity entity, string collectionPeriod)
         {
             var collectionPeriodDate = new DateTime(2000 + int.Parse(collectionPeriod.Substring(3, 2)), int.Parse(collectionPeriod.Substring(0, 2)), 1);
             var collectionPeriodNumber = collectionPeriodDate.GetPeriodNumber();
-
-            var matchPeriod = collectionPeriodDate.AddMonths(entity.Period - collectionPeriodNumber).GetPeriod();
+            
+            var matchPeriod = $"{entity.CollectionPeriodMonth:00}/{entity.CollectionPeriodYear- 2000:00}";
 
             var existingResults = periodResults.SingleOrDefault(r => r.CalculationPeriod == collectionPeriod && r.MatchPeriod == matchPeriod);
 
             if (existingResults != null)
             {
-                existingResults.Matches.Add(new DataLockResult
+                existingResults.Matches.Add(new SubmissionDataLockResult
                 {
                     CommitmentId = entity.CommitmentId,
                     CommitmentVersion = entity.CommitmentVersion,
@@ -86,13 +78,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataCollectors
             }
             else
             {
-                periodResults.Add(new DataLockPeriodResults
+                periodResults.Add(new SubmissionDataLockPeriodResults
                 {
                     CalculationPeriod = collectionPeriod,
                     MatchPeriod = matchPeriod,
-                    Matches = new List<DataLockResult>
+                    Matches = new List<SubmissionDataLockResult>
                     {
-                        new DataLockResult
+                        new SubmissionDataLockResult
                         {
                             CommitmentId = entity.CommitmentId,
                             CommitmentVersion = entity.CommitmentVersion,

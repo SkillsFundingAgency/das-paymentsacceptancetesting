@@ -7,6 +7,7 @@ using SFA.DAS.Payments.AcceptanceTests.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.DataCollectors;
 using SFA.DAS.Payments.AcceptanceTests.ReferenceDataModels;
 using SFA.DAS.Payments.AcceptanceTests.ResultsDataModels;
+using System.IO;
 
 namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
 {
@@ -22,7 +23,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                                                                                       List<EmployerAccountReferenceData> employers,
                                                                                       List<ContractTypeReferenceData> contractTypes,
                                                                                       List<EmploymentStatusReferenceData> employmentStatus,
-                                                                                      List<LearningSupportReferenceData> learningSupportStatus)
+                                                                                      List<LearningSupportReferenceData> learningSupportStatus,
+                                                                                      string[] periodsToSubmitTo = null)
         {
             var results = new List<LearnerResults>();
             if (TestEnvironment.ValidateSpecsOnly)
@@ -31,7 +33,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
             }
 
 
-            var periods = ExtractPeriods(ilrLearnerDetails, firstSubmissionDate);
+            var periods = periodsToSubmitTo ?? ExtractPeriods(ilrLearnerDetails, firstSubmissionDate);
             var providerLearners = GroupLearnersByProvider(ilrLearnerDetails, lookupContext);
             foreach (var period in periods)
             {
@@ -46,10 +48,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                 RunMonthEnd(period);
 
                 EarningsCollector.CollectForPeriod(period, results, lookupContext);
-                DataLockResultCollector.CollectForPeriod(period, results, lookupContext);
                 LevyAccountBalanceCollector.CollectForPeriod(period, results, lookupContext);
+                SubmissionDataLockResultCollector.CollectForPeriod(period, results, lookupContext);
+
+                SavedDataCollector.CaptureAccountsDataForScenario();
+                SavedDataCollector.CaptureCommitmentsDataForScenario();
+
 
             }
+            DataLockEventsDataCollector.CollectDataLockEventsForAllPeriods(results, lookupContext);
             PaymentsDataCollector.CollectForPeriod(results, lookupContext);
 
             return results;
@@ -107,6 +114,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                 ActualsSchemaPeriod = date.Year + date.Month.ToString("00"),
                 CollectionOpen = 1
             };
+            TestEnvironment.Variables.IlrFileDirectory = $"{TestEnvironment.BaseScenarioDirectory}\\{month.ToString("00")}_{year}";
+            if (!Directory.Exists(TestEnvironment.Variables.IlrFileDirectory))
+            {
+                Directory.CreateDirectory(TestEnvironment.Variables.IlrFileDirectory);
+            }
         }
         private static void SetupDisadvantagedPostcodeUplift(ProviderSubmissionDetails providerDetails)
         {

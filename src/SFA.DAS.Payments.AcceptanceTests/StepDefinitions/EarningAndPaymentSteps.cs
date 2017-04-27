@@ -16,6 +16,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
         public EarningAndPaymentSteps(EmployerAccountContext employerAccountContext, 
                                       EarningsAndPaymentsContext earningsAndPaymentsContext,
                                       DataLockContext dataLockContext,
+                                      SubmissionDataLockContext submissionDataLockContext,
                                       SubmissionContext submissionContext, 
                                       LookupContext lookupContext,
                                     CommitmentsContext commitmentsContext)
@@ -23,12 +24,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             EmployerAccountContext = employerAccountContext;
             EarningsAndPaymentsContext = earningsAndPaymentsContext;
             DataLockContext = dataLockContext;
+            SubmissionDataLockContext = submissionDataLockContext;
             SubmissionContext = submissionContext;
             LookupContext = lookupContext;
             CommitmentsContext = commitmentsContext;
         }
         public EmployerAccountContext EmployerAccountContext { get; }
         public DataLockContext DataLockContext { get; }
+        public SubmissionDataLockContext SubmissionDataLockContext { get; }
         public EarningsAndPaymentsContext EarningsAndPaymentsContext { get; }
         public SubmissionContext SubmissionContext { get; }
         public LookupContext LookupContext { get; }
@@ -107,7 +110,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
         {
             PaymentsAndEarningsAssertions.AssertPaymentsAndEarningsResults(EarningsAndPaymentsContext, SubmissionContext, EmployerAccountContext);
             TransactionTypeAssertions.AssertPaymentsAndEarningsResults(EarningsAndPaymentsContext, SubmissionContext, EmployerAccountContext);
-            //DataLockAssertions.AssertPaymentsAndEarningsResults(DataLockContext, SubmissionContext);
+            SubmissionDataLockAssertions.AssertPaymentsAndEarningsResults(SubmissionDataLockContext, SubmissionContext);
         }
 
 

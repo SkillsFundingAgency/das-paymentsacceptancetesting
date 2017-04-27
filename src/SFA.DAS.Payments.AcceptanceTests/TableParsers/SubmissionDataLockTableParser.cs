@@ -8,9 +8,9 @@ using TechTalk.SpecFlow;
 
 namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
 {
-    internal class DataLockTableParser
+    internal class SubmissionDataLockTableParser
     {
-        internal static void ParseDataLockStatusTableIntoContext(DataLockContext dataLockContext, string learnerId, Table dataLockStatusTable)
+        internal static void ParseDataLockStatusTableIntoContext(SubmissionDataLockContext dataLockContext, string learnerId, Table dataLockStatusTable)
         {
             if (dataLockStatusTable.Rows.Count < 1)
             {
@@ -47,7 +47,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
             return periods;
         }
 
-        private static void ParseDataLockStatusRows(DataLockContext context, string learnerId, Table dataLockStatusTable, string[] periodNames)
+        private static void ParseDataLockStatusRows(SubmissionDataLockContext context, string learnerId, Table dataLockStatusTable, string[] periodNames)
         {
             foreach (var row in dataLockStatusTable.Rows)
             {
@@ -106,9 +106,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
             }
         }
 
-        private static void ParseRow(string learnerId, TableRow row, string[] periodNames, List<DataLockPeriodMatch> contextList)
+        private static void ParseRow(string learnerId, TableRow row, string[] periodNames, List<SubmissionDataLockPeriodMatch> contextList)
         {
-            ParseRowValues(row, periodNames, contextList, (periodName, commitmentId, commitmentVersion) => new DataLockPeriodMatch
+            ParseRowValues(row, periodNames, contextList, (periodName, commitmentId, commitmentVersion) => new SubmissionDataLockPeriodMatch
             {
                 LearnerId = learnerId,
                 PeriodName = periodName,
