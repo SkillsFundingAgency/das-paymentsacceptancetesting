@@ -176,8 +176,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "07/18",
                         "08/18",
                         "09/18",
-                        "10/18",
-                        "11/18"});
+                        "10/18"});
             table424.AddRow(new string[] {
                         "On-program",
                         "commitment 1 v1",
@@ -188,7 +187,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "",
                         "",
                         "",
-                        "commitment 2 v1",
                         "commitment 2 v1",
                         "commitment 2 v1",
                         "commitment 2 v1",
@@ -474,8 +472,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "04/18",
                         "05/18",
                         "06/18",
-                        "07/18",
-                        "08/18"});
+                        "07/18"});
             table429.AddRow(new string[] {
                         "On-program",
                         "commitment 1 v1",
@@ -483,7 +480,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "commitment 1 v1",
                         "...",
                         "commitment 1 v1",
-                        "commitment 2 v1",
                         "commitment 2 v1",
                         "commitment 2 v1",
                         "commitment 2 v1",
@@ -771,8 +767,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "04/18",
                         "05/18",
                         "06/18",
-                        "07/18",
-                        "08/18"});
+                        "07/18"});
             table434.AddRow(new string[] {
                         "On-program",
                         "commitment 1 v1",
@@ -781,7 +776,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "...",
                         "commitment 1 v1",
                         "",
-                        "commitment 2 v1",
                         "commitment 2 v1",
                         "commitment 2 v1",
                         "commitment 2 v1",
