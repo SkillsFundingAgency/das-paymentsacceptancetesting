@@ -97,8 +97,8 @@ Feature: Provider earnings and payments where learner changes apprenticeship sta
             | ULN       | start date | planned end date | actual end date | completion status | Total training price 1 | Total training price 1 effective date | Total assessment price 1 | Total assessment price 1 effective date | Total training price 2 | Total training price 2 effective date | Total assessment price 2 | Total assessment price 2 effective date |
             | learner a | 01/08/2017 | 04/08/2018       |                 | continuing        | 12000                  | 01/08/2017                            | 3000                     | 01/08/2017                              | 7500                   | 01/11/2017                            | 1875                     | 01/11/2017                              |
         Then the data lock status will be as follows:
-            | Payment type | 08/17           | 09/17           | 10/17           | 11/17           | 12/17           | ... | 07/18           | 08/18           |
-            | On-program   | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | commitment 1 v2 | commitment 1 v2 | ... | commitment 1 v2 | commitment 1 v2 |
+            | Payment type | 08/17           | 09/17           | 10/17           | 11/17           | 12/17           | ... | 07/18           | 
+            | On-program   | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | commitment 1 v2 | commitment 1 v2 | ... | commitment 1 v2 | 
         And the provider earnings and payments break down as follows:
             | Type                          | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 |
             | Provider Earned Total         | 1000  | 1000  | 1000  | 500   | 500   | ... | 500   | 0     |
@@ -120,8 +120,8 @@ Feature: Provider earnings and payments where learner changes apprenticeship sta
             | ULN       | start date | planned end date | actual end date | completion status | Total training price 1 | Total training price 1 effective date | Total assessment price 1 | Total assessment price 1 effective date | Total training price 2 | Total training price 2 effective date | Total assessment price 2 | Total assessment price 2 effective date |
             | learner a | 01/08/2017 | 04/08/2018       |                 | continuing        | 12000                  | 01/08/2017                            | 3000                     | 01/08/2017                              | 7500                   | 10/11/2017                            | 1875                     | 10/11/2017                              |
         Then the data lock status will be as follows:
-            | Payment type | 08/17           | 09/17           | 10/17           | 11/17           | 12/17           | ... | 07/18           | 08/18           |
-            | On-program   | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | commitment 1 v2 | commitment 1 v2 | ... | commitment 1 v2 | commitment 1 v2 |
+            | Payment type | 08/17           | 09/17           | 10/17           | 11/17           | 12/17           | ... | 07/18           | 
+            | On-program   | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | commitment 1 v2 | commitment 1 v2 | ... | commitment 1 v2 | 
         And the provider earnings and payments break down as follows:
             | Type                          | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 |
             | Provider Earned Total         | 1000  | 1000  | 1000  | 500   | 500   | ... | 500   | 0     |
