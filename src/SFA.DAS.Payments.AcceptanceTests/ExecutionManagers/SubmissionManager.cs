@@ -186,16 +186,24 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                     FinancialRecords = financialRecords
                 };
             }).ToArray();
-            var employmentStatuses = employmentStatus.Select(s => new IlrGenerator.EmploymentStatus
+            var employmentStatuses = employmentStatus.Select(s =>
             {
-                EmployerId = s.EmployerId,
-                DateFrom = s.EmploymentStatusApplies,
-                EmploymentStatusMonitoring = new EmploymentStatusMonitoring
+                EmploymentStatusMonitoring monitoringStatus = null;
+                if (s.MonitoringCode > 0)
                 {
-                    Type = s.MonitoringType.ToString(),
-                    Code = s.MonitoringCode
-                },
-                StatusCode = (int)s.EmploymentStatus
+                    monitoringStatus = new EmploymentStatusMonitoring
+                    {
+                        Type = s.MonitoringType.ToString(),
+                        Code = s.MonitoringCode
+                    };
+                }
+                return new IlrGenerator.EmploymentStatus
+                {
+                    EmployerId = s.EmployerId,
+                    DateFrom = s.EmploymentStatusApplies,
+                    EmploymentStatusMonitoring = monitoringStatus,
+                    StatusCode = (int)s.EmploymentStatus
+                };
             }).ToArray();
 
             return new Learner
