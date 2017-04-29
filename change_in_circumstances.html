@@ -50,7 +50,7 @@ $(document).ready(function() {
           <li class="file">
             <a href="learner_changes_provider.html">Apprentice changes provider scenarios</a>
             <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
+              <i class="icon-ok passed" title="Successful"> </i>
             </span>
           </li>
           <li class="file">
@@ -98,7 +98,7 @@ $(document).ready(function() {
           <li class="file">
             <span class="current">Provider earnings and payments where learner changes apprenticeship standard or there is a change to the negotiated price at the end of a month, remaining with the same employer and provider</span>
             <span class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
+              <i class="icon-ok passed" title="Successful"> </i>
             </span>
           </li>
           <li class="file">
@@ -135,7 +135,7 @@ $(document).ready(function() {
       </div>
       <div id="feature">
         <div class="float-right">
-          <i class="icon-minus-sign failed" title="Failed"> </i>
+          <i class="icon-ok passed" title="Successful"> </i>
         </div>
         <h1>Provider earnings and payments where learner changes apprenticeship standard or there is a change to the negotiated price at the end of a month, remaining with the same employer and provider</h1>
         <p class="tags">Tags: <span>@ChangeInCircumstances</span></p>
@@ -255,7 +255,7 @@ $(document).ready(function() {
           </li>
           <li class="scenario">
             <div class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
+              <i class="icon-ok passed" title="Successful"> </i>
             </div>
             <div class="scenario-heading" id="earnings-and-payments-for-a-das-learner-levy-available-and-there-is-a-change-to-the-negotiated-cost-which-happens-at-the-end-of-the-month">
               <h2>Earnings and payments for a DAS learner, levy available, and there is a change to the Negotiated Cost which happens at the end of the month</h2>
@@ -268,7 +268,7 @@ $(document).ready(function() {
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>Total training price 1</th><th>Total training price 1 effective date</th><th>Total assessment price 1</th><th>Total assessment price 1 effective date</th><th>Total training price 2</th><th>Total training price 2 effective date</th><th>Total assessment price 2</th><th>Total assessment price 2 effective date</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>01/08/2017</td><td>04/08/2018</td><td></td><td>continuing</td><td>12000</td><td>01/08/2017</td><td>3000</td><td>01/08/2017</td><td>7500</td><td>01/11/2017</td><td>1875</td><td>01/11/2017</td></tr></tbody></table></div></li>
                 <li class="step">
-                  <span class="keyword">Then </span>the data lock status will be as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Payment type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>...</th><th>07/18</th><th>08/18</th><th> </th></tr></thead><tbody><tr><td>On-program</td><td>commitment 1 v1</td><td>commitment 1 v1</td><td>commitment 1 v1</td><td>commitment 1 v2</td><td>commitment 1 v2</td><td>...</td><td>commitment 1 v2</td><td>commitment 1 v2</td></tr></tbody></table></div></li>
+                  <span class="keyword">Then </span>the data lock status will be as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Payment type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>...</th><th>07/18</th><th> </th></tr></thead><tbody><tr><td>On-program</td><td>commitment 1 v1</td><td>commitment 1 v1</td><td>commitment 1 v1</td><td>commitment 1 v2</td><td>commitment 1 v2</td><td>...</td><td>commitment 1 v2</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">And </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>...</th><th>07/18</th><th>08/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>1000</td><td>1000</td><td>1000</td><td>500</td><td>500</td><td>...</td><td>500</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>1000</td><td>1000</td><td>1000</td><td>500</td><td>500</td><td>...</td><td>500</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>1000</td><td>1000</td><td>1000</td><td>500</td><td>...</td><td>500</td><td>500</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Levy account debited</td><td>0</td><td>1000</td><td>1000</td><td>1000</td><td>500</td><td>...</td><td>500</td><td>500</td></tr><tr><td>SFA Levy employer budget</td><td>1000</td><td>1000</td><td>1000</td><td>500</td><td>500</td><td>...</td><td>500</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr></tbody></table></div></li>
               </ul>
@@ -279,7 +279,7 @@ $(document).ready(function() {
           </li>
           <li class="scenario">
             <div class="float-right">
-              <i class="icon-minus-sign failed" title="Failed"> </i>
+              <i class="icon-ok passed" title="Successful"> </i>
             </div>
             <div class="scenario-heading" id="earnings-and-payments-for-a-das-learner-levy-available-and-there-is-a-change-to-the-negotiated-cost-which-happens-in-the-middle-of-the-month">
               <h2>Earnings and payments for a DAS learner, levy available, and there is a change to the Negotiated Cost which happens in the middle of the month</h2>
@@ -292,7 +292,7 @@ $(document).ready(function() {
                 <li class="step">
                   <span class="keyword">When </span>an ILR file is submitted with the following data:<div class="table_container"><table class="datatable"><thead><tr><th>ULN</th><th>start date</th><th>planned end date</th><th>actual end date</th><th>completion status</th><th>Total training price 1</th><th>Total training price 1 effective date</th><th>Total assessment price 1</th><th>Total assessment price 1 effective date</th><th>Total training price 2</th><th>Total training price 2 effective date</th><th>Total assessment price 2</th><th>Total assessment price 2 effective date</th><th> </th></tr></thead><tbody><tr><td>learner a</td><td>01/08/2017</td><td>04/08/2018</td><td></td><td>continuing</td><td>12000</td><td>01/08/2017</td><td>3000</td><td>01/08/2017</td><td>7500</td><td>10/11/2017</td><td>1875</td><td>10/11/2017</td></tr></tbody></table></div></li>
                 <li class="step">
-                  <span class="keyword">Then </span>the data lock status will be as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Payment type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>...</th><th>07/18</th><th>08/18</th><th> </th></tr></thead><tbody><tr><td>On-program</td><td>commitment 1 v1</td><td>commitment 1 v1</td><td>commitment 1 v1</td><td>commitment 1 v2</td><td>commitment 1 v2</td><td>...</td><td>commitment 1 v2</td><td>commitment 1 v2</td></tr></tbody></table></div></li>
+                  <span class="keyword">Then </span>the data lock status will be as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Payment type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>...</th><th>07/18</th><th> </th></tr></thead><tbody><tr><td>On-program</td><td>commitment 1 v1</td><td>commitment 1 v1</td><td>commitment 1 v1</td><td>commitment 1 v2</td><td>commitment 1 v2</td><td>...</td><td>commitment 1 v2</td></tr></tbody></table></div></li>
                 <li class="step">
                   <span class="keyword">And </span>the provider earnings and payments break down as follows:<div class="table_container"><table class="datatable"><thead><tr><th>Type</th><th>08/17</th><th>09/17</th><th>10/17</th><th>11/17</th><th>12/17</th><th>...</th><th>07/18</th><th>08/18</th><th> </th></tr></thead><tbody><tr><td>Provider Earned Total</td><td>1000</td><td>1000</td><td>1000</td><td>500</td><td>500</td><td>...</td><td>500</td><td>0</td></tr><tr><td>Provider Earned from SFA</td><td>1000</td><td>1000</td><td>1000</td><td>500</td><td>500</td><td>...</td><td>500</td><td>0</td></tr><tr><td>Provider Earned from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Provider Paid by SFA</td><td>0</td><td>1000</td><td>1000</td><td>1000</td><td>500</td><td>...</td><td>500</td><td>500</td></tr><tr><td>Payment due from Employer</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr><tr><td>Levy account debited</td><td>0</td><td>1000</td><td>1000</td><td>1000</td><td>500</td><td>...</td><td>500</td><td>500</td></tr><tr><td>SFA Levy employer budget</td><td>1000</td><td>1000</td><td>1000</td><td>500</td><td>500</td><td>...</td><td>500</td><td>0</td></tr><tr><td>SFA Levy co-funding budget</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>...</td><td>0</td><td>0</td></tr></tbody></table></div></li>
               </ul>
@@ -646,7 +646,7 @@ $(document).ready(function() {
         </ul>
       </div>
       <div id="footer">
-        <p>Generated on: 28 April 2017 03:22:56</p>
+        <p>Generated on: 29 April 2017 06:44:39</p>
         <p>Produced by Pickles, version 2.8.2.0</p>
       </div>
     </div>
