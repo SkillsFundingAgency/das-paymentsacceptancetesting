@@ -224,8 +224,8 @@ Scenario: DLOCK11 - When employer is not a levy payer, DLOCK11 will be raised
         | Price Episode identifier  | Apprenticeship Id | ULN       | ILR Start Date | ILR Training Price | 
         | 2-450-1-01/05/2017        | 73                | learner a | 01/05/2017     | 10000              |
     And the data lock event has the following errors:    
-        | Price Episode identifier | Error code | Error Description              |
-        | 2-450-1-01/05/2017       | DLOCK_11   | The employer is non levy payer |
+        | Price Episode identifier | Error code | Error Description                          |
+        | 2-450-1-01/05/2017       | DLOCK_11   | The employer is not currently a levy payer |
     And the data lock event has the following periods    
         | Price Episode identifier | Period   | Payable Flag | Transaction Type |
         | 2-450-1-01/05/2017       | 1617-R10 | true         | Learning         |
