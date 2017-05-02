@@ -1248,7 +1248,7 @@ this.ScenarioSetup(scenarioInfo);
             table302.AddRow(new string[] {
                         "2-450-1-01/05/2017",
                         "DLOCK_11",
-                        "The employer is non levy payer"});
+                        "The employer is not currently a levy payer"});
 #line 226
     testRunner.And("the data lock event has the following errors:", ((string)(null)), table302, "And ");
 #line hidden
