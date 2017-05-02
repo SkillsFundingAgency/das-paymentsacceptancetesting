@@ -202,7 +202,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                 rowData.StandardCode = Defaults.StandardCode;
             }
 
-            if (rowData.FrameworkCode > 0 && rowData.TotalAssessmentPrice2 > 0 )
+            if (rowData.FrameworkCode > 0 && rowData.TotalAssessmentPrice2 > 0)
             {
                 throw new Exception("Framework code and TotalAssessmentPrice2 can't be in the same scenario");
             }

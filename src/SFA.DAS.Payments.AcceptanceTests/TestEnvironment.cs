@@ -21,6 +21,10 @@ namespace SFA.DAS.Payments.AcceptanceTests
                 CurrentYear = DateTime.Today.GetAcademicYear(),
                 LogLevel = "Trace",
                 
+                IlrAimRefLookups = new[]
+                {
+                    new IlrAimRefLookup { ProgrammeType = 2, FrameworkCode = 403, PathwayCode = 1, ComponentLearnAimRef = "60005105", MathsAndEnglishLearnAimRef = "50086832" }
+                },
 
                 AccountsApiBaseUrl = "",
                 AccountsApiClientSecret = "",
