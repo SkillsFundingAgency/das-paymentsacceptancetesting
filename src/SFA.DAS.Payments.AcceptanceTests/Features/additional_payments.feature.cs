@@ -10991,6 +10991,582 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("597_AC01 Non-DAS learner, fails their English or maths aim during their programme" +
+            " and retakes it - the second instance of the aim goes beyond the actual end date" +
+            " of the programme.")]
+        [NUnit.Framework.CategoryAttribute("MathsAndEnglishNonDas")]
+        public virtual void _597_AC01Non_DASLearnerFailsTheirEnglishOrMathsAimDuringTheirProgrammeAndRetakesIt_TheSecondInstanceOfTheAimGoesBeyondTheActualEndDateOfTheProgramme_()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("597_AC01 Non-DAS learner, fails their English or maths aim during their programme" +
+                    " and retakes it - the second instance of the aim goes beyond the actual end date" +
+                    " of the programme.", new string[] {
+                        "MathsAndEnglishNonDas"});
+#line 1293
+this.ScenarioSetup(scenarioInfo);
+#line hidden
+            TechTalk.SpecFlow.Table table167 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ULN",
+                        "learner type",
+                        "aim type",
+                        "start date",
+                        "planned end date",
+                        "actual end date",
+                        "completion status",
+                        "aim rate",
+                        "Total training price 1",
+                        "Total training price 1 effective date",
+                        "Total assessment price 1",
+                        "Total assessment price 1 effective date"});
+            table167.AddRow(new string[] {
+                        "learner a",
+                        "programme only non-DAS",
+                        "programme",
+                        "06/08/2017",
+                        "22/08/2018",
+                        "22/08/2018",
+                        "completed",
+                        "",
+                        "12000",
+                        "06/08/2017",
+                        "3000",
+                        "06/08/2017"});
+            table167.AddRow(new string[] {
+                        "learner a",
+                        "programme only non-DAS",
+                        "maths or english",
+                        "06/08/2017",
+                        "08/06/2018",
+                        "08/06/2018",
+                        "completed",
+                        "471",
+                        "",
+                        "",
+                        "",
+                        ""});
+            table167.AddRow(new string[] {
+                        "learner a",
+                        "programme only non-DAS",
+                        "maths or english",
+                        "09/06/2018",
+                        "08/06/2019",
+                        "08/06/2019",
+                        "completed",
+                        "471",
+                        "",
+                        "",
+                        "",
+                        ""});
+#line 1294
+ testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table167, "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table168 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Type",
+                        "08/17",
+                        "09/17",
+                        "10/17",
+                        "...",
+                        "05/18",
+                        "06/18",
+                        "07/18",
+                        "08/18",
+                        "09/18",
+                        "...",
+                        "05/19",
+                        "06/19",
+                        "07/19"});
+            table168.AddRow(new string[] {
+                        "Provider Earned Total",
+                        "1047.10",
+                        "1047.10",
+                        "1047.10",
+                        "...",
+                        "1047.10",
+                        "1039.25",
+                        "1039.25",
+                        "3039.25",
+                        "39.25",
+                        "...",
+                        "39.25",
+                        "0",
+                        "0"});
+            table168.AddRow(new string[] {
+                        "Provider Paid by SFA",
+                        "0",
+                        "947.10",
+                        "947.10",
+                        "...",
+                        "947.10",
+                        "947.10",
+                        "939.25",
+                        "939.25",
+                        "2739.25",
+                        "...",
+                        "39.25",
+                        "39.25",
+                        "0"});
+            table168.AddRow(new string[] {
+                        "Provider Earned from Employer",
+                        "100",
+                        "100",
+                        "100",
+                        "...",
+                        "100",
+                        "100",
+                        "100",
+                        "100",
+                        "0",
+                        "...",
+                        "0",
+                        "0",
+                        "0"});
+            table168.AddRow(new string[] {
+                        "Payment due from Employer",
+                        "0",
+                        "100",
+                        "100",
+                        "...",
+                        "100",
+                        "100",
+                        "100",
+                        "100",
+                        "300",
+                        "...",
+                        "0",
+                        "0",
+                        "0"});
+            table168.AddRow(new string[] {
+                        "Levy account debited",
+                        "0",
+                        "0",
+                        "0",
+                        "...",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "...",
+                        "0",
+                        "0",
+                        "0"});
+            table168.AddRow(new string[] {
+                        "SFA Levy employer budget",
+                        "0",
+                        "0",
+                        "0",
+                        "...",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "...",
+                        "0",
+                        "0",
+                        "0"});
+            table168.AddRow(new string[] {
+                        "SFA non-Levy co-funding budget",
+                        "900",
+                        "900",
+                        "900",
+                        "...",
+                        "900",
+                        "900",
+                        "900",
+                        "2700",
+                        "0",
+                        "...",
+                        "0",
+                        "0",
+                        "0"});
+            table168.AddRow(new string[] {
+                        "SFA non-Levy additional payments budget",
+                        "47.10",
+                        "47.10",
+                        "47.10",
+                        "...",
+                        "47.10",
+                        "39.25",
+                        "39.25",
+                        "39.25",
+                        "39.25",
+                        "...",
+                        "39.25",
+                        "0",
+                        "0"});
+#line 1300
+ testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table168, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table169 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Payment type",
+                        "09/17",
+                        "10/17",
+                        "...",
+                        "05/18",
+                        "06/18",
+                        "07/18",
+                        "08/18",
+                        "09/18",
+                        "...",
+                        "06/19",
+                        "07/19"});
+            table169.AddRow(new string[] {
+                        "On-program",
+                        "900",
+                        "900",
+                        "...",
+                        "900",
+                        "900",
+                        "900",
+                        "900",
+                        "0",
+                        "...",
+                        "0",
+                        "0"});
+            table169.AddRow(new string[] {
+                        "Completion",
+                        "0",
+                        "0",
+                        "...",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "2700",
+                        "...",
+                        "0",
+                        "0"});
+            table169.AddRow(new string[] {
+                        "Balancing",
+                        "0",
+                        "0",
+                        "...",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "...",
+                        "0",
+                        "0"});
+            table169.AddRow(new string[] {
+                        "English and maths on programme",
+                        "47.10",
+                        "47.10",
+                        "...",
+                        "47.10",
+                        "47.10",
+                        "39.25",
+                        "39.25",
+                        "39.25",
+                        "...",
+                        "39.25",
+                        "0"});
+            table169.AddRow(new string[] {
+                        "English and maths Balancing",
+                        "0",
+                        "0",
+                        "...",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "...",
+                        "0",
+                        "0"});
+#line 1311
+ testRunner.And("the transaction types for the payments are:", ((string)(null)), table169, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("597_AC02 DAS learner, fails their English or maths aim during their programme and" +
+            " retakes it - the second instance of the aim goes beyond the actual end date of " +
+            "the programme.")]
+        [NUnit.Framework.CategoryAttribute("MathsAndEnglishDas")]
+        public virtual void _597_AC02DASLearnerFailsTheirEnglishOrMathsAimDuringTheirProgrammeAndRetakesIt_TheSecondInstanceOfTheAimGoesBeyondTheActualEndDateOfTheProgramme_()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("597_AC02 DAS learner, fails their English or maths aim during their programme and" +
+                    " retakes it - the second instance of the aim goes beyond the actual end date of " +
+                    "the programme.", new string[] {
+                        "MathsAndEnglishDas"});
+#line 1321
+this.ScenarioSetup(scenarioInfo);
+#line 1322
+ testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table170 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ULN",
+                        "start date",
+                        "end date",
+                        "agreed price",
+                        "status"});
+            table170.AddRow(new string[] {
+                        "learner a",
+                        "01/08/2017",
+                        "01/08/2018",
+                        "15000",
+                        "active"});
+#line 1323
+ testRunner.And("the following commitments exist:", ((string)(null)), table170, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table171 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ULN",
+                        "learner type",
+                        "aim type",
+                        "start date",
+                        "planned end date",
+                        "actual end date",
+                        "completion status",
+                        "aim rate",
+                        "Total training price 1",
+                        "Total training price 1 effective date",
+                        "Total assessment price 1",
+                        "Total assessment price 1 effective date"});
+            table171.AddRow(new string[] {
+                        "learner a",
+                        "programme only DAS",
+                        "programme",
+                        "06/08/2017",
+                        "22/08/2018",
+                        "22/08/2018",
+                        "completed",
+                        "",
+                        "12000",
+                        "06/08/2017",
+                        "3000",
+                        "06/08/2017"});
+            table171.AddRow(new string[] {
+                        "learner a",
+                        "programme only DAS",
+                        "maths or english",
+                        "06/08/2017",
+                        "08/06/2018",
+                        "08/06/2018",
+                        "completed",
+                        "471",
+                        "",
+                        "",
+                        "",
+                        ""});
+            table171.AddRow(new string[] {
+                        "learner a",
+                        "programme only DAS",
+                        "maths or english",
+                        "09/06/2018",
+                        "08/06/2019",
+                        "08/06/2019",
+                        "completed",
+                        "471",
+                        "",
+                        "",
+                        "",
+                        ""});
+#line 1327
+ testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table171, "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table172 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Type",
+                        "08/17",
+                        "09/17",
+                        "10/17",
+                        "...",
+                        "05/18",
+                        "06/18",
+                        "07/18",
+                        "08/18",
+                        "09/18",
+                        "...",
+                        "05/19",
+                        "06/19"});
+            table172.AddRow(new string[] {
+                        "Provider Earned Total",
+                        "1047.10",
+                        "1047.10",
+                        "1047.10",
+                        "...",
+                        "1047.10",
+                        "1039.25",
+                        "1039.25",
+                        "3039.25",
+                        "39.25",
+                        "...",
+                        "39.25",
+                        "0"});
+            table172.AddRow(new string[] {
+                        "Provider Paid by SFA",
+                        "0",
+                        "1047.10",
+                        "1047.10",
+                        "...",
+                        "1047.10",
+                        "1047.10",
+                        "1039.25",
+                        "1039.25",
+                        "3039.25",
+                        "...",
+                        "39.25",
+                        "39.25"});
+            table172.AddRow(new string[] {
+                        "Payment due from Employer",
+                        "0",
+                        "0",
+                        "0",
+                        "...",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "...",
+                        "0",
+                        "0"});
+            table172.AddRow(new string[] {
+                        "Levy account debited",
+                        "0",
+                        "1000",
+                        "1000",
+                        "...",
+                        "1000",
+                        "1000",
+                        "1000",
+                        "1000",
+                        "3000",
+                        "...",
+                        "0",
+                        "0"});
+            table172.AddRow(new string[] {
+                        "SFA Levy employer budget",
+                        "1000",
+                        "1000",
+                        "1000",
+                        "...",
+                        "1000",
+                        "1000",
+                        "1000",
+                        "3000",
+                        "0",
+                        "...",
+                        "0",
+                        "0"});
+            table172.AddRow(new string[] {
+                        "SFA Levy co-funding budget",
+                        "0",
+                        "0",
+                        "0",
+                        "...",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "...",
+                        "0",
+                        "0"});
+            table172.AddRow(new string[] {
+                        "SFA Levy additional payments budget",
+                        "47.10",
+                        "47.10",
+                        "47.10",
+                        "...",
+                        "47.10",
+                        "39.25",
+                        "39.25",
+                        "39.25",
+                        "39.25",
+                        "...",
+                        "39.25",
+                        "0"});
+#line 1333
+ testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table172, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table173 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Payment type",
+                        "09/17",
+                        "10/17",
+                        "...",
+                        "05/18",
+                        "06/18",
+                        "07/18",
+                        "08/18",
+                        "09/18",
+                        "...",
+                        "06/19",
+                        "07/19"});
+            table173.AddRow(new string[] {
+                        "On-program",
+                        "1000",
+                        "1000",
+                        "...",
+                        "1000",
+                        "1000",
+                        "1000",
+                        "1000",
+                        "0",
+                        "...",
+                        "0",
+                        "0"});
+            table173.AddRow(new string[] {
+                        "Completion",
+                        "0",
+                        "0",
+                        "...",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "3000",
+                        "...",
+                        "0",
+                        "0"});
+            table173.AddRow(new string[] {
+                        "Balancing",
+                        "0",
+                        "0",
+                        "...",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "...",
+                        "0",
+                        "0"});
+            table173.AddRow(new string[] {
+                        "English and maths on programme",
+                        "47.10",
+                        "47.10",
+                        "...",
+                        "47.10",
+                        "47.10",
+                        "39.25",
+                        "39.25",
+                        "39.25",
+                        "...",
+                        "39.25",
+                        "0"});
+            table173.AddRow(new string[] {
+                        "English and maths Balancing",
+                        "0",
+                        "0",
+                        "...",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "...",
+                        "0",
+                        "0"});
+#line 1342
+ testRunner.And("the transaction types for the payments are:", ((string)(null)), table173, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

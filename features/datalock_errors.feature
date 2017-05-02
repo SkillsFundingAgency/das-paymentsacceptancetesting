@@ -18,9 +18,9 @@ Scenario: DLOCK07 - When no matching record found in an employer digital account
         | 2-450-1-01/05/2017        | DLOCK_07   | No matching record found in the employer digital account for the negotiated cost of training	|
     And the data lock event has the following periods    
         | Price Episode identifier | Period   | Payable Flag | Transaction Type |
-        | 2-450-1-01/05/2017       | 1617-R10 | true         | Learning         |
-        | 2-450-1-01/05/2017       | 1617-R11 | true         | Learning         |
-        | 2-450-1-01/05/2017       | 1617-R12 | true         | Learning         |
+        | 2-450-1-01/05/2017       | 1617-R10 | false        | Learning         |
+        | 2-450-1-01/05/2017       | 1617-R11 | false        | Learning         |
+        | 2-450-1-01/05/2017       | 1617-R12 | false        | Learning         |
     And the data lock event used the following commitments   
         | Price Episode identifier | Apprentice Version | Start Date | framework code | programme type | pathway code | Negotiated Price | Effective Date |
         | 2-450-1-01/05/2017       | 125                | 01/05/2017 | 450            | 2              | 1            | 10000            | 01/05/2017     |
@@ -44,8 +44,8 @@ Scenario: DLOCK09 - When no matching record found in an employer digital account
         | 25-23-01/05/2017          | DLOCK_09   | The start date for this negotiated price is before the corresponding price start date in the employer digital account |
     And the data lock event has the following periods    
         | Price Episode identifier | Period   | Payable Flag | Transaction Type |
-        | 25-23-01/05/2017         | 1617-R11 | true         | Learning         |
-        | 25-23-01/05/2017         | 1617-R12 | true         | Learning         |
+        | 25-23-01/05/2017         | 1617-R11 | false        | Learning         |
+        | 25-23-01/05/2017         | 1617-R12 | false        | Learning         |
     And the data lock event used the following commitments   
         | Price Episode identifier | Apprentice Version | Start Date | standard code | Negotiated Price | Effective Date |
         | 25-23-01/05/2017         | 125                | 01/06/2017 | 23            | 10000            | 01/06/2017     |
@@ -69,9 +69,9 @@ Scenario: DLOCK03 - When no matching record found in an employer digital account
         | 25-23-01/05/2017          | DLOCK_03   | No matching record found in the employer digital account for the standard code |
     And the data lock event has the following periods    
         | Price Episode identifier | Period   | Payable Flag | Transaction Type |
-        | 25-23-01/05/2017         | 1617-R10 | true         | Learning         |
-        | 25-23-01/05/2017         | 1617-R11 | true         | Learning         |
-        | 25-23-01/05/2017         | 1617-R12 | true         | Learning         |
+        | 25-23-01/05/2017         | 1617-R10 | false        | Learning         |
+        | 25-23-01/05/2017         | 1617-R11 | false        | Learning         |
+        | 25-23-01/05/2017         | 1617-R12 | false        | Learning         |
     And the data lock event used the following commitments   
         | Price Episode identifier | Apprentice Version | Start Date | standard code | Negotiated Price | Effective Date |
         | 25-23-01/05/2017         | 125                | 01/05/2017 | 21            | 10000            | 01/05/2017     |
@@ -94,9 +94,9 @@ Scenario: DLOCK04 - When no matching record found in an employer digital account
         | 2-450-1-01/05/2017        | DLOCK_04   | No matching record found in the employer digital account for the framework code |
     And the data lock event has the following periods    
         | Price Episode identifier | Period   | Payable Flag | Transaction Type |
-        | 2-450-1-01/05/2017       | 1617-R10 | true         | Learning         |
-        | 2-450-1-01/05/2017       | 1617-R11 | true         | Learning         |
-        | 2-450-1-01/05/2017       | 1617-R12 | true         | Learning         |
+        | 2-450-1-01/05/2017       | 1617-R10 | false        | Learning         |
+        | 2-450-1-01/05/2017       | 1617-R11 | false        | Learning         |
+        | 2-450-1-01/05/2017       | 1617-R12 | false        | Learning         |
     And the data lock event used the following commitments   
         | Price Episode identifier | Apprentice Version | Start Date | framework code | programme type | pathway code | Negotiated Price | Effective Date |
         | 2-450-1-01/05/2017       | 125                | 01/05/2017 | 451            | 2              | 1            | 10000            | 01/05/2017     |
@@ -119,9 +119,9 @@ Scenario: DLOCK05 - When no matching record found in an employer digital account
         | 2-450-1-01/05/2017        | DLOCK_05   | No matching record found in the employer digital account for the programme type |
     And the data lock event has the following periods    
         | Price Episode identifier | Period   | Payable Flag | Transaction Type |
-        | 2-450-1-01/05/2017       | 1617-R10 | true         | Learning         |
-        | 2-450-1-01/05/2017       | 1617-R11 | true         | Learning         |
-        | 2-450-1-01/05/2017       | 1617-R12 | true         | Learning         |
+        | 2-450-1-01/05/2017       | 1617-R10 | false        | Learning         |
+        | 2-450-1-01/05/2017       | 1617-R11 | false        | Learning         |
+        | 2-450-1-01/05/2017       | 1617-R12 | false        | Learning         |
     And the data lock event used the following commitments   
         | Price Episode identifier | Apprentice Version | Start Date | framework code | programme type | pathway code | Negotiated Price | Effective Date |
         | 2-450-1-01/05/2017       | 125                | 01/05/2017 | 450            | 3              | 1            | 10000            | 01/05/2017     |
@@ -144,9 +144,9 @@ Scenario: DLOCK06 - When no matching record found in an employer digital account
         | 2-450-1-01/05/2017        | DLOCK_06   | No matching record found in the employer digital account for the pathway code   |
     And the data lock event has the following periods    
         | Price Episode identifier | Period   | Payable Flag | Transaction Type |
-        | 2-450-1-01/05/2017       | 1617-R10 | true         | Learning         |
-        | 2-450-1-01/05/2017       | 1617-R11 | true         | Learning         |
-        | 2-450-1-01/05/2017       | 1617-R12 | true         | Learning         |
+        | 2-450-1-01/05/2017       | 1617-R10 | false        | Learning         |
+        | 2-450-1-01/05/2017       | 1617-R11 | false        | Learning         |
+        | 2-450-1-01/05/2017       | 1617-R12 | false        | Learning         |
     And the data lock event used the following commitments   
         | Price Episode identifier | Apprentice Version | Start Date | framework code | programme type | pathway code | Negotiated Price | Effective Date |
         | 2-450-1-01/05/2017       | 125                | 01/05/2017 | 450            | 2              | 6            | 10000            | 01/05/2017     |
@@ -172,9 +172,9 @@ Scenario: DLOCK04 + DLOCK05 - When no matching record found in an employer digit
         | 2-450-1-01/05/2017        | DLOCK_05   | No matching record found in the employer digital account for the programme type |
     And the data lock event has the following periods    
         | Price Episode identifier | Period   | Payable Flag | Transaction Type |
-        | 2-450-1-01/05/2017       | 1617-R10 | true         | Learning         |
-        | 2-450-1-01/05/2017       | 1617-R11 | true         | Learning         |
-        | 2-450-1-01/05/2017       | 1617-R12 | true         | Learning         |
+        | 2-450-1-01/05/2017       | 1617-R10 | false        | Learning         |
+        | 2-450-1-01/05/2017       | 1617-R11 | false        | Learning         |
+        | 2-450-1-01/05/2017       | 1617-R12 | false        | Learning         |
     And the data lock event used the following commitments   
         | Price Episode identifier | Apprentice Version | Start Date | framework code | programme type | pathway code | Negotiated Price | Effective Date |
         | 2-450-1-01/05/2017       | 125                | 01/05/2017 | 451            | 3              | 1            | 10000            | 01/05/2017     |
@@ -201,9 +201,9 @@ Scenario: DLOCK04 + DLOCK05 + DLOCK06 - When no matching record found in an empl
         | 2-450-1-01/05/2017        | DLOCK_06   | No matching record found in the employer digital account for the pathway code   |
     And the data lock event has the following periods    
         | Price Episode identifier | Period   | Payable Flag | Transaction Type |
-        | 2-450-1-01/05/2017       | 1617-R10 | true         | Learning         |
-        | 2-450-1-01/05/2017       | 1617-R11 | true         | Learning         |
-        | 2-450-1-01/05/2017       | 1617-R12 | true         | Learning         |
+        | 2-450-1-01/05/2017       | 1617-R10 | false        | Learning         |
+        | 2-450-1-01/05/2017       | 1617-R11 | false        | Learning         |
+        | 2-450-1-01/05/2017       | 1617-R12 | false        | Learning         |
     And the data lock event used the following commitments   
         | Price Episode identifier | Apprentice Version | Start Date | framework code | programme type | pathway code | Negotiated Price | Effective Date |
         | 2-450-1-01/05/2017       | 125                | 01/05/2017 | 451            | 3              | 6            | 10000            | 01/05/2017     |
