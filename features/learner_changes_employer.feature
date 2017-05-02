@@ -784,8 +784,8 @@ Scenario:AC5-Provider earnings and payments where learner changes employer and t
             | employer 2 | in paid employment     | 02/03/2018                |
      
         Then the data lock status will be as follows:
-            | Payment type | 08/17           | 09/17           | 10/17 | 11/17 | 12/17 | 01/18 | 02/18 | 03/18           | 04/18           |
-            | On-program   | commitment 1 v1 | commitment 1 v1 |       |       |       |       |       | commitment 2 v1 | commitment 2 v1 |
+            | Payment type | 08/17           | 09/17           | 10/17 | 11/17 | 12/17 | 01/18 | 02/18 | 03/18 | 04/18 |
+            | On-program   | commitment 1 v1 | commitment 1 v1 |       |       |       |       |       |       |       |
         And the provider earnings and payments break down as follows:
             | Type                            | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 | 02/18 | 03/18 | 04/18 |
             | Provider Earned Total           | 1000  | 1000  | 1000  | 1000  | 1000  | 0     | 0     | 0     | 0     |

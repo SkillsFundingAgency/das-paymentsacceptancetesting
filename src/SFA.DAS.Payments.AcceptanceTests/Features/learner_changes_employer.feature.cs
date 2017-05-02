@@ -4981,8 +4981,8 @@ this.ScenarioSetup(scenarioInfo);
                         "",
                         "",
                         "",
-                        "commitment 2 v1",
-                        "commitment 2 v1"});
+                        "",
+                        ""});
 #line 786
         testRunner.Then("the data lock status will be as follows:", ((string)(null)), table427, "Then ");
 #line hidden
