@@ -70,6 +70,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             AddOrUpdateEmployerAccount(id, 0m, periodBalances);
         }
 
+        [Given(@"the employer is not a levy payer")]
+        public void GivenTheEmployerIsNotALevyPayer()
+        {
+            AddOrUpdateEmployerAccount(Defaults.EmployerAccountId,0m, isLevyPayer:false);
+        }
+
+
         [Given("the learner changes employers")]
         public void GivenTheLearnerChangesEmployers(Table employmentDates)
         {
@@ -81,14 +88,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                 }
 
                 var employerAccountId = int.Parse(row[0].Substring("employer ".Length));
-                var isLevyPayer = row[1].Equals("DAS", StringComparison.CurrentCultureIgnoreCase);
+                var isDasEMployer = row[1].Equals("DAS", StringComparison.CurrentCultureIgnoreCase);
 
                 var account = EmployerAccountContext.EmployerAccounts.SingleOrDefault(a => a.Id == employerAccountId);
                 if (account == null)
                 {
-                    account = AddOrUpdateEmployerAccount(employerAccountId, 0, null, isLevyPayer);
+                    account = AddOrUpdateEmployerAccount(employerAccountId, 0, null, isDasEMployer);
                 }
-                account.IsLevyPayer = isLevyPayer;
+                account.IsDasEmployer = isDasEMployer;
             }
         }
 
@@ -110,7 +117,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
         }
 
 
-        private EmployerAccountReferenceData AddOrUpdateEmployerAccount(int id, decimal balance, List<EmployerAccountPeriodValue> periodBalances = null, bool isLevyPayer = true)
+        private EmployerAccountReferenceData AddOrUpdateEmployerAccount(int id, 
+                                                                        decimal balance, 
+                                                                        List<EmployerAccountPeriodValue> periodBalances = null, 
+                                                                        bool isDasEmployer = true,
+                                                                        bool isLevyPayer = true)
         {
             var account = EmployerAccountContext.EmployerAccounts.SingleOrDefault(a => a.Id == id);
             if (account == null)
@@ -124,6 +135,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 
             account.Balance = balance;
             account.PeriodBalances = periodBalances ?? new List<EmployerAccountPeriodValue>();
+            account.IsDasEmployer = isDasEmployer;
             account.IsLevyPayer = isLevyPayer;
 
             EmployerAccountManager.AddOrUpdateAccount(account);

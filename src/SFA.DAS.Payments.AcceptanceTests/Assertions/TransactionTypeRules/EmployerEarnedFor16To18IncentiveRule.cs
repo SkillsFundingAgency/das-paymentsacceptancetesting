@@ -12,10 +12,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.Assertions.TransactionTypeRules
         {
             var employerPeriod = (EmployerAccountProviderPeriodValue)period;
             var employer = employerAccountContext.EmployerAccounts.SingleOrDefault(a => a.Id == employerPeriod.EmployerAccountId);
-            var isLevyPayer = employer?.IsLevyPayer ?? false;
+            var isDasEmployer = employer?.IsDasEmployer ?? false;
             var earningPeriod = employerPeriod.PeriodName.ToPeriodDateTime().AddMonths(-1).ToPeriodName();
             return submissionResults.Where(l => l.ProviderId.Equals(employerPeriod.ProviderId, System.StringComparison.CurrentCultureIgnoreCase))
-                                    .SelectMany(r => r.Payments).Where(p => (p.EmployerAccountId == employerPeriod.EmployerAccountId || !isLevyPayer && p.EmployerAccountId == 0)
+                                    .SelectMany(r => r.Payments).Where(p => (p.EmployerAccountId == employerPeriod.EmployerAccountId || !isDasEmployer && p.EmployerAccountId == 0)
                                                                          && p.DeliveryPeriod == earningPeriod
                                                                          && (p.TransactionType == TransactionType.First16To18EmployerIncentive || p.TransactionType == TransactionType.Second16To18EmployerIncentive));
         }
