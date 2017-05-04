@@ -1260,17 +1260,17 @@ this.ScenarioSetup(scenarioInfo);
             table310.AddRow(new string[] {
                         "2-450-1-01/05/2017",
                         "1617-R10",
-                        "true",
+                        "false",
                         "Learning"});
             table310.AddRow(new string[] {
                         "2-450-1-01/05/2017",
                         "1617-R11",
-                        "true",
+                        "false",
                         "Learning"});
             table310.AddRow(new string[] {
                         "2-450-1-01/05/2017",
                         "1617-R12",
-                        "true",
+                        "false",
                         "Learning"});
 #line 229
     testRunner.And("the data lock event has the following periods", ((string)(null)), table310, "And ");

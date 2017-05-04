@@ -228,9 +228,9 @@ Scenario: DLOCK11 - When employer is not a levy payer, DLOCK11 will be raised
         | 2-450-1-01/05/2017       | DLOCK_11   | The employer is not currently a levy payer |
     And the data lock event has the following periods    
         | Price Episode identifier | Period   | Payable Flag | Transaction Type |
-        | 2-450-1-01/05/2017       | 1617-R10 | true         | Learning         |
-        | 2-450-1-01/05/2017       | 1617-R11 | true         | Learning         |
-        | 2-450-1-01/05/2017       | 1617-R12 | true         | Learning         |
+        | 2-450-1-01/05/2017       | 1617-R10 | false        | Learning         |
+        | 2-450-1-01/05/2017       | 1617-R11 | false        | Learning         |
+        | 2-450-1-01/05/2017       | 1617-R12 | false        | Learning         |
     And the data lock event used the following commitments   
         | Price Episode identifier | Apprentice Version | Start Date | framework code | programme type | pathway code | Negotiated Price | Effective Date |
         | 2-450-1-01/05/2017       | 125                | 01/05/2017 | 450            | 2              | 1            | 10000            | 01/05/2017     |
