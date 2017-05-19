@@ -1298,6 +1298,212 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("DLOCK01 - When no matching record found in an employer digital account for the UK" +
+            "PRN then datalock DLOCK_01 will be produced")]
+        public virtual void DLOCK01_WhenNoMatchingRecordFoundInAnEmployerDigitalAccountForTheUKPRNThenDatalockDLOCK_01WillBeProduced()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("DLOCK01 - When no matching record found in an employer digital account for the UK" +
+                    "PRN then datalock DLOCK_01 will be produced", ((string[])(null)));
+#line 239
+this.ScenarioSetup(scenarioInfo);
+#line hidden
+            TechTalk.SpecFlow.Table table312 = new TechTalk.SpecFlow.Table(new string[] {
+                        "commitment Id",
+                        "version Id",
+                        "Provider",
+                        "ULN",
+                        "framework code",
+                        "programme type",
+                        "pathway code",
+                        "agreed price",
+                        "start date",
+                        "end date",
+                        "status",
+                        "effective from"});
+            table312.AddRow(new string[] {
+                        "73",
+                        "125",
+                        "Provider b",
+                        "learner a",
+                        "450",
+                        "2",
+                        "1",
+                        "10000",
+                        "01/05/2017",
+                        "01/05/2018",
+                        "active",
+                        "01/05/2017"});
+#line 241
+    testRunner.Given("the following commitments exist:", ((string)(null)), table312, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table313 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Provider",
+                        "ULN",
+                        "framework code",
+                        "programme type",
+                        "pathway code",
+                        "start date",
+                        "planned end date",
+                        "completion status",
+                        "Total training price",
+                        "Total training price effective date"});
+            table313.AddRow(new string[] {
+                        "Provider a",
+                        "learner a",
+                        "450",
+                        "2",
+                        "1",
+                        "01/05/2017",
+                        "08/08/2018",
+                        "continuing",
+                        "10000",
+                        "01/05/2017"});
+#line 245
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table313, "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table314 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Price Episode identifier",
+                        "Apprenticeship Id",
+                        "ULN",
+                        "ILR Start Date",
+                        "ILR Training Price"});
+            table314.AddRow(new string[] {
+                        "2-450-1-01/05/2017",
+                        "73",
+                        "learner a",
+                        "01/05/2017",
+                        "10000"});
+#line 249
+    testRunner.Then("the following data lock event is returned:", ((string)(null)), table314, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table315 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Price Episode identifier",
+                        "Error code",
+                        "Error Description"});
+            table315.AddRow(new string[] {
+                        "2-450-1-01/05/2017",
+                        "DLOCK_01",
+                        "No matching record found in an employer digital account for the UKPRN"});
+#line 252
+    testRunner.And("the data lock event has the following errors:", ((string)(null)), table315, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table316 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Price Episode identifier",
+                        "Period",
+                        "Payable Flag",
+                        "Transaction Type"});
+            table316.AddRow(new string[] {
+                        "2-450-1-01/05/2017",
+                        "1617-R10",
+                        "false",
+                        "Learning"});
+            table316.AddRow(new string[] {
+                        "2-450-1-01/05/2017",
+                        "1617-R11",
+                        "false",
+                        "Learning"});
+            table316.AddRow(new string[] {
+                        "2-450-1-01/05/2017",
+                        "1617-R12",
+                        "false",
+                        "Learning"});
+#line 255
+    testRunner.And("the data lock event has the following periods", ((string)(null)), table316, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table317 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Price Episode identifier",
+                        "Apprentice Version",
+                        "Start Date",
+                        "framework code",
+                        "programme type",
+                        "pathway code",
+                        "Negotiated Price",
+                        "Effective Date"});
+            table317.AddRow(new string[] {
+                        "2-450-1-01/05/2017",
+                        "125",
+                        "01/05/2017",
+                        "450",
+                        "2",
+                        "1",
+                        "10000",
+                        "01/05/2017"});
+#line 260
+    testRunner.And("the data lock event used the following commitments", ((string)(null)), table317, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("DLOCK02 - When no matching record found in an employer digital account for the UL" +
+            "N then datalock DLOCK_02 will be produced")]
+        public virtual void DLOCK02_WhenNoMatchingRecordFoundInAnEmployerDigitalAccountForTheULNThenDatalockDLOCK_02WillBeProduced()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("DLOCK02 - When no matching record found in an employer digital account for the UL" +
+                    "N then datalock DLOCK_02 will be produced", ((string[])(null)));
+#line 265
+this.ScenarioSetup(scenarioInfo);
+#line hidden
+            TechTalk.SpecFlow.Table table318 = new TechTalk.SpecFlow.Table(new string[] {
+                        "commitment Id",
+                        "version Id",
+                        "Provider",
+                        "ULN",
+                        "framework code",
+                        "programme type",
+                        "pathway code",
+                        "agreed price",
+                        "start date",
+                        "end date",
+                        "status",
+                        "effective from"});
+            table318.AddRow(new string[] {
+                        "73",
+                        "125",
+                        "Provider a",
+                        "learner b",
+                        "450",
+                        "2",
+                        "1",
+                        "10000",
+                        "01/05/2017",
+                        "01/05/2018",
+                        "active",
+                        "01/05/2017"});
+#line 267
+    testRunner.Given("the following commitments exist:", ((string)(null)), table318, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table319 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Provider",
+                        "ULN",
+                        "framework code",
+                        "programme type",
+                        "pathway code",
+                        "start date",
+                        "planned end date",
+                        "completion status",
+                        "Total training price",
+                        "Total training price effective date"});
+            table319.AddRow(new string[] {
+                        "Provider a",
+                        "learner a",
+                        "450",
+                        "2",
+                        "1",
+                        "01/05/2017",
+                        "08/08/2018",
+                        "continuing",
+                        "10000",
+                        "01/05/2017"});
+#line 271
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table319, "When ");
+#line 275
+    testRunner.Then("no data lock event is returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
