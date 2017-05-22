@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using SFA.DAS.Payments.AcceptanceTests.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.ResultsDataModels;
 
@@ -8,13 +9,27 @@ namespace SFA.DAS.Payments.AcceptanceTests.Assertions.DataLockRules
     {
         public override void AssertDataLockEvents(DataLockContext context, LearnerResults[] results)
         {
+            if (context.ExpectsNoDataLockEvents)
+            {
+                var numberOfDataLockErrors = results.SelectMany(l => l.DataLockEvents).Count();
+                if (numberOfDataLockErrors > 0)
+                {
+                    throw new Exception($"Did not expect any data lock errors, however found {numberOfDataLockErrors}");
+                }
+                return;
+            }
+
             foreach (var expected in context.DataLockEvents)
             {
-                var actual = GetEventForPriceEpisode(results, expected.PriceEpisodeIdentifier);
+                var eventsForPriceEpisode = GetEventsForPriceEpisode(results, expected.PriceEpisodeIdentifier);
+                var actual = eventsForPriceEpisode.FirstOrDefault(x => x.CommitmentId == expected.ApprenticeshipId);
 
-                if (expected.ApprenticeshipId != actual.CommitmentId)
+                if (actual == null)
                 {
-                    throw new Exception($"Expected event to have commitment id {expected.ApprenticeshipId} but actually had {actual.CommitmentId}");
+                    var foundCommitmentIds = eventsForPriceEpisode.Any()
+                        ? eventsForPriceEpisode.Select(x => x.CommitmentId.ToString()).Distinct().Aggregate((x, y) => $"{x}, {y}")
+                        : "no commitment ids";
+                    throw new Exception($"Expected event to have commitment id {expected.ApprenticeshipId} but actually had {foundCommitmentIds}");
                 }
                 if (expected.Uln != actual.Uln)
                 {

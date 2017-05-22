@@ -11,7 +11,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Assertions.DataLockRules
         {
             foreach (var expected in context.DataLockEventPeriods)
             {
-                var actualEvent = GetEventForPriceEpisode(results, expected.PriceEpisodeIdentifier);
+                var actualEvent = GetEventsForPriceEpisode(results, expected.PriceEpisodeIdentifier).FirstOrDefault();
                 var actualPeriods = actualEvent.Periods.Where(e => e.CollectionPeriodName == expected.Period).ToArray();
                 if (!actualPeriods.Any())
                 {

@@ -33,6 +33,16 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             DataLockAssertions.AssertDataLockOutput(DataLockContext, SubmissionContext.SubmissionResults.ToArray());
         }
 
+        [Then("no data lock event is returned")]
+        public void ThenNoDataLockEventIsReturned()
+        {
+            EnsureSubmissionsHaveHappened();
+
+            DataLockContext.ExpectsNoDataLockEvents = true;
+
+            DataLockAssertions.AssertDataLockOutput(DataLockContext, SubmissionContext.SubmissionResults.ToArray());
+        }
+
         [Then(@"the data lock event has the following errors:")]
         public void ThenTheDataLockEventHasTheFollowingErrors(Table table)
         {
