@@ -10,11 +10,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.Assertions.DataLockRules
         public abstract void AssertDataLockEvents(DataLockContext context, LearnerResults[] results);
 
 
-        protected DataLockEventResult GetEventForPriceEpisode(LearnerResults[] results, string priceEpisodeIdentifier)
+        protected DataLockEventResult[] GetEventsForPriceEpisode(LearnerResults[] results, string priceEpisodeIdentifier)
         {
-            var actual = results.SelectMany(l => l.DataLockEvents).FirstOrDefault(e => e.PriceEpisodeIdentifier == priceEpisodeIdentifier);
+            var actual = results.SelectMany(l => l.DataLockEvents).Where(e => e.PriceEpisodeIdentifier == priceEpisodeIdentifier).ToArray();
 
-            if (actual == null)
+            if (actual == null || actual.Length == 0)
             {
                 throw new Exception($"Cannot find data lock event for price episode {priceEpisodeIdentifier}");
             }

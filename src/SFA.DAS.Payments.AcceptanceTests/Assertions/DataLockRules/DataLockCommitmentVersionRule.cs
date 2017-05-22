@@ -11,8 +11,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.Assertions.DataLockRules
         {
             foreach (var expected in context.DataLockEventCommitments)
             {
-                var actualEvent = GetEventForPriceEpisode(results, expected.PriceEpisodeIdentifier);
-                var actual = actualEvent.CommitmentVersions.FirstOrDefault(e => e.CommitmentVersion == expected.ApprenticeshipVersion);
+                var actual = GetEventsForPriceEpisode(results, expected.PriceEpisodeIdentifier)
+                    .SelectMany(x => x.CommitmentVersions)
+                    .FirstOrDefault(e => e.CommitmentVersion == expected.ApprenticeshipVersion);
                 if (actual == null)
                 {
                     throw new Exception($"Event for price episode {expected.PriceEpisodeIdentifier} does not contain commitment version with with version id {expected.ApprenticeshipVersion}");
