@@ -10,5 +10,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ReferenceDataModels
         public DateTime IlrStartDate { get; set; }
         public decimal IlrTrainingPrice { get; set; }
         public decimal IlrEndpointAssementPrice { get; set; }
+        public DateTime ILrEffectiveFrom { get; set; }
+        public DateTime? ILrEffectiveTo { get; set; }
     }
 }

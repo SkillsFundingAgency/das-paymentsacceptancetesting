@@ -10,15 +10,17 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
     [Binding]
     public class DataLockSteps
     {
-        public DataLockSteps(DataLockContext dataLockContext, SubmissionContext submissionContext, EmployerAccountContext employerAccountContext, LookupContext lookupContext)
+        public DataLockSteps(DataLockContext dataLockContext, CommitmentsContext commitmentsContext, SubmissionContext submissionContext, EmployerAccountContext employerAccountContext, LookupContext lookupContext)
         {
             DataLockContext = dataLockContext;
+            CommitmentsContext = commitmentsContext;
             SubmissionContext = submissionContext;
             EmployerAccountContext = employerAccountContext;
             LookupContext = lookupContext;
         }
 
         public DataLockContext DataLockContext { get; }
+        public CommitmentsContext CommitmentsContext { get; }
         public SubmissionContext SubmissionContext { get; }
         public EmployerAccountContext EmployerAccountContext { get; }
         public LookupContext LookupContext { get; }
@@ -80,7 +82,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             {
                 var periodsToSubmitTo = new[]
                 {
-                    SubmissionContext.IlrLearnerDetails.Min(x => x.StartDate).ToString("MM/yy")
+                    //SubmissionContext.IlrLearnerDetails.Min(x => x.StartDate).ToString("MM/yy")
+                    CommitmentsContext.Commitments.Max(x=>x.EffectiveFrom).ToString("MM/yy")
                 };
                 SubmissionContext.SubmissionResults = SubmissionManager.SubmitIlrAndRunMonthEndAndCollateResults(SubmissionContext.IlrLearnerDetails, SubmissionContext.FirstSubmissionDate,
                     LookupContext, EmployerAccountContext.EmployerAccounts, SubmissionContext.ContractTypes, SubmissionContext.EmploymentStatus, SubmissionContext.LearningSupportStatus, periodsToSubmitTo);

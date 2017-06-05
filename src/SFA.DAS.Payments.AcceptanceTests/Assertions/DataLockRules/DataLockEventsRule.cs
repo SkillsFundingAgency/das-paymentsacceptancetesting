@@ -47,6 +47,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.Assertions.DataLockRules
                 {
                     throw new Exception($"Expected event to have endpoint assessment price {expected.IlrEndpointAssementPrice} but actually had {actual.IlrEndpointAssessorPrice}");
                 }
+                if (expected.ILrEffectiveFrom != actual.IlrPriceEffectiveFromDate)
+                {
+                    throw new Exception($"Expected event to have effective from date of {expected.ILrEffectiveFrom} but actually had {actual.IlrPriceEffectiveFromDate}");
+                }
+                if (expected.ILrEffectiveTo.HasValue && expected.ILrEffectiveTo != actual.IlrPriceEffectiveToDate)
+                {
+                    throw new Exception($"Expected event to have effective to date of {expected.ILrEffectiveTo} but actually had {actual.IlrPriceEffectiveToDate}");
+                }
             }
         }
     }
