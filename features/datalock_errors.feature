@@ -11,7 +11,7 @@ Scenario: DLOCK07 - When no matching record found in an employer digital account
         | Provider a | learner a | 450            | 2              | 1            | 01/05/2017 | 08/08/2018       | continuing        | 10010                | 01/05/2017                          |
     
     Then the following data lock event is returned:
-        | Price Episode identifier  | Apprenticeship Id | ULN       | ILR Start Date | ILR Training Price | 
+        | Price Episode identifier  | Apprenticeship Id | ULN       | ILR Start Date | ILR Training Price |
         | 2-450-1-01/05/2017        | 73                | learner a | 01/05/2017     | 10010              |
     And the data lock event has the following errors:    
         | Price Episode identifier  | Error code | Error Description										                                    |
@@ -302,3 +302,32 @@ Scenario: DLOCK08 - When multiple matching record found in an employer digital a
         | Price Episode identifier | Apprentice Version | Start Date | framework code | programme type | pathway code | Negotiated Price | Effective Date |
         | 2-450-1-01/05/2017       | 125                | 01/05/2017 | 450            | 2              | 1            | 10000            | 01/05/2017     |
         | 2-450-1-01/05/2017       | 2                  | 01/05/2017 | 450            | 2              | 1            | 10000            | 01/05/2017     |
+
+
+
+Scenario: DLOCK07(a) - When price is changed, then effective to is set on previous price episode
+    Given the following commitments exist:
+        | commitment Id | version Id | Provider   | ULN       | framework code | programme type | pathway code | agreed price | start date | end date   | status | effective from | effective to |
+        | 73            | 125        | Provider a | learner a | 450            | 2              | 1            | 10000        | 01/05/2017 | 01/05/2018 | active | 01/05/2017     | 30/06/2017   |
+        | 73            | 200        | Provider a | learner a | 450            | 2              | 1            | 15000        | 01/05/2017 | 01/05/2018 | active | 01/07/2017     |              |
+        
+    When an ILR file is submitted with the following data:  
+        | Provider   | ULN       | framework code | programme type | pathway code | start date | planned end date | completion status | Total training price 1 | Total training price 1 effective date | Total training price 2 | Total training price 2 effective date |
+        | Provider a | learner a | 450            | 2              | 1            | 01/05/2017 | 08/08/2018       | continuing        | 10000                  | 01/05/2017                            | 14000                  | 01/07/2017                            |
+    
+    Then the following data lock event is returned:
+        | Price Episode identifier | Apprenticeship Id | ULN       | ILR Start Date | ILR Training Price | ILR Effective from | ILR Effective to |
+        | 2-450-1-01/05/2017       | 73                | learner a | 01/05/2017     | 10000              | 01/05/2017         | 30/06/2017       |
+        | 2-450-1-01/07/2017       | 73                | learner a | 01/05/2017     | 14000              | 01/07/2017         |                  |
+    And the data lock event has the following errors:    
+        | Price Episode identifier  | Error code | Error Description										                                    |
+        | 2-450-1-01/07/2017        | DLOCK_07   | No matching record found in the employer digital account for the negotiated cost of training	|
+    And the data lock event has the following periods    
+        | Price Episode identifier | Period   | Payable Flag | Transaction Type |
+        | 2-450-1-01/05/2017       | 1617-R10 | true         | Learning         |
+        | 2-450-1-01/05/2017       | 1617-R11 | true         | Learning         |
+        | 2-450-1-01/07/2017       | 1617-R12 | false        | Learning         |
+    And the data lock event used the following commitments   
+        | Price Episode identifier | Apprentice Version | Start Date | framework code | programme type | pathway code | Negotiated Price | Effective Date |
+        | 2-450-1-01/05/2017       | 125                | 01/05/2017 | 450            | 2              | 1            | 10000            | 01/05/2017     |
+        | 2-450-1-01/07/2017       | 200                | 01/05/2017 | 450            | 2              | 1            | 15000            | 01/07/2017     |

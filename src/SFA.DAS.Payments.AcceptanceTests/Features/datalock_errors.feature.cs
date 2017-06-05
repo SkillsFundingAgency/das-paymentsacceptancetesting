@@ -1669,6 +1669,185 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("DLOCK07(a) - When price is changed, then effective to is set on previous price ep" +
+            "isode")]
+        public virtual void DLOCK07A_WhenPriceIsChangedThenEffectiveToIsSetOnPreviousPriceEpisode()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("DLOCK07(a) - When price is changed, then effective to is set on previous price ep" +
+                    "isode", ((string[])(null)));
+#line 308
+this.ScenarioSetup(scenarioInfo);
+#line hidden
+            TechTalk.SpecFlow.Table table326 = new TechTalk.SpecFlow.Table(new string[] {
+                        "commitment Id",
+                        "version Id",
+                        "Provider",
+                        "ULN",
+                        "framework code",
+                        "programme type",
+                        "pathway code",
+                        "agreed price",
+                        "start date",
+                        "end date",
+                        "status",
+                        "effective from",
+                        "effective to"});
+            table326.AddRow(new string[] {
+                        "73",
+                        "125",
+                        "Provider a",
+                        "learner a",
+                        "450",
+                        "2",
+                        "1",
+                        "10000",
+                        "01/05/2017",
+                        "01/05/2018",
+                        "active",
+                        "01/05/2017",
+                        "30/06/2017"});
+            table326.AddRow(new string[] {
+                        "73",
+                        "200",
+                        "Provider a",
+                        "learner a",
+                        "450",
+                        "2",
+                        "1",
+                        "15000",
+                        "01/05/2017",
+                        "01/05/2018",
+                        "active",
+                        "01/07/2017",
+                        ""});
+#line 309
+    testRunner.Given("the following commitments exist:", ((string)(null)), table326, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table327 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Provider",
+                        "ULN",
+                        "framework code",
+                        "programme type",
+                        "pathway code",
+                        "start date",
+                        "planned end date",
+                        "completion status",
+                        "Total training price 1",
+                        "Total training price 1 effective date",
+                        "Total training price 2",
+                        "Total training price 2 effective date"});
+            table327.AddRow(new string[] {
+                        "Provider a",
+                        "learner a",
+                        "450",
+                        "2",
+                        "1",
+                        "01/05/2017",
+                        "08/08/2018",
+                        "continuing",
+                        "10000",
+                        "01/05/2017",
+                        "14000",
+                        "01/07/2017"});
+#line 314
+    testRunner.When("an ILR file is submitted with the following data:", ((string)(null)), table327, "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table328 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Price Episode identifier",
+                        "Apprenticeship Id",
+                        "ULN",
+                        "ILR Start Date",
+                        "ILR Training Price",
+                        "ILR Effective from",
+                        "ILR Effective to"});
+            table328.AddRow(new string[] {
+                        "2-450-1-01/05/2017",
+                        "73",
+                        "learner a",
+                        "01/05/2017",
+                        "10000",
+                        "01/05/2017",
+                        "30/06/2017"});
+            table328.AddRow(new string[] {
+                        "2-450-1-01/07/2017",
+                        "73",
+                        "learner a",
+                        "01/05/2017",
+                        "14000",
+                        "01/07/2017",
+                        ""});
+#line 318
+    testRunner.Then("the following data lock event is returned:", ((string)(null)), table328, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table329 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Price Episode identifier",
+                        "Error code",
+                        "Error Description"});
+            table329.AddRow(new string[] {
+                        "2-450-1-01/07/2017",
+                        "DLOCK_07",
+                        "No matching record found in the employer digital account for the negotiated cost " +
+                            "of training"});
+#line 322
+    testRunner.And("the data lock event has the following errors:", ((string)(null)), table329, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table330 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Price Episode identifier",
+                        "Period",
+                        "Payable Flag",
+                        "Transaction Type"});
+            table330.AddRow(new string[] {
+                        "2-450-1-01/05/2017",
+                        "1617-R10",
+                        "true",
+                        "Learning"});
+            table330.AddRow(new string[] {
+                        "2-450-1-01/05/2017",
+                        "1617-R11",
+                        "true",
+                        "Learning"});
+            table330.AddRow(new string[] {
+                        "2-450-1-01/07/2017",
+                        "1617-R12",
+                        "false",
+                        "Learning"});
+#line 325
+    testRunner.And("the data lock event has the following periods", ((string)(null)), table330, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table331 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Price Episode identifier",
+                        "Apprentice Version",
+                        "Start Date",
+                        "framework code",
+                        "programme type",
+                        "pathway code",
+                        "Negotiated Price",
+                        "Effective Date"});
+            table331.AddRow(new string[] {
+                        "2-450-1-01/05/2017",
+                        "125",
+                        "01/05/2017",
+                        "450",
+                        "2",
+                        "1",
+                        "10000",
+                        "01/05/2017"});
+            table331.AddRow(new string[] {
+                        "2-450-1-01/07/2017",
+                        "200",
+                        "01/05/2017",
+                        "450",
+                        "2",
+                        "1",
+                        "15000",
+                        "01/07/2017"});
+#line 330
+    testRunner.And("the data lock event used the following commitments", ((string)(null)), table331, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

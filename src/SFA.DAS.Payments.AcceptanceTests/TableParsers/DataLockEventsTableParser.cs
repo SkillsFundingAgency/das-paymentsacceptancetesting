@@ -49,6 +49,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                     case "ILR End point assessment price":
                         structure.IlrEndpointAssementPriceIndex = c;
                         break;
+                    case "ILR Effective from":
+                        structure.IlrEffectiveFromIndex = c;
+                        break;
+                    case "ILR Effective to":
+                        structure.IlrEffectiveToIndex = c;
+                        break;
+                    default:
+                        throw new ArgumentException($"Unexpected column in data lock events table: {header}");
                 }
             }
 
@@ -62,14 +70,18 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
         private static DataLockEventReferenceData ParseDataLockEventsRow(TableRow row, DataLockEventsTableColumnStructure structure, LookupContext lookupContext)
         {
             var learnerId = row.ReadRowColumnValue<string>(structure.UlnIndex, "ULN");
+            var startDate = row.ReadRowColumnValue<DateTime>(structure.IlrStartDateIndex, "ILR Start Date");
+            var effectiveFrom = row.ReadRowColumnValue<DateTime>(structure.IlrEffectiveFromIndex, "ILR Effective from", startDate);
             return new DataLockEventReferenceData
             {
                 PriceEpisodeIdentifier = row.ReadRowColumnValue<string>(structure.PriceEpisodeIdentifierIndex, "Price Episode identifier"),
                 ApprenticeshipId = row.ReadRowColumnValue<int>(structure.ApprenticeshipIdIndex, "Apprenticeship Id"),
                 Uln = lookupContext.AddOrGetUln(learnerId),
-                IlrStartDate = row.ReadRowColumnValue<DateTime>(structure.IlrStartDateIndex, "ILR Start Date"),
+                IlrStartDate = startDate,
                 IlrTrainingPrice = row.ReadRowColumnValue<decimal>(structure.IlrTrainingPriceIndex, "ILR Training Price"),
-                IlrEndpointAssementPrice = row.ReadRowColumnValue<decimal>(structure.IlrEndpointAssementPriceIndex, "ILR End point assessment price")
+                IlrEndpointAssementPrice = row.ReadRowColumnValue<decimal>(structure.IlrEndpointAssementPriceIndex, "ILR End point assessment price"),
+                ILrEffectiveFrom = effectiveFrom,
+                ILrEffectiveTo = row.ReadRowColumnValue<DateTime?>(structure.IlrEffectiveToIndex, "ILR Effective to"),
             };
         }
 
@@ -82,6 +94,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
             public int IlrStartDateIndex { get; set; } = -1;
             public int IlrTrainingPriceIndex { get; set; } = -1;
             public int IlrEndpointAssementPriceIndex { get; set; } = -1;
+            public int IlrEffectiveFromIndex { get; set; } = -1;
+            public int IlrEffectiveToIndex { get; set; } = -1;
         }
     }
 }
