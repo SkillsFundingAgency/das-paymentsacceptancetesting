@@ -1,3 +1,4 @@
+@CommitmentsEffectiveDate
 Feature: Commitment effective dates apply correctly in data collections processing
 
     Background:
