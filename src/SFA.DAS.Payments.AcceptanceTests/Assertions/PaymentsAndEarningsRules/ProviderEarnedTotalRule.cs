@@ -46,7 +46,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Assertions.PaymentsAndEarningsRules
                                   select g.First()).Sum(x => x.Value);
             if (!AreValuesEqual(period.Value, earnedInPeriod))
             {
-                throw new Exception($"Expected provider to earn {period.Value} in {period.PeriodName} but actually earned {earnedInPeriod}");
+                throw new Exception($"Expected provider to earn {Math.Round(period.Value, 2)} in {period.PeriodName} but actually earned {Math.Round(earnedInPeriod, 2)}");
             }
         }
 
