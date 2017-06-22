@@ -1,5 +1,6 @@
 @Refunds
 Feature: Provider earnings and payments where learner refund payments are due
+
 Scenario:673-AC01 DAS learner, levy available, provider retrospectively notifies a withdrawal and previously-paid monthly instalments need to be refunded.
 
   Given The learner is programme only DAS
@@ -166,3 +167,34 @@ and this refund must be credited to Provider A where refunded Levy amount will b
         | 01/18 | 02/18 | 03/18 | 04/18 | 05/18 | 06/18 | 07/18 |
         | -1125 | 750   | 750   | 750   | 750   | 750   | 750   |
 
+
+Scenario: 780-AC01 - Non-DAS standard learner, price is changed and a negative amount is left to be paid - results in a refund
+	Given  the apprenticeship funding band maximum is 15000
+	And the following earnings and payments have been made to the provider for learner a:
+        | Type                           | 08/17 | 09/17 | 10/17 | 11/17 | 
+        | Provider Earned Total          | 750   | 750   | 0     | 0     |        
+        | Provider Earned from SFA       | 675   | 675   | 0     | 0     |        
+        | Provider Earned from Employer  | 75    | 75    | 0     | 0     |        
+        | Provider Paid by SFA           | 0     | 675   | 675   | 0     |         
+        | Payment due from Employer      | 0     | 75    | 75    | 0     |        
+        | Levy account debited           | 0     | 0     | 0     | 0     |          
+        | SFA Levy employer budget       | 0     | 0     | 0     | 0     |         
+        | SFA Levy co-funding budget     | 0     | 0     | 0     | 0     |        
+        | SFA non-Levy co-funding budget | 675   | 675   | 675   | 0     | 
+    When an ILR file is submitted on 10/01/18 with the following data:
+        | ULN       | learner type           | start date | planned end date | actual end date | completion status | Total training price 1 | Total training price 1 effective date | Total assessment price 1 | Total assessment price 1 effective date | Total training price 2 | Total training price 2 effective date | Total assessment price 2 | Total assessment price 2 effective date |
+        | learner a | programme only non-DAS | 04/08/2017 | 20/08/2018       |                 | continuing        | 9000                   | 04/08/2017                            | 2250                     | 04/08/2017                              | 1200                   | 04/10/2017                            | 200                      | 04/10/2017                              |
+	Then the provider earnings and payments break down as follows:
+        | Type                           | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 | 
+        | Provider Earned Total          | 750   | 750   | -100  | 0     | 0     | 0     | 
+        | Provider Earned from SFA       | 675   | 675   | 0     | 0     | 0     | 0     | 
+        | Provider Earned from Employer  | 75    | 75    | 0     | 0     | 0     | 0     | 
+        | Provider Paid by SFA           | 0     | 675   | 675   | 0     | 0     | 0     | 
+        | Refund taken by SFA            | 0     | 0     | 0     | -90  | 0     | 0     | 
+        | Payment due from Employer      | 0     | 75    | 75    | 0     | 0     | 0     | 
+        #| Refund due to employer         | 0     | 0     | 0     | -10   | 0     | 0     | 
+        | Levy account debited           | 0     | 0     | 0     | 0     | 0     | 0     | 
+        | Levy account credited          | 0     | 0     | 0     | 0     | 0     | 0     | 
+        | SFA Levy employer budget       | 0     | 0     | 0     | 0     | 0     | 0     | 
+        | SFA Levy co-funding budget     | 0     | 0     | 0     | 0     | 0     | 0     | 
+        | SFA non-Levy co-funding budget | 675   | 585   | 0  | 0     | 0     | 0     | 
