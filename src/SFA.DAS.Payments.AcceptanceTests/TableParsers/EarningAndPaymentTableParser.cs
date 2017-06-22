@@ -115,6 +115,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                 {
                     ParseEmployerRow(Defaults.EmployerAccountId.ToString(), row, periodNames, breakdown.EmployersLevyAccountCredited);
                 }
+                else if (row[0] == "Refund due to employer")
+                {
+                    ParseEmployerRow(Defaults.EmployerAccountId.ToString(), row, periodNames, breakdown.RefundDueToEmployer);
+                }
                 else
                 {
                     throw new ArgumentException($"Unexpected earning and payments row type of '{row[0]}'");

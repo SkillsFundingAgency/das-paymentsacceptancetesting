@@ -1445,6 +1445,14 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
             table596.AddRow(new string[] {
+                        "Refund due to employer",
+                        "0",
+                        "0",
+                        "0",
+                        "-10",
+                        "0",
+                        "0"});
+            table596.AddRow(new string[] {
                         "Levy account debited",
                         "0",
                         "0",

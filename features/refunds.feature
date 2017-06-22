@@ -190,11 +190,11 @@ Scenario: 780-AC01 - Non-DAS standard learner, price is changed and a negative a
         | Provider Earned from SFA       | 675   | 675   | 0     | 0     | 0     | 0     | 
         | Provider Earned from Employer  | 75    | 75    | 0     | 0     | 0     | 0     | 
         | Provider Paid by SFA           | 0     | 675   | 675   | 0     | 0     | 0     | 
-        | Refund taken by SFA            | 0     | 0     | 0     | -90  | 0     | 0     | 
+        | Refund taken by SFA            | 0     | 0     | 0     | -90   | 0     | 0     | 
         | Payment due from Employer      | 0     | 75    | 75    | 0     | 0     | 0     | 
-        #| Refund due to employer         | 0     | 0     | 0     | -10   | 0     | 0     | 
+        | Refund due to employer         | 0     | 0     | 0     | -10   | 0     | 0     | 
         | Levy account debited           | 0     | 0     | 0     | 0     | 0     | 0     | 
         | Levy account credited          | 0     | 0     | 0     | 0     | 0     | 0     | 
         | SFA Levy employer budget       | 0     | 0     | 0     | 0     | 0     | 0     | 
         | SFA Levy co-funding budget     | 0     | 0     | 0     | 0     | 0     | 0     | 
-        | SFA non-Levy co-funding budget | 675   | 585   | 0  | 0     | 0     | 0     | 
+        | SFA non-Levy co-funding budget | 675   | 585   | 0     | 0     | 0     | 0     | 

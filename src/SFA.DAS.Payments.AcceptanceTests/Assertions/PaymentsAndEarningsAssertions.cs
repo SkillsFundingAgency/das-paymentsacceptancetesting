@@ -19,7 +19,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Assertions
             new SfaLevyAdditionalPaymentsRule(),
             new SfaNonLevyAdditionalPaymentsRule(),
             new RefundTakenBySfaRule(),
-            new EmployersLevyAccountCreditedRule()
+            new EmployersLevyAccountCreditedRule(),
+            new RefundDueToEmployerRule()
         };
 
         public static void AssertPaymentsAndEarningsResults(EarningsAndPaymentsContext earningsAndPaymentsContext, SubmissionContext submissionContext, EmployerAccountContext employerAccountContext)

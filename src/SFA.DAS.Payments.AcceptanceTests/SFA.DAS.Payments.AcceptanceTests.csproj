@@ -91,6 +91,7 @@
     <Compile Include="Assertions\PaymentsAndEarningsRules\EmployerLevyTransactionsRule.cs" />
     <Compile Include="Assertions\LevyAccountBalanceAssertions.cs" />
     <Compile Include="Assertions\PaymentsAndEarningsRules\EmployersLevyAccountCreditedRule.cs" />
+    <Compile Include="Assertions\PaymentsAndEarningsRules\RefundDueToEmployerRule.cs" />
     <Compile Include="Assertions\PaymentsAndEarningsRules\RefundTakenBySfaRule.cs" />
     <Compile Include="Assertions\SubmissionDataLockAssertions.cs" />
     <Compile Include="Assertions\SubmissionDataLockRules\BalancingDataLockRule.cs" />
