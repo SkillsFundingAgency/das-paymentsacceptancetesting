@@ -5,7 +5,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ReferenceDataModels
     public class CommitmentReferenceData
     {
         public int CommitmentId { get; set; }
-        public int VersionId { get; set; }
+        public string VersionId { get; set; }
         public int EmployerAccountId { get; set; }
         public string LearnerId { get; set; }
         public long Uln { get; set; }

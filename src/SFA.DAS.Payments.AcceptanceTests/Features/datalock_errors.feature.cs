@@ -90,7 +90,7 @@ this.ScenarioSetup(scenarioInfo);
                         "effective from"});
             table266.AddRow(new string[] {
                         "73",
-                        "125",
+                        "73-125",
                         "Provider a",
                         "learner a",
                         "450",
@@ -190,7 +190,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Effective Date"});
             table271.AddRow(new string[] {
                         "2-450-1-01/05/2017",
-                        "125",
+                        "73-125",
                         "01/05/2017",
                         "450",
                         "2",
@@ -226,7 +226,7 @@ this.ScenarioSetup(scenarioInfo);
                         "effective from"});
             table272.AddRow(new string[] {
                         "73",
-                        "125",
+                        "73-125",
                         "Provider a",
                         "learner a",
                         "23",
@@ -319,7 +319,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Effective Date"});
             table277.AddRow(new string[] {
                         "25-23-01/05/2017",
-                        "125",
+                        "73-125",
                         "01/06/2017",
                         "23",
                         "10000",
@@ -353,7 +353,7 @@ this.ScenarioSetup(scenarioInfo);
                         "effective from"});
             table278.AddRow(new string[] {
                         "73",
-                        "125",
+                        "73-125",
                         "Provider a",
                         "learner a",
                         "21",
@@ -450,7 +450,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Effective Date"});
             table283.AddRow(new string[] {
                         "25-23-01/05/2017",
-                        "125",
+                        "73-125",
                         "01/05/2017",
                         "21",
                         "10000",
@@ -486,7 +486,7 @@ this.ScenarioSetup(scenarioInfo);
                         "effective from"});
             table284.AddRow(new string[] {
                         "73",
-                        "125",
+                        "73-125",
                         "Provider a",
                         "learner a",
                         "451",
@@ -585,7 +585,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Effective Date"});
             table289.AddRow(new string[] {
                         "2-450-1-01/05/2017",
-                        "125",
+                        "73-125",
                         "01/05/2017",
                         "451",
                         "2",
@@ -623,7 +623,7 @@ this.ScenarioSetup(scenarioInfo);
                         "effective from"});
             table290.AddRow(new string[] {
                         "73",
-                        "125",
+                        "73-125",
                         "Provider a",
                         "learner a",
                         "450",
@@ -722,7 +722,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Effective Date"});
             table295.AddRow(new string[] {
                         "2-450-1-01/05/2017",
-                        "125",
+                        "73-125",
                         "01/05/2017",
                         "450",
                         "3",
@@ -760,7 +760,7 @@ this.ScenarioSetup(scenarioInfo);
                         "effective from"});
             table296.AddRow(new string[] {
                         "73",
-                        "125",
+                        "73-125",
                         "Provider a",
                         "learner a",
                         "450",
@@ -859,7 +859,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Effective Date"});
             table301.AddRow(new string[] {
                         "2-450-1-01/05/2017",
-                        "125",
+                        "73-125",
                         "01/05/2017",
                         "450",
                         "2",
@@ -899,7 +899,7 @@ this.ScenarioSetup(scenarioInfo);
                         "effective from"});
             table302.AddRow(new string[] {
                         "73",
-                        "125",
+                        "73-125",
                         "Provider a",
                         "learner a",
                         "451",
@@ -1002,7 +1002,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Effective Date"});
             table307.AddRow(new string[] {
                         "2-450-1-01/05/2017",
-                        "125",
+                        "73-125",
                         "01/05/2017",
                         "451",
                         "3",
@@ -1042,7 +1042,7 @@ this.ScenarioSetup(scenarioInfo);
                         "effective from"});
             table308.AddRow(new string[] {
                         "73",
-                        "125",
+                        "73-125",
                         "Provider a",
                         "learner a",
                         "451",
@@ -1149,7 +1149,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Effective Date"});
             table313.AddRow(new string[] {
                         "2-450-1-01/05/2017",
-                        "125",
+                        "73-125",
                         "01/05/2017",
                         "451",
                         "3",
@@ -1187,7 +1187,7 @@ this.ScenarioSetup(scenarioInfo);
                         "effective from"});
             table314.AddRow(new string[] {
                         "73",
-                        "125",
+                        "73-125",
                         "Provider a",
                         "learner a",
                         "450",
@@ -1286,7 +1286,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Effective Date"});
             table319.AddRow(new string[] {
                         "2-450-1-01/05/2017",
-                        "125",
+                        "73-125",
                         "01/05/2017",
                         "450",
                         "2",
@@ -1324,7 +1324,7 @@ this.ScenarioSetup(scenarioInfo);
                         "effective from"});
             table320.AddRow(new string[] {
                         "73",
-                        "125",
+                        "73-125",
                         "Provider b",
                         "learner a",
                         "450",
@@ -1423,7 +1423,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Effective Date"});
             table325.AddRow(new string[] {
                         "2-450-1-01/05/2017",
-                        "125",
+                        "73-125",
                         "01/05/2017",
                         "450",
                         "2",
@@ -1461,7 +1461,7 @@ this.ScenarioSetup(scenarioInfo);
                         "effective from"});
             table326.AddRow(new string[] {
                         "73",
-                        "125",
+                        "73-125",
                         "Provider a",
                         "learner b",
                         "450",
@@ -1530,7 +1530,7 @@ this.ScenarioSetup(scenarioInfo);
                         "effective from"});
             table328.AddRow(new string[] {
                         "73",
-                        "125",
+                        "73-125",
                         "Provider a",
                         "learner a",
                         "450",
@@ -1543,7 +1543,7 @@ this.ScenarioSetup(scenarioInfo);
                         "01/05/2017"});
             table328.AddRow(new string[] {
                         "74",
-                        "2",
+                        "74-002",
                         "Provider b",
                         "learner a",
                         "450",
@@ -1648,7 +1648,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Effective Date"});
             table333.AddRow(new string[] {
                         "2-450-1-01/05/2017",
-                        "125",
+                        "73-125",
                         "01/05/2017",
                         "450",
                         "2",
@@ -1657,7 +1657,7 @@ this.ScenarioSetup(scenarioInfo);
                         "01/05/2017"});
             table333.AddRow(new string[] {
                         "2-450-1-01/05/2017",
-                        "2",
+                        "74-002",
                         "01/05/2017",
                         "450",
                         "2",
@@ -1696,7 +1696,7 @@ this.ScenarioSetup(scenarioInfo);
                         "effective to"});
             table334.AddRow(new string[] {
                         "73",
-                        "125",
+                        "73-125",
                         "Provider a",
                         "learner a",
                         "450",
@@ -1710,7 +1710,7 @@ this.ScenarioSetup(scenarioInfo);
                         "30/06/2017"});
             table334.AddRow(new string[] {
                         "73",
-                        "200",
+                        "73-200",
                         "Provider a",
                         "learner a",
                         "450",
@@ -1827,7 +1827,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Effective Date"});
             table339.AddRow(new string[] {
                         "2-450-1-01/05/2017",
-                        "125",
+                        "73-125",
                         "01/05/2017",
                         "450",
                         "2",
@@ -1836,7 +1836,7 @@ this.ScenarioSetup(scenarioInfo);
                         "01/05/2017"});
             table339.AddRow(new string[] {
                         "2-450-1-01/07/2017",
-                        "200",
+                        "73-200",
                         "01/05/2017",
                         "450",
                         "2",

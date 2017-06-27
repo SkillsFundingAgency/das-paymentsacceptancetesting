@@ -4,7 +4,7 @@ Feature: Datalock produces correct errors when ILR does not match commitment
 Scenario: DLOCK07 - When no matching record found in an employer digital account for for the agreed price then datalock DLOCK_07 will be produced
     Given the following commitments exist:
         | commitment Id | version Id | Provider   | ULN       | framework code | programme type | pathway code | agreed price | start date | end date   | status | effective from |
-        | 73            | 125        | Provider a | learner a | 450            | 2              | 1            | 10000        | 01/05/2017 | 01/05/2018 | active | 01/05/2017     |
+        | 73            | 73-125     | Provider a | learner a | 450            | 2              | 1            | 10000        | 01/05/2017 | 01/05/2018 | active | 01/05/2017     |
         
     When an ILR file is submitted with the following data:  
         | Provider   | ULN       | framework code | programme type | pathway code | start date | planned end date | completion status | Total training price | Total training price effective date |
@@ -23,14 +23,14 @@ Scenario: DLOCK07 - When no matching record found in an employer digital account
         | 2-450-1-01/05/2017       | 1617-R12 | false        | Learning         |
     And the data lock event used the following commitments   
         | Price Episode identifier | Apprentice Version | Start Date | framework code | programme type | pathway code | Negotiated Price | Effective Date |
-        | 2-450-1-01/05/2017       | 125                | 01/05/2017 | 450            | 2              | 1            | 10000            | 01/05/2017     |
+        | 2-450-1-01/05/2017       | 73-125             | 01/05/2017 | 450            | 2              | 1            | 10000            | 01/05/2017     |
 
 
 
 Scenario: DLOCK09 - When no matching record found in an employer digital account for for the start date then datalock DLOCK_09 will be produced
     Given the following commitments exist:
-        | commitment Id | version Id | Provider   | ULN       | standard code  | agreed price | start date | end date   | status | effective from |
-        | 73            | 125        | Provider a | learner a | 23             | 10000        | 01/06/2017 | 01/05/2018 | active | 01/06/2017     |
+        | commitment Id | version Id | Provider   | ULN       | standard code | agreed price | start date | end date   | status | effective from |
+        | 73            | 73-125     | Provider a | learner a | 23            | 10000        | 01/06/2017 | 01/05/2018 | active | 01/06/2017     |
         
     When an ILR file is submitted with the following data:  
         | Provider   | ULN       | standard code | start date | planned end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date |
@@ -48,14 +48,14 @@ Scenario: DLOCK09 - When no matching record found in an employer digital account
         | 25-23-01/05/2017         | 1617-R12 | false        | Learning         |
     And the data lock event used the following commitments   
         | Price Episode identifier | Apprentice Version | Start Date | standard code | Negotiated Price | Effective Date |
-        | 25-23-01/05/2017         | 125                | 01/06/2017 | 23            | 10000            | 01/06/2017     |
+        | 25-23-01/05/2017         | 73-125             | 01/06/2017 | 23            | 10000            | 01/06/2017     |
 
 
 
 Scenario: DLOCK03 - When no matching record found in an employer digital account for for the standard code then datalock DLOCK_03 will be produced
     Given the following commitments exist:
-        | commitment Id | version Id | Provider   | ULN       | standard code  | agreed price | start date | end date   | status | effective from |
-        | 73            | 125        | Provider a | learner a | 21             | 10000        | 01/05/2017 | 01/05/2018 | active | 01/05/2017     |
+        | commitment Id | version Id | Provider   | ULN       | standard code | agreed price | start date | end date   | status | effective from |
+        | 73            | 73-125     | Provider a | learner a | 21            | 10000        | 01/05/2017 | 01/05/2018 | active | 01/05/2017     |
         
     When an ILR file is submitted with the following data:  
         | Provider   | ULN       | standard code | start date | planned end date | completion status | Total training price | Total training price effective date | Total assessment price | Total assessment price effective date |
@@ -74,13 +74,13 @@ Scenario: DLOCK03 - When no matching record found in an employer digital account
         | 25-23-01/05/2017         | 1617-R12 | false        | Learning         |
     And the data lock event used the following commitments   
         | Price Episode identifier | Apprentice Version | Start Date | standard code | Negotiated Price | Effective Date |
-        | 25-23-01/05/2017         | 125                | 01/05/2017 | 21            | 10000            | 01/05/2017     |
+        | 25-23-01/05/2017         | 73-125             | 01/05/2017 | 21            | 10000            | 01/05/2017     |
 
 
 Scenario: DLOCK04 - When no matching record found in an employer digital account for for the framework code then datalock DLOCK_04 will be produced
     Given the following commitments exist:
         | commitment Id | version Id | Provider   | ULN       | framework code | programme type | pathway code | agreed price | start date | end date   | status | effective from |
-        | 73            | 125        | Provider a | learner a | 451            | 2              | 1            | 10000        | 01/05/2017 | 01/05/2018 | active | 01/05/2017     |
+        | 73            | 73-125        | Provider a | learner a | 451            | 2              | 1            | 10000        | 01/05/2017 | 01/05/2018 | active | 01/05/2017     |
         
     When an ILR file is submitted with the following data:  
         | Provider   | ULN       | framework code | programme type | pathway code | start date | planned end date | completion status | Total training price | Total training price effective date |
@@ -99,13 +99,13 @@ Scenario: DLOCK04 - When no matching record found in an employer digital account
         | 2-450-1-01/05/2017       | 1617-R12 | false        | Learning         |
     And the data lock event used the following commitments   
         | Price Episode identifier | Apprentice Version | Start Date | framework code | programme type | pathway code | Negotiated Price | Effective Date |
-        | 2-450-1-01/05/2017       | 125                | 01/05/2017 | 451            | 2              | 1            | 10000            | 01/05/2017     |
+        | 2-450-1-01/05/2017       | 73-125             | 01/05/2017 | 451            | 2              | 1            | 10000            | 01/05/2017     |
 
 
 Scenario: DLOCK05 - When no matching record found in an employer digital account for for the programme type then datalock DLOCK_05 will be produced
     Given the following commitments exist:
         | commitment Id | version Id | Provider   | ULN       | framework code | programme type | pathway code | agreed price | start date | end date   | status | effective from |
-        | 73            | 125        | Provider a | learner a | 450            | 3              | 1            | 10000        | 01/05/2017 | 01/05/2018 | active | 01/05/2017     |
+        | 73            | 73-125     | Provider a | learner a | 450            | 3              | 1            | 10000        | 01/05/2017 | 01/05/2018 | active | 01/05/2017     |
         
     When an ILR file is submitted with the following data:  
         | Provider   | ULN       | framework code | programme type | pathway code | start date | planned end date | completion status | Total training price | Total training price effective date |
@@ -124,13 +124,13 @@ Scenario: DLOCK05 - When no matching record found in an employer digital account
         | 2-450-1-01/05/2017       | 1617-R12 | false        | Learning         |
     And the data lock event used the following commitments   
         | Price Episode identifier | Apprentice Version | Start Date | framework code | programme type | pathway code | Negotiated Price | Effective Date |
-        | 2-450-1-01/05/2017       | 125                | 01/05/2017 | 450            | 3              | 1            | 10000            | 01/05/2017     |
+        | 2-450-1-01/05/2017       | 73-125             | 01/05/2017 | 450            | 3              | 1            | 10000            | 01/05/2017     |
 
 
 Scenario: DLOCK06 - When no matching record found in an employer digital account for for the pathway code then datalock DLOCK_06 will be produced
     Given the following commitments exist:
         | commitment Id | version Id | Provider   | ULN       | framework code | programme type | pathway code | agreed price | start date | end date   | status | effective from |
-        | 73            | 125        | Provider a | learner a | 450            | 2              | 6            | 10000        | 01/05/2017 | 01/05/2018 | active | 01/05/2017     |
+        | 73            | 73-125        | Provider a | learner a | 450            | 2              | 6            | 10000        | 01/05/2017 | 01/05/2018 | active | 01/05/2017     |
         
     When an ILR file is submitted with the following data:  
         | Provider   | ULN       | framework code | programme type | pathway code | start date | planned end date | completion status | Total training price | Total training price effective date |
@@ -149,7 +149,7 @@ Scenario: DLOCK06 - When no matching record found in an employer digital account
         | 2-450-1-01/05/2017       | 1617-R12 | false        | Learning         |
     And the data lock event used the following commitments   
         | Price Episode identifier | Apprentice Version | Start Date | framework code | programme type | pathway code | Negotiated Price | Effective Date |
-        | 2-450-1-01/05/2017       | 125                | 01/05/2017 | 450            | 2              | 6            | 10000            | 01/05/2017     |
+        | 2-450-1-01/05/2017       | 73-125             | 01/05/2017 | 450            | 2              | 6            | 10000            | 01/05/2017     |
 
 
 
@@ -157,7 +157,7 @@ Scenario: DLOCK06 - When no matching record found in an employer digital account
 Scenario: DLOCK04 + DLOCK05 - When no matching record found in an employer digital account for for the framework code and programme type then datalock DLOCK_04 and DLOCK05 will be produced
     Given the following commitments exist:
         | commitment Id | version Id | Provider   | ULN       | framework code | programme type | pathway code | agreed price | start date | end date   | status | effective from |
-        | 73            | 125        | Provider a | learner a | 451            | 3              | 1            | 10000        | 01/05/2017 | 01/05/2018 | active | 01/05/2017     |
+        | 73            | 73-125     | Provider a | learner a | 451            | 3              | 1            | 10000        | 01/05/2017 | 01/05/2018 | active | 01/05/2017     |
         
     When an ILR file is submitted with the following data:  
         | Provider   | ULN       | framework code | programme type | pathway code | start date | planned end date | completion status | Total training price | Total training price effective date |
@@ -177,7 +177,7 @@ Scenario: DLOCK04 + DLOCK05 - When no matching record found in an employer digit
         | 2-450-1-01/05/2017       | 1617-R12 | false        | Learning         |
     And the data lock event used the following commitments   
         | Price Episode identifier | Apprentice Version | Start Date | framework code | programme type | pathway code | Negotiated Price | Effective Date |
-        | 2-450-1-01/05/2017       | 125                | 01/05/2017 | 451            | 3              | 1            | 10000            | 01/05/2017     |
+        | 2-450-1-01/05/2017       | 73-125             | 01/05/2017 | 451            | 3              | 1            | 10000            | 01/05/2017     |
 
 
 
@@ -185,7 +185,7 @@ Scenario: DLOCK04 + DLOCK05 - When no matching record found in an employer digit
 Scenario: DLOCK04 + DLOCK05 + DLOCK06 - When no matching record found in an employer digital account for for the framework code, programme type and pathway code then datalock DLOCK_04, DLOCK05 and DLOCK06 will be produced
     Given the following commitments exist:
         | commitment Id | version Id | Provider   | ULN       | framework code | programme type | pathway code | agreed price | start date | end date   | status | effective from |
-        | 73            | 125        | Provider a | learner a | 451            | 3              | 6            | 10000        | 01/05/2017 | 01/05/2018 | active | 01/05/2017     |
+        | 73            | 73-125     | Provider a | learner a | 451            | 3              | 6            | 10000        | 01/05/2017 | 01/05/2018 | active | 01/05/2017     |
         
     When an ILR file is submitted with the following data:  
         | Provider   | ULN       | framework code | programme type | pathway code | start date | planned end date | completion status | Total training price | Total training price effective date |
@@ -206,7 +206,7 @@ Scenario: DLOCK04 + DLOCK05 + DLOCK06 - When no matching record found in an empl
         | 2-450-1-01/05/2017       | 1617-R12 | false        | Learning         |
     And the data lock event used the following commitments   
         | Price Episode identifier | Apprentice Version | Start Date | framework code | programme type | pathway code | Negotiated Price | Effective Date |
-        | 2-450-1-01/05/2017       | 125                | 01/05/2017 | 451            | 3              | 6            | 10000            | 01/05/2017     |
+        | 2-450-1-01/05/2017       | 73-125             | 01/05/2017 | 451            | 3              | 6            | 10000            | 01/05/2017     |
 
 
 Scenario: DLOCK11 - When employer is not a levy payer, DLOCK11 will be raised
@@ -214,7 +214,7 @@ Scenario: DLOCK11 - When employer is not a levy payer, DLOCK11 will be raised
     Given the employer is not a levy payer
     And the following commitments exist:
         | commitment Id | version Id | Provider   | ULN       | framework code | programme type | pathway code | agreed price | start date | end date   | status | effective from |
-        | 73            | 125        | Provider a | learner a | 450            | 2              | 1            | 10000        | 01/05/2017 | 01/05/2018 | active | 01/05/2017     |
+        | 73            | 73-125     | Provider a | learner a | 450            | 2              | 1            | 10000        | 01/05/2017 | 01/05/2018 | active | 01/05/2017     |
         
     When an ILR file is submitted with the following data:  
         | Provider   | ULN       | framework code | programme type | pathway code | start date | planned end date | completion status | Total training price | Total training price effective date |
@@ -233,14 +233,14 @@ Scenario: DLOCK11 - When employer is not a levy payer, DLOCK11 will be raised
         | 2-450-1-01/05/2017       | 1617-R12 | false        | Learning         |
     And the data lock event used the following commitments   
         | Price Episode identifier | Apprentice Version | Start Date | framework code | programme type | pathway code | Negotiated Price | Effective Date |
-        | 2-450-1-01/05/2017       | 125                | 01/05/2017 | 450            | 2              | 1            | 10000            | 01/05/2017     |
+        | 2-450-1-01/05/2017       | 73-125             | 01/05/2017 | 450            | 2              | 1            | 10000            | 01/05/2017     |
 
 
 Scenario: DLOCK01 - When no matching record found in an employer digital account for the UKPRN then datalock DLOCK_01 will be produced
 
     Given the following commitments exist:
         | commitment Id | version Id | Provider   | ULN       | framework code | programme type | pathway code | agreed price | start date | end date   | status | effective from |
-        | 73            | 125        | Provider b | learner a | 450            | 2              | 1            | 10000        | 01/05/2017 | 01/05/2018 | active | 01/05/2017     |
+        | 73            | 73-125     | Provider b | learner a | 450            | 2              | 1            | 10000        | 01/05/2017 | 01/05/2018 | active | 01/05/2017     |
         
     When an ILR file is submitted with the following data:  
         | Provider   | ULN       | framework code | programme type | pathway code | start date | planned end date | completion status | Total training price | Total training price effective date |
@@ -259,14 +259,14 @@ Scenario: DLOCK01 - When no matching record found in an employer digital account
         | 2-450-1-01/05/2017       | 1617-R12 | false        | Learning         |
     And the data lock event used the following commitments   
         | Price Episode identifier | Apprentice Version | Start Date | framework code | programme type | pathway code | Negotiated Price | Effective Date |
-        | 2-450-1-01/05/2017       | 125                | 01/05/2017 | 450            | 2              | 1            | 10000            | 01/05/2017     |
+        | 2-450-1-01/05/2017       | 73-125             | 01/05/2017 | 450            | 2              | 1            | 10000            | 01/05/2017     |
 
 
 Scenario: DLOCK02 - When no matching record found in an employer digital account for the ULN then datalock DLOCK_02 will be produced
 
     Given the following commitments exist:
         | commitment Id | version Id | Provider   | ULN       | framework code | programme type | pathway code | agreed price | start date | end date   | status | effective from |
-        | 73            | 125        | Provider a | learner b | 450            | 2              | 1            | 10000        | 01/05/2017 | 01/05/2018 | active | 01/05/2017     |
+        | 73            | 73-125     | Provider a | learner b | 450            | 2              | 1            | 10000        | 01/05/2017 | 01/05/2018 | active | 01/05/2017     |
         
     When an ILR file is submitted with the following data:  
         | Provider   | ULN       | framework code | programme type | pathway code | start date | planned end date | completion status | Total training price | Total training price effective date |
@@ -279,8 +279,8 @@ Scenario: DLOCK08 - When multiple matching record found in an employer digital a
 
     Given the following commitments exist:
         | commitment Id | version Id | Provider   | ULN       | framework code | programme type | pathway code | agreed price | start date | end date   | status | effective from |
-        | 73            | 125        | Provider a | learner a | 450            | 2              | 1            | 10000        | 01/05/2017 | 01/05/2018 | active | 01/05/2017     |
-        | 74            | 2          | Provider b | learner a | 450            | 2              | 1            | 10000        | 01/05/2017 | 01/05/2018 | active | 01/05/2017     |
+        | 73            | 73-125     | Provider a | learner a | 450            | 2              | 1            | 10000        | 01/05/2017 | 01/05/2018 | active | 01/05/2017     |
+        | 74            | 74-002     | Provider b | learner a | 450            | 2              | 1            | 10000        | 01/05/2017 | 01/05/2018 | active | 01/05/2017     |
         
     When an ILR file is submitted with the following data:  
         | Provider   | ULN       | framework code | programme type | pathway code | start date | planned end date | completion status | Total training price | Total training price effective date |
@@ -300,16 +300,16 @@ Scenario: DLOCK08 - When multiple matching record found in an employer digital a
         | 2-450-1-01/05/2017       | 1617-R12 | false        | Learning         |
     And the data lock event used the following commitments   
         | Price Episode identifier | Apprentice Version | Start Date | framework code | programme type | pathway code | Negotiated Price | Effective Date |
-        | 2-450-1-01/05/2017       | 125                | 01/05/2017 | 450            | 2              | 1            | 10000            | 01/05/2017     |
-        | 2-450-1-01/05/2017       | 2                  | 01/05/2017 | 450            | 2              | 1            | 10000            | 01/05/2017     |
+        | 2-450-1-01/05/2017       | 73-125             | 01/05/2017 | 450            | 2              | 1            | 10000            | 01/05/2017     |
+        | 2-450-1-01/05/2017       | 74-002             | 01/05/2017 | 450            | 2              | 1            | 10000            | 01/05/2017     |
 
 
 
 Scenario: DLOCK07(a) - When price is changed, then effective to is set on previous price episode
     Given the following commitments exist:
         | commitment Id | version Id | Provider   | ULN       | framework code | programme type | pathway code | agreed price | start date | end date   | status | effective from | effective to |
-        | 73            | 125        | Provider a | learner a | 450            | 2              | 1            | 10000        | 01/05/2017 | 01/05/2018 | active | 01/05/2017     | 30/06/2017   |
-        | 73            | 200        | Provider a | learner a | 450            | 2              | 1            | 15000        | 01/05/2017 | 01/05/2018 | active | 01/07/2017     |              |
+        | 73            | 73-125     | Provider a | learner a | 450            | 2              | 1            | 10000        | 01/05/2017 | 01/05/2018 | active | 01/05/2017     | 30/06/2017   |
+        | 73            | 73-200        | Provider a | learner a | 450            | 2              | 1            | 15000        | 01/05/2017 | 01/05/2018 | active | 01/07/2017     |              |
         
     When an ILR file is submitted with the following data:  
         | Provider   | ULN       | framework code | programme type | pathway code | start date | planned end date | completion status | Total training price 1 | Total training price 1 effective date | Total training price 2 | Total training price 2 effective date |
@@ -329,5 +329,5 @@ Scenario: DLOCK07(a) - When price is changed, then effective to is set on previo
         | 2-450-1-01/07/2017       | 1617-R12 | false        | Learning         |
     And the data lock event used the following commitments   
         | Price Episode identifier | Apprentice Version | Start Date | framework code | programme type | pathway code | Negotiated Price | Effective Date |
-        | 2-450-1-01/05/2017       | 125                | 01/05/2017 | 450            | 2              | 1            | 10000            | 01/05/2017     |
-        | 2-450-1-01/07/2017       | 200                | 01/05/2017 | 450            | 2              | 1            | 15000            | 01/07/2017     |
+        | 2-450-1-01/05/2017       | 73-125             | 01/05/2017 | 450            | 2              | 1            | 10000            | 01/05/2017     |
+        | 2-450-1-01/07/2017       | 73-200             | 01/05/2017 | 450            | 2              | 1            | 15000            | 01/07/2017     |

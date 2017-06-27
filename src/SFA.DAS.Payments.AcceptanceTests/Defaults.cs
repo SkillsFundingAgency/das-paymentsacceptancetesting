@@ -7,7 +7,7 @@
         internal const string ProviderId = "provider " + ProviderIdSuffix;
         internal const int AgreePrice = 15000;
         internal const int CommitmentPriority = 1;
-        internal const int CommitmentVersionId = 1;
+        internal const string CommitmentVersionId = "1-001";
         internal const string CommitmentStatus = "active";
         internal const long StandardCode = 23L;
         internal const string LearnerId = "learner a";

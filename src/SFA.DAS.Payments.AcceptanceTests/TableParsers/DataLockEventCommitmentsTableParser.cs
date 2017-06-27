@@ -76,7 +76,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
             return new DataLockEventCommitmentReferenceData
             {
                 PriceEpisodeIdentifier = row.ReadRowColumnValue<string>(structure.PriceEpisodeIdentifierIndex, "Price Episode identifier"),
-                ApprenticeshipVersion = row.ReadRowColumnValue<int>(structure.ApprenticeshipVersionIndex, "Apprentice Version"),
+                ApprenticeshipVersion = row.ReadRowColumnValue<string>(structure.ApprenticeshipVersionIndex, "Apprentice Version"),
                 StartDate = row.ReadRowColumnValue<DateTime>(structure.StartDateIndex, "Start Date"),
                 FrameworkCode = row.ReadRowColumnValue<int>(structure.FrameworkCodeIndex, "framework code"),
                 ProgrammeType = row.ReadRowColumnValue<int>(structure.ProgrammeTypeIndex, "programme type"),
