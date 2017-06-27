@@ -1829,7 +1829,7 @@ this.ScenarioSetup(scenarioInfo);
             table603.AddRow(new string[] {
                         "Provider Earned from SFA",
                         "750",
-                        "715",
+                        "712.50",
                         "0",
                         "0"});
             table603.AddRow(new string[] {
@@ -1842,7 +1842,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Provider Paid by SFA",
                         "0",
                         "750",
-                        "715",
+                        "712.50",
                         "0"});
             table603.AddRow(new string[] {
                         "Payment due from Employer",
@@ -1930,7 +1930,7 @@ this.ScenarioSetup(scenarioInfo);
             table605.AddRow(new string[] {
                         "Provider Earned from SFA",
                         "750",
-                        "715",
+                        "712.50",
                         "0",
                         "0",
                         "0",
@@ -1947,7 +1947,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Provider Paid by SFA",
                         "0",
                         "750",
-                        "715",
+                        "712.50",
                         "0",
                         "0",
                         "0"});
@@ -1994,7 +1994,7 @@ this.ScenarioSetup(scenarioInfo);
             table605.AddRow(new string[] {
                         "SFA Levy employer budget",
                         "750",
-                        "700",
+                        "325",
                         "0",
                         "0",
                         "0",
@@ -2002,7 +2002,7 @@ this.ScenarioSetup(scenarioInfo);
             table605.AddRow(new string[] {
                         "SFA Levy co-funding budget",
                         "0",
-                        "45",
+                        "292.50",
                         "0",
                         "0",
                         "0",

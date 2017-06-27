@@ -251,32 +251,32 @@ Scenario:802-AC01 - DAS standard learner, price is changed, originally mix funde
         | 1             | 2          | learner a | 01/08/2017 | 01/08/2018 | active  | 1400         | 04/10/2017     |              |
     
 	And the following earnings and payments have been made to the provider for learner a:
-        | Type                           | 08/17 | 09/17  | 10/17 | 11/17 | 
-        | Provider Earned Total          | 750   | 750    | 0     | 0     |        
-        | Provider Earned from SFA       | 750   | 715    | 0     | 0     |        
-        | Provider Earned from Employer  | 0     | 37.50  | 0     | 0     |        
-        | Provider Paid by SFA           | 0     | 750    | 715   | 0     |         
-        | Payment due from Employer      | 0     | 0      | 37.50 | 0     |        
-        | Levy account debited           | 0     | 750    | 375   | 0     |          
-        | SFA Levy employer budget       | 750   | 375    | 0     | 0     |         
-        | SFA Levy co-funding budget     | 0     | 337.50 | 0     | 0     |        
-        | SFA non-Levy co-funding budget | 0     | 0      | 0     | 0     | 
+        | Type                           | 08/17 | 09/17  | 10/17  | 11/17 | 
+        | Provider Earned Total          | 750   | 750    | 0      | 0     |        
+        | Provider Earned from SFA       | 750   | 712.50 | 0      | 0     |        
+        | Provider Earned from Employer  | 0     | 37.50  | 0      | 0     |        
+        | Provider Paid by SFA           | 0     | 750    | 712.50 | 0     |         
+        | Payment due from Employer      | 0     | 0      | 37.50  | 0     |        
+        | Levy account debited           | 0     | 750    | 375    | 0     |          
+        | SFA Levy employer budget       | 750   | 375    | 0      | 0     |         
+        | SFA Levy co-funding budget     | 0     | 337.50 | 0      | 0     |        
+        | SFA non-Levy co-funding budget | 0     | 0      | 0      | 0     | 
         
     When an ILR file is submitted on 10/01/18 with the following data:
         | ULN       | learner type       | start date | planned end date | actual end date | completion status | Total training price 1 | Total training price 1 effective date | Total assessment price 1 | Total assessment price 1 effective date | Total training price 2 | Total training price 2 effective date | Total assessment price 2 | Total assessment price 2 effective date |
         | learner a | programme only DAS | 04/08/2017 | 20/08/2018       |                 | continuing        | 9000                   | 04/08/2017                            | 2250                     | 04/08/2017                              | 1200                   | 04/10/2017                            | 200                      | 04/10/2017                              |
 	
     Then the provider earnings and payments break down as follows:
-        | Type                           | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 | 
-        | Provider Earned Total          | 750   | 750   | -100  | 0     | 0     | 0     | 
-        | Provider Earned from SFA       | 750   | 715   | 0     | 0     | 0     | 0     | 
-        | Provider Earned from Employer  | 0     | 37.50 | 0     | 0     | 0     | 0     | 
-        | Provider Paid by SFA           | 0     | 750   | 715   | 0     | 0     | 0     | 
-        | Refund taken by SFA            | 0     | 0     | 0     | -95   | 0     | 0     | 
-        | Payment due from Employer      | 0     | 0     | 37.50 | 0     | 0     | 0     | 
-        | Refund due to employer         | 0     | 0     | 0     | 5     | 0     | 0     | 
-        | Levy account debited           | 0     | 750   | 375   | 0     | 0     | 0     | 
-        | Levy account credited          | 0     | 0     | 0     | 50    | 0     | 0     | 
-        | SFA Levy employer budget       | 750   | 700   | 0     | 0     | 0     | 0     | 
-        | SFA Levy co-funding budget     | 0     | 45    | 0     | 0     | 0     | 0     | 
-        | SFA non-Levy co-funding budget | 0     | 0     | 0     | 0     | 0     | 0     |
+        | Type                           | 08/17 | 09/17  | 10/17  | 11/17 | 12/17 | 01/18 | 
+        | Provider Earned Total          | 750   | 750    | -100   | 0     | 0     | 0     | 
+        | Provider Earned from SFA       | 750   | 712.50 | 0      | 0     | 0     | 0     | 
+        | Provider Earned from Employer  | 0     | 37.50  | 0      | 0     | 0     | 0     | 
+        | Provider Paid by SFA           | 0     | 750    | 712.50 | 0     | 0     | 0     | 
+        | Refund taken by SFA            | 0     | 0      | 0      | -95   | 0     | 0     | 
+        | Payment due from Employer      | 0     | 0      | 37.50  | 0     | 0     | 0     | 
+        | Refund due to employer         | 0     | 0      | 0      | 5     | 0     | 0     | 
+        | Levy account debited           | 0     | 750    | 375    | 0     | 0     | 0     | 
+        | Levy account credited          | 0     | 0      | 0      | 50    | 0     | 0     | 
+        | SFA Levy employer budget       | 750   | 325    | 0      | 0     | 0     | 0     | 
+        | SFA Levy co-funding budget     | 0     | 292.50 | 0      | 0     | 0     | 0     | 
+        | SFA non-Levy co-funding budget | 0     | 0      | 0      | 0     | 0     | 0     |
