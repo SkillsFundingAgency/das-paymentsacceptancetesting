@@ -89,9 +89,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                     {
                         requiredPaymentId,
                         commitmentId = commitment == null ? (long?)null : commitment.CommitmentId,
-                        VersionId = commitment == null ? 0 : commitment.VersionId,
+                        VersionId = commitment == null ? "0-000" : commitment.VersionId,
                         EmployerAccountId = commitment == null ? 0 : commitment.EmployerAccountId,
-                        accountVersionId = commitment == null ? 0 : commitment.VersionId,
+                        accountVersionId = commitment == null ? 0 : int.Parse(commitment.VersionId.Split('-')[1]),
                         uln,
                         learnRefNumber,
                         ukprn,

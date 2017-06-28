@@ -117,7 +117,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
             });
         }
 
-        private static void ParseRowValues<T>(TableRow row, string[] periodNames, List<T> contextList, Func<string, int?, int?, T> valueCreator)
+        private static void ParseRowValues<T>(TableRow row, string[] periodNames, List<T> contextList, Func<string, int?, string, T> valueCreator)
         {
             for (var i = 1; i < periodNames.Length; i++)
             {
@@ -134,10 +134,10 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
 
                 Match match;
 
-                if ((match = Regex.Match(row[i], "commitment ([0-9]{1,}) v([0-9]{1,})", RegexOptions.IgnoreCase)).Success)
+                if ((match = Regex.Match(row[i], "commitment ([0-9]{1,}) v([0-9]{1}-[0-9]{3})", RegexOptions.IgnoreCase)).Success)
                 {
                     var commitmentId = int.Parse(match.Groups[1].Value);
-                    var commitmentVersion = int.Parse(match.Groups[2].Value);
+                    var commitmentVersion = match.Groups[2].Value;
 
                     contextList.Add(valueCreator(periodName, commitmentId, commitmentVersion));
                 }

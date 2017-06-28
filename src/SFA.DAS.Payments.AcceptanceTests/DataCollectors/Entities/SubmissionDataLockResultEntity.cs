@@ -8,7 +8,7 @@
         public int CollectionPeriodYear { get; set; }
         
         public long CommitmentId { get; set; }
-        public long CommitmentVersion { get; set; }
+        public string CommitmentVersion { get; set; }
         public int TransactionType { get; set; }
     }
 }

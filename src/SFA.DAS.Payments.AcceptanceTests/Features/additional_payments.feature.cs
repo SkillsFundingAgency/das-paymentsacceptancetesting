@@ -2843,7 +2843,7 @@ this.ScenarioSetup(scenarioInfo);
                         "status"});
             table42.AddRow(new string[] {
                         "1",
-                        "1",
+                        "1-001",
                         "learner a",
                         "01/08/2017",
                         "01/08/2018",
@@ -4105,7 +4105,7 @@ this.ScenarioSetup(scenarioInfo);
                         "status"});
             table62.AddRow(new string[] {
                         "1",
-                        "1",
+                        "1-001",
                         "learner a",
                         "01/08/2017",
                         "01/08/2018",

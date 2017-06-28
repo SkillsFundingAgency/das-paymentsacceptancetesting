@@ -135,9 +135,21 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
             }
 
             var versionId = Defaults.CommitmentVersionId;
-            if (structure.VersionIdIndex > -1 && !int.TryParse(row[structure.VersionIdIndex], out versionId))
+            if (structure.VersionIdIndex > -1)
             {
-                throw new ArgumentException($"'{row[structure.VersionIdIndex]}' is not a valid version id");
+                if (string.IsNullOrEmpty(row[structure.VersionIdIndex]))
+                {
+                    throw new ArgumentException($"'{row[structure.VersionIdIndex]}' is not a valid version id");
+                }
+                else
+                {
+                    versionId = row[structure.VersionIdIndex];
+                }
+                if (!versionId.Contains('-'))
+                {
+                    versionId = int.Parse(versionId).ToString("000");
+                    versionId = $"{commitmentId}-{versionId}";
+                }
             }
 
             DateTime startDate;

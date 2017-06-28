@@ -9,7 +9,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ReferenceDataModels
     public class DataLockEventCommitmentReferenceData
     {
         public string PriceEpisodeIdentifier { get; set; }
-        public int ApprenticeshipVersion { get; set; }
+        public string ApprenticeshipVersion { get; set; }
         public DateTime StartDate { get; set; }
         public int FrameworkCode { get; set; }
         public int ProgrammeType { get; set; }

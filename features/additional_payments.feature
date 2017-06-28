@@ -336,8 +336,8 @@ Scenario:AC13- Payment for a DAS learner, lives in a disadvantaged postocde area
     #The provider incentive for this postcode group is £200 split equally into 2 payments at 90 and 365 days. INELIGIBLE FOR APPRENITCESHIP STANDARDS
     Given levy balance > agreed price for all months
     And the following commitments exist:
-		  | commitment Id | version Id | ULN       | start date  | end date   | framework code | programme type | pathway code | agreed price | status   | 
-        | 1             | 1          | learner a | 01/08/2017  | 01/08/2018 | 403            | 2              | 1            | 15000        | active   | 
+		  | commitment Id | version Id | ULN       | start date | end date   | framework code | programme type | pathway code | agreed price | status |
+		  | 1             | 1-001      | learner a | 01/08/2017 | 01/08/2018 | 403            | 2              | 1            | 15000        | active | 
 
     When an ILR file is submitted with the following data:
         | ULN       | learner type       | agreed price | start date | planned end date | actual end date | completion status | framework code | programme type | pathway code | home postcode deprivation |
@@ -490,7 +490,7 @@ Scenario: 625-AC01-Payment for a DAS learner, lives in a disadvantaged postocde 
     Given levy balance > agreed price for all months
     And the following commitments exist:
         | commitment Id | version Id | ULN       | start date | end date   | standard code | agreed price | status |
-        | 1             | 1          | learner a | 01/08/2017 | 01/08/2018 | 50            | 15000        | active |
+        | 1             | 1-001      | learner a | 01/08/2017 | 01/08/2018 | 50            | 15000        | active |
     When an ILR file is submitted with the following data:
         | ULN       | learner type       | agreed price | start date | planned end date | actual end date | completion status | standard code | home postcode deprivation |
         | learner a | programme only DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | 50            | 1-10%                     |
