@@ -517,6 +517,7 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table350 = new TechTalk.SpecFlow.Table(new string[] {
                         "commitment Id",
+                        "version Id",
                         "ULN",
                         "priority",
                         "start date",
@@ -524,6 +525,7 @@ this.ScenarioSetup(scenarioInfo);
                         "agreed price"});
             table350.AddRow(new string[] {
                         "1",
+                        "1-001",
                         "learner a",
                         "1",
                         "01/08/2017",
@@ -558,11 +560,11 @@ this.ScenarioSetup(scenarioInfo);
                         "12/17"});
             table352.AddRow(new string[] {
                         "On-program",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "commitment 1 v1"});
+                        "commitment 1 v1-001",
+                        "commitment 1 v1-001",
+                        "commitment 1 v1-001",
+                        "commitment 1 v1-001",
+                        "commitment 1 v1-001"});
             table352.AddRow(new string[] {
                         "Completion",
                         "",
