@@ -179,19 +179,19 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "10/18"});
             table473.AddRow(new string[] {
                         "On-program",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
+                        "commitment 1 v1-001",
+                        "commitment 1 v1-001",
+                        "commitment 1 v1-001",
                         "...",
-                        "commitment 1 v1",
+                        "commitment 1 v1-001",
                         "",
                         "",
                         "",
-                        "commitment 2 v1",
-                        "commitment 2 v1",
-                        "commitment 2 v1",
-                        "commitment 2 v1",
-                        "commitment 2 v1"});
+                        "commitment 2 v1-001",
+                        "commitment 2 v1-001",
+                        "commitment 2 v1-001",
+                        "commitment 2 v1-001",
+                        "commitment 2 v1-001"});
 #line 18
         testRunner.Then("the data lock status will be as follows:", ((string)(null)), table473, "Then ");
 #line hidden
@@ -391,7 +391,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "effective to"});
             table476.AddRow(new string[] {
                         "1",
-                        "1",
+                        "1-001",
                         "provider a",
                         "learner a",
                         "01/08/2017",
@@ -402,7 +402,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "04/03/2018"});
             table476.AddRow(new string[] {
                         "1",
-                        "2",
+                        "2-001",
                         "provider a",
                         "learner a",
                         "01/08/2017",
@@ -413,7 +413,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         ""});
             table476.AddRow(new string[] {
                         "2",
-                        "1",
+                        "1-001",
                         "provider b",
                         "learner a",
                         "05/03/2018",
@@ -475,16 +475,16 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "07/18"});
             table478.AddRow(new string[] {
                         "On-program",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
+                        "commitment 1 v1-001",
+                        "commitment 1 v1-001",
+                        "commitment 1 v1-001",
                         "...",
-                        "commitment 1 v1",
-                        "commitment 2 v1",
-                        "commitment 2 v1",
-                        "commitment 2 v1",
-                        "commitment 2 v1",
-                        "commitment 2 v1"});
+                        "commitment 1 v1-001",
+                        "commitment 2 v1-001",
+                        "commitment 2 v1-001",
+                        "commitment 2 v1-001",
+                        "commitment 2 v1-001",
+                        "commitment 2 v1-001"});
 #line 60
         testRunner.Then("the data lock status will be as follows:", ((string)(null)), table478, "Then ");
 #line hidden
@@ -686,7 +686,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "effective to"});
             table481.AddRow(new string[] {
                         "1",
-                        "1",
+                        "1-001",
                         "provider a",
                         "learner a",
                         "01/08/2017",
@@ -697,7 +697,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "04/03/2018"});
             table481.AddRow(new string[] {
                         "1",
-                        "2",
+                        "2-001",
                         "provider a",
                         "learner a",
                         "01/08/2017",
@@ -708,7 +708,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         ""});
             table481.AddRow(new string[] {
                         "2",
-                        "1",
+                        "1-001",
                         "provider b",
                         "learner a",
                         "05/03/2018",
@@ -770,16 +770,16 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "07/18"});
             table483.AddRow(new string[] {
                         "On-program",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
+                        "commitment 1 v1-001",
+                        "commitment 1 v1-001",
+                        "commitment 1 v1-001",
                         "...",
-                        "commitment 1 v1",
+                        "commitment 1 v1-001",
                         "",
-                        "commitment 2 v1",
-                        "commitment 2 v1",
-                        "commitment 2 v1",
-                        "commitment 2 v1"});
+                        "commitment 2 v1-001",
+                        "commitment 2 v1-001",
+                        "commitment 2 v1-001",
+                        "commitment 2 v1-001"});
 #line 100
         testRunner.Then("the data lock status will be as follows:", ((string)(null)), table483, "Then ");
 #line hidden
@@ -981,7 +981,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "effective to"});
             table486.AddRow(new string[] {
                         "1",
-                        "1",
+                        "1-001",
                         "provider a",
                         "learner a",
                         "01/08/2017",
@@ -992,7 +992,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "04/03/2018"});
             table486.AddRow(new string[] {
                         "1",
-                        "2",
+                        "2-001",
                         "provider a",
                         "learner a",
                         "01/08/2017",
@@ -1003,7 +1003,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         ""});
             table486.AddRow(new string[] {
                         "2",
-                        "1",
+                        "1-001",
                         "provider b",
                         "learner a",
                         "05/03/2018",
@@ -1066,11 +1066,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "08/18"});
             table488.AddRow(new string[] {
                         "On-program",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
+                        "commitment 1 v1-001",
+                        "commitment 1 v1-001",
+                        "commitment 1 v1-001",
                         "...",
-                        "commitment 1 v1",
+                        "commitment 1 v1-001",
                         "",
                         "",
                         "",
@@ -1278,7 +1278,7 @@ this.ScenarioSetup(scenarioInfo);
                         "effective to"});
             table491.AddRow(new string[] {
                         "1",
-                        "1",
+                        "1-001",
                         "provider a",
                         "learner a",
                         "01/08/2017",
@@ -1289,7 +1289,7 @@ this.ScenarioSetup(scenarioInfo);
                         "14/11/2017"});
             table491.AddRow(new string[] {
                         "1",
-                        "2",
+                        "2-001",
                         "provider a",
                         "learner a",
                         "01/08/2017",
@@ -1300,7 +1300,7 @@ this.ScenarioSetup(scenarioInfo);
                         ""});
             table491.AddRow(new string[] {
                         "2",
-                        "1",
+                        "1-001",
                         "provider b",
                         "learner a",
                         "15/11/2017",
@@ -1373,18 +1373,18 @@ this.ScenarioSetup(scenarioInfo);
                         "01/18"});
             table493.AddRow(new string[] {
                         "On-program",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "commitment 2 v1",
-                        "commitment 2 v1",
-                        "commitment 2 v1"});
+                        "commitment 1 v1-001",
+                        "commitment 1 v1-001",
+                        "commitment 1 v1-001",
+                        "commitment 2 v1-001",
+                        "commitment 2 v1-001",
+                        "commitment 2 v1-001"});
             table493.AddRow(new string[] {
                         "Employer 16-18 incentive",
                         "",
                         "",
                         "",
-                        "commitment 1 v1",
+                        "commitment 1 v1-001",
                         "",
                         ""});
             table493.AddRow(new string[] {
@@ -1392,7 +1392,7 @@ this.ScenarioSetup(scenarioInfo);
                         "",
                         "",
                         "",
-                        "commitment 1 v1",
+                        "commitment 1 v1-001",
                         "",
                         ""});
 #line 182
@@ -1638,7 +1638,7 @@ this.ScenarioSetup(scenarioInfo);
                         "effective to"});
             table498.AddRow(new string[] {
                         "1",
-                        "1",
+                        "1-001",
                         "provider a",
                         "learner a",
                         "01/08/2017",
@@ -1649,7 +1649,7 @@ this.ScenarioSetup(scenarioInfo);
                         "14/11/2017"});
             table498.AddRow(new string[] {
                         "1",
-                        "2",
+                        "2-001",
                         "provider a",
                         "learner a",
                         "01/08/2017",
@@ -1660,7 +1660,7 @@ this.ScenarioSetup(scenarioInfo);
                         ""});
             table498.AddRow(new string[] {
                         "2",
-                        "1",
+                        "1-001",
                         "provider b",
                         "learner a",
                         "15/11/2017",
@@ -1734,19 +1734,19 @@ this.ScenarioSetup(scenarioInfo);
                         "02/18"});
             table500.AddRow(new string[] {
                         "On-program",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
+                        "commitment 1 v1-001",
+                        "commitment 1 v1-001",
+                        "commitment 1 v1-001",
                         "",
-                        "commitment 2 v1",
-                        "commitment 2 v1",
-                        "commitment 2 v1"});
+                        "commitment 2 v1-001",
+                        "commitment 2 v1-001",
+                        "commitment 2 v1-001"});
             table500.AddRow(new string[] {
                         "Employer 16-18 incentive",
                         "",
                         "",
                         "",
-                        "commitment 1 v1",
+                        "commitment 1 v1-001",
                         "",
                         "",
                         ""});
@@ -1755,7 +1755,7 @@ this.ScenarioSetup(scenarioInfo);
                         "",
                         "",
                         "",
-                        "commitment 1 v1",
+                        "commitment 1 v1-001",
                         "",
                         "",
                         ""});
@@ -2021,7 +2021,7 @@ this.ScenarioSetup(scenarioInfo);
                         "effective to"});
             table505.AddRow(new string[] {
                         "1",
-                        "1",
+                        "1-001",
                         "provider a",
                         "learner a",
                         "01/08/2017",
@@ -2032,7 +2032,7 @@ this.ScenarioSetup(scenarioInfo);
                         "14/11/2017"});
             table505.AddRow(new string[] {
                         "1",
-                        "2",
+                        "2-001",
                         "provider a",
                         "learner a",
                         "01/08/2017",
@@ -2043,7 +2043,7 @@ this.ScenarioSetup(scenarioInfo);
                         ""});
             table505.AddRow(new string[] {
                         "2",
-                        "1",
+                        "1-001",
                         "provider b",
                         "learner a",
                         "15/11/2017",
@@ -2117,9 +2117,9 @@ this.ScenarioSetup(scenarioInfo);
                         "02/18"});
             table507.AddRow(new string[] {
                         "On-program",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
-                        "commitment 1 v1",
+                        "commitment 1 v1-001",
+                        "commitment 1 v1-001",
+                        "commitment 1 v1-001",
                         "",
                         "",
                         "",
@@ -2129,7 +2129,7 @@ this.ScenarioSetup(scenarioInfo);
                         "",
                         "",
                         "",
-                        "commitment 1 v1",
+                        "commitment 1 v1-001",
                         "",
                         "",
                         ""});
@@ -2138,7 +2138,7 @@ this.ScenarioSetup(scenarioInfo);
                         "",
                         "",
                         "",
-                        "commitment 1 v1",
+                        "commitment 1 v1-001",
                         "",
                         "",
                         ""});

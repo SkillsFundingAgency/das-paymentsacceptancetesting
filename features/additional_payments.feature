@@ -931,20 +931,20 @@ Scenario:638-AC02 DAS learner, takes an English qualification that has a planned
 	Given levy balance > agreed price for all months
 	And the following commitments exist:
 		| commitment Id | version Id | ULN       | start date | end date   | agreed price | status |
-		| 1             | 1          | learner a | 01/08/2017 | 01/08/2018 | 15000        | active |
+		| 1             | 1-001      | learner a | 01/08/2017 | 01/08/2018 | 15000        | active |
 	When an ILR file is submitted with the following data:
 		| ULN       | learner type       | aim type         | agreed price | aim rate | start date | planned end date | actual end date | completion status |
 		| learner a | programme only DAS | programme        | 15000        |          | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         |
 		| learner a | programme only DAS | maths or english |              | 471      | 06/08/2017 | 06/10/2018       | 06/10/2018      | completed         |	
 	Then the data lock status will be as follows:
-		| Payment type                   | 08/17           | 09/17           | 10/17           | ... | 07/18           | 08/18           | 09/18           | 10/18 | 11/18 |
-		| On-program                     | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | ... | commitment 1 v1 |                 |                 |       |       |
-		| Completion                     |                 |                 |                 | ... |                 | commitment 1 v1 |                 |       |       |
-		| Employer 16-18 incentive       |                 |                 |                 | ... |                 |                 |                 |       |       |
-		| Provider 16-18 incentive       |                 |                 |                 | ... |                 |                 |                 |       |       |
-		| Provider learning support      |                 |                 |                 | ... |                 |                 |                 |       |       |
-		| English and maths on programme | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | ... | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 |       |       |
-		| English and maths Balancing    |                 |                 |                 | ... |                 |                 |                 |       |       |      
+		| Payment type                   | 08/17               | 09/17               | 10/17               | ... | 07/18               | 08/18               | 09/18               | 10/18 | 11/18 |
+		| On-program                     | commitment 1 v1-001 | commitment 1 v1-001 | commitment 1 v1-001 | ... | commitment 1 v1-001 |                     |                     |       |       |
+		| Completion                     |                     |                     |                     | ... |                     | commitment 1 v1-001 |                     |       |       |
+		| Employer 16-18 incentive       |                     |                     |                     | ... |                     |                     |                     |       |       |
+		| Provider 16-18 incentive       |                     |                     |                     | ... |                     |                     |                     |       |       |
+		| Provider learning support      |                     |                     |                     | ... |                     |                     |                     |       |       |
+		| English and maths on programme | commitment 1 v1-001 | commitment 1 v1-001 | commitment 1 v1-001 | ... | commitment 1 v1-001 | commitment 1 v1-001 | commitment 1 v1-001 |       |       |
+		| English and maths Balancing    |                     |                     |                     | ... |                     |                     |                     |       |       |      
     And the provider earnings and payments break down as follows:
 		| Type                                    | 08/17   | 09/17   | 10/17   | ... | 05/18   | 06/18   | 07/18   | 08/18   | 09/18   | 10/18 | 11/18 |
 		| Provider Earned Total                   | 1033.64 | 1033.64 | 1033.64 | ... | 1033.64 | 1033.64 | 1033.64 | 3033.64 | 33.64   | 0     | 0     |
@@ -1038,8 +1038,8 @@ Scenario:657-AC01 Non-DAS learner, takes an English qualification that has a pla
 Scenario:657-AC02 DAS learner, takes an English qualification that has a planned end date that exceeds the actual end date of the programme aim and learning support is applicable for all learning
 	Given levy balance > agreed price for all months 
 	And the following commitments exist:
-		| commitment Id | ULN       | start date | end date   | agreed price | status |
-		| 1             | learner a | 01/08/2017 | 01/08/2018 | 15000        | active |
+		| commitment Id | version Id | ULN | start date | end date | agreed price | status |
+		| 1             | 1-001      | learner a | 01/08/2017 | 01/08/2018 | 15000        | active |
 	When an ILR file is submitted with the following data:
 		| ULN       | learner type       | aim type         | agreed price | aim rate | start date | planned end date | actual end date | completion status |
 		| learner a | programme only DAS | programme        | 15000        |          | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         |
@@ -1048,14 +1048,14 @@ Scenario:657-AC02 DAS learner, takes an English qualification that has a planned
         | Learning support code | date from  | date to    |
         | 1                     | 06/08/2017 | 06/10/2018 |		  
 	Then the data lock status will be as follows:
-		| Payment type                   | 08/17           | 09/17           | 10/17           | ... | 07/18           | 08/18           | 09/18           | 10/18 | 11/18 |
-		| On-program                     | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | ... | commitment 1 v1 |                 |                 |       |       |
-		| Completion                     |                 |                 |                 | ... |                 | commitment 1 v1 |                 |       |       |
-		| Employer 16-18 incentive       |                 |                 |                 | ... |                 |                 |                 |       |       |
-		| Provider 16-18 incentive       |                 |                 |                 | ... |                 |                 |                 |       |       |
-		| Provider learning support      | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | ... | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 |       |       |
-		| English and maths on programme | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | ... | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 |       |       |
-		| English and maths Balancing    |                 |                 |                 | ... |                 |                 |                 |       |       |      
+		| Payment type                   | 08/17               | 09/17               | 10/17               | ... | 07/18               | 08/18               | 09/18               | 10/18 | 11/18 |
+		| On-program                     | commitment 1 v1-001 | commitment 1 v1-001 | commitment 1 v1-001 | ... | commitment 1 v1-001 |                     |                     |       |       |
+		| Completion                     |                     |                     |                     | ... |                     | commitment 1 v1-001 |                     |       |       |
+		| Employer 16-18 incentive       |                     |                     |                     | ... |                     |                     |                     |       |       |
+		| Provider 16-18 incentive       |                     |                     |                     | ... |                     |                     |                     |       |       |
+		| Provider learning support      | commitment 1 v1-001 | commitment 1 v1-001 | commitment 1 v1-001 | ... | commitment 1 v1-001 | commitment 1 v1-001 | commitment 1 v1-001 |       |       |
+		| English and maths on programme | commitment 1 v1-001 | commitment 1 v1-001 | commitment 1 v1-001 | ... | commitment 1 v1-001 | commitment 1 v1-001 | commitment 1 v1-001 |       |       |
+		| English and maths Balancing    |                     |                     |                     | ... |                     |                     |                     |       |       |      
     And the provider earnings and payments break down as follows:
 		| Type                                    | 08/17   | 09/17   | 10/17   | ... | 05/18   | 06/18   | 07/18   | 08/18   | 09/18   | 10/18  | 11/18 |
 		| Provider Earned Total                   | 1183.64 | 1183.64 | 1183.64 | ... | 1183.64 | 1183.64 | 1183.64 | 3183.64 | 183.64  | 0      | 0     |
@@ -1124,8 +1124,8 @@ Scenario:658-AC01 DAS learner, takes an English qualification that has a planned
 	Given levy balance > agreed price for all months
 	And the following commitments exist:
 		| commitment Id | version Id | ULN       | start date | end date   | agreed price | status    | effective from | effective to |
-		| 1             | 1          | learner a | 01/08/2017 | 01/08/2018 | 15000        | active    | 01/08/2017     | 10/06/2018   |
-		| 1             | 2          | learner a | 01/08/2017 | 01/08/2018 | 14000        | cancelled | 11/06/2018     |              |
+		| 1             | 1-001      | learner a | 01/08/2017 | 01/08/2018 | 15000        | active    | 01/08/2017     | 10/06/2018   |
+		| 1             | 2-001      | learner a | 01/08/2017 | 01/08/2018 | 14000        | cancelled | 11/06/2018     |              |
 	When an ILR file is submitted with the following data:
 		| ULN       | learner type       | aim type         | agreed price | aim rate | start date | planned end date | actual end date | completion status |
 		| learner a | programme only DAS | programme        | 15000        |          | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         |
@@ -1134,13 +1134,13 @@ Scenario:658-AC01 DAS learner, takes an English qualification that has a planned
         | Learning support code | date from  | date to    |
         | 1                     | 06/08/2017 | 06/10/2018 | 		  
     Then the data lock status will be as follows:
-		| Payment type                   | 08/17           | 09/17           | 10/17           | ... | 05/18           | 06/18 | 07/18 | 08/18 | 09/18 | 10/18 | 11/18 |
-		| On-program                     | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | ... | commitment 1 v1 |       |       |       |       |       |       |
-		| Employer 16-18 incentive       |                 |                 |                 | ... |                 |       |       |       |       |       |       |
-		| Provider 16-18 incentive       |                 |                 |                 | ... |                 |       |       |       |       |       |       |
-		| Provider learning support      | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | ... | commitment 1 v1 |       |       |       |       |       |       |
-		| English and maths on programme | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | ... | commitment 1 v1 |       |       |       |       |       |       |
-		| English and maths Balancing    |                 |                 |                 | ... |                 |       |       |       |       |       |       | 
+		| Payment type                   | 08/17               | 09/17               | 10/17               | ... | 05/18               | 06/18 | 07/18 | 08/18 | 09/18 | 10/18 | 11/18 |
+		| On-program                     | commitment 1 v1-001 | commitment 1 v1-001 | commitment 1 v1-001 | ... | commitment 1 v1-001 |       |       |       |       |       |       |
+		| Employer 16-18 incentive       |                     |                     |                     | ... |                     |       |       |       |       |       |       |
+		| Provider 16-18 incentive       |                     |                     |                     | ... |                     |       |       |       |       |       |       |
+		| Provider learning support      | commitment 1 v1-001 | commitment 1 v1-001 | commitment 1 v1-001 | ... | commitment 1 v1-001 |       |       |       |       |       |       |
+		| English and maths on programme | commitment 1 v1-001 | commitment 1 v1-001 | commitment 1 v1-001 | ... | commitment 1 v1-001 |       |       |       |       |       |       |
+		| English and maths Balancing    |                     |                     |                     | ... |                     |       |       |       |       |       |       | 
     And the provider earnings and payments break down as follows:
 		| Type                                    | 08/17   | 09/17   | 10/17   | ... | 05/18   | 06/18   | 07/18   | 08/18   | 09/18  | 10/18 | 11/18 |
 		| Provider Earned Total                   | 1183.64 | 1183.64 | 1183.64 | ... | 1183.64 | 1183.64 | 1183.64 | 3183.64 | 183.64 | 0     | 0     |
@@ -1167,8 +1167,8 @@ Scenario:671-AC01 DAS learner, levy available, is taking an English or maths qua
     And levy balance > agreed price for all months
     And the following commitments exist:
 		| commitment Id | version Id | ULN       | start date | end date   | status | agreed price | effective from | effective to |
-		| 1             | 1          | learner a | 01/08/2017 | 01/08/2018 | active | 11250        | 01/08/2017     | 10/11/2017   |
-		| 1             | 2          | learner a | 01/08/2017 | 01/08/2018 | active | 6750         | 11/11/2017     |              |
+		| 1             | 1-001      | learner a | 01/08/2017 | 01/08/2018 | active | 11250        | 01/08/2017     | 10/11/2017   |
+		| 1             | 2-001      | learner a | 01/08/2017 | 01/08/2018 | active | 6750         | 11/11/2017     |              |
 
     When an ILR file is submitted with the following data:
         | ULN       | learner type       | aim type         | start date | planned end date | actual end date | completion status | aim rate | Total training price 1 | Total training price 1 effective date | Total assessment price 1 | Total assessment price 1 effective date | Total training price 2 | Total training price 2 effective date | Total assessment price 2 | Total assessment price 2 effective date | 
@@ -1179,14 +1179,14 @@ Scenario:671-AC01 DAS learner, levy available, is taking an English or maths qua
         | 1                     | 06/08/2017 | 06/10/2018 |	
 
     Then the data lock status will be as follows:
-		| Payment type                   | 08/17           | 09/17           | 10/17           | 11/17           | 12/17           |
-		| On-program                     | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | commitment 1 v2 | commitment 1 v2 |
-		| Completion                     |                 |                 |                 |                 |                 |
-		| Employer 16-18 incentive       |                 |                 |                 |                 |                 |
-		| Provider 16-18 incentive       |                 |                 |                 |                 |                 |
-		| Provider learning support      | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | commitment 1 v2 | commitment 1 v2 |
-		| English and maths on programme | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 | commitment 1 v2 | commitment 1 v2 |
-		| English and maths Balancing    |                 |                 |                 |                 |                 |     
+		| Payment type                   | 08/17               | 09/17               | 10/17               | 11/17               | 12/17               |
+		| On-program                     | commitment 1 v1-001 | commitment 1 v1-001 | commitment 1 v1-001 | commitment 1 v2-001 | commitment 1 v2-001 |
+		| Completion                     |                     |                     |                     |                     |                     |
+		| Employer 16-18 incentive       |                     |                     |                     |                     |                     |
+		| Provider 16-18 incentive       |                     |                     |                     |                     |                     |
+		| Provider learning support      | commitment 1 v1-001 | commitment 1 v1-001 | commitment 1 v1-001 | commitment 1 v2-001 | commitment 1 v2-001 |
+		| English and maths on programme | commitment 1 v1-001 | commitment 1 v1-001 | commitment 1 v1-001 | commitment 1 v2-001 | commitment 1 v2-001 |
+		| English and maths Balancing    |                     |                     |                     |                     |                     |     
 	 And the provider earnings and payments break down as follows: 
         | Type                                | 08/17   | 09/17  | 10/17  | 11/17   | 12/17  | 01/18  | 
         | Provider Earned Total               | 933.64  | 933.64 | 933.64 | 533.64  | 533.64 | 533.64 |       
@@ -1247,8 +1247,8 @@ Scenario:671-AC03 DAS learner, levy available, is taking an English or maths qua
     And levy balance > agreed price for all months
     And the following commitments exist:
         | commitment Id | version Id | ULN       | start date | end date   | status | agreed price | effective from | effective to |
-        | 1             | 1          | learner a | 01/08/2017 | 01/08/2018 | active | 11250        | 01/08/2017     | 10/11/2017   |
-        | 1             | 2          | learner a | 01/08/2017 | 01/08/2018 | active | 6750         | 11/11/2017     |              |
+        | 1             | 1-001      | learner a | 01/08/2017 | 01/08/2018 | active | 11250        | 01/08/2017     | 10/11/2017   |
+        | 1             | 2-001      | learner a | 01/08/2017 | 01/08/2018 | active | 6750         | 11/11/2017     |              |
 
     When an ILR file is submitted with the following data:
         | ULN       | learner type       | aim type         | start date | planned end date | actual end date | completion status | aim rate | Total training price 1 | Total training price 1 effective date | Total assessment price 1 | Total assessment price 1 effective date | Total training price 2 | Total training price 2 effective date | Total assessment price 2 | Total assessment price 2 effective date | 
@@ -1259,14 +1259,14 @@ Scenario:671-AC03 DAS learner, levy available, is taking an English or maths qua
         | 1                     | 06/08/2017 | 06/10/2018 |	
  
     Then the data lock status will be as follows:
-        | Payment type                   | 08/17           | 09/17           | 10/17           | 11/17           | 12/17           |
-        | On-program                     | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 |                 |                 |
-        | Completion                     |                 |                 |                 |                 |                 |
-        | Employer 16-18 incentive       |                 |                 |                 |                 |                 |
-        | Provider 16-18 incentive       |                 |                 |                 |                 |                 |
-        | Provider learning support      | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 |                 |                 |
-        | English and maths on programme | commitment 1 v1 | commitment 1 v1 | commitment 1 v1 |                 |                 |
-        | English and maths Balancing    |                 |                 |                 |                 |                 |     
+        | Payment type                   | 08/17               | 09/17               | 10/17               | 11/17           | 12/17           |
+        | On-program                     | commitment 1 v1-001 | commitment 1 v1-001 | commitment 1 v1-001 |                 |                 |
+        | Completion                     |                     |                     |                     |                 |                 |
+        | Employer 16-18 incentive       |                     |                     |                     |                 |                 |
+        | Provider 16-18 incentive       |                     |                     |                     |                 |                 |
+        | Provider learning support      | commitment 1 v1-001 | commitment 1 v1-001 | commitment 1 v1-001 |                 |                 |
+        | English and maths on programme | commitment 1 v1-001 | commitment 1 v1-001 | commitment 1 v1-001 |                 |                 |
+        | English and maths Balancing    |                     |                     |                     |                 |                 |     
     And the provider earnings and payments break down as follows: 
         | Type                                | 08/17   | 09/17  | 10/17  | 11/17   | 12/17  | 01/18  | 
         | Provider Earned Total               | 933.64  | 933.64 | 933.64 | 533.64  | 533.64 | 533.64 |       

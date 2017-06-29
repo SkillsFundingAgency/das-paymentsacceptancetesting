@@ -98,7 +98,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "effective to"});
             table258.AddRow(new string[] {
                         "1",
-                        "1",
+                        "1-001",
                         "employer 1",
                         "provider a",
                         "learner a",
@@ -109,7 +109,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "31/05/2017"});
             table258.AddRow(new string[] {
                         "1",
-                        "2",
+                        "2-001",
                         "employer 1",
                         "provider a",
                         "learner a",
@@ -151,9 +151,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "07/17"});
             table260.AddRow(new string[] {
                         "On-program",
-                        "commitment 1 v1",
-                        "commitment 1 v2",
-                        "commitment 1 v2"});
+                        "commitment 1 v1-001",
+                        "commitment 1 v2-001",
+                        "commitment 1 v2-001"});
 #line 18
   testRunner.Then("the data lock status will be as follows:", ((string)(null)), table260, "Then ");
 #line hidden
@@ -222,7 +222,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "effective to"});
             table262.AddRow(new string[] {
                         "1",
-                        "1",
+                        "1-001",
                         "1",
                         "employer 1",
                         "provider a",
@@ -234,7 +234,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "31/05/2017"});
             table262.AddRow(new string[] {
                         "1",
-                        "2",
+                        "2-001",
                         "1",
                         "employer 1",
                         "provider a",
@@ -246,7 +246,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "13/07/2017"});
             table262.AddRow(new string[] {
                         "1",
-                        "3",
+                        "3-001",
                         "2",
                         "employer 1",
                         "provider a",
@@ -289,9 +289,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "07/17"});
             table264.AddRow(new string[] {
                         "On-program",
-                        "commitment 1 v1",
-                        "commitment 1 v2",
-                        "commitment 1 v3"});
+                        "commitment 1 v1-001",
+                        "commitment 1 v2-001",
+                        "commitment 1 v3-001"});
 #line 43
   testRunner.Then("the data lock status will be as follows:", ((string)(null)), table264, "Then ");
 #line hidden
