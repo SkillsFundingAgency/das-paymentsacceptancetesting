@@ -537,13 +537,13 @@ Scenario:806_AC2- DAS learner, is made redundant outside of the last 6 months of
         
         And the Contract type in the ILR is:
             | contract type | date from  | date to    |
-            | DAS           | 03/08/2017 | 18/02/2018 |        
-            | Non-DAS       | 19/02/2018 |            |
+            | DAS           | 03/08/2017 | 19/02/2018 |        
+            | Non-DAS       | 20/02/2018 |            |
         
         And the employment status in the ILR is:
             | Employer   | Employment Status      | Employment Status Applies |
             | employer 1 | in paid employment     | 02/08/2017                |
-            |            | not in paid employment | 19/02/2018                |
+            |            | not in paid employment | 20/02/2018                |
               
         Then the provider earnings and payments break down as follows:
             | Type                           | 08/17 | 09/17 | 10/17 | ... | 01/18 | 02/18 | 03/18 | 04/18 | 05/18 |
