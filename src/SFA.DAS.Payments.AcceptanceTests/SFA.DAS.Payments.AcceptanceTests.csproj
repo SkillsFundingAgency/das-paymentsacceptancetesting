@@ -321,6 +321,7 @@
     <None Include="App.Release.config">
       <DependentUpon>App.config</DependentUpon>
     </None>
+    <None Include="Automation\Acceptance Test Automation.ps1" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
