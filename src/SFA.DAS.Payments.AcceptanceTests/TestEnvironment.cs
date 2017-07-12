@@ -19,6 +19,7 @@ namespace SFA.DAS.Payments.AcceptanceTests
                 WorkingDirectory = ConfigurationManager.AppSettings["WorkingDir"],
                 IlrFileDirectory = System.IO.Path.Combine(ConfigurationManager.AppSettings["WorkingDir"], "Collect"),
                 CurrentYear = DateTime.Today.GetAcademicYear(),
+                OpaRulebaseYear = ConfigurationManager.AppSettings["OpaRulebaseYear"],
                 LogLevel = "Trace",
                 
                 IlrAimRefLookups = new[]
