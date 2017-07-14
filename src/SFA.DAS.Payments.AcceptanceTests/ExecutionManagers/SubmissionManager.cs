@@ -154,7 +154,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
             };
             for (var i = 0; i < submission.Learners.Length; i++)
             {
-                submission.Learners[i].LearnRefNumber = (i + 1).ToString();
+                if (string.IsNullOrEmpty(submission.Learners[i].LearnRefNumber))
+                {
+                    submission.Learners[i].LearnRefNumber = (i + 1).ToString();
+                }
+                i++;
             }
             return submission;
         }
@@ -205,6 +209,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
 
             return new Learner
             {
+                LearnRefNumber= learnerDetails[0].LearnerId,
                 Uln = lookupContext.AddOrGetUln(learnerDetails[0].LearnerId),
                 DateOfBirth = GetDateOfBirthBasedOnLearnerType(learnerDetails[0].LearnerType),
                 LearningDeliveries = deliveries,

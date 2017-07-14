@@ -25,7 +25,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                                               int collectionPeriodYear,
                                               int transactionType,
                                               ContractType contractType,
-                                              decimal amountDue)
+                                              decimal amountDue,
+                                              DateTime learningStartDate,
+                                              string learnAimRef="ZPROG001")
         {
             if (TestEnvironment.ValidateSpecsOnly)
             {
@@ -59,7 +61,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                                        "PathwayCode," +
                                        "ApprenticeshipContractType," +
                                        "SfaContributionPercentage," +
-                                       "UseLevyBalance" +
+                                       "UseLevyBalance," +
+                                       "LearnAimRef," +
+                                       "LearningStartDate" +
                                    ") VALUES (" +
                                        "@requiredPaymentId," +
                                        "@commitmentId," +
@@ -83,7 +87,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                                        "@pathwayCode," +
                                         "@contractType," +
                                        "0.9," +
-                                        "1" +
+                                        "1," +
+                                        "@learnAimRef," +
+                                        "@learningStartDate" +
                                    ")",
                     new
                     {
@@ -104,7 +110,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                         ProgrammeType = ProgrammeType,
                         FrameworkCode = FrameworkCode,
                         PathwayCode = PathwayCode,
-                        contractType
+                        contractType,
+                        learnAimRef,
+                        learningStartDate
                     });
             }
         }
