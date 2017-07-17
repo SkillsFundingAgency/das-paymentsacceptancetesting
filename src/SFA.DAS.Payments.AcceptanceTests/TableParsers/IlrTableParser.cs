@@ -3,12 +3,18 @@ using System.Linq;
 using SFA.DAS.Payments.AcceptanceTests.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.ReferenceDataModels;
 using TechTalk.SpecFlow;
+using System.Collections.Generic;
 
 namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
 {
     public class IlrTableParser
     {
         public static void ParseIlrTableIntoContext(SubmissionContext context, Table ilrDetails)
+        {
+            ParseIlrTableIntoContext(context.IlrLearnerDetails, ilrDetails);
+        }
+
+        public static void ParseIlrTableIntoContext(List<IlrLearnerReferenceData> IlrLearnerDetails, Table ilrDetails)
         {
             if (ilrDetails.RowCount < 1)
             {
@@ -18,8 +24,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
             var structure = ParseTableStructure(ilrDetails);
             foreach (var row in ilrDetails.Rows)
             {
-                context.IlrLearnerDetails.Add(ParseCommitmentsTableRow(row, structure));
+                IlrLearnerDetails.Add(ParseCommitmentsTableRow(row, structure));
             }
+
         }
 
 
@@ -32,6 +39,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                 var header = ilrDetails.Header.ElementAt(c);
                 switch (header)
                 {
+                    case "learner reference number":
+                        structure.LearnerReferenceIndex = c;
+                        break;
                     case "ULN":
                         structure.UlnIndex = c;
                         break;
@@ -148,6 +158,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                     case "LearnDelFAM":
                         structure.LearnDelFamIndex = c;
                         break;
+                    case "aim sequence number":
+                        structure.AimSequenceNumberIndex = c;
+                        break;
                     default:
                         throw new ArgumentException($"Unexpected column in ILR table: {header}");
                 }
@@ -159,7 +172,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
         {
             var rowData = new IlrLearnerReferenceData
             {
-                LearnerId = row.ReadRowColumnValue<string>(structure.UlnIndex, "ULN", Defaults.LearnerId),
+                LearnerReference = row.ReadRowColumnValue<string>(structure.LearnerReferenceIndex, "learner reference number", string.Empty),
+                Uln = row.ReadRowColumnValue<string>(structure.UlnIndex, "ULN", Defaults.LearnerId),
                 AgreedPrice = row.ReadRowColumnValue<int>(structure.AgreedPriceIndex, "agreed price"),
                 LearnerType = (LearnerType)row.ReadRowColumnValue<string>(structure.LearnerTypeIndex, "learner type", "programme only DAS").ToEnumByDescription(typeof(LearnerType)),
                 StartDate = row.ReadRowColumnValue<DateTime>(structure.StartDateIndex, "start date"),
@@ -194,13 +208,20 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                 EmploymentStatusApplies = row.ReadRowColumnValue<string>(structure.EmploymentStatusAppliesIndex, "employment status applies"),
                 EmployerId = row.ReadRowColumnValue<string>(structure.EmployerIdIndex, "employer id"),
                 SmallEmployer = row.ReadRowColumnValue<string>(structure.SmallEmployerIndex, "small employer"),
-                LearnDelFam = row.ReadRowColumnValue<string>(structure.LearnDelFamIndex, "LearnDelFam")
+                LearnDelFam = row.ReadRowColumnValue<string>(structure.LearnDelFamIndex, "LearnDelFam"),
+                AimSequenceNumber = row.ReadRowColumnValue<int>(structure.AimSequenceNumberIndex, "aim sequence number")
             };
+
+            if (string.IsNullOrEmpty(rowData.LearnerReference))
+            {
+                rowData.LearnerReference = rowData.Uln;
+            }
 
             if (rowData.StandardCode == 0 && rowData.FrameworkCode == 0)
             {
                 rowData.StandardCode = Defaults.StandardCode;
             }
+
 
             if (rowData.FrameworkCode > 0 && rowData.TotalAssessmentPrice2 > 0)
             {
@@ -213,7 +234,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
 
         private class IlrTableStructure
         {
-            public int UlnIndex { get; set; } = -1;
+            public int LearnerReferenceIndex { get; set; } = -1;
             public int AgreedPriceIndex { get; set; } = -1;
             public int LearnerTypeIndex { get; set; } = -1;
             public int StartDateIndex { get; set; } = -1;
@@ -249,6 +270,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
             public int ResidualTrainingPrice2EffectiveDateIndex { get; set; } = -1;
             public int ResidualAssessmentPrice2Index { get; set; } = -1;
             public int ResidualAssessmentPrice2EffectiveDateIndex { get; set; } = -1;
+
+            public int AimSequenceNumberIndex { get; set; } = -1;
+            public int UlnIndex { get; set; } = -1;
         }
     }
 }

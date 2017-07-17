@@ -113,16 +113,17 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             SubmissionDataLockAssertions.AssertPaymentsAndEarningsResults(SubmissionDataLockContext, SubmissionContext);
         }
 
-        [Given(@"the following earnings and payments for learning starting on (.*) have been made to the (.*) for (.*):")]
-        public void GivenTheFollowingEarningsAndPaymentsForLearningStartingOnHaveBeenMadeToTheProviderAForLearnerA(DateTime learningStartDate, string providerName,string learnerName, Table table)
+
+        [Given(@"following learning has been recorded for previous payments:")]
+        public void GivenFollowingLearningHasBeenRecordedForPreviousSubmission(Table table)
         {
-        //    ScenarioContext.Current.Pending();
-        //}
+            IlrTableParser.ParseIlrTableIntoContext(SubmissionContext.HistoricalLearningDetails, table);
+        }
 
-        //[Given(@"the following earnings and payments have been made to the (.*) for (.*):")]
-        //public void GivenTheFollowingEarningsAndPaymentsHaveBeenMadeToTheProviderAForLearnerA(string providerName, string learnerName, Table table)
-        //{
 
+        [Given(@"the following earnings and payments have been made to the (.*) for (.*):")]
+        public void GivenTheFollowingEarningsAndPaymentsHaveBeenMadeToTheProviderAForLearnerA(string providerName, string learnerName, Table table)
+        {
 
             var learnerBreakdown = new EarningsAndPaymentsBreakdown { ProviderId = providerName };
             EarningAndPaymentTableParser.ParseEarningsAndPaymentsTableIntoContext(learnerBreakdown, table);
@@ -130,11 +131,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             var learner = LookupContext.AddOrGetUln(learnerName);
             var provider = LookupContext.AddOrGetUkprn(learnerBreakdown.ProviderId);
 
-
             var commitment = CommitmentsContext.Commitments.FirstOrDefault(x=> x.ProviderId == learnerBreakdown.ProviderId && x.LearnerId == learnerName);
-
-            var standardCode = commitment != null ? commitment.StandardCode : Defaults.StandardCode;
-
+          
             foreach (var earned in learnerBreakdown.ProviderEarnedTotal)
             {
                 var requiredPaymentId = Guid.NewGuid().ToString();
@@ -144,17 +142,24 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                 var periodNumber = date.GetPeriodNumber();
                 var periodName = $"1718-R" + periodNumber.ToString("00");
 
-             
-                //learningStartdate = learningStartdate ?? date;
-
+                var learningDetails = SubmissionContext.HistoricalLearningDetails.Where(x => x.LearnerReference.Equals(learnerName,StringComparison.InvariantCultureIgnoreCase)).Single();
+          
                 if (earned.Value > 0)
                 {
-                    PaymentsManager.SavePaymentDue(requiredPaymentId, provider, learner, null, null, null, standardCode,
+                    PaymentsManager.SavePaymentDue(requiredPaymentId, provider, 
+                                                       learner, 
+                                                       learningDetails.FrameworkCode, 
+                                                       learningDetails.PathwayCode,
+                                                       learningDetails.ProgrammeType ,
+                                                       learningDetails.StandardCode,
                                                         commitment, learnerName, periodName,
                                                         month, year,
                                                         (int)TransactionType.OnProgram,
                                                         commitment == null ? ContractType.ContractWithSfa : ContractType.ContractWithEmployer,
-                                                        earned.Value,learningStartDate);
+                                                        earned.Value,
+                                                        learningDetails.StartDate,
+                                                        aimSequenceNumber: learningDetails.AimSequenceNumber);
+
                     var levyPayment = learnerBreakdown.SfaLevyBudget.Where(x => x.PeriodName == earned.PeriodName).SingleOrDefault();
                     if (levyPayment != null && levyPayment.Value > 0)
                     {

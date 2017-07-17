@@ -143,7 +143,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
         private static IlrSubmission BuildIlrSubmission(ProviderSubmissionDetails providerDetails, string period, LookupContext lookupContext, List<ContractTypeReferenceData> contractTypes, List<EmploymentStatusReferenceData> employmentStatus, List<LearningSupportReferenceData> learningSupportStatus)
         {
             var learners = (from x in providerDetails.LearnerDetails
-                            group x by x.LearnerId into g
+                            group x by x.LearnerReference into g
                             select BuildLearner(g.ToArray(), period, lookupContext, contractTypes, employmentStatus, learningSupportStatus)).ToArray();
             var submission = new IlrSubmission
             {
@@ -184,7 +184,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                     FamRecords = BuildLearningDeliveryFamCodes(x, contractTypes, learningSupportStatus),
                     CompletionStatus = (IlrGenerator.CompletionStatus)(int)x.CompletionStatus,
                     Type = (IlrGenerator.AimType)(int)x.AimType,
-                    FinancialRecords = financialRecords
+                    FinancialRecords = financialRecords,
+                    AimSequenceNumber = x.AimSequenceNumber
+                    
                 };
             }).ToArray();
             var employmentStatuses = employmentStatus.Select(s =>
@@ -209,8 +211,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
 
             return new Learner
             {
-                LearnRefNumber= learnerDetails[0].LearnerId,
-                Uln = lookupContext.AddOrGetUln(learnerDetails[0].LearnerId),
+                LearnRefNumber= learnerDetails[0].LearnerReference,
+                Uln = lookupContext.AddOrGetUln(learnerDetails[0].LearnerReference),
                 DateOfBirth = GetDateOfBirthBasedOnLearnerType(learnerDetails[0].LearnerType),
                 LearningDeliveries = deliveries,
                 EmploymentStatuses = employmentStatuses.Any() ? employmentStatuses : null

@@ -4,7 +4,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ReferenceDataModels
 {
     public class IlrLearnerReferenceData
     {
-        public string LearnerId { get; set; }
+        public string LearnerReference { get; set; }
         public int AgreedPrice { get; set; }
         public LearnerType LearnerType { get; set; }
         public DateTime StartDate { get; set; }
@@ -40,5 +40,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.ReferenceDataModels
         public DateTime ResidualTrainingPrice2EffectiveDate { get; set; }
         public int ResidualAssessmentPrice2 { get; set; }
         public DateTime ResidualAssessmentPrice2EffectiveDate { get; set; }
+
+        public int AimSequenceNumber { get; set; } = 1;
+        public string Uln { get; set; }
     }
 }
