@@ -127,12 +127,12 @@ and this refund must be credited to Provider A where refunded Levy amount will b
 		| 2             | Provider B | 1          | Learner B | 01/08/2017 | 01/08/2018 | active | 25            | 11250        | 01/08/2017     |              |
 	
 	And following learning has been recorded for previous payments:
-		| ULN       | start date | aim sequence number | completion status |
-		| Learner A | 04/08/2017 | 1                   | continuing        |
-		| Learner B | 04/08/2017 | 1                   | continuing        |
+		| ULN       | start date | aim sequence number | completion status | standard code |
+		| Learner A | 04/08/2017 | 1                   | continuing        | 25            |
+		| Learner B | 04/08/2017 | 1                   | continuing        | 25            |
 
 
-	And the following earnings and payments have been made to the provider A for learner a:
+	And the following earnings and payments have been made to the Provider A for Learner A:
 		| Type                                | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 |01/18|     
 		| Provider Earned Total               | 375   | 375   | 375   | 375   | 375   | 0   |
 		| Provider Paid by SFA                | 375   | 375   | 375   | 375   | 375   | 0   | 
@@ -142,7 +142,7 @@ and this refund must be credited to Provider A where refunded Levy amount will b
 		| Levy account debited                | 0     | 375   | 375   | 375   | 375   | 0   | 
 		| SFA Levy employer budget            | 375   | 375   | 375   | 375   | 375   | 0   | 
 		| SFA Levy co-funding budget          | 0     | 0     | 0     | 0     | 0     | 0   | 
-	And the following earnings and payments have been made to the provider B for learner B:
+	And the following earnings and payments have been made to the Provider B for Learner B:
 		| Type                          | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 |
 		| Provider Earned Total         | 750   | 750   | 750   | 750   | 750   | 0     |
 		| Provider Earned from SFA      | 750   | 750   | 750   | 750   | 750   | 0     |

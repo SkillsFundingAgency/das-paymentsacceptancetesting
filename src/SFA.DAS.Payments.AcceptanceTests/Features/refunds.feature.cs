@@ -905,17 +905,20 @@ this.ScenarioSetup(scenarioInfo);
                         "ULN",
                         "start date",
                         "aim sequence number",
-                        "completion status"});
+                        "completion status",
+                        "standard code"});
             table600.AddRow(new string[] {
                         "Learner A",
                         "04/08/2017",
                         "1",
-                        "continuing"});
+                        "continuing",
+                        "25"});
             table600.AddRow(new string[] {
                         "Learner B",
                         "04/08/2017",
                         "1",
-                        "continuing"});
+                        "continuing",
+                        "25"});
 #line 129
  testRunner.And("following learning has been recorded for previous payments:", ((string)(null)), table600, "And ");
 #line hidden
@@ -992,8 +995,8 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
 #line 135
- testRunner.And("the following earnings and payments have been made to the provider A for learner " +
-                    "a:", ((string)(null)), table601, "And ");
+ testRunner.And("the following earnings and payments have been made to the Provider A for Learner " +
+                    "A:", ((string)(null)), table601, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table602 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -1068,7 +1071,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0"});
 #line 145
- testRunner.And("the following earnings and payments have been made to the provider B for learner " +
+ testRunner.And("the following earnings and payments have been made to the Provider B for Learner " +
                     "B:", ((string)(null)), table602, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table603 = new TechTalk.SpecFlow.Table(new string[] {
