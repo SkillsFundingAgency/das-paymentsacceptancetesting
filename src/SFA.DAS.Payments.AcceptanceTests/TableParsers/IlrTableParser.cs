@@ -212,9 +212,16 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                 AimSequenceNumber = row.ReadRowColumnValue<int>(structure.AimSequenceNumberIndex, "aim sequence number")
             };
 
+            var learnRefNumber = string.Empty;
+            if (string.IsNullOrEmpty(rowData.LearnerReference) && !string.IsNullOrEmpty(rowData.Uln))
+            {
+                learnRefNumber = rowData.Uln;
+                rowData.Uln = string.Empty;
+            }
+
             if (string.IsNullOrEmpty(rowData.LearnerReference))
             {
-                rowData.LearnerReference = rowData.Uln;
+                rowData.LearnerReference = learnRefNumber;
             }
 
             if (rowData.StandardCode == 0 && rowData.FrameworkCode == 0)

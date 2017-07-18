@@ -18,7 +18,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataCollectors
 
             foreach (var dataLockEntity in dataLockPeriodResults)
             {
-                var learner = GetOrCreateLearner(dataLockEntity.Ukprn, dataLockEntity.Uln, results, lookupContext);
+                var learner = GetOrCreateLearner(dataLockEntity.Ukprn, dataLockEntity.LearnRefNumber, results, lookupContext);
 
                 CreateOrUpdateDataLockPeriodResults(learner.SubmissionDataLockResults, dataLockEntity, period);
             }
@@ -30,7 +30,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataCollectors
             {
                 var query = "SELECT "
                             + " Ukprn, "
-                            + " Uln, "
+                            + " LearnRefNumber, "
                             + " CollectionPeriodMonth,"
                             + " CollectionPeriodYear,"
                             + " CommitmentId, "
@@ -41,17 +41,16 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataCollectors
             }
         }
 
-        private static LearnerResults GetOrCreateLearner(long ukprn, long uln, List<LearnerResults> results, LookupContext lookupContext)
+        private static LearnerResults GetOrCreateLearner(long ukprn, string learnerReferenceNumber, List<LearnerResults> results, LookupContext lookupContext)
         {
             var providerId = lookupContext.GetProviderId(ukprn);
-            var learnerId = lookupContext.GetLearnerId(uln);
-            var learner = results.SingleOrDefault(l => l.ProviderId == providerId && l.LearnerId == learnerId);
+            var learner = results.SingleOrDefault(l => l.ProviderId == providerId && l.LearnerReferenceNumber == learnerReferenceNumber);
             if (learner == null)
             {
                 learner = new LearnerResults
                 {
                     ProviderId = providerId,
-                    LearnerId = learnerId
+                    LearnerReferenceNumber = learnerReferenceNumber
                 };
                 results.Add(learner);
             }

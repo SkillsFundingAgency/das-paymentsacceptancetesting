@@ -16,7 +16,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataCollectors
             var periodisedValues = ReadEarningsFromDeds();
             foreach (var periodisedValue in periodisedValues)
             {
-                var learner = GetOrCreateLearner(periodisedValue.Ukprn, periodisedValue.Uln, results, lookupContext);
+                var learner = GetOrCreateLearner(periodisedValue.Ukprn, periodisedValue.LearnRefNumber, results, lookupContext);
                 learner.Earnings.Add(CreateEarningResultForPeriod(1, periodisedValue.Period1, period));
                 learner.Earnings.Add(CreateEarningResultForPeriod(2, periodisedValue.Period2, period));
                 learner.Earnings.Add(CreateEarningResultForPeriod(3, periodisedValue.Period3, period));
@@ -38,7 +38,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataCollectors
             {
                 var command = "SELECT "
                             + "    ldpv.Ukprn, "
-                            + "	l.ULN, "
+                            + "  ldpv.LearnRefNumber,"
                             + "    SUM(Period_1) AS Period1, "
                             + "    SUM(Period_2)AS Period2, "
                             + "    SUM(Period_3) AS Period3, "
@@ -60,21 +60,21 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataCollectors
                             + "        ON ld.Ukprn = l.UKPRN "
                             + "        AND ld.LearnRefNumber = l.LearnRefNumber "
                             + "WHERE ldpv.AttributeName IN('DisadvFirstPayment', 'DisadvSecondPayment', 'LDApplic1618FrameworkUpliftBalancingPayment', 'LDApplic1618FrameworkUpliftCompletionPayment', 'LDApplic1618FrameworkUpliftOnProgPayment', 'LearnDelFirstEmp1618Pay', 'LearnDelFirstProv1618Pay', 'LearnDelSecondEmp1618Pay', 'LearnDelSecondProv1618Pay', 'LearnSuppFundCash', 'MathEngBalPayment', 'MathEngOnProgPayment', 'ProgrammeAimBalPayment', 'ProgrammeAimCompletionPayment', 'ProgrammeAimOnProgPayment') "
-                            + "GROUP BY ldpv.UKPRN, l.ULN";
+                            + "GROUP BY ldpv.UKPRN, ldpv.LearnRefNumber";
                 return connection.Query<PeriodisedValuesEntity>(command).ToArray();
             }
         }
-        private static LearnerResults GetOrCreateLearner(long ukprn, long uln, List<LearnerResults> results, LookupContext lookupContext)
+        private static LearnerResults GetOrCreateLearner(long ukprn, string learnerReferenceNumber, List<LearnerResults> results, LookupContext lookupContext)
         {
             var providerId = lookupContext.GetProviderId(ukprn);
-            var learnerId = lookupContext.GetLearnerId(uln);
-            var learner = results.SingleOrDefault(l => l.ProviderId == providerId && l.LearnerId == learnerId);
+            
+            var learner = results.SingleOrDefault(l => l.ProviderId == providerId && l.LearnerReferenceNumber == learnerReferenceNumber);
             if (learner == null)
             {
                 learner = new LearnerResults
                 {
                     ProviderId = providerId,
-                    LearnerId = learnerId
+                    LearnerReferenceNumber = learnerReferenceNumber
                 };
                 results.Add(learner);
             }

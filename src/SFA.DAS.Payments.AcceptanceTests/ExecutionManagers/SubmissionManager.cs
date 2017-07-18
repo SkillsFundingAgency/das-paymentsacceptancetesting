@@ -209,14 +209,20 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                 };
             }).ToArray();
 
-            return new Learner
+            var learner = new Learner
             {
                 LearnRefNumber= learnerDetails[0].LearnerReference,
-                Uln = lookupContext.AddOrGetUln(learnerDetails[0].LearnerReference),
                 DateOfBirth = GetDateOfBirthBasedOnLearnerType(learnerDetails[0].LearnerType),
                 LearningDeliveries = deliveries,
                 EmploymentStatuses = employmentStatuses.Any() ? employmentStatuses : null
             };
+
+            long uln = 0 ;
+            long.TryParse(learnerDetails[0].Uln, out uln);
+
+            learner.Uln = uln > 0 ? uln : lookupContext.AddOrGetUln(learnerDetails[0].LearnerReference);
+        
+            return learner;
         }
         private static FinancialRecord[] BuildLearningDeliveryFinancials(IlrLearnerReferenceData learnerReferenceData)
         {
