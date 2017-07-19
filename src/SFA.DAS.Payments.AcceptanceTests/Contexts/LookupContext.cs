@@ -52,7 +52,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
             if (uln == 0)
             {
                 uln = UlnSeed + Learners.Count;
-                Learners.Add(learnerId.ToUpper(), uln);
+                AddUln(learnerId.ToUpper(), uln);
             }
             return uln;
         }
@@ -63,6 +63,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
                 return 0;
             }
             return Learners[learnerId.ToUpper()];
+        }
+
+        public void AddUln(string learnerId, long uln)
+        {
+            if (!Learners.ContainsKey(learnerId.ToUpper()))
+            {
+                Learners.Add(learnerId.ToUpper(), uln);
+            }
         }
         public string GetLearnerId(long uln)
         {

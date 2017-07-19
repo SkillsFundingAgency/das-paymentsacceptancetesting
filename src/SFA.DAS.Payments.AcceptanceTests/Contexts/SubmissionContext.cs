@@ -14,6 +14,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
             ContractTypes = new List<ContractTypeReferenceData>();
             EmploymentStatus = new List<EmploymentStatusReferenceData>();
             LearningSupportStatus = new List<LearningSupportReferenceData>();
+            HistoricalLearningDetails = new List<IlrLearnerReferenceData>();
         }
 
         public bool HaveSubmissionsBeenDone { get; set; }
@@ -23,5 +24,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Contexts
         public List<EmploymentStatusReferenceData> EmploymentStatus { get; set; }
         public List<LearningSupportReferenceData> LearningSupportStatus { get; set; }
         public DateTime? FirstSubmissionDate { get; set; }
+        public List<IlrLearnerReferenceData> HistoricalLearningDetails { get; set; }
+
+
     }
 }

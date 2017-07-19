@@ -19,7 +19,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataCollectors
 
             var balance = ReadAccountBalanceFromDeds(collectionPeriodDate.Month,collectionPeriodDate.Year);
 
-            var learner = GetOrCreateLearner(lookupContext.Providers.First().Value, lookupContext.Learners.First().Value, results, lookupContext);
+            var learner = GetOrCreateLearner(lookupContext.Providers.First().Value, lookupContext.Learners.First().Key, results, lookupContext);
 
             learner.LevyAccountBalanceResults.Add(new LevyAccountBalanceResult
             {
@@ -43,17 +43,16 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataCollectors
                 return connection.Query<decimal?>(command,new { calculationPeriodMonth, calculationPeriodYear }).Single();
             }
         }
-        private static LearnerResults GetOrCreateLearner(long ukprn, long uln, List<LearnerResults> results, LookupContext lookupContext)
+        private static LearnerResults GetOrCreateLearner(long ukprn, string learnerReferenceNumber, List<LearnerResults> results, LookupContext lookupContext)
         {
             var providerId = lookupContext.GetProviderId(ukprn);
-            var learnerId = lookupContext.GetLearnerId(uln);
-            var learner = results.SingleOrDefault(l => l.ProviderId == providerId && l.LearnerId == learnerId);
+            var learner = results.SingleOrDefault(l => l.ProviderId == providerId && l.LearnerReferenceNumber == learnerReferenceNumber);
             if (learner == null)
             {
                 learner = new LearnerResults
                 {
                     ProviderId = providerId,
-                    LearnerId = learnerId
+                    LearnerReferenceNumber = learnerReferenceNumber
                 };
                 results.Add(learner);
             }

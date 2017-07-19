@@ -16,7 +16,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataCollectors
             var paymentsData = ReadPaymentsFromDeds();
             foreach (var data in paymentsData)
             {
-                var learner = GetOrCreateLearner(data.Ukprn, data.Uln, results, lookupContext);
+                var learner = GetOrCreateLearner(data.Ukprn, data.LearnRefNumber, results, lookupContext);
 
                 learner.Payments.Add(new PaymentResult
                 {
@@ -35,7 +35,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataCollectors
         {
             using (var connection = new SqlConnection(TestEnvironment.Variables.DedsDatabaseConnectionString))
             {
-                var query = @"SELECT rp.Ukprn, rp.Uln, p.DeliveryMonth, p.DeliveryYear, 
+                var query = @"SELECT rp.Ukprn, rp.Uln, rp.LearnRefNumber, p.DeliveryMonth, p.DeliveryYear, 
                                      p.CollectionPeriodMonth, p.CollectionPeriodYear, 
                                      p.FundingSource, p.TransactionType, p.Amount ,
                                      rp.ApprenticeshipContractType, rp.AccountId
@@ -48,17 +48,17 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataCollectors
 
         }
 
-        private static LearnerResults GetOrCreateLearner(long ukprn, long uln, List<LearnerResults> results, LookupContext lookupContext)
+        private static LearnerResults GetOrCreateLearner(long ukprn, string learnerReferenceNumber, List<LearnerResults> results, LookupContext lookupContext)
         {
             var providerId = lookupContext.GetProviderId(ukprn);
-            var learnerId = lookupContext.GetLearnerId(uln);
-            var learner = results.SingleOrDefault(l => l.ProviderId == providerId && l.LearnerId == learnerId);
+            
+            var learner = results.SingleOrDefault(l => l.ProviderId == providerId && l.LearnerReferenceNumber == learnerReferenceNumber);
             if (learner == null)
             {
                 learner = new LearnerResults
                 {
                     ProviderId = providerId,
-                    LearnerId = learnerId
+                    LearnerReferenceNumber = learnerReferenceNumber
                 };
                 results.Add(learner);
             }
