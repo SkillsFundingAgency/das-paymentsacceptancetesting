@@ -48,7 +48,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Assertions
         {
             foreach (var breakdown in earningsAndPaymentsContext.LearnerOverallEarningsAndPayments)
             {
-                var learnerResults = submissionContext.SubmissionResults.Where(r => r.LearnerId == breakdown.LearnerId).ToArray();
+                var learnerResults = submissionContext.SubmissionResults.Where(r => r.LearnerReferenceNumber == breakdown.LearnerReferenceNumber).ToArray();
                 try
                 {
                     foreach (var rule in Rules)
@@ -58,7 +58,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Assertions
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception($"{ex.Message} (learner {breakdown.LearnerId})", ex);
+                    throw new Exception($"{ex.Message} (learner {breakdown.LearnerReferenceNumber})", ex);
                 }
             }
         }

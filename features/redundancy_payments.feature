@@ -226,13 +226,13 @@ Scenario:808-AC2- DAS learner, is made redundant outside the last 6 months of pl
             
         And the Contract type in the ILR is:
             | contract type | date from  | date to    |
-            | DAS           | 06/08/2017 | 20/04/2018 |        
-            | Non-DAS       | 21/04/2018 |            |
+            | DAS           | 06/08/2017 | 19/04/2018 |        
+            | Non-DAS       | 20/04/2018 |            |
         
         And the employment status in the ILR is:
             | Employer   | Employment Status      | Employment Status Applies |
             | employer 1 | in paid employment     | 05/08/2017                |
-            |            | not in paid employment | 21/04/2018                |
+            |            | not in paid employment | 20/04/2018                |
             
           And the learning support status of the ILR is:
             | Learning support code | date from  | date to    |

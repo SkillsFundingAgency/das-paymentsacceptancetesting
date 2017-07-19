@@ -143,7 +143,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
         private static IlrSubmission BuildIlrSubmission(ProviderSubmissionDetails providerDetails, string period, LookupContext lookupContext, List<ContractTypeReferenceData> contractTypes, List<EmploymentStatusReferenceData> employmentStatus, List<LearningSupportReferenceData> learningSupportStatus)
         {
             var learners = (from x in providerDetails.LearnerDetails
-                            group x by x.LearnerId into g
+                            group x by x.LearnerReference into g
                             select BuildLearner(g.ToArray(), period, lookupContext, contractTypes, employmentStatus, learningSupportStatus)).ToArray();
             var submission = new IlrSubmission
             {
@@ -154,7 +154,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
             };
             for (var i = 0; i < submission.Learners.Length; i++)
             {
-                submission.Learners[i].LearnRefNumber = (i + 1).ToString();
+                if (string.IsNullOrEmpty(submission.Learners[i].LearnRefNumber))
+                {
+                    submission.Learners[i].LearnRefNumber = (i + 1).ToString();
+                }
+                i++;
             }
             return submission;
         }
@@ -180,7 +184,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                     FamRecords = BuildLearningDeliveryFamCodes(x, contractTypes, learningSupportStatus),
                     CompletionStatus = (IlrGenerator.CompletionStatus)(int)x.CompletionStatus,
                     Type = (IlrGenerator.AimType)(int)x.AimType,
-                    FinancialRecords = financialRecords
+                    FinancialRecords = financialRecords,
+                    AimSequenceNumber = x.AimSequenceNumber
+                    
                 };
             }).ToArray();
             var employmentStatuses = employmentStatus.Select(s =>
@@ -203,13 +209,20 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                 };
             }).ToArray();
 
-            return new Learner
+            var learner = new Learner
             {
-                Uln = lookupContext.AddOrGetUln(learnerDetails[0].LearnerId),
+                LearnRefNumber= learnerDetails[0].LearnerReference,
                 DateOfBirth = GetDateOfBirthBasedOnLearnerType(learnerDetails[0].LearnerType),
                 LearningDeliveries = deliveries,
                 EmploymentStatuses = employmentStatuses.Any() ? employmentStatuses : null
             };
+
+            long uln = 0 ;
+            long.TryParse(learnerDetails[0].Uln, out uln);
+
+            learner.Uln = uln > 0 ? uln : lookupContext.AddOrGetUln(learnerDetails[0].LearnerReference);
+        
+            return learner;
         }
         private static FinancialRecord[] BuildLearningDeliveryFinancials(IlrLearnerReferenceData learnerReferenceData)
         {
