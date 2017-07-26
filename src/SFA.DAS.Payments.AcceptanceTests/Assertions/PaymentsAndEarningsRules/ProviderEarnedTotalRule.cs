@@ -23,17 +23,17 @@ namespace SFA.DAS.Payments.AcceptanceTests.Assertions.PaymentsAndEarningsRules
             var filteredResults = submissionResults.Where(r => r.ProviderId.Equals(breakdown.ProviderId, StringComparison.CurrentCultureIgnoreCase));
             if (breakdown is LearnerEarningsAndPaymentsBreakdown)
             {
-                filteredResults = filteredResults.Where(r => r.LearnerId.Equals(((LearnerEarningsAndPaymentsBreakdown)breakdown).LearnerId, StringComparison.CurrentCultureIgnoreCase));
+                filteredResults = filteredResults.Where(r => r.LearnerReferenceNumber.Equals(((LearnerEarningsAndPaymentsBreakdown)breakdown).LearnerReferenceNumber, StringComparison.CurrentCultureIgnoreCase));
             }
             return filteredResults.Select(r => r.Earnings.Select(e => new LearnerEarningsResult
             {
-                LearnerId = r.LearnerId,
+                LearnerReferenceNumber = r.LearnerReferenceNumber,
                 DeliveryPeriod = e.DeliveryPeriod,
                 CalculationPeriod = e.CalculationPeriod,
                 Value = e.Value
             })).SelectMany(e => e)
             .OrderBy(e => e.DeliveryPeriod)
-            .ThenBy(e => e.LearnerId)
+            .ThenBy(e => e.LearnerReferenceNumber)
             .ToArray();
         }
         private void AssertResultsForPeriod(PeriodValue period, LearnerEarningsResult[] allEarnings)
@@ -42,7 +42,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Assertions.PaymentsAndEarningsRules
             var earnedInPeriod = (from e in allEarnings
                                   where e.DeliveryPeriod == period.PeriodName
                                   && ComparePeriods(e.CalculationPeriod, period.PeriodName) >= 0
-                                  group e by e.LearnerId into g
+                                  group e by e.LearnerReferenceNumber into g
                                   select g.First()).Sum(x => x.Value);
             if (!AreValuesEqual(period.Value, earnedInPeriod))
             {
@@ -59,7 +59,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Assertions.PaymentsAndEarningsRules
 
         private class LearnerEarningsResult : EarningsResult
         {
-            public string LearnerId { get; set; }
+            public string LearnerReferenceNumber { get; set; }
         }
     }
 }

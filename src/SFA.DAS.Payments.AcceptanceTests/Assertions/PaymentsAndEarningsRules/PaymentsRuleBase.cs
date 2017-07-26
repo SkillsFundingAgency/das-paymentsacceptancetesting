@@ -15,7 +15,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Assertions.PaymentsAndEarningsRules
             var payments = submissionResults.Where(r => r.ProviderId.Equals(breakdown.ProviderId, StringComparison.CurrentCultureIgnoreCase));
             if (breakdown is LearnerEarningsAndPaymentsBreakdown)
             {
-                payments = payments.Where(r => r.LearnerId.Equals(((LearnerEarningsAndPaymentsBreakdown)breakdown).LearnerId, StringComparison.CurrentCultureIgnoreCase));
+                payments = payments.Where(r => r.LearnerReferenceNumber.Equals(((LearnerEarningsAndPaymentsBreakdown)breakdown).LearnerReferenceNumber, StringComparison.CurrentCultureIgnoreCase));
             }
             return payments.SelectMany(r => r.Payments).ToArray();
         }

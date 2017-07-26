@@ -14,7 +14,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.DataCollectors
             var events = GetAllDataLockEventsDataFromDeds();
             foreach (var learner in results)
             {
-                var uln = lookupContext.GetUln(learner.LearnerId);
+                var uln = lookupContext.GetUln(learner.LearnerReferenceNumber);
                 learner.DataLockEvents = events.Where(e => e.Uln == uln).ToArray();
             }
         }

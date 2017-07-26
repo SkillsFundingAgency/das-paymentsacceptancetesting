@@ -2,6 +2,6 @@
 {
     public class LearnerEarningsAndPaymentsBreakdown : EarningsAndPaymentsBreakdown
     {
-        public string LearnerId { get; set; }
+        public string LearnerReferenceNumber { get; set; }
     }
 }
