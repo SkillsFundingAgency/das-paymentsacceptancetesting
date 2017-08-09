@@ -17,7 +17,7 @@ Feature: Apprentice changes provider scenarios
         
         Then the data lock status will be as follows:
             | Payment type | 08/17               | 09/17               | 10/17               | ... | 02/18               | 03/18 | 04/18 | 05/18 | 06/18               | 07/18               | 08/18               | 09/18               | 10/18               | 
-            | On-program   | commitment 1 v1-001 | commitment 1 v1-001 | commitment 1 v1-001 | ... | commitment 1 v1-001 |       |       |       | commitment 2 v1-001 | commitment 2 v1-001 | commitment 2 v1-001 | commitment 2 v1-001 | commitment 2 v1-001 | 
+            | On-program   | commitment 1 v1-001 | commitment 1 v1-001 | commitment 1 v1-001 | ... | commitment 1 v1-001 |       |       |       | commitment 2 v2-001 | commitment 2 v2-001 | commitment 2 v2-001 | commitment 2 v2-001 | commitment 2 v2-001 | 
         
         And the earnings and payments break down for provider a is as follows:
             | Type                           | 08/17 | 09/17 | 10/17 | ... | 02/18 | 03/18 |

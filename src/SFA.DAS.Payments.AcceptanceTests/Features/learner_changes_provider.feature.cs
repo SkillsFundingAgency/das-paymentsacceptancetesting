@@ -187,11 +187,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "",
                         "",
                         "",
-                        "commitment 2 v1-001",
-                        "commitment 2 v1-001",
-                        "commitment 2 v1-001",
-                        "commitment 2 v1-001",
-                        "commitment 2 v1-001"});
+                        "commitment 2 v2-001",
+                        "commitment 2 v2-001",
+                        "commitment 2 v2-001",
+                        "commitment 2 v2-001",
+                        "commitment 2 v2-001"});
 #line 18
         testRunner.Then("the data lock status will be as follows:", ((string)(null)), table486, "Then ");
 #line hidden

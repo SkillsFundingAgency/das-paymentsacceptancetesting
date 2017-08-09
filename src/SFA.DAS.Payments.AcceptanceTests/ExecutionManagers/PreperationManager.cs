@@ -21,7 +21,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                 connection.Execute("DELETE FROM Valid.LearningProvider");
                 connection.Execute("DELETE FROM Valid.LearningDelivery");
                 connection.Execute("DELETE FROM Valid.LearningDeliveryFAM");
-                connection.Execute("DELETE FROM Valid.TrailblazerApprenticeshipFinancialRecord");
+                if (TestEnvironment.Variables.OpaRulebaseYear == "1617")
+                {
+                    connection.Execute("DELETE FROM Valid.TrailblazerApprenticeshipFinancialRecord");
+                }
+                else
+                {
+                    connection.Execute("DELETE FROM Valid.AppFinRecord");
+                }
+
 
                 connection.Execute("DELETE FROM Rulebase.AEC_ApprenticeshipPriceEpisode");
                 connection.Execute("DELETE FROM Rulebase.AEC_ApprenticeshipPriceEpisode_Period");
