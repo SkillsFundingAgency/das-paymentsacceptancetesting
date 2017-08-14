@@ -46,7 +46,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                     BuildAndSubmitIlr(providerDetails, period, lookupContext, contractTypes, employmentStatus, learningSupportStatus);
                 }
                 RunMonthEnd(period);
-
+                    
                 EarningsCollector.CollectForPeriod(period, results, lookupContext);
                 LevyAccountBalanceCollector.CollectForPeriod(period, results, lookupContext);
                 SubmissionDataLockResultCollector.CollectForPeriod(period, results, lookupContext);
@@ -184,6 +184,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                     FamRecords = BuildLearningDeliveryFamCodes(x, contractTypes, learningSupportStatus),
                     CompletionStatus = (IlrGenerator.CompletionStatus)(int)x.CompletionStatus,
                     Type = (IlrGenerator.AimType)(int)x.AimType,
+                    LearnAimRef = x.LearnAimRef,
                     FinancialRecords = financialRecords,
                     AimSequenceNumber = x.AimSequenceNumber
                     
