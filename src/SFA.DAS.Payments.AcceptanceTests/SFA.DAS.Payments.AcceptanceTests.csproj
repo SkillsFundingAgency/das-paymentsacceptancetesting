@@ -134,6 +134,7 @@
     <Compile Include="Features\learner_finishes_on_time.feature.cs" />
     <Compile Include="Features\payments_calc.feature.cs" />
     <Compile Include="Features\provider_adjustments.feature.cs" />
+    <Compile Include="Features\redundancy_payments.feature.cs" />
     <Compile Include="Features\refunds.feature.cs" />
     <Compile Include="Features\small_employers.feature.cs" />
     <Compile Include="Features\two_learners_paid_in_priority.feature.cs" />
@@ -308,6 +309,10 @@
     <None Include="..\..\features\provider_adjustments.feature">
       <Link>Features\provider_adjustments.feature</Link>
       <LastGenOutput>provider_adjustments1.feature.cs</LastGenOutput>
+    </None>
+    <None Include="..\..\features\redundancy_payments.feature">
+      <Link>Features\redundancy_payments.feature</Link>
+      <LastGenOutput>redundancy_payments.feature.cs</LastGenOutput>
     </None>
     <None Include="..\..\features\refunds.feature">
       <Link>Features\refunds.feature</Link>

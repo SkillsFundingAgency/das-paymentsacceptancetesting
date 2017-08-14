@@ -475,3 +475,4 @@ Scenario:630-AC04  Earnings and payments for a DAS learner, levy available, and 
             | Levy account debited          | 0       | 1033.33 | 1033.33 | 1033.33 | 1077.78 | 1077.78 |
             | SFA Levy employer budget      | 1033.33 | 1033.33 | 1033.33 | 1077.78 | 1077.78 | 1077.78 |
             | SFA Levy co-funding budget    | 0       | 0       | 0       | 0       | 0       | 0       |
+
