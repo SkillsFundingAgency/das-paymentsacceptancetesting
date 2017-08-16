@@ -161,6 +161,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                     case "aim sequence number":
                         structure.AimSequenceNumberIndex = c;
                         break;
+                    case "aim reference":
+                        structure.LearnAimRefIndex = c;
+                        break;
                     default:
                         throw new ArgumentException($"Unexpected column in ILR table: {header}");
                 }
@@ -199,6 +202,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                 ResidualAssessmentPrice2EffectiveDate = row.ReadRowColumnValue<DateTime>(structure.ResidualAssessmentPrice2EffectiveDateIndex, "residual assessment price 2 effective date"),
                 AimType = (AimType)row.ReadRowColumnValue<string>(structure.AimTypeIndex, "aim type", "Programme").ToEnumByDescription(typeof(AimType)),
                 AimRate = row.ReadRowColumnValue<string>(structure.AimRateIndex, "aim rate"),
+                LearnAimRef = row.ReadRowColumnValue<string>(structure.LearnAimRefIndex, "aim reference"),
                 StandardCode = row.ReadRowColumnValue<long>(structure.StandardCodeIndex, "standard code"),
                 FrameworkCode = row.ReadRowColumnValue<int>(structure.FrameworkCodeIndex, "framework code"),
                 ProgrammeType = row.ReadRowColumnValue<int>(structure.ProgrammeTypeIndex, "programme type"),
@@ -280,6 +284,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
 
             public int AimSequenceNumberIndex { get; set; } = -1;
             public int UlnIndex { get; set; } = -1;
+            public int LearnAimRefIndex { get; set; } = -1;
         }
     }
 }

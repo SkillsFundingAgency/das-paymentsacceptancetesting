@@ -25,6 +25,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ReferenceDataModels
         public int TotalAssessmentPrice2 { get; set; }
         public DateTime TotalAssessmentPrice2EffectiveDate { get; set; }
         public AimType AimType { get; set; }
+        public string LearnAimRef { get; set; }
         public string AimRate { get; set; }
         public long StandardCode { get; set; }
         public int FrameworkCode { get; set; }

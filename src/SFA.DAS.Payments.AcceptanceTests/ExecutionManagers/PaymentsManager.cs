@@ -62,9 +62,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                                        "PathwayCode," +
                                        "ApprenticeshipContractType," +
                                        "SfaContributionPercentage," +
+                                       "FundingLineType," +
                                        "UseLevyBalance," +
                                        "LearnAimRef," +
-                                       "LearningStartDate" +
+                                       "LearningStartDate," +
+                                       "IlrSubmissionDateTime" +
                                    ") VALUES (" +
                                        "@requiredPaymentId," +
                                        "@commitmentId," +
@@ -88,9 +90,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                                        "@pathwayCode," +
                                         "@contractType," +
                                        "0.9," +
+                                       "'19 + Apprenticeship(From May 2017) Levy Contract'," +
                                         "1," +
                                         "@learnAimRef," +
-                                        "@learningStartDate" +
+                                        "@learningStartDate," +
+                                        "@IlrSubmissionDateTime" +
                                    ")",
                     new
                     {
@@ -114,7 +118,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                         contractType,
                         learnAimRef,
                         learningStartDate,
-                        aimSequenceNumber
+                        aimSequenceNumber,
+                        ilrSubmissiondateTime = DateTime.Now.AddMonths(-3)
                     });
             }
         }

@@ -120,15 +120,26 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             IlrTableParser.ParseIlrTableIntoContext(SubmissionContext.HistoricalLearningDetails, table);
         }
 
+        [Given(@"the following (.*) earnings and payments have been made to the (.*) for (.*):")]
+        public void GivenTheFollowingEarningsAndPaymentsHaveBeenMadeToTheProviderAForLearnerA(string aimType, string providerName, string learnerRefererenceNumber, Table table)
+        {
+            var paymentsAimType = (AimType)aimType.ToEnumByDescription(typeof(AimType));
+            CreatePreviousEarningsAndPayments(providerName, learnerRefererenceNumber, table,paymentsAimType);
+        }
 
         [Given(@"the following earnings and payments have been made to the (.*) for (.*):")]
         public void GivenTheFollowingEarningsAndPaymentsHaveBeenMadeToTheProviderAForLearnerA(string providerName, string learnerRefererenceNumber, Table table)
+        {
+            CreatePreviousEarningsAndPayments(providerName, learnerRefererenceNumber, table,AimType.Programme);
+        }
+
+        public void CreatePreviousEarningsAndPayments(string providerName, string learnerRefererenceNumber, Table table, AimType paymentsAimType)
         {
 
             var learnerBreakdown = new EarningsAndPaymentsBreakdown { ProviderId = providerName };
             EarningAndPaymentTableParser.ParseEarningsAndPaymentsTableIntoContext(learnerBreakdown, table);
 
-            var learningDetails = SubmissionContext.HistoricalLearningDetails.Where(x => x.LearnerReference.Equals(learnerRefererenceNumber, StringComparison.InvariantCultureIgnoreCase)).Single();
+            var learningDetails = SubmissionContext.HistoricalLearningDetails.Where(x => x.AimType == paymentsAimType && x.LearnerReference.Equals(learnerRefererenceNumber, StringComparison.InvariantCultureIgnoreCase)).Single();
 
             long learnerUln;
             if (!string.IsNullOrEmpty(learningDetails.Uln))
@@ -153,7 +164,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                 var year = int.Parse(earned.PeriodName.Substring(3, 2)) + 2000;
                 var date = new DateTime(year, month, 1);
                 var periodNumber = date.GetPeriodNumber();
-                var periodName = $"1718-R" + periodNumber.ToString("00");
+                var periodName = $"{TestEnvironment.Variables.OpaRulebaseYear}-R" + periodNumber.ToString("00");
           
                 if (earned.Value > 0)
                 {
@@ -165,38 +176,46 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                                                        learningDetails.StandardCode,
                                                         commitment, learnerRefererenceNumber, periodName,
                                                         month, year,
-                                                        (int)TransactionType.OnProgram,
+                                                        learningDetails.AimType == AimType.Programme ? (int)TransactionType.OnProgram : (int)TransactionType.OnProgrammeMathsAndEnglish,
                                                         commitment == null ? ContractType.ContractWithSfa : ContractType.ContractWithEmployer,
                                                         earned.Value,
                                                         learningDetails.StartDate,
+                                                        String.IsNullOrEmpty(learningDetails.LearnAimRef) ? "ZPROG001" : learningDetails.LearnAimRef,
                                                         aimSequenceNumber: learningDetails.AimSequenceNumber);
 
                     var levyPayment = learnerBreakdown.SfaLevyBudget.Where(x => x.PeriodName == earned.PeriodName).SingleOrDefault();
                     if (levyPayment != null && levyPayment.Value > 0)
                     {
                         PaymentsManager.SavePayment(requiredPaymentId, periodName, month, year,
-                                                          (int)TransactionType.OnProgram, FundingSource.Levy, levyPayment.Value);
+                                                           learningDetails.AimType == AimType.Programme ? (int)TransactionType.OnProgram : (int)TransactionType.OnProgrammeMathsAndEnglish, FundingSource.Levy, levyPayment.Value);
                     }
 
                     var earnedFromEmployer = learnerBreakdown.ProviderEarnedFromEmployers.Where(x => x.PeriodName == earned.PeriodName).SingleOrDefault();
                     if (earnedFromEmployer != null && earnedFromEmployer.Value > 0)
                     {
                         PaymentsManager.SavePayment(requiredPaymentId, periodName, month, year,
-                                                          (int)TransactionType.OnProgram, FundingSource.CoInvestedEmployer, earnedFromEmployer.Value);
+                                                           learningDetails.AimType == AimType.Programme ? (int)TransactionType.OnProgram : (int)TransactionType.OnProgrammeMathsAndEnglish, FundingSource.CoInvestedEmployer, earnedFromEmployer.Value);
                     }
 
                     var coInvestedBySfaLevy = learnerBreakdown.SfaLevyCoFundBudget.Where(x => x.PeriodName == earned.PeriodName).SingleOrDefault();
                     if (coInvestedBySfaLevy != null && coInvestedBySfaLevy.Value > 0)
                     {
                         PaymentsManager.SavePayment(requiredPaymentId, periodName, month, year,
-                                                          (int)TransactionType.OnProgram, FundingSource.CoInvestedSfa, coInvestedBySfaLevy.Value);
+                                                           learningDetails.AimType == AimType.Programme ? (int)TransactionType.OnProgram : (int)TransactionType.OnProgrammeMathsAndEnglish, FundingSource.CoInvestedSfa, coInvestedBySfaLevy.Value);
                     }
 
                     var coInvestedBySfaNonLevy = learnerBreakdown.SfaNonLevyCoFundBudget.Where(x => x.PeriodName == earned.PeriodName).SingleOrDefault();
                     if (coInvestedBySfaNonLevy != null && coInvestedBySfaNonLevy.Value > 0)
                     {
                         PaymentsManager.SavePayment(requiredPaymentId, periodName, month, year,
-                                                          (int)TransactionType.OnProgram, FundingSource.CoInvestedSfa, coInvestedBySfaNonLevy.Value);
+                                                          learningDetails.AimType == AimType.Programme ? (int)TransactionType.OnProgram : (int)TransactionType.OnProgrammeMathsAndEnglish, FundingSource.CoInvestedSfa, coInvestedBySfaNonLevy.Value);
+                    }
+
+                    var aditionalPayments = learnerBreakdown.SfaLevyAdditionalPayments.Where(x => x.PeriodName == earned.PeriodName).SingleOrDefault();
+                    if (aditionalPayments != null && aditionalPayments.Value > 0)
+                    {
+                        PaymentsManager.SavePayment(requiredPaymentId, periodName, month, year,
+                                                          learningDetails.AimType == AimType.Programme ? (int)TransactionType.OnProgram : (int)TransactionType.OnProgrammeMathsAndEnglish, FundingSource.FullyFundedSfa, aditionalPayments.Value);
                     }
 
                 }
