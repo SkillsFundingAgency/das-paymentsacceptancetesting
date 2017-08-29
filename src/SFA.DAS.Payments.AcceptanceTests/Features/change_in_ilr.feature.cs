@@ -2943,12 +2943,12 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("869-AC02 Levy apprentice, learner moves dates for learning support , on learning " +
+        [NUnit.Framework.DescriptionAttribute("869-AC01 Levy apprentice, learner moves dates for learning support , on learning " +
             "support payments will be refunded")]
         [NUnit.Framework.CategoryAttribute("LearningSupportDateMovedForward")]
-        public virtual void _869_AC02LevyApprenticeLearnerMovesDatesForLearningSupportOnLearningSupportPaymentsWillBeRefunded()
+        public virtual void _869_AC01LevyApprenticeLearnerMovesDatesForLearningSupportOnLearningSupportPaymentsWillBeRefunded()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("869-AC02 Levy apprentice, learner moves dates for learning support , on learning " +
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("869-AC01 Levy apprentice, learner moves dates for learning support , on learning " +
                     "support payments will be refunded", new string[] {
                         "LearningSupportDateMovedForward"});
 #line 502

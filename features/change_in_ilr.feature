@@ -499,7 +499,7 @@ Scenario:865-AC02 Levy apprentice, learner moves start date forward , on prog pa
 
 			
 @LearningSupportDateMovedForward
-Scenario:869-AC02 Levy apprentice, learner moves dates for learning support , on learning support payments will be refunded
+Scenario:869-AC01 Levy apprentice, learner moves dates for learning support , on learning support payments will be refunded
 
 		Given The learner is programme only DAS
         And levy balance > agreed price for all months
