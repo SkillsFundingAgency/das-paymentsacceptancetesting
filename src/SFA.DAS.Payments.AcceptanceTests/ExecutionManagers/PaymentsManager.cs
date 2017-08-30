@@ -14,21 +14,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
         internal static void SavePaymentDue(string requiredPaymentId,
                                             long ukprn,
                                             long uln,
-                                           int? FrameworkCode,
-                                            int? PathwayCode,
-                                            int? ProgrammeType,
-                                            long? StandardCode,
                                             CommitmentReferenceData commitment,
                                               string learnRefNumber,
                                               string collectionPeriodName,
                                               int collectionPeriodMonth,
                                               int collectionPeriodYear,
                                               int transactionType,
-                                              ContractType contractType,
                                               decimal amountDue,
-                                              DateTime learningStartDate,
-                                              string learnAimRef="ZPROG001",
-                                              int aimSequenceNumber = 1)
+                                              IlrLearnerReferenceData learningDetails)
         {
             if (TestEnvironment.ValidateSpecsOnly)
             {
@@ -91,9 +84,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                                         "@contractType," +
                                        "0.9," +
                                        "'19 + Apprenticeship(From May 2017) Levy Contract'," +
-                                        "1," +
+                                        "@useLevyBalance," +
                                         "@learnAimRef," +
-                                        "@learningStartDate," +
+                                        "@StartDate," +
                                         "@IlrSubmissionDateTime" +
                                    ")",
                     new
@@ -111,14 +104,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                         collectionPeriodYear,
                         transactionType,
                         amountDue,
-                        StandardCode = StandardCode == 0? null : StandardCode,
-                        ProgrammeType = ProgrammeType == 0? null : ProgrammeType,
-                        FrameworkCode = FrameworkCode ==0 ? null : FrameworkCode,
-                        PathwayCode = PathwayCode == 0 ? null : PathwayCode,
-                        contractType,
-                        learnAimRef,
-                        learningStartDate,
-                        aimSequenceNumber,
+                        StandardCode = learningDetails.StandardCode == 0? null : (int?)learningDetails.StandardCode,
+                        ProgrammeType = learningDetails.ProgrammeType == 0? null : (int?)learningDetails.ProgrammeType,
+                        FrameworkCode = learningDetails.FrameworkCode ==0 ? null : (int?)learningDetails.FrameworkCode,
+                        PathwayCode = learningDetails.PathwayCode == 0 ? null : (int?)learningDetails.PathwayCode,
+                        ContractType = commitment == null ? ContractType.ContractWithSfa : ContractType.ContractWithEmployer,
+                        UseLevyBalance = commitment == null ? 0: 1,
+                        LearnAimRef = String.IsNullOrEmpty(learningDetails.LearnAimRef) ? "ZPROG001" : learningDetails.LearnAimRef,
+                        StartDate = learningDetails.StartDate,
+                        AimSequenceNumber  = learningDetails.AimSequenceNumber == 0 ? 1 : learningDetails.AimSequenceNumber,
                         ilrSubmissiondateTime = DateTime.Now.AddMonths(-3)
                     });
             }

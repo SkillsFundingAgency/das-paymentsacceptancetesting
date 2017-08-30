@@ -7,17 +7,18 @@ using SFA.DAS.Payments.AcceptanceTests.TableParsers;
 using TechTalk.SpecFlow;
 using System;
 using SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers;
+using System.Collections.Generic;
 
 namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 {
     [Binding]
     public class EarningAndPaymentSteps
     {
-        public EarningAndPaymentSteps(EmployerAccountContext employerAccountContext, 
+        public EarningAndPaymentSteps(EmployerAccountContext employerAccountContext,
                                       EarningsAndPaymentsContext earningsAndPaymentsContext,
                                       DataLockContext dataLockContext,
                                       SubmissionDataLockContext submissionDataLockContext,
-                                      SubmissionContext submissionContext, 
+                                      SubmissionContext submissionContext,
                                       LookupContext lookupContext,
                                     CommitmentsContext commitmentsContext)
         {
@@ -124,16 +125,77 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
         public void GivenTheFollowingEarningsAndPaymentsHaveBeenMadeToTheProviderAForLearnerA(string aimType, string providerName, string learnerRefererenceNumber, Table table)
         {
             var paymentsAimType = (AimType)aimType.ToEnumByDescription(typeof(AimType));
-            CreatePreviousEarningsAndPayments(providerName, learnerRefererenceNumber, table,paymentsAimType);
+            CreatePreviousEarningsAndPayments(providerName, learnerRefererenceNumber, table, paymentsAimType);
         }
 
         [Given(@"the following earnings and payments have been made to the (.*) for (.*):")]
         public void GivenTheFollowingEarningsAndPaymentsHaveBeenMadeToTheProviderAForLearnerA(string providerName, string learnerRefererenceNumber, Table table)
         {
-            CreatePreviousEarningsAndPayments(providerName, learnerRefererenceNumber, table,AimType.Programme);
+            CreatePreviousEarningsAndPayments(providerName, learnerRefererenceNumber, table, AimType.Programme);
         }
 
-        public void CreatePreviousEarningsAndPayments(string providerName, string learnerRefererenceNumber, Table table, AimType paymentsAimType)
+        [Given(@"the following payments have been made to the (.*) for (.*):")]
+        public void GivenTheFollowingPaymentsHaveBeenMadeToTheProviderAForLearnerA(string providerName, string learnerRefererenceNumber, Table table)
+        {
+            var context = new EarningsAndPaymentsContext();
+            TransactionTypeTableParser.ParseTransactionTypeTableIntoContext(context, providerName, table);
+
+
+            var learningDetails = SubmissionContext.HistoricalLearningDetails.Where(x => x.LearnerReference.Equals(learnerRefererenceNumber, StringComparison.InvariantCultureIgnoreCase)).Single();
+
+            long learnerUln;
+            if (!string.IsNullOrEmpty(learningDetails.Uln))
+            {
+                learnerUln = long.Parse(learningDetails.Uln);
+                LookupContext.AddUln(learnerRefererenceNumber, learnerUln);
+            }
+            else
+            {
+                learnerUln = LookupContext.AddOrGetUln(learnerRefererenceNumber);
+            }
+
+
+            var provider = LookupContext.AddOrGetUkprn(providerName);
+
+            var commitment = CommitmentsContext.Commitments.FirstOrDefault(x => x.ProviderId == providerName && x.LearnerId == learnerRefererenceNumber);
+
+            CreatePayment(context.ProviderEarnedForOnProgramme, provider, learnerUln, learnerRefererenceNumber, commitment, learningDetails,TransactionType.OnProgram, commitment==null ? FundingSource.CoInvestedSfa : FundingSource.Levy);
+            CreatePayment(context.ProviderEarnedForLearningSupport, provider, learnerUln, learnerRefererenceNumber, commitment, learningDetails, TransactionType.LearningSupport, FundingSource.FullyFundedSfa);
+            CreatePayment(context.ProviderEarnedForFrameworkUpliftOnProgramme, provider, learnerUln, learnerRefererenceNumber, commitment, learningDetails, TransactionType.OnProgramme16To18FrameworkUplift,FundingSource.FullyFundedSfa);
+
+        }
+
+        private void CreatePayment(List<ProviderEarnedPeriodValue> paymentValues, long ukprn, 
+                                    long uln, string learnRefNumber, 
+                                    CommitmentReferenceData commitment, 
+                                    IlrLearnerReferenceData learningDetails,
+                                    TransactionType transactionType,
+                                    FundingSource fundingSource)
+        {
+
+            foreach (var payment in paymentValues)
+            {
+                if (payment.Value > 0)
+                {
+                    var requiredPaymentId = Guid.NewGuid().ToString();
+                    var month = int.Parse(payment.PeriodName.Substring(0, 2));
+                    var year = int.Parse(payment.PeriodName.Substring(3, 2)) + 2000;
+                    var date = new DateTime(year, month, 1);
+                    var periodNumber = date.GetPeriodNumber();
+                    var periodName = $"{TestEnvironment.Variables.OpaRulebaseYear}-R" + periodNumber.ToString("00");
+
+
+                    PaymentsManager.SavePaymentDue(requiredPaymentId, ukprn, uln, commitment, learnRefNumber, periodName,
+                                                    month, year, (int)transactionType, payment.Value, learningDetails);
+
+                    PaymentsManager.SavePayment(requiredPaymentId, periodName, month, year, (int)transactionType, fundingSource, payment.Value);
+
+                }
+            }
+        }
+
+
+        private void CreatePreviousEarningsAndPayments(string providerName, string learnerRefererenceNumber, Table table, AimType paymentsAimType)
         {
 
             var learnerBreakdown = new EarningsAndPaymentsBreakdown { ProviderId = providerName };
@@ -145,18 +207,18 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             if (!string.IsNullOrEmpty(learningDetails.Uln))
             {
                 learnerUln = long.Parse(learningDetails.Uln);
-                LookupContext.AddUln(learnerRefererenceNumber,learnerUln);
+                LookupContext.AddUln(learnerRefererenceNumber, learnerUln);
             }
             else
             {
                 learnerUln = LookupContext.AddOrGetUln(learnerRefererenceNumber);
             }
-            
-                
+
+
             var provider = LookupContext.AddOrGetUkprn(learnerBreakdown.ProviderId);
 
-            var commitment = CommitmentsContext.Commitments.FirstOrDefault(x=> x.ProviderId == learnerBreakdown.ProviderId && x.LearnerId == learnerRefererenceNumber);
-          
+            var commitment = CommitmentsContext.Commitments.FirstOrDefault(x => x.ProviderId == learnerBreakdown.ProviderId && x.LearnerId == learnerRefererenceNumber);
+
             foreach (var earned in learnerBreakdown.ProviderEarnedTotal)
             {
                 var requiredPaymentId = Guid.NewGuid().ToString();
@@ -165,23 +227,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                 var date = new DateTime(year, month, 1);
                 var periodNumber = date.GetPeriodNumber();
                 var periodName = $"{TestEnvironment.Variables.OpaRulebaseYear}-R" + periodNumber.ToString("00");
-          
+
                 if (earned.Value > 0)
                 {
-                    PaymentsManager.SavePaymentDue(requiredPaymentId, provider, 
-                                                       learnerUln, 
-                                                       learningDetails.FrameworkCode, 
-                                                       learningDetails.PathwayCode,
-                                                       learningDetails.ProgrammeType ,
-                                                       learningDetails.StandardCode,
+                    PaymentsManager.SavePaymentDue(requiredPaymentId, provider, learnerUln,
                                                         commitment, learnerRefererenceNumber, periodName,
-                                                        month, year,
-                                                        learningDetails.AimType == AimType.Programme ? (int)TransactionType.OnProgram : (int)TransactionType.OnProgrammeMathsAndEnglish,
-                                                        commitment == null ? ContractType.ContractWithSfa : ContractType.ContractWithEmployer,
-                                                        earned.Value,
-                                                        learningDetails.StartDate,
-                                                        String.IsNullOrEmpty(learningDetails.LearnAimRef) ? "ZPROG001" : learningDetails.LearnAimRef,
-                                                        aimSequenceNumber: learningDetails.AimSequenceNumber);
+                                                        month, year, learningDetails.AimType == AimType.Programme ? (int)TransactionType.OnProgram : (int)TransactionType.OnProgrammeMathsAndEnglish
+                                                        , earned.Value, learningDetails);
 
                     var levyPayment = learnerBreakdown.SfaLevyBudget.Where(x => x.PeriodName == earned.PeriodName).SingleOrDefault();
                     if (levyPayment != null && levyPayment.Value > 0)
@@ -221,7 +273,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
                 }
             }
 
-          
+
         }
     }
 }
