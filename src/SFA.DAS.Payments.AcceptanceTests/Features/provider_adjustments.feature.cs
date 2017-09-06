@@ -73,189 +73,33 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
 #line 4
     this.ScenarioSetup(scenarioInfo);
 #line hidden
-            TechTalk.SpecFlow.Table table624 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table628 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
                         "05/17",
                         "06/17",
                         "year to date total"});
-            table624.AddRow(new string[] {
+            table628.AddRow(new string[] {
                         "16-18 levy additional provider payments: audit adjustments",
                         "143.52",
                         "13.59",
                         "157.11"});
-            table624.AddRow(new string[] {
+            table628.AddRow(new string[] {
                         "16-18 non-levy additional provider payments: training authorised claims",
                         "17.57",
                         "11.89",
                         "29.46"});
-            table624.AddRow(new string[] {
+            table628.AddRow(new string[] {
                         "Adult levy training: authorised claims",
                         "501.02",
                         "98.14",
                         "599.16"});
-            table624.AddRow(new string[] {
+            table628.AddRow(new string[] {
                         "Adult non-levy additional employer payments: audit adjustments",
                         "305.25",
                         "5.23",
                         "310.48"});
 #line 5
-        testRunner.Given("that the previous EAS entries for a provider are as follows:", ((string)(null)), table624, "Given ");
-#line hidden
-            TechTalk.SpecFlow.Table table625 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Type",
-                        "05/17",
-                        "06/17",
-                        "07/17",
-                        "year to date total"});
-            table625.AddRow(new string[] {
-                        "16-18 levy additional provider payments: audit adjustments",
-                        "195.17",
-                        "4.98",
-                        "63.42",
-                        "263.57"});
-            table625.AddRow(new string[] {
-                        "16-18 non-levy additional provider payments: training authorised claims",
-                        "17.57",
-                        "2.89",
-                        "2.45",
-                        "22.91"});
-            table625.AddRow(new string[] {
-                        "Adult levy training: authorised claims",
-                        "475.34",
-                        "98.14",
-                        "65.49",
-                        "638.97"});
-            table625.AddRow(new string[] {
-                        "Adult levy additional provider payments: audit adjustments",
-                        "0",
-                        "18.65",
-                        "1.63",
-                        "20.28"});
-            table625.AddRow(new string[] {
-                        "Adult non-levy additional employer payments: audit adjustments",
-                        "341.25",
-                        "5.23",
-                        "159.34",
-                        "505.82"});
-#line 11
-        testRunner.When("the following EAS entries are submitted:", ((string)(null)), table625, "When ");
-#line hidden
-            TechTalk.SpecFlow.Table table626 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Type",
-                        "05/17",
-                        "06/17",
-                        "07/17",
-                        "payments year to date"});
-            table626.AddRow(new string[] {
-                        "16-18 levy additional provider payments: audit adjustments",
-                        "51.65",
-                        "-8.61",
-                        "63.42",
-                        "106.46"});
-            table626.AddRow(new string[] {
-                        "16-18 non-levy additional provider payments: training authorised claims",
-                        "0",
-                        "-9.00",
-                        "2.45",
-                        "-6.55"});
-            table626.AddRow(new string[] {
-                        "Adult levy training: authorised claims",
-                        "-25.68",
-                        "0",
-                        "65.49",
-                        "39.81"});
-            table626.AddRow(new string[] {
-                        "Adult levy additional provider payments: audit adjustments",
-                        "0",
-                        "18.65",
-                        "1.63",
-                        "20.28"});
-            table626.AddRow(new string[] {
-                        "Adult non-levy additional employer payments: audit adjustments",
-                        "36.00",
-                        "0",
-                        "159.34",
-                        "195.34"});
-#line 18
-        testRunner.Then("the following adjustments will be generated:", ((string)(null)), table626, "Then ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Payments when only current provider adjustments exist")]
-        public virtual void PaymentsWhenOnlyCurrentProviderAdjustmentsExist()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Payments when only current provider adjustments exist", ((string[])(null)));
-#line 27
-    this.ScenarioSetup(scenarioInfo);
-#line hidden
-            TechTalk.SpecFlow.Table table627 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Type",
-                        "05/17",
-                        "06/17",
-                        "year to date total"});
-            table627.AddRow(new string[] {
-                        "16-18 levy additional provider payments: audit adjustments",
-                        "0",
-                        "0",
-                        "0"});
-            table627.AddRow(new string[] {
-                        "16-18 non-levy additional provider payments: training authorised claims",
-                        "0",
-                        "0",
-                        "0"});
-            table627.AddRow(new string[] {
-                        "Adult levy training: authorised claims",
-                        "0",
-                        "0",
-                        "0"});
-            table627.AddRow(new string[] {
-                        "Adult non-levy additional employer payments: audit adjustments",
-                        "0",
-                        "0",
-                        "0"});
-#line 28
-        testRunner.Given("that the previous EAS entries for a provider are as follows:", ((string)(null)), table627, "Given ");
-#line hidden
-            TechTalk.SpecFlow.Table table628 = new TechTalk.SpecFlow.Table(new string[] {
-                        "Type",
-                        "05/17",
-                        "06/17",
-                        "07/17",
-                        "year to date total"});
-            table628.AddRow(new string[] {
-                        "16-18 levy additional provider payments: audit adjustments",
-                        "195.17",
-                        "4.98",
-                        "63.42",
-                        "263.57"});
-            table628.AddRow(new string[] {
-                        "16-18 non-levy additional provider payments: training authorised claims",
-                        "17.57",
-                        "2.89",
-                        "2.45",
-                        "22.91"});
-            table628.AddRow(new string[] {
-                        "Adult levy training: authorised claims",
-                        "475.34",
-                        "98.14",
-                        "65.49",
-                        "638.97"});
-            table628.AddRow(new string[] {
-                        "Adult levy additional provider payments: audit adjustments",
-                        "0",
-                        "18.65",
-                        "1.63",
-                        "20.28"});
-            table628.AddRow(new string[] {
-                        "Adult non-levy additional employer payments: audit adjustments",
-                        "341.25",
-                        "5.23",
-                        "159.34",
-                        "505.82"});
-#line 34
-        testRunner.When("the following EAS entries are submitted:", ((string)(null)), table628, "When ");
+        testRunner.Given("that the previous EAS entries for a provider are as follows:", ((string)(null)), table628, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table629 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -293,8 +137,164 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "5.23",
                         "159.34",
                         "505.82"});
+#line 11
+        testRunner.When("the following EAS entries are submitted:", ((string)(null)), table629, "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table630 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Type",
+                        "05/17",
+                        "06/17",
+                        "07/17",
+                        "payments year to date"});
+            table630.AddRow(new string[] {
+                        "16-18 levy additional provider payments: audit adjustments",
+                        "51.65",
+                        "-8.61",
+                        "63.42",
+                        "106.46"});
+            table630.AddRow(new string[] {
+                        "16-18 non-levy additional provider payments: training authorised claims",
+                        "0",
+                        "-9.00",
+                        "2.45",
+                        "-6.55"});
+            table630.AddRow(new string[] {
+                        "Adult levy training: authorised claims",
+                        "-25.68",
+                        "0",
+                        "65.49",
+                        "39.81"});
+            table630.AddRow(new string[] {
+                        "Adult levy additional provider payments: audit adjustments",
+                        "0",
+                        "18.65",
+                        "1.63",
+                        "20.28"});
+            table630.AddRow(new string[] {
+                        "Adult non-levy additional employer payments: audit adjustments",
+                        "36.00",
+                        "0",
+                        "159.34",
+                        "195.34"});
+#line 18
+        testRunner.Then("the following adjustments will be generated:", ((string)(null)), table630, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Payments when only current provider adjustments exist")]
+        public virtual void PaymentsWhenOnlyCurrentProviderAdjustmentsExist()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Payments when only current provider adjustments exist", ((string[])(null)));
+#line 27
+    this.ScenarioSetup(scenarioInfo);
+#line hidden
+            TechTalk.SpecFlow.Table table631 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Type",
+                        "05/17",
+                        "06/17",
+                        "year to date total"});
+            table631.AddRow(new string[] {
+                        "16-18 levy additional provider payments: audit adjustments",
+                        "0",
+                        "0",
+                        "0"});
+            table631.AddRow(new string[] {
+                        "16-18 non-levy additional provider payments: training authorised claims",
+                        "0",
+                        "0",
+                        "0"});
+            table631.AddRow(new string[] {
+                        "Adult levy training: authorised claims",
+                        "0",
+                        "0",
+                        "0"});
+            table631.AddRow(new string[] {
+                        "Adult non-levy additional employer payments: audit adjustments",
+                        "0",
+                        "0",
+                        "0"});
+#line 28
+        testRunner.Given("that the previous EAS entries for a provider are as follows:", ((string)(null)), table631, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table632 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Type",
+                        "05/17",
+                        "06/17",
+                        "07/17",
+                        "year to date total"});
+            table632.AddRow(new string[] {
+                        "16-18 levy additional provider payments: audit adjustments",
+                        "195.17",
+                        "4.98",
+                        "63.42",
+                        "263.57"});
+            table632.AddRow(new string[] {
+                        "16-18 non-levy additional provider payments: training authorised claims",
+                        "17.57",
+                        "2.89",
+                        "2.45",
+                        "22.91"});
+            table632.AddRow(new string[] {
+                        "Adult levy training: authorised claims",
+                        "475.34",
+                        "98.14",
+                        "65.49",
+                        "638.97"});
+            table632.AddRow(new string[] {
+                        "Adult levy additional provider payments: audit adjustments",
+                        "0",
+                        "18.65",
+                        "1.63",
+                        "20.28"});
+            table632.AddRow(new string[] {
+                        "Adult non-levy additional employer payments: audit adjustments",
+                        "341.25",
+                        "5.23",
+                        "159.34",
+                        "505.82"});
+#line 34
+        testRunner.When("the following EAS entries are submitted:", ((string)(null)), table632, "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table633 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Type",
+                        "05/17",
+                        "06/17",
+                        "07/17",
+                        "year to date total"});
+            table633.AddRow(new string[] {
+                        "16-18 levy additional provider payments: audit adjustments",
+                        "195.17",
+                        "4.98",
+                        "63.42",
+                        "263.57"});
+            table633.AddRow(new string[] {
+                        "16-18 non-levy additional provider payments: training authorised claims",
+                        "17.57",
+                        "2.89",
+                        "2.45",
+                        "22.91"});
+            table633.AddRow(new string[] {
+                        "Adult levy training: authorised claims",
+                        "475.34",
+                        "98.14",
+                        "65.49",
+                        "638.97"});
+            table633.AddRow(new string[] {
+                        "Adult levy additional provider payments: audit adjustments",
+                        "0",
+                        "18.65",
+                        "1.63",
+                        "20.28"});
+            table633.AddRow(new string[] {
+                        "Adult non-levy additional employer payments: audit adjustments",
+                        "341.25",
+                        "5.23",
+                        "159.34",
+                        "505.82"});
 #line 41
-        testRunner.Then("the following adjustments will be generated:", ((string)(null)), table629, "Then ");
+        testRunner.Then("the following adjustments will be generated:", ((string)(null)), table633, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
