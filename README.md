@@ -28,5 +28,5 @@ In order to run the tests locally you will need:
 You will then need to run:
 * The AT scripts in [src/Deploy](src/Deploy/) 
     * files are names *.transient.* for scripts to run on transient db and *.deds.* for scripts to run on deds
-* Run the test stack scripts
+* Run the tests
 
