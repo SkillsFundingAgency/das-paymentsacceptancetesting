@@ -16,10 +16,17 @@ In order to run the tests locally you will need:
 * SQL Server 2008 onwards
 * A database named DasPaymentsAT_Transient to act as the DCFS transient database
 * A database named DasPaymentsAT_Deds to act as the DCFS DEDS database
-* The latest versions of the DAS payment components (Download artifacts from VSO builds); extracted to C:\temp\PaymentsAT\components
+* Download the latest component from each of these builds on VSTS and extract to: C:\temp\PaymentsAT\components
+    * [Das-CollectionsEarnings-OPA-Calculator](https://sfa-gov-uk.visualstudio.com/Digital%20Apprenticeship%20Service/_build/index?context=allDefinitions&path=%5CDAS-Payments&definitionId=398&_a=completed)
+    * [Das-Payments-Reference-Accounts](https://sfa-gov-uk.visualstudio.com/Digital%20Apprenticeship%20Service/_build/index?context=allDefinitions&path=%5CDAS-Payments&definitionId=160&_a=completed)
+    * [Das-Payments-Reference-Commitments](https://sfa-gov-uk.visualstudio.com/Digital%20Apprenticeship%20Service/_build/index?context=allDefinitions&path=%5CDAS-Payments&definitionId=161&_a=completed)
+    * [Das-PaymentEventsApi](https://sfa-gov-uk.visualstudio.com/Digital%20Apprenticeship%20Service/_build/index?context=allDefinitions&path=%5CDAS-Payments&definitionId=197&_a=completed)
+    * [Das-ProviderEvents-Components](https://sfa-gov-uk.visualstudio.com/Digital%20Apprenticeship%20Service/_build/index?context=allDefinitions&path=%5CDAS-Payments&definitionId=298&_a=completed)
+    * [Das-ProviderPayments-Calculator](https://sfa-gov-uk.visualstudio.com/Digital%20Apprenticeship%20Service/_build/index?context=allDefinitions&path=%5CDAS-Payments&definitionId=133&_a=completed)
+    * [Das-CollectionEarnings-Datalock](https://sfa-gov-uk.visualstudio.com/Digital%20Apprenticeship%20Service/_build/index?context=allDefinitions&path=%5CDAS-Payments&definitionId=126&_a=completed)
 
 You will then need to run:
-* The AT scripts in [src/Deploy](src/Deploy/)
+* The AT scripts in [src/Deploy](src/Deploy/) 
+    * files are names *.transient.* for scripts to run on transient db and *.deds.* for scripts to run on deds
 * Run the test stack scripts
 
-N.B. files are names *.transient.* for scripts to run on transient db and *.deds.* for scripts to run on deds
