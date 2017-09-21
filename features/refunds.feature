@@ -44,8 +44,8 @@ Scenario:673-AC01 DAS learner, levy available, provider retrospectively notifies
 Scenario:673-AC02 Non-DAS learner, levy available, provider retrospectively notifies a withdrawal and previously-paid monthly instalments need to be refunded.
 	Given  the apprenticeship funding band maximum is 17000
 	And following learning has been recorded for previous payments:
-		| ULN       | start date | aim sequence number |  completion status |
-		| learner a | 04/08/2017 | 1                   |  continuing        |
+		| ULN       | learner type          | start date | aim sequence number |  completion status |
+		| learner a | programme only non-DAS| 04/08/2017 | 1                   |  continuing        |
   
 	And the following earnings and payments have been made to the provider A for learner a:
         | Type                           | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 |
@@ -191,9 +191,9 @@ Scenario: 780-AC01 - Non-DAS standard learner, price is changed and a negative a
 	Given  the apprenticeship funding band maximum is 15000
 	
 	And following learning has been recorded for previous payments:
-		| ULN       | start date | aim sequence number | completion status |
-		| Learner a | 04/08/2017 | 1                   | continuing        |
-	And the following earnings and payments have been made to the provider for learner a:
+		| ULN       | learner type           | start date | aim sequence number | completion status |
+		| Learner a | programme only non-DAS | 04/08/2017 | 1                   | continuing        |
+	And the following earnings and payments have been made to the provider A for learner a:
         | Type                           | 08/17 | 09/17 | 10/17 | 11/17 | 
         | Provider Earned Total          | 750   | 750   | 0     | 0     |        
         | Provider Earned from SFA       | 675   | 675   | 0     | 0     |        
@@ -234,17 +234,17 @@ Scenario:518-AC01 - DAS standard learner, price is changed and a negative amount
 	And following learning has been recorded for previous payments:
 		| ULN       | start date | aim sequence number | completion status |
 		| Learner a | 04/08/2017 | 1                   | continuing        |
-	And the following earnings and payments have been made to the provider for learner a:
-		| Type                           | 08/17 | 09/17 | 10/17 | 11/17 | 
-        | Provider Earned Total          | 750   | 750   | 0     | 0     |        
-        | Provider Earned from SFA       | 750   | 750   | 0     | 0     |        
-        | Provider Earned from Employer  | 0     | 0     | 0     | 0     |        
-        | Provider Paid by SFA           | 0     | 750   | 750   | 0     |         
-        | Payment due from Employer      | 0     | 0     | 0     | 0     |        
-        | Levy account debited           | 0     | 750   | 750   | 0     |          
-        | SFA Levy employer budget       | 0     | 0     | 0     | 0     |         
-        | SFA Levy co-funding budget     | 0     | 0     | 0     | 0     |        
-        | SFA non-Levy co-funding budget | 750   | 750   | 0     | 0     | 
+	And the following earnings and payments have been made to the provider A for learner a:
+		| Type                           | 08/17 | 09/17 | 10/17 | 11/17 |
+		| Provider Earned Total          | 750   | 750   | 0     | 0     |
+		| Provider Earned from SFA       | 750   | 750   | 0     | 0     |
+		| Provider Earned from Employer  | 0     | 0     | 0     | 0     |
+		| Provider Paid by SFA           | 0     | 750   | 750   | 0     |
+		| Payment due from Employer      | 0     | 0     | 0     | 0     |
+		| Levy account debited           | 0     | 750   | 750   | 0     |
+		| SFA Levy employer budget       | 750   | 750   | 0     | 0     |
+		| SFA Levy co-funding budget     | 0     | 0     | 0     | 0     |
+		| SFA non-Levy co-funding budget | 0     | 0     | 0     | 0     | 
         
     When an ILR file is submitted on 10/01/18 with the following data:
         | ULN       | learner type       | start date | planned end date | actual end date | completion status | Total training price 1 | Total training price 1 effective date | Total assessment price 1 | Total assessment price 1 effective date | Total training price 2 | Total training price 2 effective date | Total assessment price 2 | Total assessment price 2 effective date |
@@ -280,7 +280,7 @@ Scenario:802-AC01 - DAS standard learner, price is changed, originally mix funde
 		| ULN       | start date | aim sequence number | completion status |
 		| Learner a | 04/08/2017 | 1                   | continuing        |
 		
-	And the following earnings and payments have been made to the provider for learner a:
+	And the following earnings and payments have been made to the provider A for learner a:
         | Type                           | 08/17 | 09/17  | 10/17  | 11/17 | 
         | Provider Earned Total          | 750   | 750    | 0      | 0     |        
         | Provider Earned from SFA       | 750   | 712.50 | 0      | 0     |        

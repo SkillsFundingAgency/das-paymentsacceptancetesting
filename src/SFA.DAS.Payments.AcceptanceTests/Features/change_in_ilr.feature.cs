@@ -358,6 +358,7 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table263 = new TechTalk.SpecFlow.Table(new string[] {
                         "ULN",
+                        "learner type",
                         "start date",
                         "aim sequence number",
                         "framework code",
@@ -366,6 +367,7 @@ this.ScenarioSetup(scenarioInfo);
                         "completion status"});
             table263.AddRow(new string[] {
                         "learner a",
+                        "programme only non-DAS",
                         "06/05/2017",
                         "1",
                         "403",
@@ -608,6 +610,7 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table267 = new TechTalk.SpecFlow.Table(new string[] {
                         "learner reference number",
+                        "learner type",
                         "ULN",
                         "start date",
                         "aim sequence number",
@@ -617,6 +620,7 @@ this.ScenarioSetup(scenarioInfo);
                         "completion status"});
             table267.AddRow(new string[] {
                         "learner a",
+                        "programme only non-DAS",
                         "1111111111",
                         "06/05/2017",
                         "1",

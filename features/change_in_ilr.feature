@@ -57,8 +57,8 @@ Scenario:822-AC01- Levy apprentice, provider changes aim sequence numbers in ILR
 
         Given the apprenticeship funding band maximum is 9000
  		And following learning has been recorded for previous payments:
-			| ULN       | start date | aim sequence number | framework code | programme type | pathway code | completion status |
-			| learner a | 06/05/2017 | 1                   | 403            | 2              | 1            | continuing        |
+			| ULN       | learner type          | start date | aim sequence number | framework code | programme type | pathway code | completion status |
+			| learner a | programme only non-DAS| 06/05/2017 | 1                   | 403            | 2              | 1            | continuing        |
   
 		And the following earnings and payments have been made to the provider A for learner a:
 			| Type                                    | 05/17 | 06/17 | 07/17 | 08/17 |
@@ -101,8 +101,8 @@ Scenario:822-AC01- Levy apprentice, provider changes aim sequence numbers in ILR
 
         Given the apprenticeship funding band maximum is 9000
  		And following learning has been recorded for previous payments:
-			| learner reference number | ULN        | start date | aim sequence number | framework code | programme type | pathway code | completion status |
-			| learner a                | 1111111111 | 06/05/2017 | 1                   | 403            | 2              | 1            | continuing        |
+			| learner reference number| learner type           | ULN        | start date | aim sequence number | framework code | programme type | pathway code | completion status |
+			| learner a               | programme only non-DAS | 1111111111 | 06/05/2017 | 1                   | 403            | 2              | 1            | continuing        |
   
 		And the following earnings and payments have been made to the provider A for learner a:
 			| Type                                    | 05/17 | 06/17 | 07/17 | 08/17 | 

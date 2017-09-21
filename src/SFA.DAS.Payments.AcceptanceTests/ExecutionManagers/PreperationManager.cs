@@ -56,6 +56,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
 
                 connection.Execute("DELETE FROM Payments.Payments");
                 connection.Execute("DELETE FROM PaymentsDue.RequiredPayments");
+                connection.Execute("DELETE FROM Adjustments.ManualAdjustments");
 
                 connection.Execute("DELETE FROM DataLock.DataLockEventCommitmentVersions");
                 connection.Execute("DELETE FROM DataLock.DataLockEventErrors");
