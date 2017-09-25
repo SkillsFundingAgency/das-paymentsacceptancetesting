@@ -166,9 +166,9 @@ Scenario: DPP-645 Payment for a non-DAS learner, funding agreed within band maxi
 
 Given the apprenticeship funding band maximum is 15000
 When an ILR file is submitted with the following data:
-		  | ULN       | learner type                 | agreed price               | start date | planned end date | actual end date | completion status | aim type         |
-		  | learner a | 19-24 programme only non-DAS | 15000                      | 06/08/2017 | 08/08/2018       |                 | continuing        | programme        |
-		  | learner a | 19-24 programme only non-DAS | agreed within funding band | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | maths or english |
+		  | ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | aim type         |
+		  | learner a | 19-24 programme only non-DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | programme        |
+		  | learner a | 19-24 programme only non-DAS | 471          | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | maths or english |
 		  
       
 Then the provider earnings and payments break down as follows:
@@ -204,13 +204,13 @@ Scenario: DPP-645 Payment for a DAS learner, funding agreed within band maximum,
     Given levy balance > agreed price for all months
 		
     And the following commitments exist:
-		  | ULN       | start date            | planned end date   | agreed price | status   |
-		  | learner a | 06/08/2017            | 08/08/2018         | 15000        | active   |
+		  | ULN       | start date | end date   | agreed price | status |
+		  | learner a | 06/08/2017 | 08/08/2018 | 15000        | active |
 
     When an ILR file is submitted with the following data:
-		  | ULN       | learner type                 | agreed price               | start date | planned end date | actual end date | completion status | aim type         |
-		  | learner a | 19-24 programme only non-DAS | 15000                      | 06/08/2017 | 08/08/2018       |                 | continuing        | programme        |
-		  | learner a | 19-24 programme only non-DAS | agreed within funding band | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | maths or english |
+		  | ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | aim type         |
+		  | learner a | 19-24 programme only non-DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | programme        |
+		  | learner a | 19-24 programme only non-DAS | 471          | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | maths or english |
 		  
     Then the provider earnings and payments break down as follows:
 		  | Type                                             | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 |
@@ -288,10 +288,10 @@ Scenario: DPP-646 Payment for a DAS learner, funding agreed within band maximum,
 		Given levy balance > agreed price for all months
 		
     And the following commitments exist:
-		  | ULN       | price effective date  | planned end date   | agreed price | status   |
-		  | learner a | 06/08/2017            | 08/08/2018         | 15000        | active   |
+		  | ULN       | start date | planned end date | agreed price | status |
+		  | learner a | 06/08/2017 | 08/08/2018       | 15000        | active |
 
-When an ILR file is submitted with the following data:
+	When an ILR file is submitted with the following data:
 		  | ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | funding adjustment for prior learning | other funding adjustment | aim type         |
 		  | learner a | 19-24 programme only non-DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | n/a                                   | n/a                      | programme        |
 		  | learner a | 19-24 programme only non-DAS | 471          | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 75%                                   | n/a                      | maths or english |
@@ -372,8 +372,8 @@ Scenario: DPP-655 Payment for a DAS learner, funding agreed within band maximum,
 	Given levy balance > agreed price for all months
 		
     And the following commitments exist:
-		  | ULN       | price effective date  | planned end date   | agreed price | status   |
-		  | learner a | 06/08/2017            | 08/08/2018         | 15000        | active   |
+		  | ULN       | start date | planned end date | agreed price | status |
+		  | learner a | 06/08/2017 | 08/08/2018       | 15000        | active |
 
 When an ILR file is submitted with the following data:
 		  | ULN       | learner type                  | agreed price | start date | planned end date | actual end date | completion status | funding adjustment for prior learning | other funding adjustment | aim type         |
@@ -483,8 +483,8 @@ Scenario: DPP-656 Payment for a DAS learner, funding agreed within band maximum,
 	Given levy balance > agreed price for all months
 		
     And the following commitments exist:
-		  | ULN       | price effective date  | planned end date   | agreed price | status   |
-		  | learner a | 06/08/2017            | 08/08/2018         | 15000        | active   |
+		  | ULN       | start date | planned end date | agreed price | status |
+		  | learner a | 06/08/2017 | 08/08/2018       | 15000        | active |
 
 	When an ILR file is submitted with the following data:
 		  | ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | funding adjustment for prior learning | other funding adjustment | restart indicator | aim type         |
@@ -617,9 +617,9 @@ Scenario: DPP-678 Payment for a DAS learner, funding agreed within band maximum,
 	Given levy balance > agreed price for all months
 		
     And the following commitments exist:
-	Provider	  | ULN       | price effective date  | planned end date   | agreed price | status   |
-		P1        | learner a | 06/08/2017            | 08/08/2018         | 15000        | closed   |
-		P2        | learner a | 09/01/2018            | 08/08/2018         | 15000        | active   |
+	| Provider | ULN       | start date | planned end date | agreed price | status |
+	| P1       | learner a | 06/08/2017 | 08/08/2018       | 15000        | closed |
+	| P2       | learner a | 09/01/2018 | 08/08/2018       | 15000        | active |
 
 	When an ILR file is submitted with the following data:
 	| Provider | ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | funding adjustment for prior learning | other funding adjustment | restart indicator | aim type         |
@@ -723,8 +723,8 @@ Scenario: DPP-679 Payment for a DAS learner, funding agreed within band maximum,
 	Given levy balance > agreed price for all months
 		
     And the following commitments exist:
-		  | ULN       | price effective date  | planned end date   | agreed price | status   |
-		  | learner a | 06/08/2017            | 08/08/2018         | 15000        | active   |
+		  | ULN       | start date | planned end date | agreed price | status |
+		  | learner a | 06/08/2017 | 08/08/2018       | 15000        | active |
 
 	When an ILR file is submitted with the following data:
 		  | ULN       | learner type                  | agreed price | start date | planned end date | actual end date | completion status | funding adjustment for prior learning | other funding adjustment | aim type         |
