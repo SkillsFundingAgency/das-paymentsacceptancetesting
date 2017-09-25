@@ -24,7 +24,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
         private static string[] ParseDataLockStatusHeaders(Table dataLockStatusTable)
         {
             var headers = dataLockStatusTable.Header.ToArray();
-            if (headers[0] != "Payment type")
+            if (!headers[0].Equals("Payment type", StringComparison.InvariantCultureIgnoreCase))
             {
                 throw new ArgumentException("Data Lock status table must have Payment type as first column");
             }
@@ -51,51 +51,51 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
         {
             foreach (var row in dataLockStatusTable.Rows)
             {
-                if (row[0] == "On-program")
+                if (row[0].Equals("On-program", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseRow(learnerId, row, periodNames, context.DataLockStatusForOnProgramme);
                 }
-                else if (row[0] == "Completion")
+                else if (row[0].Equals("Completion", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseRow(learnerId, row, periodNames, context.DataLockStatusForCompletion);
                 }
-                else if (row[0] == "Balancing")
+                else if (row[0].Equals("Balancing", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseRow(learnerId, row, periodNames, context.DataLockStatusForBalancing);
                 }
-                else if (row[0] == "Employer 16-18 incentive")
+                else if (row[0].Equals("Employer 16-18 incentive", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseRow(learnerId, row, periodNames, context.DataLockStatusForEmployer16To18Incentive);
                 }
-                else if (row[0] == "Provider 16-18 incentive")
+                else if (row[0].Equals("Provider 16-18 incentive", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseRow(learnerId, row, periodNames, context.DataLockStatusForProvider16To18Incentive);
                 }
-                else if (row[0] == "English and maths on programme")
+                else if (row[0].Equals("English and maths on programme", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseRow(learnerId, row, periodNames, context.DataLockStatusForEnglishAndMathOnProgramme);
                 }
-                else if (row[0] == "English and maths Balancing")
+                else if (row[0].Equals("English and maths Balancing", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseRow(learnerId, row, periodNames, context.DataLockStatusForEnglishAndMathBalancing);
                 }
-                else if (row[0] == "Provider disadvantage uplift")
+                else if (row[0].Equals("Provider disadvantage uplift", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseRow(learnerId, row, periodNames, context.DataLockStatusForDisadvantageUplift);
                 }
-                else if (row[0] == "Framework uplift on-program")
+                else if (row[0].Equals("Framework uplift on-program", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseRow(learnerId, row, periodNames, context.DataLockStatusForFrameworkUpliftOnProgramme);
                 }
-                else if (row[0] == "Framework uplift completion")
+                else if (row[0].Equals("Framework uplift completion", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseRow(learnerId, row, periodNames, context.DataLockStatusForFrameworkUpliftCompletion);
                 }
-                else if (row[0] == "Framework uplift balancing")
+                else if (row[0].Equals("Framework uplift balancing", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseRow(learnerId, row, periodNames, context.DataLockStatusForFrameworkUpliftBalancing);
                 }
-                else if (row[0] == "Provider learning support")
+                else if (row[0].Equals("Provider learning support", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseRow(learnerId, row, periodNames, context.DataLockStatusForLearningSupport);
                 }

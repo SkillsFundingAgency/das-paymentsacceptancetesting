@@ -21,18 +21,17 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                 submissionContext.LearningSupportStatus.Add(ParseLearningSupportTableRow(row, structure));
             }
         }
-
-
+        
         private static LearningSupportTableColumnStructure ParseContractTypesTableStructure(Table contractTypes)
         {
             var structure = new LearningSupportTableColumnStructure();
 
             for (var c = 0; c < contractTypes.Header.Count; c++)
             {
-                var header = contractTypes.Header.ElementAt(c);
+                var header = contractTypes.Header.ElementAt(c).ToLowerInvariant();
                 switch (header)
                 {
-                    case "Learning support code":
+                    case "learning support code":
                         structure.LearningSupportCodeIndex = c;
                         break;
                     case "date from":
@@ -57,8 +56,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                 DateTo = row.ReadRowColumnValue<DateTime>(structure.DateToIndex, "date to")
             };
         }
-
-
+        
         private class LearningSupportTableColumnStructure
         {
             public int LearningSupportCodeIndex { get; set; } = -1;

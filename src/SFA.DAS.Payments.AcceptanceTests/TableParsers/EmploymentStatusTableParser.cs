@@ -22,27 +22,26 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                 submissionContext.EmploymentStatus.Add(ParseEmploymentStatusTableRow(row, structure));
             }
         }
-
-
+        
         private static EmploymentStatusTableColumnStructure ParseEmploymentStatusTableStructure(Table contractTypes)
         {
             var structure = new EmploymentStatusTableColumnStructure();
 
             for (var c = 0; c < contractTypes.Header.Count; c++)
             {
-                var header = contractTypes.Header.ElementAt(c);
+                var header = contractTypes.Header.ElementAt(c).ToLowerInvariant();
                 switch (header)
                 {
-                    case "Employer":
+                    case "employer":
                         structure.EmployerIndex = c;
                         break;
-                    case "Employment Status":
+                    case "employment status":
                         structure.EmploymentStatusIndex = c;
                         break;
-                    case "Employment Status Applies":
+                    case "employment status applies":
                         structure.EmploymentStatusAppliesIndex = c;
                         break;
-                    case "Small Employer":
+                    case "small employer":
                         structure.SmallEmployerIndex = c;
                         break;
                     default:
@@ -65,6 +64,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
 
             return structure;
         }
+
         private static EmploymentStatusReferenceData ParseEmploymentStatusTableRow(TableRow row, EmploymentStatusTableColumnStructure structure)
         {
             var employerReference = row.ReadRowColumnValue<string>(structure.EmployerIndex, "Employer");
@@ -88,7 +88,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                 EmployerId = employerId,
                 EmploymentStatus = (EmploymentStatus)row.ReadRowColumnValue<string>(structure.EmploymentStatusIndex, "Employment Status").ToEnumByDescription(typeof(EmploymentStatus)),
                 EmploymentStatusApplies = row.ReadRowColumnValue<DateTime>(structure.EmploymentStatusAppliesIndex, "Employment Status Applies"),
-
             };
 
             var smallEmployer = row.ReadRowColumnValue<string>(structure.SmallEmployerIndex, "Small Employer");
@@ -100,8 +99,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
 
             return status;
         }
-
-
+        
         private class EmploymentStatusTableColumnStructure
         {
             public int EmployerIndex { get; set; } = -1;

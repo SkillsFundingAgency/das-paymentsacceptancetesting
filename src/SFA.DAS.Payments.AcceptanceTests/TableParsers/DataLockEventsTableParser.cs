@@ -28,31 +28,31 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
 
             for (var c = 0; c < dataLockEvents.Header.Count; c++)
             {
-                var header = dataLockEvents.Header.ElementAt(c);
+                var header = dataLockEvents.Header.ElementAt(c).ToLowerInvariant();
                 switch (header)
                 {
-                    case "Price Episode identifier":
+                    case "price episode identifier":
                         structure.PriceEpisodeIdentifierIndex = c;
                         break;
-                    case "Apprenticeship Id":
+                    case "apprenticeship id":
                         structure.ApprenticeshipIdIndex = c;
                         break;
-                    case "ULN":
+                    case "uln":
                         structure.UlnIndex = c;
                         break;
-                    case "ILR Start Date":
+                    case "ilr start date":
                         structure.IlrStartDateIndex = c;
                         break;
-                    case "ILR Training Price":
+                    case "ilr training price":
                         structure.IlrTrainingPriceIndex = c;
                         break;
-                    case "ILR End point assessment price":
+                    case "ilr ed point assessment price":
                         structure.IlrEndpointAssementPriceIndex = c;
                         break;
-                    case "ILR Effective from":
+                    case "ilr effective from":
                         structure.IlrEffectiveFromIndex = c;
                         break;
-                    case "ILR Effective to":
+                    case "ilr effective to":
                         structure.IlrEffectiveToIndex = c;
                         break;
                     default:
@@ -84,8 +84,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                 ILrEffectiveTo = row.ReadRowColumnValue<DateTime?>(structure.IlrEffectiveToIndex, "ILR Effective to"),
             };
         }
-
-
+        
         private class DataLockEventsTableColumnStructure
         {
             public int PriceEpisodeIdentifierIndex { get; set; } = -1;

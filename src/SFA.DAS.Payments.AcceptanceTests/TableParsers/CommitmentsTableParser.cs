@@ -31,19 +31,19 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
 
             for (var c = 0; c < commitments.Header.Count; c++)
             {
-                var header = commitments.Header.ElementAt(c);
+                var header = commitments.Header.ElementAt(c).ToLowerInvariant();
                 switch (header)
                 {
-                    case "ULN":
+                    case "uln":
                         structure.UlnIndex = c;
                         break;
                     case "priority":
                         structure.PriorityIndex = c;
                         break;
-                    case "Employer":
+                    case "employer":
                         structure.EmployerIndex = c;
                         break;
-                    case "Provider":
+                    case "provider":
                         structure.ProviderIndex = c;
                         break;
                     case "agreed price":
@@ -52,7 +52,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                     case "commitment Id":
                         structure.CommitmentIdIndex = c;
                         break;
-                    case "version Id":
+                    case "version id":
                         structure.VersionIdIndex = c;
                         break;
                     case "start date":
@@ -225,9 +225,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
             dateTime = null;
             return false;
         }
-
-
-
+        
         private class CommitmentsTableColumnStructure
         {
             public int CommitmentIdIndex { get; set; } = -1;
@@ -247,6 +245,5 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
             public int ProgrammeTypeIndex { get; set; } = -1;
             public int PathwayCodeIndex { get; set; } = -1;
         }
-
     }
 }

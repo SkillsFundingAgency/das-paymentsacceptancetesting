@@ -21,15 +21,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                 submissionContext.ContractTypes.Add(ParseContractTypeTableRow(row, structure));
             }
         }
-
-
+        
         private static ContractTypesTableColumnStructure ParseContractTypesTableStructure(Table contractTypes)
         {
             var structure = new ContractTypesTableColumnStructure();
 
             for (var c = 0; c < contractTypes.Header.Count; c++)
             {
-                var header = contractTypes.Header.ElementAt(c);
+                var header = contractTypes.Header.ElementAt(c).ToLowerInvariant();
                 switch (header)
                 {
                     case "contract type":
@@ -70,7 +69,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                 DateTo = row.ReadRowColumnValue<DateTime>(structure.DateToIndex, "date to")
             };
         }
-
 
         private class ContractTypesTableColumnStructure
         {

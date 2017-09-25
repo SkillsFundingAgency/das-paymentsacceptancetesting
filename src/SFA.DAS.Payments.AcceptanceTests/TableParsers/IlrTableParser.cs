@@ -26,9 +26,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
             {
                 IlrLearnerDetails.Add(ParseCommitmentsTableRow(row, structure));
             }
-
         }
-
 
         private static IlrTableStructure ParseTableStructure(Table ilrDetails)
         {
@@ -36,13 +34,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
 
             for (var c = 0; c < ilrDetails.Header.Count; c++)
             {
-                var header = ilrDetails.Header.ElementAt(c);
+                var header = ilrDetails.Header.ElementAt(c).ToLowerInvariant();
                 switch (header)
                 {
                     case "learner reference number":
                         structure.LearnerReferenceIndex = c;
                         break;
-                    case "ULN":
+                    case "uln":
                         structure.UlnIndex = c;
                         break;
                     case "agreed price":
@@ -63,63 +61,63 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                     case "completion status":
                         structure.CompletionStatusIndex = c;
                         break;
-                    case "Provider":
+                    case "provider":
                         structure.ProviderIndex = c;
                         break;
-                    case "Total training price":
-                    case "Total training price 1": // duplicate
+                    case "total training price":
+                    case "total training price 1": // duplicate
                         structure.TotalTrainingPrice1Index = c;
                         break;
-                    case "Total training price effective date":
-                    case "Total training price 1 effective date": // duplicate
+                    case "total training price effective date":
+                    case "total training price 1 effective date": // duplicate
                         structure.TotalTrainingPrice1EffectiveDateIndex = c;
                         break;
-                    case "Total assessment price":
-                    case "Total assessment price 1": // duplicate
+                    case "total assessment price":
+                    case "total assessment price 1": // duplicate
                         structure.TotalAssessmentPrice1Index = c;
                         break;
-                    case "Total assessment price effective date":
-                    case "Total assessment price 1 effective date": // duplicate
+                    case "total assessment price effective date":
+                    case "total assessment price 1 effective date": // duplicate
                         structure.TotalAssessmentPrice1EffectiveDateIndex = c;
                         break;
-                    case "Total training price 2":
+                    case "total training price 2":
                         structure.TotalTrainingPrice2Index = c;
                         break;
-                    case "Total training price 2 effective date":
+                    case "total training price 2 effective date":
                         structure.TotalTrainingPrice2EffectiveDateIndex = c;
                         break;
-                    case "Total assessment price 2":
+                    case "total assessment price 2":
                         structure.TotalAssessmentPrice2Index = c;
                         break;
-                    case "Total assessment price 2 effective date":
+                    case "total assessment price 2 effective date":
                         structure.TotalAssessmentPrice2EffectiveDateIndex = c;
                         break;
-                    case "Residual training price":
-                    case "Residual training price 1":
+                    case "residual training price":
+                    case "residual training price 1":
                         structure.ResidualTrainingPrice1Index = c;
                         break;
                     case "Residual training price effective date":
                     case "Residual training price 1 effective date":
                         structure.ResidualTrainingPrice1EffectiveDateIndex = c;
                         break;
-                    case "Residual assessment price":
-                    case "Residual assessment price 1":
+                    case "residual assessment price":
+                    case "residual assessment price 1":
                         structure.ResidualAssessmentPrice1Index = c;
                         break;
-                    case "Residual assessment price effective date":
-                    case "Residual assessment price 1 effective date":
+                    case "residual assessment price effective date":
+                    case "residual assessment price 1 effective date":
                         structure.ResidualAssessmentPrice1EffectiveDateIndex = c;
                         break;
-                    case "Residual training price 2":
+                    case "residual training price 2":
                         structure.ResidualTrainingPrice2Index = c;
                         break;
-                    case "Residual training price 2 effective date":
+                    case "residual training price 2 effective date":
                         structure.ResidualTrainingPrice2EffectiveDateIndex = c;
                         break;
-                    case "Residual assessment price 2":
+                    case "residual assessment price 2":
                         structure.ResidualAssessmentPrice2Index = c;
                         break;
-                    case "Residual assessment price 2 effective date":
+                    case "residual assessment price 2 effective date":
                         structure.ResidualAssessmentPrice2EffectiveDateIndex = c;
                         break;
                     case "aim type":
@@ -143,19 +141,19 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                     case "home postcode deprivation":
                         structure.HomePostcodeDeprivationIndex = c;
                         break;
-                    case "Employment Status":
+                    case "employment status":
                         structure.EmploymentStatusIndex = c;
                         break;
-                    case "Employment Status Applies":
+                    case "employment status applies":
                         structure.EmploymentStatusAppliesIndex = c;
                         break;
-                    case "Employer Id":
+                    case "employer id":
                         structure.EmployerIdIndex = c;
                         break;
-                    case "Small Employer":
+                    case "small employer":
                         structure.SmallEmployerIndex = c;
                         break;
-                    case "LearnDelFAM":
+                    case "learndelfam":
                         structure.LearnDelFamIndex = c;
                         break;
                     case "aim sequence number":
@@ -232,8 +230,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
             {
                 rowData.StandardCode = Defaults.StandardCode;
             }
-
-
+            
             if (rowData.FrameworkCode > 0 && rowData.TotalAssessmentPrice2 > 0)
             {
                 throw new Exception("Framework code and TotalAssessmentPrice2 can't be in the same scenario");
@@ -241,8 +238,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
 
             return rowData;
         }
-
-
+        
         private class IlrTableStructure
         {
             public int LearnerReferenceIndex { get; set; } = -1;

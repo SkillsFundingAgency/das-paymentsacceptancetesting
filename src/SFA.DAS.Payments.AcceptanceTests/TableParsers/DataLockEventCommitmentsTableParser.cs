@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SFA.DAS.Payments.AcceptanceTests.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.ReferenceDataModels;
 using TechTalk.SpecFlow;
@@ -86,8 +83,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                 EffectiveDate = row.ReadRowColumnValue<DateTime>(structure.EffectiveDateIndex, "Effective Date"),
             };
         }
-
-
+        
         private class DataLockEventCommitmentsTableColumnStructure
         {
             public int PriceEpisodeIdentifierIndex { get; set; } = -1;

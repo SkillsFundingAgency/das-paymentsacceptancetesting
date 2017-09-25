@@ -28,19 +28,19 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
 
             for (var c = 0; c < dataLockEventErrors.Header.Count; c++)
             {
-                var header = dataLockEventErrors.Header.ElementAt(c);
+                var header = dataLockEventErrors.Header.ElementAt(c).ToLowerInvariant();
                 switch (header)
                 {
-                    case "Price Episode identifier":
+                    case "price episode identifier":
                         structure.PriceEpisodeIdentifierIndex = c;
                         break;
-                    case "Period":
+                    case "period":
                         structure.PeriodIndex = c;
                         break;
-                    case "Payable Flag":
+                    case "payable flag":
                         structure.PayableFlagIndex = c;
                         break;
-                    case "Transaction Type":
+                    case "transaction type":
                         structure.TransactionTypeIndex = c;
                         break;
                 }
@@ -63,7 +63,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                 TransactionType = (TransactionType)row.ReadRowColumnValue<string>(structure.TransactionTypeIndex, "Transaction Type").ToEnumByDescription(typeof(TransactionType)),
             };
         }
-
 
         private class DataLockEventPeriodsTableColumnStructure
         {
