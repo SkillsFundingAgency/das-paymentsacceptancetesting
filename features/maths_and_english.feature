@@ -162,13 +162,13 @@ Then the provider earnings and payments break down as follows:
 #DPP-645 Learner taking single level 3 aim, completes to time, no funding generated     
 #Feature: Provider earnings and payments where apprenticeship requires english or maths above level 2 - completes on time.
 
-Scenario: DPP-645 Payment for a non-DAS learner, funding agreed within band maximum, planned duration is same as programme (assumes both start and finish at same time)
+Scenario: DPP-645 A Payment for a non-DAS learner, funding agreed within band maximum, planned duration is same as programme (assumes both start and finish at same time)
 
 Given the apprenticeship funding band maximum is 15000
 When an ILR file is submitted with the following data:
 		  | ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | aim type         |
 		  | learner a | 19-24 programme only non-DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | programme        |
-		  | learner a | 19-24 programme only non-DAS | 471          | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | maths or english |
+		  | learner a | 19-24 programme only non-DAS | 0            | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | maths or english |
 		  
       
 Then the provider earnings and payments break down as follows:
@@ -197,7 +197,7 @@ And the transaction types for the payments are:
 
 
 
-Scenario: DPP-645 Payment for a DAS learner, funding agreed within band maximum, planned duration is same as programme (assumes both start and finish at same time)
+Scenario: DPP-645 B Payment for a DAS learner, funding agreed within band maximum, planned duration is same as programme (assumes both start and finish at same time)
 			  
     Given levy balance > agreed price for all months
 		
@@ -208,7 +208,7 @@ Scenario: DPP-645 Payment for a DAS learner, funding agreed within band maximum,
     When an ILR file is submitted with the following data:
 		  | ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | aim type         |
 		  | learner a | 19-24 programme only non-DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | programme        |
-		  | learner a | 19-24 programme only non-DAS | 471          | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | maths or english |
+		  | learner a | 19-24 programme only non-DAS | 0            | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | maths or english |
 		  
     Then the provider earnings and payments break down as follows:
 		  | Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 |
@@ -237,7 +237,7 @@ Scenario: DPP-645 Payment for a DAS learner, funding agreed within band maximum,
 #DPP-646 Learner taking single level 2 aim, prior funding adjustment, completes to time
 #Feature: Provider earnings and payments where apprenticeship requires english or maths at level 2 with funding adjustment - COMPLETES ON TIME
 
-Scenario: DPP-646 Payment for a non - DAS learner, funding agreed within band maximum, planned duration is same as programme (assumes both start and finish at same time)
+Scenario: DPP-646 A Payment for a non - DAS learner, funding agreed within band maximum, planned duration is same as programme (assumes both start and finish at same time)
 	
 #	Providers are paid £471 per aim. this is funded from outside the total price and is flat-profiled across the planned number of months in learning for that aim. There is no N+1, there is no money held back for completion. 
 #	If the learner has english and maths needs above level 2 (apprenticeship requires higher) this is funded within the total price.
@@ -272,7 +272,7 @@ Scenario: DPP-646 Payment for a non - DAS learner, funding agreed within band ma
 		  | English and maths Balancing    | 0     | 0     | 0     | 0     | ... | 0     | 0     |		  
 		  
 	
-Scenario: DPP-646 Payment for a DAS learner, funding agreed within band maximum, planned duration is same as programme (assumes both start and finish at same time)
+Scenario: DPP-646 B Payment for a DAS learner, funding agreed within band maximum, planned duration is same as programme (assumes both start and finish at same time)
 	
 #	Providers are paid £471 per aim. this is funded from outside the total proce and is flat-profiled across the planned number of months in learning for that aim. There is no N+1, there is no money held back for completion. 
 #	If the learner has english and maths needs above level 2 (apprenticeship requires higher) this is funded within the total price	
@@ -317,7 +317,7 @@ Scenario: DPP-646 Payment for a DAS learner, funding agreed within band maximum,
 #DPP-655 Learner taking single level 2 aim, 0 prior funding adjustment, completes to time, no funding generated
 #Feature: Provider earnings and payments where apprenticeship requires english or maths at level 2 with prior funding adjustment of ZERO - COMPLETES ON TIME
 
-Scenario: DPP-655 Payment for a non - DAS learner, funding agreed within band maximum, planned duration is same as programme (assumes both start and finish at same time)
+Scenario: DPP-655 A Payment for a non - DAS learner, funding agreed within band maximum, planned duration is same as programme (assumes both start and finish at same time)
 	
 #	Providers are paid £471 per aim. this is funded from outside the total proce and is flat-profiled across the planned number of months in learning for that aim. There is no N+1, there is no money held back for completion. 
 #	If the learner has english and maths needs above level 2 (apprenticeship requires higher) this is funded within the total price.
@@ -352,7 +352,7 @@ Scenario: DPP-655 Payment for a non - DAS learner, funding agreed within band ma
 		  | English and maths Balancing    | 0     | 0     | 0     | 0     | ... | 0     | 0     |			  
 		  
 
-Scenario: DPP-655 Payment for a DAS learner, funding agreed within band maximum, planned duration is same as programme (assumes both start and finish at same time)
+Scenario: DPP-655 B Payment for a DAS learner, funding agreed within band maximum, planned duration is same as programme (assumes both start and finish at same time)
 	
 #	Providers are paid £471 per aim. this is funded from outside the total proce and is flat-profiled across the planned number of months in learning for that aim. There is no N+1, there is no money held back for completion. 
 #	If the learner has english and maths needs above level 2 (apprenticeship requires higher) this is funded within the total price	
@@ -398,7 +398,7 @@ When an ILR file is submitted with the following data:
 		           
 #Feature: Provider earnings and payments where apprenticeship requires english or maths at level 2 with prior funding adjustment after break - COMPLETES ON TIME, RETURNS TO SAME PROVIDER
 
-Scenario: Payment for a non - DAS learner, funding agreed within band maximum, planned duration is same as programme (assumes both start and finish at same time), other funding adjutsment is 75%, prior funding adjustment is 10%
+Scenario: DPP-565 A Payment for a non - DAS learner, funding agreed within band maximum, planned duration is same as programme (assumes both start and finish at same time), other funding adjutsment is 75%, prior funding adjustment is 10%
 	
 #	Providers are paid £471 per aim. this is funded from outside the total proce and is flat-profiled across the planned number of months in learning for that aim. There is no N+1, there is no money held back for completion. 
 
@@ -458,7 +458,7 @@ Scenario: Payment for a non - DAS learner, funding agreed within band maximum, p
 
 #DPP-656 Learner taking single level 2 aim, takes break in learning and returns with prior funding adjustment, completes to time
 		  
-Scenario: DPP-656 Payment for a DAS learner, funding agreed within band maximum, planned duration is same as programme (assumes both start and finish at same time), other funding adjutsment is 75%, prior funding adjustment is 10%
+Scenario: DPP-656 B Payment for a DAS learner, funding agreed within band maximum, planned duration is same as programme (assumes both start and finish at same time), other funding adjutsment is 75%, prior funding adjustment is 10%
 	
 #	Providers are paid £471 per aim. this is funded from outside the total proce and is flat-profiled across the planned number of months in learning for that aim. There is no N+1, there is no money held back for completion. 
 
