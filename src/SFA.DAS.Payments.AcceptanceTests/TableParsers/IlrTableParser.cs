@@ -162,6 +162,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                     case "aim reference":
                         structure.LearnAimRefIndex = c;
                         break;
+                    case "restart indicator":
+                        structure.RestartIndicatorIndex = c;
+                        break;
                     default:
                         throw new ArgumentException($"Unexpected column in ILR table: {header}");
                 }
@@ -211,7 +214,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                 EmployerId = row.ReadRowColumnValue<string>(structure.EmployerIdIndex, "employer id"),
                 SmallEmployer = row.ReadRowColumnValue<string>(structure.SmallEmployerIndex, "small employer"),
                 LearnDelFam = row.ReadRowColumnValue<string>(structure.LearnDelFamIndex, "LearnDelFam"),
-                AimSequenceNumber = row.ReadRowColumnValue<int>(structure.AimSequenceNumberIndex, "aim sequence number")
+                AimSequenceNumber = row.ReadRowColumnValue<int>(structure.AimSequenceNumberIndex, "aim sequence number"),
+                RestartIndicator = row.ReadRowColumnValue<string>(structure.RestartIndicatorIndex, "restart indicator").Equals("YES", StringComparison.InvariantCultureIgnoreCase),
             };
 
             var learnRefNumber = string.Empty;
@@ -281,6 +285,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
             public int AimSequenceNumberIndex { get; set; } = -1;
             public int UlnIndex { get; set; } = -1;
             public int LearnAimRefIndex { get; set; } = -1;
+            public int RestartIndicatorIndex { get; set; } = -1;
         }
     }
 }
