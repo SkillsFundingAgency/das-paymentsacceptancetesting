@@ -2265,7 +2265,7 @@ this.ScenarioSetup(scenarioInfo);
                         "1",
                         "continuing"});
 #line 338
-    testRunner.When("an ILR file is submitted on 10/01/18 with the following data:", ((string)(null)), table722, "When ");
+    testRunner.When("an ILR file is submitted for the first time on 10/10/17 with the following data:", ((string)(null)), table722, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table723 = new TechTalk.SpecFlow.Table(new string[] {
                         "Type",
@@ -2333,9 +2333,9 @@ this.ScenarioSetup(scenarioInfo);
             table723.AddRow(new string[] {
                         "Levy account credited",
                         "0",
-                        "749.93333",
-                        "749.93333",
                         "0",
+                        "0",
+                        "1499.87",
                         "00"});
             table723.AddRow(new string[] {
                         "SFA Levy employer budget",
