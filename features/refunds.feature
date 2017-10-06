@@ -335,24 +335,24 @@ Scenario:894-AC01 - DAS standard learner, original commitment is withdrawn after
 		| SFA Levy co-funding budget     | 0     | 0     | 0     | 0     |
 		| SFA non-Levy co-funding budget | 0     | 0     | 0     | 0     | 
         
-    When an ILR file is submitted on 10/01/18 with the following data:
+    When an ILR file is submitted for the first time on 10/10/17 with the following data:
         | ULN       | learner type       | start date | planned end date | agreed price | completion status |
         | learner a | programme only DAS | 04/08/2017 | 20/08/2018       | 1            | continuing        |
 	
     Then the provider earnings and payments break down as follows:
-        | Type                           | 08/17   | 09/17     | 10/17     | 11/17   | 12/17   |
-        | Provider Earned Total          | 0.06667 | 0.06667   | 0.06667   | 0.06667 | 0.06667 |
-        | Provider Earned from SFA       | 0.06667 | 0.06667   | 0.06667   | 0.06667 | 0.06667 |
-        | Provider Earned from Employer  | 0       | 0         | 0         | 0       | 0       |
-        | Provider Paid by SFA           | 0       | 750       | 750       | 0.06667 | 0.06667 |
-        | Refund taken by SFA            | 0       | 0         | -1499.87  | 0       | 0       |
-        | Payment due from Employer      | 0       | 0         | 0         | 0       | 0       |
-        | Refund due to employer         | 0       | 0         | 0         | 0       | 0       |
-        | Levy account debited           | 0       | 750       | 750       | 0.06667 | 0.06667 |
-        | Levy account credited          | 0       | 749.93333 | 749.93333 | 0       | 00      |
-        | SFA Levy employer budget       | 0.06667 | 0.06667   | 0.06667   | 0.06667 | 0.06667 |
-        | SFA Levy co-funding budget     | 0       | 0         | 0         | 0       | 0       |
-        | SFA non-Levy co-funding budget | 0       | 0         | 0         | 0       | 0       |
+        | Type                           | 08/17   | 09/17   | 10/17    | 11/17   | 12/17   |
+        | Provider Earned Total          | 0.06667 | 0.06667 | 0.06667  | 0.06667 | 0.06667 |
+        | Provider Earned from SFA       | 0.06667 | 0.06667 | 0.06667  | 0.06667 | 0.06667 |
+        | Provider Earned from Employer  | 0       | 0       | 0        | 0       | 0       |
+        | Provider Paid by SFA           | 0       | 750     | 750      | 0.06667 | 0.06667 |
+        | Refund taken by SFA            | 0       | 0       | -1499.87 | 0       | 0       |
+        | Payment due from Employer      | 0       | 0       | 0        | 0       | 0       |
+        | Refund due to employer         | 0       | 0       | 0        | 0       | 0       |
+        | Levy account debited           | 0       | 750     | 750      | 0.06667 | 0.06667 |
+        | Levy account credited          | 0       | 0       | 0        | 1499.87 | 00      |
+        | SFA Levy employer budget       | 0.06667 | 0.06667 | 0.06667  | 0.06667 | 0.06667 |
+        | SFA Levy co-funding budget     | 0       | 0       | 0        | 0       | 0       |
+        | SFA non-Levy co-funding budget | 0       | 0       | 0        | 0       | 0       |
 
 		
 Scenario:894-AC02 - non DAS standard learner, payments made then price is changed retrospectively from beginning
