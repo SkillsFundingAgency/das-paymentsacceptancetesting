@@ -258,3 +258,6 @@ paket-files/
 # Misc
 !**/assemblies/*.dll
 docs/
+
+# Autogenned specflow files
+src/SFA.DAS.Payments.AcceptanceTests/Features/
