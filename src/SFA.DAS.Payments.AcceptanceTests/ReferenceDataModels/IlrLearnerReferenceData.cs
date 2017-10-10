@@ -44,5 +44,6 @@ namespace SFA.DAS.Payments.AcceptanceTests.ReferenceDataModels
 
         public int AimSequenceNumber { get; set; } = 1;
         public string Uln { get; set; }
+        public bool RestartIndicator { get; set; }
     }
 }
