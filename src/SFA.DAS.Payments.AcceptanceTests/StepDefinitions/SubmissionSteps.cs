@@ -43,8 +43,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
         {
             IlrTableParser.ParseIlrTableIntoContext(SubmissionsContext, ilrDetails);
 
-            DateTime firstSubmissionDate;
-            if (!DateTime.TryParse(specSumissionDate, out firstSubmissionDate))
+            if (!DateTime.TryParse(specSumissionDate, out var firstSubmissionDate))
             {
                 throw new ArgumentException($"{specSumissionDate} is not a valid date");
             }

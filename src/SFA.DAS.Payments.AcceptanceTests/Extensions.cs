@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using TechTalk.SpecFlow;
 
@@ -75,6 +76,19 @@ namespace SFA.DAS.Payments.AcceptanceTests
                 }
             }
             return defaultValue;
+        }
+
+        internal static int ParseColumnValue(this TableRow row, int columnIndex) 
+        {
+            if (columnIndex > -1 && !string.IsNullOrWhiteSpace(row[columnIndex]))
+            {
+                var value = row[columnIndex].Trim(' ', '%');
+                if (int.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var result))
+                {
+                    return result;
+                }
+            }
+            return 0;
         }
 
         internal static object ToEnumByDescription(this string description, Type enumType)

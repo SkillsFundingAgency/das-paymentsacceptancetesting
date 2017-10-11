@@ -165,6 +165,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                     case "restart indicator":
                         structure.RestartIndicatorIndex = c;
                         break;
+                    case "funding adjustment for prior learning":
+                        structure.FundingAdjustmentForPriorLearningIndex = c;
+                        break;
+                    case "other funding adjustment":
+                        structure.OtherFundingAdjustmentIndex = c;
+                        break;
                     default:
                         throw new ArgumentException($"Unexpected column in ILR table: {header}");
                 }
@@ -215,8 +221,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                 SmallEmployer = row.ReadRowColumnValue<string>(structure.SmallEmployerIndex, "small employer"),
                 LearnDelFam = row.ReadRowColumnValue<string>(structure.LearnDelFamIndex, "LearnDelFam"),
                 AimSequenceNumber = row.ReadRowColumnValue<int>(structure.AimSequenceNumberIndex, "aim sequence number"),
-                RestartIndicator = row.ReadRowColumnValue<string>(structure.RestartIndicatorIndex, "restart indicator").Equals("YES", StringComparison.InvariantCultureIgnoreCase),
             };
+
+            rowData.RestartIndicator =
+                row.ReadRowColumnValue<string>(structure.RestartIndicatorIndex, "restart indicator")?
+                    .Equals("YES", StringComparison.InvariantCultureIgnoreCase)??false;
+            rowData.LearningAdjustmentForPriorLearning =
+                row.ParseColumnValue(structure.FundingAdjustmentForPriorLearningIndex);
+            rowData.OtherFundingAdjustments = row.ParseColumnValue(structure.OtherFundingAdjustmentIndex);
 
             var learnRefNumber = string.Empty;
             if (string.IsNullOrEmpty(rowData.LearnerReference) && !string.IsNullOrEmpty(rowData.Uln))
@@ -286,6 +298,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
             public int UlnIndex { get; set; } = -1;
             public int LearnAimRefIndex { get; set; } = -1;
             public int RestartIndicatorIndex { get; set; } = -1;
+            public int FundingAdjustmentForPriorLearningIndex { get; set; } = -1;
+            public int OtherFundingAdjustmentIndex { get; set; } = -1;
         }
     }
 }
