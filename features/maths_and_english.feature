@@ -316,7 +316,7 @@ Scenario: DPP-646 B Payment for a DAS learner, planned duration is same as progr
 #DPP-655 Learner taking single level 2 aim, 0 prior funding adjustment, completes to time, no funding generated
 #Feature: Provider earnings and payments where apprenticeship requires english or maths at level 2 with prior funding adjustment of ZERO - COMPLETES ON TIME
 
-Scenario: DPP-655 A Payment for a non - DAS learner, funding agreed within band maximum, planned duration is same as programme (assumes both start and finish at same time)
+Scenario: DPP-655 A Payment for a non-DAS learner, planned duration is same as programme (assumes both start and finish at same time)
 	
 #	Providers are paid £471 per aim. this is funded from outside the total proce and is flat-profiled across the planned number of months in learning for that aim. There is no N+1, there is no money held back for completion. 
 #	If the learner has english and maths needs above level 2 (apprenticeship requires higher) this is funded within the total price.
@@ -344,7 +344,7 @@ Scenario: DPP-655 A Payment for a non - DAS learner, funding agreed within band 
 		  
     And the transaction types for the payments are:
 		  | Payment type                   | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 |
-		  | On-program                     | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 1000  |
+		  | On-program                     | 900   | 900   | 900   | 900   | ... | 900   | 900   |
 		  | Completion                     | 0     | 0     | 0     | 0     | ... | 0     | 0     |
 		  | Balancing                      | 0     | 0     | 0     | 0     | ... | 0     | 0     |
 		  | English and maths on programme | 0     | 0     | 0     | 0     | ... | 0     | 0     |
@@ -365,9 +365,9 @@ Scenario: DPP-655 B Payment for a DAS learner, funding agreed within band maximu
 		  | learner a | 06/08/2017 | 08/08/2018 | 15000        | active |
 
 When an ILR file is submitted with the following data:
-		  | ULN       | learner type                  | agreed price | start date | planned end date | actual end date | completion status | funding adjustment for prior learning | other funding adjustment | aim type         |
-		  | learner a | 19-24 programme only non-DAS  | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | n/a                                   | n/a                      | programme        |
-		  | learner a | 19-243 programme only non-DAS | 471          | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 0%                                    | n/a                      | maths or english |
+		  | ULN       | learner type             | agreed price | start date | planned end date | actual end date | completion status | funding adjustment for prior learning | other funding adjustment | aim type         |
+		  | learner a | 19-24 programme only DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | n/a                                   | n/a                      | programme        |
+		  | learner a | 19-24 programme only DAS | 471          | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | 0%                                    | n/a                      | maths or english |  
 				  	  
 		  
 #	The English or maths aim is submitted with the same start and planned end date
@@ -397,7 +397,7 @@ When an ILR file is submitted with the following data:
 		           
 #Feature: Provider earnings and payments where apprenticeship requires english or maths at level 2 with prior funding adjustment after break - COMPLETES ON TIME, RETURNS TO SAME PROVIDER
 
-Scenario: DPP-565 A Payment for a non - DAS learner, funding agreed within band maximum, planned duration is same as programme (assumes both start and finish at same time), other funding adjutsment is 75%, prior funding adjustment is 10%
+Scenario: DPP-656 A Payment for a non-DAS learner, funding agreed within band maximum, planned duration is same as programme (assumes both start and finish at same time), other funding adjutsment is 75%, prior funding adjustment is 10%
 	
 #	Providers are paid £471 per aim. this is funded from outside the total proce and is flat-profiled across the planned number of months in learning for that aim. There is no N+1, there is no money held back for completion. 
 
@@ -405,54 +405,34 @@ Scenario: DPP-565 A Payment for a non - DAS learner, funding agreed within band 
 
 	When an ILR file is submitted with the following data:
 		  | ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | funding adjustment for prior learning | other funding adjustment | restart indicator |
-		  | learner a | 19-24 programme only non-DAS | 15000        | 06/08/2017 | 08/08/2018       | 08/01/2018      | break in learning | n/a                                   | n/a                      | n/a               |
-		  | learner a | 19-24 programme only non-DAS | 471          | 06/08/2017 | 08/08/2018       | 08/01/2018      | break in learning | n/a                                   | n/a                      | n/a               |
-		  | learner a | 19-24 programme only non-DAS | 15000        | 06/08/2018 | 08/03/2019       |                 | continuing        | n/a                                   | n/a                      | 1                 |
-		  | learner a | 19-24 programme only non-DAS | 471          | 06/08/2018 | 08/03/2019       | 08/03/2019      | completed         | 42%                                   | n/a                      | 1                 |
+		  | learner a | 19-24 programme only non-DAS | 15000        | 06/08/2017 | 08/08/2018       | 08/01/2018      | planned break     | n/a                                   | n/a                      | NO                |
+		  | learner a | 19-24 programme only non-DAS | 471          | 06/08/2017 | 08/08/2018       | 08/01/2018      | planned break     | n/a                                   | n/a                      | NO                |
+		  | learner a | 19-24 programme only non-DAS | 15000        | 06/08/2018 | 08/03/2019       |                 | continuing        | n/a                                   | n/a                      | YES               |
+		  | learner a | 19-24 programme only non-DAS | 471          | 06/08/2018 | 08/03/2019       | 08/03/2019      | completed         | 42%                                   | n/a                      | YES               |
 		  
 #	The English or maths aim is submitted with the same start and planned end date
       
-    Then the provider P1 earnings and payments for the first episode of learning break down as follows:
-		  | Type                                    | 08/17   | 09/17   | 10/17   | 11/17   | 12/17   | 01/18  |
-		  | Provider Earned Total                   | 1039.25 | 1039.25 | 1039.25 | 1039.25 | 1039.25 | 0      |
-		  | Provider Paid by SFA                    | 0       | 939.25  | 939.25  | 939.25  | 939.25  | 939.25 |
-		  | Payment due from Employer               | 0       | 100     | 100     | 100     | 100     | 100    |
-		  | Levy account debited                    | 0       | 0       | 0       | 0       | 0       | 0      |
-		  | SFA Levy employer budget                | 0       | 0       | 0       | 0       | 0       | 0      |
-		  | SFA Levy co-funding budget              | 0       | 0       | 0       | 0       | 0       | 0      |
-		  | SFA non-Levy co-funding budget          | 900     | 900     | 900     | 900     | 900     | 0      |
-		  | SFA non-levy additional payments budget | 39.25   | 39.25   | 39.25   | 39.25   | 39.25   | 0      |
-		  | SFA levy additional payments budget     | 0       | 0       | 0       | 0       | 0       | 0      |
+    Then the provider earnings and payments break down as follows:
+		  | Type                                    | 08/17   | 09/17   | 10/17   | 11/17   | 12/17   | 01/18  | ... | 08/18   | 09/18   | 10/18   | ... | 02/19   | 03/19  |
+		  | Provider Earned Total                   | 1039.25 | 1039.25 | 1039.25 | 1039.25 | 1039.25 | 0      | ... | 1028.26 | 1028.26 | 1028.26 | ... | 1028.26 | 0      |
+		  | Provider Paid by SFA                    | 0       | 939.25  | 939.25  | 939.25  | 939.25  | 939.25 | ... | 0       | 928.26  | 928.26  | ... | 928.26  | 928.26 |
+		  | Payment due from Employer               | 0       | 100     | 100     | 100     | 100     | 100    | ... | 0       | 100     | 100     | ... | 100     | 100    |
+		  | Levy account debited                    | 0       | 0       | 0       | 0       | 0       | 0      | ... | 0       | 0       | 0       | ... | 0       | 0      |
+		  | SFA Levy employer budget                | 0       | 0       | 0       | 0       | 0       | 0      | ... | 0       | 0       | 0       | ... | 0       | 0      |
+		  | SFA Levy co-funding budget              | 0       | 0       | 0       | 0       | 0       | 0      | ... | 0       | 0       | 0       | ... | 0       | 0      |
+		  | SFA non-Levy co-funding budget          | 900     | 900     | 900     | 900     | 900     | 0      | ... | 900     | 900     | 900     | ... | 900     | 0      |
+		  | SFA non-levy additional payments budget | 39.25   | 39.25   | 39.25   | 39.25   | 39.25   | 0      | ... | 28.26   | 28.26   | 28.26   | ... | 28.26   | 0      |
+		  | SFA levy additional payments budget     | 0       | 0       | 0       | 0       | 0       | 0      | ... | 0       | 0       | 0       | ... | 0       | 0      |
 		  
-    And the transaction types for the provider P1 payments are:
-		  | Payment type                   | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 |
-		  | On-program                     | 1000  | 1000  | 1000  | 1000  | 1000  |
-		  | Completion                     | 0     | 0     | 0     | 0     | 0     |
-		  | Balancing                      | 0     | 0     | 0     | 0     | 0     |
-          | English and maths on programme | 39.25 | 39.25 | 39.25 | 39.25 | 39.25 |
-		  | English and maths Balancing    | 0     | 0     | 0     | 0     | 0     |
+    And the transaction types for the payments are:
+		  | Payment type                   | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 | ... | 09/18 | 10/18 | 11/18 | ... | 02/19 | 03/19 |
+		  | On-program                     | 900   | 900   | 900   | 900   | 900   | ... | 900   | 900   | 900   | ... | 900   | 900   |
+		  | Completion                     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | ... | 0     | 0     |
+		  | Balancing                      | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | ... | 0     | 0     |
+		  | English and maths on programme | 39.25 | 39.25 | 39.25 | 39.25 | 39.25 | ... | 39.25 | 39.25 | 39.25 | ... | 39.25 | 39.25 |
+		  | English and maths Balancing    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | ... | 0     | 0     |	
 
 
-    Then the provider P2 earnings and payments for the second episode of learning break down as follows:
-		  | Type                                    | 08/18   | 09/18   | 10/18   | ... | 02/19   | 03/19  |
-		  | Provider Earned Total                   | 1039.25 | 1039.25 | 1039.25 | ... | 1039.25 | 0      |
-		  | Provider Paid by SFA                    | 0       | 939.25  | 939.25  | ... | 939.25  | 939.25 |
-		  | Payment due from Employer               | 0       | 100     | 100     | ... | 100     | 100    |
-		  | Levy account debited                    | 0       | 0       | 0       | ... | 0       | 0      |
-		  | SFA Levy employer budget                | 0       | 0       | 0       | ... | 0       | 0      |
-		  | SFA Levy co-funding budget              | 0       | 0       | 0       | ... | 0       | 0      |
-		  | SFA Levy co-funding budget              | 900     | 900     | 900     | ... | 900     | 0      |
-		  | SFA non-Levy additional payments budget | 39.25   | 39.25   | 39.25   | ... | 39.25   | 0      |
-		  | SFA levy additional payments budget     | 0       | 0       | 0       | ... | 0       | 0      |
-		  
-    And the transaction types for the provider P2 payments are:
-		  | Payment type                   | 09/18 | 10/18 | 11/18 | ... | 02/19 | 03/19 |
-		  | On-program                     | 1000  | 1000  | 1000  | ... | 1000  | 1000  |
-		  | Completion                     | 0     | 0     | 0     | ... | 0     | 0     |
-		  | Balancing                      | 0     | 0     | 0     | ... | 0     | 0     |
-          | English and maths on programme | 39.25 | 39.25 | 39.25 | ... | 39.25 | 39.25 |
-		  | English and maths Balancing    | 0     | 0     | 0     | ... | 0     | 0     |		  
-		  		  
 
 
 #DPP-656 Learner taking single level 2 aim, takes break in learning and returns with prior funding adjustment, completes to time
@@ -470,56 +450,35 @@ Scenario: DPP-656 B Payment for a DAS learner, funding agreed within band maximu
 		  | learner a | 06/08/2017 | 08/08/2018 | 15000        | active |
 
 	When an ILR file is submitted with the following data:
-		  | ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | funding adjustment for prior learning | other funding adjustment | restart indicator | aim type         |
-		  | learner a | 19-24 programme only non-DAS | 15000        | 06/08/2017 | 08/08/2018       | 08/01/2018      | break in learning | n/a                                   | n/a                      | n/a               | programme        |
-		  | learner a | 19-24 programme only non-DAS | 471          | 06/08/2017 | 08/08/2018       | 08/01/2018      | break in learning | n/a                                   | n/a                      | n/a               | maths or english |
-		  | learner a | 19-24 programme only non-DAS | 15000        | 06/08/2018 | 08/03/2019       |                 | continuing        | n/a                                   | n/a                      | 1                 | programme        |
-		  | learner a | 19-24 programme only non-DAS | 471          | 06/08/2018 | 08/03/2019       | 08/03/2019      | completed         | 42%                                   | n/a                      | 1                 | maths or english |
+		  | ULN       | learner type             | agreed price | start date | planned end date | actual end date | completion status | funding adjustment for prior learning | other funding adjustment | restart indicator | aim type         |
+		  | learner a | 19-24 programme only DAS | 15000        | 06/08/2017 | 08/08/2018       | 08/01/2018      | planned break     | n/a                                   | n/a                      | NO                | programme        |
+		  | learner a | 19-24 programme only DAS | 471          | 06/08/2017 | 08/08/2018       | 08/01/2018      | planned break     | n/a                                   | n/a                      | NO                | maths or english |
+		  | learner a | 19-24 programme only DAS | 15000        | 06/08/2018 | 08/03/2019       |                 | continuing        | n/a                                   | n/a                      | YES               | programme        |
+		  | learner a | 19-24 programme only DAS | 471          | 06/08/2018 | 08/03/2019       | 08/03/2019      | completed         | 42%                                   | n/a                      | YES               | maths or english |
 		  
 #	The English or maths aim is submitted with the same start and planned end date
       
-    Then the provider earnings and payments for the first episode of learning break down as follows:
-		  | Type                                    | 08/17   | 09/17   | 10/17   | 11/17   | 12/17   | 01/18   |
-		  | Provider Earned Total                   | 1039.25 | 1039.25 | 1039.25 | 1039.25 | 1039.25 | 0       |
-		  | Provider Paid by SFA                    | 0       | 1039.25 | 1039.25 | 1039.25 | 1039.25 | 1039.25 |
-		  | Payment due from Employer               | 0       | 0       | 0       | 0       | 0       | 0       |
-		  | Levy account debited                    | 0       | 1000    | 1000    | 1000    | 1000    | 1000    |
-		  | SFA Levy employer budget                | 1000    | 1000    | 1000    | 1000    | 1000    | 0       |
-		  | SFA Levy co-funding budget              | 0       | 0       | 0       | 0       | 0       | 0       |
-		  | SFA non-Levy co-funding budget          | 0       | 0       | 0       | 0       | 0       | 0       |
-		  | SFA non-levy additional payments budget | 0       | 0       | 0       | 0       | 0       | 0       |
-		  | SFA levy additional payments budget     | 39.25   | 39.25   | 39.25   | 39.25   | 39.25   | 0       |
+    Then the provider earnings and payments break down as follows:
+		  | Type                                    | 08/17   | 09/17   | ... | 12/17   | 01/18   | ...   | 08/18   | 09/18   | 10/18   | ... | 02/19   | 03/19   |
+		  | Provider Earned Total                   | 1039.25 | 1039.25 | ... | 1039.25 | 0       | ...   | 1028.26 | 1028.26 | 1028.26 | ... | 1028.26 | 0       |
+		  | Provider Paid by SFA                    | 0       | 1039.25 | ... | 1039.25 | 1039.25 | ...   | 0       | 1028.26 | 1028.26 | ... | 1028.26 | 1028.26 |
+		  | Payment due from Employer               | 0       | 0       | ... | 0       | 0       | ...   | 0       | 0       | 0       | ... | 0       | 0       |
+		  | Levy account debited                    | 0       | 1000    | ... | 1000    | 1000    | ...   | 0       | 1000    | 1000    | ... | 1000    | 1000    |
+		  | SFA Levy employer budget                | 1000    | 1000    | ... | 1000    | 0       | ...   | 1000    | 1000    | 1000    | ... | 1000    | 0       |
+		  | SFA Levy co-funding budget              | 0       | 0       | ... | 0       | 0       | ...   | 0       | 0       | 0       | ... | 0       | 0       |
+		  | SFA non-Levy co-funding budget          | 0       | 0       | ... | 0       | 0       | ...   | 0       | 0       | 0       | ... | 0       | 0       |
+		  | SFA non-levy additional payments budget | 0       | 0       | ... | 0       | 0       | ...   | 0       | 0       | 0       | ... | 0       | 0       |
+		  | SFA levy additional payments budget     | 39.25   | 39.25   | ... | 39.25   | 0       | ...   | 28.26   | 28.26   | 28.26   | ... | 28.26   | 0       |
 		  
     And the transaction types for the payments are:
-		  | Payment type                   | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 |
-		  | On-program                     | 1000  | 1000  | 1000  | 1000  | 1000  |
-		  | Completion                     | 0     | 0     | 0     | 0     | 0     |
-		  | Balancing                      | 0     | 0     | 0     | 0     | 0     |
-          | English and maths on programme | 39.25 | 39.25 | 39.25 | 39.25 | 39.25 |
-		  | English and maths Balancing    | 0     | 0     | 0     | 0     | 0     |
+		  | Payment type                   | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 | ... | 09/18 | 10/18 | 11/18 | ... | 02/19 | 03/19 |
+		  | On-program                     | 1000  | 1000  | 1000  | 1000  | 1000  | ... | 1000  | 1000  | 1000  | ... | 1000  | 1000  |
+		  | Completion                     | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | ... | 0     | 0     |
+		  | Balancing                      | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | ... | 0     | 0     |
+		  | English and maths on programme | 39.25 | 39.25 | 39.25 | 39.25 | 39.25 | ... | 28.26 | 28.26 | 28.26 | ... | 28.26 | 28.26 |
+		  | English and maths Balancing    | 0     | 0     | 0     | 0     | 0     | ... | 0     | 0     | 0     | ... | 0     | 0     |	
 
 
-    Then the provider earnings and payments for the second episode of learning break down as follows:
-		  | Type                                    | 08/18   | 09/18   | 10/18   | ... | 02/19   | 03/19   |
-		  | Provider Earned Total                   | 1039.25 | 1039.25 | 1039.25 | ... | 1039.25 | 0       |
-		  | Provider Paid by SFA                    | 0       | 1039.25 | 1039.25 | ... | 1039.25 | 1039.25 |
-		  | Payment due from Employer               | 0       | 0       | 0       | ... | 0       | 0       |
-		  | Levy account debited                    | 0       | 1000    | 1000    | ... | 1000    | 1000    |
-		  | SFA Levy employer budget                | 1000    | 1000    | 1000    | ... | 1000    | 0       |
-		  | SFA Levy co-funding budget              | 0       | 0       | 0       | ... | 0       | 0       |
-		  | SFA Levy co-funding budget              | 0       | 0       | 0       | ... | 0       | 0       |
-		  | SFA non-Levy additional payments budget | 0       | 0       | 0       | ... | 0       | 0       |
-		  | SFA levy additional payments budget     | 39.25   | 39.25   | 39.25   | ... | 39.25   | 0       |
-		  
-    And the transaction types for the payments are:
-		  | Payment type                   | 09/18 | 10/18 | 11/18 | ... | 02/19 | 03/19 |
-		  | On-program                     | 1000  | 1000  | 1000  | ... | 1000  | 1000  |
-		  | Completion                     | 0     | 0     | 0     | ... | 0     | 0     |
-		  | Balancing                      | 0     | 0     | 0     | ... | 0     | 0     |
-          | English and maths on programme | 39.25 | 39.25 | 39.25 | ... | 39.25 | 39.25 |
-		  | English and maths Balancing    | 0     | 0     | 0     | ... | 0     | 0     |	
-		  
-          
 
 #DPP-678 Learner taking single level 2 aim, changes provider with prior funding adjustment, completes to time
 

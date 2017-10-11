@@ -88,7 +88,7 @@ namespace SFA.DAS.Payments.AcceptanceTests
                     return result;
                 }
             }
-            return 0;
+            return -1;
         }
 
         internal static object ToEnumByDescription(this string description, Type enumType)
