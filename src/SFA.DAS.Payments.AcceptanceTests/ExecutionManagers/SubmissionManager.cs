@@ -32,8 +32,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
             {
                 return results;
             }
-
-
+            
             var periods = periodsToSubmitTo ?? ExtractPeriods(ilrLearnerDetails, firstSubmissionDate);
             var providerLearners = GroupLearnersByProvider(ilrLearnerDetails, lookupContext);
             foreach (var period in periods)
@@ -55,9 +54,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
 
                 SavedDataCollector.CaptureAccountsDataForScenario();
                 SavedDataCollector.CaptureCommitmentsDataForScenario();
-
-
             }
+
             DataLockEventsDataCollector.CollectDataLockEventsForAllPeriods(results, lookupContext);
             PaymentsDataCollector.CollectForPeriod(results, lookupContext);
 
@@ -175,27 +173,32 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
             var periodYear = int.Parse(period.Substring(3)) + 2000;
             var endOfPeriod = new DateTime(periodYear, periodMonth, 1).AddMonths(1).AddSeconds(-1);
 
-            var deliveries = learnerDetails.Where(x => x.StartDate <= endOfPeriod).Select(x =>
-            {
-                var financialRecords = BuildLearningDeliveryFinancials(x);
-
-                return new LearningDelivery
+            var deliveries = learnerDetails
+                .Where(x => x.StartDate <= endOfPeriod)
+                .Select(x =>
                 {
-                    StandardCode = x.StandardCode,
-                    FrameworkCode = x.FrameworkCode,
-                    ProgrammeType = x.ProgrammeType,
-                    PathwayCode = x.PathwayCode,
-                    ActualStartDate = x.StartDate,
-                    PlannedEndDate = x.PlannedEndDate,
-                    ActualEndDate = x.ActualEndDate <= endOfPeriod ? x.ActualEndDate : (DateTime?)null,
-                    FamRecords = BuildLearningDeliveryFamCodes(x, contractTypes, learningSupportStatus),
-                    CompletionStatus = (IlrGenerator.CompletionStatus)(int)x.CompletionStatus,
-                    Type = (IlrGenerator.AimType)(int)x.AimType,
-                    LearnAimRef = x.LearnAimRef,
-                    FinancialRecords = financialRecords,
-                    AimSequenceNumber = x.AimSequenceNumber
-                };
-            }).ToArray();
+                    var financialRecords = BuildLearningDeliveryFinancials(x);
+
+                    return new LearningDelivery
+                    {
+                        StandardCode = x.StandardCode,
+                        FrameworkCode = x.FrameworkCode,
+                        ProgrammeType = x.ProgrammeType,
+                        PathwayCode = x.PathwayCode,
+                        ActualStartDate = x.StartDate,
+                        PlannedEndDate = x.PlannedEndDate,
+                        ActualEndDate = x.ActualEndDate <= endOfPeriod ? x.ActualEndDate : (DateTime?) null,
+                        FamRecords = BuildLearningDeliveryFamCodes(x, contractTypes, learningSupportStatus),
+                        CompletionStatus = (IlrGenerator.CompletionStatus) (int) x.CompletionStatus,
+                        Type = (IlrGenerator.AimType) (int) x.AimType,
+                        LearnAimRef = x.LearnAimRef,
+                        FinancialRecords = financialRecords,
+                        AimSequenceNumber = x.AimSequenceNumber,
+                        LearningAdjustmentForPriorLearning = x.LearningAdjustmentForPriorLearning,
+                        OtherFundingAdjustments = x.OtherFundingAdjustments,
+                    };
+                })
+                .ToArray();
 
             var employmentStatuses = employmentStatus.Select(s =>
             {
