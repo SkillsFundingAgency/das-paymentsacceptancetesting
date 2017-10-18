@@ -205,9 +205,9 @@ Scenario: DPP-645 B Payment for a DAS learner, funding agreed within band maximu
 		  | learner a | 06/08/2017 | 08/08/2018 | 15000        | active |
 
     When an ILR file is submitted with the following data:
-		  | ULN       | learner type                 | agreed price | start date | planned end date | actual end date | completion status | aim type         | aim rate |
-		  | learner a | 19-24 programme only non-DAS | 15000        | 06/08/2017 | 08/08/2018       |                 | continuing        | programme        |          |
-		  | learner a | 19-24 programme only non-DAS |              | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | maths or english | 0        |
+		  | ULN       | learner type                 | agreed price | standard code | start date | planned end date | actual end date | completion status | aim type         | aim rate |
+		  | learner a | 19-24 programme only non-DAS | 15000        | 50            | 06/08/2017 | 08/08/2018       |                 | continuing        | programme        |          |
+		  | learner a | 19-24 programme only non-DAS |              |               | 06/08/2017 | 08/08/2018       | 08/08/2018      | completed         | maths or english | none     |
 		  
     Then the provider earnings and payments break down as follows:
 		  | Type                                    | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | ... | 07/18 | 08/18 |
