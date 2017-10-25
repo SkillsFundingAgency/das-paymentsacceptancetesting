@@ -22,28 +22,26 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                 context.Commitments.Add(ParseCommitmentsTableRow(row, structure, context.Commitments.Count, lookupContext));
             }
         }
-
-
-
+        
         private static CommitmentsTableColumnStructure ParseCommitmentsTableStructure(Table commitments)
         {
             var structure = new CommitmentsTableColumnStructure();
 
             for (var c = 0; c < commitments.Header.Count; c++)
             {
-                var header = commitments.Header.ElementAt(c);
+                var header = commitments.Header.ElementAt(c).ToLowerInvariant();
                 switch (header)
                 {
-                    case "ULN":
+                    case "uln":
                         structure.UlnIndex = c;
                         break;
                     case "priority":
                         structure.PriorityIndex = c;
                         break;
-                    case "Employer":
+                    case "employer":
                         structure.EmployerIndex = c;
                         break;
-                    case "Provider":
+                    case "provider":
                         structure.ProviderIndex = c;
                         break;
                     case "agreed price":
@@ -52,7 +50,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                     case "commitment Id":
                         structure.CommitmentIdIndex = c;
                         break;
-                    case "version Id":
+                    case "version id":
                         structure.VersionIdIndex = c;
                         break;
                     case "start date":
@@ -108,7 +106,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
             var uln = lookupContext.AddOrGetUln(learnerId);
             var providerId = structure.ProviderIndex > -1 ? row[structure.ProviderIndex] : Defaults.ProviderId;
             var ukprn = lookupContext.AddOrGetUkprn(providerId);
-            var status = (CommitmentPaymentStatus) row.ReadRowColumnValue<string>(structure.StatusIndex, "status", Defaults.CommitmentStatus).ToEnumByDescription(typeof(CommitmentPaymentStatus));
+            var status = (CommitmentPaymentStatus) row.ReadRowColumnValue(structure.StatusIndex, "status", Defaults.CommitmentStatus).ToEnumByDescription(typeof(CommitmentPaymentStatus));
 
             int priority = Defaults.CommitmentPriority;
             if (structure.PriorityIndex > -1 && !int.TryParse(row[structure.PriorityIndex], out priority))
@@ -141,10 +139,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                 {
                     throw new ArgumentException($"'{row[structure.VersionIdIndex]}' is not a valid version id");
                 }
-                else
-                {
-                    versionId = row[structure.VersionIdIndex];
-                }
+
+                versionId = row[structure.VersionIdIndex];
                 if (!versionId.Contains('-'))
                 {
                     versionId = int.Parse(versionId).ToString("000");
@@ -152,14 +148,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                 }
             }
 
-            DateTime startDate;
-            if (!DateTime.TryParse(row[structure.StartDateIndex], out startDate))
+            if (!DateTime.TryParse(row[structure.StartDateIndex], out var startDate))
             {
                 throw new ArgumentException($"'{row[structure.StartDateIndex]}' is not a valid start date");
             }
 
-            DateTime endDate;
-            if (!DateTime.TryParse(row[structure.EndDateIndex], out endDate))
+            if (!DateTime.TryParse(row[structure.EndDateIndex], out var endDate))
             {
                 throw new ArgumentException($"'{row[structure.EndDateIndex]}' is not a valid end date");
             }
@@ -215,8 +209,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
 
         private static bool TryParseNullableDateTime(string value, out DateTime? dateTime)
         {
-            DateTime temp;
-            if (DateTime.TryParse(value, out temp))
+            if (DateTime.TryParse(value, out var temp))
             {
                 dateTime = temp;
                 return true;
@@ -225,9 +218,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
             dateTime = null;
             return false;
         }
-
-
-
+        
         private class CommitmentsTableColumnStructure
         {
             public int CommitmentIdIndex { get; set; } = -1;
@@ -247,6 +238,5 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
             public int ProgrammeTypeIndex { get; set; } = -1;
             public int PathwayCodeIndex { get; set; } = -1;
         }
-
     }
 }

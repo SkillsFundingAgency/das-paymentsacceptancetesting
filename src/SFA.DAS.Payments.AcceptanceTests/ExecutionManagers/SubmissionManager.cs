@@ -17,22 +17,22 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
         private const short FamCodeActDasValue = 1;
         private const short FamCodeActNonDasValue = 2;
 
-        internal static List<LearnerResults> SubmitIlrAndRunMonthEndAndCollateResults(List<IlrLearnerReferenceData> ilrLearnerDetails,
-                                                                                      DateTime? firstSubmissionDate,
-                                                                                      LookupContext lookupContext,
-                                                                                      List<EmployerAccountReferenceData> employers,
-                                                                                      List<ContractTypeReferenceData> contractTypes,
-                                                                                      List<EmploymentStatusReferenceData> employmentStatus,
-                                                                                      List<LearningSupportReferenceData> learningSupportStatus,
-                                                                                      string[] periodsToSubmitTo = null)
+        internal static List<LearnerResults> SubmitIlrAndRunMonthEndAndCollateResults(
+            List<IlrLearnerReferenceData> ilrLearnerDetails,
+            DateTime? firstSubmissionDate,
+            LookupContext lookupContext,
+            List<EmployerAccountReferenceData> employers,
+            List<ContractTypeReferenceData> contractTypes,
+            List<EmploymentStatusReferenceData> employmentStatus,
+            List<LearningSupportReferenceData> learningSupportStatus,
+            string[] periodsToSubmitTo = null)
         {
             var results = new List<LearnerResults>();
             if (TestEnvironment.ValidateSpecsOnly)
             {
                 return results;
             }
-
-
+            
             var periods = periodsToSubmitTo ?? ExtractPeriods(ilrLearnerDetails, firstSubmissionDate);
             var providerLearners = GroupLearnersByProvider(ilrLearnerDetails, lookupContext);
             foreach (var period in periods)
@@ -43,19 +43,19 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                 foreach (var providerDetails in providerLearners)
                 {
                     SetupDisadvantagedPostcodeUplift(providerDetails);
-                    BuildAndSubmitIlr(providerDetails, period, lookupContext, contractTypes, employmentStatus, learningSupportStatus);
+                    BuildAndSubmitIlr(providerDetails, period, lookupContext, contractTypes, employmentStatus,
+                        learningSupportStatus);
                 }
                 RunMonthEnd(period);
-                    
+
                 EarningsCollector.CollectForPeriod(period, results, lookupContext);
                 LevyAccountBalanceCollector.CollectForPeriod(period, results, lookupContext);
                 SubmissionDataLockResultCollector.CollectForPeriod(period, results, lookupContext);
 
                 SavedDataCollector.CaptureAccountsDataForScenario();
                 SavedDataCollector.CaptureCommitmentsDataForScenario();
-
-
             }
+
             DataLockEventsDataCollector.CollectDataLockEventsForAllPeriods(results, lookupContext);
             PaymentsDataCollector.CollectForPeriod(results, lookupContext);
 
@@ -86,6 +86,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
 
             return periods.ToArray();
         }
+
         private static ProviderSubmissionDetails[] GroupLearnersByProvider(List<IlrLearnerReferenceData> ilrLearnerDetails, LookupContext lookupContext)
         {
             return (from x in ilrLearnerDetails
@@ -97,6 +98,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                         LearnerDetails = g.ToArray()
                     }).ToArray();
         }
+
         private static void SetEnvironmentToPeriod(string period)
         {
             var month = int.Parse(period.Substring(0, 2));
@@ -114,12 +116,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                 ActualsSchemaPeriod = date.Year + date.Month.ToString("00"),
                 CollectionOpen = 1
             };
-            TestEnvironment.Variables.IlrFileDirectory = $"{TestEnvironment.BaseScenarioDirectory}\\{month.ToString("00")}_{year}";
+            TestEnvironment.Variables.IlrFileDirectory = $"{TestEnvironment.BaseScenarioDirectory}\\{month:00}_{year}";
             if (!Directory.Exists(TestEnvironment.Variables.IlrFileDirectory))
             {
                 Directory.CreateDirectory(TestEnvironment.Variables.IlrFileDirectory);
             }
         }
+
         private static void SetupDisadvantagedPostcodeUplift(ProviderSubmissionDetails providerDetails)
         {
             var homePostcodeDeprivation = providerDetails.LearnerDetails.Select(l => l.HomePostcodeDeprivation)
@@ -129,17 +132,18 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                 ReferenceDataManager.AddDisadvantagedPostcodeUplift(homePostcodeDeprivation);
             }
         }
+
         private static void BuildAndSubmitIlr(ProviderSubmissionDetails providerDetails, string period, LookupContext lookupContext, List<ContractTypeReferenceData> contractTypes, List<EmploymentStatusReferenceData> employmentStatus, List<LearningSupportReferenceData> learningSupportStatus)
         {
             IlrSubmission submission = BuildIlrSubmission(providerDetails, period, lookupContext, contractTypes, employmentStatus, learningSupportStatus);
             TestEnvironment.ProcessService.RunIlrSubmission(submission, TestEnvironment.Variables, new LoggingStatusWatcher($"ILR submission for provider {providerDetails.ProviderId} in {period}"));
         }
+
         private static void RunMonthEnd(string period)
         {
             TestEnvironment.ProcessService.RunSummarisation(TestEnvironment.Variables, new LoggingStatusWatcher($"Month end for {period}"));
         }
-
-
+        
         private static IlrSubmission BuildIlrSubmission(ProviderSubmissionDetails providerDetails, string period, LookupContext lookupContext, List<ContractTypeReferenceData> contractTypes, List<EmploymentStatusReferenceData> employmentStatus, List<LearningSupportReferenceData> learningSupportStatus)
         {
             var learners = (from x in providerDetails.LearnerDetails
@@ -162,34 +166,40 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
             }
             return submission;
         }
+
         private static Learner BuildLearner(IlrLearnerReferenceData[] learnerDetails, string period, LookupContext lookupContext, List<ContractTypeReferenceData> contractTypes, List<EmploymentStatusReferenceData> employmentStatus, List<LearningSupportReferenceData> learningSupportStatus)
         {
             var periodMonth = int.Parse(period.Substring(0, 2));
             var periodYear = int.Parse(period.Substring(3)) + 2000;
             var endOfPeriod = new DateTime(periodYear, periodMonth, 1).AddMonths(1).AddSeconds(-1);
 
-            var deliveries = learnerDetails.Where(x => x.StartDate <= endOfPeriod).Select(x =>
-            {
-                var financialRecords = BuildLearningDeliveryFinancials(x);
-
-                return new LearningDelivery
+            var deliveries = learnerDetails
+                .Where(x => x.StartDate <= endOfPeriod)
+                .Select(x =>
                 {
-                    StandardCode = x.StandardCode,
-                    FrameworkCode = x.FrameworkCode,
-                    ProgrammeType = x.ProgrammeType,
-                    PathwayCode = x.PathwayCode,
-                    ActualStartDate = x.StartDate,
-                    PlannedEndDate = x.PlannedEndDate,
-                    ActualEndDate = x.ActualEndDate <= endOfPeriod ? x.ActualEndDate : (DateTime?)null,
-                    FamRecords = BuildLearningDeliveryFamCodes(x, contractTypes, learningSupportStatus),
-                    CompletionStatus = (IlrGenerator.CompletionStatus)(int)x.CompletionStatus,
-                    Type = (IlrGenerator.AimType)(int)x.AimType,
-                    LearnAimRef = x.LearnAimRef,
-                    FinancialRecords = financialRecords,
-                    AimSequenceNumber = x.AimSequenceNumber
-                    
-                };
-            }).ToArray();
+                    var financialRecords = BuildLearningDeliveryFinancials(x);
+
+                    return new LearningDelivery
+                    {
+                        StandardCode = x.StandardCode,
+                        FrameworkCode = x.FrameworkCode,
+                        ProgrammeType = x.ProgrammeType,
+                        PathwayCode = x.PathwayCode,
+                        ActualStartDate = x.StartDate,
+                        PlannedEndDate = x.PlannedEndDate,
+                        ActualEndDate = x.ActualEndDate <= endOfPeriod ? x.ActualEndDate : (DateTime?) null,
+                        FamRecords = BuildLearningDeliveryFamCodes(x, contractTypes, learningSupportStatus),
+                        CompletionStatus = (IlrGenerator.CompletionStatus) (int) x.CompletionStatus,
+                        Type = (IlrGenerator.AimType) (int) x.AimType,
+                        LearnAimRef = x.LearnAimRef,
+                        FinancialRecords = financialRecords,
+                        AimSequenceNumber = x.AimSequenceNumber,
+                        LearningAdjustmentForPriorLearning = x.LearningAdjustmentForPriorLearning,
+                        OtherFundingAdjustments = x.OtherFundingAdjustments,
+                    };
+                })
+                .ToArray();
+
             var employmentStatuses = employmentStatus.Select(s =>
             {
                 EmploymentStatusMonitoring monitoringStatus = null;
@@ -218,13 +228,13 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                 EmploymentStatuses = employmentStatuses.Any() ? employmentStatuses : null
             };
 
-            long uln = 0 ;
-            long.TryParse(learnerDetails[0].Uln, out uln);
+            long.TryParse(learnerDetails[0].Uln, out var uln);
 
             learner.Uln = uln > 0 ? uln : lookupContext.AddOrGetUln(learnerDetails[0].LearnerReference);
         
             return learner;
         }
+
         private static FinancialRecord[] BuildLearningDeliveryFinancials(IlrLearnerReferenceData learnerReferenceData)
         {
             var agreedTrainingPrice = learnerReferenceData.FrameworkCode > 0 ? learnerReferenceData.AgreedPrice :
@@ -246,6 +256,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                     Date = learnerReferenceData.TotalTrainingPrice1EffectiveDate == DateTime.MinValue ? learnerReferenceData.StartDate : learnerReferenceData.TotalTrainingPrice1EffectiveDate
                 });
             }
+
             if (learnerReferenceData.TotalAssessmentPrice1 > 0)
             {
                 financialRecords.Add(new FinancialRecord
@@ -267,6 +278,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                     Date = learnerReferenceData.TotalTrainingPrice2EffectiveDate == DateTime.MinValue ? learnerReferenceData.StartDate : learnerReferenceData.TotalTrainingPrice2EffectiveDate
                 });
             }
+
             if (learnerReferenceData.TotalAssessmentPrice2 > 0 && learnerReferenceData.TotalAssessmentPrice2 != learnerReferenceData.TotalAssessmentPrice1)
             {
                 financialRecords.Add(new FinancialRecord
@@ -346,6 +358,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
 
             return financialRecords.ToArray();
         }
+
         private static LearningDeliveryFamRecord[] BuildLearningDeliveryFamCodes(IlrLearnerReferenceData learnerDetails,
             List<ContractTypeReferenceData> contractTypes, List<LearningSupportReferenceData> learningSupportStatus)
         {
@@ -355,9 +368,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
             var actFamCodes = BuildActFamCodes(learnerDetails.LearnerType, learnerDetails.StartDate, learningEndDate, contractTypes);
             var lsfFamCodes = BuildLsfFamCodes(learningSupportStatus);
             var eefFamCodes = BuildEefFamCodes(learnerDetails);
+            var restartFamCode = BuildRestartIndicatorFamCode(learnerDetails);
 
-            return actFamCodes.Concat(lsfFamCodes).Concat(eefFamCodes).ToArray();
+            return actFamCodes.Concat(lsfFamCodes).Concat(eefFamCodes).Concat(restartFamCode).ToArray();
         }
+
         private static LearningDeliveryFamRecord[] BuildActFamCodes(LearnerType learnerType, DateTime learningStart, DateTime learningEnd, List<ContractTypeReferenceData> contractTypes)
         {
             if (contractTypes.Any())
@@ -365,7 +380,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                 return contractTypes.Select(x => new LearningDeliveryFamRecord
                 {
                     FamType = FamCodeAct,
-                    Code = x.ContractType == ContractType.ContractWithEmployer ? FamCodeActDasValue : FamCodeActNonDasValue,
+                    Code = x.ContractType == ContractType.ContractWithEmployer ? FamCodeActDasValue.ToString() : FamCodeActNonDasValue.ToString(),
                     From = x.DateFrom,
                     To = x.DateTo
                 }).ToArray();
@@ -375,25 +390,28 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                 new LearningDeliveryFamRecord
                 {
                     FamType = FamCodeAct,
-                    Code = IsLearnerTypeLevy(learnerType) ? FamCodeActDasValue : FamCodeActNonDasValue,
+                    Code = IsLearnerTypeLevy(learnerType) ? FamCodeActDasValue.ToString() : FamCodeActNonDasValue.ToString(),
                     From = learningStart,
                     To = learningEnd
                 }
             };
         }
+
         private static LearningDeliveryFamRecord[] BuildLsfFamCodes(List<LearningSupportReferenceData> learningSupportStatus)
         {
             return learningSupportStatus.Select(s => new LearningDeliveryFamRecord
             {
                 FamType = "LSF",
-                Code = s.LearningSupportCode,
+                Code = s.LearningSupportCode.ToString(),
                 From = s.DateFrom,
                 To = s.DateTo
             }).ToArray();
         }
+
         private static LearningDeliveryFamRecord[] BuildEefFamCodes(IlrLearnerReferenceData learnerDetails)
         {
-            if (learnerDetails.LearnDelFam == null || !learnerDetails.LearnDelFam.ToUpper().StartsWith("EEF"))
+            if (learnerDetails.LearnDelFam == null || 
+                !learnerDetails.LearnDelFam.ToUpper().StartsWith("EEF"))
             {
                 return new LearningDeliveryFamRecord[0];
             }
@@ -403,12 +421,32 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                 new LearningDeliveryFamRecord
                 {
                     FamType = "EEF",
-                    Code = int.Parse(learnerDetails.LearnDelFam.Substring(3)),
+                    Code = learnerDetails.LearnDelFam.Substring(3),
                     //From = learnerDetails.StartDate,
-                    //To = learnerDetails.PlannedEndDate
+                    //To = learnerDetails.PlannedEndDate,
                 }
             };
         }
+
+        private static IEnumerable<LearningDeliveryFamRecord> BuildRestartIndicatorFamCode(IlrLearnerReferenceData learnerDetails)
+        {
+            if (!learnerDetails.RestartIndicator)
+            {
+                return new LearningDeliveryFamRecord[0];
+            }
+
+            return new[]
+            {
+                new LearningDeliveryFamRecord
+                {
+                    FamType = "RES",
+                    Code = "RES1",
+                    //From = learnerDetails.StartDate,
+                    //To = learnerDetails.PlannedEndDate,
+                }
+            };
+        }
+
         private static bool IsLearnerTypeLevy(LearnerType learnerType)
         {
             if (learnerType == LearnerType.ProgrammeOnlyDas
@@ -419,6 +457,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
             }
             return false;
         }
+
         private static DateTime GetDateOfBirthBasedOnLearnerType(LearnerType learnerType)
         {
             if (learnerType == LearnerType.ProgrammeOnlyDas1618 || learnerType == LearnerType.ProgrammeOnlyNonDas1618)
@@ -431,14 +470,14 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
             }
             return DateTime.Today.AddYears(-25);
         }
-
-
+        
         private class ProviderSubmissionDetails
         {
             public string ProviderId { get; set; }
             public IlrLearnerReferenceData[] LearnerDetails { get; set; }
             public long Ukprn { get; set; }
         }
+
         private class LoggingStatusWatcher : StatusWatcherBase
         {
             private readonly string _processName;
@@ -452,10 +491,12 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
             {
                 TestEnvironment.Logger.Info($"Started execution of {_processName}");
             }
+
             public override void TaskStarted(string taskId)
             {
                 TestEnvironment.Logger.Info($"Started task {taskId} of {_processName}");
             }
+
             public override void TaskCompleted(string taskId, Exception error)
             {
                 if (error != null)
@@ -467,6 +508,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
                     TestEnvironment.Logger.Info($"Completed task {taskId} of {_processName}");
                 }
             }
+
             public override void ExecutionCompleted(Exception error)
             {
                 if (error != null)

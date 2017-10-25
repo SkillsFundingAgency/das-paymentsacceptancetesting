@@ -51,15 +51,15 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
             foreach (var row in earningAndPayments.Rows)
             {
                 Match match;
-                if (row[0] == "Provider Earned Total")
+                if (row[0].Equals("Provider Earned Total", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseNonEmployerRow(row, periodNames, breakdown.ProviderEarnedTotal);
                 }
-                else if (row[0] == "Provider Earned from SFA")
+                else if (row[0].Equals("Provider Earned from SFA", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseNonEmployerRow(row, periodNames, breakdown.ProviderEarnedFromSfa);
                 }
-                else if (row[0] == "Provider Earned from Employer")
+                else if (row[0].Equals("Provider Earned from Employer", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseEmployerRow(Defaults.EmployerAccountId.ToString(), row, periodNames, breakdown.ProviderEarnedFromEmployers);
                 }
@@ -67,11 +67,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                 {
                     ParseEmployerRow(match.Groups[1].Value, row, periodNames, breakdown.ProviderEarnedFromEmployers);
                 }
-                else if (row[0] == "Provider Paid by SFA")
+                else if (row[0].Equals("Provider Paid by SFA", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseNonEmployerRow(row, periodNames, breakdown.ProviderPaidBySfa);
                 }
-                else if (row[0] == "Payment due from Employer")
+                else if (row[0].Equals("Payment due from Employer", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseEmployerRow(Defaults.EmployerAccountId.ToString(), row, periodNames, breakdown.PaymentDueFromEmployers);
                 }
@@ -79,7 +79,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                 {
                     ParseEmployerRow(match.Groups[1].Value, row, periodNames, breakdown.PaymentDueFromEmployers);
                 }
-                else if (row[0] == "Levy account debited")
+                else if (row[0].Equals("Levy account debited", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseEmployerRow(Defaults.EmployerAccountId.ToString(), row, periodNames, breakdown.EmployersLevyAccountDebited);
                 }
@@ -87,35 +87,35 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                 {
                     ParseEmployerRow(match.Groups[1].Value, row, periodNames, breakdown.EmployersLevyAccountDebited);
                 }
-                else if (row[0] == "SFA Levy employer budget")
+                else if (row[0].Equals("SFA Levy employer budget", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseNonEmployerRow(row, periodNames, breakdown.SfaLevyBudget);
                 }
-                else if (row[0] == "SFA Levy co-funding budget")
+                else if (row[0].Equals("SFA Levy co-funding budget", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseNonEmployerRow(row, periodNames, breakdown.SfaLevyCoFundBudget);
                 }
-                else if (row[0] == "SFA non-Levy co-funding budget")
+                else if (row[0].Equals("SFA non-Levy co-funding budget", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseNonEmployerRow(row, periodNames, breakdown.SfaNonLevyCoFundBudget);
                 }
-                else if (row[0] == "SFA Levy additional payments budget")
+                else if (row[0].Equals("SFA Levy additional payments budget", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseNonEmployerRow(row, periodNames, breakdown.SfaLevyAdditionalPayments);
                 }
-                else if (row[0] == "SFA non-Levy additional payments budget")
+                else if (row[0].Equals("SFA non-Levy additional payments budget", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseNonEmployerRow(row, periodNames, breakdown.SfaNonLevyAdditionalPayments);
                 }
-                else if (row[0] == "Refund taken by SFA")
+                else if (row[0].Equals("Refund taken by SFA", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseNonEmployerRow(row, periodNames, breakdown.RefundTakenBySfa);
                 }
-                else if (row[0] == "Levy account credited")
+                else if (row[0].Equals("Levy account credited", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseEmployerRow(Defaults.EmployerAccountId.ToString(), row, periodNames, breakdown.EmployersLevyAccountCredited);
                 }
-                else if (row[0] == "Refund due to employer")
+                else if (row[0].Equals("Refund due to employer", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseEmployerRow(Defaults.EmployerAccountId.ToString(), row, periodNames, breakdown.RefundDueToEmployer);
                 }

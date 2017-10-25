@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SFA.DAS.Payments.AcceptanceTests.Contexts;
 using SFA.DAS.Payments.AcceptanceTests.ReferenceDataModels;
 using TechTalk.SpecFlow;
@@ -31,16 +28,16 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
 
             for (var c = 0; c < dataLockEventErrors.Header.Count; c++)
             {
-                var header = dataLockEventErrors.Header.ElementAt(c);
+                var header = dataLockEventErrors.Header.ElementAt(c).ToLowerInvariant();
                 switch (header)
                 {
-                    case "Price Episode identifier":
+                    case "price episode identifier":
                         structure.PriceEpisodeIdentifierIndex = c;
                         break;
-                    case "Error code":
+                    case "error code":
                         structure.ErrorCodeIndex = c;
                         break;
-                    case "Error Description":
+                    case "error description":
                         structure.ErrorDescriptionIndex = c;
                         break;
                 }
@@ -62,8 +59,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                 ErrorDescription = row.ReadRowColumnValue<string>(structure.ErrorDescriptionIndex, "Error Description")
             };
         }
-
-
+        
         private class DataLockEventErrorsTableColumnStructure
         {
             public int PriceEpisodeIdentifierIndex { get; set; } = -1;

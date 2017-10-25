@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\NUnit3TestAdapter.3.8.0\build\net35\NUnit3TestAdapter.props" Condition="Exists('..\packages\NUnit3TestAdapter.3.8.0\build\net35\NUnit3TestAdapter.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -11,6 +12,8 @@
     <AssemblyName>SFA.DAS.Payments.AcceptanceTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -133,6 +136,7 @@
     <Compile Include="Features\learner_finishes_late.feature.cs" />
     <Compile Include="Features\learner_finishes_on_time.feature.cs" />
     <Compile Include="Features\manual_adjustments.feature.cs" />
+    <Compile Include="Features\maths_and_english.feature.cs" />
     <Compile Include="Features\payments_calc.feature.cs" />
     <Compile Include="Features\provider_adjustments.feature.cs" />
     <Compile Include="Features\redundancy_payments.feature.cs" />
@@ -307,6 +311,10 @@
     <None Include="..\..\features\manual_adjustments.feature">
       <Link>Features\manual_adjustments.feature</Link>
     </None>
+    <None Include="..\..\features\maths_and_english.feature">
+      <Link>Features\maths_and_english.feature</Link>
+      <LastGenOutput>maths_and_english.feature.cs</LastGenOutput>
+    </None>
     <None Include="..\..\features\payments_calc.feature">
       <Link>Features\payments_calc.feature</Link>
     </None>
@@ -381,5 +389,11 @@
   <Import Project="..\packages\SpecFlow.2.1.0\tools\TechTalk.SpecFlow.targets" />
   <Target Name="AfterUpdateFeatureFilesInProject">
     <Move SourceFiles="@(SpecFlowGeneratedFiles)" DestinationFolder="Features" OverwriteReadOnlyFiles="true" />
+  </Target>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\NUnit3TestAdapter.3.8.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit3TestAdapter.3.8.0\build\net35\NUnit3TestAdapter.props'))" />
   </Target>
 </Project>

@@ -21,11 +21,11 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
             ParseTransationTypesRows(earningsAndPaymentsContext, providerId, transactionTypesTable, periodNames);
         }
 
-
         private static string[] ParseEarningAndPaymentsHeaders(Table earningAndPayments)
         {
             var headers = earningAndPayments.Header.ToArray();
-            if (headers[0] != "Payment type" && headers[0] != "Transaction type") //duplicate language
+            if (!headers[0].Equals("Payment type", StringComparison.InvariantCultureIgnoreCase) && 
+                !headers[0].Equals("Transaction type", StringComparison.InvariantCultureIgnoreCase)) //duplicate language
             {
                 throw new ArgumentException("Transaction types table must have Payment type as first column");
             }
@@ -47,24 +47,25 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
             }
             return periods;
         }
+
         private static void ParseTransationTypesRows(EarningsAndPaymentsContext context, string providerId, Table transactionTypesTable, string[] periodNames)
         {
             foreach (var row in transactionTypesTable.Rows)
             {
                 Match match;
-                if (row[0] == "On-program")
+                if (row[0].Equals("On-program", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseProviderRow(providerId, row, periodNames, context.ProviderEarnedForOnProgramme);
                 }
-                else if (row[0] == "Completion")
+                else if (row[0].Equals("Completion", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseProviderRow(providerId, row, periodNames, context.ProviderEarnedForCompletion);
                 }
-                else if (row[0] == "Balancing")
+                else if (row[0].Equals("Balancing", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseProviderRow(providerId, row, periodNames, context.ProviderEarnedForBalancing);
                 }
-                else if (row[0] == "Employer 16-18 incentive")
+                else if (row[0].Equals("Employer 16-18 incentive", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseEmployerRow(providerId, Defaults.EmployerAccountId.ToString(), row, periodNames, context.EmployerEarnedFor16To18Incentive);
                 }
@@ -72,35 +73,35 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                 {
                     ParseEmployerRow(providerId, match.Groups[1].Value, row, periodNames, context.EmployerEarnedFor16To18Incentive);
                 }
-                else if (row[0] == "Provider 16-18 incentive")
+                else if (row[0].Equals("Provider 16-18 incentive", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseProviderRow(providerId, row, periodNames, context.ProviderEarnedFor16To18Incentive);
                 }
-                else if (row[0] == "English and maths on programme")
+                else if (row[0].Equals("English and maths on programme", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseProviderRow(providerId, row, periodNames, context.ProviderEarnedForEnglishAndMathOnProgramme);
                 }
-                else if (row[0] == "English and maths Balancing")
+                else if (row[0].Equals("English and maths Balancing", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseProviderRow(providerId, row, periodNames, context.ProviderEarnedForEnglishAndMathBalancing);
                 }
-                else if (row[0] == "Provider disadvantage uplift")
+                else if (row[0].Equals("Provider disadvantage uplift", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseProviderRow(providerId, row, periodNames, context.ProviderEarnedForDisadvantageUplift);
                 }
-                else if (row[0] == "Framework uplift on-program")
+                else if (row[0].Equals("Framework uplift on-program", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseProviderRow(providerId, row, periodNames, context.ProviderEarnedForFrameworkUpliftOnProgramme);
                 }
-                else if (row[0] == "Framework uplift completion")
+                else if (row[0].Equals("Framework uplift completion", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseProviderRow(providerId, row, periodNames, context.ProviderEarnedForFrameworkUpliftOnCompletion);
                 }
-                else if (row[0] == "Framework uplift balancing")
+                else if (row[0].Equals("Framework uplift balancing", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseProviderRow(providerId, row, periodNames, context.ProviderEarnedForFrameworkUpliftOnBalancing);
                 }
-                else if (row[0] == "Provider learning support")
+                else if (row[0].Equals("Provider learning support", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ParseProviderRow(providerId, row, periodNames, context.ProviderEarnedForLearningSupport);
                 }
@@ -119,6 +120,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                 Value = value
             });
         }
+
         private static void ParseEmployerRow(string providerId, string rowAccountId, TableRow row, string[] periodNames, List<EmployerAccountProviderPeriodValue> contextList)
         {
             int employerAccountId;
@@ -126,8 +128,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
             {
                 throw new ArgumentException($"Employer id '{rowAccountId}' is not valid (Parsing row {row[0]})");
             }
-
-
+            
             ParseRowValues(row, periodNames, contextList, (periodName, value) => new EmployerAccountProviderPeriodValue
             {
                 ProviderId = providerId,
@@ -136,6 +137,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.TableParsers
                 Value = value
             });
         }
+
         private static void ParseRowValues<T>(TableRow row, string[] periodNames, List<T> contextList, Func<string, decimal, T> valueCreator)
         {
             for (var i = 1; i < periodNames.Length; i++)

@@ -141,7 +141,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
             TransactionTypeTableParser.ParseTransactionTypeTableIntoContext(context, providerName, table);
 
 
-            var learningDetails = SubmissionContext.HistoricalLearningDetails.Where(x => x.LearnerReference.Equals(learnerRefererenceNumber, StringComparison.InvariantCultureIgnoreCase)).Single();
+            var learningDetails = SubmissionContext.HistoricalLearningDetails.Single(x => x.LearnerReference.Equals(learnerRefererenceNumber, StringComparison.InvariantCultureIgnoreCase));
 
             long learnerUln;
             if (!string.IsNullOrEmpty(learningDetails.Uln))
