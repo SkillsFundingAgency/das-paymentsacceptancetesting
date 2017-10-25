@@ -165,6 +165,22 @@ namespace SFA.DAS.Payments.AcceptanceTests.StepDefinitions
 
         }
 
+       
+        [Given(@"the following payments will be added for reversal:")]
+        public void GivenTheFollowingPaymentsWillBeAddedForReversal(Table table)
+        {
+            var context = new EarningsAndPaymentsContext();
+            TransactionTypeTableParser.ParseTransactionTypeTableIntoContext(context, "", table);
+            
+            foreach(var row in context.ProviderEarnedForOnProgramme)
+            {
+                var month = Int32.Parse(row.PeriodName.Split('/')[0]);
+                var year = Int32.Parse($"20" + row.PeriodName.Split('/')[1]);
+                PaymentsManager.AddRequiredPaymentForReversal(month, year, row.Value, TransactionType.OnProgram);
+            }
+        }
+
+
         private void CreatePayment(List<ProviderEarnedPeriodValue> paymentValues, long ukprn, 
                                     long uln, string learnRefNumber, 
                                     CommitmentReferenceData commitment, 

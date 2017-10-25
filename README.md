@@ -26,7 +26,6 @@ In order to run the tests locally you will need:
     * [Das-CollectionEarnings-Datalock](https://sfa-gov-uk.visualstudio.com/Digital%20Apprenticeship%20Service/_build/index?context=allDefinitions&path=%5CDAS-Payments&definitionId=126&_a=completed)
 
 You will then need to run:
-* The AT scripts in [src/Deploy](src/Deploy/) 
-    * files are names *.transient.* for scripts to run on transient db and *.deds.* for scripts to run on deds
+* Run the test stack database script from [vsts](https://sfa-gov-uk.visualstudio.com/Digital%20Apprenticeship%20Service/Provider%20Payments/_git/ProviderPayments?path=%2Ftooling%2FProviderPayments.TestStack%2FCreate_TestStack_Db.sql&version=GBmaster&_a=contents) against the DasPaymentsAT_Transient database
 * Run the tests
 

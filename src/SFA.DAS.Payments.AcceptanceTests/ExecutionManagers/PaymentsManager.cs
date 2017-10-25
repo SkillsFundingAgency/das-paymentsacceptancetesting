@@ -30,7 +30,9 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
             using (var connection = new SqlConnection(TestEnvironment.Variables.DedsDatabaseConnectionString))
             {
 
-
+                var isDas = learningDetails.LearnerType == LearnerType.ProgrammeOnlyNonDas ||
+                            learningDetails.LearnerType == LearnerType.ProgrammeOnlyNonDas1618||
+                            learningDetails.LearnerType == LearnerType.ProgrammeOnlyNonDas1924? false: true;
 
                 connection.Execute("INSERT INTO PaymentsDue.RequiredPayments (" +
                                         "Id," +
@@ -59,7 +61,8 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                                        "UseLevyBalance," +
                                        "LearnAimRef," +
                                        "LearningStartDate," +
-                                       "IlrSubmissionDateTime" +
+                                       "IlrSubmissionDateTime," +
+                                       "PriceEpisodeIdentifier" +
                                    ") VALUES (" +
                                        "@requiredPaymentId," +
                                        "@commitmentId," +
@@ -82,20 +85,21 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                                        "@frameworkCode," +
                                        "@pathwayCode," +
                                         "@contractType," +
-                                       "0.9," +
-                                       "'19 + Apprenticeship(From May 2017) Levy Contract'," +
+                                       "@sfaContributionPercentage," +
+                                       "@fundingLineType," +
                                         "@useLevyBalance," +
                                         "@learnAimRef," +
                                         "@StartDate," +
-                                        "@IlrSubmissionDateTime" +
+                                        "@IlrSubmissionDateTime," +
+                                        "'2-403-1-06/05/2017'" +
                                    ")",
                     new
                     {
                         requiredPaymentId,
-                        commitmentId = commitment == null ? (long?)null : commitment.CommitmentId,
-                        VersionId = commitment == null ? "0-000" : commitment.VersionId,
-                        EmployerAccountId = commitment == null ? 0 : commitment.EmployerAccountId,
-                        accountVersionId = commitment == null ? 0 : int.Parse(commitment.VersionId.Split('-')[1]),
+                        commitmentId = !isDas? (long?)null : commitment.CommitmentId,
+                        VersionId = !isDas ?  null : commitment.VersionId,
+                        EmployerAccountId = !isDas ? (long?)null : commitment.EmployerAccountId,
+                        accountVersionId = !isDas ? null : commitment.VersionId.Split('-')[1],
                         uln,
                         learnRefNumber,
                         ukprn,
@@ -104,15 +108,17 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                         collectionPeriodYear,
                         transactionType,
                         amountDue,
-                        StandardCode = learningDetails.StandardCode == 0? null : (int?)learningDetails.StandardCode,
-                        ProgrammeType = learningDetails.ProgrammeType == 0? null : (int?)learningDetails.ProgrammeType,
-                        FrameworkCode = learningDetails.FrameworkCode ==0 ? null : (int?)learningDetails.FrameworkCode,
+                        StandardCode = learningDetails.StandardCode == 0 ? null : (int?)learningDetails.StandardCode,
+                        ProgrammeType = learningDetails.ProgrammeType == 0 ? null : (int?)learningDetails.ProgrammeType,
+                        FrameworkCode = learningDetails.FrameworkCode == 0 ? null : (int?)learningDetails.FrameworkCode,
                         PathwayCode = learningDetails.PathwayCode == 0 ? null : (int?)learningDetails.PathwayCode,
-                        ContractType = commitment == null ? ContractType.ContractWithSfa : ContractType.ContractWithEmployer,
-                        UseLevyBalance = commitment == null ? 0: 1,
+                        ContractType = isDas ? 1 : 2,
+                        UseLevyBalance = isDas ? 1 : 0,
+                        SfaContributionPercentage = 0.90 ,
+                        FundingLineType = isDas? "19 + Apprenticeship(From May 2017) Levy Contract" : "19 + Apprenticeship(From May 2017) Non-Levy Contract",
                         LearnAimRef = String.IsNullOrEmpty(learningDetails.LearnAimRef) ? "ZPROG001" : learningDetails.LearnAimRef,
                         StartDate = learningDetails.StartDate,
-                        AimSequenceNumber  = learningDetails.AimSequenceNumber == 0 ? 1 : learningDetails.AimSequenceNumber,
+                        AimSequenceNumber = learningDetails.AimSequenceNumber == 0 ? 1 : learningDetails.AimSequenceNumber,
                         ilrSubmissiondateTime = DateTime.Now.AddMonths(-3)
                     });
             }
@@ -167,6 +173,39 @@ namespace SFA.DAS.Payments.AcceptanceTests.Refactoring.ExecutionManagers
                         transactionType,
                         amount
                     });
+            }
+        }
+
+        public static void AddRequiredPaymentForReversal(int deliveryMonth, int deliveryYear, decimal amountDue, TransactionType transactionType)
+        {
+            if (TestEnvironment.ValidateSpecsOnly)
+            {
+                return;
+            }
+            using (var connection = new SqlConnection(TestEnvironment.Variables.DedsDatabaseConnectionString))
+            {
+
+                connection.Execute("Insert Into [Adjustments].[ManualAdjustments]" +
+                                "([RequiredPaymentIdToReverse]" +
+                                ",[ReasonForReversal]" +
+                                ",[RequestorName]" +
+                                ",[DateUploaded]" +
+                                ",[RequiredPaymentIdForReversal])" +
+                            "Select Id," +
+                                    "'Test scenario', " +
+                                    "'Test', " +
+                                    "getDate()," +
+                                    "NULL" +
+                    "  From PaymentsDue.RequiredPayments Where " +
+                    " DeliveryMonth = @deliveryMonth and DeliveryYear = @deliveryYear and " +
+                    " TransactionType = @transactionType And AmountDue = @amountDue",
+                  new
+                  {
+                      deliveryMonth,
+                      deliveryYear,
+                      transactionType,
+                      amountDue
+                  });
             }
         }
 

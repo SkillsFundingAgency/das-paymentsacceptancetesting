@@ -56,6 +56,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
 
                 connection.Execute("DELETE FROM Payments.Payments");
                 connection.Execute("DELETE FROM PaymentsDue.RequiredPayments");
+                connection.Execute("DELETE FROM Adjustments.ManualAdjustments");
 
                 connection.Execute("DELETE FROM DataLock.DataLockEventCommitmentVersions");
                 connection.Execute("DELETE FROM DataLock.DataLockEventErrors");
@@ -93,6 +94,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.ExecutionManagers
             PrepareDatabaseForComponent(TestEnvironment.ProcessService, ComponentType.PeriodEndScripts, TestEnvironment.Variables, watcher);
             PrepareDatabaseForComponent(TestEnvironment.ProcessService, ComponentType.DataLockEvents, TestEnvironment.Variables, watcher);
             PrepareDatabaseForComponent(TestEnvironment.ProcessService, ComponentType.SubmissionEvents, TestEnvironment.Variables, watcher);
+            PrepareDatabaseForComponent(TestEnvironment.ProcessService, ComponentType.ManualAdjustments, TestEnvironment.Variables, watcher);
         }
         private static void PrepareDatabaseForComponent(ProcessService processService, ComponentType componentType, EnvironmentVariables environmentVariables, RebuildStatusWatcher watcher)
         {

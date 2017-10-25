@@ -135,6 +135,7 @@
     <Compile Include="Features\learner_finishes_early.feature.cs" />
     <Compile Include="Features\learner_finishes_late.feature.cs" />
     <Compile Include="Features\learner_finishes_on_time.feature.cs" />
+    <Compile Include="Features\manual_adjustments.feature.cs" />
     <Compile Include="Features\maths_and_english.feature.cs" />
     <Compile Include="Features\payments_calc.feature.cs" />
     <Compile Include="Features\provider_adjustments.feature.cs" />
@@ -306,6 +307,9 @@
     </None>
     <None Include="..\..\features\learner_finishes_on_time.feature">
       <Link>Features\learner_finishes_on_time.feature</Link>
+    </None>
+    <None Include="..\..\features\manual_adjustments.feature">
+      <Link>Features\manual_adjustments.feature</Link>
     </None>
     <None Include="..\..\features\maths_and_english.feature">
       <Link>Features\maths_and_english.feature</Link>
