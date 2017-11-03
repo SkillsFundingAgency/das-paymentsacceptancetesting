@@ -426,7 +426,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "commitment 1 v1-001",
                         "commitment 1 v3-001",
                         "commitment 1 v3-001"});
-#line 68
+#line 69
   testRunner.Then("the data lock status will be as follows:", ((string)(null)), table323, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table324 = new TechTalk.SpecFlow.Table(new string[] {
@@ -464,7 +464,7 @@ namespace SFA.DAS.Payments.AcceptanceTests.Features
                         "0",
                         "0",
                         "0"});
-#line 71
+#line 72
         testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table324, "Then ");
 #line hidden
             this.ScenarioCleanup();
