@@ -975,7 +975,7 @@ this.ScenarioSetup(scenarioInfo);
                         "On-program",
                         "commitment 1 v1-001",
                         "commitment 1 v1-001",
-                        "commitment 1 v1-001",
+                        "commitment 2 v2-001",
                         "commitment 2 v2-001",
                         "commitment 2 v2-001"});
             table421.AddRow(new string[] {

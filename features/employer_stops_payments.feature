@@ -175,7 +175,7 @@ Scenario:884_AC03 DAS learner, commitment cancelled from begining and a new comm
 		 
 		Then the data lock status will be as follows:
 			| Payment type                   | 08/17               | 09/17               | 10/17               | 11/17               | 12/17               |
-			| On-program                     | commitment 1 v1-001 | commitment 1 v1-001 | commitment 1 v1-001 | commitment 2 v2-001 | commitment 2 v2-001 |
+			| On-program                     | commitment 1 v1-001 | commitment 1 v1-001 | commitment 2 v2-001 | commitment 2 v2-001 | commitment 2 v2-001 |
 			| Completion                     |                     |                     |                     |                     |                     |
 			| Employer 16-18 incentive       |                     |                     |                     | commitment 2 v2-001 |                     |
 			| Provider 16-18 incentive       |                     |                     |                     | commitment 2 v2-001 |                     |
