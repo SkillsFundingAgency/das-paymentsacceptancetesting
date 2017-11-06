@@ -142,8 +142,7 @@ Scenario:884_AC02 DAS learner, commitment cancelled after threshold date but bef
 
 
 Scenario:884_AC03 DAS learner, commitment cancelled from begining and a new commitment is created from start with a lower price, it should reconcile price difference and pay correct incentives
-# Start date: 15 Aug
-# Threshold date: 13 Nov
+#This is like live learners scenarios - added as list in the ticket.
 
         Given levy balance > agreed price for all months
 		And the following commitments exist:
@@ -172,18 +171,8 @@ Scenario:884_AC03 DAS learner, commitment cancelled from begining and a new comm
             | learner type             | agreed price | standard code | start date | planned end date | actual end date | completion status |
             | 16-18 programme only DAS | 1            | 50            | 15/08/2017 | 20/08/2018       |                 | continuing        |
          
-		 
-		Then the data lock status will be as follows:
-			| Payment type                   | 08/17               | 09/17               | 10/17               | 11/17               | 12/17               |
-			| On-program                     | commitment 1 v1-001 | commitment 1 v1-001 | commitment 2 v2-001 | commitment 2 v2-001 | commitment 2 v2-001 |
-			| Completion                     |                     |                     |                     |                     |                     |
-			| Employer 16-18 incentive       |                     |                     |                     | commitment 2 v2-001 |                     |
-			| Provider 16-18 incentive       |                     |                     |                     | commitment 2 v2-001 |                     |
-			| Provider learning support      |                     |                     |                     |                     |                     |
-			| English and maths on programme |                     |                     |                     |                     |                     |
-			| English and maths Balancing    |                     |                     |                     |                     |                     |     
-
-		And the provider earnings and payments break down as follows:
+	
+		Then the provider earnings and payments break down as follows:
             | Type                          | 08/17 | 09/17 | 10/17 | 11/17    | 12/17   |
             | Provider Earned Total         | 0.07  | 0.07  | 0.07  | 1000.07  | 0.07    |
             | Provider Earned from SFA      | 0.07  | 0.07  | 0.07  | 1000.07  | 0.07    |
@@ -198,6 +187,6 @@ Scenario:884_AC03 DAS learner, commitment cancelled from begining and a new comm
 
 		And the transaction types for the payments for provider a are:
             | Payment type             | 09/17 | 10/17 | 11/17 | 12/17 |
-            | On-program               | 1000  | 1000  | 1000  | 0     |
+            | On-program               | 0.07  | 0.07  | 0.07  | 0.07  |
             | Employer 16-18 incentive | 0     | 0     | 0     | 500   |
             | Provider 16-18 incentive | 0     | 0     | 0     | 500   |
