@@ -830,7 +830,7 @@ this.ScenarioSetup(scenarioInfo);
                     "pay correct incentives", ((string[])(null)));
 #line 144
 this.ScenarioSetup(scenarioInfo);
-#line 148
+#line 147
         testRunner.Given("levy balance > agreed price for all months", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table417 = new TechTalk.SpecFlow.Table(new string[] {
@@ -866,7 +866,7 @@ this.ScenarioSetup(scenarioInfo);
                         "active",
                         "15/08/2017",
                         ""});
-#line 149
+#line 148
   testRunner.And("the following commitments exist:", ((string)(null)), table417, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table418 = new TechTalk.SpecFlow.Table(new string[] {
@@ -883,7 +883,7 @@ this.ScenarioSetup(scenarioInfo);
                         "50",
                         "continuing",
                         "15000"});
-#line 154
+#line 153
      testRunner.And("following learning has been recorded for previous payments:", ((string)(null)), table418, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table419 = new TechTalk.SpecFlow.Table(new string[] {
@@ -941,7 +941,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 158
+#line 157
   testRunner.And("the following earnings and payments have been made to the provider A for learner " +
                     "a:", ((string)(null)), table419, "And ");
 #line hidden
@@ -961,7 +961,7 @@ this.ScenarioSetup(scenarioInfo);
                         "20/08/2018",
                         "",
                         "continuing"});
-#line 171
+#line 170
   testRunner.When("an ILR file is submitted for the first time on 30/10/17 with the following data:", ((string)(null)), table420, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table421 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1041,7 +1041,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "0"});
-#line 176
+#line 175
   testRunner.Then("the provider earnings and payments break down as follows:", ((string)(null)), table421, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table422 = new TechTalk.SpecFlow.Table(new string[] {
@@ -1068,7 +1068,7 @@ this.ScenarioSetup(scenarioInfo);
                         "0",
                         "0",
                         "500"});
-#line 189
+#line 188
   testRunner.And("the transaction types for the payments for provider a are:", ((string)(null)), table422, "And ");
 #line hidden
             this.ScenarioCleanup();
