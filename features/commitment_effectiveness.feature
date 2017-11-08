@@ -65,6 +65,7 @@ Feature: Commitment effective dates apply correctly in data collections processi
 			| ULN       | learner type       | start date | planned end date | completion status | Total training price 1 | Total training price 1 effective date | 
 			| learner a | programme only DAS | 12/05/2017 | 20/05/2018       | continuing        | 7500                   | 01/05/2017                            | 
 
+
 		Then the data lock status will be as follows:
             | Payment type | 05/17               | 06/17               | 07/17               |
             | On-program   | commitment 1 v1-001 | commitment 1 v3-001 | commitment 1 v3-001 |

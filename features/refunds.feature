@@ -205,8 +205,8 @@ Scenario: 780-AC01 - Non-DAS standard learner, price is changed and a negative a
         | SFA Levy co-funding budget     | 0     | 0     | 0     | 0     |        
         | SFA non-Levy co-funding budget | 675   | 675   | 675   | 0     | 
     When an ILR file is submitted on 10/01/18 with the following data:
-        | ULN       | learner type           | start date | planned end date | actual end date | completion status | Total training price 1 | Total training price 1 effective date | Total assessment price 1 | Total assessment price 1 effective date | Total training price 2 | Total training price 2 effective date | Total assessment price 2 | Total assessment price 2 effective date |
-        | learner a | programme only non-DAS | 04/08/2017 | 20/08/2018       |                 | continuing        | 9000                   | 04/08/2017                            | 2250                     | 04/08/2017                              | 1200                   | 04/10/2017                            | 200                      | 04/10/2017                              |
+        | ULN       | learner type           | start date | planned end date | actual end date | completion status | agreed price |
+        | learner a | programme only non-DAS | 04/08/2017 | 20/08/2018       |                 | continuing        | 5000         |
 	Then the provider earnings and payments break down as follows:
         | Type                           | 08/17 | 09/17 | 10/17 | 11/17 | 12/17 | 01/18 | 
         | Provider Earned Total          | 750   | 750   | -100  | 0     | 0     | 0     | 
